@@ -7,6 +7,7 @@ before_script:
 - chmod 755 ./travis-tool.sh
 - ./travis-tool.sh bootstrap
 - ./travis-tool.sh install_deps
+- ./travis-tool.sh github_package ropensci/bmc ropensci/rplos ropensci/elife
 
 env:
    global:
