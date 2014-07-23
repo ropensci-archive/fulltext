@@ -14,7 +14,15 @@ ft_search(query, from = "plos", limit = 10, plosopts = list(),
 
 \item{from}{Source to query}
 
+\item{limit}{Number of records to return.}
+
+\item{plosopts}{PLOS options. See \code{?searchplos}}
+
+\item{bmcopts}{BMC options. See \code{?bmc_search}}
+
 \item{...}{Further args passed on to \code{httr::GET}}
+
+\item{x}{Input to print method.}
 }
 \value{
 An object of class ft.

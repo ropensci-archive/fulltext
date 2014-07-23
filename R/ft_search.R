@@ -5,7 +5,11 @@
 #' 
 #' @param query Query terms
 #' @param from Source to query
+#' @param limit Number of records to return.
+#' @param plosopts PLOS options. See \code{?searchplos}
+#' @param bmcopts BMC options. See \code{?bmc_search}
 #' @param ... Further args passed on to \code{httr::GET}
+#' @param x Input to print method.
 #' 
 #' @return An object of class ft.
 #'
