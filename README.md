@@ -9,6 +9,18 @@ Data sources currently available in `fulltext`:
 * Biomed Central - via `bmc`
 * We hope to add more, as publishers open up, and as we have time...
 
+## Installation
+
+```r
+install.packages("bmc")
+devtools::install_github("ropensci/rplos")
+devtools::install_github("ropensci/fulltext")
+```
+
+```r
+library('fulltext')
+```
+
 ## fulltext interface
 
 Almost all functions are prefixed with `ft_`. Because functions in R are not forced to be namespaced, this makes conflict with other packages very unlikely.  
