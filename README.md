@@ -1,5 +1,7 @@
 ## fulltext ~ Get full text across all da journals
 
+[![Build Status](https://api.travis-ci.org/ropensci/fulltext.png)](https://travis-ci.org/ropensci/fulltext)
+
 rOpenSci has a number of R packages to get either full text, metadata, or both from various publishers. The goal of `fulltext` is to integrate these packages to create a single interface to many data sources.
 
 Data sources in `fulltext`:
