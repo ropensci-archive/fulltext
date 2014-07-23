@@ -2,11 +2,11 @@
 
 rOpenSci has a number of R packages to get either full text, metadata, or both from various publishers. The goal of `fulltext` is to integrate these packages to create a single interface to many data sources.
 
-Data sources currently available in `fulltext`:
+Data sources in `fulltext`:
 
-* Public Library of Science (PLOS) - via `rplos`
-* eLife - via `elife`
-* Biomed Central - via `bmc`
+* Public Library of Science (PLOS) - via the `rplos` package
+* Biomed Central - via the `bmc` package
+* eLife - via the `elife` package
 * We hope to add more, as publishers open up, and as we have time...
 
 ## Installation
