@@ -1,0 +1,21 @@
+Package: fulltext
+Title: title
+Description: description
+Version: 0.0.1
+License: MIT + file LICENSE
+Date: 2014-07-23
+Authors@R: person("x", "y", role = c("aut", "cre")
+URL: https://github.com/ropensci/fulltext
+BugReports: https://github.com/ropensci/fulltext/issues
+LazyLoad: yes
+VignetteBuilder: knitr
+Roxygen: list(wrap = FALSE)
+Imports:
+    httr,
+    XML,
+    jsonlite,
+    tm
+Suggests:
+    roxygen2,
+    testthat,
+    knitr
