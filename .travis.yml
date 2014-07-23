@@ -1,0 +1,21 @@
+language: c
+
+script: ./travis-tool.sh run_tests
+
+before_script:
+- curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
+- chmod 755 ./travis-tool.sh
+- ./travis-tool.sh bootstrap
+- ./travis-tool.sh install_deps
+
+env:
+   global:
+     - R_BUILD_ARGS=" "
+     - R_CHECK_ARGS="--as-cran"
+     - BOOTSTRAP_LATEX="1"
+
+after_failure:
+  - ./travis-tool.sh dump_logs
+
+notifications:
+ slack: ropensci:wh30e1MP9Am3wXb2wJx1ZRFi
