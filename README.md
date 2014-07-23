@@ -14,8 +14,7 @@ Data sources in `fulltext`:
 ## Installation
 
 ```r
-install.packages("bmc")
-devtools::install_github("ropensci/rplos")
+devtools::install_github(c("ropensci/rplos", "ropensci/bmc", "ropensci/elife"))
 devtools::install_github("ropensci/fulltext")
 ```
 
