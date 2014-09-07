@@ -18,8 +18,6 @@ ft_search(query, from = "plos", limit = 10, plosopts = list(),
 \item{bmcopts}{BMC options. See \code{?bmc_search}}
 
 \item{...}{Further args passed on to \code{httr::GET}}
-
-\item{x}{Input to print method.}
 }
 \value{
 An object of class ft.
@@ -31,7 +29,7 @@ Search for full text.
 \dontrun{
 ft_search(query='ecology', from='plos')
 ft_search(query='climate change', from='plos', limit=500, plosopts=list(
-   fl=c('id','author','eissn','journal','counter_total_all','alm_twitterCount'), fq='doc_type:full'))
+   fl=c('id','author','eissn','journal','counter_total_all','alm_twitterCount')))
 }
 }
 

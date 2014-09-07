@@ -9,14 +9,13 @@
 #' @param plosopts PLOS options. See \code{?searchplos}
 #' @param bmcopts BMC options. See \code{?bmc_search}
 #' @param ... Further args passed on to \code{httr::GET}
-#' @param x Input to print method.
 #' 
 #' @return An object of class ft.
 #'
 #' @examples \dontrun{
 #' ft_search(query='ecology', from='plos')
 #' ft_search(query='climate change', from='plos', limit=500, plosopts=list(
-#'    fl=c('id','author','eissn','journal','counter_total_all','alm_twitterCount'), fq='doc_type:full'))
+#'    fl=c('id','author','eissn','journal','counter_total_all','alm_twitterCount')))
 #' }
 
 ft_search <- function(query, from='plos', limit=10, plosopts=list(), bmcopts=list(), ...){
