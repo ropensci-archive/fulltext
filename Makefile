@@ -1,4 +1,4 @@
-all: move rmd2md
+all: vignettes move rmd2md
 
 vignettes:
 		cd inst/vign;\
