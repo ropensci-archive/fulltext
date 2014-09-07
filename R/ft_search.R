@@ -15,6 +15,8 @@
 #'
 #' @examples \dontrun{
 #' ft_search(query='ecology', from='plos')
+#' ft_search(query='climate change', from='plos', limit=500, plosopts=list(
+#'    fl=c('id','author','eissn','journal','counter_total_all','alm_twitterCount'), fq='doc_type:full'))
 #' }
 
 ft_search <- function(query, from='plos', limit=10, plosopts=list(), bmcopts=list(), ...){
@@ -25,18 +27,27 @@ ft_search <- function(query, from='plos', limit=10, plosopts=list(), bmcopts=lis
   res
 }
 
+#' Print brief summary of ft object
+#'
+#' @examples \dontrun{
+#' xxx
+#' }
+#'
+#' @param x Input...
+#' @param ... Ignored.
+#' @param n Number of data frame rows to print
 #' @method print ft
 #' @export
-#' @rdname ft_search
-print.ft <- function(x, ...)
-{
+
+print.ft <- function(x, ..., n = 10) {
+  rows <- sum(sapply(x, function(y) NROW(y$data)))
+  found <- sum(unlist(ft_compact(sapply(x, "[[", 'found'))))
+  
   cat(sprintf("Query [%s]", x[[1]]$opts$q), "\n")
-  cat(sprintf("No. records found [%s]", x[[1]]$found), "\n")
-  cat(sprintf("No. records returned [%s]", NROW(x[[1]]$data)), "\n")
-#   cat(sprintf("First record abbrev [format:%s] .\n\n", x$format))
-  cat("Data: \n\n")
-  if(is(x[[1]]$data, "data.frame")) print(x[[1]]$data) else cat("no data")
-} 
+  cat(sprintf("Records found, returned [%s,%s]", found, rows), "\n")
+  cat(paste(sprintf("PLoS: %s", NROW(x$plos$data)), sprintf("BMC: %s", NROW(x$bmc$data)), sep = "; "), "\n")
+  ft_trunc_mat(x$plos$data, n = n)
+}
 
 plugin_plos <- function(sources, query, limit, opts){
   if(any(grepl("plos", sources))){
