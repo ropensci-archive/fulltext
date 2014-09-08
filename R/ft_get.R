@@ -2,26 +2,33 @@
 #' 
 #' @export
 #' @import rplos bmc
+#' @importFrom rentrez entrez_search entrez_fetch
 #' 
 #' @param query Query terms
+#' @param ids Identifiers for papers, either DOIs, or other ids.
 #' @param from Source to query
 #' @param limit Number of records to return.
 #' @param plosopts PLOS options. See \code{?searchplos}
 #' @param bmcopts BMC options. See \code{?bmc_search}
+#' @param entrezopts Entrez options. See \code{?entrez_search} and \code{?entrez_fetch}
 #' @param ... Further args passed on to \code{httr::GET}
 #' 
-#' @return An object of class ft.
+#' @return An object of class ft_data
 #'
-#' @examples \dontrun{
-#' ft_search(query='ecology', from='plos')
-#' ft_search(query='climate change', from='plos', limit=500, plosopts=list(
-#'    fl=c('id','author','eissn','journal','counter_total_all','alm_twitterCount')))
+#' @examples \donttest{
+#' ft_get(ids='10.1371%2Fjournal.pone.0086169', from='plos')
+#' (dois <- searchplos(q="*:*", fl='id', fq='doc_type:full', limit=5)$data$id)
+#' ft_get(ids=dois, from='plos')
+#' ft_get(ids=c('10.7717/peerj.228','10.7717/peerj.234'), from='entrez')
+#' ft_get(ids='http://www.microbiomejournal.com/content/download/xml/2049-2618-2-7.xml', from='bmc')
 #' }
 
-ft_get <- function(query, from='plos', limit=10, plosopts=list(), bmcopts=list(), ...){
-  plos_out <- plugin_plos(from, query, limit, plosopts)
-  bmc_out <- plugin_bmc(from, query, limit, bmcopts)
-  res <- list(plos=plos_out, bmc=bmc_out)
+ft_get <- function(ids, query, from='plos', plosopts=list(), bmcopts=list(), entrezopts=list(), ...)
+{
+  plos_out <- plugin_get_plos(from, ids, limit, plosopts, ...)
+  entrez_out <- plugin_get_entrez(from, ids, limit, entrezopts, ...)
+  bmc_out <- plugin_get_bmc(from, ids, limit, bmcopts, ...)
+  res <- list(plos=plos_out, entrez=entrez_out, bmc_out)
   class(res) <- "ft_data"
   res
 }
@@ -34,38 +41,63 @@ ft_get <- function(query, from='plos', limit=10, plosopts=list(), bmcopts=list()
 #'
 #' @param x Input...
 #' @param ... Ignored.
-#' @param n Number of data frame rows to print
 #' @method print ft_data
 #' @export
 
-print.ft_data <- function(x, ..., n = 10) {
-  rows <- sum(sapply(x, function(y) NROW(y$data)))
-  found <- sum(unlist(ft_compact(sapply(x, "[[", 'found'))))
-  
-  cat(sprintf("Query [%s]", x[[1]]$opts$q), "\n")
-  cat(sprintf("Records found, returned [%s,%s]", found, rows), "\n")
-  cat(paste(sprintf("PLoS: %s", NROW(x$plos$data)), sprintf("BMC: %s", NROW(x$bmc$data)), sep = "; "), "\n")
-  ft_trunc_mat(x$plos$data, n = n)
+print.ft_data <- function(x, ...) {
+  alldois <- unlist(ft_compact(sapply(x, function(z) names(z$data))))
+  alldois <- vapply(alldois, URLdecode, "")
+  namesprint <- paste(na.omit(alldois[1:10]), collapse = " ")
+  totgot <- sum(sapply(x, function(y) length(y$data)))
+  lengths <- unlist( sapply(x, function(y){ if(!is.null(y$data)) vapply(y$data, nchar, 1) else NULL }) )
+  cat(sprintf("[%s] full-text articles retrieved", totgot), "\n")
+  cat(sprintf("Min. Length: %s - Max. Length: %s", min(lengths), max(lengths)), "\n")
+  cat(ft_wrap(sprintf("IDs:\n %s ...", namesprint)), "\n\n")
+  cat("NOTE: extract xml strings like output['<doi>']")
 }
 
-plugin_plos <- function(sources, query, limit, opts){
+plugin_get_plos <- function(sources, ids, limit, opts, ...){
+  callopts <- list(...)
   if(any(grepl("plos", sources))){
-    opts$q <- query
-    opts$limit <- limit
-    out <- do.call(searchplos, opts)
-    list(found = out$meta$numFound, data = out$data, opts = opts)
+    opts$doi <- ids
+    opts$callopts <- callopts
+    out <- do.call(plos_fulltext, opts)
+    list(found = length(out), data = out, opts = opts)
   } else {
     list(found = NULL, data = NULL, opts = opts)
   }
 }
 
-plugin_bmc <- function(sources, query, limit, opts){
-  if(any(grepl("bmc", sources))){
-    opts$q <- query
-    out <- do.call(bmc_search, opts)
-    dat <- out
-    list(found = out$meta$count, data = dat, opts = opts)
+plugin_get_entrez <- function(sources, ids, limit, opts, ...){
+  callopts <- list(...)
+  if(any(grepl("entrez", sources))){
+    opts$ids <- ids
+    out <- do.call(entrez_get, opts)
+    list(found = length(out), data = out, opts = opts)
   } else {
     list(found = NULL, data = NULL, opts = opts)
   }
+}
+
+entrez_get <- function(ids){
+  res <- entrez_search(db="pmc", term=paste0(sprintf('%s[doi]', ids), collapse = "|"))
+  vapply(res$ids, function(z) entrez_fetch(db = 'pmc', id=z, rettype = "xml"), character(1))
+}
+
+plugin_get_bmc <- function(sources, query, limit, opts, ...){
+  callopts <- list(...)
+  if(any(grepl("bmc", sources))){
+    opts$uris <- query
+    opts$raw <- TRUE
+    out <- do.call(bmc_xml, opts)
+    list(found = length(out), data = out, opts = opts)
+  } else {
+    list(found = NULL, data = NULL, opts = opts)
+  }
+}
+
+ft_wrap <- function (..., indent = 0, width = getOption("width")){
+  x <- paste0(..., collapse = "")
+  wrapped <- strwrap(x, indent = indent, exdent = indent + 2, width = width)
+  paste0(wrapped, collapse = "\n")
 }

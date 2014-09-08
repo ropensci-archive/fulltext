@@ -3,14 +3,12 @@
 \alias{print.ft_data}
 \title{Print brief summary of ft_data object}
 \usage{
-\method{print}{ft_data}(x, ..., n = 10)
+\method{print}{ft_data}(x, ...)
 }
 \arguments{
 \item{x}{Input...}
 
 \item{...}{Ignored.}
-
-\item{n}{Number of data frame rows to print}
 }
 \description{
 Print brief summary of ft_data object

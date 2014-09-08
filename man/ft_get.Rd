@@ -3,11 +3,13 @@
 \alias{ft_get}
 \title{Get full text.}
 \usage{
-ft_get(query, from = "plos", limit = 10, plosopts = list(),
-  bmcopts = list(), ...)
+ft_get(ids, query, from = "plos", plosopts = list(), bmcopts = list(),
+  entrezopts = list(), ...)
 }
 \arguments{
 \item{query}{Query terms}
+
+\item{ids}{Identifiers for papers, either DOIs, or other ids.}
 
 \item{from}{Source to query}
 
@@ -17,19 +19,23 @@ ft_get(query, from = "plos", limit = 10, plosopts = list(),
 
 \item{bmcopts}{BMC options. See \code{?bmc_search}}
 
+\item{entrezopts}{Entrez options. See \code{?entrez_search} and \code{?entrez_fetch}}
+
 \item{...}{Further args passed on to \code{httr::GET}}
 }
 \value{
-An object of class ft.
+An object of class ft_data
 }
 \description{
 Get full text.
 }
 \examples{
-\dontrun{
-ft_search(query='ecology', from='plos')
-ft_search(query='climate change', from='plos', limit=500, plosopts=list(
-   fl=c('id','author','eissn','journal','counter_total_all','alm_twitterCount')))
+\donttest{
+ft_get(ids='10.1371\%2Fjournal.pone.0086169', from='plos')
+(dois <- searchplos(q="*:*", fl='id', fq='doc_type:full', limit=5)$data$id)
+ft_get(ids=dois, from='plos')
+ft_get(ids=c('10.7717/peerj.228','10.7717/peerj.234'), from='entrez')
+ft_get(ids='http://www.microbiomejournal.com/content/download/xml/2049-2618-2-7.xml', from='bmc')
 }
 }
 
