@@ -3,12 +3,13 @@
 \alias{ft_serialize}
 \title{Serialize raw text to other formats, including to disk.}
 \usage{
-ft_serialize(x, to = "XMLInternalDocument", from = NULL, ...)
+ft_serialize(x, to = "xml", from = NULL, ...)
 }
 \arguments{
 \item{x}{Input object, output from a call to \code{ft_get}. Required.}
 
-\item{to}{(character) Format to serialize to. One of xml, json, etc. Required.}
+\item{to}{(character) Format to serialize to. One of list, xml, json, data.frame, ... Required.
+Output to xml returns object of class XMLInternalDocument.}
 
 \item{from}{(character) Format \code{x} is currently in. Function attempts to use metadata
 provided, or guess from data itself. Optional. CURRENTLY IGNORED.}
@@ -20,15 +21,20 @@ Serialize raw text to other formats, including to disk.
 }
 \examples{
 \donttest{
-# From XML to JSON
 dois <- c('10.1371/journal.pone.0087376','10.1371\%2Fjournal.pone.0086169')
 res <- ft_get(ids=dois, from='plos')
+
+# From XML to JSON
 (out <- ft_serialize(res, to='json'))
 out$plos$data$`10.1371/journal.pone.0087376` # the json
 jsonlite::fromJSON(out$plos$data$`10.1371/journal.pone.0087376`)
 
 # Parse raw xml to XMLInternalDocument class
-out <- ft_serialize(res, to='XMLInternalDocument')
+out <- ft_serialize(res, to='xml')
+out$plos$data$`10.1371/journal.pone.0087376`
+
+# To a list
+out <- ft_serialize(res, to='list')
 out$plos$data$`10.1371/journal.pone.0087376`
 
 # You can't go from JSON to XML

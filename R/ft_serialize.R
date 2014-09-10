@@ -3,32 +3,40 @@
 #' @export
 #' 
 #' @param x Input object, output from a call to \code{ft_get}. Required.
-#' @param to (character) Format to serialize to. One of xml, json, etc. Required.
+#' @param to (character) Format to serialize to. One of list, xml, json, data.frame, ... Required. 
+#' Output to xml returns object of class XMLInternalDocument.
 #' @param from (character) Format \code{x} is currently in. Function attempts to use metadata
 #' provided, or guess from data itself. Optional. CURRENTLY IGNORED.
 #' @param ... Further args passed on to \code{XML::xmlParse} or \code{jsonlite::toJSON}
 #' @examples \donttest{
-#' # From XML to JSON
 #' dois <- c('10.1371/journal.pone.0087376','10.1371%2Fjournal.pone.0086169')
 #' res <- ft_get(ids=dois, from='plos')
+#' 
+#' # From XML to JSON
 #' (out <- ft_serialize(res, to='json'))
 #' out$plos$data$`10.1371/journal.pone.0087376` # the json
 #' jsonlite::fromJSON(out$plos$data$`10.1371/journal.pone.0087376`)
 #' 
 #' # Parse raw xml to XMLInternalDocument class
-#' out <- ft_serialize(res, to='XMLInternalDocument')
+#' out <- ft_serialize(res, to='xml')
+#' out$plos$data$`10.1371/journal.pone.0087376`
+#' 
+#' # To a list
+#' out <- ft_serialize(res, to='list')
 #' out$plos$data$`10.1371/journal.pone.0087376`
 #' 
 #' # You can't go from JSON to XML
 #' #    need example here...
 #' }
 
-ft_serialize <- function(x, to='XMLInternalDocument', from=NULL, ...)
+ft_serialize <- function(x, to='xml', from=NULL, ...)
 {
   fmt <- attributes(x$plos$data)$format
   tmp <- switch(to, 
-                XMLInternalDocument = to_xml(x, fmt, ...),
-                json = to_json(x, fmt, ...))
+                xml = to_xml(x, fmt, ...),
+                json = to_json(x, fmt, ...),
+                list = to_list(x, fmt, ...)
+  )
   class(tmp) <- "ft_parsed"
   tmp
 }
@@ -70,6 +78,22 @@ to_json <- function(x, fmt, ...){
   }
 }
 
+to_list <- function(x, fmt, ...){
+  fmt <- match.arg(fmt, c('xml','json'))
+  if(fmt == 'xml'){
+    lapply(x, function(y){ 
+      y$data <- lapply(y$data, xmlToList, ...)
+      return( y )
+    })
+  } else {
+    lapply(x, function(y){
+      y$data <- lapply(y$data, function(z){
+        jsonlite::fromJSON(z, FALSE, ...)
+      })
+      return( y )
+    })
+  }
+}
 
 #' Print brief summary of ft_parsed object
 #'
@@ -89,3 +113,5 @@ print.ft_parsed <- function(x, ...) {
   cat(ft_wrap(sprintf("IDs:\n %s ...", namesprint)), "\n\n")
   cat("NOTE: extract xml strings like output$source$['<doi>']")
 }
+
+
