@@ -13,9 +13,4 @@
 \description{
 Print brief summary of ft_data object
 }
-\examples{
-\dontrun{
-xxx
-}
-}
 
