@@ -28,16 +28,12 @@ ft_get <- function(ids, query, from='plos', plosopts=list(), bmcopts=list(), ent
   plos_out <- plugin_get_plos(from, ids, limit, plosopts, ...)
   entrez_out <- plugin_get_entrez(from, ids, limit, entrezopts, ...)
   bmc_out <- plugin_get_bmc(from, ids, limit, bmcopts, ...)
-  res <- list(plos=plos_out, entrez=entrez_out, bmc_out)
+  res <- list(plos=plos_out, entrez=entrez_out, bmc=bmc_out)
   class(res) <- "ft_data"
   res
 }
 
 #' Print brief summary of ft_data object
-#'
-#' @examples \dontrun{
-#' xxx
-#' }
 #'
 #' @param x Input...
 #' @param ... Ignored.
@@ -62,6 +58,7 @@ plugin_get_plos <- function(sources, ids, limit, opts, ...){
     opts$doi <- ids
     opts$callopts <- callopts
     out <- do.call(plos_fulltext, opts)
+    attr(out, "format") <- "xml"
     list(found = length(out), data = out, opts = opts)
   } else {
     list(found = NULL, data = NULL, opts = opts)
@@ -73,6 +70,7 @@ plugin_get_entrez <- function(sources, ids, limit, opts, ...){
   if(any(grepl("entrez", sources))){
     opts$ids <- ids
     out <- do.call(entrez_get, opts)
+    attr(out, "format") <- "xml"
     list(found = length(out), data = out, opts = opts)
   } else {
     list(found = NULL, data = NULL, opts = opts)
@@ -90,6 +88,7 @@ plugin_get_bmc <- function(sources, query, limit, opts, ...){
     opts$uris <- query
     opts$raw <- TRUE
     out <- do.call(bmc_xml, opts)
+    attr(out, "format") <- "xml"
     list(found = length(out), data = out, opts = opts)
   } else {
     list(found = NULL, data = NULL, opts = opts)
