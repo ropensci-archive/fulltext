@@ -49,7 +49,7 @@ print.ft_data <- function(x, ...) {
   cat(sprintf("[%s] full-text articles retrieved", totgot), "\n")
   cat(sprintf("Min. Length: %s - Max. Length: %s", min(lengths), max(lengths)), "\n")
   cat(ft_wrap(sprintf("IDs:\n %s ...", namesprint)), "\n\n")
-  cat("NOTE: extract xml strings like output['<doi>']")
+  cat("NOTE: extract xml strings like output$source['<doi>']")
 }
 
 plugin_get_plos <- function(sources, ids, limit, opts, ...){
