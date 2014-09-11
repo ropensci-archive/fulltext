@@ -1,22 +1,18 @@
 language: c
-
-script: ./travis-tool.sh run_tests
-
+script: "./travis-tool.sh run_tests"
 before_script:
 - curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
 - chmod 755 ./travis-tool.sh
-- ./travis-tool.sh bootstrap
-- ./travis-tool.sh install_deps
-- ./travis-tool.sh github_package ropensci/bmc ropensci/rplos ropensci/elife
-
+- "./travis-tool.sh bootstrap"
+- "./travis-tool.sh install_deps"
+- "./travis-tool.sh github_package ropensci/bmc ropensci/rplos ropensci/elife"
 env:
-   global:
-     - R_BUILD_ARGS=" "
-     - R_CHECK_ARGS="--as-cran"
-     - BOOTSTRAP_LATEX="1"
-
+  global:
+  - R_BUILD_ARGS=" "
+  - R_CHECK_ARGS="--as-cran"
+  - BOOTSTRAP_LATEX="1"
 after_failure:
-  - ./travis-tool.sh dump_logs
-
+- "./travis-tool.sh dump_logs"
 notifications:
- slack: ropensci:wh30e1MP9Am3wXb2wJx1ZRFi
+  slack:
+    secure: iUbodhwdTWY/Lu+u0THafzSCMB+5im7XCYEAoIxNB61KSD0i99e+reqKXy2c5Rh8XS4KqlhOZ7FN0ivJ9T0DU1sIN27cyIZJHwDL3sY2tKsPlrxATM07+WVuVhvHVeF8JGktbI/mHspoI1OSzAoPZsj7LUdWyDIGYNGwYNXqt04=
