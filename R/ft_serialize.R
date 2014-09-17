@@ -45,7 +45,7 @@ to_xml <- function(x, fmt, ...){
   fmt <- match.arg(fmt, c('xml','json'))
   if(fmt == 'xml'){
     lapply(x, function(y){ 
-      y$data <- lapply(y$data, xmlParse)
+      y$data <- lapply(y$data, XML::xmlParse)
       return( y )
     })
   } else {
@@ -65,7 +65,7 @@ to_json <- function(x, fmt, ...){
   if(fmt == 'xml'){
     lapply(x, function(y){ 
       y$data <- lapply(y$data, function(z){
-        ztmp <- xmlToList(z)
+        ztmp <- XML::xmlToList(z)
         jsonlite::toJSON(ztmp, ...)
       })
       return( y )
@@ -82,7 +82,7 @@ to_list <- function(x, fmt, ...){
   fmt <- match.arg(fmt, c('xml','json'))
   if(fmt == 'xml'){
     lapply(x, function(y){ 
-      y$data <- lapply(y$data, xmlToList, ...)
+      y$data <- lapply(y$data, XML::xmlToList, ...)
       return( y )
     })
   } else {

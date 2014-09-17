@@ -20,7 +20,9 @@ Imports:
     rplos,
     bmc,
     elife,
-    rentrez
+    rentrez,
+    XML,
+    jsonlite
 Suggests:
     roxygen2,
     testthat,
