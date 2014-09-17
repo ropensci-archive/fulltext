@@ -4,22 +4,22 @@
 \title{Get full text.}
 \usage{
 ft_get(ids, query, from = "plos", plosopts = list(), bmcopts = list(),
-  entrezopts = list(), ...)
+  entrezopts = list(), elifeopts = list(), ...)
 }
 \arguments{
-\item{query}{Query terms}
-
 \item{ids}{Identifiers for papers, either DOIs, or other ids.}
 
-\item{from}{Source to query}
+\item{query}{Query terms}
 
-\item{limit}{Number of records to return.}
+\item{from}{Source to query}
 
 \item{plosopts}{PLOS options. See \code{?searchplos}}
 
 \item{bmcopts}{BMC options. See \code{?bmc_search}}
 
 \item{entrezopts}{Entrez options. See \code{?entrez_search} and \code{?entrez_fetch}}
+
+\item{elifeopts}{eLife options. See \code{?elife_search}}
 
 \item{...}{Further args passed on to \code{httr::GET}}
 }
@@ -31,10 +31,18 @@ Get full text.
 }
 \examples{
 \donttest{
-ft_get(ids='10.1371\%2Fjournal.pone.0086169', from='plos')
+ft_get(ids='10.1371/journal.pone.0086169', from='plos')
 (dois <- searchplos(q="*:*", fl='id', fq='doc_type:full', limit=5)$data$id)
 ft_get(ids=dois, from='plos')
 ft_get(ids=c('10.7717/peerj.228','10.7717/peerj.234'), from='entrez')
+
+# elife
+ft_get(ids=c('10.7554/eLife.04300','10.7554/eLife.03032'), from='elife')
+library('elife')
+dois <- searchelife(terms="Cell biology", searchin="subject_area", boolean="contains")
+ft_get(ids=dois[1:10], from='elife')
+
+# bmc
 ft_get(ids='http://www.microbiomejournal.com/content/download/xml/2049-2618-2-7.xml', from='bmc')
 }
 }
