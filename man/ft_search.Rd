@@ -4,7 +4,7 @@
 \title{Search for full text.}
 \usage{
 ft_search(query, from = "plos", limit = 10, plosopts = list(),
-  bmcopts = list(), crossrefopts = list(), ...)
+  bmcopts = list(), crossrefopts = list(), entrezopts = list(), ...)
 }
 \arguments{
 \item{query}{Query terms}
@@ -19,10 +19,12 @@ ft_search(query, from = "plos", limit = 10, plosopts = list(),
 
 \item{crossrefopts}{Crossref options. See \code{?cr_works}}
 
-\item{...}{Further args passed on to \code{httr::GET}}
+\item{entrezopts}{Entrez options. See \code{?entrez_search}}
+
+\item{...}{Further args passed on to \code{httr::GET}. Not working right now...}
 }
 \value{
-An object of class ft.
+An object of class ft, and objects of class ft_ind within each source
 }
 \description{
 Search for full text.
@@ -30,15 +32,22 @@ Search for full text.
 \examples{
 \dontrun{
 # Plos
-ft_search(query='ecology', from='plos')
+(res <- ft_search(query='ecology', from='plos'))
+res$plos
 ft_search(query='climate change', from='plos', limit=500, plosopts=list(
    fl=c('id','author','eissn','journal','counter_total_all','alm_twitterCount')))
 
 # Crossref
-ft_search(query='ecology', from='crossref')
+(res <- ft_search(query='ecology', from='crossref'))
+res$crossref
 
 # BMC
-ft_search(query='ecology', from='bmc')
+(res <- ft_search(query='ecology', from='bmc'))
+res$bmc
+
+# Entrez
+(res <- ft_search(query='ecology', from='entrez'))
+res$entrez
 
 # Plos and Crossref
 (res <- ft_search(query='ecology', from=c('plos','crossref')))
