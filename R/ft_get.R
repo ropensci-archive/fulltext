@@ -1,7 +1,6 @@
 #' Get full text.
 #' 
 #' @export
-#' @import rplos bmc 
 #' @importFrom elife elife_paper
 #' @importFrom rentrez entrez_search entrez_fetch
 #' 
