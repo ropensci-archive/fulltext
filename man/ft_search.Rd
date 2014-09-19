@@ -4,7 +4,7 @@
 \title{Search for full text.}
 \usage{
 ft_search(query, from = "plos", limit = 10, plosopts = list(),
-  bmcopts = list(), ...)
+  bmcopts = list(), crossrefopts = list(), ...)
 }
 \arguments{
 \item{query}{Query terms}
@@ -17,6 +17,8 @@ ft_search(query, from = "plos", limit = 10, plosopts = list(),
 
 \item{bmcopts}{BMC options. See \code{?bmc_search}}
 
+\item{crossrefopts}{Crossref options. See \code{?cr_works}}
+
 \item{...}{Further args passed on to \code{httr::GET}}
 }
 \value{
@@ -27,9 +29,21 @@ Search for full text.
 }
 \examples{
 \dontrun{
+# Plos
 ft_search(query='ecology', from='plos')
 ft_search(query='climate change', from='plos', limit=500, plosopts=list(
    fl=c('id','author','eissn','journal','counter_total_all','alm_twitterCount')))
+
+# Crossref
+ft_search(query='ecology', from='crossref')
+
+# BMC
+ft_search(query='ecology', from='bmc')
+
+# Plos and Crossref
+(res <- ft_search(query='ecology', from=c('plos','crossref')))
+res$plos
+res$crossref
 }
 }
 

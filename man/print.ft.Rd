@@ -3,21 +3,14 @@
 \alias{print.ft}
 \title{Print brief summary of ft object}
 \usage{
-\method{print}{ft}(x, ..., n = 10)
+\method{print}{ft}(x, ...)
 }
 \arguments{
 \item{x}{Input...}
 
 \item{...}{Ignored.}
-
-\item{n}{Number of data frame rows to print}
 }
 \description{
 Print brief summary of ft object
-}
-\examples{
-\dontrun{
-xxx
-}
 }
 
