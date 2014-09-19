@@ -18,6 +18,7 @@ VignetteBuilder: knitr
 Roxygen: list(wrap = FALSE)
 Imports:
     rplos,
+    rcrossref,
     bmc,
     elife,
     rentrez,
