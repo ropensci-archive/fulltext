@@ -29,11 +29,25 @@
 #' 
 #' # bmc
 #' ft_get(ids='http://www.microbiomejournal.com/content/download/xml/2049-2618-2-7.xml', from='bmc')
+#' 
+#' # Frontiers in Pharmacology (publisher: Frontiers)
+#' doi <- '10.3389/fphar.2014.00109'
+#' ft_get(ids=doi, from="entrez")
+#' 
+#' # Hindawi Journals
+#' ft_get(ids=c('10.1155/2014/292109','10.1155/2014/162024','10.1155/2014/249309'), from='entrez')
+#' res <- ft_search(query='ecology', from='crossref', limit=50,
+#'                  crossrefopts = list(filter=list(has_full_text = TRUE, 
+#'                                                  member=98, 
+#'                                                  type='journal-article')))
+#' 
+#' out <- ft_get(ids=res$crossref$data$DOI[1:20], from='entrez')
 #' }
 
 ft_get <- function(ids, query, from='plos', plosopts=list(), bmcopts=list(), entrezopts=list(), 
-                   elifeopts=list(), ...)
+  elifeopts=list(), ...)
 {
+#   from <- toggle_from(from)
   plos_out <- plugin_get_plos(from, ids, plosopts, ...)
   entrez_out <- plugin_get_entrez(from, ids, entrezopts, ...)
   bmc_out <- plugin_get_bmc(from, ids, bmcopts, ...)
@@ -42,6 +56,15 @@ ft_get <- function(ids, query, from='plos', plosopts=list(), bmcopts=list(), ent
   class(res) <- "ft_data"
   res
 }
+
+# toggle_from <- function(x){
+#   switch(x,
+#     entrez = "entrez",
+#     hindawi = "entrez",
+#     bmc = "bmc",
+#     elife = "elife"
+#   )
+# }
 
 #' Print brief summary of ft_data object
 #'

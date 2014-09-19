@@ -44,6 +44,19 @@ ft_get(ids=dois[1:10], from='elife')
 
 # bmc
 ft_get(ids='http://www.microbiomejournal.com/content/download/xml/2049-2618-2-7.xml', from='bmc')
+
+# Frontiers in Pharmacology (publisher: Frontiers)
+doi <- '10.3389/fphar.2014.00109'
+ft_get(ids=doi, from="entrez")
+
+# Hindawi Journals
+ft_get(ids=c('10.1155/2014/292109','10.1155/2014/162024','10.1155/2014/249309'), from='entrez')
+res <- ft_search(query='ecology', from='crossref', limit=50,
+                 crossrefopts = list(filter=list(has_full_text = TRUE,
+                                                 member=98,
+                                                 type='journal-article')))
+
+out <- ft_get(ids=res$crossref$data$DOI[1:20], from='entrez')
 }
 }
 
