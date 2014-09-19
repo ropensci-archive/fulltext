@@ -23,7 +23,8 @@ Imports:
     elife,
     rentrez,
     XML,
-    jsonlite
+    jsonlite,
+    plyr
 Suggests:
     roxygen2,
     testthat,
