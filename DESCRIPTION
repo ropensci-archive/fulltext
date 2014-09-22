@@ -22,8 +22,10 @@ Imports:
     bmc,
     elife,
     rentrez,
+    aRxiv,
     XML,
     jsonlite,
+    dplyr,
     plyr
 Suggests:
     roxygen2,
