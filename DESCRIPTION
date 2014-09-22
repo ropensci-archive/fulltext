@@ -6,9 +6,9 @@ Description: This package provides a single interface to many sources of full
     preprints, and more. Functionality included for searching for articles,
     downloading full or partial text, converting to various data formats used
     in and outside of R, and visualizations of data and the text itself.
-Version: 0.0.2.99
+Version: 0.0.2.999
 License: MIT + file LICENSE
-Date: 2014-09-19
+Date: 2014-09-22
 Authors@R: person("chamberlain", "Scott", role = c("aut", "cre"),
     email = "myrmecocystus@gmail.com")
 URL: https://github.com/ropensci/fulltext
