@@ -36,7 +36,7 @@
 #' # Entrez
 #' (res <- ft_search(query='ecology', from='entrez'))
 #' res$entrez
-#' 
+#'  
 #' # Plos and Crossref
 #' (res <- ft_search(query='ecology', from=c('plos','crossref')))
 #' res$plos
