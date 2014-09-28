@@ -25,7 +25,6 @@ Imports:
     rentrez,
     XML,
     jsonlite,
-    dplyr,
     plyr,
     Rcampdf,
     tm

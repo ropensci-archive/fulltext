@@ -14,17 +14,17 @@
 #' paths <- c("~/github/sac/scott/pdfs/BarraquandEtal2014peerj.pdf",
 #' "~/github/sac/scott/pdfs/Chamberlain&Holland2009Ecology.pdf",
 #' "~/github/sac/scott/pdfs/Revell&Chamberlain2014MEE.pdf")
-#' res <- extract_corpus(paths, "rcamp")
+#' res <- ft_extract_corpus(paths, "rcamp")
 #' res
 #' tm::TermDocumentMatrix(res$data)
 #'
-#' res <- extract_corpus(path, "gs")
+#' res <- ft_extract_corpus(path, "gs")
 #' res
-#' res <- extract_corpus(path, "xpdf")
+#' res <- ft_extract_corpus(path, "xpdf")
 #' res
 #' }
 
-extract_corpus <- function(paths, which, ...){
+ft_extract_corpus <- function(paths, which, ...){
   switch(which,
          rcamp = extract_tm_rcamp(paths, ...),
          gs = extract_tm_gs(paths, ...),
