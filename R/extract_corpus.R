@@ -1,4 +1,4 @@
-#' Extract text from one to many pdf documents into a tm Corpus.
+#' Extract text from one to many pdf documents into a tm Corpus or Vcorpus.
 #'
 #' @importFrom Rcampdf pdf_text pdf_info
 #' @importFrom tm Corpus URISource readPDF
@@ -6,7 +6,7 @@
 #'
 #' @export
 #'
-#' @param paths Path to a file
+#' @param paths Path to one or more pdfs
 #' @param which One of rcamp, gs, or xpdf.
 #' @param ... further args passed on
 #' @return A tm Corpus or VCorpus
@@ -43,7 +43,7 @@ extract_tm_gs <- function(paths, which, ...){
   paths <- process_paths(paths)
   out <- Corpus(URISource(paths), readerControl=list(reader=readPDF(engine="ghostscript", control=list(...))))
   meta <- get_meta(out)
-  structure(list(meta=meta, data=out), class="xpdf")
+  structure(list(meta=meta, data=out), class="gs")
 }
 
 extract_tm_xpdf <- function(paths, which, ...){
@@ -72,29 +72,3 @@ process_paths <- function(x){
   files_exist(x)
   path.expand(x)
 }
-
-# #' @export
-# print.rcamp_char <- function(x, ...) {
-#   cat("<document>", attr(x, "path"), "\n", sep = "")
-#   cat("  File size: ", x$meta$`File Size`, "\n", sep = "")
-#   cat("  Pages: ", x$meta$`File Size`, "\n", sep = "")
-#   cat("  Producer: ", x$meta$Producer, "\n", sep = "")
-#   cat("  Creation date: ", x$meta$`File Size`, "\n", sep = "")
-# }
-#
-# #' @export
-# print.gs_char <- function(x, ...) {
-#   cat("<document>", attr(x, "path"), "\n", sep = "")
-#   cat("  Title: ", x$meta$Title, "\n", sep = "")
-#   cat("  Producer: ", x$meta$Producer, "\n", sep = "")
-#   cat("  Creation date: ", as.character(as.Date(x$meta$CreationDate)), "\n", sep = "")
-# }
-#
-# #' @export
-# print.xpdf_char <- function(x, ...) {
-#   cat("<document>", attr(x, "path"), "\n", sep = "")
-#   cat("  Pages: ", x$meta$Pages, "\n", sep = "")
-#   cat("  Title: ", x$meta$Title, "\n", sep = "")
-#   cat("  Producer: ", x$meta$Producer, "\n", sep = "")
-#   cat("  Creation date: ", as.character(as.Date(x$meta$CreationDate)), "\n", sep = "")
-# }

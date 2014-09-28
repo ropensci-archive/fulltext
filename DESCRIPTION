@@ -17,6 +17,7 @@ LazyLoad: yes
 VignetteBuilder: knitr
 Roxygen: list(wrap = FALSE)
 Imports:
+    httr,
     rplos,
     rcrossref,
     bmc,

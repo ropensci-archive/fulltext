@@ -23,8 +23,7 @@ extract <- function(path, which, ...){
 }
 
 extract_rcamp <- function(path, which, ...){
-  cmds <- list(...)
-  cmds <- if(length(cmds)==0) "" else cmds
+  cmds <- get_cmds(...)
   path <- path.expand(path)
   res <- pdf_text(path)
   meta <- pdf_info(path)
@@ -32,8 +31,7 @@ extract_rcamp <- function(path, which, ...){
 }
 
 extract_gs <- function(path, which, ...){
-  cmds <- list(...)
-  cmds <- if(length(cmds)==0) "" else cmds
+  cmds <- get_cmds(...)
   path <- path.expand(path)
   res <- pdf_text_via_gs(path)
   res <- paste(res, collapse = ", ")
@@ -42,8 +40,7 @@ extract_gs <- function(path, which, ...){
 }
 
 extract_xpdf <- function(path, which, ...){
-  cmds <- list(...)
-  cmds <- if(length(cmds)==0) "" else cmds
+  cmds <- get_cmds(...)
   path <- path.expand(path)
   res <- system2("pdftotext", shQuote(path), stdout = TRUE)
   res <- paste(res, collapse = ", ")
@@ -75,4 +72,9 @@ print.xpdf_char <- function(x, ...) {
   cat("  Title: ", x$meta$Title, "\n", sep = "")
   cat("  Producer: ", x$meta$Producer, "\n", sep = "")
   cat("  Creation date: ", as.character(as.Date(x$meta$CreationDate)), "\n", sep = "")
+}
+
+get_cmds <- function(...){
+  d <- list(...)
+  if(length(d)==0) "" else d
 }
