@@ -13,6 +13,14 @@ Data sources in `fulltext`:
 
 ## Installation
 
+You need Rcampdf, which is not on CRAN, but you can install easily via 
+
+```r
+install.packages("Rcampdf", repos = "http://datacube.wu.ac.at/", type = "source")
+```
+
+Then instal `fulltext`
+
 ```r
 devtools::install_github(c("ropensci/rplos", "ropensci/bmc", "ropensci/elife"))
 devtools::install_github("ropensci/fulltext")
