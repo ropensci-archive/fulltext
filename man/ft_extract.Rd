@@ -20,12 +20,11 @@ Extract text from a single pdf document.
 }
 \examples{
 \donttest{
-res <- ft_extract(path, "rcamp")
-res
-res <- ft_extract(path, "gs")
-res
-res <- ft_extract(path, "xpdf")
-res
+path <- "~/github/sac/scott/pdfs/ChamberlainEtal2013Ecosphere.pdf"
+
+(res_rcamp <- ft_extract(path, "rcamp"))
+(res_gs <- ft_extract(path, "gs"))
+(res_xpdf <- ft_extract(path, "xpdf"))
 }
 }
 

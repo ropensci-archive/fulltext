@@ -9,19 +9,16 @@
 #' @param paths Path to one or more pdfs
 #' @param which One of rcamp, gs, or xpdf.
 #' @param ... further args passed on
-#' @return A tm Corpus or VCorpus
+#' @return A tm Corpus (or VCorpus, later that is)
 #' @examples \donttest{
 #' paths <- c("~/github/sac/scott/pdfs/BarraquandEtal2014peerj.pdf",
 #' "~/github/sac/scott/pdfs/Chamberlain&Holland2009Ecology.pdf",
 #' "~/github/sac/scott/pdfs/Revell&Chamberlain2014MEE.pdf")
-#' res <- ft_extract_corpus(paths, "rcamp")
-#' res
+#' (res <- ft_extract_corpus(paths, "rcamp"))
 #' tm::TermDocumentMatrix(res$data)
 #'
-#' res <- ft_extract_corpus(path, "gs")
-#' res
-#' res <- ft_extract_corpus(path, "xpdf")
-#' res
+#' (res_gs <- ft_extract_corpus(path, "gs"))
+#' (res_xpdf <- ft_extract_corpus(path, "xpdf"))
 #' }
 
 ft_extract_corpus <- function(paths, which, ...){

@@ -6,12 +6,11 @@
 #' @param ... further args passed on
 #' @return An object of class rcamp_char, gs_char, xpdf_char
 #' @examples \donttest{
-#' res <- ft_extract(path, "rcamp")
-#' res
-#' res <- ft_extract(path, "gs")
-#' res
-#' res <- ft_extract(path, "xpdf")
-#' res
+#' path <- "~/github/sac/scott/pdfs/ChamberlainEtal2013Ecosphere.pdf"
+#' 
+#' (res_rcamp <- ft_extract(path, "rcamp"))
+#' (res_gs <- ft_extract(path, "gs"))
+#' (res_xpdf <- ft_extract(path, "xpdf"))
 #' }
 
 ft_extract <- function(path, which, ...){

@@ -13,7 +13,7 @@ ft_extract_corpus(paths, which, ...)
 \item{...}{further args passed on}
 }
 \value{
-A tm Corpus or VCorpus
+A tm Corpus (or VCorpus, later that is)
 }
 \description{
 Extract text from one to many pdf documents into a tm Corpus or Vcorpus.
@@ -23,14 +23,11 @@ Extract text from one to many pdf documents into a tm Corpus or Vcorpus.
 paths <- c("~/github/sac/scott/pdfs/BarraquandEtal2014peerj.pdf",
 "~/github/sac/scott/pdfs/Chamberlain&Holland2009Ecology.pdf",
 "~/github/sac/scott/pdfs/Revell&Chamberlain2014MEE.pdf")
-res <- ft_extract_corpus(paths, "rcamp")
-res
+(res <- ft_extract_corpus(paths, "rcamp"))
 tm::TermDocumentMatrix(res$data)
 
-res <- ft_extract_corpus(path, "gs")
-res
-res <- ft_extract_corpus(path, "xpdf")
-res
+(res_gs <- ft_extract_corpus(path, "gs"))
+(res_xpdf <- ft_extract_corpus(path, "xpdf"))
 }
 }
 
