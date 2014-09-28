@@ -1,6 +1,7 @@
 #' Search for information on journals or publishers.
 #' 
 #' @export
+#' @importFrom rcrossref cr_journals cr_members
 #' 
 #' @param journal Query terms
 #' @param publisher Source to query
