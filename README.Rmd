@@ -17,21 +17,18 @@ We'd love your feedback. Let us know what you think at info@ropensci.org, or in 
 
 You need Rcampdf, which is not on CRAN, but you can install easily via
 
-
-```r
+```{r eval=FALSE}
 install.packages("Rcampdf", repos = "http://datacube.wu.ac.at/", type = "source")
 ```
 
 Then instal `fulltext`
 
-
-```r
+```{r eval=FALSE}
 devtools::install_github(c("ropensci/rplos", "ropensci/bmc", "ropensci/elife"))
 devtools::install_github("ropensci/fulltext")
 ```
 
-
-```r
+```{r}
 library('fulltext')
 ```
 
@@ -43,35 +40,16 @@ All functions are prefixed with `ft_`.
 
 `ft_search()` - get metadata on a search query.
 
-
-```r
+```{r search}
 ft_search(query='ecology', from='plos')
-```
-
-```
-## Query:
-##   [ecology] 
-## Found:
-##   [PLoS: 23356; BMC: 0; Crossref: 0; Entrez: 0] 
-## Returned:
-##   [PLoS: 10; BMC: 0; Crossref: 0; Entrez: 0]
 ```
 
 ### Text
 
 `ft_get()` - get full or partial text of articles.
 
-
-```r
+```{r gettext}
 ft_get(ids='10.1371/journal.pone.0086169', from='plos')
-```
-
-```
-## [1] full-text articles retrieved 
-## Min. Length: 111132 - Max. Length: 111132 
-## IDs: 10.1371/journal.pone.0086169 ... 
-## 
-## NOTE: extract xml strings like output$source['<doi>']
 ```
 
 ### Cache
@@ -80,8 +58,7 @@ __in development__
 
 When dealing with full text data, you can get a lot quickly, and it can take a long time to get. That's where caching comes in. And after you pull down a bunch of data, if you do so within the R session, you don't want to lose that data if the session crashes, etc. When you search you _will be able to_ (i.e., not ready yet) optionally cache the raw JSON/XML/etc. of each request locally - when you do that exact search again we'll just give you the local data - unless of course you want new data, which you can do.
 
-
-```r
+```{r eval=FALSE}
 ft_search(query='reproducible science', from=c('plos','elife'), cache=TRUE)
 ```
 
@@ -91,8 +68,7 @@ __in development__
 
 `ft_plot()` is a convenience function to plot the results of a call to `ft_search()`. There are a variety of options available, including common ways that one vizualizes full text data.
 
-
-```r
+```{r eval=FALSE}
 res <- ft_search(query='reproducible science', from=c('plos','elife'))
 ft_plot(res, method='somemethod')
 ```
@@ -105,54 +81,22 @@ There are going to be cases in which some results you find in `ft_search()` have
 
 Locally, using code adapted from the package `tm`, and various pdf to text parsing backends
 
-
-```r
+```{r extract_local}
 pdf1 <- system.file("examples", "example1.pdf", package = "fulltext")
 
 (res_rcamp <- ft_extract(pdf1, "rcamp"))
-```
-
-```
-## <document>/Users/sacmac/Library/R/3.1/library/fulltext/examples/example1.pdf
-##   File size: 909801 bytes
-##   Pages: 909801 bytes
-##   Producer: Acrobat Distiller 10.1.5 (Windows)
-##   Creation date: 909801 bytes
-```
-
-```r
 (res_gs <- ft_extract(pdf1, "gs"))
-```
-
-```
-## <document>/Users/sacmac/Library/R/3.1/library/fulltext/examples/example1.pdf
-##   Title: ecsp-04-08-07 1..16
-##   Producer: Acrobat Distiller 10.1.5 (Windows)
-##   Creation date: 2013-08-16
-```
-
-```r
 (res_xpdf <- ft_extract(pdf1, "xpdf"))
-```
-
-```
-## <document>/Users/sacmac/Library/R/3.1/library/fulltext/examples/example1.pdf
-##   Pages: 16
-##   Title: ecsp-04-08-07 1..16
-##   Producer: Acrobat Distiller 10.1.5 (Windows)
-##   Creation date: 2013-08-16
 ```
 
 Or extract directly into a `tm` Corpus
 
-
-```r
+```{r eval=FALSE}
 paths <- sapply(paste0("example", 2:5, ".pdf"), function(x) system.file("examples", x, package = "fulltext"))
 (corpus_rcamp <- ft_extract_corpus(paths, "rcamp"))
 ```
 
-
-```r
+```{r eval=FALSE}
 ## $meta
 ##   Author       DateTimeStamp Description            Heading ID Language
 ## 1     NA 2014-09-18 18:09:57          NA pone.0107412 1..10  1       en
@@ -179,14 +123,12 @@ paths <- sapply(paste0("example", 2:5, ".pdf"), function(x) system.file("example
 
 Remotely, using a service called PDFX
 
-
-```r
+```{r extract_remote, eval=FALSE}
 pdf5 <- system.file("examples", "example5.pdf", package = "fulltext")
 pdfx(file = pdf5)
 ```
 
-
-```r
+```{r eval=FALSE, tidy=FALSE}
 ## $meta
 ## $meta$job
 ## [1] "34b281c10730b9e777de8a29b2dbdcc19f7d025c71afe9d674f3c5311a1f2044"
