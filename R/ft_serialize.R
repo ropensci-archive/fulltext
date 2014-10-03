@@ -1,7 +1,7 @@
 #' Serialize raw text to other formats, including to disk.
 #' 
 #' @importFrom rredis redisClose redisSet redisConnect
-#' @importFrom R.cache saveCache
+#' @importFrom R.cache saveCache 
 #' @export
 #' 
 #' @param x Input object, output from a call to \code{ft_get}. Required.
@@ -47,7 +47,8 @@
 #' # Chain together functions
 #' doi <- '10.1371/journal.pone.0086169'
 #' ft_get(doi, from='plos') %>%
-#'    ft_serialize(to='xml')
+#'    ft_serialize(to='xml') %>%
+#'    ft_serialize(to='redis')
 #' }
 
 ft_serialize <- function(x, to='xml', from=NULL, ...)

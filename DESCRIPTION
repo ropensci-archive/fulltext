@@ -29,7 +29,8 @@ Imports:
     Rcampdf,
     tm,
     rredis,
-    R.cache
+    R.cache,
+    magrittr
 Suggests:
     roxygen2,
     testthat,
