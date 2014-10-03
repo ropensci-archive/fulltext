@@ -47,7 +47,7 @@ ft_serialize(res, to='file')
 res_rcache <- ft_serialize(res, to='rcache')
 
 ## To Redis
-ft_serialize(res, to='redis')
+res_redis <- ft_serialize(res, to='redis')
 
 # Sizes
 pryr::object_size(res)

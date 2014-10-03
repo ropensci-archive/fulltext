@@ -37,11 +37,17 @@
 #' res_rcache <- ft_serialize(res, to='rcache')
 #' 
 #' ## To Redis
-#' ft_serialize(res, to='redis')
+#' res_redis <- ft_serialize(res, to='redis')
 #' 
 #' # Sizes
 #' pryr::object_size(res)
 #' pryr::object_size(res_rcache)
+#' pryr::object_size(res_redis)
+#' 
+#' # Chain together functions
+#' doi <- '10.1371/journal.pone.0086169'
+#' ft_get(doi, from='plos') %>%
+#'    ft_serialize(to='xml')
 #' }
 
 ft_serialize <- function(x, to='xml', from=NULL, ...)
@@ -57,6 +63,22 @@ ft_serialize <- function(x, to='xml', from=NULL, ...)
                 redis = save_redis(x)
   )
   structure(tmp, class="ft_parsed", type=to, location=attr(tmp, "location"))
+}
+
+#' Print brief summary of ft_parsed object
+#'
+#' @param x Input...
+#' @param ... Ignored.
+#' @method print ft_parsed
+#' @export
+print.ft_parsed <- function(x, ...) {
+  alldois <- unlist(ft_compact(sapply(x, function(z) names(z$data))))
+  alldois <- vapply(alldois, URLdecode, "")
+  namesprint <- paste(na.omit(alldois[1:10]), collapse = " ")
+  totgot <- sum(sapply(x, function(y) length(y$data)))
+  cat(sprintf("[Docs] %s", totgot), "\n")
+  cat(sprintf("[Source] %s", attr(x, "type")), "\n")
+  cat(ft_wrap(sprintf("[IDs] \n %s ...", namesprint)), "\n\n")
 }
 
 to_xml <- function(x, fmt, ...){
@@ -126,27 +148,11 @@ save_redis <- function(x){
     stop("Start redis. Go to your terminal/shell and type redis-server, then hit enter")
   } else
   {
-    hash <- digest::digest(x)
-    redisSet(hash, x)
+    x <- serialize_redis(x)
     redisClose()
-    structure(x, location=sprintf('<redis,key:%s>', hash))
+    structure(x, location="Redis")
+#     sprintf('<redis,key:%s>', hash)
   }
-}
-
-#' Print brief summary of ft_parsed object
-#'
-#' @param x Input...
-#' @param ... Ignored.
-#' @method print ft_parsed
-#' @export
-print.ft_parsed <- function(x, ...) {
-  alldois <- unlist(ft_compact(sapply(x, function(z) names(z$data))))
-  alldois <- vapply(alldois, URLdecode, "")
-  namesprint <- paste(na.omit(alldois[1:10]), collapse = " ")
-  totgot <- sum(sapply(x, function(y) length(y$data)))
-  cat(sprintf("[Docs] %s", totgot), "\n")
-  cat(sprintf("[Source] %s", attr(x, "type")), "\n")
-  cat(ft_wrap(sprintf("[IDs] \n %s ...", namesprint)), "\n\n")
 }
 
 serialize_rcache <- function(x){
@@ -161,4 +167,27 @@ serialize_rcache <- function(x){
     }
   }
   return( x )
+}
+
+serialize_redis <- function(x){
+  for(i in seq_along(x)){
+    if(is.null( x[[i]]$data )){
+      x[[i]]$data <- "none"
+    } else {
+      for(j in seq_along(x[[i]]$data)){
+        nn <- paste(names(x[i]), names(x[[i]]$data[j]), sep = "_")
+        x[[i]]$data[[j]] <- redis_set_(nn, x[[i]]$data[[j]])
+      }
+    }
+  }
+  return( x )
+}
+
+redis_set_ <- function(x, y){
+  redisSet(x, y)
+  x
+}
+
+ft_get_keys <- function(x){
+  
 }
