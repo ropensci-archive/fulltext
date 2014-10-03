@@ -5,7 +5,7 @@
 #' @export
 #' 
 #' @param x Input object, output from a call to \code{ft_get}. Required.
-#' @param to (character) Format to serialize to. One of list, xml, json, data.frame, ... Required. 
+#' @param to (character) Format to serialize to. One of list, xml, json, ... Required. 
 #' Output to xml returns object of class XMLInternalDocument.
 #' @param from (character) Format \code{x} is currently in. Function attempts to use metadata
 #' provided, or guess from data itself. Optional. CURRENTLY IGNORED.
@@ -53,7 +53,7 @@
 
 ft_serialize <- function(x, to='xml', from=NULL, ...)
 {
-  match.arg(to, c('json','xml','list','file','rcache','redis','sqlite'))
+  match.arg(to, c('json','xml','list','file','rcache','redis'))
   fmt <- attributes(x$plos$data)$format
   tmp <- switch(to, 
                 xml = to_xml(x, fmt, ...),
@@ -66,11 +66,6 @@ ft_serialize <- function(x, to='xml', from=NULL, ...)
   structure(tmp, class="ft_parsed", type=to, location=attr(tmp, "location"))
 }
 
-#' Print brief summary of ft_parsed object
-#'
-#' @param x Input...
-#' @param ... Ignored.
-#' @method print ft_parsed
 #' @export
 print.ft_parsed <- function(x, ...) {
   alldois <- unlist(ft_compact(sapply(x, function(z) names(z$data))))
@@ -189,6 +184,8 @@ redis_set_ <- function(x, y){
   x
 }
 
+#' @export
+#' @rdname ft_serialize
 ft_get_keys <- function(x){
-  
+  lapply(x, function(z) names(z$data))
 }
