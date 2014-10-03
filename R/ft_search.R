@@ -6,6 +6,7 @@
 #' @importFrom rcrossref cr_works
 #' @importFrom plyr rbind.fill
 #' @importFrom rentrez entrez_summary
+#' @importFrom aRxiv arxiv_search
 #' 
 #' @param query Query terms
 #' @param from Source to query
