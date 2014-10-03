@@ -4,7 +4,8 @@
 \title{Search for full text.}
 \usage{
 ft_search(query, from = "plos", limit = 10, plosopts = list(),
-  bmcopts = list(), crossrefopts = list(), entrezopts = list(), ...)
+  bmcopts = list(), crossrefopts = list(), entrezopts = list(),
+  arxivopts = list(), ...)
 }
 \arguments{
 \item{query}{Query terms}
@@ -21,7 +22,9 @@ ft_search(query, from = "plos", limit = 10, plosopts = list(),
 
 \item{entrezopts}{Entrez options. See \code{?entrez_search}}
 
-\item{...}{Further args passed on to \code{httr::GET}. Not working right now...}
+\item{...}{Further args passed on to \code{\link[httr]{GET}}. Not working right now...}
+
+\item{arxivzopts}{arxiv options. See \code{?arxiv_search}}
 }
 \value{
 An object of class ft, and objects of class ft_ind within each source
@@ -49,8 +52,12 @@ res$bmc
 (res <- ft_search(query='ecology', from='entrez'))
 res$entrez
 
-# Plos and Crossref
-(res <- ft_search(query='ecology', from=c('plos','crossref')))
+# arxiv
+(res <- ft_search(query='ecology', from='arxiv'))
+res$arxiv
+
+# PLOS, Crossref, and arxiv
+(res <- ft_search(query='ecology', from=c('plos','crossref','arxiv')))
 res$plos
 res$crossref
 }

@@ -147,7 +147,6 @@ save_redis <- function(x){
     x <- serialize_redis(x)
     redisClose()
     structure(x, location="Redis")
-#     sprintf('<redis,key:%s>', hash)
   }
 }
 
