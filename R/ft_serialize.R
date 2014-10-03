@@ -1,5 +1,7 @@
 #' Serialize raw text to other formats, including to disk.
 #' 
+#' @importFrom rredis redisClose redisSet redisConnect
+#' @importFrom R.cache saveCache
 #' @export
 #' 
 #' @param x Input object, output from a call to \code{ft_get}. Required.
@@ -9,7 +11,9 @@
 #' provided, or guess from data itself. Optional. CURRENTLY IGNORED.
 #' @param ... Further args passed on to \code{XML::xmlParse} or \code{jsonlite::toJSON}
 #' @examples \donttest{
-#' dois <- c('10.1371/journal.pone.0087376','10.1371%2Fjournal.pone.0086169')
+#' dois <- c('10.1371/journal.pone.0087376','10.1371%2Fjournal.pone.0086169',
+#' '10.1371/journal.pone.0102976','10.1371/journal.pone.0105225',
+#' '10.1371/journal.pone.0102722','10.1371/journal.pone.0033693')
 #' res <- ft_get(ids=dois, from='plos')
 #' 
 #' # From XML to JSON
@@ -29,23 +33,30 @@
 #' ## To .Rds files
 #' ft_serialize(res, to='file')
 #' 
+#' ## To local files using R.cache package
+#' res_rcache <- ft_serialize(res, to='rcache')
+#' 
 #' ## To Redis
 #' ft_serialize(res, to='redis')
 #' 
-#' ## To SQLite
-#' ft_serialize(res, to='sqlite')
+#' # Sizes
+#' pryr::object_size(res)
+#' pryr::object_size(res_rcache)
 #' }
 
 ft_serialize <- function(x, to='xml', from=NULL, ...)
 {
+  match.arg(to, c('json','xml','list','file','rcache','redis','sqlite'))
   fmt <- attributes(x$plos$data)$format
   tmp <- switch(to, 
                 xml = to_xml(x, fmt, ...),
                 json = to_json(x, fmt, ...),
                 list = to_list(x, fmt, ...),
-                file = save_file(x, x)
+                file = save_file(x, x),
+                rcache = save_rcache(x),
+                redis = save_redis(x)
   )
-  structure(tmp, class="ft_parsed", type=to)
+  structure(tmp, class="ft_parsed", type=to, location=attr(tmp, "location"))
 }
 
 to_xml <- function(x, fmt, ...){
@@ -101,8 +112,25 @@ save_file <- function(x, y, path="~/.fulltext_cache")
   if(!file.exists(path)) dir.create(path, showWarnings = FALSE, recursive = TRUE)
   filepath <- file.path(path, paste0(hash, ".rds"))
   saveRDS(x, filepath)
-  attr(x, "location") <- filepath
-  return( x )
+  structure(x, location=filepath)
+}
+
+save_rcache <- function(x){
+  x <- serialize_rcache(x)
+  structure(x, location="~/.Rcache")
+}
+
+save_redis <- function(x){
+  tt <- suppressWarnings(tryCatch(redisConnect(), error=function(e) e))
+  if(is(tt, "simpleError")){
+    stop("Start redis. Go to your terminal/shell and type redis-server, then hit enter")
+  } else
+  {
+    hash <- digest::digest(x)
+    redisSet(hash, x)
+    redisClose()
+    structure(x, location=sprintf('<redis,key:%s>', hash))
+  }
 }
 
 #' Print brief summary of ft_parsed object
@@ -111,17 +139,26 @@ save_file <- function(x, y, path="~/.fulltext_cache")
 #' @param ... Ignored.
 #' @method print ft_parsed
 #' @export
-
 print.ft_parsed <- function(x, ...) {
-  locpath <- if(attr(x, "type") == "file") attr(x, "location") else "R session"
   alldois <- unlist(ft_compact(sapply(x, function(z) names(z$data))))
   alldois <- vapply(alldois, URLdecode, "")
   namesprint <- paste(na.omit(alldois[1:10]), collapse = " ")
   totgot <- sum(sapply(x, function(y) length(y$data)))
-#   lengths <- unlist( sapply(x, function(y){ if(!is.null(y$data)) vapply(y$data, nchar, 1) else NULL }) )
-#   cat(sprintf("Min. Length: %s - Max. Length: %s", min(lengths), max(lengths)), "\n")
-  cat(sprintf("[Documents] %s", totgot), "\n")
-  cat(sprintf("[Location] %s", locpath), "\n")
-  cat(ft_wrap(sprintf("IDs:\n %s ...", namesprint)), "\n\n")
-  cat("NOTE: extract xml strings like output$source$['<doi>']")
+  cat(sprintf("[Docs] %s", totgot), "\n")
+  cat(sprintf("[Source] %s", attr(x, "type")), "\n")
+  cat(ft_wrap(sprintf("[IDs] \n %s ...", namesprint)), "\n\n")
+}
+
+serialize_rcache <- function(x){
+  for(i in seq_along(x)){
+    if(is.null( x[[i]]$data )){
+      x[[i]]$data <- "none"
+    } else {
+      for(j in seq_along(x[[i]]$data)){
+        nn <- paste(names(x[i]), names(x[[i]]$data[j]), sep = "_")
+        x[[i]]$data[[j]] <- saveCache(object = x[[i]]$data[[j]], key = list(nn))
+      }
+    }
+  }
+  return( x )
 }

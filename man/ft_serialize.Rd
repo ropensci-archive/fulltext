@@ -21,7 +21,9 @@ Serialize raw text to other formats, including to disk.
 }
 \examples{
 \donttest{
-dois <- c('10.1371/journal.pone.0087376','10.1371\%2Fjournal.pone.0086169')
+dois <- c('10.1371/journal.pone.0087376','10.1371\%2Fjournal.pone.0086169',
+'10.1371/journal.pone.0102976','10.1371/journal.pone.0105225',
+'10.1371/journal.pone.0102722','10.1371/journal.pone.0033693')
 res <- ft_get(ids=dois, from='plos')
 
 # From XML to JSON
@@ -41,11 +43,15 @@ out$plos$data[[1]]
 ## To .Rds files
 ft_serialize(res, to='file')
 
+## To local files using R.cache package
+res_rcache <- ft_serialize(res, to='rcache')
+
 ## To Redis
 ft_serialize(res, to='redis')
 
-## To SQLite
-ft_serialize(res, to='sqlite')
+# Sizes
+pryr::object_size(res)
+pryr::object_size(res_rcache)
 }
 }
 

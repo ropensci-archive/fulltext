@@ -27,7 +27,9 @@ Imports:
     jsonlite,
     plyr,
     Rcampdf,
-    tm
+    tm,
+    rredis,
+    R.cache
 Suggests:
     roxygen2,
     testthat,

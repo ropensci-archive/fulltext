@@ -69,10 +69,10 @@ print.ft_data <- function(x, ...) {
   namesprint <- paste(na.omit(alldois[1:10]), collapse = " ")
   totgot <- sum(sapply(x, function(y) length(y$data)))
   lengths <- unlist( sapply(x, function(y){ if(!is.null(y$data)) vapply(y$data, nchar, 1) else NULL }) )
-  cat(sprintf("[%s] full-text articles", totgot), "\n")
-  cat(sprintf("Min. Length: %s - Max. Length: %s", min(lengths), max(lengths)), "\n")
-  cat(ft_wrap(sprintf("IDs:\n %s ...", namesprint)), "\n\n")
-  cat("NOTE: extract xml strings like output$source['<doi>']")
+  cat(sprintf("[Docs] %s", totgot), "\n")
+  cat(sprintf("[Source] %s", "R session"), "\n")
+  cat(sprintf("[Size] Min. Length: %s - Max. Length: %s", min(lengths), max(lengths)), "\n")
+  cat(ft_wrap(sprintf("[IDs]\n %s ...", namesprint)), "\n\n")
 }
 
 plugin_get_plos <- function(sources, ids, opts, ...){

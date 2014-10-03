@@ -43,8 +43,12 @@
 #' res$crossref
 #' }
 
-ft_search <- function(query, from='plos', limit=10, plosopts=list(), bmcopts=list(), 
-  crossrefopts=list(), entrezopts=list(), ...)
+ft_search <- function(query, from='plos', limit=10, 
+  plosopts=list(), 
+  bmcopts=list(), 
+  crossrefopts=list(), 
+  entrezopts=list(), 
+  ...)
 {
   plos_out <- plugin_plos(from, query, limit, plosopts)
   bmc_out <- plugin_bmc(from, query, limit, bmcopts)
@@ -98,7 +102,8 @@ print.ft_ind <- function(x, ..., n = 10) {
   rows <- NROW(x$data)
   found <- x$found
   cat(sprintf("Query: [%s]", attr(x, "query")), "\n")
-  cat(sprintf("Records found, returned [%s, %s]", found, rows), "\n")
+  cat(sprintf("Records found, returned: [%s, %s]", found, rows), "\n")
+  cat(sprintf("License: [all %s]", x$license$type), "\n")
   print_if(x$data, n = n)
 }
 
@@ -111,7 +116,13 @@ plugin_plos <- function(sources, query, limit, opts){
     opts$q <- query
     opts$limit <- limit
     out <- do.call(searchplos, opts)
-    zz <- list(found = out$meta$numFound, data = out$data, opts = opts)
+    zz <- list(found = out$meta$numFound, data = out$data, opts = opts, 
+               license = list(type = "CC-BY", 
+                              uri = 'http://creativecommons.org/licenses/by/4.0/', 
+                              text = '<authors> This is an open-access article distributed under 
+                              the terms of the Creative Commons Attribution License, which permits 
+                              unrestricted use, distribution, and reproduction in any medium, 
+                              provided the original author and source are credited.'))
     structure(zz, class="ft_ind", query=query)
   } else {
     zz <- list(found = NULL, data = NULL, opts = opts)
@@ -123,6 +134,8 @@ plugin_crossref <- function(sources, query, limit, opts){
   if(any(grepl("crossref", sources))){
     opts$query <- query
     opts$limit <- limit
+    opts$filter <- c(has_license=TRUE)
+    opts$filter <- c(`license.url`='http://creativecommons.org/licenses/by/3.0/deed.en_US')
     out <- do.call(cr_works, opts)
     zz <- list(found = out$meta$`total-results`, data = out$data, opts = opts)
     structure(zz, class="ft_ind", query=query)
