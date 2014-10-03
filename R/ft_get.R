@@ -47,7 +47,6 @@
 ft_get <- function(ids, query, from='plos', plosopts=list(), bmcopts=list(), entrezopts=list(), 
   elifeopts=list(), ...)
 {
-#   from <- toggle_from(from)
   plos_out <- plugin_get_plos(from, ids, plosopts, ...)
   entrez_out <- plugin_get_entrez(from, ids, entrezopts, ...)
   bmc_out <- plugin_get_bmc(from, ids, bmcopts, ...)
@@ -56,15 +55,6 @@ ft_get <- function(ids, query, from='plos', plosopts=list(), bmcopts=list(), ent
   class(res) <- "ft_data"
   res
 }
-
-# toggle_from <- function(x){
-#   switch(x,
-#     entrez = "entrez",
-#     hindawi = "entrez",
-#     bmc = "bmc",
-#     elife = "elife"
-#   )
-# }
 
 #' Print brief summary of ft_data object
 #'
@@ -79,7 +69,7 @@ print.ft_data <- function(x, ...) {
   namesprint <- paste(na.omit(alldois[1:10]), collapse = " ")
   totgot <- sum(sapply(x, function(y) length(y$data)))
   lengths <- unlist( sapply(x, function(y){ if(!is.null(y$data)) vapply(y$data, nchar, 1) else NULL }) )
-  cat(sprintf("[%s] full-text articles retrieved", totgot), "\n")
+  cat(sprintf("[%s] full-text articles", totgot), "\n")
   cat(sprintf("Min. Length: %s - Max. Length: %s", min(lengths), max(lengths)), "\n")
   cat(ft_wrap(sprintf("IDs:\n %s ...", namesprint)), "\n\n")
   cat("NOTE: extract xml strings like output$source['<doi>']")
