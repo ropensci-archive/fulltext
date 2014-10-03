@@ -19,14 +19,21 @@
 #' 
 #' # Parse raw xml to XMLInternalDocument class
 #' out <- ft_serialize(res, to='xml')
-#' out$plos$data$`10.1371/journal.pone.0087376`
+#' out$plos$data[[1]]
 #' 
 #' # To a list
 #' out <- ft_serialize(res, to='list')
-#' out$plos$data$`10.1371/journal.pone.0087376`
+#' out$plos$data[[1]]
 #' 
-#' # You can't go from JSON to XML
-#' #    need example here...
+#' # To various data stores on disk
+#' ## To .Rds files
+#' ft_serialize(res, to='file')
+#' 
+#' ## To Redis
+#' ft_serialize(res, to='redis')
+#' 
+#' ## To SQLite
+#' ft_serialize(res, to='sqlite')
 #' }
 
 ft_serialize <- function(x, to='xml', from=NULL, ...)
@@ -35,10 +42,10 @@ ft_serialize <- function(x, to='xml', from=NULL, ...)
   tmp <- switch(to, 
                 xml = to_xml(x, fmt, ...),
                 json = to_json(x, fmt, ...),
-                list = to_list(x, fmt, ...)
+                list = to_list(x, fmt, ...),
+                file = save_file(x, x)
   )
-  class(tmp) <- "ft_parsed"
-  tmp
+  structure(tmp, class="ft_parsed", type=to)
 }
 
 to_xml <- function(x, fmt, ...){
@@ -50,13 +57,6 @@ to_xml <- function(x, fmt, ...){
     })
   } else {
     stop("No conversion from JSON to XML", call. = FALSE)
-#     lapply(x, function(y){
-#       y$data <- lapply(y$data, function(z){
-#         ztmp <- jsonlite::fromJSON(z, FALSE)
-#         listToXML(root, ztmp)
-#       })
-#       return( y )
-#     })
   }
 }
 
@@ -95,6 +95,16 @@ to_list <- function(x, fmt, ...){
   }
 }
 
+save_file <- function(x, y, path="~/.fulltext_cache")
+{
+  hash <- digest::digest(x)
+  if(!file.exists(path)) dir.create(path, showWarnings = FALSE, recursive = TRUE)
+  filepath <- file.path(path, paste0(hash, ".rds"))
+  saveRDS(x, filepath)
+  attr(x, "location") <- filepath
+  return( x )
+}
+
 #' Print brief summary of ft_parsed object
 #'
 #' @param x Input...
@@ -103,15 +113,15 @@ to_list <- function(x, fmt, ...){
 #' @export
 
 print.ft_parsed <- function(x, ...) {
+  locpath <- if(attr(x, "type") == "file") attr(x, "location") else "R session"
   alldois <- unlist(ft_compact(sapply(x, function(z) names(z$data))))
   alldois <- vapply(alldois, URLdecode, "")
   namesprint <- paste(na.omit(alldois[1:10]), collapse = " ")
   totgot <- sum(sapply(x, function(y) length(y$data)))
 #   lengths <- unlist( sapply(x, function(y){ if(!is.null(y$data)) vapply(y$data, nchar, 1) else NULL }) )
-  cat(sprintf("[%s] documents parsed", totgot), "\n")
 #   cat(sprintf("Min. Length: %s - Max. Length: %s", min(lengths), max(lengths)), "\n")
+  cat(sprintf("[Documents] %s", totgot), "\n")
+  cat(sprintf("[Location] %s", locpath), "\n")
   cat(ft_wrap(sprintf("IDs:\n %s ...", namesprint)), "\n\n")
   cat("NOTE: extract xml strings like output$source$['<doi>']")
 }
-
-

@@ -31,14 +31,21 @@ jsonlite::fromJSON(out$plos$data$`10.1371/journal.pone.0087376`)
 
 # Parse raw xml to XMLInternalDocument class
 out <- ft_serialize(res, to='xml')
-out$plos$data$`10.1371/journal.pone.0087376`
+out$plos$data[[1]]
 
 # To a list
 out <- ft_serialize(res, to='list')
-out$plos$data$`10.1371/journal.pone.0087376`
+out$plos$data[[1]]
 
-# You can't go from JSON to XML
-#    need example here...
+# To various data stores on disk
+## To .Rds files
+ft_serialize(res, to='file')
+
+## To Redis
+ft_serialize(res, to='redis')
+
+## To SQLite
+ft_serialize(res, to='sqlite')
 }
 }
 
