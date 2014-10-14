@@ -1,6 +1,7 @@
 ## fulltext ~ Get full text across all da journals
 
 [![Build Status](https://api.travis-ci.org/ropensci/fulltext.png)](https://travis-ci.org/ropensci/fulltext)
+[![Build status](https://ci.appveyor.com/api/projects/status/y487h3ec5wc2s20m/branch/master?svg=true)](https://ci.appveyor.com/project/sckott/fulltext/branch/master)
 
 rOpenSci has a number of R packages to get either full text, metadata, or both from various publishers. The goal of `fulltext` is to integrate these packages to create a single interface to many data sources.
 
@@ -52,9 +53,9 @@ ft_search(query='ecology', from='plos')
 ## Query:
 ##   [ecology] 
 ## Found:
-##   [PLoS: 23356; BMC: 0; Crossref: 0; Entrez: 0] 
+##   [PLoS: 23517; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0] 
 ## Returned:
-##   [PLoS: 10; BMC: 0; Crossref: 0; Entrez: 0]
+##   [PLoS: 10; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0]
 ```
 
 ### Text
@@ -67,11 +68,10 @@ ft_get(ids='10.1371/journal.pone.0086169', from='plos')
 ```
 
 ```
-## [1] full-text articles retrieved 
-## Min. Length: 111132 - Max. Length: 111132 
-## IDs: 10.1371/journal.pone.0086169 ... 
-## 
-## NOTE: extract xml strings like output$source['<doi>']
+## [Docs] 1 
+## [Source] R session 
+## [Size] Min. Length: 111132 - Max. Length: 111132 
+## [IDs] 10.1371/journal.pone.0086169 ...
 ```
 
 ### Cache
