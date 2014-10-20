@@ -10,12 +10,10 @@ init:
 install:
   ps: Bootstrap
 
-before_script:
-  - travis-tool.sh github_package ropensci/bmc ropensci/rplos ropensci/elife ropensci/rcrossref
-  - Rscript -e 'options("repos"="http://cran.rstudio.com"); install.packages("Rcampdf", repos = "http://datacube.wu.ac.at/", type = "source")'
-
 build_script:
   - travis-tool.sh install_deps
+  - travis-tool.sh github_package ropensci/bmc ropensci/rplos ropensci/elife ropensci/rcrossref
+  - Rscript -e 'options("repos"="http://cran.rstudio.com"); install.packages("Rcampdf", repos = "http://datacube.wu.ac.at/", type = "source")'
 
 test_script:
   - travis-tool.sh run_tests
