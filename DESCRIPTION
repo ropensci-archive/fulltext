@@ -6,8 +6,8 @@ Description: Provides a single interface to many sources of full
     preprints, and more. Functionality included for searching for articles,
     downloading full or partial text, converting to various data formats used
     in and outside of R, and visualizations of data and the text itself.
-Version: 0.0.3.999
-Date: 2014-10-02
+Version: 0.0.4.99
+Date: 2014-12-19
 License: MIT + file LICENSE
 Authors@R: person("chamberlain", "Scott", role = c("aut", "cre"),
     email = "myrmecocystus@gmail.com")
@@ -21,7 +21,6 @@ Imports:
     rplos,
     rcrossref,
     bmc,
-    elife,
     rentrez,
     XML,
     jsonlite,
