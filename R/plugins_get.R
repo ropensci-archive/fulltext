@@ -1,3 +1,15 @@
+plugin_get_crossref <- function(sources, ids, opts, ...){
+  callopts <- list(...)
+  if(any(grepl("entrez", sources))){
+    opts$ids <- ids
+    out <- do.call(entrez_get, opts)
+    attr(out, "format") <- "xml"
+    list(found = length(out), data = out, opts = opts)
+  } else {
+    list(found = NULL, data = NULL, opts = opts)
+  }
+}
+
 plugin_get_plos <- function(sources, ids, opts, ...){
   callopts <- list(...)
   if(any(grepl("plos", sources))){
@@ -56,6 +68,5 @@ plugin_get_elife <- function(sources, ids, opts, ...){
 
 elife_paper <- function(doi) {
   url <- sprintf("http://elife.elifesciences.org/elife-source-xml/%s", doi)
-  tt <- httr::content(GET(url), as="text")
-  xmlParse(tt)
+  httr::content(GET(url), as="text")
 }

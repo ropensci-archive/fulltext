@@ -16,7 +16,8 @@
 #'
 #' @examples \donttest{
 #' ft_get(ids='10.1371/journal.pone.0086169', from='plos')
-#' (dois <- searchplos(q="*:*", fl='id', fq='doc_type:full', limit=5)$data$id)
+#' (dois <- searchplos(q="*:*", fl='id', 
+#'    fq=list('doc_type:full',"article_type:\"research article\""), limit=5)$data$id)
 #' ft_get(ids=dois, from='plos')
 #' ft_get(ids=c('10.7717/peerj.228','10.7717/peerj.234'), from='entrez')
 #' 
@@ -42,10 +43,17 @@
 #'                                                  type='journal-article')))
 #' 
 #' out <- ft_get(ids=res$crossref$data$DOI[1:20], from='entrez')
+#' 
+#' # Frontiers Publisher - Frontiers in Aging Nueroscience
+#' res <- ft_get(ids="10.3389/fnagi.2014.00130", from='entrez')
+#' res$entrez
 #' }
-
-ft_get <- function(ids, query, from='plos', plosopts=list(), bmcopts=list(), entrezopts=list(), 
-  elifeopts=list(), ...)
+  
+ft_get <- function(ids, query, from='plos', 
+                   plosopts=list(), 
+                   bmcopts=list(), 
+                   entrezopts=list(), 
+                   elifeopts=list(), ...)
 {
   plos_out <- plugin_get_plos(from, ids, plosopts, ...)
   entrez_out <- plugin_get_entrez(from, ids, entrezopts, ...)
@@ -62,7 +70,8 @@ print.ft_data <- function(x, ...) {
   totgot <- sum(sapply(x, function(y) length(y$data)))
   lengths <- 
     unlist( sapply(x, function(y){ 
-      if(!is.null(y$data)) vapply(y$data, function(z) nchar(getChildrenStrings(z)), 1) else NULL 
+      if(!is.null(y$data)) vapply(y$data, nchar, 1) else NULL 
+      # if(!is.null(y$data)) vapply(y$data, function(z) nchar(getChildrenStrings(z)), 1) else NULL 
     }))
   cat(sprintf("[Docs] %s", totgot), "\n")
   cat(sprintf("[Source] %s", "R session"), "\n")
