@@ -3,8 +3,6 @@
 %\VignetteIndexEntry{Article formats}
 -->
 
-
-
 ## Information on article formats
 
 There are various formats articles are provided in, including pdf, plain text, xml, json, and more. The following is non-exhaustive table of formats provided by publisher or journal. Examples are included for each publisher if they support the format - click on the `Y` to get an example file.
@@ -12,7 +10,7 @@ There are various formats articles are provided in, including pdf, plain text, x
 > Note: many of these journals are also in PMC, where some formats are provided: PDF, ePub.
 
 | Publisher | pdf | xml | json | plain text| epub | Notes |
-|:----------|:----|:----|:-----|:-----------|:------|
+|:----------|:----|:----|:-----|:-------- -|:------|:------|
 | PLOS | [Y][plp] | [Y][plx] [^1] | N | N |  N |... |
 | FrontiersIn | [Y][fp] | [Y][fx] [^1] | N | N | N | ReadCube, browser |
 | Pensoft | [Y][pep] | [Y][pex] | N | N |  N |... |
