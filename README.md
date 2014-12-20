@@ -25,6 +25,10 @@ Data sources in `fulltext`:
 
 We'd love your feedback. Let us know what you think at info@ropensci.org, or in [the issue tracker](https://github.com/ropensci/fulltext/issues).
 
+Article full text formats by publisher:
+
+* https://github.com/ropensci/fulltext/wiki/Full-text-formats
+
 ## Installation
 
 You need Rcampdf, which is not on CRAN, but you can install easily via
