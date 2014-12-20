@@ -13,7 +13,7 @@ ft_providers(journal = NULL, publisher = NULL, limit = 10, ...)
 
 \item{limit}{Number of records to return.}
 
-\item{...}{Further args passed on to \code{httr::GET}. Not working right now...}
+\item{...}{Further args passed on to \code{\link[httr]{GET}}}
 }
 \value{
 An object of class ft_p

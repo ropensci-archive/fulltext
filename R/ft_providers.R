@@ -6,9 +6,9 @@
 #' @param journal Query terms
 #' @param publisher Source to query
 #' @param limit Number of records to return.
-#' @param ... Further args passed on to \code{httr::GET}. Not working right now...
-#' @return An object of class ft_p
+#' @param ... Further args passed on to \code{\link[httr]{GET}}
 #' 
+#' @return An object of class ft_p
 #' @examples \dontrun{
 #' # journal name search
 #' ft_providers(journal="Stem Cells International")
