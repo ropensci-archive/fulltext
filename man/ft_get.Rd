@@ -38,8 +38,9 @@ ft_get(ids=dois, from='plos')
 ft_get(ids=c('10.7717/peerj.228','10.7717/peerj.234'), from='entrez')
 
 # elife
+ft_get(ids='10.7554/eLife.04300', from='elife')
 ft_get(ids=c('10.7554/eLife.04300','10.7554/eLife.03032'), from='elife')
-library('elife')
+##### replace with code not using elife packages
 dois <- searchelife(terms="Cell biology", searchin="subject_area", boolean="contains")
 ft_get(ids=dois[1:10], from='elife')
 

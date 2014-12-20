@@ -1,7 +1,7 @@
 #' Get full text.
 #' 
 #' @export
-#' @importFrom elife elife_paper
+#' @importFrom httr GET content
 #' @importFrom rentrez entrez_search entrez_fetch
 #' 
 #' @param ids Identifiers for papers, either DOIs, or other ids.
@@ -22,8 +22,9 @@
 #' ft_get(ids=c('10.7717/peerj.228','10.7717/peerj.234'), from='entrez')
 #' 
 #' # elife
+#' ft_get(ids='10.7554/eLife.04300', from='elife')
 #' ft_get(ids=c('10.7554/eLife.04300','10.7554/eLife.03032'), from='elife')
-#' library('elife')
+#' ##### replace with code not using elife packages
 #' dois <- searchelife(terms="Cell biology", searchin="subject_area", boolean="contains")
 #' ft_get(ids=dois[1:10], from='elife')
 #' 
@@ -51,9 +52,7 @@ ft_get <- function(ids, query, from='plos', plosopts=list(), bmcopts=list(), ent
   entrez_out <- plugin_get_entrez(from, ids, entrezopts, ...)
   bmc_out <- plugin_get_bmc(from, ids, bmcopts, ...)
   elife_out <- plugin_get_elife(from, ids, elifeopts, ...)
-  res <- list(plos=plos_out, entrez=entrez_out, bmc=bmc_out, elife=elife_out)
-  class(res) <- "ft_data"
-  res
+  structure(list(plos=plos_out, entrez=entrez_out, bmc=bmc_out, elife=elife_out), class="ft_data")
 }
 
 #' @export
@@ -62,7 +61,10 @@ print.ft_data <- function(x, ...) {
   alldois <- vapply(alldois, URLdecode, "")
   namesprint <- paste(na.omit(alldois[1:10]), collapse = " ")
   totgot <- sum(sapply(x, function(y) length(y$data)))
-  lengths <- unlist( sapply(x, function(y){ if(!is.null(y$data)) vapply(y$data, nchar, 1) else NULL }) )
+  lengths <- 
+    unlist( sapply(x, function(y){ 
+      if(!is.null(y$data)) vapply(y$data, function(z) nchar(getChildrenStrings(z)), 1) else NULL 
+    }))
   cat(sprintf("[Docs] %s", totgot), "\n")
   cat(sprintf("[Source] %s", "R session"), "\n")
   cat(sprintf("[Size] Min. Length: %s - Max. Length: %s", min(lengths), max(lengths)), "\n")
