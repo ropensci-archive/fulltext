@@ -39,10 +39,10 @@ extract_gs <- function(path, which, ...){
 }
 
 extract_xpdf <- function(path, which, ...){
-  cmds <- get_cmds(...)
   path <- path.expand(path)
-  res <- system2("pdftotext", shQuote(path), stdout = TRUE)
-  res <- paste(res, collapse = ", ")
+  res <- system2("pdftotext", shQuote(path))
+  newpath <- sub("\\.pdf", ".txt", path)
+  res <- paste(readLines(newpath, warn = FALSE), collapse = ", ")
   meta <- pdf_info_via_xpdf(path)
   structure(list(meta=meta, data=res), class="xpdf_char", path=path)
 }

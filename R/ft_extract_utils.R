@@ -33,31 +33,51 @@ find_gs_cmd <- function(gs_cmd = ""){
   else Sys.which(gs_cmd)
 }
 
+# pdf_info_via_xpdf <- function(file, options = NULL){
+#   outfile <- tempfile("pdfinfo")
+#   on.exit(unlink(outfile))
+#   status <- system2("pdfinfo", c(options, shQuote(normalizePath(file))), 
+#                     stdout = outfile)
+#   tags <- c("Title", "Subject", "Keywords", "Author", "Creator", 
+#             "Producer", "CreationDate", "ModDate", "Tagged", "Form", 
+#             "Pages", "Encrypted", "Page size", "File size", "Optimized", 
+#             "PDF version")
+#   re <- sprintf("^(%s)", 
+#           paste(sprintf("%-16s", sprintf("%s:", tags)), collapse = "|"))
+#   lines <- readLines(outfile, warn = FALSE)
+#   ind <- grepl(re, lines)
+#   tags <- sub(": *", "", substring(lines[ind], 1L, 16L))
+#   info <- split(sub(re, "", lines), cumsum(ind))
+#   names(info) <- tags
+#   fmt <- "%a %b %d %X %Y"
+#   if (!is.null(d <- info$CreationDate)) 
+#     info$CreationDate <- strptime(d, fmt)
+#   if (!is.null(d <- info$ModDate)) 
+#     info$ModDate <- strptime(d, fmt)
+#   if (!is.null(p <- info$Pages)) 
+#     info$Pages <- as.integer(p)
+#   info
+# }
+
 pdf_info_via_xpdf <- function(file, options = NULL){
   outfile <- tempfile("pdfinfo")
   on.exit(unlink(outfile))
   status <- system2("pdfinfo", c(options, shQuote(normalizePath(file))), 
                     stdout = outfile)
-  tags <- c("Title", "Subject", "Keywords", "Author", "Creator", 
-            "Producer", "CreationDate", "ModDate", "Tagged", "Form", 
-            "Pages", "Encrypted", "Page size", "File size", "Optimized", 
-            "PDF version")
-  re <- sprintf("^(%s)", 
-          paste(sprintf("%-16s", sprintf("%s:", tags)), collapse = "|"))
   lines <- readLines(outfile, warn = FALSE)
-  ind <- grepl(re, lines)
-  tags <- sub(": *", "", substring(lines[ind], 1L, 16L))
-  info <- split(sub(re, "", lines), cumsum(ind))
-  names(info) <- tags
+  tmp <- do.call("c", lapply(lines, function(x){
+    x <- gsub("[^\x20-\x7F]", "", x) # remove unicode characters
+    as.list(setNames(strtrim(sub("^:", "", strextract(x, ":\\s.+$"))), 
+                     sub(":", "", strextract(x, "^[A-Za-z]+\\s?[A-Za-z]+:"))))
+  }))
   fmt <- "%a %b %d %X %Y"
-  if (!is.null(d <- info$CreationDate)) 
-    info$CreationDate <- strptime(d, fmt)
-  if (!is.null(d <- info$ModDate)) 
-    info$ModDate <- strptime(d, fmt)
-  if (!is.null(p <- info$Pages)) 
-    info$Pages <- as.integer(p)
-  info
+  modifyList(tmp, list(CreationDate = strptime(tmp$CreationDate, fmt), 
+                       ModDate = strptime(tmp$ModDate, fmt),
+                       Pages = as.integer(tmp$Pages)))
 }
+
+strextract <- function(str, pattern) regmatches(str, regexpr(pattern, str))
+strtrim <- function(str) gsub("^\\s+|\\s+$", "", str)
 
 pdf_text_via_gs <- function (file){
   files <- normalizePath(file)
