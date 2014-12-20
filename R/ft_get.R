@@ -1,7 +1,6 @@
 #' Get full text.
 #' 
 #' @export
-#' @importFrom httr GET content
 #' @importFrom rentrez entrez_search entrez_fetch
 #' 
 #' @param ids Identifiers for papers, either DOIs, or other ids.
