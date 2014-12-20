@@ -2,8 +2,7 @@ all: move rmd2md
 
 move:
 		cp inst/vign/fulltext_vignette.md vignettes;\
-		cp inst/vign/formats.md vignettes;\
-		cp -rf inst/vign/img/* vignettes/img/
+		cp inst/vign/formats.md vignettes
 
 rmd2md:
 		cd vignettes;\
