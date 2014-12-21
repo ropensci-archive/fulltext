@@ -3,11 +3,13 @@
 #' @export
 #' @param path Path to a file
 #' @param which One of rcamp, gs, or xpdf.
+#' @param x Input
 #' @param ... further args passed on
 #' @return An object of class gs_char, xpdf_char
 #' @examples \donttest{
 #' path <- "~/github/sac/scott/pdfs/ChamberlainEtal2013Ecosphere.pdf"
 #' 
+#' (res_xpdf <- ft_extract(path)) # xpdf is the default
 #' (res_xpdf <- ft_extract(path, "xpdf"))
 #' (res_gs <- ft_extract(path, "gs"))
 #' }
@@ -57,6 +59,7 @@ extract_xpdf <- function(path, which, ...){
 # }
 
 #' @export
+#' @rdname ft_extract
 print.gs_char <- function(x, ...) {
   cat("<document>", attr(x, "path"), "\n", sep = "")
   cat("  Title: ", x$meta$Title, "\n", sep = "")
@@ -65,6 +68,7 @@ print.gs_char <- function(x, ...) {
 }
 
 #' @export
+#' @rdname ft_extract
 print.xpdf_char <- function(x, ...) {
   cat("<document>", attr(x, "path"), "\n", sep = "")
   cat("  Pages: ", x$meta$Pages, "\n", sep = "")
