@@ -18,18 +18,18 @@ VignetteBuilder: knitr
 Roxygen: list(wrap = FALSE)
 Imports:
     httr,
-    rplos,
-    rcrossref,
-    bmc,
-    rentrez,
+    magrittr,
     XML,
+    rplos,
     jsonlite,
     plyr,
+    rcrossref,
+    bmc,
+    aRxiv,
+    rentrez,
     tm,
     rredis,
     R.cache,
-    magrittr,
-    aRxiv,
     digest
 Suggests:
     roxygen2,
