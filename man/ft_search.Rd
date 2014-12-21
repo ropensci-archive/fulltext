@@ -23,9 +23,9 @@ ft_search(query, from = "plos", limit = 10, plosopts = list(),
 
 \item{entrezopts}{Entrez options. See \code{?entrez_search}}
 
-\item{...}{Further args passed on to \code{\link[httr]{GET}}. Not working right now...}
+\item{arxivopts}{arxiv options. See \code{?arxiv_search}}
 
-\item{arxivzopts}{arxiv options. See \code{?arxiv_search}}
+\item{...}{Further args passed on to \code{\link[httr]{GET}}. Not working right now...}
 }
 \value{
 An object of class ft, and objects of class ft_ind within each source
