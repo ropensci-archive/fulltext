@@ -4,7 +4,7 @@
 \alias{ft_extract}
 \title{Extract text from a single pdf document.}
 \usage{
-ft_extract(path, which, ...)
+ft_extract(path, which = "xpdf", ...)
 }
 \arguments{
 \item{path}{Path to a file}
@@ -14,7 +14,7 @@ ft_extract(path, which, ...)
 \item{...}{further args passed on}
 }
 \value{
-An object of class rcamp_char, gs_char, xpdf_char
+An object of class gs_char, xpdf_char
 }
 \description{
 Extract text from a single pdf document.
@@ -23,9 +23,8 @@ Extract text from a single pdf document.
 \donttest{
 path <- "~/github/sac/scott/pdfs/ChamberlainEtal2013Ecosphere.pdf"
 
-(res_rcamp <- ft_extract(path, "rcamp"))
-(res_gs <- ft_extract(path, "gs"))
 (res_xpdf <- ft_extract(path, "xpdf"))
+(res_gs <- ft_extract(path, "gs"))
 }
 }
 

@@ -4,30 +4,30 @@
 #' @param path Path to a file
 #' @param which One of rcamp, gs, or xpdf.
 #' @param ... further args passed on
-#' @return An object of class rcamp_char, gs_char, xpdf_char
+#' @return An object of class gs_char, xpdf_char
 #' @examples \donttest{
 #' path <- "~/github/sac/scott/pdfs/ChamberlainEtal2013Ecosphere.pdf"
 #' 
-#' (res_rcamp <- ft_extract(path, "rcamp"))
-#' (res_gs <- ft_extract(path, "gs"))
 #' (res_xpdf <- ft_extract(path, "xpdf"))
+#' (res_gs <- ft_extract(path, "gs"))
 #' }
 
-ft_extract <- function(path, which, ...){
+ft_extract <- function(path, which = "xpdf", ...){
+  which <- match.arg(which, c("gs","xpdf"))
   switch(which, 
-         rcamp = extract_rcamp(path, ...),
+         # rcamp = extract_rcamp(path, ...),
          gs = extract_gs(path, ...),
          xpdf = extract_xpdf(path, ...)
   )
 }
 
-extract_rcamp <- function(path, which, ...){
-  cmds <- get_cmds(...)
-  path <- path.expand(path)
-  res <- pdf_text(path)
-  meta <- pdf_info(path)
-  structure(list(meta=meta, data=res), class="rcamp_char", path=path)
-}
+# extract_rcamp <- function(path, which, ...){
+#   cmds <- get_cmds(...)
+#   path <- path.expand(path)
+#   res <- pdf_text(path)
+#   meta <- pdf_info(path)
+#   structure(list(meta=meta, data=res), class="rcamp_char", path=path)
+# }
 
 extract_gs <- function(path, which, ...){
   cmds <- get_cmds(...)
@@ -47,14 +47,14 @@ extract_xpdf <- function(path, which, ...){
   structure(list(meta=meta, data=res), class="xpdf_char", path=path)
 }
 
-#' @export
-print.rcamp_char <- function(x, ...) {
-  cat("<document>", attr(x, "path"), "\n", sep = "")
-  cat("  File size: ", x$meta$`File Size`, "\n", sep = "")
-  cat("  Pages: ", x$meta$`File Size`, "\n", sep = "")
-  cat("  Producer: ", x$meta$Producer, "\n", sep = "")
-  cat("  Creation date: ", x$meta$`File Size`, "\n", sep = "")
-}
+# #' @export
+# print.rcamp_char <- function(x, ...) {
+#   cat("<document>", attr(x, "path"), "\n", sep = "")
+#   cat("  File size: ", x$meta$`File Size`, "\n", sep = "")
+#   cat("  Pages: ", x$meta$`File Size`, "\n", sep = "")
+#   cat("  Producer: ", x$meta$Producer, "\n", sep = "")
+#   cat("  Creation date: ", x$meta$`File Size`, "\n", sep = "")
+# }
 
 #' @export
 print.gs_char <- function(x, ...) {

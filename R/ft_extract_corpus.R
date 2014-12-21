@@ -1,40 +1,39 @@
 #' Extract text from one to many pdf documents into a tm Corpus or Vcorpus.
 #'
-#' @importFrom Rcampdf pdf_text pdf_info
 #' @importFrom tm Corpus URISource readPDF
 #' @importFrom plyr rbind.fill
 #'
 #' @export
 #'
 #' @param paths Path to one or more pdfs
-#' @param which One of rcamp, gs, or xpdf.
+#' @param which One of gs, or xpdf.
 #' @param ... further args passed on
 #' @return A tm Corpus (or VCorpus, later that is)
 #' @examples \donttest{
 #' paths <- c("~/github/sac/scott/pdfs/BarraquandEtal2014peerj.pdf",
 #' "~/github/sac/scott/pdfs/Chamberlain&Holland2009Ecology.pdf",
 #' "~/github/sac/scott/pdfs/Revell&Chamberlain2014MEE.pdf")
-#' (res <- ft_extract_corpus(paths, "rcamp"))
+#' (res <- ft_extract_corpus(path, "xpdf"))
 #' tm::TermDocumentMatrix(res$data)
-#'
+#' 
 #' (res_gs <- ft_extract_corpus(path, "gs"))
-#' (res_xpdf <- ft_extract_corpus(path, "xpdf"))
 #' }
 
-ft_extract_corpus <- function(paths, which, ...){
+ft_extract_corpus <- function(paths, which = "xpdf", ...){
+  which <- match.arg(which, c("gs","xpdf"))
   switch(which,
-         rcamp = extract_tm_rcamp(paths, ...),
+         # rcamp = extract_tm_rcamp(paths, ...),
          gs = extract_tm_gs(paths, ...),
          xpdf = extract_tm_xpdf(paths, ...)
   )
 }
 
-extract_tm_rcamp <- function(paths, which, ...){
-  paths <- process_paths(paths)
-  out <- Corpus(URISource(paths), readerControl=list(language="en", reader=readPDF(engine="Rcampdf", control=list(...))))
-  meta <- get_meta(out)
-  structure(list(meta=meta, data=out), class="rcamp")
-}
+# extract_tm_rcamp <- function(paths, which, ...){
+#   paths <- process_paths(paths)
+#   out <- Corpus(URISource(paths), readerControl=list(language="en", reader=readPDF(engine="Rcampdf", control=list(...))))
+#   meta <- get_meta(out)
+#   structure(list(meta=meta, data=out), class="rcamp")
+# }
 
 extract_tm_gs <- function(paths, which, ...){
   paths <- process_paths(paths)

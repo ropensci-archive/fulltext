@@ -25,7 +25,6 @@ Imports:
     XML,
     jsonlite,
     plyr,
-    Rcampdf,
     tm,
     rredis,
     R.cache,

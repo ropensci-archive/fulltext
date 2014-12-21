@@ -44,10 +44,10 @@ You need Rcampdf, which is not on CRAN, but you can install easily via
 install.packages("Rcampdf", repos = "http://datacube.wu.ac.at/", type = "source")
 ```
 
-Then instal `fulltext`
+Install `fulltext`
 
 ```{r eval=FALSE}
-devtools::install_github(c("ropensci/rplos", "ropensci/bmc", "ropensci/elife"))
+devtools::install_github(c("ropensci/rplos", "ropensci/bmc"))
 devtools::install_github("ropensci/fulltext")
 ```
 
