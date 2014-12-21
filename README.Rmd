@@ -38,12 +38,6 @@ Article full text formats by publisher:
 
 ## Installation
 
-You need Rcampdf, which is not on CRAN, but you can install easily via
-
-```{r eval=FALSE}
-install.packages("Rcampdf", repos = "http://datacube.wu.ac.at/", type = "source")
-```
-
 Install `fulltext`
 
 ```{r eval=FALSE}
