@@ -30,7 +30,8 @@ Imports:
     rredis,
     R.cache,
     magrittr,
-    aRxiv
+    aRxiv,
+    digest
 Suggests:
     roxygen2,
     testthat,

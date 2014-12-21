@@ -1,5 +1,6 @@
 #' Serialize raw text to other formats, including to disk.
 #' 
+#' @importFrom digest digest
 #' @importFrom rredis redisClose redisSet redisConnect
 #' @importFrom R.cache saveCache 
 #' @export
