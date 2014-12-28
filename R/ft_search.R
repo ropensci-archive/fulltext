@@ -55,6 +55,7 @@ ft_search <- function(query, from='plos', limit=10,
   crossrefopts=list(), 
   entrezopts=list(), 
   arxivopts=list(),
+  bioarxivopts=list(),
   ...)
 {
   plos_out <- plugin_plos(from, query, limit, plosopts)
@@ -62,6 +63,8 @@ ft_search <- function(query, from='plos', limit=10,
   cr_out <- plugin_crossref(from, query, limit, crossrefopts)
   en_out <- plugin_entrez(from, query, limit, entrezopts)
   arx_out <- plugin_arxiv(from, query, limit, arxivopts)
+  bioarxiv_out <- plugin_bioarxiv(from,query,limit,bioarxivopts)
+  
   res <- list(plos=plos_out, bmc=bmc_out, crossref=cr_out, entrez=en_out, arxiv=arx_out)
   structure(res, class="ft", query=query)
 }
