@@ -86,12 +86,12 @@ plugin_arxiv <- function(sources, query, limit, opts){
   }
 }
 
-plugin_bioarxiv <- function(sources, query, limit, opts){
-  if(any(grepl("bioarxiv", sources))){
+plugin_biorxiv <- function(sources, query, limit, opts){
+  if(any(grepl("biorxiv", sources))){
     opts$query <- query
     opts$limit <- limit
-    out <- do.call(bioarxiv_search, opts)
-    zz <- list(found = attributes(z)$total_results, data = out, opts = opts)
+    out <- do.call(biorxiv_search, opts)
+    zz <- list(found = out$found, data = out$data, opts = opts)
     structure(zz, class="ft_ind", query=query)
   } else {
     zz <- list(found = NULL, data = NULL, opts = opts)

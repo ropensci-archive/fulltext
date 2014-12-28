@@ -57,6 +57,8 @@ biorxiv_search <- function(query, limit = 10){
   if(limit < length(ftURL)){
     ftURL <- ftURL[1:limit]
   }
+  ftURL <- as.matrix(ftURL)
+  colnames(ftURL) <- "URL"
   bioX <- list(data = ftURL, found = maxRes)
   return(bioX)
   
