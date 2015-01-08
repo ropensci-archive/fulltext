@@ -9,7 +9,7 @@ Description: Provides a single interface to many sources of full
 Version: 0.0.5.99
 Date: 2015-01-08
 License: MIT + file LICENSE
-Authors@R: person("chamberlain", "Scott", role = c("aut", "cre"),
+Authors@R: person("Chamberlain", "Scott", role = c("aut", "cre"),
     email = "myrmecocystus@gmail.com")
 URL: https://github.com/ropensci/fulltext
 BugReports: https://github.com/ropensci/fulltext/issues
