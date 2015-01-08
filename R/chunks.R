@@ -18,6 +18,8 @@
 #'  \item executive_summary
 #'  \item refs
 #'  \item refs_dois
+#'  \item publisher
+#'  \item journal_meta
 #' }
 #'
 #' @return A list of output, one for each thing requested
@@ -148,7 +150,7 @@ abstract <- function(b, from){
 }
 exec_summary <- function(b, from){
   switch(from, 
-         elife = paste0(xpathSApply(x, "//abstract[@hwp:id='abstract-2']/p", xmlValue), collapse = " "),
+         elife = paste0(xpathSApply(b, "//abstract[@hwp:id='abstract-2']/p", xmlValue), collapse = " "),
          plos = NULL
   )
 }

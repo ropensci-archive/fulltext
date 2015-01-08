@@ -31,6 +31,8 @@ Extract chunks of data from articles.
  \item executive_summary
  \item refs
  \item refs_dois
+ \item publisher
+ \item journal_meta
 }
 }
 \examples{
