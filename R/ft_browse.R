@@ -13,6 +13,7 @@
 #' 
 #' @examples \dontrun{
 #' x <- ft_get(ids='10.7554/eLife.04300', from='elife')
+#' x <- ft_get(ids='10.7554/eLife.04251', from='elife')
 #' ft_browse(x)
 #' ft_browse(x, browse=FALSE)
 #' 
@@ -45,3 +46,6 @@ get_doi <- function(x){
   else
     tmp
 }
+
+
+# xsltApplyStyleSheet(b, "~/Downloads/ViewNLM-v2.3/ViewNLM-v2.3.xsl")
