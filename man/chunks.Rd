@@ -19,28 +19,34 @@ Extract chunks of data from articles.
 }
 \details{
 \itemize{
- \item title
- \item doi
- \item categories
- \item authors
- \item keywords
- \item body
- \item abstract
- \item executive_summary
- \item refs
- \item refs_dois
- \item publisher
- \item journal_meta
+ \item front - Publisher, journal and article metadata elements
+ \item body - Body of the article
+ \item back - Back of the article, acknowledgments, author contributions, references
+ \item title - Article title
+ \item doi - Article DOI
+ \item categories - Publisher's categories, if any
+ \item authors - Authors
+ \item keywords - Keywords
+ \item abstract - Article abstract
+ \item executive_summary - Article executive summary
+ \item refs - References
+ \item refs_dois - References DOIs - if available
+ \item publisher - Publisher name
+ \item journal_meta - Journal metadata
+ \item article_meta - Article metadata
+ \item acknowledgments - Acknowledgments
+ \item permissions - Article permissions
 }
 }
 \examples{
 \dontrun{
 x <- ft_get(ids=c('10.7554/eLife.04251','10.7554/eLife.04986'), from='elife')
-chunks(x, what="abstract")
-chunks(x, what="publisher")
-chunks(x, what="journal_meta")
-chunks(x, what="refs_dois")
-chunks(x, what=c("abstract","executive_summary"))
+x \%>\% chunks("abstract")
+x \%>\% chunks("publisher")
+x \%>\% chunks("journal_meta")
+x \%>\% chunks("acknowledgments")
+x \%>\% chunks("refs_dois")
+x \%>\% chunks(c("abstract","executive_summary"))
 
 x <- ft_get(ids='10.1371/journal.pone.0086169', from='plos')
 chunks(x, what="authors")
@@ -49,11 +55,17 @@ library("rplos")
 (dois <- searchplos(q="*:*", fl='id',
    fq=list('doc_type:full',"article_type:\\"research article\\""), limit=5)$data$id)
 x <- ft_get(dois, from="plos")
-chunks(x, what="authors")
-chunks(x, what=c("doi","categories"))
-chunks(x, what="all")
-chunks(x, what="publisher")
-chunks(x, what="journal_meta")
+x \%>\% chunks("front")
+x \%>\% chunks("body")
+x \%>\% chunks("back")
+x \%>\% chunks("authors")
+x \%>\% chunks(c("doi","categories"))
+x \%>\% chunks("all")
+x \%>\% chunks("publisher")
+x \%>\% chunks("acknowledgments")
+x \%>\% chunks("permissions")
+x \%>\% chunks("journal_meta")
+x \%>\% chunks("article_meta")
 
 # Piping workflow
 opts <- list(fq=list('doc_type:full',"article_type:\\"research article\\""))
@@ -68,6 +80,11 @@ chunks(res, what="abstract")
 chunks(res, what="title")
 chunks(res, what="keywords")
 chunks(res, what="publisher")
+
+(res <- ft_search(query='ecology', from='entrez'))
+ft_get(res$entrez$data$DOI, from='entrez') \%>\% chunks("title")
+ft_get(res$entrez$data$DOI[1:4], from='entrez') \%>\% chunks("acknowledgments")
+ft_get(res$entrez$data$DOI[1:4], from='entrez') \%>\% chunks(c('title','keywords'))
 }
 }
 

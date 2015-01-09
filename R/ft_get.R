@@ -47,6 +47,12 @@
 #' # Frontiers Publisher - Frontiers in Aging Nueroscience
 #' res <- ft_get(ids="10.3389/fnagi.2014.00130", from='entrez')
 #' res$entrez
+#' 
+#' # Search entrez, get some DOIs
+#' (res <- ft_search(query='ecology', from='entrez'))
+#' res$entrez$data$DOI
+#' ft_get(res$entrez$data$DOI[1], from='entrez')
+#' ft_get(res$entrez$data$DOI[1:3], from='entrez')
 #' }
   
 ft_get <- function(ids, query, from='plos', 
