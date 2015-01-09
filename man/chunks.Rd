@@ -2,9 +2,12 @@
 % Please edit documentation in R/chunks.R
 \name{chunks}
 \alias{chunks}
+\alias{tabularize}
 \title{Extract chunks of data from articles.}
 \usage{
 chunks(x, what = "all")
+
+tabularize(x)
 }
 \arguments{
 \item{x}{Input article}
@@ -36,6 +39,7 @@ Extract chunks of data from articles.
  \item article_meta - Article metadata
  \item acknowledgments - Acknowledgments
  \item permissions - Article permissions
+ \item history - Dates, recieved, published, accepted, etc.
 }
 }
 \examples{
@@ -58,6 +62,8 @@ x <- ft_get(dois, from="plos")
 x \%>\% chunks("front")
 x \%>\% chunks("body")
 x \%>\% chunks("back")
+x \%>\% chunks("history")
+x \%>\% chunks(c("doi","history")) \%>\% tabularize()
 x \%>\% chunks("authors")
 x \%>\% chunks(c("doi","categories"))
 x \%>\% chunks("all")
@@ -66,6 +72,27 @@ x \%>\% chunks("acknowledgments")
 x \%>\% chunks("permissions")
 x \%>\% chunks("journal_meta")
 x \%>\% chunks("article_meta")
+
+# Coerce list output to a data.frame, where possible
+(dois <- searchplos(q="*:*", fl='id',
+   fq=list('doc_type:full',"article_type:\\"research article\\""), limit=5)$data$id)
+x <- ft_get(dois, from="plos")
+x \%>\% chunks("publisher") \%>\% tabularize()
+x \%>\% chunks("refs") \%>\% tabularize()
+x \%>\% chunks(c("doi","publisher")) \%>\% tabularize()
+x \%>\% chunks(c("doi","publisher","permissions")) \%>\% tabularize()
+x \%>\%
+ chunks(c("doi","publisher","permissions")) \%>\%
+ tabularize() \%>\%
+ .$plos \%>\%
+ select(-permissions.license)
+
+x <- ft_get(ids=c("10.3389/fnagi.2014.00130",'10.1155/2014/249309','10.1155/2014/162024'),
+   from='entrez')
+x \%>\% chunks(c("doi","keywords")) \%>\% tabularize()
+x \%>\% chunks("authors") \%>\% tabularize()
+x \%>\% chunks(c("doi","publisher","permissions")) \%>\% tabularize()
+x \%>\% chunks("history") \%>\% tabularize()
 
 # Piping workflow
 opts <- list(fq=list('doc_type:full',"article_type:\\"research article\\""))

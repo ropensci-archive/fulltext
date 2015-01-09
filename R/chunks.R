@@ -24,6 +24,7 @@
 #'  \item article_meta - Article metadata
 #'  \item acknowledgments - Acknowledgments
 #'  \item permissions - Article permissions
+#'  \item history - Dates, recieved, published, accepted, etc.
 #' }
 #'
 #' @return A list of output, one for each thing requested
@@ -46,6 +47,8 @@
 #' x %>% chunks("front")
 #' x %>% chunks("body")
 #' x %>% chunks("back")
+#' x %>% chunks("history")
+#' x %>% chunks(c("doi","history")) %>% tabularize()
 #' x %>% chunks("authors")
 #' x %>% chunks(c("doi","categories"))
 #' x %>% chunks("all")
@@ -54,6 +57,27 @@
 #' x %>% chunks("permissions")
 #' x %>% chunks("journal_meta")
 #' x %>% chunks("article_meta")
+#' 
+#' # Coerce list output to a data.frame, where possible
+#' (dois <- searchplos(q="*:*", fl='id', 
+#'    fq=list('doc_type:full',"article_type:\"research article\""), limit=5)$data$id)
+#' x <- ft_get(dois, from="plos")
+#' x %>% chunks("publisher") %>% tabularize()
+#' x %>% chunks("refs") %>% tabularize()
+#' x %>% chunks(c("doi","publisher")) %>% tabularize()
+#' x %>% chunks(c("doi","publisher","permissions")) %>% tabularize()
+#' x %>% 
+#'  chunks(c("doi","publisher","permissions")) %>% 
+#'  tabularize() %>% 
+#'  .$plos %>% 
+#'  select(-permissions.license)
+#'  
+#' x <- ft_get(ids=c("10.3389/fnagi.2014.00130",'10.1155/2014/249309','10.1155/2014/162024'), 
+#'    from='entrez')
+#' x %>% chunks(c("doi","keywords")) %>% tabularize()
+#' x %>% chunks("authors") %>% tabularize()
+#' x %>% chunks(c("doi","publisher","permissions")) %>% tabularize()
+#' x %>% chunks("history") %>% tabularize()
 #' 
 #' # Piping workflow
 #' opts <- list(fq=list('doc_type:full',"article_type:\"research article\""))
@@ -95,7 +119,7 @@ chunks <- function(x, what='all') {
 sections <- function() c("front","body","back","title","doi","categories","authors","keywords",
                          "abstract","executive_summary","refs","refs_dois",
                          "publisher","journal_meta","article_meta",
-                         "acknowledgments","permissions")
+                         "acknowledgments","permissions","history")
 
 get_what <- function(data, what, from){
   if( any(what == "all") ) what <- sections()
@@ -117,7 +141,8 @@ get_what <- function(data, what, from){
            journal_meta = journal_meta(data, from),
            article_meta = article_meta(data, from),
            acknowledgments = acknowledgments(data, from),
-           permissions = permissions(data, from)
+           permissions = permissions(data, from),
+           history = history(data, from)
     )
   }), what)
 }
@@ -154,9 +179,10 @@ authors <- function(b, from){
            surname = xpathSApply(z, "name/surname", xmlValue))
     })
   }
-  switch(from, 
+  switch(from,
          elife = get_auth(b),
-         plos = get_auth(b)
+         plos = get_auth(b),
+         entrez = get_auth(b)
   )
 }
 
@@ -248,10 +274,18 @@ acknowledgments <- function(b, from){
 
 permissions <- function(b, from){
   switch(from, 
-         elife = xmlToList(xpathSApply(b, "//permissions")[[1]]),
-         plos = xmlToList(xpathSApply(b, "//permissions")[[1]]),
-         entrez = xmlToList(xpathSApply(b, "//permissions")[[1]])
+         elife = getperms(b),
+         plos = getperms(b),
+         entrez = getperms(b)
   )
+}
+
+getperms <- function(v){
+  tmp <- xmlToList(xpathSApply(v, "//permissions")[[1]], addAttributes = FALSE)
+  tmp$license <- paste0(tmp$license[[1]], collapse = " ")
+  lichref <- tryCatch(xmlGetAttr(xpathSApply(v, "//permissions/license//ext-link")[[1]], "xlink:href"), error = function(e) e)
+  tmp$license_url <- if(is(lichref, "simpleError")) NA else lichref
+  tmp
 }
 
 front <- function(b, from){
@@ -270,11 +304,32 @@ back <- function(b, from){
   )
 }
 
-# # each publisher
-# out <- lapply(res, function(x){
-#   # each article
-#   lapply(x, function(y){
-#     data.frame(y, stringsAsFactors = FALSE)
-#   })
-# })
-# rbind_all(out$plos)
+history <- function(b, from){
+  switch(from, 
+         elife = history2date(b),
+         plos = history2date(b),
+         entrez = history2date(b)
+  )
+}
+
+history2date <- function(r){
+  tmp <- xpathSApply(r, "//history/date")
+  out <- lapply(tmp, function(rr){
+    as.Date(paste0(sapply(c('day','month','year'), function(vv) xpathApply(rr, vv, xmlValue)), collapse = "-"), "%d-%m-%Y")
+  })
+  setNames(out, sapply(tmp, xmlGetAttr, name="date-type"))
+}
+
+#' @export
+#' @rdname chunks
+tabularize <- function(x){
+  # each publisher
+  out <- lapply(x, function(a){
+    # each article
+    lapply(a, function(y){
+      y[sapply(y, length) == 0] <- NULL
+      data.frame(y, stringsAsFactors = FALSE)
+    })
+  })
+  lapply(out, rbind_all)
+}
