@@ -30,7 +30,8 @@ Imports:
     tm,
     rredis,
     R.cache,
-    digest
+    digest,
+    whisker
 Suggests:
     roxygen2,
     testthat,
