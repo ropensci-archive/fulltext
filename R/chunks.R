@@ -4,7 +4,6 @@
 #'
 #' @param x Input article
 #' @param what What to get, can be 1 to many. See Details.
-#' @param ... Ignored
 #'
 #' @details
 #' \itemize{

@@ -10,8 +10,6 @@ chunks(x, what = "all")
 \item{x}{Input article}
 
 \item{what}{What to get, can be 1 to many. See Details.}
-
-\item{...}{Ignored}
 }
 \value{
 A list of output, one for each thing requested
