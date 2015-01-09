@@ -48,6 +48,14 @@
 #' ft_search(query='ecology', from='plos', plosopts = opts)$plos$data$id %>% 
 #'  ft_get(from = "plos") %>% 
 #'  chunks("publisher")
+#'  
+#' # Via entrez
+#' res <- ft_get(ids=c("10.3389/fnagi.2014.00130",'10.1155/2014/249309','10.1155/2014/162024'), 
+#'    from='entrez')
+#' chunks(res, what="abstract")
+#' chunks(res, what="title")
+#' chunks(res, what="keywords")
+#' chunks(res, what="publisher")
 #' }
 
 chunks <- function(x, what='all') {
@@ -94,21 +102,26 @@ get_what <- function(data, what, from){
 title <- function(b, from){
   switch(from, 
          elife = xpathSApply(b, "//title-group/article-title", xmlValue)[[1]],
-         plos = xpathSApply(b, "//title-group/article-title", xmlValue)[[1]]
+         plos = xpathSApply(b, "//title-group/article-title", xmlValue)[[1]],
+         entrez = xpathSApply(b, "//title-group/article-title", xmlValue)[[1]]
   )
 }
+
 doi <- function(b, from){
   switch(from, 
          elife = xpathSApply(b, "//article-id[@pub-id-type='doi']", xmlValue)[[1]],
-         plos = xpathSApply(b, "//article-id[@pub-id-type='doi']", xmlValue)[[1]]
+         plos = xpathSApply(b, "//article-id[@pub-id-type='doi']", xmlValue)[[1]],
+         entrez = xpathSApply(b, "//article-id[@pub-id-type='doi']", xmlValue)[[1]]
   )
 }
+
 categories <- function(b, from){
   switch(from, 
          elife = xpathSApply(xpathSApply(b, "//article-categories")[[1]], "//subject", xmlValue),
          plos = xpathSApply(xpathSApply(b, "//article-categories")[[1]], "//subject", xmlValue)
   )
 }
+
 authors <- function(b, from){
   get_auth <- function(v){
     tmp <- xpathSApply(v, "//contrib[@contrib-type='author']")
@@ -122,12 +135,15 @@ authors <- function(b, from){
          plos = get_auth(b)
   )
 }
+
 keywords <- function(b, from){
   switch(from, 
          elife = xpathSApply(b, "//kwd-group[@kwd-group-type='author-keywords']/kwd", xmlValue),
-         plos = NULL
+         plos = NULL,
+         entrez = xpathSApply(b, "//kwd-group/kwd", xmlValue)
   )
 }
+
 body <- function(b, from){
   switch(from, 
          elife = {
@@ -141,12 +157,15 @@ body <- function(b, from){
          }
   )
 }
+
 abstract <- function(b, from){
   switch(from, 
          elife = xpathSApply(b, "//abstract[@hwp:id='abstract-1']/p", xmlValue)[[1]],
-         plos = xpathSApply(b, "//abstract", xmlValue)
+         plos = xpathSApply(b, "//abstract", xmlValue),
+         entrez = xpathSApply(b, "//abstract", xmlValue)
   )
 }
+
 exec_summary <- function(b, from){
   switch(from, 
          elife = paste0(xpathSApply(b, "//abstract[@hwp:id='abstract-2']/p", xmlValue), collapse = " "),
@@ -171,7 +190,8 @@ refs <- function(b, from){
 publisher <- function(b, from){
   switch(from, 
          elife = xmlToList(xpathSApply(b, "//publisher")[[1]]),
-         plos = xmlToList(xpathSApply(b, "//publisher")[[1]])
+         plos = xmlToList(xpathSApply(b, "//publisher")[[1]]),
+         entrez = xmlToList(xpathSApply(b, "//publisher")[[1]])
   )
 }
 

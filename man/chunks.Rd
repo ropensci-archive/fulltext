@@ -60,6 +60,14 @@ opts <- list(fq=list('doc_type:full',"article_type:\\"research article\\""))
 ft_search(query='ecology', from='plos', plosopts = opts)$plos$data$id \%>\%
  ft_get(from = "plos") \%>\%
  chunks("publisher")
+
+# Via entrez
+res <- ft_get(ids=c("10.3389/fnagi.2014.00130",'10.1155/2014/249309','10.1155/2014/162024'),
+   from='entrez')
+chunks(res, what="abstract")
+chunks(res, what="title")
+chunks(res, what="keywords")
+chunks(res, what="publisher")
 }
 }
 

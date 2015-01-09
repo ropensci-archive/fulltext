@@ -27,7 +27,7 @@ plugin_get_entrez <- function(sources, ids, opts, ...){
   callopts <- list(...)
   if(any(grepl("entrez", sources))){
     opts$ids <- ids
-    out <- do.call(entrez_get, opts)
+    out <- as.list(do.call(entrez_get, opts))
     attr(out, "format") <- "xml"
     list(found = length(out), data = out, opts = opts)
   } else {
