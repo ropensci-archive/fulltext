@@ -10,3 +10,4 @@ vignettes/margins.sty
 .Rhistory
 CONTRIBUTING.md
 README.Rmd
+^.*\.xml

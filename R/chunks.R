@@ -331,5 +331,5 @@ tabularize <- function(x){
       data.frame(y, stringsAsFactors = FALSE)
     })
   })
-  lapply(out, rbind_all)
+  lapply(out, rbind.fill)
 }
