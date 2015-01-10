@@ -7,7 +7,7 @@ Description: Provides a single interface to many sources of full
     downloading full or partial text, converting to various data formats used
     in and outside of R, and visualizations of data and the text itself.
 Version: 0.0.5.99
-Date: 2015-01-08
+Date: 2015-01-09
 License: MIT + file LICENSE
 Authors@R: person("Chamberlain", "Scott", role = c("aut", "cre"),
     email = "myrmecocystus@gmail.com")
