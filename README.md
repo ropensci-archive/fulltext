@@ -31,18 +31,11 @@ Article full text formats by publisher:
 
 ## Installation
 
-You need Rcampdf, which is not on CRAN, but you can install easily via
+Install `fulltext`
 
 
 ```r
-install.packages("Rcampdf", repos = "http://datacube.wu.ac.at/", type = "source")
-```
-
-Then instal `fulltext`
-
-
-```r
-devtools::install_github(c("ropensci/rplos", "ropensci/bmc", "ropensci/elife"))
+devtools::install_github(c("ropensci/rplos", "ropensci/bmc"))
 devtools::install_github("ropensci/fulltext")
 ```
 
@@ -110,11 +103,7 @@ Using `Rcampdf`
 
 ```r
 (res_rcamp <- ft_extract(pdf1, "rcamp"))
-#> <document>/Users/sacmac/Library/R/3.1/library/fulltext/examples/example1.pdf
-#>   File size: 909801 bytes
-#>   Pages: 909801 bytes
-#>   Producer: Acrobat Distiller 10.1.5 (Windows)
-#>   Creation date: 909801 bytes
+#> Error in match.arg(which, c("gs", "xpdf")): 'arg' should be one of "gs", "xpdf"
 ```
 
 Using `ghostscript`
@@ -146,18 +135,7 @@ Or extract directly into a `tm` Corpus
 ```r
 paths <- sapply(paste0("example", 2:5, ".pdf"), function(x) system.file("examples", x, package = "fulltext"))
 (corpus_rcamp <- ft_extract_corpus(paths, "rcamp"))
-#> $meta
-#>           names                           class
-#> 1 content, meta PlainTextDocument, TextDocument
-#> 2 content, meta PlainTextDocument, TextDocument
-#> 3 content, meta PlainTextDocument, TextDocument
-#> 4 content, meta PlainTextDocument, TextDocument
-#> 
-#> $data
-#> <<VCorpus (documents: 4, metadata (corpus/indexed): 0/0)>>
-#> 
-#> attr(,"class")
-#> [1] "rcamp"
+#> Error in match.arg(which, c("gs", "xpdf")): 'arg' should be one of "gs", "xpdf"
 ```
 
 Extract pdf remotely on the web, using a service called `PDFX`

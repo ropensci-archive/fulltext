@@ -1,6 +1,7 @@
 .gitignore
 ^Makefile$
 .travis.yml
+appveyor.yml
 travis-tool.sh
 man-roxygen
 ^.*\.Rproj$
@@ -9,3 +10,4 @@ vignettes/margins.sty
 .Rhistory
 CONTRIBUTING.md
 README.Rmd
+^.*\.xml

@@ -5,7 +5,8 @@
 \title{Get full text.}
 \usage{
 ft_get(ids, query, from = "plos", plosopts = list(), bmcopts = list(),
-  entrezopts = list(), elifeopts = list(), ...)
+  entrezopts = list(), elifeopts = list(), cache = FALSE,
+  backend = "rds", path = NULL, ...)
 }
 \arguments{
 \item{ids}{Identifiers for papers, either DOIs, or other ids.}
@@ -14,15 +15,24 @@ ft_get(ids, query, from = "plos", plosopts = list(), bmcopts = list(),
 
 \item{from}{Source to query}
 
-\item{plosopts}{PLOS options. See \code{?searchplos}}
+\item{plosopts}{PLOS options. See \code{\link[rplos]{plos_fulltext}}}
 
-\item{bmcopts}{BMC options. See \code{?bmc_search}}
+\item{bmcopts}{BMC options. See \code{\link[bmc]{bmc_xml}}}
 
-\item{entrezopts}{Entrez options. See \code{?entrez_search} and \code{?entrez_fetch}}
+\item{entrezopts}{Entrez options. See \code{\link[rentrez]{entrez_search}} and
+\code{\link{entrez_fetch}}}
 
-\item{elifeopts}{eLife options. See \code{?elife_search}}
+\item{elifeopts}{eLife options}
 
-\item{...}{Further args passed on to \code{httr::GET}}
+\item{cache}{(logical) To cache results or not. If \code{cache=TRUE}, raw XML, or other
+format that article is in is written to disk, then pulled from disk when further
+manipulations are done on the data. See also \code{\link{cache}}}
+
+\item{backend}{(character) One of local, rcache, redis, or sqlite}
+
+\item{path}{(character) Path to local folder}
+
+\item{...}{Further args passed on to \code{\link[httr]{GET}}}
 }
 \value{
 An object of class ft_data
@@ -64,6 +74,15 @@ out <- ft_get(ids=res$crossref$data$DOI[1:20], from='entrez')
 # Frontiers Publisher - Frontiers in Aging Nueroscience
 res <- ft_get(ids="10.3389/fnagi.2014.00130", from='entrez')
 res$entrez
+
+# Search entrez, get some DOIs
+(res <- ft_search(query='ecology', from='entrez'))
+res$entrez$data$DOI
+ft_get(res$entrez$data$DOI[1], from='entrez')
+ft_get(res$entrez$data$DOI[1:3], from='entrez')
+
+# Caching
+res <- ft_get(ids='10.1371/journal.pone.0086169', from='plos', cache=TRUE, backend="rds")
 }
 }
 

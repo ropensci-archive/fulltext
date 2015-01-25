@@ -78,7 +78,7 @@ plugin_arxiv <- function(sources, query, limit, opts){
     opts$query <- query
     opts$limit <- limit
     out <- do.call(arxiv_search, opts)
-    zz <- list(found = attributes(z)$total_results, data = out, opts = opts)
+    zz <- list(found = attributes(out)$total_results, data = out, opts = opts)
     structure(zz, class="ft_ind", query=query)
   } else {
     zz <- list(found = NULL, data = NULL, opts = opts)

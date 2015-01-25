@@ -120,3 +120,11 @@ ft_obj_type <- function (x)
     paste0("<S4:", paste0(is(x), collapse = ", "), ">")
   }
 }
+
+pluck <- function(x, name, type) {
+  if (missing(type)) {
+    lapply(x, "[[", name)
+  } else {
+    vapply(x, "[[", name, FUN.VALUE = type)
+  }
+}

@@ -2,4 +2,6 @@
 .Rhistory
 .RData
 .DS_Store
-
+out.xml
+plosarticle.xml
+entrez.xml

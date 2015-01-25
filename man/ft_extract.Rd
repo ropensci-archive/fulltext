@@ -2,9 +2,15 @@
 % Please edit documentation in R/ft_extract.R
 \name{ft_extract}
 \alias{ft_extract}
+\alias{print.gs_char}
+\alias{print.xpdf_char}
 \title{Extract text from a single pdf document.}
 \usage{
-ft_extract(path, which, ...)
+ft_extract(path, which = "xpdf", ...)
+
+\method{print}{gs_char}(x, ...)
+
+\method{print}{xpdf_char}(x, ...)
 }
 \arguments{
 \item{path}{Path to a file}
@@ -12,20 +18,24 @@ ft_extract(path, which, ...)
 \item{which}{One of rcamp, gs, or xpdf.}
 
 \item{...}{further args passed on}
+
+\item{x}{Input}
 }
 \value{
-An object of class rcamp_char, gs_char, xpdf_char
+An object of class gs_char, xpdf_char
 }
 \description{
 Extract text from a single pdf document.
+
+#
 }
 \examples{
 \donttest{
 path <- "~/github/sac/scott/pdfs/ChamberlainEtal2013Ecosphere.pdf"
 
-(res_rcamp <- ft_extract(path, "rcamp"))
-(res_gs <- ft_extract(path, "gs"))
+(res_xpdf <- ft_extract(path)) # xpdf is the default
 (res_xpdf <- ft_extract(path, "xpdf"))
+(res_gs <- ft_extract(path, "gs"))
 }
 }
 
