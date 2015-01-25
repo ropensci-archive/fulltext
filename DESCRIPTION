@@ -1,15 +1,15 @@
 Package: fulltext
 Title: Get full text of scholarly articles across many data sources.
-Description: This package provides a single interface to many sources of full
+Description: Provides a single interface to many sources of full
     text scholarly data, including Biomed Central, Public Library of Science,
     Pubmed Central, eLife, F1000Research, PeerJ, Pensoft, Hindawi, arXiv
     preprints, and more. Functionality included for searching for articles,
     downloading full or partial text, converting to various data formats used
     in and outside of R, and visualizations of data and the text itself.
-Version: 0.0.2.99
+Version: 0.0.5.99
+Date: 2015-01-09
 License: MIT + file LICENSE
-Date: 2014-09-19
-Authors@R: person("chamberlain", "Scott", role = c("aut", "cre"),
+Authors@R: person("Chamberlain", "Scott", role = c("aut", "cre"),
     email = "myrmecocystus@gmail.com")
 URL: https://github.com/ropensci/fulltext
 BugReports: https://github.com/ropensci/fulltext/issues
@@ -17,16 +17,22 @@ LazyLoad: yes
 VignetteBuilder: knitr
 Roxygen: list(wrap = FALSE)
 Imports:
+    httr,
+    magrittr,
+    XML,
     rplos,
+    jsonlite,
+    plyr,
     rcrossref,
     bmc,
-    elife,
+    aRxiv,
     rentrez,
-    XML,
-    jsonlite,
-    plyr
+    tm,
+    rredis,
+    R.cache,
+    digest,
+    whisker
 Suggests:
     roxygen2,
     testthat,
-    knitr,
-    tm
+    knitr

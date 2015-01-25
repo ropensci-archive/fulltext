@@ -1,15 +1,10 @@
-all: vignettes move1 rmd2md
+all: move rmd2md
 
-vignettes:
-		cd inst/vign;\
-		Rscript --vanilla -e 'library(knitr); knit("fulltext_vignette.Rmd")'
-
-move1:
-		cp inst/vign/fulltext_vignette.md vignettes
-
-move2:
-		cp -rf inst/vign/img/* vignettes/img/
+move:
+		cp inst/vign/fulltext_vignette.md vignettes;\
+		cp inst/vign/formats.md vignettes
 
 rmd2md:
 		cd vignettes;\
-		mv fulltext_vignette.md fulltext_vignette.Rmd
+		mv fulltext_vignette.md fulltext_vignette.Rmd;\
+		mv formats.md formats.Rmd

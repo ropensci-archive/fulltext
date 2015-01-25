@@ -5,7 +5,8 @@ before_script:
 - chmod 755 ./travis-tool.sh
 - "./travis-tool.sh bootstrap"
 - "./travis-tool.sh install_deps"
-- "./travis-tool.sh github_package ropensci/bmc ropensci/rplos ropensci/elife"
+- "./travis-tool.sh github_package ropensci/bmc ropensci/rplos ropensci/elife ropensci/rcrossref"
+- Rscript -e "install.packages('Rcampdf', repos = 'http://datacube.wu.ac.at/', type = 'source')"
 env:
   global:
   - R_BUILD_ARGS=" "
