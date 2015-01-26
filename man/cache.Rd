@@ -33,6 +33,18 @@ ft_get(ids='10.1371/journal.pone.0086169', from='plos', cache=TRUE)
 cache_options_set(backend="redis")
 (x <- ft_get(ids='10.1371/journal.pone.0086169', from='plos', cache=TRUE, backend="redis"))
 x \%>\% collect()
+
+cache_options_set(backend="rcache")
+cache_options_get()
+(x <- ft_get(ids='10.1371/journal.pone.0086169', from='plos'))
+x \%>\% collect()
+
+# Many different sources
+(res <- ft_search(query='ecology', from='entrez'))
+cache_options_set(backend="rds")
+out <- ft_get(res)
+out$entrez
+out \%>\% collect() \%>\% chunks("title")
 }
 }
 

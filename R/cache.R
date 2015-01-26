@@ -14,6 +14,18 @@
 #' cache_options_set(backend="redis")
 #' (x <- ft_get(ids='10.1371/journal.pone.0086169', from='plos', cache=TRUE, backend="redis"))
 #' x %>% collect()
+#' 
+#' cache_options_set(backend="rcache")
+#' cache_options_get()
+#' (x <- ft_get(ids='10.1371/journal.pone.0086169', from='plos'))
+#' x %>% collect()
+#' 
+#' # Many different sources
+#' (res <- ft_search(query='ecology', from='entrez'))
+#' cache_options_set(backend="rds")
+#' out <- ft_get(res)
+#' out$entrez
+#' out %>% collect() %>% chunks("title")
 #' }
 
 #' @export
@@ -21,7 +33,7 @@
 cache_options_set <- function(cache = TRUE, backend = "rds", path="~/.fulltext"){
   options(ft_cache = cache)
   options(ft_backend = if(!cache) NULL else backend)
-  options(ft_path = if(!cache || "redis" %in% backend) NULL else path)
+  options(ft_path = if(!cache || backend %in% c("redis","rcache")) NULL else path)
 }
 
 #' @export
@@ -34,18 +46,16 @@ cache_options_get <- function(){
 }
 
 ############# save cache
-cache_save <- function(cache, key, obj, backend, path, db)
+cache_save <- function(obj, backend, path, db)
 {
-  if(cache){
-    backend <- match.arg(backend, choices=c('rds', 'rcache', 'redis'))
-    switch(backend,
-           rds = save_rds(obj, path),
-           rcache = save_rcache2(obj, key),
-           redis = save_redis2(obj)
-#            ,
-#            sqlite = save_sqlite(db=db, obj, key)
-    )
-  } else { NULL }
+  backend <- match.arg(backend, choices=c('rds', 'rcache', 'redis'))
+  switch(backend,
+         rds = save_rds(obj, path),
+         rcache = save_rcache2(obj),
+         redis = save_redis2(obj)
+         #            ,
+         #            sqlite = save_sqlite(db=db, obj, key)
+  )
 }
 
 save_rds <- function(x, path="~/")
@@ -54,10 +64,6 @@ save_rds <- function(x, path="~/")
   filepath <- file.path(path, paste0(hash, ".rds"))
   saveRDS(object=x, file=filepath)
   return( filepath )
-}
-
-save_rcache2 <- function(x, y){
-  saveCache(object=x)
 }
 
 save_redis2 <- function(x){
@@ -73,19 +79,29 @@ save_redis2 <- function(x){
   }
 }
 
+save_rcache2 <- function(x){
+  key <- digest::digest(x)
+  saveCache(object=x, key=list(key))
+}
+
 # save_sqlite <- function(db, x, y) dbInsert(db, key=y, value=x)
 
 ############# get cache
 cache_get <- function(key=NULL, backend=NULL, path=NULL, db=NULL)
 {
-  backend <- match.arg(backend, choices=c('rds', 'rcache', 'redis'))
-  switch(backend,
-         rds = get_rds(path),
-         rcache = get_rcache(key),
-         redis = get_redis(key)
-#          ,
-#          sqlite = get_sqlite(key, db=db)
-  )
+  if(is.null(key)){
+    NULL
+  } else {
+    backend <- match.arg(backend, choices=c('rds', 'rcache', 'redis'))
+    key <- path.expand(key)
+    switch(backend,
+           rds = get_rds(key),
+           rcache = get_rcache(key),
+           redis = get_redis(key)
+           #          ,
+           #          sqlite = get_sqlite(key, db=db)
+    )
+  }
 }
 
 get_rds <- function(z){
@@ -116,11 +132,7 @@ get_redis <- function(key)
   }
 }
 
-get_rcache <- function(cache, key){
-  if(cache){
-    loadCache(list(key))
-  } else { NULL }
-}
+get_rcache <- function(key) loadCache(list(key))
 
 # get_sqlite <- function(cache, key, db)
 # {

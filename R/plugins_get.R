@@ -30,7 +30,7 @@ construct_paths <- function(co, x){
          data = x)
   } else {
     list(backend = co$backend,
-         path = cache_save(TRUE, NULL, x, co$backend, co$path),
+         path = cache_save(obj = x, backend = co$backend, path = co$path),
          data = NULL)
   }
 }
@@ -41,7 +41,7 @@ plugin_get_entrez <- function(sources, ids, opts, ...){
     opts$ids <- ids
     out <- as.list(do.call(entrez_get, opts))
     attr(out, "format") <- "xml"
-    list(found = length(out), dois = NULL, data = out, opts = opts)
+    list(found = length(out), dois = names(out), data = construct_paths(cache_options_get(), out), opts = opts)
   } else {
     list(found = NULL, dois = NULL,  data = NULL, opts = opts)
   }
