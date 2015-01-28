@@ -86,4 +86,18 @@ plugin_arxiv <- function(sources, query, limit, opts){
   }
 }
 
+plugin_biorxiv <- function(sources, query, limit, opts){
+  if(any(grepl("biorxiv", sources))){
+    opts$query <- query
+    opts$limit <- limit
+    out <- do.call(bx_search, opts)
+    zz <- list(found = out$found, data = out$ID, opts = opts)
+    structure(zz, class="ft_ind", query=query)
+  } else {
+    zz <- list(found = NULL, data = NULL, opts = opts)
+    structure(zz, class="ft_ind", query=query)
+  }
+  
+}
+
 move_col <- function(x, y) x[ c(names(x)[-grep(y, names(x))], y) ]
