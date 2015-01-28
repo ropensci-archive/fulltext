@@ -22,37 +22,37 @@
 #' @return An object of class ft_data
 #'
 #' @examples \donttest{
-#' ft_get(ids='10.1371/journal.pone.0086169', from='plos')
+#' ft_get('10.1371/journal.pone.0086169', from='plos')
 #' (dois <- searchplos(q="*:*", fl='id', 
 #'    fq=list('doc_type:full',"article_type:\"research article\""), limit=5)$data$id)
-#' ft_get(ids=dois, from='plos')
-#' ft_get(ids=c('10.7717/peerj.228','10.7717/peerj.234'), from='entrez')
+#' ft_get(dois, from='plos')
+#' ft_get(c('10.7717/peerj.228','10.7717/peerj.234'), from='entrez')
 #' 
 #' # elife
-#' ft_get(ids='10.7554/eLife.04300', from='elife')
-#' ft_get(ids=c('10.7554/eLife.04300','10.7554/eLife.03032'), from='elife')
+#' ft_get('10.7554/eLife.04300', from='elife')
+#' ft_get(c('10.7554/eLife.04300','10.7554/eLife.03032'), from='elife')
 #' ##### replace with code not using elife packages
 #' dois <- searchelife(terms="Cell biology", searchin="subject_area", boolean="contains")
-#' ft_get(ids=dois[1:10], from='elife')
+#' ft_get(dois[1:10], from='elife')
 #' 
 #' # bmc
-#' ft_get(ids='http://www.microbiomejournal.com/content/download/xml/2049-2618-2-7.xml', from='bmc')
+#' ft_get('http://www.microbiomejournal.com/content/download/xml/2049-2618-2-7.xml', from='bmc')
 #' 
 #' # Frontiers in Pharmacology (publisher: Frontiers)
 #' doi <- '10.3389/fphar.2014.00109'
-#' ft_get(ids=doi, from="entrez")
+#' ft_get(doi, from="entrez")
 #' 
 #' # Hindawi Journals
-#' ft_get(ids=c('10.1155/2014/292109','10.1155/2014/162024','10.1155/2014/249309'), from='entrez')
+#' ft_get(c('10.1155/2014/292109','10.1155/2014/162024','10.1155/2014/249309'), from='entrez')
 #' res <- ft_search(query='ecology', from='crossref', limit=50,
 #'                  crossrefopts = list(filter=list(has_full_text = TRUE, 
 #'                                                  member=98, 
 #'                                                  type='journal-article')))
 #' 
-#' out <- ft_get(ids=res$crossref$data$DOI[1:20], from='entrez')
+#' out <- ft_get(res$crossref$data$DOI[1:20], from='entrez')
 #' 
 #' # Frontiers Publisher - Frontiers in Aging Nueroscience
-#' res <- ft_get(ids="10.3389/fnagi.2014.00130", from='entrez')
+#' res <- ft_get("10.3389/fnagi.2014.00130", from='entrez')
 #' res$entrez
 #' 
 #' # Search entrez, get some DOIs
@@ -62,25 +62,41 @@
 #' ft_get(res$entrez$data$DOI[1:3], from='entrez')
 #' 
 #' # Caching
-#' res <- ft_get(ids='10.1371/journal.pone.0086169', from='plos', cache=TRUE, backend="rds")
+#' res <- ft_get('10.1371/journal.pone.0086169', from='plos', cache=TRUE, backend="rds")
 #' }
   
-ft_get <- function(ids, query, from='plos', 
-                   plosopts=list(), 
-                   bmcopts=list(), 
-                   entrezopts=list(), 
-                   elifeopts=list(), 
-                   cache=FALSE, backend="rds", path=NULL, ...){
+ft_get <- function(x, query, from='plos', plosopts=list(), bmcopts=list(), entrezopts=list(), elifeopts=list(), 
+                   cache=FALSE, backend="rds", path="~/.fulltext", ...){
+  UseMethod("ft_get")
+}
+
+#' @export
+#' @rdname ft_get
+ft_get.character <- function(x, query, from='plos', plosopts=list(), bmcopts=list(), entrezopts=list(), 
+                   elifeopts=list(), cache=FALSE, backend="rds", path="~/.fulltext", ...){
+  cacheopts <- cache_options_get()
+  if(is.null(cacheopts$cache) && is.null(cacheopts$backend)) cache_options_set(cache, backend, path)
   
-  cache_options_set(cache, backend, path)
-  
-  plos_out <- plugin_get_plos(from, ids, plosopts, ...)
-  entrez_out <- plugin_get_entrez(from, ids, entrezopts, ...)
-  bmc_out <- plugin_get_bmc(from, ids, bmcopts, ...)
-  elife_out <- plugin_get_elife(from, ids, elifeopts, ...)
+  plos_out <- plugin_get_plos(from, x, plosopts, ...)
+  entrez_out <- plugin_get_entrez(from, x, entrezopts, ...)
+  bmc_out <- plugin_get_bmc(from, x, bmcopts, ...)
+  elife_out <- plugin_get_elife(from, x, elifeopts, ...)
   structure(list(plos=plos_out, entrez=entrez_out, bmc=bmc_out, elife=elife_out), class="ft_data")
 }
 
+#' @export
+#' @rdname ft_get
+ft_get.ft <- function(x, query, from=NULL, plosopts=list(), bmcopts=list(), entrezopts=list(),  
+                   cache=FALSE, backend="rds", path="~/.fulltext", ...){
+  cacheopts <- cache_options_get()
+  if(is.null(cacheopts$cache) && is.null(cacheopts$backend)) cache_options_set(cache, backend, path)
+  
+  from <- names(x[sapply(x, function(v) !is.null(v$data))])
+  plos_out <- plugin_get_plos(from, x$plos$data$id, plosopts, ...)
+  entrez_out <- plugin_get_entrez(from, x$entrez$data$DOI, entrezopts, ...)
+  bmc_out <- plugin_get_bmc(from, x$bmc$data, bmcopts, ...)
+  structure(list(plos=plos_out, entrez=entrez_out, bmc=bmc_out), class="ft_data")
+}
 
 #' @export
 print.ft_data <- function(x, ...) {

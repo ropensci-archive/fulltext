@@ -19,8 +19,9 @@ Collect data from a remote source in fulltext
 }
 \examples{
 \dontrun{
-x <- ft_get(ids='10.1371/journal.pone.0086169', from='plos', cache=TRUE, backend="rds")
+x <- ft_get('10.1371/journal.pone.0086169', from='plos', cache=TRUE, backend="rds")
 x \%>\% collect()
+x \%>\% collect() \%>\% text()
 }
 }
 
