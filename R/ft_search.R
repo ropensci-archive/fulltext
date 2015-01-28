@@ -7,6 +7,7 @@
 #' @importFrom plyr rbind.fill
 #' @importFrom rentrez entrez_summary
 #' @importFrom aRxiv arxiv_search
+#' @importFrom biorxiv bx_search
 #' 
 #' @param query Query terms
 #' @param from Source to query
@@ -16,6 +17,7 @@
 #' @param crossrefopts Crossref options. See \code{?cr_works}
 #' @param entrezopts Entrez options. See \code{?entrez_search}
 #' @param arxivopts arxiv options. See \code{?arxiv_search}
+#' @param biorxivopts biorxiv options. See \code{?bx_search}
 #' @param ... Further args passed on to \code{\link[httr]{GET}}. Not working right now...
 #' 
 #' @return An object of class ft, and objects of class ft_ind within each source
@@ -29,6 +31,10 @@
 #'    
 #' # Crossref
 #' (res <- ft_search(query='ecology', from='crossref'))
+#' res$crossref
+#' 
+#' #biorxiv
+#' (res <- ft_search(query='ecology', from='biorxiv'))
 #' res$crossref
 #' 
 #' # BMC
@@ -50,13 +56,13 @@
 #' }
 
 ft_search <- function(query, from='plos', limit=10, 
-  plosopts=list(), 
-  bmcopts=list(), 
-  crossrefopts=list(), 
-  entrezopts=list(), 
-  arxivopts=list(),
-  biorxivopts=list(),
-  ...)
+                      plosopts=list(), 
+                      bmcopts=list(), 
+                      crossrefopts=list(), 
+                      entrezopts=list(), 
+                      arxivopts=list(),
+                      biorxivopts=list(),
+                      ...)
 {
   plos_out <- plugin_plos(from, query, limit, plosopts)
   bmc_out <- plugin_bmc(from, query, limit, bmcopts)
@@ -112,3 +118,5 @@ null_len <- function(x) if(is.null(x)) 0 else x
 print_if <- function(x, n){
   if(!is.null(x)) ft_trunc_mat(x, n)
 }
+
+
