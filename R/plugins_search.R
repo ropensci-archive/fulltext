@@ -62,10 +62,10 @@ plugin_entrez <- function(sources, query, limit, opts){
       }), stringsAsFactors=FALSE)
     })
     data <- do.call(rbind.fill, dat)
-    data <- move_col(data, "Title")
-    data <- move_col(data, "AuthorList")
+    data <- move_col(data, "title")
+    data <- move_col(data, "authors")
     
-    zz <- list(found = out$count, data = data, opts = opts)
+    zz <- list(found = as.integer(out$count), data = data, opts = opts)
     structure(zz, class="ft_ind", query=query)
   } else {
     zz <- list(found = NULL, data = NULL, opts = opts)
