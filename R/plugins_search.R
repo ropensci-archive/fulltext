@@ -55,17 +55,19 @@ plugin_entrez <- function(sources, query, limit, opts){
     out <- do.call(entrez_search, opts)
     sumres <- entrez_summary(db = "pmc", id=out$ids)
     dat <- lapply(sumres, function(x){
-      x$file <- NULL
-      data.frame(lapply(x, function(z){
-        tmp <- if(length(z) > 1) paste(z, collapse=", ") else z
-        if(is.null(tmp)) NA else tmp
-      }), stringsAsFactors=FALSE)
-    })
-    data <- do.call(rbind.fill, dat)
-    data <- move_col(data, "Title")
-    data <- move_col(data, "AuthorList")
+      x$authors <- paste(x$authors[,1], collapse=", ")
+      x$pmid  <- x$articleids[x$articleids[,1] == "pmid", 2]
+      x$doi   <- x$articleids[x$articleids[,1] == "doi",  2]
+      x$pmcid <- x$articleids[x$articleids[,1] == "pmcid",2]
+      x$mid   <- x$articleids[x$articleids[,1] == "MID",  2]
+      x$articleids <- NULL
+      lapply(x, function(z) if(is.null(z) | length(z) == 0) NA else z)
+      })
+    data <- plyr::ldply(dat, data.frame,stringsAsFactors=FALSE, .id="uid" )
+    data <- move_col(data, "title")
+    data <- move_col(data, "authors")
     
-    zz <- list(found = out$count, data = data, opts = opts)
+    zz <- list(found = as.integer(out$count), data = data, opts = opts)
     structure(zz, class="ft_ind", query=query)
   } else {
     zz <- list(found = NULL, data = NULL, opts = opts)
