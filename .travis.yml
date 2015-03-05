@@ -3,7 +3,6 @@ language: r
 r_github_packages:  
   - jimhester/covr
   - ropensci/bmc
-  - ropensci/rplos
   - emhart/biorxiv
 
 after_success:
