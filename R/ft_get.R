@@ -1,4 +1,4 @@
-  #' Get full text.
+#' Get full text.
 #' 
 #' @export
 #' @importFrom rentrez entrez_search entrez_fetch

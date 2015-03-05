@@ -21,6 +21,7 @@ Imports:
     magrittr,
     XML,
     rplos,
+    biorxiv,
     jsonlite,
     plyr,
     rcrossref,

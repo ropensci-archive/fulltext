@@ -1,19 +1,17 @@
-language: c
-script: "./travis-tool.sh run_tests"
+language: r
+
+r_github_packages:  
+  - jimhester/covr
+  - ropensci/bmc
+  - ropensci/rplos
+  - emhart/biorxiv
+
+after_success:
+  - Rscript -e 'library(covr); coveralls()'
+  
 before_script:
-- curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
-- chmod 755 ./travis-tool.sh
-- "./travis-tool.sh bootstrap"
-- "./travis-tool.sh install_deps"
-- "./travis-tool.sh github_package ropensci/bmc ropensci/rplos ropensci/elife ropensci/rcrossref"
-- Rscript -e "install.packages('Rcampdf', repos = 'http://datacube.wu.ac.at/', type = 'source')"
-env:
-  global:
-  - R_BUILD_ARGS=" "
-  - R_CHECK_ARGS="--as-cran"
-  - BOOTSTRAP_LATEX="1"
-after_failure:
-- "./travis-tool.sh dump_logs"
+  - Rscript -e "install.packages('Rcampdf', repos = 'http://datacube.wu.ac.at/', type = 'source')"
+
 notifications:
   slack:
     secure: iUbodhwdTWY/Lu+u0THafzSCMB+5im7XCYEAoIxNB61KSD0i99e+reqKXy2c5Rh8XS4KqlhOZ7FN0ivJ9T0DU1sIN27cyIZJHwDL3sY2tKsPlrxATM07+WVuVhvHVeF8JGktbI/mHspoI1OSzAoPZsj7LUdWyDIGYNGwYNXqt04=

@@ -6,7 +6,7 @@
 \usage{
 ft_search(query, from = "plos", limit = 10, plosopts = list(),
   bmcopts = list(), crossrefopts = list(), entrezopts = list(),
-  arxivopts = list(), ...)
+  arxivopts = list(), biorxivopts = list(), ...)
 }
 \arguments{
 \item{query}{Query terms}
@@ -24,6 +24,8 @@ ft_search(query, from = "plos", limit = 10, plosopts = list(),
 \item{entrezopts}{Entrez options. See \code{?entrez_search}}
 
 \item{arxivopts}{arxiv options. See \code{?arxiv_search}}
+
+\item{biorxivopts}{biorxiv options. See \code{?bx_search}}
 
 \item{...}{Further args passed on to \code{\link[httr]{GET}}. Not working right now...}
 }
@@ -43,6 +45,10 @@ ft_search(query='climate change', from='plos', limit=500, plosopts=list(
 
 # Crossref
 (res <- ft_search(query='ecology', from='crossref'))
+res$crossref
+
+#biorxiv
+(res <- ft_search(query='ecology', from='biorxiv'))
 res$crossref
 
 # BMC
