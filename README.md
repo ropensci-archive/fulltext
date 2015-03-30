@@ -21,6 +21,7 @@ Data sources in `fulltext`:
 * Public Library of Science (PLOS) - via the `rplos` package
 * Biomed Central - via the `bmc` package
 * eLife
+* arXiv preprints
 * We __will__ add more, as publishers open up, and as we have time...See the [master list here](https://github.com/ropensci/fulltext/issues/4#issuecomment-52376743)
 
 We'd love your feedback. Let us know what you think at info@ropensci.org, or in [the issue tracker](https://github.com/ropensci/fulltext/issues).
@@ -35,7 +36,7 @@ Install `fulltext`
 
 
 ```r
-devtools::install_github(c("ropensci/rplos", "ropensci/bmc"))
+devtools::install_github(c("ropensci/rplos", "ropensci/bmc", "ropensci/aRxiv"))
 devtools::install_github("ropensci/fulltext")
 ```
 
@@ -58,9 +59,9 @@ ft_search(query='ecology', from='plos')
 #> Query:
 #>   [ecology] 
 #> Found:
-#>   [PLoS: 24708; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0] 
+#>   [PLoS: 26018; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0] 
 #> Returned:
-#>   [PLoS: 10; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0]
+#>   [PLoS: 10; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0]
 ```
 
 ## Get full text
@@ -69,10 +70,9 @@ ft_search(query='ecology', from='plos')
 
 
 ```r
-ft_get(ids='10.1371/journal.pone.0086169', from='plos')
+ft_get('10.1371/journal.pone.0086169', from='plos')
 #> [Docs] 1 
-#> [Source] R session 
-#> [Size] Min. Length: 111132 - Max. Length: 111132 
+#> [Source] R session  
 #> [IDs] 10.1371/journal.pone.0086169 ...
 ```
 
@@ -96,14 +96,6 @@ Locally, using code adapted from the package `tm`, and various pdf to text parsi
 
 ```r
 pdf1 <- system.file("examples", "example1.pdf", package = "fulltext")
-```
-
-Using `Rcampdf`
-
-
-```r
-(res_rcamp <- ft_extract(pdf1, "rcamp"))
-#> Error in match.arg(which, c("gs", "xpdf")): 'arg' should be one of "gs", "xpdf"
 ```
 
 Using `ghostscript`
@@ -134,8 +126,19 @@ Or extract directly into a `tm` Corpus
 
 ```r
 paths <- sapply(paste0("example", 2:5, ".pdf"), function(x) system.file("examples", x, package = "fulltext"))
-(corpus_rcamp <- ft_extract_corpus(paths, "rcamp"))
-#> Error in match.arg(which, c("gs", "xpdf")): 'arg' should be one of "gs", "xpdf"
+(corpus_xpdf <- ft_extract_corpus(paths, "xpdf"))
+#> $meta
+#>           names                           class
+#> 1 content, meta PlainTextDocument, TextDocument
+#> 2 content, meta PlainTextDocument, TextDocument
+#> 3 content, meta PlainTextDocument, TextDocument
+#> 4 content, meta PlainTextDocument, TextDocument
+#> 
+#> $data
+#> <<VCorpus (documents: 4, metadata (corpus/indexed): 0/0)>>
+#> 
+#> attr(,"class")
+#> [1] "xpdf"
 ```
 
 Extract pdf remotely on the web, using a service called `PDFX`
