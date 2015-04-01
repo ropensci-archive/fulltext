@@ -36,7 +36,7 @@ Install `fulltext`
 
 
 ```r
-devtools::install_github(c("ropensci/rplos", "ropensci/bmc", "ropensci/aRxiv"))
+devtools::install_github(c("ropensci/rplos", "ropensci/bmc", "ropensci/aRxiv", "emhart/biorxiv"))
 devtools::install_github("ropensci/fulltext")
 ```
 
@@ -59,7 +59,7 @@ ft_search(query='ecology', from='plos')
 #> Query:
 #>   [ecology] 
 #> Found:
-#>   [PLoS: 26018; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0] 
+#>   [PLoS: 26042; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0] 
 #> Returned:
 #>   [PLoS: 10; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0]
 ```

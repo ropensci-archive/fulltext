@@ -42,7 +42,7 @@ Article full text formats by publisher:
 Install `fulltext`
 
 ```{r eval=FALSE}
-devtools::install_github(c("ropensci/rplos", "ropensci/bmc", "ropensci/aRxiv"))
+devtools::install_github(c("ropensci/rplos", "ropensci/bmc", "ropensci/aRxiv", "emhart/biorxiv"))
 devtools::install_github("ropensci/fulltext")
 ```
 
