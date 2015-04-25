@@ -40,11 +40,6 @@
 #' ## To Redis
 #' res_redis <- ft_serialize(res, to='redis')
 #'
-#' # Sizes
-#' pryr::object_size(res)
-#' pryr::object_size(res_rcache)
-#' pryr::object_size(res_redis)
-#'
 #' # Chain together functions
 #' doi <- '10.1371/journal.pone.0086169'
 #' ft_get(doi, from='plos') %>%

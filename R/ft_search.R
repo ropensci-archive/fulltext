@@ -17,7 +17,7 @@
 #' @param crossrefopts Crossref options. See \code{?cr_works}
 #' @param entrezopts Entrez options. See \code{?entrez_search}
 #' @param arxivopts arxiv options. See \code{?arxiv_search}
-#' @param biorxivopts biorxivr options. See \code{?bx_search}
+#' @param biorxivropts biorxivr options. See \code{?bx_search}
 #' @param ... Further args passed on to \code{\link[httr]{GET}}. Not working right now...
 #'
 #' @return An object of class ft, and objects of class ft_ind within each source

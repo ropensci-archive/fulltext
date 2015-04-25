@@ -3,7 +3,7 @@
 #' @export
 #' @importFrom rentrez entrez_search entrez_fetch
 #' 
-#' @param ids Identifiers for papers, either DOIs, or other ids.
+#' @param x Identifiers for papers, either DOIs, or other ids.
 #' @param query Query terms
 #' @param from Source to query
 #' @param plosopts PLOS options. See \code{\link[rplos]{plos_fulltext}}
@@ -87,7 +87,7 @@ ft_get.character <- function(x, query, from='plos', plosopts=list(), bmcopts=lis
 #' @export
 #' @rdname ft_get
 ft_get.ft <- function(x, query, from=NULL, plosopts=list(), bmcopts=list(), entrezopts=list(),  
-                   cache=FALSE, backend="rds", path="~/.fulltext", ...){
+                      elifeopts=list(), cache=FALSE, backend="rds", path="~/.fulltext", ...){
   cacheopts <- cache_options_get()
   if(is.null(cacheopts$cache) && is.null(cacheopts$backend)) cache_options_set(cache, backend, path)
   

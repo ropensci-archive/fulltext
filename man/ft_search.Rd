@@ -25,9 +25,9 @@ ft_search(query, from = "plos", limit = 10, plosopts = list(),
 
 \item{arxivopts}{arxiv options. See \code{?arxiv_search}}
 
-\item{...}{Further args passed on to \code{\link[httr]{GET}}. Not working right now...}
+\item{biorxivropts}{biorxivr options. See \code{?bx_search}}
 
-\item{biorxivopts}{biorxivr options. See \code{?bx_search}}
+\item{...}{Further args passed on to \code{\link[httr]{GET}}. Not working right now...}
 }
 \value{
 An object of class ft, and objects of class ft_ind within each source

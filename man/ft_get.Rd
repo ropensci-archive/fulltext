@@ -15,10 +15,12 @@ ft_get(x, query, from = "plos", plosopts = list(), bmcopts = list(),
   cache = FALSE, backend = "rds", path = "~/.fulltext", ...)
 
 \method{ft_get}{ft}(x, query, from = NULL, plosopts = list(),
-  bmcopts = list(), entrezopts = list(), cache = FALSE, backend = "rds",
-  path = "~/.fulltext", ...)
+  bmcopts = list(), entrezopts = list(), elifeopts = list(),
+  cache = FALSE, backend = "rds", path = "~/.fulltext", ...)
 }
 \arguments{
+\item{x}{Identifiers for papers, either DOIs, or other ids.}
+
 \item{query}{Query terms}
 
 \item{from}{Source to query}
@@ -41,8 +43,6 @@ manipulations are done on the data. See also \code{\link{cache}}}
 \item{path}{(character) Path to local folder}
 
 \item{...}{Further args passed on to \code{\link[httr]{GET}}}
-
-\item{ids}{Identifiers for papers, either DOIs, or other ids.}
 }
 \value{
 An object of class ft_data
