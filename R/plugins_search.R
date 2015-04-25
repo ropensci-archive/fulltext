@@ -3,12 +3,12 @@ plugin_plos <- function(sources, query, limit, opts){
     opts$q <- query
     opts$limit <- limit
     out <- do.call(searchplos, opts)
-    zz <- list(found = out$meta$numFound, data = out$data, opts = opts, 
-               license = list(type = "CC-BY", 
-                              uri = 'http://creativecommons.org/licenses/by/4.0/', 
-                              text = '<authors> This is an open-access article distributed under 
-                              the terms of the Creative Commons Attribution License, which permits 
-                              unrestricted use, distribution, and reproduction in any medium, 
+    zz <- list(found = out$meta$numFound, data = out$data, opts = opts,
+               license = list(type = "CC-BY",
+                              uri = 'http://creativecommons.org/licenses/by/4.0/',
+                              text = '<authors> This is an open-access article distributed under
+                              the terms of the Creative Commons Attribution License, which permits
+                              unrestricted use, distribution, and reproduction in any medium,
                               provided the original author and source are credited.'))
     structure(zz, class="ft_ind", query=query)
   } else {
@@ -66,7 +66,7 @@ plugin_entrez <- function(sources, query, limit, opts){
     data <- plyr::ldply(dat, data.frame,stringsAsFactors=FALSE, .id="uid" )
     data <- move_col(data, "title")
     data <- move_col(data, "authors")
-    
+
     zz <- list(found = as.integer(out$count), data = data, opts = opts)
     structure(zz, class="ft_ind", query=query)
   } else {
@@ -88,8 +88,8 @@ plugin_arxiv <- function(sources, query, limit, opts){
   }
 }
 
-plugin_biorxiv <- function(sources, query, limit, opts){
-  if(any(grepl("biorxiv", sources))){
+plugin_biorxivr <- function(sources, query, limit, opts){
+  if(any(grepl("biorxivr", sources))){
     opts$query <- query
     opts$limit <- limit
     out <- do.call(bx_search, opts)
@@ -99,7 +99,7 @@ plugin_biorxiv <- function(sources, query, limit, opts){
     zz <- list(found = NULL, data = NULL, opts = opts)
     structure(zz, class="ft_ind", query=query)
   }
-  
+
 }
 
 move_col <- function(x, y) x[ c(names(x)[-grep(y, names(x))], y) ]
