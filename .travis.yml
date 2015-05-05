@@ -1,14 +1,14 @@
 language: r
 
 r_github_packages:
-  - jimhester/robustr  
+  - jimhester/robustr
   - jimhester/covr
   - ropensci/bmc
-  - emhart/biorxiv
+  - emhart/biorxivr
 
 after_success:
   - Rscript -e 'library(covr); coveralls()'
-  
+
 before_script:
   - Rscript -e "install.packages('Rcampdf', repos = 'http://datacube.wu.ac.at/', type = 'source')"
 
