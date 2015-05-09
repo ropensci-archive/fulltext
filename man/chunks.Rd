@@ -44,7 +44,7 @@ Extract chunks of data from articles.
 }
 \examples{
 \dontrun{
-x <- ft_get(ids=c('10.7554/eLife.04251','10.7554/eLife.04986'), from='elife')
+x <- ft_get(c('10.7554/eLife.04251','10.7554/eLife.04986'), from='elife')
 x \%>\% chunks("abstract")
 x \%>\% chunks("publisher")
 x \%>\% chunks("journal_meta")
@@ -52,7 +52,7 @@ x \%>\% chunks("acknowledgments")
 x \%>\% chunks("refs_dois")
 x \%>\% chunks(c("abstract","executive_summary"))
 
-x <- ft_get(ids='10.1371/journal.pone.0086169', from='plos')
+x <- ft_get('10.1371/journal.pone.0086169', from='plos')
 chunks(x, what="authors")
 
 library("rplos")
@@ -87,7 +87,7 @@ x \%>\%
  .$plos \%>\%
  select(-permissions.license)
 
-x <- ft_get(ids=c("10.3389/fnagi.2014.00130",'10.1155/2014/249309','10.1155/2014/162024'),
+x <- ft_get(c("10.3389/fnagi.2014.00130",'10.1155/2014/249309','10.1155/2014/162024'),
    from='entrez')
 x \%>\% chunks(c("doi","keywords")) \%>\% tabularize()
 x \%>\% chunks("authors") \%>\% tabularize()
@@ -101,7 +101,7 @@ ft_search(query='ecology', from='plos', plosopts = opts)$plos$data$id \%>\%
  chunks("publisher")
 
 # Via entrez
-res <- ft_get(ids=c("10.3389/fnagi.2014.00130",'10.1155/2014/249309','10.1155/2014/162024'),
+res <- ft_get(c("10.3389/fnagi.2014.00130",'10.1155/2014/249309','10.1155/2014/162024'),
    from='entrez')
 chunks(res, what="abstract")
 chunks(res, what="title")
