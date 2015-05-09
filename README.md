@@ -20,7 +20,6 @@ Data sources in `fulltext`:
 
 * Public Library of Science (PLOS) - via the `rplos` package
 * Biomed Central - via the `bmc` package
-* eLife
 * arXiv preprints
 * We __will__ add more, as publishers open up, and as we have time...See the [master list here](https://github.com/ropensci/fulltext/issues/4#issuecomment-52376743)
 
@@ -36,7 +35,7 @@ Install `fulltext`
 
 
 ```r
-devtools::install_github(c("ropensci/rplos", "ropensci/bmc", "ropensci/aRxiv", "emhart/biorxiv"))
+devtools::install_github(c("ropensci/rplos", "ropensci/bmc", "ropensci/aRxiv", "emhart/biorxivr"))
 devtools::install_github("ropensci/fulltext")
 ```
 
@@ -55,11 +54,11 @@ Most major functions are prefixed with `ft_`.
 
 
 ```r
-ft_search(query='ecology', from='plos')
+ft_search(query = 'ecology', from = 'plos')
 #> Query:
 #>   [ecology] 
 #> Found:
-#>   [PLoS: 26042; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0] 
+#>   [PLoS: 26780; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0] 
 #> Returned:
 #>   [PLoS: 10; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0]
 ```
@@ -70,7 +69,7 @@ ft_search(query='ecology', from='plos')
 
 
 ```r
-ft_get('10.1371/journal.pone.0086169', from='plos')
+ft_get('10.1371/journal.pone.0086169', from = 'plos')
 #> [Docs] 1 
 #> [Source] R session  
 #> [IDs] 10.1371/journal.pone.0086169 ...
@@ -84,7 +83,7 @@ When dealing with full text data, you can get a lot quickly, and it can take a l
 
 
 ```r
-ft_search(query='reproducible science', from=c('plos','elife'), cache=TRUE)
+ft_search(query = 'reproducible science', from = 'plos', cache = TRUE)
 ```
 
 ## pdf to text
@@ -103,7 +102,7 @@ Using `ghostscript`
 
 ```r
 (res_gs <- ft_extract(pdf1, "gs"))
-#> <document>/Users/sacmac/Library/R/3.1/library/fulltext/examples/example1.pdf
+#> <document>/Library/Frameworks/R.framework/Versions/3.2/Resources/library/fulltext/examples/example1.pdf
 #>   Title: ecsp-04-08-07 1..16
 #>   Producer: Acrobat Distiller 10.1.5 (Windows)
 #>   Creation date: 2013-08-16
@@ -114,7 +113,7 @@ Using `xpdf`
 
 ```r
 (res_xpdf <- ft_extract(pdf1, "xpdf"))
-#> <document>/Users/sacmac/Library/R/3.1/library/fulltext/examples/example1.pdf
+#> <document>/Library/Frameworks/R.framework/Versions/3.2/Resources/library/fulltext/examples/example1.pdf
 #>   Pages: 16
 #>   Title: ecsp-04-08-07 1..16
 #>   Producer: Acrobat Distiller 10.1.5 (Windows)
@@ -182,11 +181,13 @@ __in development__
 
 
 ```r
-res <- ft_search(query='reproducible science', from=c('plos','elife'))
-ft_plot(res, method='somemethod')
+res <- ft_search(query = 'reproducible science', from = 'plos')
+ft_plot(res, method = 'somemethod')
 ```
 
 (cool plot)
+
+* Note that `ft_plot()` doesn't exist yet.
 
 ## Meta
 

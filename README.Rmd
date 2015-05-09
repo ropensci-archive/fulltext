@@ -27,7 +27,6 @@ Data sources in `fulltext`:
 
 * Public Library of Science (PLOS) - via the `rplos` package
 * Biomed Central - via the `bmc` package
-* eLife
 * arXiv preprints
 * We __will__ add more, as publishers open up, and as we have time...See the [master list here](https://github.com/ropensci/fulltext/issues/4#issuecomment-52376743)
 
@@ -42,7 +41,7 @@ Article full text formats by publisher:
 Install `fulltext`
 
 ```{r eval=FALSE}
-devtools::install_github(c("ropensci/rplos", "ropensci/bmc", "ropensci/aRxiv", "emhart/biorxiv"))
+devtools::install_github(c("ropensci/rplos", "ropensci/bmc", "ropensci/aRxiv", "emhart/biorxivr"))
 devtools::install_github("ropensci/fulltext")
 ```
 
@@ -59,7 +58,7 @@ Most major functions are prefixed with `ft_`.
 `ft_search()` - get metadata on a search query.
 
 ```{r}
-ft_search(query='ecology', from='plos')
+ft_search(query = 'ecology', from = 'plos')
 ```
 
 ## Get full text
@@ -67,7 +66,7 @@ ft_search(query='ecology', from='plos')
 `ft_get()` - get full or partial text of articles.
 
 ```{r}
-ft_get('10.1371/journal.pone.0086169', from='plos')
+ft_get('10.1371/journal.pone.0086169', from = 'plos')
 ```
 
 ## Cache
@@ -77,7 +76,7 @@ __in development__
 When dealing with full text data, you can get a lot quickly, and it can take a long time to get. That's where caching comes in. And after you pull down a bunch of data, if you do so within the R session, you don't want to lose that data if the session crashes, etc. When you search you _will be able to_ (i.e., not ready yet) optionally cache the raw JSON/XML/etc. of each request locally - when you do that exact search again we'll just give you the local data - unless of course you want new data, which you can do.
 
 ```{r eval=FALSE}
-ft_search(query='reproducible science', from=c('plos','elife'), cache=TRUE)
+ft_search(query = 'reproducible science', from = 'plos', cache = TRUE)
 ```
 
 ## pdf to text
@@ -147,11 +146,13 @@ __in development__
 `ft_plot()` is a convenience function to plot the results of a call to `ft_search()`. There are a variety of options available, including common ways that one vizualizes full text data.
 
 ```{r eval=FALSE}
-res <- ft_search(query='reproducible science', from=c('plos','elife'))
-ft_plot(res, method='somemethod')
+res <- ft_search(query = 'reproducible science', from = 'plos')
+ft_plot(res, method = 'somemethod')
 ```
 
 (cool plot)
+
+* Note that `ft_plot()` doesn't exist yet.
 
 ## Meta
 
