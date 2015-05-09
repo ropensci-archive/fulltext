@@ -1,12 +1,12 @@
 
 
 ```
-  _____     .__  .__   __                   __   
-_/ ____\_ __|  | |  |_/  |_  ____ ___  ____/  |_ 
+  _____     .__  .__   __                   __
+_/ ____\_ __|  | |  |_/  |_  ____ ___  ____/  |_
 \   __\  |  \  | |  |\   __\/ __ \\  \/  /\   __\
- |  | |  |  /  |_|  |_|  | \  ___/ >    <  |  |  
- |__| |____/|____/____/__|  \___  >__/\_ \ |__|  
-                                \/      \/       
+ |  | |  |  /  |_|  |_|  | \  ___/ >    <  |  |
+ |__| |____/|____/____/__|  \___  >__/\_ \ |__|
+                                \/      \/
 ```
 
 __Get full text across all da (open access) journals__
@@ -83,7 +83,7 @@ When dealing with full text data, you can get a lot quickly, and it can take a l
 
 
 ```r
-ft_search(query = 'reproducible science', from = 'plos', cache = TRUE)
+ft_get(ids='10.1371/journal.pone.0086169', from='plos', cache=TRUE)
 ```
 
 ## pdf to text

@@ -2,18 +2,18 @@
 knitr::opts_chunk$set(
   comment = "#>",
   collapse = TRUE,
-  warning = FALSE, 
+  warning = FALSE,
   message = FALSE
 )
 ```
 
 ```
-  _____     .__  .__   __                   __   
-_/ ____\_ __|  | |  |_/  |_  ____ ___  ____/  |_ 
+  _____     .__  .__   __                   __
+_/ ____\_ __|  | |  |_/  |_  ____ ___  ____/  |_
 \   __\  |  \  | |  |\   __\/ __ \\  \/  /\   __\
- |  | |  |  /  |_|  |_|  | \  ___/ >    <  |  |  
- |__| |____/|____/____/__|  \___  >__/\_ \ |__|  
-                                \/      \/       
+ |  | |  |  /  |_|  |_|  | \  ___/ >    <  |  |
+ |__| |____/|____/____/__|  \___  >__/\_ \ |__|
+                                \/      \/
 ```
 
 __Get full text across all da (open access) journals__
@@ -76,7 +76,7 @@ __in development__
 When dealing with full text data, you can get a lot quickly, and it can take a long time to get. That's where caching comes in. And after you pull down a bunch of data, if you do so within the R session, you don't want to lose that data if the session crashes, etc. When you search you _will be able to_ (i.e., not ready yet) optionally cache the raw JSON/XML/etc. of each request locally - when you do that exact search again we'll just give you the local data - unless of course you want new data, which you can do.
 
 ```{r eval=FALSE}
-ft_search(query = 'reproducible science', from = 'plos', cache = TRUE)
+ft_get(ids='10.1371/journal.pone.0086169', from='plos', cache=TRUE)
 ```
 
 ## pdf to text
