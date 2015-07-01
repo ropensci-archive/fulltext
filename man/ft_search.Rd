@@ -66,6 +66,7 @@ res$arxiv
 # PLOS, Crossref, and arxiv
 (res <- ft_search(query='ecology', from=c('plos','crossref','arxiv')))
 res$plos
+res$arxiv
 res$crossref
 }
 }

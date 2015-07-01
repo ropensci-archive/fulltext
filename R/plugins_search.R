@@ -18,17 +18,17 @@ plugin_plos <- function(sources, query, limit, opts){
 }
 
 plugin_crossref <- function(sources, query, limit, opts){
-  if(any(grepl("crossref", sources))){
+  if (any(grepl("crossref", sources))) {
     opts$query <- query
     opts$limit <- limit
-    opts$filter <- c(has_license=TRUE)
-    opts$filter <- c(`license.url`='http://creativecommons.org/licenses/by/3.0/deed.en_US')
+    opts$filter <- c(has_license = TRUE)
+    # opts$filter <- c(`license.url`='http://creativecommons.org/licenses/by/3.0/deed.en_US')
     out <- do.call(cr_works, opts)
-    zz <- list(found = out$meta$`total-results`, data = out$data, opts = opts)
-    structure(zz, class="ft_ind", query=query)
+    zz <- list(found = out$meta$total_results, data = out$data, opts = opts)
+    structure(zz, class = "ft_ind", query = query)
   } else {
     zz <- list(found = NULL, data = NULL, opts = opts)
-    structure(zz, class="ft_ind", query=query)
+    structure(zz, class = "ft_ind", query = query)
   }
 }
 

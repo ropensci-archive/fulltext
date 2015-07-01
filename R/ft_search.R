@@ -52,6 +52,7 @@
 #' # PLOS, Crossref, and arxiv
 #' (res <- ft_search(query='ecology', from=c('plos','crossref','arxiv')))
 #' res$plos
+#' res$arxiv
 #' res$crossref
 #' }
 
@@ -62,8 +63,8 @@ ft_search <- function(query, from='plos', limit=10,
                       entrezopts=list(),
                       arxivopts=list(),
                       biorxivropts=list(),
-                      ...)
-{
+                      ...) {
+  
   plos_out <- plugin_plos(from, query, limit, plosopts)
   bmc_out <- plugin_bmc(from, query, limit, bmcopts)
   cr_out <- plugin_crossref(from, query, limit, crossrefopts)
@@ -71,8 +72,9 @@ ft_search <- function(query, from='plos', limit=10,
   arx_out <- plugin_arxiv(from, query, limit, arxivopts)
   biorxivr_out <- plugin_biorxivr(from,query,limit,biorxivropts)
 
-  res <- list(plos=plos_out, bmc=bmc_out, crossref=cr_out, entrez=en_out, arxiv=arx_out,biorxivr = biorxivr_out)
-  structure(res, class="ft", query=query)
+  res <- list(plos = plos_out, bmc = bmc_out, crossref = cr_out, 
+              entrez = en_out, arxiv = arx_out, biorxivr = biorxivr_out)
+  structure(res, class = "ft", query = query)
 }
 
 #' @export
@@ -113,10 +115,8 @@ print.ft_ind <- function(x, ..., n = 10) {
   print_if(x$data, n = n)
 }
 
-null_len <- function(x) if(is.null(x)) 0 else x
+null_len <- function(x) if (is.null(x)) 0 else x
 
-print_if <- function(x, n){
-  if(!is.null(x)) ft_trunc_mat(x, n)
+print_if <- function(x, n) {
+  if (!is.null(x)) ft_trunc_mat(x, n)
 }
-
-

@@ -6,8 +6,7 @@ Description: Provides a single interface to many sources of full
     preprints, and more. Functionality included for searching for articles,
     downloading full or partial text, converting to various data formats used
     in and outside of R, and visualizations of data and the text itself.
-Version: 0.0.6.9000
-Date: 2015-05-09
+Version: 0.0.6.9300
 License: MIT + file LICENSE
 Authors@R: person("Chamberlain", "Scott", role = c("aut", "cre"),
     email = "myrmecocystus@gmail.com")
