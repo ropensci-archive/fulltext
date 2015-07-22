@@ -18,16 +18,19 @@ rOpenSci has a number of R packages to get either full text, metadata, or both f
 
 Data sources in `fulltext`:
 
-* Public Library of Science (PLOS) - via the `rplos` package
-* Biomed Central - via the `bmc` package
-* arXiv preprints
+* [Crossref](http://www.crossref.org/) - via the `rcrossref` package
+* [Public Library of Science (PLOS)](https://www.plos.org/) - via the `rplos` package
+* [Biomed Central](http://www.biomedcentral.com/)
+* [arXiv preprints](https://arxiv.org) - via the `aRxiv` package
+* [bioRxiv preprints](http://biorxiv.org/) - via the `biorxivr` package
+* [NCBI via Entrez](http://www.ncbi.nlm.nih.gov/) - via the `rentrez` package
 * We __will__ add more, as publishers open up, and as we have time...See the [master list here](https://github.com/ropensci/fulltext/issues/4#issuecomment-52376743)
 
 We'd love your feedback. Let us know what you think at info@ropensci.org, or in [the issue tracker](https://github.com/ropensci/fulltext/issues).
 
 Article full text formats by publisher:
 
-* https://github.com/ropensci/fulltext/wiki/Full-text-formats
+* [https://github.com/ropensci/fulltext/wiki/Full-text-formats](https://github.com/ropensci/fulltext/wiki/Full-text-formats)
 
 ## Installation
 
@@ -35,7 +38,6 @@ Install `fulltext`
 
 
 ```r
-devtools::install_github(c("ropensci/rplos", "ropensci/bmc", "ropensci/aRxiv", "emhart/biorxivr"))
 devtools::install_github("ropensci/fulltext")
 ```
 

@@ -1,5 +1,5 @@
 plugin_plos <- function(sources, query, limit, opts){
-  if(any(grepl("plos", sources))){
+  if (any(grepl("plos", sources))) {
     opts$q <- query
     opts$limit <- limit
     out <- do.call(searchplos, opts)
@@ -49,30 +49,30 @@ plugin_bmc <- function(sources, query, limit, opts){
 }
 
 plugin_entrez <- function(sources, query, limit, opts){
-  if(any(grepl("entrez", sources))){
+  if (any(grepl("entrez", sources))) {
     opts$db <- "pmc"
     opts$term <- query
     opts$retmax <- limit
     out <- do.call(entrez_search, opts)
-    sumres <- entrez_summary(db = "pmc", id=out$ids)
+    sumres <- entrez_summary(db = "pmc", id = out$ids)
     dat <- lapply(sumres, function(x){
-      x$authors <- paste(x$authors[,1], collapse=", ")
+      x$authors <- paste(x$authors[,1], collapse = ", ")
       x$pmid  <- x$articleids[x$articleids[,1] == "pmid", 2]
       x$doi   <- x$articleids[x$articleids[,1] == "doi",  2]
       x$pmcid <- x$articleids[x$articleids[,1] == "pmcid",2]
       x$mid   <- x$articleids[x$articleids[,1] == "MID",  2]
       x$articleids <- NULL
-      lapply(x, function(z) if(is.null(z) | length(z) == 0) NA else z)
+      lapply(x, function(z) if (is.null(z) | length(z) == 0) NA else z)
       })
-    data <- plyr::ldply(dat, data.frame,stringsAsFactors=FALSE, .id="uid" )
+    data <- plyr::ldply(dat, data.frame, stringsAsFactors = FALSE, .id = "uid")
     data <- move_col(data, "title")
     data <- move_col(data, "authors")
 
     zz <- list(found = as.integer(out$count), data = data, opts = opts)
-    structure(zz, class="ft_ind", query=query)
+    structure(zz, class = "ft_ind", query = query)
   } else {
     zz <- list(found = NULL, data = NULL, opts = opts)
-    structure(zz, class="ft_ind", query=query)
+    structure(zz, class = "ft_ind", query = query)
   }
 }
 
