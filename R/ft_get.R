@@ -7,7 +7,7 @@
 #' @param query Query terms
 #' @param from Source to query
 #' @param plosopts PLOS options. See \code{\link[rplos]{plos_fulltext}}
-#' @param bmcopts BMC options. See \code{\link[bmc]{bmc_xml}}
+#' @param bmcopts BMC options. See \code{\link{bmc_xml}}
 #' @param entrezopts Entrez options. See \code{\link[rentrez]{entrez_search}} and 
 #' \code{\link{entrez_fetch}}
 #' @param elifeopts eLife options

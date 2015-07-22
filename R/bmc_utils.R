@@ -1,7 +1,31 @@
-# bmc functions
-
-## search for bmc papers
-# bmc_search(terms = 'ecology')
+#' Search for gene sequences available for a species from NCBI.
+#' 
+#' @export
+#' @keywords internal
+#' @param terms Search terms.
+#' @param limit Number of records to return. Max 25. Default 10.
+#' @param page Page number. Only applies if more than 25 results.
+#' @param ... Further args passed on to httr::GET
+#' @return A list.
+#' @examples \dontrun{
+#' bmc_search(terms = 'ecology')
+#' bmc_search(terms = 'fire', limit=3)
+#' bmc_search(terms = 'fire', limit=2, page=1)
+#' bmc_search(terms = 'fire', limit=2, page=2)
+#' 
+#' out <- bmc_search(terms = 'fire', limit=5)
+#' out
+#' 
+#' # Search, then get full text
+#' out <- bmc_search(terms = 'ecology')
+#' out$urls # you could use these to go to the website
+#' out$ids # used to construct download urls in bmc_xml
+#' browseURL(out$urls[1])
+#' 
+#' # curl debugging help
+#' library('httr')
+#' bmc_search(terms = 'ecology', config=verbose())
+#' }
 bmc_search <- function(terms, limit=10, page=1, ...) {
   url = 'http://www.biomedcentral.com/search/results'
   args <- ft_compact(list(terms = terms, itemsPerPage = limit, page = page, format = 'json'))
@@ -13,7 +37,47 @@ bmc_search <- function(terms, limit=10, page=1, ...) {
   list(urls = urls, ids = ids, results = tt)
 }
 
-## get xml
+#' Download full text xml of a BMC paper.
+#' 
+#' @rdname bmc
+#' @export
+#' @keywords internal
+#' @param obj (optional) An object of class bmc, from a call to \code{bmc_search}
+#' @param uris (optional) A uri to a xml file of a BMC paper
+#' @param dir (optional) A directory to save to. The file extension is forced to 
+#' .xml, and the file name will be 
+#' @param raw (logical) If TRUE, returns raw text, but if FALSE, parsed XML. Default: FALSE
+#' @param ... Futher args passed on to httr::GET for debugging curl calls.
+#' @examples \dontrun{
+#' uri = 'http://www.biomedcentral.com/content/download/xml/1471-2393-14-71.xml'
+#' uri = 'http://www.springerplus.com/content/download/xml/2193-1801-3-7.xml'
+#' uri = 'http://www.microbiomejournal.com/content/download/xml/2049-2618-2-7.xml'
+#' bmc_xml(uris=uri)
+#' bmc_xml(uri, dir='~/')
+#' bmc_xml(uri, verbose())
+#' 
+#' # from using bmc_search
+#' out <- bmc_search(terms = 'science', limit=5)
+#' dat <- bmc_xml(out)
+#' length(dat)
+#' library(plyr)
+#' dat <- compact(dat)
+#' length(dat)
+#' dat
+#' library(XML)
+#' xpathApply(dat[[1]], "//abs", xmlValue)
+#' saveXML(dat[[1]], file = 'myxml.xml')
+#' 
+#' # curl debugging, and other parameters passed to \code{httr::GET}
+#' uri = 'http://www.microbiomejournal.com/content/download/xml/2049-2618-2-7.xml'
+#' res <- bmc_xml(uris=uri, config=verbose())
+#' res <- bmc_xml(uris=uri, config=timeout(0.1))
+#' 
+#' uri1 = 'http://www.biomedcentral.com/content/download/xml/1471-2393-14-71.xml'
+#' uri2 = 'http://www.springerplus.com/content/download/xml/2193-1801-3-7.xml'
+#' uri3 = 'http://www.microbiomejournal.com/content/download/xml/2049-2618-2-7.xml'
+#' res <- bmc_xml(uris=list(uri1, uri2, uri3), config=progress())
+#' }
 bmc_xml <- function(obj=NULL, uris=NULL, dir=NULL, raw=FALSE, ...) {
   if (!is.null(obj)) { 
     stopifnot(is(obj, "bmc"))
