@@ -77,28 +77,29 @@ plugin_entrez <- function(sources, query, limit, opts){
 }
 
 plugin_arxiv <- function(sources, query, limit, opts){
-  if(any(grepl("arxiv", sources))){
+  if (any(grepl("arxiv", sources))) {
     opts$query <- query
     opts$limit <- limit
     out <- do.call(arxiv_search, opts)
     zz <- list(found = attributes(out)$total_results, data = out, opts = opts)
-    structure(zz, class="ft_ind", query=query)
+    structure(zz, class = "ft_ind", query = query)
   } else {
     zz <- list(found = NULL, data = NULL, opts = opts)
-    structure(zz, class="ft_ind", query=query)
+    structure(zz, class = "ft_ind", query = query)
   }
 }
 
 plugin_biorxivr <- function(sources, query, limit, opts){
-  if(any(grepl("biorxivr", sources))){
+  if (any(grepl("biorxiv", sources))) {
     opts$query <- query
     opts$limit <- limit
     out <- do.call(bx_search, opts)
-    zz <- list(found = out$found, data = out$ID, opts = opts)
-    structure(zz, class="ft_ind", query=query)
+    df <- data.frame(id = out$ID, url = out$URL, stringsAsFactors = FALSE)
+    zz <- list(found = out$found, data = df, opts = opts)
+    structure(zz, class = "ft_ind", query = query)
   } else {
     zz <- list(found = NULL, data = NULL, opts = opts)
-    structure(zz, class="ft_ind", query=query)
+    structure(zz, class = "ft_ind", query = query)
   }
 
 }

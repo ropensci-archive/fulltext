@@ -16,7 +16,7 @@
 #' @param crossrefopts Crossref options. See \code{?cr_works}
 #' @param entrezopts Entrez options. See \code{?entrez_search}
 #' @param arxivopts arxiv options. See \code{?arxiv_search}
-#' @param biorxivropts biorxivr options. See \code{?bx_search}
+#' @param biorxivopts biorxiv options. See \code{?bx_search}
 #' @param ... Further args passed on to \code{\link[httr]{GET}}. Not working right now...
 #'
 #' @return An object of class ft, and objects of class ft_ind within each source
@@ -33,8 +33,8 @@
 #' res$crossref
 #'
 #' #biorxivr
-#' (res <- ft_search(query='ecology', from='biorxivr'))
-#' res$crossref
+#' (res <- ft_search(query='ecology', from='biorxiv'))
+#' res$biorxiv
 #'
 #' # BMC
 #' (res <- ft_search(query='ecology', from='bmc'))
@@ -55,13 +55,13 @@
 #' res$crossref
 #' }
 
-ft_search <- function(query, from='plos', limit=10,
-                      plosopts=list(),
-                      bmcopts=list(),
-                      crossrefopts=list(),
-                      entrezopts=list(),
-                      arxivopts=list(),
-                      biorxivropts=list(),
+ft_search <- function(query, from = 'plos', limit = 10,
+                      plosopts = list(),
+                      bmcopts = list(),
+                      crossrefopts = list(),
+                      entrezopts = list(),
+                      arxivopts = list(),
+                      biorxivopts = list(),
                       ...) {
   
   plos_out <- plugin_plos(from, query, limit, plosopts)
@@ -69,10 +69,10 @@ ft_search <- function(query, from='plos', limit=10,
   cr_out <- plugin_crossref(from, query, limit, crossrefopts)
   en_out <- plugin_entrez(from, query, limit, entrezopts)
   arx_out <- plugin_arxiv(from, query, limit, arxivopts)
-  biorxivr_out <- plugin_biorxivr(from,query,limit,biorxivropts)
+  bio_out <- plugin_biorxivr(from, query, limit, biorxivopts)
 
   res <- list(plos = plos_out, bmc = bmc_out, crossref = cr_out, 
-              entrez = en_out, arxiv = arx_out, biorxivr = biorxivr_out)
+              entrez = en_out, arxiv = arx_out, biorxiv = bio_out)
   structure(res, class = "ft", query = query)
 }
 
@@ -90,7 +90,7 @@ print.ft <- function(x, ...) {
     sprintf("Crossref: %s", null_len(x$crossref$found)),
     sprintf("Entrez: %s", null_len(x$entrez$found)),
     sprintf("arxiv: %s", null_len(x$arxiv$found)),
-    sprintf("biorxiv: %s]", null_len(x$biorxivr$found)),
+    sprintf("biorxiv: %s]", null_len(x$biorxiv$found)),
     sep = "; "), "\n")
 
   cat("Returned:\n")
@@ -100,7 +100,7 @@ print.ft <- function(x, ...) {
     sprintf("Crossref: %s", NROW(x$crossref$data)),
     sprintf("Entrez: %s", NROW(x$entrez$data)),
     sprintf("arxiv: %s", NROW(x$arxiv$data)),
-    sprintf("biorxiv: %s]", NROW(x$biorxivr$data)),
+    sprintf("biorxiv: %s]", NROW(x$biorxiv$data)),
     sep = "; "), "\n")
 }
 

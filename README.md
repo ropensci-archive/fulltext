@@ -58,7 +58,7 @@ ft_search(query = 'ecology', from = 'plos')
 #> Query:
 #>   [ecology] 
 #> Found:
-#>   [PLoS: 26780; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0] 
+#>   [PLoS: 28256; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0] 
 #> Returned:
 #>   [PLoS: 10; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0]
 ```
@@ -102,7 +102,7 @@ Using `ghostscript`
 
 ```r
 (res_gs <- ft_extract(pdf1, "gs"))
-#> <document>/Library/Frameworks/R.framework/Versions/3.2/Resources/library/fulltext/examples/example1.pdf
+#> <document>/Users/sacmac/github/ropensci/fulltext/inst/examples/example1.pdf
 #>   Title: ecsp-04-08-07 1..16
 #>   Producer: Acrobat Distiller 10.1.5 (Windows)
 #>   Creation date: 2013-08-16
@@ -113,7 +113,7 @@ Using `xpdf`
 
 ```r
 (res_xpdf <- ft_extract(pdf1, "xpdf"))
-#> <document>/Library/Frameworks/R.framework/Versions/3.2/Resources/library/fulltext/examples/example1.pdf
+#> <document>/Users/sacmac/github/ropensci/fulltext/inst/examples/example1.pdf
 #>   Pages: 16
 #>   Title: ecsp-04-08-07 1..16
 #>   Producer: Acrobat Distiller 10.1.5 (Windows)
