@@ -10,10 +10,10 @@ plugin_plos <- function(sources, query, limit, opts){
                               the terms of the Creative Commons Attribution License, which permits
                               unrestricted use, distribution, and reproduction in any medium,
                               provided the original author and source are credited.'))
-    structure(zz, class="ft_ind", query=query)
+    structure(zz, class = "ft_ind", query = query)
   } else {
     zz <- list(found = NULL, data = NULL, opts = opts)
-    structure(zz, class="ft_ind", query=query)
+    structure(zz, class = "ft_ind", query = query)
   }
 }
 
@@ -33,17 +33,18 @@ plugin_crossref <- function(sources, query, limit, opts){
 }
 
 plugin_bmc <- function(sources, query, limit, opts){
-  if(any(grepl("bmc", sources))){
+  if (any(grepl("bmc", sources))) {
     opts$terms <- query
     opts$limit <- limit
     out <- do.call(bmc_search, opts)
     dat <- do.call(rbind, lapply(out@results$entries, data.frame, stringsAsFactors = FALSE))
     opts$query <- opts$terms; opts$terms <- NULL
+    xpathSApply(xml, "//fm//bibl//pubid[@idtype='doi']", xmlValue)
     zz <- list(found = NA, data = dat, opts = opts)
-    structure(zz, class="ft_ind", query=query)
+    structure(zz, class = "ft_ind", query = query)
   } else {
     zz <- list(found = NULL, data = NULL, opts = opts)
-    structure(zz, class="ft_ind", query=query)
+    structure(zz, class = "ft_ind", query = query)
   }
 }
 

@@ -2,7 +2,6 @@
 #'
 #' @export
 #' @importFrom rplos searchplos plos_fulltext
-#' @importFrom bmc bmc_search bmc_xml
 #' @importFrom rcrossref cr_works
 #' @importFrom plyr rbind.fill
 #' @importFrom rentrez entrez_summary

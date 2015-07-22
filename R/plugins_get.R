@@ -59,7 +59,10 @@ plugin_get_bmc <- function(sources, query, opts, ...){
     opts$raw <- TRUE
     out <- do.call(bmc_xml, opts)
     attr(out, "format") <- "xml"
-    list(found = length(out), dois = NULL, data = out, opts = opts)
+    dois <- sapply(out, function(x) {
+      xpathSApply(xmlParse(x), "//fm//bibl//pubid[@idtype='doi']", xmlValue)
+    })
+    list(found = length(out), dois = dois, data = out, opts = opts)
   } else {
     list(found = NULL, dois = NULL,  data = NULL, opts = opts)
   }

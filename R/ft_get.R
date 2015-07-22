@@ -37,6 +37,10 @@
 #' 
 #' # bmc
 #' ft_get('http://www.microbiomejournal.com/content/download/xml/2049-2618-2-7.xml', from='bmc')
+#' urls <- c('http://www.biomedcentral.com/content/download/xml/1471-2393-14-71.xml',
+#'  'http://www.springerplus.com/content/download/xml/2193-1801-3-7.xml',
+#'  'http://www.microbiomejournal.com/content/download/xml/2049-2618-2-7.xml')
+#' ft_get(urls, from='bmc')
 #' 
 #' # Frontiers in Pharmacology (publisher: Frontiers)
 #' doi <- '10.3389/fphar.2014.00109'
