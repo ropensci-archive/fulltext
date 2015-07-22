@@ -10,19 +10,19 @@ There are various formats articles are provided in, including pdf, plain text, x
 
 > Note: many of these journals are also in PMC, where some formats are provided: PDF, ePub.
 
-| Publisher | pdf | xml | json | plain text | epub | Notes |
-|:----------|:----|:----|:-----|:-------- -|:------|:------|
-| PLOS | [Y][plp] | [Y][plx] [^1] | N | N |  N |... |
-| FrontiersIn | [Y][fp] | [Y][fx] [^1] | N | N | N | ReadCube, browser |
-| Pensoft | [Y][pep] | [Y][pex] | N | N |  N |... |
-| eLife | [Y][ep] | [Y][ex] | N | N |  N |... |
-| BiomedCentral | [Y][bp] | [Y][bx] | N | N |  N |... |
-| Hindawi | [Y][hp] | [Y][hx] | N | N | [Y][he] | Don't show XML link on page  |
-| CogenOA | [Y][coap] | [Y][coax] | N | N |  N |... |
-| Karger | [Y][kp] | [Y][kx] | N | N |  N |... |
-| Sage | [Y][sp] | N | N | N |  N |... |
-| Copernicus | [Y][copp] | [Y][copx] | N | N |  N |... |
-| Bentham | [Y][bep] | N | N | N |  N |... |
+Publisher | pdf | xml | json | plain text | epub | Notes |
+----------| ----| --- | ---- | ---------- | ---- | ----- |
+PLOS | [Y][plp] | [Y][plx] [^1] | N | N |  N |... |
+FrontiersIn | [Y][fp] | [Y][fx] [^1] | N | N | N | ReadCube, browser |
+Pensoft | [Y][pep] | [Y][pex] | N | N |  N |... |
+eLife | [Y][ep] | [Y][ex] | N | N |  N |... |
+BiomedCentral | [Y][bp] | [Y][bx] | N | N |  N |... |
+Hindawi | [Y][hp] | [Y][hx] | N | N | [Y][he] | Don't show XML link on page  |
+CogenOA | [Y][coap] | [Y][coax] | N | N |  N |... |
+Karger | [Y][kp] | [Y][kx] | N | N |  N |... |
+Sage | [Y][sp] | N | N | N |  N |... |
+Copernicus | [Y][copp] | [Y][copx] | N | N |  N |... |
+Bentham | [Y][bep] | N | N | N |  N |... |
 
 [^1]: NLM-DTD XML schema - http://dtd.nlm.nih.gov/
 
