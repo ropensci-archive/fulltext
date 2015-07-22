@@ -24,7 +24,9 @@
 #' }
 #' 
 #' Feedback! Let us know what you think at \url{https://github.com/ropensci/fulltext/issues}
-#'
+#' @importFrom utils URLdecode browseURL head
+#' @importFrom methods is 
+#' @importFrom stats na.omit setNames
 #' @name fulltext-package
 #' @aliases fulltext
 #' @docType package
