@@ -1,6 +1,7 @@
 <!--
 %\VignetteEngine{knitr::knitr}
 %\VignetteIndexEntry{Getting full text}
+%\VignetteEncoding{UTF-8}
 -->
 
 
@@ -181,15 +182,15 @@ For example, search entrez, get some DOIs, then fetch some articles
 #> Query:
 #>   [ecology] 
 #> Found:
-#>   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 92214; arxiv: 0; biorxiv: 0] 
+#>   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 95749; arxiv: 0; biorxiv: 0] 
 #> Returned:
 #>   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 10; arxiv: 0; biorxiv: 0]
 res$entrez$data$doi
-#>  [1] "10.1186/s12966-014-0103-2"    "10.1186/s13002-015-0013-7"   
-#>  [3] "10.1289/ehp.1509934"          "10.1093/gbe/evv053"          
-#>  [5] "10.1371/journal.pone.0124625" "10.1371/journal.pone.0124092"
-#>  [7] "10.1371/journal.pone.0125348" "10.1371/journal.pone.0125431"
-#>  [9] "10.1371/journal.pone.0125702" "10.1371/journal.pone.0125636"
+#>  [1] "10.1093/aobpla/plu077"     "10.1093/aobpla/plu075"    
+#>  [3] "10.1093/aobpla/plu076"     "10.1093/aobpla/plu073"    
+#>  [5] "10.1186/s12862-015-0391-4" "10.1186/s13071-015-0999-7"
+#>  [7] "10.1186/s13071-015-0987-y" "10.1186/s12862-015-0413-2"
+#>  [9] "10.1186/s12862-015-0380-7" "10.1186/s13071-015-0993-0"
 ```
 
 Get articles
@@ -199,7 +200,7 @@ Get articles
 ft_get(res$entrez$data$doi[1:3], from = 'entrez')
 #> [Docs] 3 
 #> [Source] R session  
-#> [IDs] 4423771 4423098 4421777 ...
+#> [IDs] 4287689 4287690 4287688 ...
 ```
 
 ## Caching

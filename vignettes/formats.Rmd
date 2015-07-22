@@ -1,6 +1,7 @@
 <!--
 %\VignetteEngine{knitr::knitr}
 %\VignetteIndexEntry{Article formats}
+%\VignetteEncoding{UTF-8}
 -->
 
 ## Information on article formats
@@ -9,7 +10,7 @@ There are various formats articles are provided in, including pdf, plain text, x
 
 > Note: many of these journals are also in PMC, where some formats are provided: PDF, ePub.
 
-| Publisher | pdf | xml | json | plain text| epub | Notes |
+| Publisher | pdf | xml | json | plain text | epub | Notes |
 |:----------|:----|:----|:-----|:-------- -|:------|:------|
 | PLOS | [Y][plp] | [Y][plx] [^1] | N | N |  N |... |
 | FrontiersIn | [Y][fp] | [Y][fx] [^1] | N | N | N | ReadCube, browser |

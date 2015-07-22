@@ -1,6 +1,7 @@
 <!--
 %\VignetteEngine{knitr::knitr}
 %\VignetteIndexEntry{Article formats}
+%\VignetteEncoding{UTF-8}
 -->
 
 ## Information on article formats

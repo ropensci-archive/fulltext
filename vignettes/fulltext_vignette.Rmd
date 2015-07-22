@@ -1,6 +1,7 @@
 <!--
 %\VignetteEngine{knitr::knitr}
 %\VignetteIndexEntry{An introduction to the fulltext package}
+%\VignetteEncoding{UTF-8}
 -->
 
 # fulltext vignette
