@@ -16,7 +16,7 @@ LazyLoad: yes
 VignetteBuilder: knitr
 Roxygen: list(wrap = FALSE)
 Imports:
-    httr,
+    httr (>= 1.0.0),
     magrittr,
     XML,
     rplos,
