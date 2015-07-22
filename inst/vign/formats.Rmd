@@ -29,14 +29,14 @@ There are various formats articles are provided in, including pdf, plain text, x
 [plp]: http://www.plosone.org/article/fetchObject.action?uri=info%3Adoi%2F10.1371%2Fjournal.pone.0107510&representation=PDF
 [fp]: http://journal.frontiersin.org/Journal/10.3389/fnagi.2014.00336/pdf
 [pep]: http://zookeys.pensoft.net/lib/ajax_srv/article_elements_srv.php?action=download_pdf&item_id=4351
-[ep]: http://elifesciences.org/elife/download-pdf/content/3/e04165/n/Active%20torque%20generation%20by%20the%20actomyosin%20cell%20cortex%20drives%20left%E2%80%93right%20symmetry%20breaking.pdf/1
+[ep]: http://elifesciences.org/content/elife/2/e00471.full.pdf
 [bp]: http://www.gigasciencejournal.com/content/pdf/2047-217X-3-27.pdf
 [hp]: http://downloads.hindawi.com/journals/crid/2014/246965.pdf
 [kp]: http://www.karger.com/Article/Pdf/370302
 [coap]: http://cogentoa.tandfonline.com/doi/pdf/10.1080/23311908.2014.986922
 [sp]: http://gph.sagepub.com/content/1/2333794X14548199.full.pdf
 [copp]: http://www.biogeosciences.net/11/7331/2014/bg-11-7331-2014.pdf
-[bep]: http://benthamopen.com/tobctj/articles/V008/182TOBCTJ.pdf
+[bep]: http://benthamopen.com/contents/pdf/TONEUJ/TONEUJ-9-21.pdf
 
 [plx]: http://www.plosone.org/article/fetchObjectAttachment.action?uri=info%3Adoi%2F10.1371%2Fjournal.pone.0107510&representation=XML
 [fx]: http://journal.frontiersin.org/Journal/10.3389/fnagi.2014.00336/xml/nlm
