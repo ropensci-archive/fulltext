@@ -7,7 +7,7 @@
 #' @param ... further args passed on
 #' @return An object of class gs_char, xpdf_char
 #' @examples \donttest{
-#' path <- "~/github/sac/scott/pdfs/ChamberlainEtal2013Ecosphere.pdf"
+#' path <- system.file("examples", "example1.pdf", package = "fulltext")
 #' 
 #' (res_xpdf <- ft_extract(path)) # xpdf is the default
 #' (res_xpdf <- ft_extract(path, "xpdf"))
