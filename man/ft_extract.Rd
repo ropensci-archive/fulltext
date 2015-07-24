@@ -13,13 +13,13 @@ ft_extract(path, which = "xpdf", ...)
 \method{print}{xpdf_char}(x, ...)
 }
 \arguments{
-\item{path}{Path to a file}
+\item{path}{Path to a pdf file}
 
-\item{which}{One of rcamp, gs, or xpdf.}
+\item{which}{One of gs or xpdf (default).}
 
 \item{...}{further args passed on}
 
-\item{x}{Input}
+\item{x}{Input, printing}
 }
 \value{
 An object of class gs_char, xpdf_char

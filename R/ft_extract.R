@@ -1,9 +1,9 @@
 #' Extract text from a single pdf document.
 #' 
 #' @export
-#' @param path Path to a file
-#' @param which One of rcamp, gs, or xpdf.
-#' @param x Input
+#' @param path Path to a pdf file
+#' @param which One of gs or xpdf (default).
+#' @param x Input, printing
 #' @param ... further args passed on
 #' @return An object of class gs_char, xpdf_char
 #' @examples \donttest{
@@ -15,7 +15,8 @@
 #' }
 
 ft_extract <- function(path, which = "xpdf", ...){
-  which <- match.arg(which, c("gs","xpdf"))
+  which <- match.arg(which, c("gs", "xpdf"))
+  if (!file.exists(path)) stop("File does not exist", call. = FALSE)
   switch(which, 
          # rcamp = extract_rcamp(path, ...),
          gs = extract_gs(path, ...),
@@ -37,7 +38,7 @@ extract_gs <- function(path, which, ...){
   res <- pdf_text_via_gs(path)
   res <- paste(res, collapse = ", ")
   meta <- pdf_info_via_gs(path)
-  structure(list(meta=meta, data=res), class="gs_char", path=path)
+  structure(list(meta = meta, data = res), class = "gs_char", path = path)
 }
 
 extract_xpdf <- function(path, which, ...){
@@ -46,7 +47,7 @@ extract_xpdf <- function(path, which, ...){
   newpath <- sub("\\.pdf", ".txt", path)
   res <- paste(readLines(newpath, warn = FALSE), collapse = ", ")
   meta <- pdf_info_via_xpdf(path)
-  structure(list(meta=meta, data=res), class="xpdf_char", path=path)
+  structure(list(meta = meta, data = res), class = "xpdf_char", path = path)
 }
 
 # #' @export
@@ -79,5 +80,5 @@ print.xpdf_char <- function(x, ...) {
 
 get_cmds <- function(...){
   d <- list(...)
-  if(length(d)==0) "" else d
+  if (length(d) == 0) "" else d
 }
