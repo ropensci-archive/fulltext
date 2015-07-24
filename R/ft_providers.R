@@ -10,17 +10,18 @@
 #' 
 #' @return An object of class ft_p
 #' @examples \dontrun{
-#' # journal name search
 #' ft_providers(journal="Stem Cells International")
 #' ft_providers(publisher="hindawi")
 #' ft_providers(publisher="journal")
 #' }
 
-ft_providers <- function(journal=NULL, publisher=NULL, limit=10, ...)
-{
-  if(!is.null(journal) && is.null(publisher)) res <- ft_journal(journal, ...)
-  if(is.null(journal) && !is.null(publisher)) res <- ft_publisher(publisher, ...)
-  structure(res, class="ft_p", journal=journal, publisher=publisher)
+ft_providers <- function(journal=NULL, publisher=NULL, limit=10, ...) {
+  if (!xor(!is.null(journal), !is.null(publisher))) {
+    stop("Provide either journal or publisher", call. = FALSE)
+  }
+  if (!is.null(journal) && is.null(publisher)) res <- ft_journal(journal, ...)
+  if (is.null(journal) && !is.null(publisher)) res <- ft_publisher(publisher, ...)
+  structure(res, class = "ft_p", journal = journal, publisher = publisher)
 }
 
 ft_journal <- function(x, ...){

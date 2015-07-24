@@ -23,7 +23,6 @@ Search for information on journals or publishers.
 }
 \examples{
 \dontrun{
-# journal name search
 ft_providers(journal="Stem Cells International")
 ft_providers(publisher="hindawi")
 ft_providers(publisher="journal")
