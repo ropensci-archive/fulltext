@@ -10,6 +10,7 @@ plugin_plos <- function(sources, query, limit, opts){
                               the terms of the Creative Commons Attribution License, which permits
                               unrestricted use, distribution, and reproduction in any medium,
                               provided the original author and source are credited.'))
+    if (!is(zz$data, "data.frame")) zz$data <- data.frame(NULL)
     structure(zz, class = "ft_ind", query = query)
   } else {
     zz <- list(found = NULL, data = NULL, opts = opts)

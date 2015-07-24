@@ -64,6 +64,7 @@ ft_search <- function(query, from = 'plos', limit = 10,
                       biorxivopts = list(),
                       ...) {
   
+  from <- match.arg(from, c("plos", "bmc", "crossref", "entrez", "arxiv", "biorxiv"))
   plos_out <- plugin_plos(from, query, limit, plosopts)
   bmc_out <- plugin_bmc(from, query, limit, bmcopts)
   cr_out <- plugin_crossref(from, query, limit, crossrefopts)
