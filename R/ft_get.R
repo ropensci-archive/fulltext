@@ -78,6 +78,7 @@ ft_get <- function(x, query, from='plos', plosopts=list(), bmcopts=list(), entre
 #' @rdname ft_get
 ft_get.character <- function(x, query, from='plos', plosopts=list(), bmcopts=list(), entrezopts=list(), 
                    elifeopts=list(), cache=FALSE, backend="rds", path="~/.fulltext", ...){
+  from <- match.arg(from, c("plos", "entrez", "bmc", "elife"))
   cacheopts <- cache_options_get()
   if(is.null(cacheopts$cache) && is.null(cacheopts$backend)) cache_options_set(cache, backend, path)
   

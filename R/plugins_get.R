@@ -13,6 +13,7 @@ plugin_get_crossref <- function(sources, ids, opts, ...){
 plugin_get_plos <- function(sources, ids, opts, ...){
   callopts <- list(...)
   if(any(grepl("plos", sources))){
+    check_dois(ids)
     opts$doi <- ids
     opts$callopts <- callopts
     out <- do.call(plos_fulltext, opts)

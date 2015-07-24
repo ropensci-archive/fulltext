@@ -128,3 +128,17 @@ pluck <- function(x, name, type) {
     vapply(x, "[[", name, FUN.VALUE = type)
   }
 }
+
+is_doi <- function(x) {
+  grepl("[0-9]+\\.[0-9]+/.+", x)
+}
+
+check_dois <- function(x) {
+  stopifnot(is(x, "list") || is(x, "vector"))
+  res <- vapply(x, is_doi, logical(1))
+  if (all(res)) {
+    TRUE
+  } else {
+    stop("These are probably not DOIs:\n\n", paste0(names(res[!res]), "\n"), call. = FALSE)
+  }
+}
