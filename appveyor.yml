@@ -13,7 +13,7 @@ install:
 build_script:
   - travis-tool.sh install_deps
   - travis-tool.sh github_package ropensci/bmc ropensci/rplos emhart/biorxivr
-  - travis-tool.sh r_install slam
+  - travis-tool.sh r_install slam rredis
   - Rscript -e "install.packages('Rcampdf', repos = 'http://datacube.wu.ac.at/', type = 'source')"
 
 test_script:
