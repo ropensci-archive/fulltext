@@ -52,7 +52,12 @@ Get full text.
 }
 \examples{
 \donttest{
+# by default, plos gives back xml
 ft_get('10.1371/journal.pone.0086169', from='plos')
+
+# instead, get json
+ft_get('10.1371/journal.pone.0086169', from='plos', plosopts=list(wt="json"))
+
 (dois <- searchplos(q="*:*", fl='id',
    fq=list('doc_type:full',"article_type:\\"research article\\""), limit=5)$data$id)
 ft_get(dois, from='plos')

@@ -143,3 +143,7 @@ check_dois <- function(x) {
     stop("These are probably not DOIs:\n\n", paste0(names(res[!res]), "\n"), call. = FALSE)
   }
 }
+
+is_ft_data <- function(x) {
+  if (!is(x, "ft_data")) stop("Input to x must be of class ft_data", call. = FALSE) 
+}

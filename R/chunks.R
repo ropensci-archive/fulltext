@@ -5,7 +5,7 @@
 #' @param x Input article
 #' @param what What to get, can be 1 to many. See Details.
 #'
-#' @details
+#' @details Options for the \code{what} parameter:
 #' \itemize{
 #'  \item front - Publisher, journal and article metadata elements
 #'  \item body - Body of the article
@@ -29,14 +29,6 @@
 #'
 #' @return A list of output, one for each thing requested
 #' @examples \dontrun{
-#' x <- ft_get(c('10.7554/eLife.04251','10.7554/eLife.04986'), from='elife')
-#' x %>% chunks("abstract")
-#' x %>% chunks("publisher")
-#' x %>% chunks("journal_meta")
-#' x %>% chunks("acknowledgments")
-#' x %>% chunks("refs_dois")
-#' x %>% chunks(c("abstract","executive_summary"))
-#' 
 #' x <- ft_get('10.1371/journal.pone.0086169', from='plos')
 #' chunks(x, what="authors")
 #' 
@@ -97,19 +89,29 @@
 #' ft_get(res$entrez$data$DOI, from='entrez') %>% chunks("title")
 #' ft_get(res$entrez$data$DOI[1:4], from='entrez') %>% chunks("acknowledgments")
 #' ft_get(res$entrez$data$DOI[1:4], from='entrez') %>% chunks(c('title','keywords'))
+#' 
+#' # From eLife
+#' x <- ft_get(c('10.7554/eLife.04251', '10.7554/eLife.04986'), from='elife')
+#' x %>% chunks("abstract")
+#' x %>% chunks("publisher")
+#' x %>% chunks("journal_meta")
+#' x %>% chunks("acknowledgments")
+#' x %>% chunks("refs_dois")
+#' x %>% chunks(c("abstract","executive_summary"))
 #' }
 
 chunks <- function(x, what='all') {
+  is_ft_data(x)
   what <- match.arg(what, c("all", sections()), TRUE)
   out <- list()
-  for(i in seq_along(x)){
-    if(is.null(x[[i]]$found)){
+  for (i in seq_along(x)) {
+    if (is.null(x[[i]]$found)) {
       out[[names(x[i])]] <- NULL
     } else {
       out[[names(x[i])]] <- 
-      lapply(x[[i]]$data, function(q){
+      lapply(x[[i]]$data$data, function(q){
         qparsed <- xmlParse(q)
-        get_what(data=qparsed, what, names(x[i]))
+        get_what(data = qparsed, what, names(x[i]))
       })
     }
   }
@@ -122,7 +124,7 @@ sections <- function() c("front","body","back","title","doi","categories","autho
                          "acknowledgments","permissions","history")
 
 get_what <- function(data, what, from){
-  if( any(what == "all") ) what <- sections()
+  if ( any(what == "all") ) what <- sections()
   setNames(lapply(what, function(z){
     switch(z,
            front = front(data, from),
@@ -199,7 +201,7 @@ body <- function(b, from){
          elife = {
            body <- getNodeSet(b, "//body/p")
            body2 <- lapply(body, xmlValue)
-           setNames(body2, sapply(body, xmlGetAttr, name="hwp:id"))
+           setNames(body2, sapply(body, xmlGetAttr, name = "hwp:id"))
          },
          plos = {
            body <- getNodeSet(b, "//body//p")
@@ -284,7 +286,7 @@ getperms <- function(v){
   tmp <- xmlToList(xpathSApply(v, "//permissions")[[1]], addAttributes = FALSE)
   tmp$license <- paste0(tmp$license[[1]], collapse = " ")
   lichref <- tryCatch(xmlGetAttr(xpathSApply(v, "//permissions/license//ext-link")[[1]], "xlink:href"), error = function(e) e)
-  tmp$license_url <- if(is(lichref, "simpleError")) NA else lichref
+  tmp$license_url <- if (is(lichref, "simpleError")) NA else lichref
   tmp
 }
 
@@ -317,7 +319,7 @@ history2date <- function(r){
   out <- lapply(tmp, function(rr){
     as.Date(paste0(sapply(c('day','month','year'), function(vv) xpathApply(rr, vv, xmlValue)), collapse = "-"), "%d-%m-%Y")
   })
-  setNames(out, sapply(tmp, xmlGetAttr, name="date-type"))
+  setNames(out, sapply(tmp, xmlGetAttr, name = "date-type"))
 }
 
 #' @export

@@ -18,7 +18,11 @@ Output to xml returns object of class XMLInternalDocument.}
 \item{from}{(character) Format \code{x} is currently in. Function attempts to use metadata
 provided, or guess from data itself. Optional. CURRENTLY IGNORED.}
 
-\item{...}{Further args passed on to \code{XML::xmlParse} or \code{jsonlite::toJSON}}
+\item{...}{Further args passed on to \code{\link[XML]{xmlParse}} or
+\code{\link[jsonlite]{toJSON}}}
+}
+\value{
+An object of class \code{ft_parsed}
 }
 \description{
 Serialize raw text to other formats, including to disk.
@@ -28,7 +32,7 @@ Serialize raw text to other formats, including to disk.
 dois <- c('10.1371/journal.pone.0087376','10.1371\%2Fjournal.pone.0086169',
 '10.1371/journal.pone.0102976','10.1371/journal.pone.0105225',
 '10.1371/journal.pone.0102722','10.1371/journal.pone.0033693')
-res <- ft_get(ids=dois, from='plos')
+res <- ft_get(dois, from='plos')
 
 # From XML to JSON
 (out <- ft_serialize(res, to='json'))
@@ -44,7 +48,7 @@ out <- ft_serialize(res, to='list')
 out$plos$data[[1]]
 
 # To various data stores on disk
-## To .Rds files
+## To an .Rds file
 ft_serialize(res, to='file')
 
 ## To local files using R.cache package

@@ -9,9 +9,10 @@ ft_extract_corpus(paths, which = "xpdf", ...)
 \arguments{
 \item{paths}{Path to one or more pdfs}
 
-\item{which}{One of gs, or xpdf.}
+\item{which}{One of gs or xpdf.}
 
-\item{...}{further args passed on}
+\item{...}{further args passed on to \code{readerControl} parameter
+in \code{\link[tm]{Corpus}}}
 }
 \value{
 A tm Corpus (or VCorpus, later that is)
@@ -21,13 +22,14 @@ Extract text from one to many pdf documents into a tm Corpus or Vcorpus.
 }
 \examples{
 \donttest{
-paths <- c("~/github/sac/scott/pdfs/BarraquandEtal2014peerj.pdf",
-"~/github/sac/scott/pdfs/Chamberlain&Holland2009Ecology.pdf",
-"~/github/sac/scott/pdfs/Revell&Chamberlain2014MEE.pdf")
+path <- system.file("examples", "example1.pdf", package = "fulltext")
 (res <- ft_extract_corpus(path, "xpdf"))
 tm::TermDocumentMatrix(res$data)
 
 (res_gs <- ft_extract_corpus(path, "gs"))
 }
+}
+\seealso{
+\code{\link{ft_extract}}
 }
 

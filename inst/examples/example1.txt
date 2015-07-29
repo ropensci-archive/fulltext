@@ -1,0 +1,361 @@
+Proximity to agriculture alters abundance and community composition of wild sunflower mutualists and antagonists
+SCOTT A. CHAMBERLAIN,1,3,  KENNETH D. WHITNEY,1,2 AND JENNIFER A. RUDGERS1,2
+1Department of Ecology and Evolutionary Biology, Rice University, Houston, Texas 77006 USA 2Department of Biology, University of New Mexico, Albuquerque, New Mexico 87131 USA
+Citation: Chamberlain, S. A., K. D. Whitney, and J. A. Rudgers. 2013. Proximity to agriculture alters abundance and community composition of wild sunflower mutualists and antagonists. Ecosphere 4(8):96. http://dx.doi.org/10.1890/ ES13-00026.1
+Abstract. Anthropogenic modifications of the landscape, such as agriculture, are widespread globally and can reduce native biodiversity and homogenize communities by decreasing variation in species composition across sites. Partitioning anthropogenic impacts among species that have positive versus negative effects on plants may improve our ability to forecast the ecological and evolutionary consequences of these alterations in communities. Here, we manipulated the distance of populations of a wild sunflower species (Helianthus annuus texanus) to fields of its domesticated relative (crop sunflowers, H. annuus) and contrasted subsequent shifts in the abundance and community composition of mutualists (pollinators) and antagonists (seed predators, folivores) of H. a. texanus. With some exceptions, populations of H. a. texanus near crop sunflowers supported higher numbers of pollinators than those far from crop sunflowers. In contrast, in the majority of cases, populations of H. a. texanus supported more seed predators when located far from crop sunflowers. Folivore damage to plants was greater far from crop sunflowers, and was never greater near crop sunflowers. Contrary to the prediction that proximity to agriculture homogenizes community composition, we found b-diversity of pollinators (species turnover between populations) was greater near crop sunflowers. Our results demonstrate that mutualists and antagonists of a wild plant species respond differently to the proximity of a related crop species, indicating the potential for both altered population dynamics and complex selection pressures on wild species in agricultural landscapes.
+Key words: abundance; bee; beta diversity; crop; pollinator; seed predator.
+Received 28 January 2013; revised 30 April 2013; accepted 31 May 2013; final version received 18 July 2013; published 20 August 2013. Corresponding Editor: A. McCall. Copyright: Ó 2013 Chamberlain et al. This is an open-access article distributed under the terms of the Creative Commons Attribution License, which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited. http://creativecommons.org/licenses/by/3.0/ 3 Present address: Biology Department, Simon Fraser University, Vancouver, British Columbia V5A 1S6 Canada.   E-mail: myrmecocystus@gmail.com
+
+INTRODUCTION
+Human activities, such as urbanization, fragmentation, and the introduction of invasive species, can homogenize ecological communities by reducing variation in community composition across sites (McKinney 2006), and alter abundance of individual species. Some evidence indicates that agricultural intensification can also alter species and communities. For example,
+
+agricultural intensification largely decreased abundance of Dipteran insects in Quebec, Canada (Rioux Paquette et al. 2013). In addition, in Europe, increased pesticide use amplified similarities in both bee and hemipteran assemblages in agricultural relative to non-agricultural areas (Dormann et al. 2007). However, biotic homogenization is not the rule: small mammal diversity did not vary across a gradient of arable land use intensity in conventional agricultural fields
+
+v www.esajournals.org
+
+1
+
+August 2013 v Volume 4(8) v Article 96
+
+CHAMBERLAIN ET AL.
+
+(Fischer et al. 2011). Croplands, pastures, and rangelands constituted ;50% of the global vegetated land surface as of 2005 (Foley et al. 2005). Thus, proximity to agriculture has the potential to impact the diversity of adjacent natural communities, and specifically, may homogenize community composition relative to less modified habitats within the landscape.
+Proximity to agriculture is likely to affect the abundance and community composition of functional groups in different ways. Plant antagonists and mutualists are two functional groups that are important for both crop productivity (as pests and pollinators) and the ecology and evolution of wild plants (Morris et al. 2007, Go´mez et al. 2009). Reductions in plant antagonists on wild plants near crops could result from direct management of plant antagonists on crops (e.g., pesticides, tilling practices) or from top-down effects from spillover of parasitoids. For example, greater parasitism of herbivores of wild mustard was correlated with increasing density of oilseed rape in the landscape (Gladbach et al. 2011). Alternatively, crop management practices could increase the abundance of plant antagonists on wild plants near crops, for example, if the antagonists respond to management by emigrating from crops to wild plants (Blitzer et al. 2012) or if crop monocultures attract antagonists via resource concentration (Gurr et al. 2003). In contrast, while farmers do not purposefully reduce plant mutualists, the management of antagonists could cause non-target declines in mutualists. For example, at a number of spatial scales, pollinator abundance and diversity in Northeast Italy decreased due to pesticides (Brittain et al. 2010). Alternatively, farmers may actively supplement mutualist populations through activities such as importing bees or adding mycorrhizal fungi (Vanengelsdorp and Meixner 2010, Roy-Bolduc and Hijri 2011). Finally, at a landscape scale, agricultural intensification may homogenize the composition of both antagonist and mutualist communities, producing greater similarity across sites in the landscape (i.e., reduced b-diversity) than would occur in the natural matrix. It remains unclear whether the degree of homogenization would differ for mutualists versus antagonists.
+While the importance of changes in mutualist and antagonist communities is likely to vary
+
+among individual systems, the relatedness of the crop to the wild plant is likely a factor. When the crop and wild species are closely related, sharing of both mutualists and antagonists is likely to be more prevalent (Ness et al. 2011), and the ecological and evolutionary effects of community shifts on the wild plant are likely to be stronger than for less closely related species. As many crop plants are cultivated in regions where their wild progenitors arose (as evidenced by crop-towild gene flow in many of the major crops; Ellstrand et al. 1999), this phenomenon is likely common. To our knowledge, no prior studies have examined how the proximity to agriculture affects both antagonist and mutualist communities on related wild plants.
+Here, we investigated how proximity to agriculture affects the abundance and community composition of plant mutualists and antagonists using crop sunflowers (Helianthus annuus) and their wild relatives (H. annuus texanus). We asked the following questions: (1) Do mutualists (pollinators) and antagonists (seed predators, folivores) of wild sunflowers differ in abundance near versus far from crop sunflowers? (2) Do mutualists and antagonists differ in community composition near versus far from crop sunflowers? (3) Does the b-diversity of mutualists and antagonists differ near versus far from crop sunflowers?
+METHODS
+Study system Cultivated Helianthus annuus and its wild
+congeners (sunflowers; Asteraceae) provide a tractable system for studying how agriculture alters mutualist and antagonist communities for wild plants. First, wild Helianthus commonly occur along the borders of crop sunflower fields (Burke et al. 2002). Second, in sunflower growing regions in the US, crop and wild sunflowers can overlap for several months across the season in flowering phenology (Chamberlain, personal observation), leading to high potential for shared mutualists (pollinators) and antagonists (seed predators, folivores) between crop and wild sunflowers. Texas has 20 native Helianthus species, many of which produce viable, hybrid offspring with crop sunflowers (Whitton et al. 1997, Linder et al. 1998), an indication of shared
+
+v www.esajournals.org
+
+2
+
+August 2013 v Volume 4(8) v Article 96
+
+CHAMBERLAIN ET AL.
+
+insect pollinators. Third, a diverse biotic community interacts with wild and crop sunflowers. The pollinator communities of both crop and wild sunflowers include in sum several hundred species of bees (Hurd Jr. et al. 1980), with honeybees particularly dominant in crop sunflowers (Greenleaf and Kremen 2006). Furthermore, the wild species, H. a. texanus, is obligately outcrossing (Rieseberg et al. 1998), suggesting an important fitness effect of pollinators. Seed predators (mainly Diptera, Lepidoptera, and Coleoptera) attack both wild and crop sunflowers, and their species-specific damage to sunflower seeds is easily quantified (Whitney et al. 2006). Seed predators and herbivores can strongly reduce fitness for annual sunflowers (Cummings et al. 1999, Pilson 2000, Snow et al. 2003, Whitney et al. 2006).
+Study sites and design We used a factorial design in which we
+manipulated proximity of wild sunflowers to crop sunflowers and the wild sunflower seed source (2 proximity levels 3 2 seed source levels ¼ 4 wild populations per site). The proximity treatment was crossed factorially with a seed source treatment to enhance the generality of results by examining the responses in two genetically different wild lineages. H. a. texanus seeds were collected from each of two locations in 2009 (Source 1: 30.3 N, 97.5 W; Source 2: 30.2 N, 97.6 W). In addition, seed source was replicated as this study was used for a manuscript in preparation exploring evolutionary response variables. Seed source was not explicitly examined in our statistical models outlined below.
+We collaborated with five Texas growers to locate planting sites adjacent to existing crop sunflowers. At all sites, we chose fields planted with Clearfield sunflowers, which are not genetically modified, but have been artificially selected to be resistant to the imidazolinone herbicides (Sala et al. 2008). In 2010, we manipulated the proximity of each of the two seed sources of H. a. texanus to crop sunflowers: Near (H. a. texanus population planted 10 m from the crop) or Far (population planted 2.5 km from any crop sunflower, bordering both natural habitat and next to other crops: wheat, cotton, corn, sorghum) which allowed us to more directly isolate
+
+the effect of proximity to crop sunflower within the agricultural landscape matrix. Within a site, we attempted to space out the seed source replicates as far as possible, with a minimum distance of 1 km. Each of the four populations were planted at each of five farms in TX (Fig. 1), and were planted with 80­100 greenhouse grown seedlings. Final plant abundance in each population differed from the starting number due to some plant mortality. In 2011, we used the same design as 2010 (proximity treatment crossed with seed source treatment), but used only two of the five farms (sites 1 and 2; see Fig. 1); we could not use sites 3­5 in 2011 as they were not growing sunflowers or would not allow research.
+Helianthus annuus texanus seedlings were obtained by nicking seeds with a razor blade and germinating them on damp filter paper in late February each year (2010 and 2011). Germinating seeds were kept in the dark at room temperature and were moved into the light after they produced fine root hairs. Approximately eightday-old seedlings were transplanted into peat pellets (J30100 Super; Jiffy, Denmark) and grown in a greenhouse at Rice University for approximately four weeks before transplanting. Plants were transplanted to the field early- to mid-April to replicate the natural phenology of wild sunflower populations and allow for overlap in flowering with crop sunflowers. Seedlings were watered in the field every three to five days by hand until they established (2­4 weeks).
+Plant traits To account for possible scaling of pollinator
+and seed predator abundance with plant size, we calculated plant volume at the end of the season by measuring height to the tallest inflorescence (to the nearest cm) and diameter of the stem at the base (to the nearest 0.1 mm) Plant volume was calculated as the volume of a cylinder (pr2h), where r is the radius of the stem at the base, and h is the height, following (Whitney et al. 2006). On average, plant volume did not differ between near and far populations (ANOVA, F1, 434 ¼ 0.08, P ¼ 0.785). We also recorded plant abundance by counting the number of plants per population that survived to reproduction. On average, plant abundance did not differ between near and far populations (Welch test, t ¼ À0.64, P ¼ 0.530).
+
+v www.esajournals.org
+
+3
+
+August 2013 v Volume 4(8) v Article 96
+
+CHAMBERLAIN ET AL.
+
+Fig. 1. Map of study sites in 2010 and 2011. Note that five sites were studied in 2010, and only two of the sites from 2010 (sites 1 and 2) were also studied in 2011.
+
+Pollinators
+We quantified pollinators by direct observations of pollinator visitation rate on our study sunflowers. We randomly selected ca. 30 plants in each population to observe throughout the flowering season. We observed each plant for five minutes per plant, over four to six observation periods during the flowering period (May­ September); total of 5,140 and 4,250 minutes in 2010 and 2011, respectively (some plants not observed on some dates if not flowering). A pollinator visit was recorded when we observed a visitor making contact with anthers, stigmas, or both. Pollinators that could not be identified to species in the field were collected for identification in the lab. Flower visitation was standardized by observation effort (minutes), and totaled for each plant across observation dates; visitation did not vary with the slight variations in numbers of surviving wild sunflowers among populations (Pearson correlation of mean visitation per plant by number of plants per population; r ¼ 0.27, P ¼ 0.181, n ¼ 25 populations). Plants were used as the unit of observation. As a
+
+response variable, we used pollinator visits per inflorescence per minute (number of visits to a plant/number of inflorescences/minutes observed), which removes variation due to floral display and observation effort. Morphospecies were identified to the lowest taxonomic ranking following Michener et al. (1994) and Michener (2000).
+Seed predators We quantified the abundance of seed predators
+on all plants in each H. a. texanus population from seeds collected in mesh bags (8 cm 3 8 cm, made from plastic mesh; DelStar Technologies, Delaware) on three to six inflorescences per plant. Bags were installed after pollination to allow enough time for seed predators to interact with the inflorescence, but before shattering (seed drop) occurred to prevent seeds from dropping to the ground (following methods of Whitney et al. 2006). We collected bagged inflorescences at the end of the season (September), after seeds had matured and plants had senesced. We pooled all inflorescences per plant,
+
+v www.esajournals.org
+
+4
+
+August 2013 v Volume 4(8) v Article 96
+
+CHAMBERLAIN ET AL.
+
+and then sub-sampled ;80 randomly selected seeds with a 103 dissecting microscope to quantify species-specific damage for Neolasioptera helianthi (Diptera: Cecidomyiidae), Isophrictis sp. (Lepidoptera: Gelechiidae), and Smicronyx sordidus (Coleoptera: Curculionidae). A total of 255,593 and 68,370 seeds were scored in 2010 and 2011, respectively. Total numbers of seeds damaged per plant were extrapolated using the number of inflorescences per plant. Number of seed predators was calculated assuming that each damaged seed was caused by a unique predator individual. This is clearly the case for Neolasioptera and Smicronyx, species for which each larva completes its development inside a single seed, but this method may have overestimated the abundance of Isophrictis, as individual Isophrictis larvae can damage multiple seeds. As a response variable for each seed predator species, we used abundance scaled to available resources, or proportion of attacked seeds per plant (seeds attacked/total seeds produced), which removes variation due to the size of the resource.
+Folivores We quantified folivore abundance for both
+chewing herbivores and herbivores that cause leaf vascular tissue damage by assuming leaf damage was predictive of folivore abundance. Insect damage to leaves was recorded once for each plant in late May 2010, and was not recorded in 2011. Folivory at this early stage in plant phenology (mean leaves per plant 6 1 SEM: 8.1 6 0.1, range: 1­17) should influence plant fitness more so than folivory later in the season after inflorescences and seeds have been produced. We scored damage on the three oldest non-senescent leaves per plant. Damage scored was chewing damage (due to Orthoptera, Lepidoptera, and Diptera) and leaf vascular tissue damage (due to Hemiptera). Damage was scored visually for each leaf in the field by assigning a score from 0 to 4: 0 ¼ no damage; 1 ¼ low (ca. 1­ 5%) damage; 2 ¼ medium (ca. 6­20%) damage; 3 ¼ medium-high (ca. 21­50%) damage; and 4 ¼ high (ca. 51­100%) damage. These scores were used to calculate a damage metric for each plant following Whitney et al. (2006):
+D ¼ X4 niðCiÞ i¼1 N
+
+where i is the damage category, ni is the number of leaves in the ith category, Ci is the midpoint of each damage category (e.g., C4 ¼ 75.5%), and N is the total number of leaves surveyed per plant (range 1­3). Units for D are percent leaf area damaged.
+Data analysis Abundance.--We analyzed data for 2010 for
+sites 1 through 5 separately for pollinator flower visitation, abundance of each seed predator species, and chewing and leaf vascular damage by folivores. For all models, we used a mixed model, with proximity to crop sunflowers (near vs. far) as a fixed effect, plant volume as a covariate, and site and population (nested within site and proximity) as random effects. As we had some missing site 3 proximity 3 seed source populations due to accidental destruction by farmers or wild pigs, we did not include seed source in these factorial models, but populations were separate replicates in all models. For pollinators, all three seed predator species, and folivores, we also modeled flower visitation or abundance across years (2010 and 2011) for the two sites for which data was collected in both years (site 1 and site 2; see Fig. 1). We used the same models as above, but with year, and interactions, as additional factors. We used randomization test equivalents of ANOVA to analyze flower visitation and abundance data for pollinators, and abundance of seed predators, and folivores. Distribution-free randomization tests create an expected distribution of the Pvalue under the null hypothesis that the predictor variables have no effect by randomizing the response (dependent) variable on the independent variables 10,000 times, and calculating the test statistic (F-value from ANOVA). Then, the observed test statistics for every model term are compared to their expected distribution of the test statistic generated by the randomization procedure, generating a P-value. We used PROC MIXED within the SAS randomization-test macro program (SAS v.9.3, SAS Institute, Cary, NC, USA; Cassell 2002).
+As we had three of 28 populations missing we tested for the proximity effect within each site for pollinators, seed predators, and folivores. We used the same analysis approach as above using PROC MIXED within the SAS randomization-
+
+v www.esajournals.org
+
+5
+
+August 2013 v Volume 4(8) v Article 96
+
+CHAMBERLAIN ET AL.
+
+test macro program. From these models we use only the proximity term to determine if abundance of pollinators, and damage by seed predators and folivores, differed by proximity to crop sunflowers. We corrected for multiple tests using Bonferroni correction, where the proximity term is judged significant if it falls below a/n, a ¼ 0.05 and n is the number of tests being performed.
+Community composition.--We conducted nonmetric multidimensional scaling analyses (NMS) to assess differences among sites and treatments in mutualist (pollinator) and antagonist (seed predator) community composition. We did not include measures of folivore damage in the NMS for antagonists. In the NMS, we used the BrayCurtis distance measure, and 9,999 iterations using the vegan package (R Development Core Team 2011, Oksanen et al. 2012). For both pollinators and seed predators, we ran models with 2010 and 2011 data combined. We removed all morphospecies that were not represented in at least 5% of samples (McCune and Grace 2002). We used permutational multivariate analysis of variance (PERMANOVA; function adonis in the vegan package in R; McArdle and Anderson 2001, Oksanen et al. 2012) to test for differences in species assemblages due to year, site, proximity to crop sunflowers, and their interactions. Seed source was not included as a factor in the model because we were not specifically interested in its effects, and sample sizes were not large enough to include it. We used SIMPER (similarity percentages) analysis to identify the morphospecies that contributed most to composition differences between treatments and sites (Oksanen et al. 2012).
+We expected that b-diversity (compositional variation across local sites; Chase 2010) of mutualists and antagonists would be greater far from crop sunflowers due to the adjacent natural habitat and greater diversity of crop types. We used permutational analysis of homogeneity of group dispersions (PERMDISP; function betadisper in the vegan package in R; Anderson 2006, Oksanen et al. 2012) to test for heterogeneity in community composition. Whereas PERMANOVA tests for differences in means of treatment levels in a distance matrix, PERMDISP tests for differences in dispersion from the centroid of treatment levels. Analyses were done using R
+
+v.2.14.1 (R Development Core Team 2011).
+RESULTS
+We collected 32 species of pollinators and three species of seed predators in this study (Appendix B: Table B1). The pollinators were composed of three fly species, 23 bee species, and six species of butterflies. The seed predators included one beetle (Coleoptera: Curculionidae), one fly (Diptera: Cecidomyiidae), and one moth species (Lepidoptera: Gelechiidae).
+Do mutualists and antagonists differ in abundance near vs. far from crop sunflowers?
+Mutualists.--On average, flower visitation to wild sunflowers was greater near crop sunflowers than far from the crop. However, the magnitude of the proximity to crop effect differed between years and among sites. In 2010, flower visitation was, on average, 137% greater near crop sunflowers (Fig. 2A) relative to far from crop sunflowers (P ¼ 0.026; Table 1), and did not significantly differ among sites (P ¼ 0.513; site 3 proximity: P ¼ 0.801). In 2010, flower visitation to wild sunflowers was significantly greater near sunflower crops within sites 2 and 3 (Fig. 2A), with similar (but nonsignificant) trends at sites 1 and 5.
+For sites at which experiments were replicated in two years (sites 1 and 2, 2010­2011), flower visitation was on average 101% greater near crop sunflowers relative to far from crop sunflowers (averaged across years; P , 0.002; Table 1). In general, the effect of proximity to crop sunflower was stronger at site 1 than at site 2 (site 3 proximity P ¼ 0.009). In 2011, flower visitation was significantly greater near crop sunflowers at site 1 (363% greater Near), but not at site 2 (11% less Near) (Fig. 2B). Flower visitation did not significantly differ between years or sites (Table 1). The effect of proximity to crop sunflowers on flower visitation did not depend on year, or site 3 year (Table 1).
+Antagonists: Seed predators.--Among the three seed predator species, the most abundant were Neolasioptera helianthi midges (mean % seeds attacked across individual plants ¼ 2.7%, range per population [0.5­4.4%]), followed by Isophrictis sp. moths (2.1%, range [0.2­5.7%]), then Smicronyx sordidus weevils (0.02%, range [0­
+
+v www.esajournals.org
+
+6
+
+August 2013 v Volume 4(8) v Article 96
+
+CHAMBERLAIN ET AL.
+
+Fig. 2. Effect of proximity to crop on pollinator floral visitation rate during (A) 2010 and (B) 2011. Proximity to crop sunflowers is shown as Far (triangles) and Near (circles). Points show means, and error bars represent 1 SE. Significance (*) after Bonferroni correction of the proximity term in single site models is given for Far vs. Near above each site pair. Sample sizes (number of plants) are given in each panel; the first of each set is for the Far treatment, and the second for the Near treatment.
+
+1.0%]). On average, seed predators were more abundant on wild sunflowers far from crop sunflowers relative to near them, and they were more abundant in 2011 than 2010.
+In 2010, N. helianthi was on average 182% more abundant far from crop sunflowers (P , 0.001; Table 1, Fig. 3A). However, the effect of proximity to crop sunflower depended on the site (site 3 proximity; P , 0.001). N. helianthi abundance was greater far from crop sunflowers
+
+at sites 1 (298% greater Far) and 3 (1520% greater Far). N. helianthi abundance did not significantly respond to proximity at sites 2 or 5 (Fig. 3A). In the analysis across years (2010 and 2011), N. helianthi abundance was greater far from crop sunflowers on average (P , 0.001; Fig. 3D), but this effect was driven by the large response in 2010 (proximity 3 year; P , 0.001). Specifically, abundance at site 1 was 298% higher far from crop sunflowers in 2010, but did not differ by
+
+Table 1. Results of abundance analyses for pollinator mutualists and antagonists (seed predators and folivores). Only P-values are presented because all analyses were randomization equivalents of ANOVAs (9999 iterations). Significant results (P , 0.05) are shown in bold; marginally significant results (P , 0.06) are italicized. Site 4 was removed from all analyses except those for chewing folivores and leaf vascular folivores. See Methods for details.
+
+Variable
+2010 Site (S) Proximity (P) S3P Plant volume
+2010/2011 Year (Y) Site (S) Proximity (P) Y3S S3P Y3P Y3S3P
+Plant volume
+
+Pollinators
+0.513 0.026 0.801 0.902
+0.454 0.063 0.002 0.141 0.009 0.782 0.145 0.025
+
+N. helianthi
+,0.001 ,0.001 ,0.001 0.440
+,0.001 ,0.001 0.004 0.002 0.009 ,0.001 0.005 0.008
+
+Isophrictis sp.
+,0.001 ,0.001 ,0.001 0.001
+0.038 0.972 0.143 0.358 0.721 0.519 0.141 ,0.001
+
+S. smicronyx
+,0.001 0.744 0.949 0.251
+0.075 ,0.001 0.211 0.200 0.068 0.181 0.061 0.999
+
+Chewing folivores
+,0.001 0.231 0.369 0.229
+... ... ... ... ... ... ... ...
+
+Leaf vascular folivores
+0.009 0.059 0.157 0.946
+... ... ... ... ... ... ... ...
+
+v www.esajournals.org
+
+7
+
+August 2013 v Volume 4(8) v Article 96
+
+CHAMBERLAIN ET AL.
+
+Fig. 3. Effect of proximity to crop on the abundance of wild sunflower seed predators (determined via seed damage) across two years (2010, 2011): (A, D) Neolasioptera helianthi; (B, E) Isophrictis sp.; and (C, F) Smicronyx sordidus. Proximity from crop sunflowers: Far (triangles), Near (circles). Note that ordinates differ among panels. Error bars represent 1 SE. Significance (*) after Bonferroni correction of the proximity term in single site models is given for Far vs. Near above each site pair. Sample sizes (number of plants) given in C also apply to A and B, while those in F also apply to D and E; the first of each set is for the Far treatment, and the second for the Near treatment.
+
+proximity to crop sunflowers in 2011 (Fig. 3A, D). Abundance at site 2 did not differ by proximity in 2010 or 2011. N. helianthi abundance was 313% greater in 2010 than 2011 (P , 0.001), and was 156% greater at site 1 than site 2 across years (P , 0.001).
+In 2010, Isophrictis sp. abundance was, on average, 462% greater far from crop sunflowers relative to near them (P , 0.001; Table 1, Fig. 3B).
+
+However, the effect of proximity to crop sunflower depended on the site (site 3 proximity; P , 0.001). Isophrictis sp. abundance was greater far from crop sunflowers at sites 1 (1163% greater Far), 2 (235% greater Far), and 3 (1570% greater Far). Isophrictis sp. abundance did not significantly respond to proximity at site 5 (Fig. 3B). In the analysis across years, proximity to crop sunflowers did not affect Isophrictis sp. abun-
+
+v www.esajournals.org
+
+8
+
+August 2013 v Volume 4(8) v Article 96
+
+CHAMBERLAIN ET AL.
+
+dance overall (P ¼ 0.143), but in models for individual sites abundance tended to be greater far from crop sunflowers at both sites, and was 66% greater far from crop sunflowers at site 2 (Fig. 3E).
+In 2010, S. sordidus sp. abundance, on average, did not differ by proximity to sunflower crops (P ¼ 0.744; Fig. 3C), and there was no proximity 3 site interaction (Table 1). Across years, S. sordidus abundance did not differ overall by proximity to crop sunflowers (P ¼ 0.211). However, in individual analyses for each site, S. sordidus abundance was significantly greater far from crop sunflowers at site 1, but significantly greater near crop sunflowers at site 2 (Fig. 3F).
+Antagonists: Folivores.--Similar to the pattern for seed predation, abundances of folivores (as estimated by the amounts of both chewing and vascular leaf tissue damage) tended to be greater far from crop sunflowers than near them (Fig. 4A). However, the proximity effect was not significant in the overall model (Table 1). In individual analyses for each site, chewing damage was significantly greater far from crop sunflowers at site 1 (252% greater Far), site 3 (165% greater Far), and site 5 (23% greater Far), but did not significantly respond to proximity at sites 2 or 4 (Fig. 4A). In the overall model, vascular tissue damage tended to be greater far from crop sunflowers than near them (Fig. 4B), but the proximity effect was not significant in the overall model (Table 1). Vascular damage was significantly greater far from crop sunflowers at site 3 (74% greater Far) and site 5 (246% greater Far), but did not differ by proximity at sites 1, 2, or 4 (Fig. 4B).
+Does mutualist and antagonist community composition differ near vs. far from crop sunflowers?
+Mutualists.--Pollinator community composition based on flower visitation data varied with proximity to crop sunflowers (PERMANOVA; F ¼ 3.02, P ¼ 0.004; Fig. 5A), among years (F ¼ 8.47, P ¼ 0.0001), and among sites (F ¼ 2.02, P ¼ 0.004). No interaction terms were significant. Diadasia enavata, Halictus ligatus, Apidae sp. 1, and Megachile sp. 1 all contributed at least 10% to dissimilarity between H. a. texanus populations near and far from crop sunflowers, contributing 21%, 13%, 11%, and 10% to dissimilarity, respec-
+
+Fig. 4. Abundance of chewing damage folivores (A) and vascular tissue damage folivores (B) in 2010. Proximity from crop sunflowers: Far (triangles), Near (circles). Note that ordinates differ among panels. Error bars represent 1 SE. Significance (*) after Bonferroni correction of the proximity term in single site models is given for Far vs. Near above each site pair. Sample sizes (number of plants) given in B also applies to A; the first of each set is for the Far treatment, and the second for the Near treatment.
+tively (Appendix A: Table A1). D. enavata and Megachile sp. 1 were more abundant near sunflower crops than far from them, whereas Halictus ligatus was more abundant far from sunflower crops than near them.
+Antagonists.--Seed predator community composition differed by proximity to crop sunflowers (permutational MANOVA; F ¼ 4.55, P ¼ 0.008; Fig. 5B), among years (F ¼ 13.83, P ,
+
+v www.esajournals.org
+
+9
+
+August 2013 v Volume 4(8) v Article 96
+
+CHAMBERLAIN ET AL.
+
+were a distant third in contribution to dissimilarity (only 5%).
+
+Does the b-diversity of mutualists and antagonists differ near vs. far from crop sunflowers?
+In contrast to our prediction, the dispersion of mutualistic pollinator assemblages was significantly greater near crop sunflowers relative to far from them (PERMDISP; mean distance to centroid [Far: 0.52; Near: 0.58]; F ¼ 6.80, P ¼ 0.017). The dispersion of antagonistic seed predators did not vary with distance to crop sunflower (F ¼ 0.10, P ¼ 0.745).
+
+DISCUSSION
+
+Fig. 5. Non-metric multidimensional scaling ordination plots showing differences in community composition for (A) pollinators in 2010 and 2011 combined, (B) seed predators in 2010 and 2011 combined. Results show that pollinators and seed predators differ in community composition Far (triangles) vs. Near (circles) from sunflower crops, whereas only in seed predators does the proximity effect depend on the site. Each point is an individual population of wild sunflower. Two-dimensional stress of the ordinations: (A) 0.18 and (B) 0.07, indicating low risk for false inferences (McCune and Grace 2002).
+0.001), and among sites (F ¼ 2.40, P ¼ 0.017). Whether community composition differed by proximity to crop sunflowers depended on the site (F ¼ 2.25, P ¼ 0.024); no other interactions terms were significant. Isophrictis sp. contributed the most (50%) to dissimilarity between near and far from crop sunflowers, while Neolasioptera helianthi midges contributed slightly less to dissimilarity (46%) (SIMPER analysis; Appendix A: Table A2), and Smicronyx sordidus weevils
+
+Because agriculture covers nearly 50% of the global vegetated land surface (Foley et al. 2005), understanding the extent to which agricultural landscapes alter biodiversity has potential to improve ecological predictions (Vellend et al. 2007, Ekroos et al. 2010). This study adds a new perspective to the study of biotic communities in agricultural landscapes through the lens of plant mutualists and antagonists. We showed that abundance of mutualists and antagonists sometimes responded in opposite directions to the proximity of crop sunflowers: overall, mutualistic pollinators often increased in abundance near crop sunflowers, while antagonistic seed predators and folivores often decreased in abundance near crop sunflowers. In addition, b-diversity of mutualistic pollinators was greater in wild sunflower populations planted near relative to far from crops in one of two years.
+Abundance While there was variation among sites and
+insect taxa, when proximity was significant, it had consistent effects. For many site/taxon combinations, proximity to sunflower crops had weak effects on insect abundance relative to other factors. However, when proximity mattered it did so in a consistent direction: increased mutualist abundance, and decreased antagonist abundance, near crops. The single exception was a rare weevil antagonist which showed increased abundance near crops at a single site. This result is consistent with at least two studies. First, Hanley et al. (2011), found that bumble bee
+
+v www.esajournals.org
+
+10
+
+August 2013 v Volume 4(8) v Article 96
+
+CHAMBERLAIN ET AL.
+
+(Bombus spp.) pollinators in England increased in short-term abundance on hedgerows near an insect-pollinated crop (beans), but did not increase on hedgerows along a wind-pollinated crop (wheat); this effect was only observed when the bean crops were in flower. Second, Westphal et al. (2003) showed that the abundances of species of Bombus at many sites in Germany were positively related to the density of flowering crops in the landscape, but were not related to the presence of natural habitat. Our result is consistent with a potential mechanism: crop sunflowers provide a large pulse of resources (pollen and nectar), attracting many pollinators, with subsequent spillover onto flowering plants adjacent to crop sunflowers. A likely consequence of this result for wild plants in agricultural landscapes is reduced pollen limitation near flowering crops.
+Contrary to mutualists, antagonistic seed predators and folivores were on average more abundant far from crop sunflowers. These results differ from the findings of McKone et al. (2001), who reported that corn-rootworms were more abundant on wild sunflowers in prairie remnants near corn fields relative to far from corn fields. However, McKone et al. took an observational approach, and also examined a crop not related to the wild species, which likely associates with a different biotic community. Our finding is consistent with two possible mechanisms driving antagonist abundance in response to agriculture. First, suppression of crop pests via pesticides (killing insects on plants) and tilling (killing insects in the soil) may decrease herbivore populations, thereby decreasing them on nearby wild sunflowers (Gladbach et al. 2011). Second, crop sunflowers could be a more attractive resource than wild sunflowers for seed predators and folivores, thereby reducing their populations on nearby wild sunflowers. Consistent with this idea, Blitzer et al. (2012) reviewed published studies and found that flows of herbivores from wild to crop plants are much more common than flows in the other direction.
+Community composition Despite evidence that biotic communities in
+agricultural landscapes are decreasing in both aand b-diversity (Dormann et al. 2007, Ekroos et al. 2010), a framework linking consequences of
+
+this pattern to effects on wild plants in agricultural landscapes has been absent. We found that mutualistic pollinator and antagonistic seed predator community composition differed near relative to far from crop sunflowers. In addition, the b-diversity among pollinator communities was greater near relative to far from crop sunflowers, whereas b-diversity of antagonist seed predators did not differ by proximity to crop sunflowers. This finding is contrary to the common expectation that biotic communities should be homogenized when farther away from natural habitat, and especially near the same crop species. One potential mechanism driving this effect may be that crops provide an enormous pulse of resources, which often increases mutualist pollinators in the landscape (Westphal et al. 2003). Although a single crop is a homogenous environment, the resource pulse may lead to a more diverse community relative to nearby natural habitats since more resources can support more diverse communities (Gillman and Wright 2010). In addition, the increase in b-diversity of pollinating insects on wild plants near crops relative to far from crops likely changes with land use intensity. In intense agricultural landscapes, massive resource pulses are likely to have a greater effect on biotic communities relative to when they occur in less intensive agricultural landscapes (Westphal et al. 2003).
+Wild-crop relatedness Our results may be most easily generalized to
+other contexts in which crops and their wild relatives coexist. Many crops are grown where related native species occur, including wheat in the Middle East, corn, squash, cotton and peppers in Mexico, and potatoes from the southwestern USA (AZ and NM) to Uruguay (Jarvis et al. 2008). Related native plant species are subject to gene flow from their crop relative, and are likely to overlap in the biotic interactions they have with mutualists and antagonists. Close proximity of wild plant species and their related crops can lead to altered abundance of shared species. For example, in this study the bee species Diadasia enavata was more abundant near crop sunflowers relative to far from them. Since species interactions are evolutionarily conserved (Go´mez et al. 2010), effects of shared species interactions on native plants are likely to be
+
+v www.esajournals.org
+
+11
+
+August 2013 v Volume 4(8) v Article 96
+
+CHAMBERLAIN ET AL.
+
+greatest when native plants grow adjacent to their closest crop relatives. That is, we predict greater phylogenetic distance between native plants and crop plants will reduce the intensity of their shared interactions with mutualists and antagonists.
+The mutualist-antagonist framework Mutualists have positive effects on their part-
+ners, while antagonists have negative effects on their partners. The mutualist-antagonist framework recognizes this fundamental difference between species, as opposed to lumping groups. A mutualist-antagonist framework has been adopted to gain insight into ecological and evolutionary consequences of plant-insect or plant-vertebrate interactions (Herrera et al. 2002, Cariveau et al. 2004, Tora¨ng et al. 2008, Siepielski and Benkman 2010). Understanding whether, and how, plant mutualists and antagonists respond differentially to agriculture should improve our understanding of the ecology and evolution of the plants they interact with. Plant mutualists and antagonists are managed differently in agriculture. Whereas plant mutualists are often not managed (mycorrhizal fungi) or are supplemented (honeybees), plant antagonists are aggressively suppressed. We have shown that two groups of organisms, plant mutualists and antagonists, often respond differently to the proximity of a crop species. Because mutualists and antagonists have different ecological effects on wild plants, our results suggest that the mutualist-antagonist framework could inform farm management. Wild sunflowers are important weeds in crop fields (Kane and Rieseberg 2008), and in this study, their antagonistic seed predators were more abundant far from crop sunflowers. Thus, management might attempt to increase populations of seed predators that harm wild sunflowers, but not crop sunflowers, in order to suppress weedy wild sunflowers. Despite these insights, more work is needed to make the mutualist-antagonist framework more general. Specifically, future studies could consider other mutualists and antagonists that interact with plants besides those examined here. For example, soil communities can be negatively affected by agriculture (Postma-Blaauw et al. 2010), which could, in turn, negatively or positively affect the ecology of nearby wild plants.
+
+Conclusion Our results suggest that a mutualist-antago-
+nist framework can lead to useful insights into how plant-associated insect communities are altered in agricultural landscapes. Here, mutualistic pollinators were sometimes more abundant on wild sunflower plants near crop sunflowers, while antagonists were sometimes more abundant far from crop sunflowers. Community composition of both mutualists and antagonists differed near versus far from crop sunflowers, although the proximity to crop sunflowers increased the b-diversity of mutualists but had no effect on antagonists. Not only do agricultural landscapes alter biotic communities relative to those in pristine landscapes (Dormann et al. 2007), but our results show that functional groupings within those communities can show unique responses to the proximity of crops.
+ACKNOWLEDGMENTS
+We thank the following people for field and lab assistance: Toby Liss, Charles Danan, Morgan Black, and Wael Al Wawi. We are grateful for comments on a previous version of this manuscript from V.H.W. Rudolf, and two anonymous reviewers. This work was supported by a grant from Prairie Biotic Research (to SAC) and by NSF DEB 0716868 (to KDW). JAR acknowledges support from the Wiess Career Development Chair at Rice University.
+LITERATURE CITED
+Anderson, M. J. 2006. Distance-based tests for homogeneity of multivariate dispersions. Biometrics 62:245­253.
+Blitzer, E. J., C. F. Dormann, A. Holzschuh, A. M. Klein, T. A. Rand, and T. Tscharntke. 2012. Spillover of functionally important organisms between managed and natural habitats. Agriculture, Ecosystems & Environment 146:34­43.
+Brittain, C., M. Vighi, R. Bommarco, J. Settele, and S. Potts. 2010. Impacts of a pesticide on pollinator species richness at different spatial scales. Basic and Applied Ecology 11:106­115.
+Burke, J. M., K. A. Gardner, and L. H. Rieseberg. 2002. The potential for gene flow between cultivated and wild sunflower (Helianthus annuus) in the United States. American Journal of Botany 89:1550­1552.
+Cariveau, D., R. E. Irwin, A. K. Brody, L. S. GarciaMayeya, A. V. D. Ohe, and V. D. Ohe. 2004. Direct and indirect effects of pollinators and seed preda-
+
+v www.esajournals.org
+
+12
+
+August 2013 v Volume 4(8) v Article 96
+
+CHAMBERLAIN ET AL.
+
+tors to selection on plant and floral traits. Oikos 1:15­26. Cassell, D. L. 2002. A randomization-test wrapper for SAS PROCs. In Proceedings of the 27th Annual SAS Users Group International Conference. SAS Institute, Cary, North Carolina, USA. Chase, J. M. 2010. Stochastic community assembly causes higher biodiversity in more productive environments. Science 328:1388­1391. Cummings, C. L., H. M. Alexander, and A. A. Snow. 1999. Increased pre-dispersal seed predation in sunflower crop-wild hybrids. Oecologia 121:330­338. Dormann, C. F., O. Schweiger, I. Augenstein, D. Bailey, R. Billeter, G. de Blust, R. DeFilippi, M. Frenzel, F. Hendrickx, and F. Herzog. 2007. Effects of landscape structure and land-use intensity on similarity of plant and animal communities. Global Ecology and Biogeography 16:774­787. Ekroos, J., J. Helio¨ la¨ , and M. Kuussaari. 2010. Homogenization of lepidopteran communities in intensively cultivated agricultural landscapes. Journal of Applied Ecology 47:459­467. Ellstrand, N. C., H. C. Prentice, and J. F. Hancock. 1999. Gene flow and introgression from domesticated plants into their wild relatives. Annual Review of Ecology and Systematics 30:539­563. Fischer, C., C. Thies, and T. Tscharntke. 2011. Small mammals in agricultural landscapes: Opposing responses to farming practices and landscape complexity. Biological Conservation 144:1130­1136. Foley, J. a., R. Defries, G. P. Asner, C. Barford, G. Bonan, S. R. Carpenter, F. S. Chapin, M. T. Coe, G. C. Daily, H. K. Gibbs, J. H. Helkowski, T. Holloway, E. a. Howard, C. J. Kucharik, C. Monfreda, J. a. Patz, I. C. Prentice, N. Ramankutty, and P. K. Snyder. 2005. Global consequences of land use. Science 309:570­574. Gillman, L. N. and S. D. Wright. 2010. Mega mistakes in meta-analyses: devil in the detail. Ecology 91:2550­2552. Gladbach, D. J., A. Holzschuh, C. Scherber, C. Thies, C. F. Dormann, and T. Tscharntke. 2011. Crop­ noncrop spillover: arable fields affect trophic interactions on wild plants in surrounding habitats. Oecologia 166:433­441. Go´mez, J. M., F. Perfectti, J. Bosch, and J. P. M. Camacho. 2009. A geographic selection mosaic in a generalized plant-pollinator-herbivore system. Ecological Monographs 79:245­263. Go´mez, J. M., M. Verdu´ , and F. Perfectti. 2010. Ecological interactions are evolutionarily conserved across the entire tree of life. Nature 465:918­921. Greenleaf, S. S. and C. Kremen. 2006. Wild bees enhance honey bees' pollination of hybrid sunflower. Proceedings of the National Academy of Sciences USA 103:13890­13895.
+
+Gurr, G. M., S. D. Wratten, and J. M. Luna. 2003. Multifunction agricultural biodiversity: pest management and other benefits. Basic and Applied Ecology 4:107­116.
+Hanley, M., M. Franco, C. Dean, E. Franklin, H. Harris, A. Haynes, S. Rapson, G. Rowse, K. Thomas, and B. Waterhouse. 2011. Increased bumblebee abundance along the margins of a mass flowering crop: evidence for pollinator spill-over. Oikos 120:1618­ 1624.
+Herrera, C. M., M. Medrano, P. J. Rey, A. M. Sa´nchezLafuente, M. B. Garci´a, J. Guitia´n, and A. J. Manzaneda. 2002. Interaction of pollinators and herbivores on plant fitness suggests a pathway for correlated evolution of mutualism-and antagonism-related traits. Proceedings of the National Academy of Sciences 99:16823­16828.
+Hurd, P. D., Jr., W. E. LaBerge, and E. G. Linsley. 1980. Principal sunflower bees of North America with emphasis on the southwestern United States (Hymenoptera: Apoidea). Smithsonian Contributions to Zoology 310:1­158.
+Jarvis, A., A. Lane, and R. J. Hijmans. 2008. The effect of climate change on crop wild relatives. Agriculture, Ecosystems & Environment 126:13­23.
+Kane, N. C. and L. H. Rieseberg. 2008. Genetics and evolution of weedy Helianthus annuus populations: adaptation of an agricultural weed. Molecular Ecology 17:384­394.
+Linder, C. R., I. Taha, G. J. Seiler, A. A. Snow, and L. H. Rieseberg. 1998. Long-term introgression of crop genes into wild sunflower populations. Theoretical and Applied Genetics 96:339­347.
+McArdle, B. H. and M. J. Anderson. 2001. Fitting multivariate models to community data: a comment on distance-based redundancy analysis. Ecology 82:290­297.
+McCune, B. and J. B. Grace. 2002. Analysis of ecological communities. MjM Software Design, Gleneden Beach, Oregon, USA.
+McKinney, M. L. 2006. Urbanization as a major cause of biotic homogenization. Biological Conservation 127:247­260.
+McKone, M. J., K. K. McLauchlan, E. G. Lebrun, and A. C. McCall. 2001. An edge effect caused by adult corn-rootworm beetles on sunflowers in tallgrass prairie remnants. Conservation Biology 15:1315­ 1324.
+Michener, C. D. 2000. The bees of the world. Johns Hopkins University Press, Baltimore, Maryland, USA.
+Michener, C. D., R. J. McGinley, and B. N. Danforth. 1994. The bee genera of North and Central America. Smithsonian Institution Press, Washington, D.C., USA.
+Morris, W. F., R. A. Hufbauer, A. A. Agrawal, J. D. Bever, V. A. Borowicz, G. S. Gilbert, J. L. Maron,
+
+v www.esajournals.org
+
+13
+
+August 2013 v Volume 4(8) v Article 96
+
+CHAMBERLAIN ET AL.
+
+C. E. Mitchell, I. M. Parker, A. G. Power, M. E. Torchin, and D. P. Vazquez. 2007. Direct and interactive effects of enemies and mutualists on plant performance: A meta-analysis. Ecology 88:1021­1029. Ness, J., E. Rollinson, and K. Whitney. 2011. Phylogenetic distance can predict susceptibility to attack by natural enemies. Oikos 120:1327­1334. Oksanen, J., F. G. Blanchet, R. Kindt, P. Legendre, P. R. Minchin, R. B. O'Hara, G. L. Simpson, P. Solymos, M. H. H. Stevens, and H. Wagner. 2012. vegan: Community ecology package. http://CRAN. R-project.org/package¼vegan Pilson, D. 2000. Herbivory and natural selection on flowering phenology in wild sunflower, Helianthus annuus. Oecologia 122:72­82. Postma-Blaauw, M. B., R. G. M. de Goede, J. Bloem, J. H. Faber, and L. Brussaard. 2010. Soil biota community structure and abundance under agricultural intensification and extensification. Ecology 91:460 ­ 473. R Development Core Team. 2011. R: A language and environment for statistical computing. Version 2.14.1. R Foundation for Statistical Computing, Vienna, Austria. Rieseberg, L. H., S. J. E. Baird, and A. M. Desrochers. 1998. Patterns of mating in wild sunflower hybrid zones. Evolution 52:713­726. Rioux Paquette, S., D. Garant, F. Pelletier, and M. Be´lisle. 2013. Seasonal patterns in tree swallow prey (Diptera) abundance are affected by agricultural intensification. Ecological Applications 23:122­133. Roy-Bolduc, A. and M. Hijri. 2011. The use of mycorrhizae to enhance phosphorus uptake: a way out the phosphorus crisis. Journal of Biofertilizers and Biopesticides 2:104. Sala, C. A., M. Bulos, M. Echarte, S. R. Whitt, and R. Ascenzi. 2008. Molecular and biochemical characterization of an induced mutation conferring
+
+imidazolinone resistance in sunflower. Theoretical and Applied Genetics 118:105­112. Siepielski, A. M. and C. W. Benkman. 2010. Conflicting selection from an antagonist and a mutualist enhances phenotypic variation in a plant. Evolution 64:1120­1128. Snow, A. A., D. Pilson, L. H. Rieseberg, M. Paulsen, N. Pleskac, M. Reagon, D. Wolf, and S. Selbo. 2003. A Bt transgene reduces herbivory and enhances fecundity in wild sunflowers. Ecological Applications 13:279­286. Tora¨ng, P., J. Ehrle´n, and J. A° gren. 2008. Mutualists and antagonists mediate frequency-dependent selection on floral display. Ecology 89:1564­1572. Vanengelsdorp, D. and M. D. Meixner. 2010. A historical review of managed honey bee populations in Europe and the United States and the factors that may affect them. Journal of Invertebrate Pathology 103:S80­S95. Vellend, M., K. Verheyen, K. M. Flinn, H. Jacquemyn, A. K. Kolb, H. V. Calster, G. Peterken, B. J. Graae, J. Bellemare, O. Honnay, J. Brunet, M. Wulf, F. Gerhardt, and M. Hermy. 2007. Homogenization of forest plant communities and weakening of species-environment relationships via agricultural land use. Journal of Ecology 95:565­573. Westphal, C., I. Steffan-Dewenter, and T. Tscharntke. 2003. Mass flowering crops enhance pollinator densities at a landscape scale. Ecology Letters 6:961­965. Whitney, K. D., R. A. Randell, and L. H. Rieseberg. 2006. Adaptive introgression of herbivore resistance traits in the weedy sunflower Helianthus annuus. American Naturalist 167:794­807. Whitton, J., D. E. Wolf, D. M. Arias, A. A. Snow, and L. H. Rieseberg. 1997. The persistence of cultivar alleles in wild populations of sunflowers five generations after hybridization. Theoretical and Applied Genetics 95:33­40.
+
+v www.esajournals.org
+
+14
+
+August 2013 v Volume 4(8) v Article 96
+
+CHAMBERLAIN ET AL.
+
+SUPPLEMENTAL MATERIAL APPENDIX A
+
+Table A1. The contribution of individual species to differences among proximity treatments in pollinator community structure in 2010 and 2011 combined (see Fig. 5A for the NMS ordination of pollinator data). SIMPER (similarity percentages analysis) was done, and presented are percent contribution of each species to the difference between plots near versus far from sunflowers. % Contr. ¼ percent contribution of the species to the difference between proximity treatments. % Cum. Contr. ¼ cumulative percent contribution of the species to the difference between proximity treatments. Only the species contributing at least 1% are shown here.
+
+Species
+Diadasia enavata Halictus ligatus Apidae sp. 2 Megachile sp. 1 Megachile sp. 2 Apis mellifera Halictidae sp. 1 Apidae sp. 1 Hesperiidae sp. 1 Bombyliidae sp. 3 Hesperiidae sp. 2 Svastra sp. 1 Perdita sp. 2 Lasioglossum sp. 1 Megachile sp. 3 Unidentified bee 1 Hesperiidae sp. 3 Bombyliidae sp. 1 Megachile sp. 4 Perdita sp. 1 Colias eurytheme Agaostemon texanus Lycinidae sp. 1
+
+Taxonomy
+Hymenoptera: Apidae Hymenoptera: Halictidae
+Hymenoptera: Apidae Hymenoptera: Megachilidae Hymenoptera: Megachilidae
+Hymenoptera: Apidae Hymenoptera: Halictidae
+Hymenoptera: Apidae Lepidoptera: Hesperiidae
+Diptera: Bombyliidae Lepidoptera: Hesperiidae
+Hymenoptera: Apidae Hymenoptera: Andrenidae Hymenoptera: Halictidae Hymenoptera: Megachilidae Hymenoptera: Apoidea (bees) Lepidoptera: Hesperiidae
+Diptera: Bombyliidae Hymenoptera: Megachilidae Hymenoptera: Andrenidae
+Lepidoptera: Pieridae Hymenoptera: Halictidae Lepidoptera: Lycinidae
+
+% Contr.
+21 13 11 10 6 6 6 3 3 3 2 2 1 1 1 1 1 1 1 1 1 1 1
+
+% Cum. Contr.
+21 34 45 55 61 67 73 76 79 82 84 86 87 89 90 91 92 93 94 95 95 96 96
+
+Table A2. The contribution of individual seed predator species to differences among proximity treatments (Near vs. Far) in antagonist community structure in 2010 and 2011 combined (see Fig. 5B for the NMS ordination). SIMPER (similarity percentages analysis) was done, and presented are percent contribution of each species to the difference between Near and Far treatments. See Table A1 for further details about the analyses.
+
+Species
+Isophrictis sp. Neolasioptera helianthi Smicronyx sordidus
+
+Taxonomy
+Lepidoptera: Gelechiidae Diptera: Cecidomyiidae Coleoptera: Curculionidae
+
+% Contr.
+50 46 5
+
+% Cum. Contr.
+50 95 100
+
+v www.esajournals.org
+
+15
+
+August 2013 v Volume 4(8) v Article 96
+
+CHAMBERLAIN ET AL.
+
+APPENDIX B
+
+Table B1. A list of the species collected during the study, separated by pollinators and seed predators of Helianthus annuus texanus.
+
+Species
+Pollinators Bombyliidae sp. 1 Bombyliidae sp. 2 Bombyliidae sp. 3 Perdita sp. 1 Perdita sp. 2 Apidae sp. 1 Apidae sp. 2 Apis mellifera Bombus sp. 1 Diadasia enavata Epelous sp. 1 Epelous sp. 2 Epelous sp. 3 Svastra sp. 1 Unidentified bee Unidentified bee 1 Agaostemon texanus Halictidae sp. 1 Halictus ligatus Lasioglossum sp. 1 Coelioxys sp. 1 Dianthidium sp. 1 Megachile sp. 1 Megachile sp. 2 Megachile sp. 3 Megachile sp. 4 Hesperiidae sp. 1 Hesperiidae sp. 2 Hesperiidae sp. 3 Lycinidae sp. 1 Colias eurytheme Pieridae sp. 1
+Seed predators Smicronyx sordidus Neolasioptera helianthi Isophrictis sp.
+
+Order
+Diptera Diptera Diptera Hymenoptera Hymenoptera Hymenoptera Hymenoptera Hymenoptera Hymenoptera Hymenoptera Hymenoptera Hymenoptera Hymenoptera Hymenoptera Hymenoptera Hymenoptera Hymenoptera Hymenoptera Hymenoptera Hymenoptera Hymenoptera Hymenoptera Hymenoptera Hymenoptera Hymenoptera Hymenoptera Lepidoptera Lepidoptera Lepidoptera Lepidoptera Lepidoptera Lepidoptera
+Coleoptera Diptera
+Lepidoptera
+
+Family
+Bombyliidae Bombyliidae Bombyliidae Andrenidae Andrenidae
+Apidae Apidae Apidae Apidae Apidae Apidae Apidae Apidae Apidae Apoidea Apoidea Halictidae Halictidae Halictidae Halictidae Megachilidae Megachilidae Megachilidae Megachilidae Megachilidae Megachilidae Hesperiidae Hesperiidae Hesperiidae Lycinidae Pieridae Pieridae
+Curculionidae Cecidomyiidae
+Gelechiidae
+
+v www.esajournals.org
+
+16
+
+August 2013 v Volume 4(8) v Article 96
+
+

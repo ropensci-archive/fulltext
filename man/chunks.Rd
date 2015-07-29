@@ -21,6 +21,7 @@ A list of output, one for each thing requested
 Extract chunks of data from articles.
 }
 \details{
+Options for the \code{what} parameter:
 \itemize{
  \item front - Publisher, journal and article metadata elements
  \item body - Body of the article
@@ -44,14 +45,6 @@ Extract chunks of data from articles.
 }
 \examples{
 \dontrun{
-x <- ft_get(c('10.7554/eLife.04251','10.7554/eLife.04986'), from='elife')
-x \%>\% chunks("abstract")
-x \%>\% chunks("publisher")
-x \%>\% chunks("journal_meta")
-x \%>\% chunks("acknowledgments")
-x \%>\% chunks("refs_dois")
-x \%>\% chunks(c("abstract","executive_summary"))
-
 x <- ft_get('10.1371/journal.pone.0086169', from='plos')
 chunks(x, what="authors")
 
@@ -112,6 +105,15 @@ chunks(res, what="publisher")
 ft_get(res$entrez$data$DOI, from='entrez') \%>\% chunks("title")
 ft_get(res$entrez$data$DOI[1:4], from='entrez') \%>\% chunks("acknowledgments")
 ft_get(res$entrez$data$DOI[1:4], from='entrez') \%>\% chunks(c('title','keywords'))
+
+# From eLife
+x <- ft_get(c('10.7554/eLife.04251', '10.7554/eLife.04986'), from='elife')
+x \%>\% chunks("abstract")
+x \%>\% chunks("publisher")
+x \%>\% chunks("journal_meta")
+x \%>\% chunks("acknowledgments")
+x \%>\% chunks("refs_dois")
+x \%>\% chunks(c("abstract","executive_summary"))
 }
 }
 

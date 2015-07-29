@@ -29,7 +29,4 @@ test_that("ft_extract fails well", {
   # bad path given
   expect_error(ft_extract(5), "invalid 'file' argument")
   expect_error(ft_extract('adfafsdf'), "File does not exist")
-  # bad which value
-  path <- system.file("examples", "example1.pdf", package = "fulltext")
-  expect_error(ft_search(path, 'stuff'), "'arg' should be one of")
 })
