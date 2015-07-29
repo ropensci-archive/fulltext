@@ -135,6 +135,7 @@ is_doi <- function(x) {
 
 check_dois <- function(x) {
   stopifnot(is(x, "list") || is(x, "vector"))
+  x <- vapply(x, URLdecode, "")
   res <- vapply(x, is_doi, logical(1))
   if (all(res)) {
     TRUE
