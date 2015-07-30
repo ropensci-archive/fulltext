@@ -38,22 +38,18 @@ Search for full text.
 \examples{
 \dontrun{
 # Plos
-(res <- ft_search(query='ecology', from='plos'))
-res$plos
+(res1 <- ft_search(query='ecology', from='plos'))
+res1$plos
 ft_search(query='climate change', from='plos', limit=500, plosopts=list(
    fl=c('id','author','eissn','journal','counter_total_all','alm_twitterCount')))
 
 # Crossref
-(res <- ft_search(query='ecology', from='crossref'))
-res$crossref
+(res2 <- ft_search(query='ecology', from='crossref'))
+res2$crossref
 
 #biorxivr
 (res <- ft_search(query='ecology', from='biorxiv'))
 res$biorxiv
-
-# BMC
-(res <- ft_search(query='ecology', from='bmc'))
-res$bmc
 
 # Entrez
 (res <- ft_search(query='ecology', from='entrez'))
@@ -62,6 +58,10 @@ res$entrez
 # arxiv
 (res <- ft_search(query='ecology', from='arxiv'))
 res$arxiv
+
+# BMC - can be very slow
+(res <- ft_search(query='ecology', from='bmc'))
+res$bmc
 
 # PLOS, Crossref, and arxiv
 (res <- ft_search(query='ecology', from=c('plos','crossref','arxiv')))

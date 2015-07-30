@@ -27,6 +27,7 @@
 #' @importFrom utils URLdecode browseURL head
 #' @importFrom methods is 
 #' @importFrom stats na.omit setNames
+#' @importFrom xml2 read_html read_xml xml_find_one xml_find_all xml_text xml_contents
 #' @name fulltext-package
 #' @aliases fulltext
 #' @docType package

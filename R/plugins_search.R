@@ -25,7 +25,8 @@ plugin_crossref <- function(sources, query, limit, opts){
     opts$filter <- c(has_license = TRUE)
     # opts$filter <- c(`license.url`='http://creativecommons.org/licenses/by/3.0/deed.en_US')
     out <- do.call(cr_works, opts)
-    zz <- list(found = out$meta$total_results, data = out$data, opts = opts)
+    zz <- list(found = out$meta$total_results, data = out$data, opts = opts, 
+               license = list(type = "variable, see individual records"))
     structure(zz, class = "ft_ind", query = query)
   } else {
     zz <- list(found = NULL, data = NULL, opts = opts)
@@ -38,10 +39,10 @@ plugin_bmc <- function(sources, query, limit, opts){
     opts$terms <- query
     opts$limit <- limit
     out <- do.call(bmc_search, opts)
-    dat <- do.call(rbind, lapply(out@results$entries, data.frame, stringsAsFactors = FALSE))
+    dat <- do.call(rbind, lapply(out$results$entries, data.frame, stringsAsFactors = FALSE))
     opts$query <- opts$terms; opts$terms <- NULL
-    xpathSApply(xml, "//fm//bibl//pubid[@idtype='doi']", xmlValue)
-    zz <- list(found = NA, data = dat, opts = opts)
+    zz <- list(found = NA, data = dat, opts = opts, 
+               license = list(type = "variable, see `isOpenAccess` field in results"))
     structure(zz, class = "ft_ind", query = query)
   } else {
     zz <- list(found = NULL, data = NULL, opts = opts)
@@ -82,7 +83,8 @@ plugin_arxiv <- function(sources, query, limit, opts){
     opts$query <- query
     opts$limit <- limit
     out <- do.call(arxiv_search, opts)
-    zz <- list(found = attributes(out)$total_results, data = out, opts = opts)
+    zz <- list(found = attributes(out)$total_results, data = out, opts = opts,
+               license = list(type = "variable, but should be free to text-mine, see http://arxiv.org/help/license and http://arxiv.org/help/bulk_data"))
     structure(zz, class = "ft_ind", query = query)
   } else {
     zz <- list(found = NULL, data = NULL, opts = opts)
@@ -94,9 +96,9 @@ plugin_biorxivr <- function(sources, query, limit, opts){
   if (any(grepl("biorxiv", sources))) {
     opts$query <- query
     opts$limit <- limit
-    out <- do.call(bx_search, opts)
-    df <- data.frame(id = out$ID, url = out$URL, stringsAsFactors = FALSE)
-    zz <- list(found = out$found, data = df, opts = opts)
+    out <- do.call(biorxiv_search, opts)
+    zz <- list(found = out$found, data = out$data, opts = opts, 
+               license = list(type = "variable, but free to text-mine, see http://biorxiv.org/about-biorxiv"))
     structure(zz, class = "ft_ind", query = query)
   } else {
     zz <- list(found = NULL, data = NULL, opts = opts)

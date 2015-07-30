@@ -6,7 +6,6 @@
 #' @importFrom plyr rbind.fill
 #' @importFrom rentrez entrez_summary
 #' @importFrom aRxiv arxiv_search
-#' @importFrom biorxivr bx_search
 #'
 #' @param query Query terms
 #' @param from Source to query
@@ -23,22 +22,18 @@
 #'
 #' @examples \dontrun{
 #' # Plos
-#' (res <- ft_search(query='ecology', from='plos'))
-#' res$plos
+#' (res1 <- ft_search(query='ecology', from='plos'))
+#' res1$plos
 #' ft_search(query='climate change', from='plos', limit=500, plosopts=list(
 #'    fl=c('id','author','eissn','journal','counter_total_all','alm_twitterCount')))
 #'
 #' # Crossref
-#' (res <- ft_search(query='ecology', from='crossref'))
-#' res$crossref
+#' (res2 <- ft_search(query='ecology', from='crossref'))
+#' res2$crossref
 #'
 #' #biorxivr
 #' (res <- ft_search(query='ecology', from='biorxiv'))
 #' res$biorxiv
-#'
-#' # BMC
-#' (res <- ft_search(query='ecology', from='bmc'))
-#' res$bmc
 #'
 #' # Entrez
 #' (res <- ft_search(query='ecology', from='entrez'))
@@ -47,6 +42,10 @@
 #' # arxiv
 #' (res <- ft_search(query='ecology', from='arxiv'))
 #' res$arxiv
+#' 
+#' # BMC - can be very slow
+#' (res <- ft_search(query='ecology', from='bmc'))
+#' res$bmc
 #'
 #' # PLOS, Crossref, and arxiv
 #' (res <- ft_search(query='ecology', from=c('plos','crossref','arxiv')))
@@ -64,7 +63,7 @@ ft_search <- function(query, from = 'plos', limit = 10,
                       biorxivopts = list(),
                       ...) {
   
-  from <- match.arg(from, c("plos", "bmc", "crossref", "entrez", "arxiv", "biorxiv"))
+  from <- match.arg(from, c("plos", "bmc", "crossref", "entrez", "arxiv", "biorxiv"), several.ok = TRUE)
   plos_out <- plugin_plos(from, query, limit, plosopts)
   bmc_out <- plugin_bmc(from, query, limit, bmcopts)
   cr_out <- plugin_crossref(from, query, limit, crossrefopts)
@@ -111,7 +110,7 @@ print.ft_ind <- function(x, ..., n = 10) {
   found <- x$found
   cat(sprintf("Query: [%s]", attr(x, "query")), "\n")
   cat(sprintf("Records found, returned: [%s, %s]", found, rows), "\n")
-  cat(sprintf("License: [all %s]", x$license$type), "\n")
+  cat(sprintf("License: [%s]", x$license$type), "\n")
   print_if(x$data, n = n)
 }
 

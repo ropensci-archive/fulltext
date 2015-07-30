@@ -58,6 +58,7 @@
 #' x %>% chunks("refs") %>% tabularize()
 #' x %>% chunks(c("doi","publisher")) %>% tabularize()
 #' x %>% chunks(c("doi","publisher","permissions")) %>% tabularize()
+#' library("dplyr")
 #' x %>% 
 #'  chunks(c("doi","publisher","permissions")) %>% 
 #'  tabularize() %>% 
@@ -86,9 +87,9 @@
 #' chunks(res, what="publisher")
 #' 
 #' (res <- ft_search(query='ecology', from='entrez'))
-#' ft_get(res$entrez$data$DOI, from='entrez') %>% chunks("title")
-#' ft_get(res$entrez$data$DOI[1:4], from='entrez') %>% chunks("acknowledgments")
-#' ft_get(res$entrez$data$DOI[1:4], from='entrez') %>% chunks(c('title','keywords'))
+#' ft_get(res$entrez$data$doi, from='entrez') %>% chunks("title")
+#' ft_get(res$entrez$data$doi[1:4], from='entrez') %>% chunks("acknowledgments")
+#' ft_get(res$entrez$data$doi[1:4], from='entrez') %>% chunks(c('title','keywords'))
 #' 
 #' # From eLife
 #' x <- ft_get(c('10.7554/eLife.04251', '10.7554/eLife.04986'), from='elife')
