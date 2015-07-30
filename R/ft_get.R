@@ -14,7 +14,7 @@
 #' @param cache (logical) To cache results or not. If \code{cache=TRUE}, raw XML, or other
 #' format that article is in is written to disk, then pulled from disk when further 
 #' manipulations are done on the data. See also \code{\link{cache}}
-#' @param backend (character) One of local, rcache, redis, or sqlite
+#' @param backend (character) One of rds, rcache, or redis
 #' @param path (character) Path to local folder
 #' 
 #' @param ... Further args passed on to \code{\link[httr]{GET}}

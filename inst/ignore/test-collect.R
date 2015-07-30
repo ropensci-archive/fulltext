@@ -3,9 +3,10 @@ context("collect")
 test_that("collect returns...", {
   skip_on_cran()
 
-  res <- ft_get('10.1371/journal.pone.0086169', from='plos', cache=TRUE, backend="rds")
-  aa <- x %>% collect()
-  bb <- x %>% collect() %>% text()
+  dir <- tempdir()
+  res <- ft_get('10.1371/journal.pone.0086169', from='plos', cache=TRUE, backend="rcache", path=dir)
+  aa <- res %>% collect()
+  bb <- res %>% collect() %>% text()
 
   # correct classes
   expect_is(res, "ft_data")

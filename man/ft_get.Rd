@@ -38,7 +38,7 @@ ft_get(x, query, from = "plos", plosopts = list(), bmcopts = list(),
 format that article is in is written to disk, then pulled from disk when further
 manipulations are done on the data. See also \code{\link{cache}}}
 
-\item{backend}{(character) One of local, rcache, redis, or sqlite}
+\item{backend}{(character) One of rds, rcache, or redis}
 
 \item{path}{(character) Path to local folder}
 

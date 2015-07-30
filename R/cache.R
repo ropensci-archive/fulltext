@@ -32,8 +32,8 @@
 #' @rdname cache
 cache_options_set <- function(cache = TRUE, backend = "rds", path="~/.fulltext"){
   options(ft_cache = cache)
-  options(ft_backend = if(!cache) NULL else backend)
-  options(ft_path = if(!cache || backend %in% c("redis","rcache")) NULL else path)
+  options(ft_backend = if (!cache) NULL else backend)
+  options(ft_path = if (!cache || backend %in% c("redis", "rcache")) NULL else path)
 }
 
 #' @export
@@ -46,9 +46,8 @@ cache_options_get <- function(){
 }
 
 ############# save cache
-cache_save <- function(obj, backend, path, db)
-{
-  backend <- match.arg(backend, choices=c('rds', 'rcache', 'redis'))
+cache_save <- function(obj, backend, path, db) {
+  backend <- match.arg(backend, choices = c('rds', 'rcache', 'redis'))
   switch(backend,
          rds = save_rds(obj, path),
          rcache = save_rcache2(obj),
@@ -58,20 +57,18 @@ cache_save <- function(obj, backend, path, db)
   )
 }
 
-save_rds <- function(x, path="~/")
-{
+save_rds <- function(x, path="~/") {
   hash <- digest::digest(x)
   filepath <- file.path(path, paste0(hash, ".rds"))
-  saveRDS(object=x, file=filepath)
+  saveRDS(object = x, file = filepath)
   return( filepath )
 }
 
-save_redis2 <- function(x){
-  tt <- suppressWarnings(tryCatch(redisConnect(), error=function(e) e))
-  if(is(tt, "simpleError")){
+save_redis2 <- function(x) {
+  tt <- suppressWarnings(tryCatch(redisConnect(), error = function(e) e))
+  if (is(tt, "simpleError")) {
     stop("Start redis. Go to your terminal/shell and type redis-server, then hit enter")
-  } else
-  {
+  } else {
     key <- digest::digest(x)
     redisSet(key, x)
     redisClose()
@@ -81,18 +78,17 @@ save_redis2 <- function(x){
 
 save_rcache2 <- function(x){
   key <- digest::digest(x)
-  saveCache(object=x, key=list(key))
+  saveCache(object = x, key = list(key))
 }
 
 # save_sqlite <- function(db, x, y) dbInsert(db, key=y, value=x)
 
 ############# get cache
-cache_get <- function(key=NULL, backend=NULL, path=NULL, db=NULL)
-{
-  if(is.null(key)){
+cache_get <- function(key=NULL, backend=NULL, path=NULL, db=NULL) {
+  if (is.null(key)) {
     NULL
   } else {
-    backend <- match.arg(backend, choices=c('rds', 'rcache', 'redis'))
+    backend <- match.arg(backend, choices = c('rds', 'rcache', 'redis'))
     key <- path.expand(key)
     switch(backend,
            rds = get_rds(key),
@@ -105,25 +101,24 @@ cache_get <- function(key=NULL, backend=NULL, path=NULL, db=NULL)
 }
 
 get_rds <- function(z){
-  if(is.null(z))
+  if (is.null(z))
     NULL
   else 
     readRDS(z)
 }
 
-get_redis <- function(key)
-{
-  if(is.null(key)){
+get_redis <- function(key) {
+  if (is.null(key)) {
     NULL
   } else {
     redisConnect()
-    tt <- suppressWarnings(tryCatch(redisConnect(), error=function(e) e))
-    if(is(tt, "simpleError")){
+    tt <- suppressWarnings(tryCatch(redisConnect(), error = function(e) e))
+    if (is(tt, "simpleError")) {
       stop("You need to start redis. Go to your terminal/shell and type redis-server, then hit enter")
     } else {
       nn <- redisGet(key)
       redisClose()
-      if(!is.null(nn)){ 
+      if (!is.null(nn)) { 
         nn 
       } else { 
         NULL 
