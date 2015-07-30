@@ -16,10 +16,9 @@
 #' manipulations are done on the data. See also \code{\link{cache}}
 #' @param backend (character) One of rds, rcache, or redis
 #' @param path (character) Path to local folder
-#' 
 #' @param ... Further args passed on to \code{\link[httr]{GET}}
 #' 
-#' @return An object of class ft_data
+#' @return An object of class \code{ft_data}
 #'
 #' @examples \donttest{
 #' # by default, plos gives back xml
@@ -72,6 +71,10 @@
 #' 
 #' # Caching
 #' res <- ft_get('10.1371/journal.pone.0086169', from='plos', cache=TRUE, backend="rds")
+#' 
+#' # Search entrez, and pass to ft_get()
+#' (res <- ft_search(query='ecology', from='entrez'))
+#' ft_get(res)
 #' }
   
 ft_get <- function(x, query, from='plos', plosopts=list(), bmcopts=list(), entrezopts=list(), elifeopts=list(), 
@@ -85,13 +88,13 @@ ft_get.character <- function(x, query, from='plos', plosopts=list(), bmcopts=lis
                    elifeopts=list(), cache=FALSE, backend="rds", path="~/.fulltext", ...){
   from <- match.arg(from, c("plos", "entrez", "bmc", "elife"))
   cacheopts <- cache_options_get()
-  if(is.null(cacheopts$cache) && is.null(cacheopts$backend)) cache_options_set(cache, backend, path)
+  if (is.null(cacheopts$cache) && is.null(cacheopts$backend)) cache_options_set(cache, backend, path)
   
   plos_out <- plugin_get_plos(from, x, plosopts, ...)
   entrez_out <- plugin_get_entrez(from, x, entrezopts, ...)
   bmc_out <- plugin_get_bmc(from, x, bmcopts, ...)
   elife_out <- plugin_get_elife(from, x, elifeopts, ...)
-  structure(list(plos=plos_out, entrez=entrez_out, bmc=bmc_out, elife=elife_out), class="ft_data")
+  structure(list(plos = plos_out, entrez = entrez_out, bmc = bmc_out, elife = elife_out), class = "ft_data")
 }
 
 #' @export
@@ -99,13 +102,13 @@ ft_get.character <- function(x, query, from='plos', plosopts=list(), bmcopts=lis
 ft_get.ft <- function(x, query, from=NULL, plosopts=list(), bmcopts=list(), entrezopts=list(),  
                       elifeopts=list(), cache=FALSE, backend="rds", path="~/.fulltext", ...){
   cacheopts <- cache_options_get()
-  if(is.null(cacheopts$cache) && is.null(cacheopts$backend)) cache_options_set(cache, backend, path)
+  if (is.null(cacheopts$cache) && is.null(cacheopts$backend)) cache_options_set(cache, backend, path)
   
   from <- names(x[sapply(x, function(v) !is.null(v$data))])
   plos_out <- plugin_get_plos(from, x$plos$data$id, plosopts, ...)
-  entrez_out <- plugin_get_entrez(from, x$entrez$data$DOI, entrezopts, ...)
+  entrez_out <- plugin_get_entrez(from, x$entrez$data$doi, entrezopts, ...)
   bmc_out <- plugin_get_bmc(from, x$bmc$data, bmcopts, ...)
-  structure(list(plos=plos_out, entrez=entrez_out, bmc=bmc_out), class="ft_data")
+  structure(list(plos = plos_out, entrez = entrez_out, bmc = bmc_out), class = "ft_data")
 }
 
 #' @export
@@ -125,7 +128,7 @@ print.ft_data <- function(x, ...) {
   cat(ft_wrap(sprintf("[IDs]\n %s ...", namesprint)), "\n\n")
 }
 
-ft_wrap <- function (..., indent = 0, width = getOption("width")){
+ft_wrap <- function(..., indent = 0, width = getOption("width")) {
   x <- paste0(..., collapse = "")
   wrapped <- strwrap(x, indent = indent, exdent = indent + 2, width = width)
   paste0(wrapped, collapse = "\n")

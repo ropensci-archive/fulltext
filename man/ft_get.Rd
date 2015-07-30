@@ -45,7 +45,7 @@ manipulations are done on the data. See also \code{\link{cache}}}
 \item{...}{Further args passed on to \code{\link[httr]{GET}}}
 }
 \value{
-An object of class ft_data
+An object of class \code{ft_data}
 }
 \description{
 Get full text.
@@ -102,6 +102,10 @@ ft_get(res$entrez$data$DOI[1:3], from='entrez')
 
 # Caching
 res <- ft_get('10.1371/journal.pone.0086169', from='plos', cache=TRUE, backend="rds")
+
+# Search entrez, and pass to ft_get()
+(res <- ft_search(query='ecology', from='entrez'))
+ft_get(res)
 }
 }
 

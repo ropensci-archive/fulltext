@@ -50,7 +50,7 @@
 #' }
 
 ft_serialize <- function(x, to='xml', from=NULL, ...) {
-  is_ft_data(x)
+  is_or(x, c('ft_data', 'ft_parsed'))
   to <- match.arg(to, c('json','xml','list','file','rcache','redis'))
   fmt <- attributes(x$plos$data$data)$format
   tmp <- switch(to,
@@ -144,8 +144,7 @@ save_redis <- function(x) {
   tt <- suppressWarnings(tryCatch(redisConnect(), error = function(e) e))
   if (is(tt, "simpleError")) {
     stop("Start redis. Go to your terminal/shell and type redis-server, then hit enter")
-  } else
-  {
+  } else {
     x <- serialize_redis(x)
     redisClose()
     structure(x, location = "Redis")
@@ -169,11 +168,11 @@ serialize_rcache <- function(x) {
 serialize_redis <- function(x) {
   for (i in seq_along(x)) {
     if (is.null( x[[i]]$data )) {
-      x[[i]]$data <- "none"
+      x[[i]]$data$data <- NULL
     } else {
-      for (j in seq_along(x[[i]]$data)) {
-        nn <- paste(names(x[i]), names(x[[i]]$data[j]), sep = "_")
-        x[[i]]$data[[j]] <- redis_set_(nn, x[[i]]$data[[j]])
+      for (j in seq_along(x[[i]]$data$data)) {
+        nn <- paste(names(x[i]), names(x[[i]]$data$data[j]), sep = "_")
+        x[[i]]$data$data[[j]] <- redis_set_(nn, x[[i]]$data$data[[j]])
       }
     }
   }
