@@ -61,8 +61,8 @@ test_that("ft_serialize fails well", {
 
   # bad path given
   expect_error(ft_serialize(), "\"x\" is missing")
-  expect_error(ft_serialize('adfafsdf'), "Input to x must be of class ft_data")
-  expect_error(ft_serialize(5), "Input to x must be of class ft_data")
-  expect_error(ft_serialize(mtcars), "Input to x must be of class ft_data")
+  expect_error(ft_serialize('adfafsdf'), "Input to x must be one of")
+  expect_error(ft_serialize(5), "Input to x must be one of")
+  expect_error(ft_serialize(mtcars), "Input to x must be one of")
   expect_error(ft_serialize(res, "nada"), "'arg' should be one of")
 })

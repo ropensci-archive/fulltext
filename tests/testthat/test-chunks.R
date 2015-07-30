@@ -7,7 +7,7 @@ test_that("chunks returns...", {
   (dois <- searchplos(q="*:*", fl='id',
      fq=list('doc_type:full',"article_type:\"research article\""), limit=5)$data$id)
   x <- ft_get(dois, from="plos")
-  
+    
   aa <- x %>% chunks("front")
   bb <- x %>% chunks("body")
   
