@@ -60,7 +60,7 @@ ft_search(query = 'ecology', from = 'plos')
 #> Query:
 #>   [ecology] 
 #> Found:
-#>   [PLoS: 28256; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0] 
+#>   [PLoS: 28471; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0] 
 #> Returned:
 #>   [PLoS: 10; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0]
 ```
@@ -104,7 +104,7 @@ Using `ghostscript`
 
 ```r
 (res_gs <- ft_extract(pdf1, "gs"))
-#> <document>/Users/sacmac/github/ropensci/fulltext/inst/examples/example1.pdf
+#> <document>/Library/Frameworks/R.framework/Versions/3.2/Resources/library/fulltext/examples/example1.pdf
 #>   Title: ecsp-04-08-07 1..16
 #>   Producer: Acrobat Distiller 10.1.5 (Windows)
 #>   Creation date: 2013-08-16
@@ -115,7 +115,7 @@ Using `xpdf`
 
 ```r
 (res_xpdf <- ft_extract(pdf1, "xpdf"))
-#> <document>/Users/sacmac/github/ropensci/fulltext/inst/examples/example1.pdf
+#> <document>/Library/Frameworks/R.framework/Versions/3.2/Resources/library/fulltext/examples/example1.pdf
 #>   Pages: 16
 #>   Title: ecsp-04-08-07 1..16
 #>   Producer: Acrobat Distiller 10.1.5 (Windows)
@@ -136,7 +136,9 @@ paths <- sapply(paste0("example", 2:5, ".pdf"), function(x) system.file("example
 #> 4 content, meta PlainTextDocument, TextDocument
 #> 
 #> $data
-#> <<VCorpus (documents: 4, metadata (corpus/indexed): 0/0)>>
+#> <<VCorpus>>
+#> Metadata:  corpus specific: 0, document level (indexed): 0
+#> Content:  documents: 4
 #> 
 #> attr(,"class")
 #> [1] "xpdf"
@@ -175,21 +177,9 @@ pdfx(file = pdf5)
 #>  .....
 ```
 
-## Visualize
+## TODO
 
-__in development__
-
-`ft_plot()` is a convenience function to plot the results of a call to `ft_search()`. There are a variety of options available, including common ways that one vizualizes full text data.
-
-
-```r
-res <- ft_search(query = 'reproducible science', from = 'plos')
-ft_plot(res, method = 'somemethod')
-```
-
-(cool plot)
-
-* Note that `ft_plot()` doesn't exist yet.
+* `ft_plot()` - vizualize metadata or full text data
 
 ## Meta
 

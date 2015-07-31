@@ -141,20 +141,9 @@ pdfx(file = pdf5)
 #>  .....
 ```
 
-## Visualize
+## TODO
 
-__in development__
-
-`ft_plot()` is a convenience function to plot the results of a call to `ft_search()`. There are a variety of options available, including common ways that one vizualizes full text data.
-
-```{r eval=FALSE}
-res <- ft_search(query = 'reproducible science', from = 'plos')
-ft_plot(res, method = 'somemethod')
-```
-
-(cool plot)
-
-* Note that `ft_plot()` doesn't exist yet.
+* `ft_plot()` - vizualize metadata or full text data
 
 ## Meta
 
