@@ -29,6 +29,10 @@ Extract text from a single pdf document.
 
 #
 }
+\details{
+For xpdf, you can pass on addition options via flags. See Examples.
+Right now, you can't pass options to Ghostscript if you're using the gs option.
+}
 \examples{
 \donttest{
 path <- system.file("examples", "example1.pdf", package = "fulltext")
@@ -36,6 +40,16 @@ path <- system.file("examples", "example1.pdf", package = "fulltext")
 (res_xpdf <- ft_extract(path)) # xpdf is the default
 (res_xpdf <- ft_extract(path, "xpdf"))
 (res_gs <- ft_extract(path, "gs"))
+
+# pass on options to xpdf
+## preserve layout from pdf
+ft_extract(path, "xpdf", "-layout")
+## preserve table structure as much as possible
+ft_extract(path, "xpdf", "-table")
+## last page to convert is page 2
+ft_extract(path, "xpdf", "-l 2")
+## first page to convert is page 3
+ft_extract(path, "xpdf", "-f 3")
 }
 }
 

@@ -151,3 +151,6 @@ is_ft_data <- function(x) {
 is_or <- function(x, clazzes) {
   if (!class(x) %in% clazzes) stop("Input to x must be one of class ", paste0(clazzes, collapse = ", "), call. = FALSE) 
 }
+
+strextract <- function(str, pattern) regmatches(str, regexpr(pattern, str))
+strtrim <- function(str) gsub("^\\s+|\\s+$", "", str)

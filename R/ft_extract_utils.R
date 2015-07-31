@@ -1,3 +1,4 @@
+# pdf_info_via_gs() modified from tm:::pdf_info_via_gs
 pdf_info_via_gs <- function(file){
   file <- normalizePath(file)
   gs_cmd <- find_gs_cmd(Sys.getenv("R_GSCMD", ""))
@@ -59,6 +60,7 @@ find_gs_cmd <- function(gs_cmd = ""){
 #   info
 # }
 
+# pdf_info_via_xpdf() modified from tm:::pdf_info_via_xpdf
 pdf_info_via_xpdf <- function(file, options = NULL){
   outfile <- tempfile("pdfinfo")
   on.exit(unlink(outfile))
@@ -76,10 +78,8 @@ pdf_info_via_xpdf <- function(file, options = NULL){
                        Pages = as.integer(tmp$Pages)))
 }
 
-strextract <- function(str, pattern) regmatches(str, regexpr(pattern, str))
-strtrim <- function(str) gsub("^\\s+|\\s+$", "", str)
-
-pdf_text_via_gs <- function (file){
+# pdf_text_via_gs() modified from tm:::pdf_text_via_gs
+pdf_text_via_gs <- function(file){
   files <- normalizePath(file)
   gs_cmd <- find_gs_cmd(Sys.getenv("R_GSCMD", ""))
   tf <- tempfile("pdf")
@@ -95,6 +95,7 @@ pdf_text_via_gs <- function (file){
   strsplit(paste(txt, collapse = "\n"), "\f")[[1L]]
 }
 
+# PDF_Date_to_POSIXt() modified from tm:::PDF_Date_to_POSIXt
 PDF_Date_to_POSIXt <- function(s){
   s <- sub("^D:", "", s)
   s <- gsub("'", "", s)

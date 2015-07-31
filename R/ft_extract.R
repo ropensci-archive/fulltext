@@ -6,12 +6,24 @@
 #' @param x Input, printing
 #' @param ... further args passed on
 #' @return An object of class gs_char, xpdf_char
+#' @details For xpdf, you can pass on addition options via flags. See Examples. 
+#' Right now, you can't pass options to Ghostscript if you're using the gs option.
 #' @examples \donttest{
 #' path <- system.file("examples", "example1.pdf", package = "fulltext")
 #' 
 #' (res_xpdf <- ft_extract(path)) # xpdf is the default
 #' (res_xpdf <- ft_extract(path, "xpdf"))
 #' (res_gs <- ft_extract(path, "gs"))
+#' 
+#' # pass on options to xpdf
+#' ## preserve layout from pdf
+#' ft_extract(path, "xpdf", "-layout")
+#' ## preserve table structure as much as possible
+#' ft_extract(path, "xpdf", "-table")
+#' ## last page to convert is page 2
+#' ft_extract(path, "xpdf", "-l 2")
+#' ## first page to convert is page 3
+#' ft_extract(path, "xpdf", "-f 3")
 #' }
 
 ft_extract <- function(path, which = "xpdf", ...){
@@ -32,8 +44,8 @@ ft_extract <- function(path, which = "xpdf", ...){
 #   structure(list(meta=meta, data=res), class="rcamp_char", path=path)
 # }
 
-extract_gs <- function(path, which, ...){
-  cmds <- get_cmds(...)
+extract_gs <- function(path, ...){
+  # cmds <- get_cmds(...)
   path <- path.expand(path)
   res <- pdf_text_via_gs(path)
   res <- paste(res, collapse = ", ")
@@ -41,13 +53,20 @@ extract_gs <- function(path, which, ...){
   structure(list(meta = meta, data = res), class = "gs_char", path = path)
 }
 
-extract_xpdf <- function(path, which, ...){
+extract_xpdf <- function(path, ...){
+  check_pdftotext()
+  cmds <- get_cmds(...)
   path <- path.expand(path)
-  res <- system2("pdftotext", shQuote(path))
+  res <- system2("pdftotext", paste(cmds, shQuote(path)))
   newpath <- sub("\\.pdf", ".txt", path)
   res <- paste(readLines(newpath, warn = FALSE), collapse = ", ")
   meta <- pdf_info_via_xpdf(path)
   structure(list(meta = meta, data = res), class = "xpdf_char", path = path)
+}
+
+check_pdftotext <- function(x) {
+  chk <- Sys.which("pdftotext")
+  if (chk == "") stop("Please install Poppler http://poppler.freedesktop.org/ \nor xpdf http://www.foolabs.com/xpdf/", call. = FALSE)
 }
 
 # #' @export
@@ -80,5 +99,5 @@ print.xpdf_char <- function(x, ...) {
 
 get_cmds <- function(...){
   d <- list(...)
-  if (length(d) == 0) "" else d
+  if (length(d) == 0) "" else paste0(unlist(d), collapse = " ")
 }
