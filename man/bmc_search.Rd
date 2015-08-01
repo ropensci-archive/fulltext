@@ -13,7 +13,7 @@ bmc_search(terms, limit = 10, page = 1, ...)
 
 \item{page}{Page number. Only applies if more than 25 results.}
 
-\item{...}{Further args passed on to httr::GET}
+\item{...}{Further args passed on to \code{\link[httr]{GET}}}
 }
 \value{
 A list.
@@ -28,8 +28,7 @@ bmc_search(terms = 'fire', limit=3)
 bmc_search(terms = 'fire', limit=2, page=1)
 bmc_search(terms = 'fire', limit=2, page=2)
 
-out <- bmc_search(terms = 'fire', limit=5)
-out
+(out <- bmc_search(terms = 'fire', limit=5))
 
 # Search, then get full text
 out <- bmc_search(terms = 'ecology')

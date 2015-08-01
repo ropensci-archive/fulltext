@@ -24,7 +24,6 @@ Imports:
     XML,
     xml2,
     jsonlite,
-    plyr,
     rplos,
     rcrossref,
     aRxiv,

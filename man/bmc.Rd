@@ -16,7 +16,7 @@ bmc_xml(obj = NULL, uris = NULL, dir = NULL, raw = FALSE, ...)
 
 \item{raw}{(logical) If TRUE, returns raw text, but if FALSE, parsed XML. Default: FALSE}
 
-\item{...}{Futher args passed on to httr::GET for debugging curl calls.}
+\item{...}{Futher args passed on to \code{\link[httr]{GET}} for debugging curl calls.}
 }
 \description{
 Download full text xml of a BMC paper.
@@ -34,18 +34,17 @@ bmc_xml(uri, verbose())
 out <- bmc_search(terms = 'science', limit=5)
 dat <- bmc_xml(out)
 length(dat)
-library(plyr)
-dat <- compact(dat)
+dat <- Filter(Negate(is.null), dat)
 length(dat)
 dat
-library(XML)
+library("XML")
 xpathApply(dat[[1]], "//abs", xmlValue)
 saveXML(dat[[1]], file = 'myxml.xml')
 
-# curl debugging, and other parameters passed to \\code{httr::GET}
+# curl debugging, and other parameters passed to httr::GET()
 uri = 'http://www.microbiomejournal.com/content/download/xml/2049-2618-2-7.xml'
 res <- bmc_xml(uris=uri, config=verbose())
-res <- bmc_xml(uris=uri, config=timeout(0.1))
+# res <- bmc_xml(uris=uri, config=timeout(0.1))
 
 uri1 = 'http://www.biomedcentral.com/content/download/xml/1471-2393-14-71.xml'
 uri2 = 'http://www.springerplus.com/content/download/xml/2193-1801-3-7.xml'

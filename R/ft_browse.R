@@ -1,6 +1,5 @@
 #' Browse an article in your default browser.
 #'
-#' @import whisker
 #' @name ft_browse
 #'
 #' @param x An object of class \code{ft_data}

@@ -3,7 +3,6 @@
 #' @export
 #' @importFrom rplos searchplos plos_fulltext
 #' @importFrom rcrossref cr_works
-#' @importFrom plyr rbind.fill
 #' @importFrom rentrez entrez_summary
 #' @importFrom aRxiv arxiv_search
 #'
@@ -42,7 +41,7 @@
 #' # arxiv
 #' (res <- ft_search(query='ecology', from='arxiv'))
 #' res$arxiv
-#' 
+#'
 #' # BMC - can be very slow
 #' (res <- ft_search(query='ecology', from='bmc'))
 #' res$bmc
@@ -62,7 +61,7 @@ ft_search <- function(query, from = 'plos', limit = 10,
                       arxivopts = list(),
                       biorxivopts = list(),
                       ...) {
-  
+
   from <- match.arg(from, c("plos", "bmc", "crossref", "entrez", "arxiv", "biorxiv"), several.ok = TRUE)
   plos_out <- plugin_plos(from, query, limit, plosopts)
   bmc_out <- plugin_bmc(from, query, limit, bmcopts)
@@ -71,7 +70,7 @@ ft_search <- function(query, from = 'plos', limit = 10,
   arx_out <- plugin_arxiv(from, query, limit, arxivopts)
   bio_out <- plugin_biorxivr(from, query, limit, biorxivopts)
 
-  res <- list(plos = plos_out, bmc = bmc_out, crossref = cr_out, 
+  res <- list(plos = plos_out, bmc = bmc_out, crossref = cr_out,
               entrez = en_out, arxiv = arx_out, biorxiv = bio_out)
   structure(res, class = "ft", query = query)
 }

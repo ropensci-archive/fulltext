@@ -1,7 +1,6 @@
 #' Extract text from one to many pdf documents into a tm Corpus or Vcorpus.
 #'
 #' @importFrom tm Corpus URISource readPDF
-#' @importFrom plyr rbind.fill
 #'
 #' @export
 #'
@@ -58,7 +57,7 @@ files_exist <- function(x){
 }
 
 get_meta <- function(input){
-  do.call(rbind.fill, lapply(input, function(x) {
+  do.call(rbind_fill, lapply(input, function(x) {
     tmp <- attributes(x)
     tmp[sapply(tmp, length) == 0] <- NA
     tmp <- lapply(tmp, function(z) if (length(z) > 1) paste(z, collapse = ", ") else z)
