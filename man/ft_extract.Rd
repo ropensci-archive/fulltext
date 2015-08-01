@@ -34,7 +34,7 @@ For xpdf, you can pass on addition options via flags. See Examples.
 Right now, you can't pass options to Ghostscript if you're using the gs option.
 }
 \examples{
-\donttest{
+\dontrun{
 path <- system.file("examples", "example1.pdf", package = "fulltext")
 
 (res_xpdf <- ft_extract(path)) # xpdf is the default

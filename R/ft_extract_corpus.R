@@ -7,15 +7,15 @@
 #'
 #' @param paths Path to one or more pdfs
 #' @param which One of gs or xpdf.
-#' @param ... further args passed on to \code{readerControl} parameter 
+#' @param ... further args passed on to \code{readerControl} parameter
 #' in \code{\link[tm]{Corpus}}
 #' @return A tm Corpus (or VCorpus, later that is)
 #' @seealso \code{\link{ft_extract}}
-#' @examples \donttest{
+#' @examples \dontrun{
 #' path <- system.file("examples", "example1.pdf", package = "fulltext")
 #' (res <- ft_extract_corpus(path, "xpdf"))
 #' tm::TermDocumentMatrix(res$data)
-#' 
+#'
 #' (res_gs <- ft_extract_corpus(path, "gs"))
 #' }
 
@@ -37,7 +37,7 @@ ft_extract_corpus <- function(paths, which = "xpdf", ...){
 
 extract_tm_gs <- function(paths, which, ...){
   paths <- process_paths(paths)
-  out <- Corpus(URISource(paths), 
+  out <- Corpus(URISource(paths),
                 readerControl = list(reader = readPDF(engine = "ghostscript", control = list(...))))
   meta <- get_meta(out)
   structure(list(meta = meta, data = out), class = "gs")
@@ -45,7 +45,7 @@ extract_tm_gs <- function(paths, which, ...){
 
 extract_tm_xpdf <- function(paths, which, ...){
   paths <- process_paths(paths)
-  out <- Corpus(URISource(paths), 
+  out <- Corpus(URISource(paths),
                 readerControl = list(reader = readPDF(engine = "xpdf", control = list(...))))
   meta <- get_meta(out)
   structure(list(meta = meta, data = out), class = "xpdf")

@@ -1,20 +1,20 @@
 #' Extract text from a single pdf document.
-#' 
+#'
 #' @export
 #' @param path Path to a pdf file
 #' @param which One of gs or xpdf (default).
 #' @param x Input, printing
 #' @param ... further args passed on
 #' @return An object of class gs_char, xpdf_char
-#' @details For xpdf, you can pass on addition options via flags. See Examples. 
+#' @details For xpdf, you can pass on addition options via flags. See Examples.
 #' Right now, you can't pass options to Ghostscript if you're using the gs option.
-#' @examples \donttest{
+#' @examples \dontrun{
 #' path <- system.file("examples", "example1.pdf", package = "fulltext")
-#' 
+#'
 #' (res_xpdf <- ft_extract(path)) # xpdf is the default
 #' (res_xpdf <- ft_extract(path, "xpdf"))
 #' (res_gs <- ft_extract(path, "gs"))
-#' 
+#'
 #' # pass on options to xpdf
 #' ## preserve layout from pdf
 #' ft_extract(path, "xpdf", "-layout")
@@ -29,7 +29,7 @@
 ft_extract <- function(path, which = "xpdf", ...){
   which <- match.arg(which, c("gs", "xpdf"))
   if (!file.exists(path)) stop("File does not exist", call. = FALSE)
-  switch(which, 
+  switch(which,
          # rcamp = extract_rcamp(path, ...),
          gs = extract_gs(path, ...),
          xpdf = extract_xpdf(path, ...)

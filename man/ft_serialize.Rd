@@ -28,7 +28,7 @@ An object of class \code{ft_parsed}
 Serialize raw text to other formats, including to disk.
 }
 \examples{
-\donttest{
+\dontrun{
 dois <- c('10.1371/journal.pone.0087376','10.1371\%2Fjournal.pone.0086169',
 '10.1371/journal.pone.0102976','10.1371/journal.pone.0105225',
 '10.1371/journal.pone.0102722','10.1371/journal.pone.0033693')

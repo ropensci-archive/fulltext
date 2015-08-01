@@ -26,17 +26,18 @@ cache_clear(cachetype = NULL)
 Cache blobs of json, xml or pdfs of text from ft_get() function
 }
 \examples{
-\donttest{
-ft_get(ids='10.1371/journal.pone.0086169', from='plos', cache=FALSE)
-ft_get(ids='10.1371/journal.pone.0086169', from='plos', cache=TRUE)
+\dontrun{
+ft_get('10.1371/journal.pone.0086169', from='plos', cache=FALSE)
+ft_get('10.1371/journal.pone.0086169', from='plos', cache=TRUE)
 
 cache_options_set(backend="redis")
-(x <- ft_get(ids='10.1371/journal.pone.0086169', from='plos', cache=TRUE, backend="redis"))
+cache_options_get()
+(x <- ft_get('10.1371/journal.pone.0086169', from='plos', cache=TRUE, backend="redis"))
 x \%>\% collect()
 
 cache_options_set(backend="rcache")
 cache_options_get()
-(x <- ft_get(ids='10.1371/journal.pone.0086169', from='plos'))
+(x <- ft_get('10.1371/journal.pone.0086169', from='plos'))
 x \%>\% collect()
 
 # Many different sources

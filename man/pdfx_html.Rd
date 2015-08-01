@@ -16,7 +16,7 @@ pdfx_html(input, ...)
 Get html version of the extracted text
 }
 \examples{
-\donttest{
+\dontrun{
 path <- "~/github/sac/scott/pdfs/BarraquandEtal2014peerj.pdf"
 out <- pdfx(file = path)
 pdfx_html(out)

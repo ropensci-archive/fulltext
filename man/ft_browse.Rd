@@ -29,8 +29,8 @@ html page from XML content, each section parsed into separate section.
 }
 \examples{
 \dontrun{
-x <- ft_get(ids='10.7554/eLife.04300', from='elife')
-x <- ft_get(ids='10.7554/eLife.04251', from='elife')
+x <- ft_get('10.7554/eLife.04300', from='elife')
+x <- ft_get('10.7554/eLife.04251', from='elife')
 ft_browse(x)
 ft_browse(x, browse=FALSE)
 
@@ -40,7 +40,7 @@ ft_browse( ft_get('10.3389/fphar.2014.00109', from="entrez") )
 ft_browse(x, "publisher")
 
 # Browse sections
-x <- ft_get(ids=c('10.1371/journal.pone.0086169',"10.1371/journal.pone.0110535"), from='plos')
+x <- ft_get(c('10.1371/journal.pone.0086169',"10.1371/journal.pone.0110535"), from='plos')
 ft_browse_sections(x, "abstract")
 ft_browse_sections(x, "categories")
 

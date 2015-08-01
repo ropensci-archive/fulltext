@@ -1,17 +1,17 @@
 #' PDF-to-XML conversion of scientific articles using pdfx
-#' 
+#'
 #' Uses a web service provided by Utopia at \url{http://pdfx.cs.man.ac.uk/}.
-#' 
+#'
 #' @import httr XML
 #' @export
-#' 
+#'
 #' @param file (character) Path to a file, or files on your machine.
-#' @param what (character) One of parsed, text, or html. 
+#' @param what (character) One of parsed, text, or html.
 #' @template config
-#' 
+#'
 #' @author Scott Chamberlain {myrmecocystus@@gmail.com}
 #' @return Raw XML text, parsed to XMLInternalDocument, or to html text
-#' 
+#'
 #' @examples \dontrun{
 #' path <- "~/github/sac/hovick_work/pdfs/Vaughn1937_Mauritius.pdf"
 #' pdfx(file = path)
@@ -22,8 +22,8 @@ pdfx <- function(file = NULL, what = "parsed", ...)
   out <- pdfx_POST(file, ...)
   parsed <- xmlParse(out)
   meta <- pdfx_get_meta(parsed)
-  
-  toput <- switch(what, 
+
+  toput <- switch(what,
                   parsed = XML::xmlParse(out),
                   text = out,
                   html = "not yet"
@@ -44,12 +44,12 @@ pdfx_GET <- function(input, type="html", write_path, ...) {
   stopifnot(is(input, "pdfx"))
   jobid <- input$meta$base_name
   url <- paste0(file.path("http://pdfx.cs.man.ac.uk", jobid), ".", type)
-  if(type=="html"){ 
-    res <- GET(url, ...) 
+  if(type=="html"){
+    res <- GET(url, ...)
     if(!res$status_code == 200) stop("something's wrong", call.=FALSE)
-    content(res)    
-  } else { 
-    res <- GET(url, write_disk(path = write_path), ...) 
+    content(res)
+  } else {
+    res <- GET(url, write_disk(path = write_path), ...)
     if(!res$status_code == 200) stop("something's wrong", call.=FALSE)
     message(sprintf('tar file written to\n   %s', write_path))
   }
@@ -60,11 +60,11 @@ pdfx_get_meta <- function(x){
 }
 
 #' Get html version of the extracted text
-#' 
+#'
 #' @export
 #' @param input Output from \code{pdfx} function
 #' @template config
-#' @examples \donttest{
+#' @examples \dontrun{
 #' path <- "~/github/sac/scott/pdfs/BarraquandEtal2014peerj.pdf"
 #' out <- pdfx(file = path)
 #' pdfx_html(out)
@@ -72,12 +72,12 @@ pdfx_get_meta <- function(x){
 pdfx_html <- function(input, ...) pdfx_GET(input, "html", ...)
 
 #' Get tar.gz version of the extracted text
-#' 
+#'
 #' @export
 #' @param input Output from \code{pdfx} function
 #' @param write_path Path to write tar ball to.
 #' @template config
-#' @examples \donttest{
+#' @examples \dontrun{
 #' path <- "~/github/sac/scott/pdfs/BarraquandEtal2014peerj.pdf"
 #' out <- pdfx(file = path)
 #' tarfile <- tempfile(fileext = "tar.gz")

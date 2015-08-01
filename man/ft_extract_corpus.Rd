@@ -21,7 +21,7 @@ A tm Corpus (or VCorpus, later that is)
 Extract text from one to many pdf documents into a tm Corpus or Vcorpus.
 }
 \examples{
-\donttest{
+\dontrun{
 path <- system.file("examples", "example1.pdf", package = "fulltext")
 (res <- ft_extract_corpus(path, "xpdf"))
 tm::TermDocumentMatrix(res$data)

@@ -51,7 +51,7 @@ An object of class \code{ft_data}
 Get full text.
 }
 \examples{
-\donttest{
+\dontrun{
 # by default, plos gives back xml
 ft_get('10.1371/journal.pone.0086169', from='plos')
 

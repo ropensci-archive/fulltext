@@ -1,25 +1,26 @@
 #' Cache blobs of json, xml or pdfs of text from ft_get() function
-#' 
+#'
 #' @name cache
-#' 
+#'
 #' @param cache (logical) If TRUE, cache results, if not objects saved within R session.
 #' @param backend (character) One of local, rcache, redis
 #' @param path path to local storage. used only if \code{backend="rds"}
 #' @param cachetype The cache type
 #'
-#' @examples \donttest{
-#' ft_get(ids='10.1371/journal.pone.0086169', from='plos', cache=FALSE)
-#' ft_get(ids='10.1371/journal.pone.0086169', from='plos', cache=TRUE)
-#' 
+#' @examples \dontrun{
+#' ft_get('10.1371/journal.pone.0086169', from='plos', cache=FALSE)
+#' ft_get('10.1371/journal.pone.0086169', from='plos', cache=TRUE)
+#'
 #' cache_options_set(backend="redis")
-#' (x <- ft_get(ids='10.1371/journal.pone.0086169', from='plos', cache=TRUE, backend="redis"))
+#' cache_options_get()
+#' (x <- ft_get('10.1371/journal.pone.0086169', from='plos', cache=TRUE, backend="redis"))
 #' x %>% collect()
-#' 
+#'
 #' cache_options_set(backend="rcache")
 #' cache_options_get()
-#' (x <- ft_get(ids='10.1371/journal.pone.0086169', from='plos'))
+#' (x <- ft_get('10.1371/journal.pone.0086169', from='plos'))
 #' x %>% collect()
-#' 
+#'
 #' # Many different sources
 #' (res <- ft_search(query='ecology', from='entrez'))
 #' cache_options_set(backend="rds")
@@ -39,7 +40,7 @@ cache_options_set <- function(cache = TRUE, backend = "rds", path="~/.fulltext")
 #' @export
 #' @rdname cache
 cache_options_get <- function(){
-  list(cache = getOption("ft_cache"), 
+  list(cache = getOption("ft_cache"),
        backend = getOption("ft_backend"),
        path = getOption("ft_path")
   )
@@ -103,7 +104,7 @@ cache_get <- function(key=NULL, backend=NULL, path=NULL, db=NULL) {
 get_rds <- function(z){
   if (is.null(z))
     NULL
-  else 
+  else
     readRDS(z)
 }
 
@@ -118,10 +119,10 @@ get_redis <- function(key) {
     } else {
       nn <- redisGet(key)
       redisClose()
-      if (!is.null(nn)) { 
-        nn 
-      } else { 
-        NULL 
+      if (!is.null(nn)) {
+        nn
+      } else {
+        NULL
       }
     }
   }
@@ -148,10 +149,10 @@ cache_clear <- function(cachetype=NULL){
 #   if(is.null(cachetype))
 #     cachetype <- getOption('cachetype')
 #   if(is.null(cachetype))
-#     stop("Sorry, can't find your cache type. Either enter 
+#     stop("Sorry, can't find your cache type. Either enter
 #   		a type or keep a type in your .Rprofile file")
-#   
-#   switch(cachetype, 
+#
+#   switch(cachetype,
 #          local = X, # i.e., digest
 #          r.cache = X,
 #          redis = X,
