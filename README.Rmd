@@ -71,6 +71,31 @@ ft_search(query = 'ecology', from = 'plos')
 ft_get('10.1371/journal.pone.0086169', from = 'plos')
 ```
 
+## Extract chunks
+
+```{r}
+library("rplos")
+(dois <- searchplos(q = "*:*", fl = 'id',
+   fq = list('doc_type:full',"article_type:\"research article\""), limit = 5)$data$id)
+x <- ft_get(dois, from = "plos")
+x %>% chunks("publisher") %>% tabularize()
+```
+
+```{r}
+x %>% chunks(c("doi","publisher")) %>% tabularize()
+```
+
+Use `dplyr` to data munge
+
+```{r}
+library("dplyr")
+x %>%
+ chunks(c("doi","publisher","permissions")) %>%
+ tabularize() %>%
+ .$plos %>%
+ select(-permissions.license)
+```
+
 ## Cache
 
 __in development__

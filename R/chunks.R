@@ -58,12 +58,6 @@
 #' x %>% chunks("refs") %>% tabularize()
 #' x %>% chunks(c("doi","publisher")) %>% tabularize()
 #' x %>% chunks(c("doi","publisher","permissions")) %>% tabularize()
-#' library("dplyr")
-#' x %>%
-#'  chunks(c("doi","publisher","permissions")) %>%
-#'  tabularize() %>%
-#'  .$plos %>%
-#'  select(-permissions.license)
 #'
 #' x <- ft_get(c("10.3389/fnagi.2014.00130",'10.1155/2014/249309','10.1155/2014/162024'),
 #'    from='entrez')

@@ -77,6 +77,75 @@ ft_get('10.1371/journal.pone.0086169', from = 'plos')
 #> [IDs] 10.1371/journal.pone.0086169 ...
 ```
 
+## Extract chunks
+
+
+```r
+library("rplos")
+(dois <- searchplos(q = "*:*", fl = 'id',
+   fq = list('doc_type:full',"article_type:\"research article\""), limit = 5)$data$id)
+#> [1] "10.1371/journal.pone.0031384" "10.1371/journal.pone.0031385"
+#> [3] "10.1371/journal.pone.0107441" "10.1371/journal.pone.0000339"
+#> [5] "10.1371/journal.pone.0046739"
+x <- ft_get(dois, from = "plos")
+x %>% chunks("publisher") %>% tabularize()
+#> $plos
+#>    publisher.publisher.name publisher.publisher.loc
+#> 1 Public Library of Science      San Francisco, USA
+#> 2 Public Library of Science      San Francisco, USA
+#> 3 Public Library of Science      San Francisco, USA
+#> 4 Public Library of Science      San Francisco, USA
+#> 5 Public Library of Science      San Francisco, USA
+```
+
+
+```r
+x %>% chunks(c("doi","publisher")) %>% tabularize()
+#> $plos
+#>                            doi  publisher.publisher.name
+#> 1 10.1371/journal.pone.0031384 Public Library of Science
+#> 2 10.1371/journal.pone.0031385 Public Library of Science
+#> 3 10.1371/journal.pone.0107441 Public Library of Science
+#> 4 10.1371/journal.pone.0000339 Public Library of Science
+#> 5 10.1371/journal.pone.0046739 Public Library of Science
+#>   publisher.publisher.loc
+#> 1      San Francisco, USA
+#> 2      San Francisco, USA
+#> 3      San Francisco, USA
+#> 4      San Francisco, USA
+#> 5      San Francisco, USA
+```
+
+Use `dplyr` to data munge
+
+
+```r
+library("dplyr")
+x %>%
+ chunks(c("doi","publisher","permissions")) %>%
+ tabularize() %>%
+ .$plos %>%
+ select(-permissions.license)
+#>                            doi  publisher.publisher.name
+#> 1 10.1371/journal.pone.0031384 Public Library of Science
+#> 2 10.1371/journal.pone.0031385 Public Library of Science
+#> 3 10.1371/journal.pone.0107441 Public Library of Science
+#> 4 10.1371/journal.pone.0000339 Public Library of Science
+#> 5 10.1371/journal.pone.0046739 Public Library of Science
+#>   publisher.publisher.loc permissions.copyright.year
+#> 1      San Francisco, USA                       2012
+#> 2      San Francisco, USA                       2012
+#> 3      San Francisco, USA                       2014
+#> 4      San Francisco, USA                       2007
+#> 5      San Francisco, USA                       2012
+#>   permissions.copyright.holder                     permissions.license_url
+#> 1                 Arnold et al                                        <NA>
+#> 2                     Hu, Kuhn                                        <NA>
+#> 3           Peterson, McKenzie http://creativecommons.org/licenses/by/4.0/
+#> 4                Shrager et al                                        <NA>
+#> 5                Kapoula et al                                        <NA>
+```
+
 ## Cache
 
 __in development__
