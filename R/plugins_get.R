@@ -1,6 +1,6 @@
 plugin_get_crossref <- function(sources, ids, opts, ...){
   callopts <- list(...)
-  if(any(grepl("entrez", sources))){
+  if (any(grepl("entrez", sources))) {
     opts$ids <- ids
     out <- do.call(entrez_get, opts)
     attr(out, "format") <- "xml"
@@ -12,7 +12,7 @@ plugin_get_crossref <- function(sources, ids, opts, ...){
 
 plugin_get_plos <- function(sources, ids, opts, ...){
   callopts <- list(...)
-  if(any(grepl("plos", sources))){
+  if (any(grepl("plos", sources))) {
     check_dois(ids)
     opts$doi <- ids
     opts$callopts <- callopts
@@ -25,7 +25,7 @@ plugin_get_plos <- function(sources, ids, opts, ...){
 }
 
 construct_paths <- function(co, x){
-  if(!co$cache){
+  if (!co$cache) {
     list(backend = NULL, 
          path = "session",
          data = x)
@@ -38,7 +38,7 @@ construct_paths <- function(co, x){
 
 plugin_get_entrez <- function(sources, ids, opts, ...){
   callopts <- list(...)
-  if(any(grepl("entrez", sources))){
+  if (any(grepl("entrez", sources))) {
     opts$ids <- ids
     out <- as.list(do.call(entrez_get, opts))
     attr(out, "format") <- "xml"
@@ -49,19 +49,19 @@ plugin_get_entrez <- function(sources, ids, opts, ...){
 }
 
 entrez_get <- function(ids){
-  res <- entrez_search(db="pmc", term=paste0(sprintf('%s[doi]', ids), collapse = "|"))
-  vapply(res$ids, function(z) entrez_fetch(db = 'pmc', id=z, rettype = "xml"), character(1))
+  res <- entrez_search(db = "pmc", term = paste0(sprintf('%s[doi]', ids), collapse = "|"))
+  vapply(res$ids, function(z) entrez_fetch(db = 'pmc', id = z, rettype = "xml"), character(1))
 }
 
 plugin_get_bmc <- function(sources, query, opts, ...){
   callopts <- list(...)
-  if(any(grepl("bmc", sources))){
+  if (any(grepl("bmc", sources))) {
     opts$uris <- query
     opts$raw <- TRUE
     out <- do.call(bmc_xml, opts)
     attr(out, "format") <- "xml"
     dois <- sapply(out, function(x) {
-      xpathSApply(xmlParse(x), "//fm//bibl//pubid[@idtype='doi']", xmlValue)
+      xml2::xml_text(xml2::xml_find_one(xml2::read_xml(x), "//fm//bibl//pubid[@idtype='doi']"))
     })
     list(found = length(out), dois = dois, data = out, opts = opts)
   } else {
@@ -71,7 +71,7 @@ plugin_get_bmc <- function(sources, query, opts, ...){
 
 plugin_get_elife <- function(sources, ids, opts, ...){
   callopts <- list(...)
-  if(any(grepl("elife", sources))){
+  if (any(grepl("elife", sources))) {
     opts$doi <- ids
     out2 <- lapply(ids, elife_paper)
     names(out2) <- ids
@@ -84,5 +84,5 @@ plugin_get_elife <- function(sources, ids, opts, ...){
 
 elife_paper <- function(doi) {
   url <- sprintf("http://elife.elifesciences.org/elife-source-xml/%s", doi)
-  httr::content(GET(url), as="text")
+  httr::content(GET(url), as = "text")
 }

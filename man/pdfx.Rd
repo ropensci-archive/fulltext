@@ -22,7 +22,7 @@ Uses a web service provided by Utopia at \url{http://pdfx.cs.man.ac.uk/}.
 }
 \examples{
 \dontrun{
-path <- "~/github/sac/hovick_work/pdfs/Vaughn1937_Mauritius.pdf"
+path <- system.file("examples", "example2.pdf", package = "fulltext")
 pdfx(file = path)
 }
 }
