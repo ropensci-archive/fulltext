@@ -85,7 +85,7 @@ When dealing with full text data, you can get a lot quickly, and it can take a l
 
 
 ```r
-ft_get(ids='10.1371/journal.pone.0086169', from='plos', cache=TRUE)
+ft_get('10.1371/journal.pone.0086169', from='plos', cache=TRUE)
 ```
 
 ## pdf to text
@@ -96,30 +96,30 @@ Locally, using code adapted from the package `tm`, and various pdf to text parsi
 
 
 ```r
-pdf1 <- system.file("examples", "example1.pdf", package = "fulltext")
+pdf <- system.file("examples", "example2.pdf", package = "fulltext")
 ```
 
 Using `ghostscript`
 
 
 ```r
-(res_gs <- ft_extract(pdf1, "gs"))
-#> <document>/Library/Frameworks/R.framework/Versions/3.2/Resources/library/fulltext/examples/example1.pdf
-#>   Title: ecsp-04-08-07 1..16
-#>   Producer: Acrobat Distiller 10.1.5 (Windows)
-#>   Creation date: 2013-08-16
+(res_gs <- ft_extract(pdf, "gs"))
+#> <document>/Library/Frameworks/R.framework/Versions/3.2/Resources/library/fulltext/examples/example2.pdf
+#>   Title: pone.0107412 1..10
+#>   Producer: Acrobat Distiller 9.0.0 (Windows); modified using iText 5.0.3 (c) 1T3XT BVBA
+#>   Creation date: 2014-09-18
 ```
 
 Using `xpdf`
 
 
 ```r
-(res_xpdf <- ft_extract(pdf1, "xpdf"))
-#> <document>/Library/Frameworks/R.framework/Versions/3.2/Resources/library/fulltext/examples/example1.pdf
-#>   Pages: 16
-#>   Title: ecsp-04-08-07 1..16
-#>   Producer: Acrobat Distiller 10.1.5 (Windows)
-#>   Creation date: 2013-08-16
+(res_xpdf <- ft_extract(pdf, "xpdf"))
+#> <document>/Library/Frameworks/R.framework/Versions/3.2/Resources/library/fulltext/examples/example2.pdf
+#>   Pages: 10
+#>   Title: pone.0107412 1..10
+#>   Producer: Acrobat Distiller 9.0.0 (Windows); modified using iText 5.0.3 (c) 1T3XT BVBA
+#>   Creation date: 2014-09-18
 ```
 
 Or extract directly into a `tm` Corpus
@@ -186,5 +186,6 @@ pdfx(file = pdf5)
 * Please [report any issues or bugs](https://github.com/ropensci/fulltext/issues).
 * License: MIT
 * Get citation information for `fulltext`: `citation(package = 'fulltext')`
+* Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
 
 [![rofooter](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)

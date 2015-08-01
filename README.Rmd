@@ -78,7 +78,7 @@ __in development__
 When dealing with full text data, you can get a lot quickly, and it can take a long time to get. That's where caching comes in. And after you pull down a bunch of data, if you do so within the R session, you don't want to lose that data if the session crashes, etc. When you search you _will be able to_ (i.e., not ready yet) optionally cache the raw JSON/XML/etc. of each request locally - when you do that exact search again we'll just give you the local data - unless of course you want new data, which you can do.
 
 ```{r eval=FALSE}
-ft_get(ids='10.1371/journal.pone.0086169', from='plos', cache=TRUE)
+ft_get('10.1371/journal.pone.0086169', from='plos', cache=TRUE)
 ```
 
 ## pdf to text
@@ -88,19 +88,19 @@ There are going to be cases in which some results you find in `ft_search()` have
 Locally, using code adapted from the package `tm`, and various pdf to text parsing backends
 
 ```{r}
-pdf1 <- system.file("examples", "example1.pdf", package = "fulltext")
+pdf <- system.file("examples", "example2.pdf", package = "fulltext")
 ```
 
 Using `ghostscript`
 
 ```{r}
-(res_gs <- ft_extract(pdf1, "gs"))
+(res_gs <- ft_extract(pdf, "gs"))
 ```
 
 Using `xpdf`
 
 ```{r}
-(res_xpdf <- ft_extract(pdf1, "xpdf"))
+(res_xpdf <- ft_extract(pdf, "xpdf"))
 ```
 
 Or extract directly into a `tm` Corpus
@@ -150,5 +150,6 @@ pdfx(file = pdf5)
 * Please [report any issues or bugs](https://github.com/ropensci/fulltext/issues).
 * License: MIT
 * Get citation information for `fulltext`: `citation(package = 'fulltext')`
+* Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
 
 [![rofooter](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)

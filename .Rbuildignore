@@ -11,3 +11,4 @@ vignettes/margins.sty
 CONTRIBUTING.md
 README.Rmd
 ^.*\.xml
+^CONDUCT\.md$
