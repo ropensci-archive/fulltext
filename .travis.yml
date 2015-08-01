@@ -6,7 +6,7 @@ r_github_packages:
   - ropensci/rplos
 
 after_success:
-  - Rscript -e 'library(covr); coveralls()'
+  - Rscript -e 'covr::codecov()'
 
 before_script:
   - Rscript -e "install.packages('Rcampdf', repos = 'http://datacube.wu.ac.at/', type = 'source')"
