@@ -3,25 +3,44 @@
 \name{collect}
 \alias{collect}
 \alias{collect.ft_data}
+\alias{get_text}
+\alias{get_text.ft_data}
 \title{Collect data from a remote source in fulltext}
 \usage{
 collect(x, ...)
 
 \method{collect}{ft_data}(x, ...)
+
+get_text(x, ...)
+
+\method{get_text}{ft_data}(x, ...)
 }
 \arguments{
-\item{x}{Input.}
+\item{x}{Input. An object of class \code{ft_data}}
 
 \item{...}{Further args, ignored.}
 }
 \description{
-Collect data from a remote source in fulltext
+\code{collect} grabs full text data from a remote storage device. \code{get_text}
+is a convenience function to grab the nested text data and bring it up in the
+list for easier access
 }
 \examples{
 \dontrun{
+# Get some data, stash in rds file
 x <- ft_get('10.1371/journal.pone.0086169', from='plos', cache=TRUE, backend="rds")
-x \%>\% collect()
-x \%>\% collect() \%>\% text()
+
+# note that the data is not in the object, gives NULL
+x$plos$data$data
+
+# Collect data from the rds file
+y <- x \%>\% collect()
+
+# note how the data is now in the object
+y$plos$data$data
+
+# Let's get the actual
+x \%>\% collect() \%>\% get_text()
 }
 }
 
