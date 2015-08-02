@@ -10,23 +10,41 @@ There are various formats articles are provided in, including pdf, plain text, x
 
 > Note: many of these journals are also in PMC, where some formats are provided: PDF, ePub.
 
-Publisher | pdf | xml | json | plain text | epub | Notes |
-----------| ----| --- | ---- | ---------- | ---- | ----- |
-PLOS | [Y][plp] | [Y][plx] [^1] | N | N |  N |... |
-FrontiersIn | [Y][fp] | [Y][fx] [^1] | N | N | N | ReadCube, browser |
-Pensoft | [Y][pep] | [Y][pex] | N | N |  N |... |
-eLife | [Y][ep] | [Y][ex] | N | N |  N |... |
-BiomedCentral | [Y][bp] | [Y][bx] | N | N |  N |... |
-Hindawi | [Y][hp] | [Y][hx] | N | N | [Y][he] | Don't show XML link on page  |
-CogenOA | [Y][coap] | [Y][coax] | N | N |  N |... |
-Karger | [Y][kp] | [Y][kx] | N | N |  N |... |
-Sage | [Y][sp] | N | N | N |  N |... |
-Copernicus | [Y][copp] | [Y][copx] | N | N |  N |... |
-Bentham | [Y][bep] | N | N | N |  N |... |
+Publisher | pdf | xml | epub | Notes |
+----------| ----| --- | ---- | ----- |
+AIRCC | [Y][airccp] | N |  N |... |
+arXiv | [Y][arxivp] | N |  N |... |
+Bentham | [Y][bep] | N |  N |... |
+BiomedCentral | [Y][bp] | [Y][bx] | N |... |
+bioRxiv | [Y][biorxivp] | N | N |... |
+CogentOA | [Y][coap] | [Y][coax] | N |... |
+Copernicus | [Y][copp] | [Y][copx] ^[1] | N |... |
+De Gruyter | [Y][degrutp] | N | N |... |
+Dovepress | [Y][dovep] | N | N |... |
+eLife | [Y][ep] | [Y][ex] | N |... |
+FrontiersIn | [Y][fp] | [Y][fx] ^[1] | Y | ReadCube in browser |
+Hindawi | [Y][hp] | [Y][hx] | [Y][he] | Don't show XML link on page  |
+Karger | [Y][kp] | [Y][kx] | N |... |
+MDPI | [Y][mdpip] | [Y][mdpix] | N |... |
+Nature | [Y][naturep] | N | N |... |
+PeerJ | [Y][peerjp] | [Y][peerjx] | N |... |
+Pensoft | [Y][pep] | [Y][pex] | N |... |
+PLoS | [Y][plp] | [Y][plx] ^[1] | N |... |
+Sage | [Y][sp] | N | N |... |
+Scielo | [Y][scielop] | [Y][scielox] | N | May only be some journals |
+ScienceOpen | [Y][sciopp] | [Y][sciopx] | N |... |
+SERSC | [Y][serscp] | N | N |... |
+Springer Open | [Y][springeroap] | [Y][springeroax] | N |... |
 
-[^1]: NLM-DTD XML schema - http://dtd.nlm.nih.gov/
+^1: NLM-DTD XML schema - http://dtd.nlm.nih.gov/
+^2: Wiley and Elsevier do have a few open access journals each, 
+which provide PDFs, but no XML. Elsevier has text mining web services
+but they are so painful to use that we will not support it here. Do 
+put pressure on these two enormous publishers to give XML of articles, at
+least for their open access journals.
 
 [plp]: http://www.plosone.org/article/fetchObject.action?uri=info%3Adoi%2F10.1371%2Fjournal.pone.0107510&representation=PDF
+[peerjp]: https://peerj.com/articles/1142.pdf
 [fp]: http://journal.frontiersin.org/Journal/10.3389/fnagi.2014.00336/pdf
 [pep]: http://zookeys.pensoft.net/lib/ajax_srv/article_elements_srv.php?action=download_pdf&item_id=4351
 [ep]: http://elifesciences.org/content/elife/2/e00471.full.pdf
@@ -37,8 +55,20 @@ Bentham | [Y][bep] | N | N | N |  N |... |
 [sp]: http://gph.sagepub.com/content/1/2333794X14548199.full.pdf
 [copp]: http://www.biogeosciences.net/11/7331/2014/bg-11-7331-2014.pdf
 [bep]: http://benthamopen.com/contents/pdf/TONEUJ/TONEUJ-9-21.pdf
+[arxivp]: http://arxiv.org/pdf/1507.08559v1.pdf?
+[biorxivp]: http://biorxiv.org/content/biorxiv/early/2015/07/26/023259.full.pdf
+[springeroap]: http://www.jnanochem.com/content/pdf/2193-8865-3-79.pdf
+[degrutp]: http://www.degruyter.com/dg/viewarticle.fullcontentlink:pdfeventlink/$002fj$002fbiolet.2014.51.issue-2$002fbiolet-2015-0008$002fbiolet-2015-0008.pdf?format=INT&t:ac=j$002fbiolet.2014.51.issue-2$002fbiolet-2015-0008$002fbiolet-2015-0008.xml
+[mdpip]: http://www.mdpi.com/1999-4915/7/8/2817/pdf
+[serscp]: http://www.sersc.org/journals/IJEIC/vol6_Is3/2.pdf
+[airccp]: http://airccse.org/journal/cnc/7115cnc04.pdf
+[naturep]: http://www.nature.com/srep/2015/150731/srep12550/pdf/srep12550.pdf
+[dovep]: http://www.dovepress.com/getfile.php?fileID=24696
+[scielop]: http://www.scielo.br/pdf/cbab/v14n1/04.pdf
+[sciopp]: https://www.scienceopen.com/document_file/1812366b-8712-46f8-b8ec-581d885c7ae5/PubMedCentral/1812366b-8712-46f8-b8ec-581d885c7ae5.pdf
 
 [plx]: http://www.plosone.org/article/fetchObjectAttachment.action?uri=info%3Adoi%2F10.1371%2Fjournal.pone.0107510&representation=XML
+[peerjx]: https://peerj.com/articles/1142.xml
 [fx]: http://journal.frontiersin.org/Journal/10.3389/fnagi.2014.00336/xml/nlm
 [pex]: http://zookeys.pensoft.net/lib/ajax_srv/article_elements_srv.php?action=download_xml&item_id=4351
 [ex]: http://elifesciences.org/content/3/e04165.source.xml
@@ -47,5 +77,9 @@ Bentham | [Y][bep] | N | N | N |  N |... |
 [kx]: http://downloads.hindawi.com/journals/crid/2014/246965.pdf
 [coax]: http://cogentoa.tandfonline.com/doi/xml/10.1080/23311908.2014.986922
 [copx]: http://www.biogeosciences.net/11/7331/2014/bg-11-7331-2014.xml
+[springeroax]: http://www.jnanochem.com/content/download/xml/2193-8865-3-79.xml
+[mdpix]: http://www.mdpi.com/1999-4915/7/8/2817/xml
+[scielox]: http://www.scielo.br/scieloOrg/php/articleXML.php?pid=S1984-70332014000100004&lang=en
+[sciopx]: https://www.scienceopen.com/document/vid/35b1397c-0f4f-438c-98de-56d87439d520?4-1.ILinkListener-header-download~dropdown-xml~link
 
 [he]: http://downloads.hindawi.com/journals/crid/2014/246965.epub
