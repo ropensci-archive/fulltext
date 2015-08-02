@@ -34,14 +34,14 @@ dois <- c('10.1371/journal.pone.0087376','10.1371\%2Fjournal.pone.0086169',
 '10.1371/journal.pone.0102722','10.1371/journal.pone.0033693')
 res <- ft_get(dois, from='plos')
 
+# if articles in xml format, parse the XML
+(out <- ft_serialize(res, to='xml'))
+out$plos$data$data[[1]] # the xml
+
 # From XML to JSON
 (out <- ft_serialize(res, to='json'))
-out$plos$data$`10.1371/journal.pone.0087376` # the json
-jsonlite::fromJSON(out$plos$data$`10.1371/journal.pone.0087376`)
-
-# Parse raw xml to XMLInternalDocument class
-out <- ft_serialize(res, to='xml')
-out$plos$data[[1]]
+out$plos$data$data$`10.1371/journal.pone.0087376` # the json
+jsonlite::fromJSON(out$plos$data$data$`10.1371/journal.pone.0087376`)
 
 # To a list
 out <- ft_serialize(res, to='list')

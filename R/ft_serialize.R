@@ -18,15 +18,15 @@
 #' '10.1371/journal.pone.0102976','10.1371/journal.pone.0105225',
 #' '10.1371/journal.pone.0102722','10.1371/journal.pone.0033693')
 #' res <- ft_get(dois, from='plos')
+#' 
+#' # if articles in xml format, parse the XML
+#' (out <- ft_serialize(res, to='xml'))
+#' out$plos$data$data[[1]] # the xml
 #'
 #' # From XML to JSON
 #' (out <- ft_serialize(res, to='json'))
-#' out$plos$data$`10.1371/journal.pone.0087376` # the json
-#' jsonlite::fromJSON(out$plos$data$`10.1371/journal.pone.0087376`)
-#'
-#' # Parse raw xml to XMLInternalDocument class
-#' out <- ft_serialize(res, to='xml')
-#' out$plos$data[[1]]
+#' out$plos$data$data$`10.1371/journal.pone.0087376` # the json
+#' jsonlite::fromJSON(out$plos$data$data$`10.1371/journal.pone.0087376`)
 #'
 #' # To a list
 #' out <- ft_serialize(res, to='list')
@@ -80,8 +80,9 @@ to_xml <- function(x, fmt, ...){
   if (fmt == 'xml') {
     lapply(x, function(y) {
       for (i in seq_along(y$data$data)) {
-        y$data$data[[i]] <- XML::xmlParse(y$data$data[[i]])
+        y$data$data[[i]] <- xml2::read_xml(y$data$data[[i]])
       }
+      y$data$data <- unclass(y$data$data)
       return( y )
     })
   } else {
@@ -113,8 +114,10 @@ to_list <- function(x, fmt, ...){
   if (fmt == 'xml') {
     lapply(x, function(y) {
       for (i in seq_along(y$data$data)) {
-        y$data$data[[i]] <- XML::xmlToList(y$data$data[[i]])
+        # y$data$data[[i]] <- XML::xmlToList(y$data$data[[i]])
+        y$data$data[[i]] <- xml2::read_xml(y$data$data[[i]])
       }
+      y$data$data <- unclass(y$data$data)
       return( y )
     })
   } else {
@@ -125,6 +128,21 @@ to_list <- function(x, fmt, ...){
       return( y )
     })
   }
+}
+
+xml_to_list <- function(z) {
+  # xml2::xml_children(z)
+  lapply(xml2::xml_children(z), function(w) {
+    lapply(xml2::xml_children(w), function(v) {
+      lapply(xml2::xml_children(v), function(f) {
+        xml2::xml_children(f)
+      })
+    })
+  })
+}
+
+xml_node_parse <- function(x) {
+  as.list(setNames(xml_text(x), xml_name(x)))
 }
 
 save_file <- function(x, y, path="~/.fulltext_cache") {

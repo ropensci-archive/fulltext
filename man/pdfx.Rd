@@ -9,13 +9,13 @@ pdfx(file = NULL, what = "parsed", ...)
 \arguments{
 \item{file}{(character) Path to a file, or files on your machine.}
 
-\item{what}{(character) One of parsed, text, or html.}
+\item{what}{(character) One of parsed or text.}
 
 \item{...}{Further args passed to \code{\link[httr]{GET}}. These aren't named, so just do e.g. ,
 \code{verbose()}, or \code{timeout(3)}}
 }
 \value{
-Raw XML text, parsed to XMLInternalDocument, or to html text
+Raw XML text, parsed to \code{xml_document}
 }
 \description{
 Uses a web service provided by Utopia at \url{http://pdfx.cs.man.ac.uk/}.
