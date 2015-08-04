@@ -27,8 +27,8 @@ uri = 'http://www.biomedcentral.com/content/download/xml/1471-2393-14-71.xml'
 uri = 'http://www.springerplus.com/content/download/xml/2193-1801-3-7.xml'
 uri = 'http://www.microbiomejournal.com/content/download/xml/2049-2618-2-7.xml'
 bmc_xml(uris=uri)
-bmc_xml(uri, dir='~/')
-bmc_xml(uri, verbose())
+bmc_xml(uris=uri, dir='~/')
+bmc_xml(uris=uri, verbose())
 
 # from using bmc_search
 out <- bmc_search(terms = 'science', limit=5)
@@ -37,9 +37,6 @@ length(dat)
 dat <- Filter(Negate(is.null), dat)
 length(dat)
 dat
-library("XML")
-xpathApply(dat[[1]], "//abs", xmlValue)
-saveXML(dat[[1]], file = 'myxml.xml')
 
 # curl debugging, and other parameters passed to httr::GET()
 uri = 'http://www.microbiomejournal.com/content/download/xml/2049-2618-2-7.xml'

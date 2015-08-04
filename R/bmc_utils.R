@@ -52,8 +52,8 @@ bmc_search <- function(terms, limit=10, page=1, ...) {
 #' uri = 'http://www.springerplus.com/content/download/xml/2193-1801-3-7.xml'
 #' uri = 'http://www.microbiomejournal.com/content/download/xml/2049-2618-2-7.xml'
 #' bmc_xml(uris=uri)
-#' bmc_xml(uri, dir='~/')
-#' bmc_xml(uri, verbose())
+#' bmc_xml(uris=uri, dir='~/')
+#' bmc_xml(uris=uri, verbose())
 #'
 #' # from using bmc_search
 #' out <- bmc_search(terms = 'science', limit=5)
@@ -62,9 +62,6 @@ bmc_search <- function(terms, limit=10, page=1, ...) {
 #' dat <- Filter(Negate(is.null), dat)
 #' length(dat)
 #' dat
-#' library("XML")
-#' xpathApply(dat[[1]], "//abs", xmlValue)
-#' saveXML(dat[[1]], file = 'myxml.xml')
 #'
 #' # curl debugging, and other parameters passed to httr::GET()
 #' uri = 'http://www.microbiomejournal.com/content/download/xml/2049-2618-2-7.xml'
@@ -92,18 +89,18 @@ bmc_xml <- function(obj=NULL, uris=NULL, dir=NULL, raw=FALSE, ...) {
     if (!res$status_code == 200) {
       message(sprintf('%s not found, or xml not available', x))
     } else {
-      tt <- content(res, as = "text")
+      tt <- content(res, as = "text", encoding = "UTF-8")
 
       if (raw) {
         tt
       } else {
-        xml <- tryCatch(xmlParse(tt), error = function(e) e, silent = TRUE)
+        xml <- tryCatch(xml2::read_xml(tt), error = function(e) e, silent = TRUE)
         if (is(xml, 'simpleError')) {
           message(sprintf('%s is not valid xml', x))
         } else {
           if (!is.null(dir)) {
-            filedir <- paste0(dir, strextract(x, "[0-9].+")[[1]], collapse = '')
-            saveXML(xml, file = filedir)
+            filedir <- path.expand(paste0(dir, strextract(x, "[0-9].+")[[1]], collapse = ''))
+            xml2::write_xml(xml, filedir)
           } else {
             return( xml )
           }
@@ -115,5 +112,3 @@ bmc_xml <- function(obj=NULL, uris=NULL, dir=NULL, raw=FALSE, ...) {
 
   lapply(uris, getxml, ...)
 }
-
-strextract <- function(str, pattern) regmatches(str, regexpr(pattern, str))

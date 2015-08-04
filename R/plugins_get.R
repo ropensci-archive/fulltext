@@ -94,7 +94,7 @@ bmc_ft <- function(dois, ...) {
   lapply(dois, function(x) {
     url <- sprintf("http://www.microbiomejournal.com/content/download/xml/%s.xml", 
                    strextract(x, "[0-9-]+$"))
-    httr::content(httr::GET(url, ...), as = "text")
+    httr::content(httr::GET(url, ...), as = "text", encoding = "UTF-8")
   })
 }
 
@@ -115,7 +115,7 @@ plugin_get_elife <- function(sources, ids, opts, path = NULL, ...){
 elife_paper <- function(dois, ...) {
   lapply(dois, function(x) {
     url <- sprintf("http://elife.elifesciences.org/elife-source-xml/%s", x)
-    httr::content(httr::GET(url, ...), as = "text")
+    httr::content(httr::GET(url, ...), as = "text", encoding = "UTF-8")
   })
 }
 
@@ -137,7 +137,7 @@ plugin_get_peerj <- function(sources, ids, opts, path = NULL, ...){
 peerj_ft <- function(dois, ...) {
   lapply(dois, function(x) {
     url <- sprintf("https://peerj.com/articles/%s.xml", strextract(x, "[0-9]+$"))
-    httr::content(httr::GET(url, ...), as = "text")
+    httr::content(httr::GET(url, ...), as = "text", encoding = "UTF-8")
   })
 }
 
@@ -159,7 +159,7 @@ plugin_get_frontiersin <- function(sources, ids, opts, path = NULL, ...){
 frontiersin_ft <- function(dois, ...) {
   lapply(dois, function(x) {
     url <- sprintf("http://journal.frontiersin.org/article/%s/xml/nlm", x)
-    httr::content(httr::GET(url, ...), as = "text")
+    httr::content(httr::GET(url, ...), as = "text", encoding = "UTF-8")
   })
 }
 
@@ -181,7 +181,7 @@ plugin_get_pensoft <- function(sources, ids, opts, path = NULL, ...){
 
 pensoft_ft <- function(dois, ...) {
   lapply(dois, function(x) {
-    httr::content(httr::GET(rcrossref::cr_ft_links(x), ...), as = "text")
+    httr::content(httr::GET(rcrossref::cr_ft_links(x), ...), as = "text", encoding = "UTF-8")
   })
 }
 
@@ -205,7 +205,7 @@ copernicus_ft <- function(dois, ...) {
   lapply(dois, function(x) {
     res <- HEAD(paste0("http://dx.doi.org/", x))
     url <- paste0(res$url, sub("10.5194/", "", x), ".xml")
-    httr::content(httr::GET(url, ...), as = "text")
+    httr::content(httr::GET(url, ...), as = "text", encoding = "UTF-8")
   })
 }
 
@@ -281,6 +281,6 @@ plugin_get_cogent <- function(sources, ids, opts, path = NULL, ...){
 cogent_ft <- function(dois, ...) {
   lapply(dois, function(x) {
     url <- paste0("http://cogentoa.tandfonline.com/doi/xml/", x)
-    httr::content(httr::GET(url, ...), as = "text")
+    httr::content(httr::GET(url, ...), as = "text", encoding = "UTF-8")
   })
 }
