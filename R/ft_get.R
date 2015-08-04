@@ -181,6 +181,30 @@ ft_get.character <- function(x, from=NULL, plosopts=list(), bmcopts=list(), entr
 
 #' @export
 #' @rdname ft_get
+ft_get.list <- function(x, from=NULL, plosopts=list(), bmcopts=list(), entrezopts=list(),
+                        elifeopts=list(), cache=FALSE, backend="rds", path="~/.fulltext", ...) {
+  
+  cacheopts <- cache_options_get()
+  if (is.null(cacheopts$cache) && is.null(cacheopts$backend)) cache_options_set(cache, backend, path)
+  
+  if (!is.null(from)) {
+    from <- match.arg(from, c("plos", "entrez", "bmc", "elife", "pensoft", "arxiv", "biorxiv"))
+    plos_out <- plugin_get_plos(from, x, plosopts, ...)
+    entrez_out <- plugin_get_entrez(from, x, entrezopts, ...)
+    bmc_out <- plugin_get_bmc(from, x, bmcopts, ...)
+    elife_out <- plugin_get_elife(from, x, elifeopts, ...)
+    pensoft_out <- plugin_get_pensoft(from, x, ...)
+    arxiv_out <- plugin_get_arxiv(from, x, path, ...)
+    biorxiv_out <- plugin_get_biorxiv(from, x, path, ...)
+    structure(list(plos = plos_out, entrez = entrez_out, bmc = bmc_out, elife = elife_out,
+                   pensoft = pensoft_out, arxiv = arxiv_out, biorxiv = biorxiv_out), class = "ft_data")
+  } else {
+    get_unknown(x, path, ...)
+  }
+}
+
+#' @export
+#' @rdname ft_get
 ft_get.ft <- function(x, from=NULL, plosopts=list(), bmcopts=list(), entrezopts=list(),
                       elifeopts=list(), cache=FALSE, backend="rds", path="~/.fulltext", ...) {
   cacheopts <- cache_options_get()
