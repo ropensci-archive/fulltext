@@ -18,7 +18,7 @@ Output to xml returns object of class XMLInternalDocument.}
 \item{from}{(character) Format \code{x} is currently in. Function attempts to use metadata
 provided, or guess from data itself. Optional. CURRENTLY IGNORED.}
 
-\item{...}{Further args passed on to \code{\link[XML]{xmlParse}} or
+\item{...}{Further args passed on to \code{\link[xml2]{read_xml}} or
 \code{\link[jsonlite]{toJSON}}}
 }
 \value{

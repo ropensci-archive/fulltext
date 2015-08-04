@@ -3,7 +3,7 @@
 #' @export
 #'
 #' @param x Input article
-#' @param what What to get, can be 1 to many. See Details.
+#' @param what What to get, can be 1 or more in a vector or list. See Details.
 #'
 #' @details Options for the \code{what} parameter:
 #' \itemize{
@@ -32,7 +32,7 @@
 #' x <- ft_get('10.1371/journal.pone.0086169', from='plos')
 #' chunks(x, what="authors")
 #'
-#' library("rplos")
+#' library("rplos") 
 #' (dois <- searchplos(q="*:*", fl='id',
 #'    fq=list('doc_type:full',"article_type:\"research article\""), limit=5)$data$id)
 #' x <- ft_get(dois, from="plos")
@@ -61,10 +61,13 @@
 #'
 #' x <- ft_get(c("10.3389/fnagi.2014.00130",'10.1155/2014/249309','10.1155/2014/162024'),
 #'    from='entrez')
-#' x %>% chunks(c("doi","keywords")) %>% tabularize()
+#' x %>% chunks("doi") %>% tabularize()
 #' x %>% chunks("authors") %>% tabularize()
 #' x %>% chunks(c("doi","publisher","permissions")) %>% tabularize()
 #' x %>% chunks("history") %>% tabularize()
+#' 
+#' x <- ft_get('10.3389/fnagi.2014.00130', from='entrez')
+#' x %>% chunks("keywords")
 #'
 #' # Piping workflow
 #' opts <- list(fq=list('doc_type:full',"article_type:\"research article\""))
@@ -92,12 +95,12 @@
 #' x %>% chunks("journal_meta")
 #' x %>% chunks("acknowledgments")
 #' x %>% chunks("refs_dois")
-#' x %>% chunks(c("abstract","executive_summary"))
+#' x %>% chunks(c("abstract", "executive_summary"))
 #' }
 
 chunks <- function(x, what='all') {
   is_ft_data(x)
-  what <- match.arg(what, c("all", sections()), TRUE)
+  what <- match.arg(unlist(what), c("all", sections()), TRUE)
   out <- list()
   for (i in seq_along(x)) {
     if (is.null(x[[i]]$found)) {
@@ -105,7 +108,7 @@ chunks <- function(x, what='all') {
     } else {
       out[[names(x[i])]] <-
       lapply(x[[i]]$data$data, function(q){
-        qparsed <- xmlParse(q)
+        qparsed <- xml2::read_xml(q)
         get_what(data = qparsed, what, names(x[i]))
       })
     }
@@ -146,34 +149,34 @@ get_what <- function(data, what, from){
 
 title <- function(b, from){
   switch(from,
-         elife = xpathSApply(b, "//title-group/article-title", xmlValue)[[1]],
-         plos = xpathSApply(b, "//title-group/article-title", xmlValue)[[1]],
-         entrez = xpathSApply(b, "//title-group/article-title", xmlValue)[[1]]
+         elife = f1txt(b, "//title-group/article-title"),
+         plos = f1txt(b, "//title-group/article-title"),
+         entrez = f1txt(b, "//title-group/article-title")
   )
 }
 
 doi <- function(b, from){
   switch(from,
-         elife = xpathSApply(b, "//article-id[@pub-id-type='doi']", xmlValue)[[1]],
-         plos = xpathSApply(b, "//article-id[@pub-id-type='doi']", xmlValue)[[1]],
-         entrez = xpathSApply(b, "//article-id[@pub-id-type='doi']", xmlValue)[[1]]
+         elife = f1txt(b, "//article-id[@pub-id-type='doi']"),
+         plos = f1txt(b, "//article-id[@pub-id-type='doi']"),
+         entrez = f1txt(b, "//article-id[@pub-id-type='doi']")
   )
 }
 
 categories <- function(b, from){
   switch(from,
-         elife = xpathSApply(xpathSApply(b, "//article-categories")[[1]], "//subject", xmlValue),
-         plos = xpathSApply(xpathSApply(b, "//article-categories")[[1]], "//subject", xmlValue),
-         entrez = xpathSApply(xpathSApply(b, "//article-categories")[[1]], "//subject", xmlValue)
+         elife = xml2::xml_text(xml_find_all(xml2::xml_find_all(b, "//article-categories")[[1]], "//subject")),
+         plos = xml2::xml_text(xml_find_all(xml2::xml_find_all(b, "//article-categories")[[1]], "//subject")),
+         entrez = xml2::xml_text(xml_find_all(xml2::xml_find_all(b, "//article-categories")[[1]], "//subject"))
   )
 }
 
 authors <- function(b, from){
   get_auth <- function(v){
-    tmp <- xpathSApply(v, "//contrib[@contrib-type='author']")
+    tmp <- xml2::xml_find_all(v, "//contrib[@contrib-type='author']")
     lapply(tmp, function(z){
-      list(given_names = xpathSApply(z, "name/given-names", xmlValue),
-           surname = xpathSApply(z, "name/surname", xmlValue))
+      list(given_names = f1txt(z, "name/given-names"),
+           surname = f1txt(z, "name/surname"))
     })
   }
   switch(from,
@@ -185,37 +188,33 @@ authors <- function(b, from){
 
 keywords <- function(b, from){
   switch(from,
-         elife = xpathSApply(b, "//kwd-group[@kwd-group-type='author-keywords']/kwd", xmlValue),
+         elife = xml2::xml_text(xml2::xml_find_all(b, "//kwd-group[@kwd-group-type='author-keywords']/kwd")),
          plos = NULL,
-         entrez = xpathSApply(b, "//kwd-group/kwd", xmlValue)
+         entrez = xml2::xml_text(xml2::xml_find_all(b, "//kwd-group/kwd"))
   )
 }
 
 body <- function(b, from){
   switch(from,
-         elife = {
-           body <- getNodeSet(b, "//body/p")
-           body2 <- lapply(body, xmlValue)
-           setNames(body2, sapply(body, xmlGetAttr, name = "hwp:id"))
-         },
-         plos = {
-           body <- getNodeSet(b, "//body//p")
-           lapply(body, xmlValue)
-         }
+         elife = xml_text(xml_find_all(b, "//body//p")),
+         plos = xml_text(xml_find_all(b, "//body//p"))
   )
 }
 
 abstract <- function(b, from){
   switch(from,
-         elife = xpathSApply(b, "//abstract[@hwp:id='abstract-1']/p", xmlValue)[[1]],
-         plos = xpathSApply(b, "//abstract", xmlValue),
-         entrez = xpathSApply(b, "//abstract", xmlValue)
+         elife = xml_text(xml_find_all(xml_find_all(b, '//abstract[@hwp:id="abstract-1"]', ns = xml_ns(b))[[1]], "p")[1]),
+         plos = f1txt(b, "//abstract"),
+         entrez = f1txt(b, "//abstract")
   )
 }
 
 exec_summary <- function(b, from){
   switch(from,
-         elife = paste0(xpathSApply(b, "//abstract[@hwp:id='abstract-2']/p", xmlValue), collapse = " "),
+         elife = {
+           tmp <- xml_text(xml_find_all(b, '//abstract[@abstract-type="executive-summary"]/p', ns = xml_ns(b)))
+           tmp[-length(tmp)]
+         },
          plos = NULL,
          entrez = NULL
   )
@@ -223,7 +222,7 @@ exec_summary <- function(b, from){
 
 refs_dois <- function(b, from){
   switch(from,
-         elife = xpathSApply(b, "//ref-list/ref//pub-id[@pub-id-type='doi']", xmlValue),
+         elife = falltxt(b, "//ref-list/ref//pub-id[@pub-id-type='doi']"),
          plos = NULL,
          entrez = NULL
   )
@@ -232,40 +231,40 @@ refs_dois <- function(b, from){
 refs <- function(b, from){
   switch(from,
          elife = NULL,
-         plos = xpathSApply(b, "//ref-list/ref/mixed-citation", xmlValue),
-         entrez = xpathSApply(b, "//ref-list/ref", xmlValue)
+         plos = falltxt(b, "//ref-list/ref/mixed-citation"),
+         entrez = falltxt(b, "//ref-list/ref")
   )
 }
 
 publisher <- function(b, from){
   switch(from,
-         elife = xmlToList(xpathSApply(b, "//publisher")[[1]]),
-         plos = xmlToList(xpathSApply(b, "//publisher")[[1]]),
-         entrez = xmlToList(xpathSApply(b, "//publisher")[[1]])
+         elife = falltxt(b, "//publisher"),
+         plos = falltxt(b, "//publisher"),
+         entrez = falltxt(b, "//publisher")
   )
 }
 
 journal_meta <- function(b, from){
   switch(from,
-         elife = xmlToList(xpathSApply(b, "//journal-meta")[[1]], addAttributes = TRUE),
-         plos = xmlToList(xpathSApply(b, "//journal-meta")[[1]], addAttributes = TRUE),
-         entrez = xmlToList(xpathSApply(b, "//journal-meta")[[1]], addAttributes = TRUE)
+         elife = lapply(xml2::xml_children(xml2::xml_find_one(b, "//journal-meta")), xml_node_parse),
+         plos = lapply(xml2::xml_children(xml2::xml_find_one(b, "//journal-meta")), xml_node_parse),
+         entrez = lapply(xml2::xml_children(xml2::xml_find_one(b, "//journal-meta")), xml_node_parse)
   )
 }
 
 article_meta <- function(b, from){
   switch(from,
-         elife = xmlToList(xpathSApply(b, "//article-meta")[[1]], addAttributes = TRUE),
-         plos = xmlToList(xpathSApply(b, "//article-meta")[[1]], addAttributes = TRUE),
-         entrez = xmlToList(xpathSApply(b, "//article-meta")[[1]], addAttributes = TRUE)
+         elife = lapply(xml2::xml_children(xml2::xml_find_one(b, "//article-meta")), xml_node_parse),
+         plos = lapply(xml2::xml_children(xml2::xml_find_one(b, "//article-meta"), xml_node_parse)),
+         entrez = lapply(xml2::xml_children(xml2::xml_find_one(b, "//article-meta"), xml_node_parse))
   )
 }
 
 acknowledgments <- function(b, from){
   switch(from,
-         elife = xpathSApply(b, "//ack/p", xmlValue),
-         plos = xpathSApply(b, "//ack/p", xmlValue),
-         entrez = xpathSApply(b, "//ack/p", xmlValue)
+         elife = f1txt(b, "//ack/p"),
+         plos = f1txt(b, "//ack/p"),
+         entrez = f1txt(b, "//ack/p")
   )
 }
 
@@ -278,27 +277,35 @@ permissions <- function(b, from){
 }
 
 getperms <- function(v){
-  tmp <- xmlToList(xpathSApply(v, "//permissions")[[1]], addAttributes = FALSE)
+  # tmp <- xmlToList(xpathSApply(v, "//permissions")[[1]], addAttributes = FALSE)
+  tmp <- sapply(xml2::xml_children(xml2::xml_find_one(v, "//permissions")), xml_node_parse)
   tmp$license <- paste0(tmp$license[[1]], collapse = " ")
-  lichref <- tryCatch(xmlGetAttr(xpathSApply(v, "//permissions/license//ext-link")[[1]], "xlink:href"), error = function(e) e)
+  lichref <- tryCatch(xml_attr(xml_find_all(v, "//permissions/license//ext-link"), "href"), error = function(e) e)
   tmp$license_url <- if (is(lichref, "simpleError")) NA else lichref
   tmp
 }
 
 front <- function(b, from){
   switch(from,
-         elife = xmlToList(xpathSApply(b, "//front")[[1]]),
-         plos = xmlToList(xpathSApply(b, "//front")[[1]]),
-         entrez = xmlToList(xpathSApply(b, "//front")[[1]])
+         elife = get_forb(b, "//front"),
+         plos = get_forb(b, "//front"),
+         entrez = get_forb(b, "//front")
   )
 }
 
 back <- function(b, from){
   switch(from,
-         elife = xmlToList(xpathSApply(b, "//back")[[1]]),
-         plos = xmlToList(xpathSApply(b, "//back")[[1]]),
-         entrez = xmlToList(xpathSApply(b, "//back")[[1]])
+         elife = get_forb(b, "//back"),
+         plos = get_forb(b, "//back"),
+         entrez = get_forb(b, "//back")
   )
+}
+
+get_forb <- function(x, fb) {
+  tmp <- xml_children(xml_find_all(x, fb))
+  lapply(tmp, function(z) {
+    lapply(xml_children(z), xml_node_parse)
+  })
 }
 
 history <- function(b, from){
@@ -310,11 +317,11 @@ history <- function(b, from){
 }
 
 history2date <- function(r){
-  tmp <- xpathSApply(r, "//history/date")
+  tmp <- xml_find_all(r, "//history/date")
   out <- lapply(tmp, function(rr){
-    as.Date(paste0(sapply(c('day','month','year'), function(vv) xpathApply(rr, vv, xmlValue)), collapse = "-"), "%d-%m-%Y")
+    as.Date(paste0(sapply(c('day','month','year'), function(vv) f1txt(rr, vv)), collapse = "-"), "%d-%m-%Y")
   })
-  setNames(out, sapply(tmp, xmlGetAttr, name = "date-type"))
+  setNames(out, sapply(tmp, xml_attr, attr = "date-type"))
 }
 
 #' @export
@@ -329,4 +336,12 @@ tabularize <- function(x){
     })
   })
   lapply(out, rbind_fill)
+}
+
+f1txt <- function(x, xpath) {
+  xml2::xml_text(xml2::xml_find_one(x, xpath))
+}
+
+falltxt <- function(x, xpath) {
+  xml2::xml_text(xml2::xml_find_all(x, xpath))
 }

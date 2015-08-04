@@ -12,7 +12,7 @@ tabularize(x)
 \arguments{
 \item{x}{Input article}
 
-\item{what}{What to get, can be 1 to many. See Details.}
+\item{what}{What to get, can be 1 or more in a vector or list. See Details.}
 }
 \value{
 A list of output, one for each thing requested
@@ -77,10 +77,13 @@ x \%>\% chunks(c("doi","publisher","permissions")) \%>\% tabularize()
 
 x <- ft_get(c("10.3389/fnagi.2014.00130",'10.1155/2014/249309','10.1155/2014/162024'),
    from='entrez')
-x \%>\% chunks(c("doi","keywords")) \%>\% tabularize()
+x \%>\% chunks("doi") \%>\% tabularize()
 x \%>\% chunks("authors") \%>\% tabularize()
 x \%>\% chunks(c("doi","publisher","permissions")) \%>\% tabularize()
 x \%>\% chunks("history") \%>\% tabularize()
+
+x <- ft_get('10.3389/fnagi.2014.00130', from='entrez')
+x \%>\% chunks("keywords")
 
 # Piping workflow
 opts <- list(fq=list('doc_type:full',"article_type:\\"research article\\""))
@@ -108,7 +111,7 @@ x \%>\% chunks("publisher")
 x \%>\% chunks("journal_meta")
 x \%>\% chunks("acknowledgments")
 x \%>\% chunks("refs_dois")
-x \%>\% chunks(c("abstract","executive_summary"))
+x \%>\% chunks(c("abstract", "executive_summary"))
 }
 }
 

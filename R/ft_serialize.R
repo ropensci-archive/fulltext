@@ -10,7 +10,7 @@
 #' Output to xml returns object of class XMLInternalDocument.
 #' @param from (character) Format \code{x} is currently in. Function attempts to use metadata
 #' provided, or guess from data itself. Optional. CURRENTLY IGNORED.
-#' @param ... Further args passed on to \code{\link[XML]{xmlParse}} or
+#' @param ... Further args passed on to \code{\link[xml2]{read_xml}} or
 #' \code{\link[jsonlite]{toJSON}}
 #' @return An object of class \code{ft_parsed}
 #' @examples \dontrun{
@@ -18,7 +18,7 @@
 #' '10.1371/journal.pone.0102976','10.1371/journal.pone.0105225',
 #' '10.1371/journal.pone.0102722','10.1371/journal.pone.0033693')
 #' res <- ft_get(dois, from='plos')
-#' 
+#'
 #' # if articles in xml format, parse the XML
 #' (out <- ft_serialize(res, to='xml'))
 #' out$plos$data$data[[1]] # the xml
@@ -140,10 +140,7 @@ to_list <- function(x, fmt, ...){
 #     })
 #   })
 # }
-# 
-# xml_node_parse <- function(x) {
-#   as.list(setNames(xml_text(x), xml_name(x)))
-# }
+#
 
 save_file <- function(x, y, path="~/.fulltext_cache") {
   hash <- digest::digest(x)
