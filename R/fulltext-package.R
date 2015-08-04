@@ -28,7 +28,7 @@
 #' @importFrom methods is
 #' @importFrom stats na.omit setNames
 #' @importFrom xml2 read_html read_xml xml_find_one xml_find_all xml_text xml_contents xml_attr
-#' @importFrom httr GET POST upload_file content_type content write_disk stop_for_status
+#' @importFrom httr HEAD GET POST upload_file content_type content write_disk stop_for_status
 #' @importFrom whisker whisker.render
 #' @name fulltext-package
 #' @aliases fulltext

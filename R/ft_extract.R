@@ -4,7 +4,6 @@
 #' @param x Path to a pdf file, or an object of class \code{ft_data}, the 
 #' output from \code{\link{ft_get}}
 #' @param which One of gs or xpdf (default).
-#' @param x Input, printing
 #' @param ... further args passed on
 #' @return An object of class gs_char, xpdf_char
 #' @details For xpdf, you can pass on addition options via flags. See Examples.

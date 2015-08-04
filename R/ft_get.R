@@ -169,9 +169,9 @@ ft_get.character <- function(x, from=NULL, plosopts=list(), bmcopts=list(), entr
     entrez_out <- plugin_get_entrez(from, x, entrezopts, ...)
     bmc_out <- plugin_get_bmc(from, x, bmcopts, ...)
     elife_out <- plugin_get_elife(from, x, elifeopts, ...)
-    pensoft_out <- plugin_get_pensoft(from, x, ...)
-    arxiv_out <- plugin_get_arxiv(from, x, path, ...)
-    biorxiv_out <- plugin_get_biorxiv(from, x, path, ...)
+    pensoft_out <- plugin_get_pensoft(from, x, list(), ...)
+    arxiv_out <- plugin_get_arxiv(from, x, list(), path, ...)
+    biorxiv_out <- plugin_get_biorxiv(from, x, list(), path, ...)
     structure(list(plos = plos_out, entrez = entrez_out, bmc = bmc_out, elife = elife_out,
                    pensoft = pensoft_out, arxiv = arxiv_out, biorxiv = biorxiv_out), class = "ft_data")
   } else {

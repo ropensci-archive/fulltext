@@ -27,6 +27,6 @@ test_that("ft_extract fails well", {
   skip_on_cran()
   
   # bad path given
-  expect_error(ft_extract(5), "invalid 'file' argument")
+  expect_error(ft_extract(5), "no applicable method")
   expect_error(ft_extract('adfafsdf'), "File does not exist")
 })

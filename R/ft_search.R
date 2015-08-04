@@ -2,7 +2,7 @@
 #'
 #' @export
 #' @importFrom rplos searchplos plos_fulltext
-#' @importFrom rcrossref cr_works
+#' @importFrom rcrossref cr_works cr_ft_links
 #' @importFrom rentrez entrez_summary
 #' @importFrom aRxiv arxiv_search
 #'

@@ -19,8 +19,6 @@ output from \code{\link{ft_get}}}
 \item{which}{One of gs or xpdf (default).}
 
 \item{...}{further args passed on}
-
-\item{x}{Input, printing}
 }
 \value{
 An object of class gs_char, xpdf_char

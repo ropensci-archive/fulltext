@@ -90,7 +90,7 @@ plugin_get_bmc_dois <- function(sources, dois, opts, path = NULL, ...){
   }
 }
 
-bmc_ft <- function(doi, ...) {
+bmc_ft <- function(dois, ...) {
   lapply(dois, function(x) {
     url <- sprintf("http://www.microbiomejournal.com/content/download/xml/%s.xml", 
                    strextract(x, "[0-9-]+$"))
@@ -101,7 +101,7 @@ bmc_ft <- function(doi, ...) {
 plugin_get_elife <- function(sources, ids, opts, path = NULL, ...){
   callopts <- list(...)
   if (any(grepl("elife", sources))) {
-    opts$doi <- ids
+    opts$dois <- ids
     opts$callopts <- callopts
     out <- do.call(elife_paper, opts)
     names(out) <- ids
@@ -112,7 +112,7 @@ plugin_get_elife <- function(sources, ids, opts, path = NULL, ...){
   }
 }
 
-elife_paper <- function(doi, ...) {
+elife_paper <- function(dois, ...) {
   lapply(dois, function(x) {
     url <- sprintf("http://elife.elifesciences.org/elife-source-xml/%s", x)
     httr::content(httr::GET(url, ...), as = "text")
@@ -181,7 +181,7 @@ plugin_get_pensoft <- function(sources, ids, opts, path = NULL, ...){
 
 pensoft_ft <- function(dois, ...) {
   lapply(dois, function(x) {
-    httr::content(httr::GET(cr_ft_links(x), ...), as = "text")
+    httr::content(httr::GET(rcrossref::cr_ft_links(x), ...), as = "text")
   })
 }
 

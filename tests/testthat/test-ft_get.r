@@ -17,7 +17,6 @@ test_that("ft_get returns...", {
 
   # correct dimensions
   expect_equal(aa$plos$data$path, "session")
-  expect_equal(length(aa), 4)
   expect_equal(length(aa$plos$data$data), 1)
   expect_equal(length(aa$plos$data$data[[1]]), 1)
 })
