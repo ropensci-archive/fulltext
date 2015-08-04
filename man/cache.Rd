@@ -16,7 +16,7 @@ cache_clear(cachetype = NULL)
 \arguments{
 \item{cache}{(logical) If TRUE, cache results, if not objects saved within R session.}
 
-\item{backend}{(character) One of local, rcache, redis}
+\item{backend}{(character) One of rds, rcache, redis}
 
 \item{path}{path to local storage. used only if \code{backend="rds"}}
 

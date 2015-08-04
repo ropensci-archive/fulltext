@@ -3,7 +3,7 @@
 #' @name cache
 #'
 #' @param cache (logical) If TRUE, cache results, if not objects saved within R session.
-#' @param backend (character) One of local, rcache, redis
+#' @param backend (character) One of rds, rcache, redis
 #' @param path path to local storage. used only if \code{backend="rds"}
 #' @param cachetype The cache type
 #'

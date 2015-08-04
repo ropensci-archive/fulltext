@@ -130,20 +130,20 @@ to_list <- function(x, fmt, ...){
   }
 }
 
-xml_to_list <- function(z) {
-  # xml2::xml_children(z)
-  lapply(xml2::xml_children(z), function(w) {
-    lapply(xml2::xml_children(w), function(v) {
-      lapply(xml2::xml_children(v), function(f) {
-        xml2::xml_children(f)
-      })
-    })
-  })
-}
-
-xml_node_parse <- function(x) {
-  as.list(setNames(xml_text(x), xml_name(x)))
-}
+# xml_to_list <- function(z) {
+#   # xml2::xml_children(z)
+#   lapply(xml2::xml_children(z), function(w) {
+#     lapply(xml2::xml_children(w), function(v) {
+#       lapply(xml2::xml_children(v), function(f) {
+#         xml2::xml_children(f)
+#       })
+#     })
+#   })
+# }
+# 
+# xml_node_parse <- function(x) {
+#   as.list(setNames(xml_text(x), xml_name(x)))
+# }
 
 save_file <- function(x, y, path="~/.fulltext_cache") {
   hash <- digest::digest(x)

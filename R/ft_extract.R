@@ -1,7 +1,8 @@
 #' Extract text from a single pdf document.
 #'
 #' @export
-#' @param path Path to a pdf file
+#' @param x Path to a pdf file, or an object of class \code{ft_data}, the 
+#' output from \code{\link{ft_get}}
 #' @param which One of gs or xpdf (default).
 #' @param x Input, printing
 #' @param ... further args passed on
@@ -24,16 +25,55 @@
 #' ft_extract(path, "xpdf", "-l 2")
 #' ## first page to convert is page 3
 #' ft_extract(path, "xpdf", "-f 3")
+#' 
+#' # use on output of ft_get() to extract pdf to text
+#' ## arxiv
+#' res <- ft_get('cond-mat/9309029', from = "arxiv")
+#' res2 <- ft_extract(res)
+#' res$arxiv$data
+#' res2$arxiv$data
+#' res2$arxiv$data$data[[1]]$data
+#' 
+#' ## biorxiv
+#' res <- ft_get('10.1101/012476')
+#' res2 <- ft_extract(res)
+#' res$biorxiv$data
+#' res2$biorxiv$data
+#' res2$biorxiv$data$data[[1]]$data
 #' }
+ft_extract <- function(x, which = "xpdf", ...) {
+  UseMethod("ft_extract")
+}
 
-ft_extract <- function(path, which = "xpdf", ...){
+#' @export
+ft_extract.character <- function(x, which = "xpdf", ...) {
   which <- match.arg(which, c("gs", "xpdf"))
-  if (!file.exists(path)) stop("File does not exist", call. = FALSE)
+  if (!file.exists(x)) stop("File does not exist", call. = FALSE)
   switch(which,
-         # rcamp = extract_rcamp(path, ...),
-         gs = extract_gs(path, ...),
-         xpdf = extract_xpdf(path, ...)
+         # rcamp = extract_rcamp(x, ...),
+         gs = extract_gs(x, ...),
+         xpdf = extract_xpdf(x, ...)
   )
+}
+
+#' @export
+ft_extract.ft_data <- function(x, which = "xpdf", ...) {
+  which <- match.arg(which, c("gs", "xpdf"))
+  do_extraction(x, which, ...)
+}
+
+do_extraction <- function(x, which, ...) {
+  lapply(x, function(y) {
+    for (i in seq_along(y$data$path)) {
+      y$data$data[[i]] <- 
+        switch(which,
+               gs = extract_gs(y$data$path[[i]], ...),
+               xpdf = extract_xpdf(y$data$path[[i]], ...)
+        )
+    }
+    y$data$data <- unclass(y$data$data)
+    return( y )
+  })
 }
 
 # extract_rcamp <- function(path, which, ...){

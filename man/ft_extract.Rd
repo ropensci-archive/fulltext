@@ -6,14 +6,15 @@
 \alias{print.xpdf_char}
 \title{Extract text from a single pdf document.}
 \usage{
-ft_extract(path, which = "xpdf", ...)
+ft_extract(x, which = "xpdf", ...)
 
 \method{print}{gs_char}(x, ...)
 
 \method{print}{xpdf_char}(x, ...)
 }
 \arguments{
-\item{path}{Path to a pdf file}
+\item{x}{Path to a pdf file, or an object of class \code{ft_data}, the
+output from \code{\link{ft_get}}}
 
 \item{which}{One of gs or xpdf (default).}
 
@@ -50,6 +51,21 @@ ft_extract(path, "xpdf", "-table")
 ft_extract(path, "xpdf", "-l 2")
 ## first page to convert is page 3
 ft_extract(path, "xpdf", "-f 3")
+
+# use on output of ft_get() to extract pdf to text
+## arxiv
+res <- ft_get('cond-mat/9309029', from = "arxiv")
+res2 <- ft_extract(res)
+res$arxiv$data
+res2$arxiv$data
+res2$arxiv$data$data[[1]]$data
+
+## biorxiv
+res <- ft_get('10.1101/012476')
+res2 <- ft_extract(res)
+res$biorxiv$data
+res2$biorxiv$data
+res2$biorxiv$data$data[[1]]$data
 }
 }
 

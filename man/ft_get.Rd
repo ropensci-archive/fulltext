@@ -6,24 +6,24 @@
 \alias{ft_get.ft}
 \title{Get full text.}
 \usage{
-ft_get(x, query, from = "plos", plosopts = list(), bmcopts = list(),
+ft_get(x, from = NULL, plosopts = list(), bmcopts = list(),
   entrezopts = list(), elifeopts = list(), cache = FALSE,
   backend = "rds", path = "~/.fulltext", ...)
 
-\method{ft_get}{character}(x, query, from = "plos", plosopts = list(),
+\method{ft_get}{character}(x, from = NULL, plosopts = list(),
   bmcopts = list(), entrezopts = list(), elifeopts = list(),
   cache = FALSE, backend = "rds", path = "~/.fulltext", ...)
 
-\method{ft_get}{ft}(x, query, from = NULL, plosopts = list(),
-  bmcopts = list(), entrezopts = list(), elifeopts = list(),
-  cache = FALSE, backend = "rds", path = "~/.fulltext", ...)
+\method{ft_get}{ft}(x, from = NULL, plosopts = list(), bmcopts = list(),
+  entrezopts = list(), elifeopts = list(), cache = FALSE,
+  backend = "rds", path = "~/.fulltext", ...)
 }
 \arguments{
-\item{x}{Identifiers for papers, either DOIs, or other ids.}
+\item{x}{Either identifiers for papers, either DOIs (or other ids) as a list of
+charcter strings, or a character vector, OR an object of class \code{ft}, as
+returned from \code{\link{ft_search}}}
 
-\item{query}{Query terms}
-
-\item{from}{Source to query}
+\item{from}{Source to query. Optional.}
 
 \item{plosopts}{PLOS options. See \code{\link[rplos]{plos_fulltext}}}
 
@@ -45,17 +45,91 @@ manipulations are done on the data. See also \code{\link{cache}}}
 \item{...}{Further args passed on to \code{\link[httr]{GET}}}
 }
 \value{
-An object of class \code{ft_data}
+An object of class \code{ft_data} (of type \code{S3}) with slots for
+each of the publishers. The returned object is split up by publishers because
+the full text format is the same within publisher - which should facilitate
+text mining downstream as different steps may be needed for each publisher's
+content.
 }
 \description{
 Get full text.
 }
+\details{
+There are various ways to use \code{ft_get}:
+\itemize{
+ \item Pass in only DOIs - leave \code{from} parameter \code{NULL}. This route will
+ first query Crossref API for the publisher of the DOI, then we'll use the appropriate
+ method to fetch full text from the publisher. If a publisher is not found for the DOI,
+ then we'll throw back a message telling you a publisher was not found.
+ \item Pass in DOIs (or other pub IDs) and use the \code{from} parameter. This route
+ means we don't have to make an extra API call to Crossref (thus, this route is faster)
+ to determine the publisher for each DOI. We go straight to getting full text based on
+ the publisher.
+ \item Use \code{\link{ft_search}} to search for articles. Then pass that output to
+ this function, which will use info in that object. This behaves the same as the previous
+ option in that each DOI has publisher info so we know how to get full text for each
+ DOI.
+}
+
+Note that some publishers are available via Entrez, but often not recent articles,
+where "recent" may be a few months to a year or so. In that case, make sure to specify
+the publisher, or else you'll get back no data.
+}
+\section{Notes on specific publishers}{
+
+\itemize{
+ \item arXiv - The IDs passed are not actually DOIs, though they look similar.
+ Thus, there's no way to not pass in the \code{from} parameter as we can't
+ determine unambiguously that the IDs passed in are from arXiv.org.
+}
+}
 \examples{
 \dontrun{
-# by default, plos gives back xml
-ft_get('10.1371/journal.pone.0086169', from='plos')
+# If you just have DOIs and don't know the publisher
+## PLOS
+ft_get('10.1371/journal.pone.0086169')
+## PeerJ
+ft_get('10.7717/peerj.228')
+## eLife
+ft_get('10.7554/eLife.03032')
+## BMC
+ft_get(c('10.1186/2049-2618-2-7', '10.1186/2193-1801-3-7'))
+## FrontiersIn
+res <- ft_get(c('10.3389/fphar.2014.00109', '10.3389/feart.2015.00009'))
+## Hindawi - via Entrez
+res <- ft_get(c('10.1155/2014/292109','10.1155/2014/162024','10.1155/2014/249309'))
+## F1000Research - via Entrez
+ft_get('10.12688/f1000research.6522.1')
+## Two different publishers via Entrez - retains publisher names
+res <- ft_get(c('10.1155/2014/292109', '10.12688/f1000research.6522.1'))
+res$hindawi
+res$f1000research
+## Pensoft
+ft_get('10.3897/zookeys.499.8360')
+### you'll need to specify the publisher for a DOI from a recent publication
+ft_get('10.3897/zookeys.515.9332', from = "pensoft")
+## Copernicus
+out <- ft_get(c('10.5194/angeo-31-2157-2013', '10.5194/bg-12-4577-2015'))
+out$copernicus
+## arXiv - only pdf, you have to pass in the from parameter
+res <- ft_get(x='cond-mat/9309029', from = "arxiv", cache=TRUE, backend="rds")
+res \%>\% ft_extract
+## bioRxiv - only pdf
+res <- ft_get(x='10.1101/012476')
+res$biorxiv
+## Karger Publisher
+ft_get('10.1159/000369331')
+## CogentOA Publisher
+ft_get('10.1080/23311916.2014.938430')
+## MDPI Publisher
+ft_get('10.3390/nu3010063')
+ft_get('10.3390/nu7085279')
+ft_get(c('10.3390/nu3010063', '10.3390/nu7085279')) # not working, only getting 1
 
-# instead, get json
+# If you know the publisher, give DOI and publisher
+## by default, PLOS gives back XML
+ft_get('10.1371/journal.pone.0086169', from='plos')
+## you can instead get json
 ft_get('10.1371/journal.pone.0086169', from='plos', plosopts=list(wt="json"))
 
 (dois <- searchplos(q="*:*", fl='id',
@@ -65,7 +139,7 @@ ft_get(c('10.7717/peerj.228','10.7717/peerj.234'), from='entrez')
 
 # elife
 ft_get('10.7554/eLife.04300', from='elife')
-ft_get(c('10.7554/eLife.04300','10.7554/eLife.03032'), from='elife')
+ft_get(c('10.7554/eLife.04300', '10.7554/eLife.03032'), from='elife')
 ##### replace with code not using elife packages
 dois <- searchelife(terms="Cell biology", searchin="subject_area", boolean="contains")
 ft_get(dois[1:10], from='elife')

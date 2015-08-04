@@ -47,7 +47,7 @@ ft_search(query='climate change', from='plos', limit=500, plosopts=list(
 (res2 <- ft_search(query='ecology', from='crossref'))
 res2$crossref
 
-#biorxivr
+# BioRxiv
 (res <- ft_search(query='ecology', from='biorxiv'))
 res$biorxiv
 
@@ -55,7 +55,7 @@ res$biorxiv
 (res <- ft_search(query='ecology', from='entrez'))
 res$entrez
 
-# arxiv
+# arXiv
 (res <- ft_search(query='ecology', from='arxiv'))
 res$arxiv
 
