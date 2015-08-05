@@ -16,7 +16,6 @@
 #'
 #' @examples \dontrun{
 #' x <- ft_get('10.7554/eLife.04300', from='elife')
-#' x <- ft_get('10.7554/eLife.04251', from='elife')
 #' ft_browse(x)
 #' ft_browse(x, browse=FALSE)
 #'
@@ -41,6 +40,7 @@
 #' @rdname ft_browse
 ft_browse <- function(x, what = "macrodocs", browse = TRUE) {
   what <- match.arg(what, c("macrodocs","publisher","whisker"))
+  if (!is(x, "ft_data")) stop("x must be of class ft_data", call. = FALSE)
   doi <- get_doi(x)
   url <- switch(what,
                 macrodocs = paste0(md(), doi),
@@ -82,7 +82,7 @@ ft_browse_sections <- function(x, what = "abstract", output=NULL, browse = TRUE)
   if (is.null(output))
     output <- tempfile(fileext = ".html")
   write(rendered, file = output)
-  if (browse) browseURL(output)
+  if (browse) browseURL(output) else output
 }
 
 template <-

@@ -31,7 +31,6 @@ html page from XML content, each section parsed into separate section.
 \examples{
 \dontrun{
 x <- ft_get('10.7554/eLife.04300', from='elife')
-x <- ft_get('10.7554/eLife.04251', from='elife')
 ft_browse(x)
 ft_browse(x, browse=FALSE)
 
