@@ -1,7 +1,6 @@
 language: r
 
 r_github_packages:
-  - jimhester/robustr
   - jimhester/covr
   - ropensci/rplos
 
