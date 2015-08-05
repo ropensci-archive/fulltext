@@ -1,4 +1,10 @@
-#' Serialize raw text to other formats, including to disk.
+#' @title Serialize raw text to other formats, including to disk
+#' 
+#' @description \code{ft_serialize} helps you convert to various data formats. If 
+#' your data is in unparsed XML (i.e., character class), you can convert to 
+#' parsed XML. If in XML, you can convert to (ugly-ish) JSON, or a list. In 
+#' addition, this function allows you to save to various places, including 
+#' Rds files, cached via \code{\link{R.cache}}, or to Redis.
 #'
 #' @importFrom digest digest
 #' @importFrom rredis redisClose redisSet redisConnect redisGet
@@ -30,7 +36,8 @@
 #'
 #' # To a list
 #' out <- ft_serialize(res, to='list')
-#' out$plos$data[[1]]
+#' out$plos$data$data[[4]]
+#' out$plos$data$data[[4]][[2]]$`article-meta`
 #'
 #' # To various data stores on disk
 #' ## To an .Rds file
@@ -95,7 +102,7 @@ to_json <- function(x, fmt, ...){
   if (fmt == 'xml') {
     lapply(x, function(y) {
       for (i in seq_along(y$data$data)) {
-        y$data$data[[i]] <- jsonlite::toJSON(XML::xmlToList(y$data$data[[i]]), ...)
+        y$data$data[[i]] <- jsonlite::toJSON(xml2::as_list(xml2::read_xml(y$data$data[[i]])), ...)
       }
       return( y )
     })
@@ -114,8 +121,7 @@ to_list <- function(x, fmt, ...){
   if (fmt == 'xml') {
     lapply(x, function(y) {
       for (i in seq_along(y$data$data)) {
-        # y$data$data[[i]] <- XML::xmlToList(y$data$data[[i]])
-        y$data$data[[i]] <- xml2::read_xml(y$data$data[[i]])
+        y$data$data[[i]] <- xml2::as_list(xml2::read_xml(y$data$data[[i]]))
       }
       y$data$data <- unclass(y$data$data)
       return( y )
@@ -129,18 +135,6 @@ to_list <- function(x, fmt, ...){
     })
   }
 }
-
-# xml_to_list <- function(z) {
-#   # xml2::xml_children(z)
-#   lapply(xml2::xml_children(z), function(w) {
-#     lapply(xml2::xml_children(w), function(v) {
-#       lapply(xml2::xml_children(v), function(f) {
-#         xml2::xml_children(f)
-#       })
-#     })
-#   })
-# }
-#
 
 save_file <- function(x, y, path="~/.fulltext_cache") {
   hash <- digest::digest(x)

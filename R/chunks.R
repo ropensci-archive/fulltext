@@ -1,9 +1,15 @@
-#' Extract chunks of data from articles.
+#' @title Extract chunks of data from articles
+#' 
+#' @description \code{chunks} makes it easy to extract sections of an article. You
+#' can extract just authors across all articles, or all references sections, or 
+#' the complete text of each article. Then you can pass the output downstream for 
+#' vizualization and analysis. 
 #'
 #' @export
 #'
-#' @param x Input article
-#' @param what What to get, can be 1 or more in a vector or list. See Details.
+#' @param x An object of class \code{ft_data}, the output from a call to 
+#' \code{\link{ft_get}}
+#' @param what What to get, can be one or more in a vector or list. See Details.
 #'
 #' @details Options for the \code{what} parameter:
 #' \itemize{
@@ -204,8 +210,8 @@ body <- function(b, from){
 abstract <- function(b, from){
   switch(from,
          elife = xml_text(xml_find_all(xml_find_all(b, '//abstract[@hwp:id="abstract-1"]', ns = xml_ns(b))[[1]], "p")[1]),
-         plos = f1txt(b, "//abstract"),
-         entrez = f1txt(b, "//abstract")
+         plos = falltxt(b, "//abstract"),
+         entrez = falltxt(b, "//abstract")
   )
 }
 

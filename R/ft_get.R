@@ -1,4 +1,11 @@
-#' Get full text.
+#' @title Get full text
+#' 
+#' @description \code{ft_get} is a one stop shop to fetch full text of articles,
+#' either XML or PDFs. We have specific support for PLOS via the 
+#' \code{rplos} package, Entrez via the \code{rentrez} package, and arXiv via the 
+#' \code{aRxiv} package. For other publishers, we have helpers to \code{ft_get} to
+#' sort out links for full text based on user input. See \code{Details} for 
+#' help on how to use this function.
 #'
 #' @export
 #' @importFrom rentrez entrez_search entrez_fetch

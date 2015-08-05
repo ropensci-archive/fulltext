@@ -21,9 +21,9 @@ get_text(x, ...)
 \item{...}{Further args, ignored.}
 }
 \description{
-\code{collect} grabs full text data from a remote storage device. \code{get_text}
-is a convenience function to grab the nested text data and bring it up in the
-list for easier access
+\code{collect} grabs full text data from a remote storage
+device. \code{get_text} is a convenience function to grab the nested text
+data and bring it up in the list for easier access
 }
 \examples{
 \dontrun{

@@ -5,7 +5,7 @@
 \alias{ft_get.character}
 \alias{ft_get.ft}
 \alias{ft_get.list}
-\title{Get full text.}
+\title{Get full text}
 \usage{
 ft_get(x, from = NULL, plosopts = list(), bmcopts = list(),
   entrezopts = list(), elifeopts = list(), cache = FALSE,
@@ -57,7 +57,12 @@ text mining downstream as different steps may be needed for each publisher's
 content.
 }
 \description{
-Get full text.
+\code{ft_get} is a one stop shop to fetch full text of articles,
+either XML or PDFs. We have specific support for PLOS via the
+\code{rplos} package, Entrez via the \code{rentrez} package, and arXiv via the
+\code{aRxiv} package. For other publishers, we have helpers to \code{ft_get} to
+sort out links for full text based on user input. See \code{Details} for
+help on how to use this function.
 }
 \details{
 There are various ways to use \code{ft_get}:

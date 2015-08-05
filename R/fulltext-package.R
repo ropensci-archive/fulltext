@@ -1,29 +1,37 @@
-#' Fulltext search and retrieval of scholarly texts.
+#' @title Fulltext search and retrieval of scholarly texts.
 #'
-#' fulltext is a single interface to as many sources of scholarly texts as possible. In practice,
-#' this means only ones that are legally used. We will support sources that require
-#' authentication on a case by case basis - that is, if more than just a few people will use it,
-#' then we can include that source.
-#'
-#' We currently include:
-#' \itemize{
-#'  \item PLOS - Public Library of Science
-#'  \item eLife
-#'  \item BMC - BioMed Central
-#'  \item Crossref
-#'  \item Entrez
-#'  \item arXiv - ya know, that cool preprint server
-#' }
-#'
+#' @description fulltext is a single interface to many sources of scholarly texts. In practice,
+#' this means only ones that are legally useable. We will support sources that require
+#' authentication on a case by case basis - that is, if more than just a few people 
+#' will use it, and it's not too burdensome to include, then we can include that source.
+#' 
+#' @section What's included:
+#' We currently include support for search and full text retrieval for a variety 
+#' of publishers. See \code{\link{ft_search}} for what we include for search, and 
+#' \code{\link{ft_get}} for what we include for full text retrieval.
+#' 
+#' @section Use cases:
 #' The following are tasks/use cases supported:
 #' \itemize{
-#'  \item search - \code{ft_search}
-#'  \item get texts - \code{ft_get}
-#'  \item serialize to different formats - \code{ft_serialize}
-#'  \item extract text from pdfs - \code{ft_extract}
+#'  \item search - \code{\link{ft_search}}
+#'  \item get texts - \code{\link{ft_get}}
+#'  \item extract text from pdfs - \code{\link{ft_extract}}
+#'  \item serialize to different data formats - \code{\link{ft_serialize}}
+#'  \item extract certain article sections (e.g., authors) - \code{\link{chunks}}
 #' }
-#'
-#' Feedback! Let us know what you think at \url{https://github.com/ropensci/fulltext/issues}
+#' 
+#' @section DOI delays:
+#' Beware that DOIs are not searchable via Crossref/Entrez immediately. The delay may 
+#' be as much as a few days, though should be less than a day. This delay should become
+#' shorter as services improve. The point of this is that you man not find a match 
+#' for a relatively new DOI (e.g., for an article published the same day). We've 
+#' tried to account for this for some publishers. For example, for Crossref we search
+#' Crossref for a match for a DOI, and if none is found we attempt to retrieve the 
+#' full text from the publisher directly. 
+#' 
+#' @section Feedback: 
+#' Let us know what you think at \url{https://github.com/ropensci/fulltext/issues}
+#' 
 #' @importFrom utils URLdecode browseURL head
 #' @importFrom methods is
 #' @importFrom stats na.omit setNames

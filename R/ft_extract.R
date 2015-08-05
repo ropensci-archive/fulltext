@@ -1,5 +1,9 @@
-#' Extract text from a single pdf document.
-#'
+#' @title Extract text from a single pdf document
+#' 
+#' @description \code{ft_extract} attemps to make it easy to extract text from 
+#' PDFs, using a variety of extraction tools. Inputs can be either paths to PDF
+#' files, or the output of \code{\link{ft_get}} (class \code{ft_data}). 
+#' 
 #' @export
 #' @param x Path to a pdf file, or an object of class \code{ft_data}, the 
 #' output from \code{\link{ft_get}}
@@ -108,7 +112,6 @@ check_pdftotext <- function(x) {
   if (chk == "") stop("Please install Poppler http://poppler.freedesktop.org/ \nor xpdf http://www.foolabs.com/xpdf/", call. = FALSE)
 }
 
-# #' @export
 # print.rcamp_char <- function(x, ...) {
 #   cat("<document>", attr(x, "path"), "\n", sep = "")
 #   cat("  File size: ", x$meta$`File Size`, "\n", sep = "")

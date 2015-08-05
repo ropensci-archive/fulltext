@@ -1,4 +1,13 @@
-#' Search for full text.
+#' @title Search for full text
+#' 
+#' @description \code{ft_search} is a one stop shop for searching for articles across
+#' many publishers and repositories. We currently support search for PLOS via the 
+#' \code{rplos} package, Crossref via the \code{rcrossref} package, Entrez via the 
+#' \code{rentrez} package, arXiv via the \code{aRxiv} package, and BMC and Biorxiv
+#' via internal helper functions in this package. Many publishers content is searchable
+#' via Crossref and Entrez - of course this doesn't mean that we can get full text
+#' for those articles. In the output objects of this function, we attempt to help by
+#' indicating what license is used for articles.  
 #'
 #' @export
 #' @importFrom rplos searchplos plos_fulltext

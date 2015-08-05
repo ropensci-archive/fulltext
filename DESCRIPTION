@@ -21,7 +21,6 @@ Imports:
     stats,
     httr (>= 1.0.0),
     magrittr,
-    XML,
     xml2,
     jsonlite,
     rplos (>= 0.5.2),

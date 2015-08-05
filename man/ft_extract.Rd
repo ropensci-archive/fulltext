@@ -4,7 +4,7 @@
 \alias{ft_extract}
 \alias{print.gs_char}
 \alias{print.xpdf_char}
-\title{Extract text from a single pdf document.}
+\title{Extract text from a single pdf document}
 \usage{
 ft_extract(x, which = "xpdf", ...)
 
@@ -24,9 +24,9 @@ output from \code{\link{ft_get}}}
 An object of class gs_char, xpdf_char
 }
 \description{
-Extract text from a single pdf document.
-
-#
+\code{ft_extract} attemps to make it easy to extract text from
+PDFs, using a variety of extraction tools. Inputs can be either paths to PDF
+files, or the output of \code{\link{ft_get}} (class \code{ft_data}).
 }
 \details{
 For xpdf, you can pass on addition options via flags. See Examples.

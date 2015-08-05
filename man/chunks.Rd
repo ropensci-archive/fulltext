@@ -3,22 +3,26 @@
 \name{chunks}
 \alias{chunks}
 \alias{tabularize}
-\title{Extract chunks of data from articles.}
+\title{Extract chunks of data from articles}
 \usage{
 chunks(x, what = "all")
 
 tabularize(x)
 }
 \arguments{
-\item{x}{Input article}
+\item{x}{An object of class \code{ft_data}, the output from a call to
+\code{\link{ft_get}}}
 
-\item{what}{What to get, can be 1 or more in a vector or list. See Details.}
+\item{what}{What to get, can be one or more in a vector or list. See Details.}
 }
 \value{
 A list of output, one for each thing requested
 }
 \description{
-Extract chunks of data from articles.
+\code{chunks} makes it easy to extract sections of an article. You
+can extract just authors across all articles, or all references sections, or
+the complete text of each article. Then you can pass the output downstream for
+vizualization and analysis.
 }
 \details{
 Options for the \code{what} parameter:

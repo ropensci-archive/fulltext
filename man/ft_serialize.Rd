@@ -3,7 +3,7 @@
 \name{ft_serialize}
 \alias{ft_get_keys}
 \alias{ft_serialize}
-\title{Serialize raw text to other formats, including to disk.}
+\title{Serialize raw text to other formats, including to disk}
 \usage{
 ft_serialize(x, to = "xml", from = NULL, ...)
 
@@ -25,7 +25,11 @@ provided, or guess from data itself. Optional. CURRENTLY IGNORED.}
 An object of class \code{ft_parsed}
 }
 \description{
-Serialize raw text to other formats, including to disk.
+\code{ft_serialize} helps you convert to various data formats. If
+your data is in unparsed XML (i.e., character class), you can convert to
+parsed XML. If in XML, you can convert to (ugly-ish) JSON, or a list. In
+addition, this function allows you to save to various places, including
+Rds files, cached via \code{\link{R.cache}}, or to Redis.
 }
 \examples{
 \dontrun{

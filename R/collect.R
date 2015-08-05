@@ -1,8 +1,8 @@
-#' Collect data from a remote source in fulltext
+#' @title Collect data from a remote source in fulltext
 #' 
-#' \code{collect} grabs full text data from a remote storage device. \code{get_text} 
-#' is a convenience function to grab the nested text data and bring it up in the 
-#' list for easier access
+#' @description \code{collect} grabs full text data from a remote storage 
+#' device. \code{get_text} is a convenience function to grab the nested text 
+#' data and bring it up in the list for easier access
 #' 
 #' @name collect
 #' @export

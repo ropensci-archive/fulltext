@@ -3,14 +3,15 @@
 \name{ft_browse}
 \alias{ft_browse}
 \alias{ft_browse_sections}
-\title{Browse an article in your default browser.}
+\title{Browse an article in your default browser}
 \usage{
 ft_browse(x, what = "macrodocs", browse = TRUE)
 
 ft_browse_sections(x, what = "abstract", output = NULL, browse = TRUE)
 }
 \arguments{
-\item{x}{An object of class \code{ft_data}}
+\item{x}{An object of class \code{ft_data} - the output from a call to
+\code{\link{ft_get}}}
 
 \item{what}{(character) One of macrodocs (default), publisher, or whisker.}
 
@@ -21,7 +22,7 @@ return the url.}
 R session.}
 }
 \description{
-Browse an article in your default browser.
+Browse an article in your default browser
 }
 \details{
 \code{what=whisker} not operational yet. When operational, will use whisker to open

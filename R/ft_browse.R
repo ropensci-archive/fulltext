@@ -1,8 +1,9 @@
-#' Browse an article in your default browser.
+#' @title Browse an article in your default browser
 #'
 #' @name ft_browse
 #'
-#' @param x An object of class \code{ft_data}
+#' @param x An object of class \code{ft_data} - the output from a call to 
+#' \code{\link{ft_get}}
 #' @param what (character) One of macrodocs (default), publisher, or whisker.
 #' @param output A file path, if not given, uses a temporary file, deleted up on leaving the
 #' R session.
@@ -45,7 +46,7 @@ ft_browse <- function(x, what = "macrodocs", browse = TRUE) {
                 macrodocs = paste0(md(), doi),
                 publisher = paste0(dx(), doi),
                 whisker = stop("not working yet :)", call. = FALSE))
-  if(browse) browseURL(url) else url
+  if (browse) browseURL(url) else url
 }
 
 md <- function() "http://macrodocs.org/?doi="
@@ -54,12 +55,13 @@ dx <- function() "http://dx.doi.org/"
 get_doi <- function(x){
   tmp <- ft_compact(sapply(x, function(v){
     tmp <- v$opts$doi
-    if(is.null(tmp)) v$opts$ids else tmp
+    if (is.null(tmp)) v$opts$ids else tmp
   }))[[1]]
-  if(length(tmp) == 0)
+  if (length(tmp) == 0) {
     stop("No DOIs found", call. = FALSE)
-  else
+  } else {
     tmp
+  }
 }
 
 #' @export
@@ -70,17 +72,17 @@ ft_browse_sections <- function(x, what = "abstract", output=NULL, browse = TRUE)
   what <- c("doi", what)
   input <- unname(chunks(x, what)[[1]])
   input <- lapply(input, function(x) setNames(x, c("doi","target")))
-  for(i in seq_along(input)){
-    input[[i]] <- c(input[[i]], collapse=i)
+  for (i in seq_along(input)) {
+    input[[i]] <- c(input[[i]], collapse = i)
   }
-  input <- list(name=origwhat, data=input)
+  input <- list(name = origwhat, data = input)
   rendered <- whisker.render(template, input)
   rendered <- gsub("&lt;em&gt;", "<b>", rendered)
   rendered <- gsub("&lt;/em&gt;", "</b>", rendered)
-  if(is.null(output))
-    output <- tempfile(fileext=".html")
+  if (is.null(output))
+    output <- tempfile(fileext = ".html")
   write(rendered, file = output)
-  if(browse) browseURL(output)
+  if (browse) browseURL(output)
 }
 
 template <-
@@ -124,5 +126,3 @@ template <-
 
   </body>
 </html>'
-
-# xsltApplyStyleSheet(b, "~/Downloads/ViewNLM-v2.3/ViewNLM-v2.3.xsl")
