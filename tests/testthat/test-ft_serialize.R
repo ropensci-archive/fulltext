@@ -46,7 +46,7 @@ test_that("ft_serialize returns...", {
 
   expect_is(tojsonparsed, "list")
   expect_is(toxmlparsed, "xml_document")
-  expect_is(tolistparsed, "xml_document")
+  expect_is(tolistparsed, "list")
   expect_is(tofileloc, "character")
   expect_is(torcacheloc, "character")
   
