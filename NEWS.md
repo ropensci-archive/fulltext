@@ -1,4 +1,4 @@
 fulltext 0.1.0
 ===============
 
-* to be released to CRAN...
+* Released to CRAN.

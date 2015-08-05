@@ -12,3 +12,5 @@ CONTRIBUTING.md
 README.Rmd
 ^.*\.xml
 ^CONDUCT\.md$
+cran-comments.md
+NEWS.md
