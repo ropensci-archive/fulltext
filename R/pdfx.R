@@ -1,22 +1,32 @@
-#' PDF-to-XML conversion of scientific articles using pdfx
+#' @title PDF-to-XML conversion of scientific articles using pdfx
 #'
-#' Uses a web service provided by Utopia at \url{http://pdfx.cs.man.ac.uk/}.
+#' @description Uses a web service provided by Utopia at 
+#' \url{http://pdfx.cs.man.ac.uk/}. Beware, this can be quite slow. 
+#' \code{pdfx} posts the pdf from your machine to the web service, 
+#' \code{pdfx_html} takes the output of \code{pdfx} and gives back 
+#' a html version of extracted text, and \code{pdfx_targz} 
+#' gives a tar.gz version of the extracted text.
 #'
 #' @export
-#'
-#' @param file (character) Path to a file, or files on your machine.
+#' @param file (character) Path to a file, or files on your machine. Required.
 #' @param what (character) One of parsed or text.
 #' @template config
-#'
-#' @author Scott Chamberlain {myrmecocystus@@gmail.com}
-#' @return Raw XML text, parsed to \code{xml_document}
-#'
+#' @param input Output from \code{pdfx} function
+#' @param write_path Path to write tar ball to.
+#' @return \code{pdfx} gives XML parsed to \code{xml_document}, \code{pdfx_html} 
+#' gives html, \code{pdfx_targz} writes a tar.gz file to disk.
 #' @examples \dontrun{
 #' path <- system.file("examples", "example2.pdf", package = "fulltext")
 #' pdfx(file = path)
+#' 
+#' out <- pdfx(file = path)
+#' pdfx_html(out)
+#' 
+#' out <- pdfx(file = path)
+#' tarfile <- tempfile(fileext = "tar.gz")
+#' pdfx_targz(input = out, write_path = tarfile)
 #' }
-
-pdfx <- function(file = NULL, what = "parsed", ...) {
+pdfx <- function(file, what = "parsed", ...) {
   out <- pdfx_POST(file, ...)
   parsed <- xml2::read_xml(out)
   meta <- pdfx_get_meta(parsed)
@@ -29,30 +39,12 @@ pdfx <- function(file = NULL, what = "parsed", ...) {
   structure(list(meta = meta, data = toput), class = "pdfx")
 }
 
-#' Get html version of the extracted text
-#'
 #' @export
-#' @param input Output from \code{pdfx} function
-#' @template config
-#' @examples \dontrun{
-#' path <- "~/github/sac/scott/pdfs/BarraquandEtal2014peerj.pdf"
-#' out <- pdfx(file = path)
-#' pdfx_html(out)
-#' }
+#' @rdname pdfx
 pdfx_html <- function(input, ...) pdfx_GET(input, "html", ...)
 
-#' Get tar.gz version of the extracted text
-#'
 #' @export
-#' @param input Output from \code{pdfx} function
-#' @param write_path Path to write tar ball to.
-#' @template config
-#' @examples \dontrun{
-#' path <- "~/github/sac/scott/pdfs/BarraquandEtal2014peerj.pdf"
-#' out <- pdfx(file = path)
-#' tarfile <- tempfile(fileext = "tar.gz")
-#' pdfx_targz(input = out, write_path = tarfile)
-#' }
+#' @rdname pdfx
 pdfx_targz <- function(input, write_path, ...) pdfx_GET(input, type = "tar.gz", write_path, ...)
 
 # Helper functions
