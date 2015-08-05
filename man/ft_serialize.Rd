@@ -49,7 +49,8 @@ jsonlite::fromJSON(out$plos$data$data$`10.1371/journal.pone.0087376`)
 
 # To a list
 out <- ft_serialize(res, to='list')
-out$plos$data[[1]]
+out$plos$data$data[[4]]
+out$plos$data$data[[4]][[2]]$`article-meta`
 
 # To various data stores on disk
 ## To an .Rds file
