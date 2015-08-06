@@ -46,6 +46,8 @@ Options for the \code{what} parameter:
  \item permissions - Article permissions
  \item history - Dates, recieved, published, accepted, etc.
 }
+
+Note that we currently only support PLOS, eLife, and Entrez right now, more to come.
 }
 \examples{
 \dontrun{

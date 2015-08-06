@@ -32,6 +32,8 @@
 #'  \item permissions - Article permissions
 #'  \item history - Dates, recieved, published, accepted, etc.
 #' }
+#' 
+#' Note that we currently only support PLOS, eLife, and Entrez right now, more to come.
 #'
 #' @return A list of output, one for each thing requested
 #' @examples \dontrun{
@@ -122,10 +124,13 @@ chunks <- function(x, what='all') {
   out
 }
 
-sections <- function() c("front","body","back","title","doi","categories","authors","keywords",
-                         "abstract","executive_summary","refs","refs_dois",
-                         "publisher","journal_meta","article_meta",
-                         "acknowledgments","permissions","history")
+sections <- function() {
+  c("front","body","back","title","doi","categories",
+    "authors","keywords",
+    "abstract","executive_summary","refs","refs_dois",
+    "publisher","journal_meta","article_meta",
+    "acknowledgments","permissions","history")
+}
 
 get_what <- function(data, what, from){
   if ( any(what == "all") ) what <- sections()
@@ -261,8 +266,8 @@ journal_meta <- function(b, from){
 article_meta <- function(b, from){
   switch(from,
          elife = lapply(xml2::xml_children(xml2::xml_find_one(b, "//article-meta")), xml_node_parse),
-         plos = lapply(xml2::xml_children(xml2::xml_find_one(b, "//article-meta"), xml_node_parse)),
-         entrez = lapply(xml2::xml_children(xml2::xml_find_one(b, "//article-meta"), xml_node_parse))
+         plos = lapply(xml2::xml_children(xml2::xml_find_one(b, "//article-meta")), xml_node_parse),
+         entrez = lapply(xml2::xml_children(xml2::xml_find_one(b, "//article-meta")), xml_node_parse)
   )
 }
 
@@ -283,12 +288,11 @@ permissions <- function(b, from){
 }
 
 getperms <- function(v){
-  # tmp <- xmlToList(xpathSApply(v, "//permissions")[[1]], addAttributes = FALSE)
   tmp <- sapply(xml2::xml_children(xml2::xml_find_one(v, "//permissions")), xml_node_parse)
   tmp$license <- paste0(tmp$license[[1]], collapse = " ")
-  lichref <- tryCatch(xml_attr(xml_find_all(v, "//permissions/license//ext-link"), "href"), error = function(e) e)
-  tmp$license_url <- if (is(lichref, "simpleError")) NA else lichref
-  tmp
+  lichref <- tryCatch(xml2::xml_attr(xml2::xml_find_all(v, "//permissions/license//ext-link"), "href"), error = function(e) e)
+  tmp$license_url <- if (is(lichref, "simpleError") || length(lichref) == 0) NA else lichref
+  lapply(tmp, strtrim)
 }
 
 front <- function(b, from){
@@ -345,9 +349,9 @@ tabularize <- function(x){
 }
 
 f1txt <- function(x, xpath) {
-  xml2::xml_text(xml2::xml_find_one(x, xpath))
+  vapply(xml2::xml_text(xml2::xml_find_one(x, xpath)), strtrim, "", USE.NAMES = FALSE)
 }
 
 falltxt <- function(x, xpath) {
-  xml2::xml_text(xml2::xml_find_all(x, xpath))
+  vapply(xml2::xml_text(xml2::xml_find_all(x, xpath)), strtrim, "", USE.NAMES = FALSE)
 }
