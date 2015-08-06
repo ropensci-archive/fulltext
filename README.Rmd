@@ -24,37 +24,53 @@ __Get full text across all da (open access) journals__
 
 rOpenSci has a number of R packages to get either full text, metadata, or both from various publishers. The goal of `fulltext` is to integrate these packages to create a single interface to many data sources.
 
-Data sources in `fulltext`:
+`fulltext` attempts to make it easy to do text-mining by supporting the following steps:
+
+* Search for articles
+* Fetch articles
+* Extract text from articles / convert formats
+* Collect bits of articles that you actually need
+
+Additional steps we hope to include in future versions:
+
+* Analysis enable via the [tm](https://cran.rstudio.com/web/packages/tm/) package and friends, or via [Spark-R](https://amplab-extras.github.io/SparkR-pkg/)
+* Visualization
+
+Data sources in `fulltext` include:
 
 * [Crossref](http://www.crossref.org/) - via the `rcrossref` package
 * [Public Library of Science (PLOS)](https://www.plos.org/) - via the `rplos` package
 * [Biomed Central](http://www.biomedcentral.com/)
-* [arXiv preprints](https://arxiv.org) - via the `aRxiv` package
-* [bioRxiv preprints](http://biorxiv.org/) - via the `biorxivr` package
-* [NCBI via Entrez](http://www.ncbi.nlm.nih.gov/) - via the `rentrez` package
+* [arXiv](https://arxiv.org) - via the `aRxiv` package
+* [bioRxiv](http://biorxiv.org/) - via the `biorxivr` package
+* [PMC/Pubmed via Entrez](http://www.ncbi.nlm.nih.gov/) - via the `rentrez` package
 * We __will__ add more, as publishers open up, and as we have time...See the [master list here](https://github.com/ropensci/fulltext/issues/4#issuecomment-52376743)
 
-We'd love your feedback. Let us know what you think at info@ropensci.org, or in [the issue tracker](https://github.com/ropensci/fulltext/issues).
+We'd love your feedback. Let us know what you think in [the issue tracker](https://github.com/ropensci/fulltext/issues).
 
 Article full text formats by publisher:
 
-* [https://github.com/ropensci/fulltext/wiki/Full-text-formats](https://github.com/ropensci/fulltext/wiki/Full-text-formats)
+* [https://github.com/ropensci/fulltext/blob/master/vignettes/formats.Rmd](https://github.com/ropensci/fulltext/blob/master/vignettes/formats.Rmd)
 
 ## Installation
 
-Install `fulltext`
+Stable version from CRAN
+
+```{r eval=FALSE}
+install.packages("fulltext")
+```
+
+Development version from GitHub
 
 ```{r eval=FALSE}
 devtools::install_github("ropensci/fulltext")
 ```
 
+Load library
+
 ```{r}
 library('fulltext')
 ```
-
-## fulltext interface
-
-Most major functions are prefixed with `ft_`.
 
 ## Search
 
@@ -91,7 +107,7 @@ Use `dplyr` to data munge
 ```{r}
 library("dplyr")
 x %>%
- chunks(c("doi","publisher","permissions")) %>%
+ chunks(c("doi", "publisher", "permissions")) %>%
  tabularize() %>%
  .$plos %>%
  select(-permissions.license)
@@ -99,15 +115,13 @@ x %>%
 
 ## Cache
 
-__in development__
-
 When dealing with full text data, you can get a lot quickly, and it can take a long time to get. That's where caching comes in. And after you pull down a bunch of data, if you do so within the R session, you don't want to lose that data if the session crashes, etc. When you search you _will be able to_ (i.e., not ready yet) optionally cache the raw JSON/XML/etc. of each request locally - when you do that exact search again we'll just give you the local data - unless of course you want new data, which you can do.
 
 ```{r eval=FALSE}
 ft_get('10.1371/journal.pone.0086169', from='plos', cache=TRUE)
 ```
 
-## pdf to text
+## Extract text from PDFs
 
 There are going to be cases in which some results you find in `ft_search()` have full text available in text, xml, or other machine readable formats, but some may be open access, but only in pdf format. We have a series of convenience functions in this package to help extract text from pdfs, both locally and remotely.
 

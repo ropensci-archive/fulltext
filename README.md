@@ -17,39 +17,56 @@ __Get full text across all da (open access) journals__
 
 rOpenSci has a number of R packages to get either full text, metadata, or both from various publishers. The goal of `fulltext` is to integrate these packages to create a single interface to many data sources.
 
-Data sources in `fulltext`:
+`fulltext` attempts to make it easy to do text-mining by supporting the following steps:
+
+* Search for articles
+* Fetch articles
+* Extract text from articles / convert formats
+* Collect bits of articles that you actually need
+
+Additional steps we hope to include in future versions:
+
+* Analysis enable via the [tm](https://cran.rstudio.com/web/packages/tm/) package and friends, or via [Spark-R](https://amplab-extras.github.io/SparkR-pkg/)
+* Visualization
+
+Data sources in `fulltext` include:
 
 * [Crossref](http://www.crossref.org/) - via the `rcrossref` package
 * [Public Library of Science (PLOS)](https://www.plos.org/) - via the `rplos` package
 * [Biomed Central](http://www.biomedcentral.com/)
-* [arXiv preprints](https://arxiv.org) - via the `aRxiv` package
-* [bioRxiv preprints](http://biorxiv.org/) - via the `biorxivr` package
-* [NCBI via Entrez](http://www.ncbi.nlm.nih.gov/) - via the `rentrez` package
+* [arXiv](https://arxiv.org) - via the `aRxiv` package
+* [bioRxiv](http://biorxiv.org/) - via the `biorxivr` package
+* [PMC/Pubmed via Entrez](http://www.ncbi.nlm.nih.gov/) - via the `rentrez` package
 * We __will__ add more, as publishers open up, and as we have time...See the [master list here](https://github.com/ropensci/fulltext/issues/4#issuecomment-52376743)
 
-We'd love your feedback. Let us know what you think at info@ropensci.org, or in [the issue tracker](https://github.com/ropensci/fulltext/issues).
+We'd love your feedback. Let us know what you think in [the issue tracker](https://github.com/ropensci/fulltext/issues).
 
 Article full text formats by publisher:
 
-* [https://github.com/ropensci/fulltext/wiki/Full-text-formats](https://github.com/ropensci/fulltext/wiki/Full-text-formats)
+* [https://github.com/ropensci/fulltext/blob/master/vignettes/formats.Rmd](https://github.com/ropensci/fulltext/blob/master/vignettes/formats.Rmd)
 
 ## Installation
 
-Install `fulltext`
+Stable version from CRAN
+
+
+```r
+install.packages("fulltext")
+```
+
+Development version from GitHub
 
 
 ```r
 devtools::install_github("ropensci/fulltext")
 ```
 
+Load library
+
 
 ```r
 library('fulltext')
 ```
-
-## fulltext interface
-
-Most major functions are prefixed with `ft_`.
 
 ## Search
 
@@ -61,7 +78,7 @@ ft_search(query = 'ecology', from = 'plos')
 #> Query:
 #>   [ecology] 
 #> Found:
-#>   [PLoS: 28471; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0] 
+#>   [PLoS: 28561; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0] 
 #> Returned:
 #>   [PLoS: 10; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0]
 ```
@@ -91,30 +108,30 @@ library("rplos")
 x <- ft_get(dois, from = "plos")
 x %>% chunks("publisher") %>% tabularize()
 #> $plos
-#>    publisher.publisher.name publisher.publisher.loc
-#> 1 Public Library of Science      San Francisco, USA
-#> 2 Public Library of Science      San Francisco, USA
-#> 3 Public Library of Science      San Francisco, USA
-#> 4 Public Library of Science      San Francisco, USA
-#> 5 Public Library of Science      San Francisco, USA
+#>                                               publisher
+#> 1 Public Library of Science\n        San Francisco, USA
+#> 2 Public Library of Science\n        San Francisco, USA
+#> 3         Public Library of Science\nSan Francisco, USA
+#> 4           Public Library of ScienceSan Francisco, USA
+#> 5 Public Library of Science\n        San Francisco, USA
 ```
 
 
 ```r
 x %>% chunks(c("doi","publisher")) %>% tabularize()
 #> $plos
-#>                            doi  publisher.publisher.name
-#> 1 10.1371/journal.pone.0031384 Public Library of Science
-#> 2 10.1371/journal.pone.0031385 Public Library of Science
-#> 3 10.1371/journal.pone.0107441 Public Library of Science
-#> 4 10.1371/journal.pone.0000339 Public Library of Science
-#> 5 10.1371/journal.pone.0046739 Public Library of Science
-#>   publisher.publisher.loc
-#> 1      San Francisco, USA
-#> 2      San Francisco, USA
-#> 3      San Francisco, USA
-#> 4      San Francisco, USA
-#> 5      San Francisco, USA
+#>                            doi
+#> 1 10.1371/journal.pone.0031384
+#> 2 10.1371/journal.pone.0031385
+#> 3 10.1371/journal.pone.0107441
+#> 4 10.1371/journal.pone.0000339
+#> 5 10.1371/journal.pone.0046739
+#>                                               publisher
+#> 1 Public Library of Science\n        San Francisco, USA
+#> 2 Public Library of Science\n        San Francisco, USA
+#> 3         Public Library of Science\nSan Francisco, USA
+#> 4           Public Library of ScienceSan Francisco, USA
+#> 5 Public Library of Science\n        San Francisco, USA
 ```
 
 Use `dplyr` to data munge
@@ -123,33 +140,37 @@ Use `dplyr` to data munge
 ```r
 library("dplyr")
 x %>%
- chunks(c("doi","publisher","permissions")) %>%
+ chunks(c("doi", "publisher", "permissions")) %>%
  tabularize() %>%
  .$plos %>%
  select(-permissions.license)
-#>                            doi  publisher.publisher.name
-#> 1 10.1371/journal.pone.0031384 Public Library of Science
-#> 2 10.1371/journal.pone.0031385 Public Library of Science
-#> 3 10.1371/journal.pone.0107441 Public Library of Science
-#> 4 10.1371/journal.pone.0000339 Public Library of Science
-#> 5 10.1371/journal.pone.0046739 Public Library of Science
-#>   publisher.publisher.loc permissions.copyright.year
-#> 1      San Francisco, USA                       2012
-#> 2      San Francisco, USA                       2012
-#> 3      San Francisco, USA                       2014
-#> 4      San Francisco, USA                       2007
-#> 5      San Francisco, USA                       2012
-#>   permissions.copyright.holder                     permissions.license_url
-#> 1                 Arnold et al                                        <NA>
-#> 2                     Hu, Kuhn                                        <NA>
-#> 3           Peterson, McKenzie http://creativecommons.org/licenses/by/4.0/
-#> 4                Shrager et al                                        <NA>
-#> 5                Kapoula et al                                        <NA>
+#>                            doi
+#> 1 10.1371/journal.pone.0031384
+#> 2 10.1371/journal.pone.0031385
+#> 3 10.1371/journal.pone.0107441
+#> 4 10.1371/journal.pone.0000339
+#> 5 10.1371/journal.pone.0046739
+#>                                               publisher
+#> 1 Public Library of Science\n        San Francisco, USA
+#> 2 Public Library of Science\n        San Francisco, USA
+#> 3         Public Library of Science\nSan Francisco, USA
+#> 4           Public Library of ScienceSan Francisco, USA
+#> 5 Public Library of Science\n        San Francisco, USA
+#>   permissions.copyright.year permissions.copyright.holder
+#> 1                       2012                 Arnold et al
+#> 2                       2012                     Hu, Kuhn
+#> 3                       2014           Peterson, McKenzie
+#> 4                       2007                Shrager et al
+#> 5                       2012                Kapoula et al
+#>                       permissions.license_url
+#> 1                                        <NA>
+#> 2                                        <NA>
+#> 3 http://creativecommons.org/licenses/by/4.0/
+#> 4                                        <NA>
+#> 5                                        <NA>
 ```
 
 ## Cache
-
-__in development__
 
 When dealing with full text data, you can get a lot quickly, and it can take a long time to get. That's where caching comes in. And after you pull down a bunch of data, if you do so within the R session, you don't want to lose that data if the session crashes, etc. When you search you _will be able to_ (i.e., not ready yet) optionally cache the raw JSON/XML/etc. of each request locally - when you do that exact search again we'll just give you the local data - unless of course you want new data, which you can do.
 
@@ -158,7 +179,7 @@ When dealing with full text data, you can get a lot quickly, and it can take a l
 ft_get('10.1371/journal.pone.0086169', from='plos', cache=TRUE)
 ```
 
-## pdf to text
+## Extract text from PDFs
 
 There are going to be cases in which some results you find in `ft_search()` have full text available in text, xml, or other machine readable formats, but some may be open access, but only in pdf format. We have a series of convenience functions in this package to help extract text from pdfs, both locally and remotely.
 
@@ -174,7 +195,7 @@ Using `ghostscript`
 
 ```r
 (res_gs <- ft_extract(pdf, "gs"))
-#> <document>/Users/sacmac/github/ropensci/fulltext/inst/examples/example2.pdf
+#> <document>/Library/Frameworks/R.framework/Versions/3.2/Resources/library/fulltext/examples/example2.pdf
 #>   Title: pone.0107412 1..10
 #>   Producer: Acrobat Distiller 9.0.0 (Windows); modified using iText 5.0.3 (c) 1T3XT BVBA
 #>   Creation date: 2014-09-18
@@ -185,7 +206,7 @@ Using `xpdf`
 
 ```r
 (res_xpdf <- ft_extract(pdf, "xpdf"))
-#> <document>/Users/sacmac/github/ropensci/fulltext/inst/examples/example2.pdf
+#> <document>/Library/Frameworks/R.framework/Versions/3.2/Resources/library/fulltext/examples/example2.pdf
 #>   Pages: 10
 #>   Title: pone.0107412 1..10
 #>   Producer: Acrobat Distiller 9.0.0 (Windows); modified using iText 5.0.3 (c) 1T3XT BVBA
