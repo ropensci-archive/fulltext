@@ -150,9 +150,9 @@ ft_get(c('10.7717/peerj.228','10.7717/peerj.234'), from='entrez')
 # elife
 ft_get('10.7554/eLife.04300', from='elife')
 ft_get(c('10.7554/eLife.04300', '10.7554/eLife.03032'), from='elife')
-##### replace with code not using elife packages
-dois <- searchelife(terms="Cell biology", searchin="subject_area", boolean="contains")
-ft_get(dois[1:10], from='elife')
+## search for elife papers via Entrez
+dois <- ft_search("elife[journal]", from = "entrez")
+ft_get(dois)
 
 # bmc
 ft_get('http://www.microbiomejournal.com/content/download/xml/2049-2618-2-7.xml', from='bmc')
@@ -180,9 +180,9 @@ res$entrez
 
 # Search entrez, get some DOIs
 (res <- ft_search(query='ecology', from='entrez'))
-res$entrez$data$DOI
-ft_get(res$entrez$data$DOI[1], from='entrez')
-ft_get(res$entrez$data$DOI[1:3], from='entrez')
+res$entrez$data$doi
+ft_get(res$entrez$data$doi[1], from='entrez')
+ft_get(res$entrez$data$doi[1:3], from='entrez')
 
 # Caching
 res <- ft_get('10.1371/journal.pone.0086169', from='plos', cache=TRUE, backend="rds")

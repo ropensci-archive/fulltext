@@ -144,10 +144,6 @@ check_dois <- function(x) {
   }
 }
 
-is_ft_data <- function(x) {
-  if (!is(x, "ft_data")) stop("Input to x must be of class ft_data", call. = FALSE)
-}
-
 is_or <- function(x, clazzes) {
   if (!class(x) %in% clazzes) stop("Input to x must be one of class ", paste0(clazzes, collapse = ", "), call. = FALSE)
 }

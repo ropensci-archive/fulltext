@@ -1,13 +1,13 @@
 #' @title Extract chunks of data from articles
-#' 
+#'
 #' @description \code{chunks} makes it easy to extract sections of an article. You
-#' can extract just authors across all articles, or all references sections, or 
-#' the complete text of each article. Then you can pass the output downstream for 
-#' vizualization and analysis. 
+#' can extract just authors across all articles, or all references sections, or
+#' the complete text of each article. Then you can pass the output downstream for
+#' vizualization and analysis.
 #'
 #' @export
 #'
-#' @param x An object of class \code{ft_data}, the output from a call to 
+#' @param x An object of class \code{ft_data}, the output from a call to
 #' \code{\link{ft_get}}
 #' @param what What to get, can be one or more in a vector or list. See Details.
 #'
@@ -32,7 +32,7 @@
 #'  \item permissions - Article permissions
 #'  \item history - Dates, recieved, published, accepted, etc.
 #' }
-#' 
+#'
 #' Note that we currently only support PLOS, eLife, and Entrez right now, more to come.
 #'
 #' @return A list of output, one for each thing requested
@@ -40,7 +40,7 @@
 #' x <- ft_get('10.1371/journal.pone.0086169', from='plos')
 #' chunks(x, what="authors")
 #'
-#' library("rplos") 
+#' library("rplos")
 #' (dois <- searchplos(q="*:*", fl='id',
 #'    fq=list('doc_type:full',"article_type:\"research article\""), limit=5)$data$id)
 #' x <- ft_get(dois, from="plos")
@@ -73,7 +73,7 @@
 #' x %>% chunks("authors") %>% tabularize()
 #' x %>% chunks(c("doi","publisher","permissions")) %>% tabularize()
 #' x %>% chunks("history") %>% tabularize()
-#' 
+#'
 #' x <- ft_get('10.3389/fnagi.2014.00130', from='entrez')
 #' x %>% chunks("keywords")
 #'
@@ -273,9 +273,9 @@ article_meta <- function(b, from){
 
 acknowledgments <- function(b, from){
   switch(from,
-         elife = f1txt(b, "//ack/p"),
-         plos = f1txt(b, "//ack/p"),
-         entrez = f1txt(b, "//ack/p")
+         elife = falltxt(b, "//ack/p"),
+         plos = falltxt(b, "//ack/p"),
+         entrez = falltxt(b, "//ack/p")
   )
 }
 
@@ -354,4 +354,8 @@ f1txt <- function(x, xpath) {
 
 falltxt <- function(x, xpath) {
   vapply(xml2::xml_text(xml2::xml_find_all(x, xpath)), strtrim, "", USE.NAMES = FALSE)
+}
+
+is_ft_data <- function(x) {
+  if (!is(x, "ft_data")) stop("Input to x must be of class ft_data", call. = FALSE)
 }
