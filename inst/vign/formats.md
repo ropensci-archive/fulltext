@@ -62,7 +62,7 @@ least for their open access journals.
 [mdpip]: http://www.mdpi.com/1999-4915/7/8/2817/pdf
 [serscp]: http://www.sersc.org/journals/IJEIC/vol6_Is3/2.pdf
 [airccp]: http://airccse.org/journal/cnc/7115cnc04.pdf
-[naturep]: http://www.nature.com/srep/2015/150731/srep12550/pdf/srep12550.pdf
+[naturep]: http://www.nature.com/articles/srep12550.pdf
 [dovep]: http://www.dovepress.com/getfile.php?fileID=24696
 [scielop]: http://www.scielo.br/pdf/cbab/v14n1/04.pdf
 [sciopp]: https://www.scienceopen.com/document_file/1812366b-8712-46f8-b8ec-581d885c7ae5/PubMedCentral/1812366b-8712-46f8-b8ec-581d885c7ae5.pdf
