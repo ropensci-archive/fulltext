@@ -27,6 +27,8 @@ plugin_get_crossref <- function(sources, ids, opts, path = NULL, ...){
 plugin_get_plos <- function(sources, ids, opts, path = NULL, ...){
   callopts <- list(...)
   if (any(grepl("plos", sources))) {
+    # remove annotations
+    ids <- grep("annotation", ids, value = TRUE, invert = TRUE)
     check_dois(ids)
     opts$doi <- ids
     opts$callopts <- callopts

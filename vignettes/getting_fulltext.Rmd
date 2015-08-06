@@ -34,7 +34,7 @@ data from more than 1 data source.
 
 ```r
 names(res)
-#> [1] "plos"   "entrez" "bmc"    "elife"
+#> [1] "plos"    "entrez"  "bmc"     "elife"   "pensoft" "arxiv"   "biorxiv"
 ```
 
 Let's dig into the `plos` source object, which is another list, including metadata the 
@@ -58,7 +58,7 @@ res$plos
 #> 
 #> $data$data
 #> 1 full-text articles retrieved 
-#> Min. Length: 111132 - Max. Length: 111132 
+#> Min. Length: 110717 - Max. Length: 110717 
 #> DOIs: 10.1371/journal.pone.0086169 ... 
 #> 
 #> NOTE: extract xml strings like output['<doi>']
@@ -84,7 +84,7 @@ res$plos$data
 #> 
 #> $data
 #> 1 full-text articles retrieved 
-#> Min. Length: 111132 - Max. Length: 111132 
+#> Min. Length: 110717 - Max. Length: 110717 
 #> DOIs: 10.1371/journal.pone.0086169 ... 
 #> 
 #> NOTE: extract xml strings like output['<doi>']
@@ -134,11 +134,11 @@ One article
 ft_get('10.7554/eLife.04300', from = 'elife')
 #> [Docs] 1 
 #> [Source] R session  
-#> [IDs] ...
+#> [IDs] 10.7554/eLife.04300 ...
 ft_get(c('10.7554/eLife.04300','10.7554/eLife.03032'), from = 'elife')
 #> [Docs] 2 
 #> [Source] R session  
-#> [IDs] ...
+#> [IDs] 10.7554/eLife.04300 10.7554/eLife.03032 ...
 ```
 
 Many articles
@@ -148,7 +148,7 @@ Many articles
 ft_get(c('10.7554/eLife.04300','10.7554/eLife.03032'), from = 'elife')
 #> [Docs] 2 
 #> [Source] R session  
-#> [IDs] ...
+#> [IDs] 10.7554/eLife.04300 10.7554/eLife.03032 ...
 ```
 
 ### Articles from BMC
@@ -158,7 +158,7 @@ ft_get(c('10.7554/eLife.04300','10.7554/eLife.03032'), from = 'elife')
 ft_get('http://www.microbiomejournal.com/content/download/xml/2049-2618-2-7.xml', from = 'bmc')
 #> [Docs] 1 
 #> [Source] R session  
-#> [IDs] ...
+#> [IDs] 10.1186/2049-2618-2-7 ...
 ```
 
 ### Articles from Frontiers in Pharmacology (publisher: Frontiers)
@@ -182,15 +182,15 @@ For example, search entrez, get some DOIs, then fetch some articles
 #> Query:
 #>   [ecology] 
 #> Found:
-#>   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 95749; arxiv: 0; biorxiv: 0] 
+#>   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 96493; arxiv: 0; biorxiv: 0] 
 #> Returned:
 #>   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 10; arxiv: 0; biorxiv: 0]
 res$entrez$data$doi
-#>  [1] "10.1093/aobpla/plu077"     "10.1093/aobpla/plu075"    
-#>  [3] "10.1093/aobpla/plu076"     "10.1093/aobpla/plu073"    
-#>  [5] "10.1186/s12862-015-0391-4" "10.1186/s13071-015-0999-7"
-#>  [7] "10.1186/s13071-015-0987-y" "10.1186/s12862-015-0413-2"
-#>  [9] "10.1186/s12862-015-0380-7" "10.1186/s13071-015-0993-0"
+#>  [1] "10.1186/s40168-015-0093-6"   "10.1186/s13062-015-0070-9"  
+#>  [3] "10.1038/srep12693"           "10.1038/srep12427"          
+#>  [5] "10.1007/s13205-014-0241-x"   "10.1007/s13205-014-0242-9"  
+#>  [7] "10.1093/aobpla/plv071"       "10.1136/bmjopen-2014-007471"
+#>  [9] "10.1038/srep12267"           "10.1038/srep12436"
 ```
 
 Get articles
@@ -200,7 +200,7 @@ Get articles
 ft_get(res$entrez$data$doi[1:3], from = 'entrez')
 #> [Docs] 3 
 #> [Source] R session  
-#> [IDs] 4287689 4287690 4287688 ...
+#> [IDs] 4526283 4526193 4523847 ...
 ```
 
 ## Caching
