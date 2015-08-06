@@ -32,7 +32,7 @@
 #' @section Feedback: 
 #' Let us know what you think at \url{https://github.com/ropensci/fulltext/issues}
 #' 
-#' @importFrom utils URLdecode browseURL head
+#' @importFrom utils URLdecode URLencode browseURL head modifyList
 #' @importFrom methods is
 #' @importFrom stats na.omit setNames
 #' @importFrom xml2 read_html read_xml xml_find_one xml_find_all xml_text xml_contents xml_attr
