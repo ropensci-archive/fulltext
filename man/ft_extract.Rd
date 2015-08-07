@@ -31,6 +31,13 @@ files, or the output of \code{\link{ft_get}} (class \code{ft_data}).
 \details{
 For xpdf, you can pass on addition options via flags. See Examples.
 Right now, you can't pass options to Ghostscript if you're using the gs option.
+
+xpdf installation: See \url{http://www.foolabs.com/xpdf/download.html} for
+instructions on how to download and install xpdf. For OSX, you an also get
+xpdf via homebrew.
+
+ghostscript installation: See \url{http://www.ghostscript.com/doc/9.16/Install.htm}
+for instructions on how to download and install ghostscript
 }
 \examples{
 \dontrun{

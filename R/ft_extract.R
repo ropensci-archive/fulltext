@@ -12,6 +12,13 @@
 #' @return An object of class gs_char, xpdf_char
 #' @details For xpdf, you can pass on addition options via flags. See Examples.
 #' Right now, you can't pass options to Ghostscript if you're using the gs option.
+#' 
+#' xpdf installation: See \url{http://www.foolabs.com/xpdf/download.html} for 
+#' instructions on how to download and install xpdf. For OSX, you an also get 
+#' xpdf via homebrew.
+#' 
+#' ghostscript installation: See \url{http://www.ghostscript.com/doc/9.16/Install.htm} 
+#' for instructions on how to download and install ghostscript
 #' @examples \dontrun{
 #' path <- system.file("examples", "example1.pdf", package = "fulltext")
 #'
@@ -89,6 +96,7 @@ do_extraction <- function(x, which, ...) {
 
 extract_gs <- function(path, ...){
   # cmds <- get_cmds(...)
+  check_gs()
   path <- path.expand(path)
   res <- pdf_text_via_gs(path)
   res <- paste(res, collapse = ", ")
@@ -109,7 +117,12 @@ extract_xpdf <- function(path, ...){
 
 check_pdftotext <- function(x) {
   chk <- Sys.which("pdftotext")
-  if (chk == "") stop("Please install Poppler http://poppler.freedesktop.org/ \nor xpdf http://www.foolabs.com/xpdf/", call. = FALSE)
+  if (chk == "") stop("Please install xpdf. See ?extract_tools for more", call. = FALSE)
+}
+
+check_gs <- function(x) {
+  chk <- Sys.which("gs")
+  if (chk == "") stop("Please install Ghostscript. See ?extract_tools for more", call. = FALSE)
 }
 
 # print.rcamp_char <- function(x, ...) {
