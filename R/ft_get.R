@@ -23,7 +23,8 @@
 #' format that article is in is written to disk, then pulled from disk when further
 #' manipulations are done on the data. See also \code{\link{cache}}
 #' @param backend (character) One of rds, rcache, or redis
-#' @param path (character) Path to local folder
+#' @param path (character) Path to local folder. If the folder doesn't exist, we 
+#' create it for you.
 #' @param ... Further args passed on to \code{\link[httr]{GET}}
 #'
 #' @return An object of class \code{ft_data} (of type \code{S3}) with slots for 
@@ -167,6 +168,7 @@ ft_get <- function(x, from=NULL, plosopts=list(), bmcopts=list(), entrezopts=lis
 ft_get.character <- function(x, from=NULL, plosopts=list(), bmcopts=list(), entrezopts=list(),
                    elifeopts=list(), cache=FALSE, backend="rds", path="~/.fulltext", ...) {
   
+  make_dir(path)
   cacheopts <- cache_options_get()
   if (is.null(cacheopts$cache) && is.null(cacheopts$backend)) cache_options_set(cache, backend, path)
   
@@ -191,6 +193,7 @@ ft_get.character <- function(x, from=NULL, plosopts=list(), bmcopts=list(), entr
 ft_get.list <- function(x, from=NULL, plosopts=list(), bmcopts=list(), entrezopts=list(),
                         elifeopts=list(), cache=FALSE, backend="rds", path="~/.fulltext", ...) {
   
+  make_dir(path)
   cacheopts <- cache_options_get()
   if (is.null(cacheopts$cache) && is.null(cacheopts$backend)) cache_options_set(cache, backend, path)
   
@@ -214,6 +217,8 @@ ft_get.list <- function(x, from=NULL, plosopts=list(), bmcopts=list(), entrezopt
 #' @rdname ft_get
 ft_get.ft <- function(x, from=NULL, plosopts=list(), bmcopts=list(), entrezopts=list(),
                       elifeopts=list(), cache=FALSE, backend="rds", path="~/.fulltext", ...) {
+  
+  make_dir(path)
   cacheopts <- cache_options_get()
   if (is.null(cacheopts$cache) && is.null(cacheopts$backend)) cache_options_set(cache, backend, path)
 
@@ -247,6 +252,10 @@ expand_if <- function(x) {
 
 print_backend <- function(x) {
   if (!is.null(x)) x else "R session"
+}
+
+make_dir <- function(path) {
+  dir.create(path, showWarnings = FALSE, recursive = TRUE)
 }
 
 # get unknown from DOIs where from=NULL ------------------

@@ -45,7 +45,8 @@ manipulations are done on the data. See also \code{\link{cache}}}
 
 \item{backend}{(character) One of rds, rcache, or redis}
 
-\item{path}{(character) Path to local folder}
+\item{path}{(character) Path to local folder. If the folder doesn't exist, we
+create it for you.}
 
 \item{...}{Further args passed on to \code{\link[httr]{GET}}}
 }
