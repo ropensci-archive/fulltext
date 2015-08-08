@@ -54,7 +54,9 @@ test_that("ft_search works for larger requests", {
   expect_is(res_cr$crossref, "ft_ind")
   expect_equal(NROW(res_cr$crossref$data), 200)
   
-  expect_warning(ft_search(query = 'ecology', from = 'crossref', limit = 2000), "less than or equal to 1000")
+  expect_error(ft_search(query = 'ecology', from = 'entrez', limit = 2000), 
+               "HTTP failure 414, the request is too large")
+  ## FIXME - add catches for crossref, plos, other sources
 })
 
 
