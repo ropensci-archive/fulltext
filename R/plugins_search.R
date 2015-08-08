@@ -58,11 +58,11 @@ plugin_entrez <- function(sources, query, limit, opts){
     out <- do.call(entrez_search, opts)
     sumres <- entrez_summary(db = "pmc", id = out$ids)
     dat <- lapply(sumres, function(x) {
-      x$authors <- paste(x$authors[,1], collapse = ", ")
-      x$pmid  <- x$articleids[x$articleids[,1] == "pmid", 2]
-      x$doi   <- x$articleids[x$articleids[,1] == "doi",  2]
-      x$pmcid <- x$articleids[x$articleids[,1] == "pmcid",2]
-      x$mid   <- x$articleids[x$articleids[,1] == "MID",  2]
+      x$authors <- paste(try_NULL(x$authors[,1]), collapse = ", ")
+      x$pmid  <- try_NULL(x$articleids[x$articleids[,1] == "pmid", 2])
+      x$doi   <- try_NULL(x$articleids[x$articleids[,1] == "doi",  2])
+      x$pmcid <- try_NULL(x$articleids[x$articleids[,1] == "pmcid",2])
+      x$mid   <- try_NULL(x$articleids[x$articleids[,1] == "MID",  2])
       x$articleids <- NULL
       lapply(x, function(z) if (is.null(z) | length(z) == 0) NA else z)
     })

@@ -154,3 +154,18 @@ strtrim <- function(str) gsub("^\\s+|\\s+$", "", str)
 xml_node_parse <- function(x) {
   as.list(setNames(strtrim(xml_text(x)), xml_name(x)))
 }
+
+# Modified from plyr::try_default
+try_default_ <- function(expr, default, quiet = FALSE) {
+  result <- default
+  if (quiet) {
+    tryCatch(result <- expr, error = function(e) NULL)
+  }
+  else {
+    try(result <- expr)
+  }
+  result
+}
+
+# Modified from plyr::tryNULL
+try_NULL <- function(expr) try_default_(expr, NULL, quiet = TRUE)
