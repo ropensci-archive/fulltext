@@ -34,7 +34,8 @@ Uses a web service provided by Utopia at
 \code{pdfx} posts the pdf from your machine to the web service,
 \code{pdfx_html} takes the output of \code{pdfx} and gives back
 a html version of extracted text, and \code{pdfx_targz}
-gives a tar.gz version of the extracted text.
+gives a tar.gz version of the extracted text. This will not work
+with PDFs that are scans of text, or mostly of images.
 }
 \examples{
 \dontrun{

@@ -58,7 +58,7 @@ test_that("ft_search works for larger requests", {
                "HTTP failure 414, the request is too large")
   ## FIXME - add catches for plos, other sources
   expect_error(ft_search(query = 'ecology', from = 'crossref', limit = 2000), 
-               "Integer specified as 2000 but must be a positive integer less than or equal to 1000")
+               "limit parameter must be 1000 or less")
 })
 
 

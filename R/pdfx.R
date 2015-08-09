@@ -5,7 +5,8 @@
 #' \code{pdfx} posts the pdf from your machine to the web service, 
 #' \code{pdfx_html} takes the output of \code{pdfx} and gives back 
 #' a html version of extracted text, and \code{pdfx_targz} 
-#' gives a tar.gz version of the extracted text.
+#' gives a tar.gz version of the extracted text. This will not work
+#' with PDFs that are scans of text, or mostly of images.
 #'
 #' @export
 #' @param file (character) Path to a file, or files on your machine. Required.
@@ -51,9 +52,18 @@ pdfx_targz <- function(input, write_path, ...) pdfx_GET(input, type = "tar.gz", 
 pdfx_POST <- function(file, ...) {
   url <- "http://pdfx.cs.man.ac.uk"
   res <- POST(url, config = c(content_type("application/pdf"), ...), body = upload_file(file))
-  if (!res$status_code == 200) stop("something's wrong", call. = FALSE)
+  pdfx_err(res)
   stopifnot(res$headers$`content-type` == "text/xml")
   content(res, as = "text")
+}
+
+pdfx_err <- function(x) {
+  stopifnot(is(x, "response"))
+  if (!x$status_code == 200)  {
+    xml <- content(x, "text")
+    stop(x$status_code, " - ", xml2::xml_text(xml2::read_xml(xml)), 
+         call. = FALSE)
+  }
 }
 
 pdfx_GET <- function(input, type="html", write_path, ...) {
@@ -64,7 +74,7 @@ pdfx_GET <- function(input, type="html", write_path, ...) {
   if (type == "html") {
     res <- GET(url, ...)
     if (!res$status_code == 200) stop("something's wrong", call. = FALSE)
-    content(res)
+    xml2::read_html(content(res, "text"))
   } else {
     res <- GET(url, write_disk(path = write_path), ...)
     if (!res$status_code == 200) stop("something's wrong", call. = FALSE)
