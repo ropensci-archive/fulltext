@@ -5,9 +5,6 @@ r_github_packages:
   - jimhester/covr
   - ropensci/rplos
 
-r_packages:
-  - munsell
-
 after_success:
   - Rscript -e 'covr::codecov()'
 

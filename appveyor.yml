@@ -12,7 +12,7 @@ install:
 
 build_script:
   - travis-tool.sh install_deps
-  - travis-tool.sh r_install slam rredis
+  - travis-tool.sh r_install slam rredis munsell
   - Rscript -e "install.packages('Rcampdf', repos = 'http://datacube.wu.ac.at/', type = 'source')"
 
 test_script:
