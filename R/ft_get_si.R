@@ -1,11 +1,18 @@
 #' Download supplementary materials from journals
-#' 
-#' @param doi DOI of article
-#' @param from Source (publisher) of article (optional, but suggested!)
-#' @param si.no which supplement (first, second, etc.) as printed in
-#' the article, to download. Note that "Fig S1" is not valid; this
-#' should be a number
-#' @param si.name name of the supplement to be downloaded (see notes)
+#'
+#' Download supplementary materials from papers. Put a call to this
+#' function where you would put a file-path - everything is cached by
+#' default, so you don't have to worry about multiple downloads in the
+#' same session.
+#' @param doi DOI of article. Note: if using ESA journal, this must be
+#' the ESA-specific article code (e.g., E092-201).
+#' @param si number of the supplment to be downloads (1, 2, 3, etc.),
+#' or (for ESA and Science journals) the name of the supplment (e.g.,
+#' "S1_data.csv").
+#' @param from Publisher of article. Optional, except for ESA journals
+#' (see \code{doi}), but supplying it will speed downloads. Must be
+#' one of: auto (i.e., auto-detect journal; default), plos, wiley,
+#' science, proceedings, figshare, esa_data_archives, esa_archives.
 #' @param save.name a name for the file to download. If \code{NULL}
 #' (default) this will be a combination of the DOI and SI number
 #' @param dir directory to save file to. If \code{NULL} (default) this
@@ -13,24 +20,27 @@
 #' @param cache if \code{TRUE} (default), the file won't be downloaded
 #' again if it already exists (in a temporary directory creates, or
 #' your chosen \code{dir})
+#' @param vol Article volume (Proceedings journals only)
+#' @param issue Article issue (Proceedings journals only) 
 #' @author Will Pearse
 #' @examples
-#' ft_get_si("10.1371/journal.pone.0127900", 1)
-#' ft_get_si("10.1371/journal.pone.0127900", 1, "plos")
-#' ft_get_si("10.1111/ele.12437", 1)
-#' ft_get_si("10.6084/m9.figshare.979288", 1)
-#' ft_get_si("E093-059", "myco_db.csv", "esa_archives")
-#' ft_get_si("E092-201", "MCDB_communities.csv", "esa_data_archives")
-#' ft_get_si("10.1126/science.1255768", "Appendix_BanksLeite_etal.txt")
-#' ft_get_si("10.1098/rspb.2015.0338", vol=282, issue=1811, 1)
-ft_get_si <- function(doi, si, from=NULL, save.name=NULL, dir=NULL, cache=TRUE, vol=NULL, issue=NULL){
+#' #Put the function wherever you would put a file path
+#' crabs <- read.csv(ft_get_si("10.6084/m9.figshare.979288", 2))
+#'
+#' #ESA data papers and regular articles *must* be marked
+#' fungi <- read.csv(ft_get_si("E093-059", "myco_db.csv",
+#'                                         "esa_archives"))
+#' mammals <- read.delim(ft_get_si("E092-201", "MCDB_communities.csv",
+#'                                             "esa_data_archives"))
+#'
+#' @export
+ft_get_si <- function(doi, si, from=c("auto","plos","wiley","science","proceedings","figshare","esa_data_archives","esa_archives"), save.name=NULL, dir=NULL, cache=TRUE, vol=NULL, issue=NULL){
     #Argument handling
     if(!(is.numeric(si) | is.character(si)))
         stop("'si' must be numeric or character")
     if(length(doi) != 1)
         stop("Only one DOI at a time; see help for examples of use'")
-    if(!is.null(from))
-        from <- match.arg(from, c("plos","wiley","science","proceedings","figshare","esa_data_archives","esa_archives"))
+    from <- match.arg(from)
     
     #Setup output directory and filename
     if(!is.null(dir)){
@@ -43,7 +53,7 @@ ft_get_si <- function(doi, si, from=NULL, save.name=NULL, dir=NULL, cache=TRUE, 
     }
 
     #Dispatch, download, and return
-    if(is.null(from))
+    if(from == "auto")
         from <- get_si_pub(doi)
     func <- get_si_func(from)
     return(func(doi, si, save.name=save.name, cache=cache, vol=vol, issue=issue))
@@ -111,6 +121,7 @@ get_si_plos <- function(doi, si, save.name=NULL, dir=NULL, cache=TRUE, ...){
     return(.download(url, dir, save.name, cache))
 }
 
+#' @importFrom RCurl getURL
 get_si_wiley <- function(doi, si, save.name=NULL, dir=NULL, cache=TRUE, ...){
     #Argument handling
     if(!is.numeric(si))
