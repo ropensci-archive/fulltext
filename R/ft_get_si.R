@@ -121,7 +121,6 @@ get_si_plos <- function(doi, si, save.name=NULL, dir=NULL, cache=TRUE, ...){
     return(.download(url, dir, save.name, cache))
 }
 
-#' @importFrom RCurl getURL
 get_si_wiley <- function(doi, si, save.name=NULL, dir=NULL, cache=TRUE, ...){
     #Argument handling
     if(!is.numeric(si))
@@ -130,7 +129,7 @@ get_si_wiley <- function(doi, si, save.name=NULL, dir=NULL, cache=TRUE, ...){
     save.name <- .save.name(doi, save.name, si)
 
     #Download SI HTML page and find SI link
-    html <- getURL(paste0("http://onlinelibrary.wiley.com/doi/", doi, "/suppinfo"))
+    html <- as.character(GET(paste0("http://onlinelibrary.wiley.com/doi/", doi, "/suppinfo")))
     links <- gregexpr("(asset/supinfo/)[-0-9a-zA-Z\\.\\?\\=\\&\\,\\;_]*", as.character(html), useBytes=FALSE)
     pos <- as.numeric(links[[si]])
     link <- substr(html, pos, pos+attr(links[[si]], "match.length")-1)
@@ -149,8 +148,7 @@ get_si_figshare <- function(doi, si, save.name=NULL, dir=NULL, cache=TRUE, ...){
     save.name <- .save.name(doi, save.name, si)
     
     #Find, download, and return
-    url <- .grep.url(paste0("http://dx.doi.org/", doi), "(http://figshare.com/articles/)[A-Za-z0-9_/]*")
-    url <- .grep.url(url, "(http://files\\.figshare\\.com/)[-a-zA-Z0-9\\_/\\.]*", si)
+    url <- .grep.url(paste0("http://dx.doi.org/", doi), "(http://files\\.figshare\\.com/)[-a-zA-Z0-9\\_/\\.]*", si)
     return(.download(url, dir, save.name, cache))
 }
 
@@ -207,7 +205,7 @@ get_si_proceedings <- function(doi, si, vol, issue, save.name=NULL, dir=NULL, ca
 
 #' Internal regexp functions
 .grep.url <- function(url, regexp, which=1){
-    html <- getURL(url)
+    html <- as.character(GET(url))
     return(.grep.text(html, regexp, which))
 }
 .grep.text <- function(text, regexp, which=1){

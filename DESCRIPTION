@@ -1,11 +1,12 @@
 Package: fulltext
 Title: Full Text of 'Scholarly' Articles Across Many Data Sources
-Description: Provides a single interface to many sources of full
-    text 'scholarly' data, including 'Biomed Central', Public Library of Science,
-    'Pubmed Central', 'eLife', 'F1000Research', 'PeerJ', 'Pensoft', 'Hindawi', 'arXiv'
-    'preprints', and more. Functionality included for searching for articles,
-    downloading full or partial text, converting to various data formats used
-    in and outside of R.
+Description: Provides a single interface to many sources of full text
+    'scholarly' data, including 'Biomed Central', Public Library of
+    Science, 'Pubmed Central', 'eLife', 'F1000Research', 'PeerJ',
+    'Pensoft', 'Hindawi', 'arXiv' 'preprints', and more. Functionality
+    included for searching for articles, downloading full or partial
+    text, downloading supplementary materials, converting to various
+    data formats used in and outside of R.
 Version: 0.1.0.9931
 License: MIT + file LICENSE
 Authors@R: person("Scott", "Chamberlain", role = c("aut", "cre"),
