@@ -9,31 +9,37 @@ ft_get_si(doi, si, from = c("auto", "plos", "wiley", "science", "proceedings",
   dir = NULL, cache = TRUE, vol = NULL, issue = NULL)
 }
 \arguments{
-\item{doi}{DOI of article. Note: if using ESA journal, this must be
-the ESA-specific article code (e.g., E092-201).}
+\item{doi}{DOI of article (\code{character}). Note: if using ESA
+journal, this must be the ESA-specific article code (e.g.,
+E092-201).}
 
 \item{si}{number of the supplment to be downloads (1, 2, 3, etc.),
 or (for ESA and Science journals) the name of the supplment (e.g.,
-"S1_data.csv").}
+"S1_data.csv"). Can be a \code{character} or \code{numeric}.}
 
-\item{from}{Publisher of article. Optional, except for ESA journals
-(see \code{doi}), but supplying it will speed downloads. Must be
-one of: auto (i.e., auto-detect journal; default), plos, wiley,
-science, proceedings, figshare, esa_data_archives, esa_archives.}
+\item{from}{Publisher of article (\code{character}). Optional,
+except for ESA journals (see \code{doi}), but supplying it will
+speed downloads. Must be one of: auto (i.e., auto-detect journal;
+default), plos, wiley, science, proceedings, figshare,
+esa_data_archives, esa_archives.}
 
-\item{save.name}{a name for the file to download. If \code{NULL}
-(default) this will be a combination of the DOI and SI number}
+\item{save.name}{a name for the file to download
+(\code{character}). If \code{NULL} (default) this will be a
+combination of the DOI and SI number}
 
-\item{dir}{directory to save file to. If \code{NULL} (default) this
-will be a temporary directory created for your files}
+\item{dir}{directory to save file to (\code{character}). If
+\code{NULL} (default) this will be a temporary directory created
+for your files}
 
 \item{cache}{if \code{TRUE} (default), the file won't be downloaded
 again if it already exists (in a temporary directory creates, or
 your chosen \code{dir})}
 
-\item{vol}{Article volume (Proceedings journals only)}
+\item{vol}{Article volume (Proceedings journals only;
+\code{numeric})}
 
-\item{issue}{Article issue (Proceedings journals only)}
+\item{issue}{Article issue (Proceedings journals only;
+\code{numeric})}
 }
 \description{
 Download supplementary materials from papers. Put a call to this
@@ -41,17 +47,61 @@ function where you would put a file-path - everything is cached by
 default, so you don't have to worry about multiple downloads in the
 same session.
 }
+\details{
+The examples probably give the best indication of how to
+use this function. In general, just specify the DOI of the article
+you want to download data from, and the number of the supplement
+you want to download (1, 5, etc.). ESA journals don't use DOIs
+(give the article code; see below), and Proceedings, Science, and
+ESA journals need you to give the filename of the supplement to
+download.
+
+Below is a list of all the publishers this supports, and examples
+of articles from them. I'm aware that there isn't perfect overlap
+between these publishers and the rest of the package; I plan to
+correct this in the near future.
+
+\describe{
+\item{auto}{Default. Use a cross-ref search
+(\code{\link[rcrossref:cr_works]{cr_works}}) on the DOI to
+determine the publisher.}
+\item{plos}{Public Library of Science journals (e.g., PLoS One;
+\url{http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0126524})}
+\item{wiley}{Wiley journals, (e.g.,
+\url{http://onlinelibrary.wiley.com/doi/10.1111/ele.12289/abstract}}
+\item{science}{Science magazine (e.g.,
+\url{http://www.sciencemag.org/content/345/6200/1041.short})}
+\item{proceedings}{Royal Society of London journals (e.g.,
+\url{http://rspb.royalsocietypublishing.org/content/282/1814/20151215}). Requires
+\code{vol} and \code{issue} of the article.}
+\item{figshare}{Figshare, (e.g.,
+\url{http://figshare.com/articles/Catching_crabs_a_case_study_in_local_scale_English_conservation/979288}}
+\item{\code{esa_data_archives} & \code{esa_data}}{You must give
+article codes, not DOIs, for these, which you can find on the
+article itself. An ESA Data Archive paper - not to be confused with
+an ESA Archive, which is the supplement to an ESA paper. The
+distinction seems less crazy once you're reading the paper - if it
+only describes a dataset, it's an \code{esa_archive} paper, else
+it's an \code{esa_data_archive}. For example,
+\url{http://www.esapubs.org/archive/ecol/E092/201/default.htm} is
+an \code{esa_data_archive} whose article code is E092-201-D1;
+\url{http://esapubs.org/Archive/ecol/E093/059/default.htm} is a
+\code{esa_archive} whose code is E093-059-D1.}
+}
+}
 \examples{
+\dontrun{
 #Put the function wherever you would put a file path
 crabs <- read.csv(ft_get_si("10.6084/m9.figshare.979288", 2))
 
 #ESA data papers and regular articles *must* be marked
 fungi <- read.csv(ft_get_si("E093-059", "myco_db.csv",
                                         "esa_archives"))
-mammals <- read.delim(ft_get_si("E092-201", "MCDB_communities.csv",
+mammals <- read.csv(ft_get_si("E092-201", "MCDB_communities.csv",
                                             "esa_data_archives"))
 }
+}
 \author{
-Will Pearse
+Will Pearse (\email{will.pearse@gmail.com})
 }
 
