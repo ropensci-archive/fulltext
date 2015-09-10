@@ -125,10 +125,13 @@ x %>%
  select(-permissions.license)
 ```
 
+## Supplementary materials
+
 Grab supplementary materials for (re-)analysis of data
 
 ```{r}
 catching.crabs <- read.csv(ft_get_si("10.6084/m9.figshare.979288", 2))
+head(catching.crabs)
 ```
 
 ## Cache

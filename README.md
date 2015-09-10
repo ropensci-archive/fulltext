@@ -31,6 +31,8 @@ Additional steps we hope to include in future versions:
 * Analysis enable via the [tm](https://cran.rstudio.com/web/packages/tm/) package and friends, or via [Spark-R](https://amplab-extras.github.io/SparkR-pkg/)
 * Visualization
 
+You can also download supplementary materials from papers.
+
 Data sources in `fulltext` include:
 
 * [Crossref](http://www.crossref.org/) - via the `rcrossref` package
@@ -70,6 +72,14 @@ Load library
 library('fulltext')
 ```
 
+## Extraction tools
+
+If you want to use `ft_extract()` function, it currently has two options for how to extract text from PDFs: `xpdf` and `ghostscript`. 
+
+* `xpdf` installation: See http://www.foolabs.com/xpdf/download.html for instructions on how to download and install `xpdf`. For OSX, you an also get `xpdf` via [Homebrew](https://github.com/homebrew/homebrew-x11/blob/master/xpdf.rb) with `brew install xpdf`. Apparently, you can optionally install Poppler, which is built on `xpdf`. Get it at http://poppler.freedesktop.org/
+* `ghostscript` installation: See http://www.ghostscript.com/doc/9.16/Install.htm  
+for instructions on how to download and install `ghostscript`. For OSX, you an also get `ghostscript` via [Homebrew](https://github.com/Homebrew/homebrew/blob/master/Library/Formula/ghostscript.rb) with `brew install gs`.
+
 ## Search
 
 `ft_search()` - get metadata on a search query.
@@ -80,7 +90,7 @@ ft_search(query = 'ecology', from = 'plos')
 #> Query:
 #>   [ecology] 
 #> Found:
-#>   [PLoS: 28561; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0] 
+#>   [PLoS: 29123; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0] 
 #> Returned:
 #>   [PLoS: 10; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0]
 ```
@@ -104,18 +114,18 @@ ft_get('10.1371/journal.pone.0086169', from = 'plos')
 library("rplos")
 (dois <- searchplos(q = "*:*", fl = 'id',
    fq = list('doc_type:full',"article_type:\"research article\""), limit = 5)$data$id)
-#> [1] "10.1371/journal.pone.0031384" "10.1371/journal.pone.0031385"
-#> [3] "10.1371/journal.pone.0107441" "10.1371/journal.pone.0000339"
-#> [5] "10.1371/journal.pone.0046739"
+#> [1] "10.1371/journal.pone.0016448" "10.1371/journal.pone.0067096"
+#> [3] "10.1371/journal.pone.0129955" "10.1371/journal.pgen.1003702"
+#> [5] "10.1371/journal.pgen.1003701"
 x <- ft_get(dois, from = "plos")
 x %>% chunks("publisher") %>% tabularize()
 #> $plos
 #>                                               publisher
 #> 1 Public Library of Science\n        San Francisco, USA
-#> 2 Public Library of Science\n        San Francisco, USA
-#> 3         Public Library of Science\nSan Francisco, USA
-#> 4           Public Library of ScienceSan Francisco, USA
-#> 5 Public Library of Science\n        San Francisco, USA
+#> 2         Public Library of Science\nSan Francisco, USA
+#> 3      Public Library of Science\nSan Francisco, CA USA
+#> 4         Public Library of Science\nSan Francisco, USA
+#> 5         Public Library of Science\nSan Francisco, USA
 ```
 
 
@@ -123,17 +133,17 @@ x %>% chunks("publisher") %>% tabularize()
 x %>% chunks(c("doi","publisher")) %>% tabularize()
 #> $plos
 #>                            doi
-#> 1 10.1371/journal.pone.0031384
-#> 2 10.1371/journal.pone.0031385
-#> 3 10.1371/journal.pone.0107441
-#> 4 10.1371/journal.pone.0000339
-#> 5 10.1371/journal.pone.0046739
+#> 1 10.1371/journal.pone.0016448
+#> 2 10.1371/journal.pone.0067096
+#> 3 10.1371/journal.pone.0129955
+#> 4 10.1371/journal.pgen.1003702
+#> 5 10.1371/journal.pgen.1003701
 #>                                               publisher
 #> 1 Public Library of Science\n        San Francisco, USA
-#> 2 Public Library of Science\n        San Francisco, USA
-#> 3         Public Library of Science\nSan Francisco, USA
-#> 4           Public Library of ScienceSan Francisco, USA
-#> 5 Public Library of Science\n        San Francisco, USA
+#> 2         Public Library of Science\nSan Francisco, USA
+#> 3      Public Library of Science\nSan Francisco, CA USA
+#> 4         Public Library of Science\nSan Francisco, USA
+#> 5         Public Library of Science\nSan Francisco, USA
 ```
 
 Use `dplyr` to data munge
@@ -147,29 +157,46 @@ x %>%
  .$plos %>%
  select(-permissions.license)
 #>                            doi
-#> 1 10.1371/journal.pone.0031384
-#> 2 10.1371/journal.pone.0031385
-#> 3 10.1371/journal.pone.0107441
-#> 4 10.1371/journal.pone.0000339
-#> 5 10.1371/journal.pone.0046739
+#> 1 10.1371/journal.pone.0016448
+#> 2 10.1371/journal.pone.0067096
+#> 3 10.1371/journal.pone.0129955
+#> 4 10.1371/journal.pgen.1003702
+#> 5 10.1371/journal.pgen.1003701
 #>                                               publisher
 #> 1 Public Library of Science\n        San Francisco, USA
-#> 2 Public Library of Science\n        San Francisco, USA
-#> 3         Public Library of Science\nSan Francisco, USA
-#> 4           Public Library of ScienceSan Francisco, USA
-#> 5 Public Library of Science\n        San Francisco, USA
+#> 2         Public Library of Science\nSan Francisco, USA
+#> 3      Public Library of Science\nSan Francisco, CA USA
+#> 4         Public Library of Science\nSan Francisco, USA
+#> 5         Public Library of Science\nSan Francisco, USA
 #>   permissions.copyright.year permissions.copyright.holder
-#> 1                       2012                 Arnold et al
-#> 2                       2012                     Hu, Kuhn
-#> 3                       2014           Peterson, McKenzie
-#> 4                       2007                Shrager et al
-#> 5                       2012                Kapoula et al
+#> 1                       2011                Friberg et al
+#> 2                       2013                      David C
+#> 3                       2015                    Lei et al
+#> 4                       2013                   Zhou et al
+#> 5                       2013                         <NA>
 #>                       permissions.license_url
 #> 1                                        <NA>
 #> 2                                        <NA>
 #> 3 http://creativecommons.org/licenses/by/4.0/
 #> 4                                        <NA>
 #> 5                                        <NA>
+```
+
+## Supplementary materials
+
+Grab supplementary materials for (re-)analysis of data
+
+
+```r
+catching.crabs <- read.csv(ft_get_si("10.6084/m9.figshare.979288", 2))
+head(catching.crabs)
+#>   trap.no. length.deployed no..crabs
+#> 1        1          10 sec         0
+#> 2        2          10 sec         0
+#> 3        3          10 sec         0
+#> 4        4          10 sec         0
+#> 5        5          10 sec         0
+#> 6        1           1 min         0
 ```
 
 ## Cache
