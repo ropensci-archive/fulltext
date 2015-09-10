@@ -1,9 +1,9 @@
 #' Download supplementary materials from journals
 #'
-#' Download supplementary materials from papers. Put a call to this
-#' function where you would put a file-path - everything is cached by
-#' default, so you don't have to worry about multiple downloads in the
-#' same session.
+#' Put a call to this function where you would put a file-path - everything 
+#' is cached by default, so you don't have to worry about multiple downloads 
+#' in the same session.
+#' 
 #' @details The examples probably give the best indication of how to
 #' use this function. In general, just specify the DOI of the article
 #' you want to download data from, and the number of the supplement
@@ -30,8 +30,7 @@
 #' \item{proceedings}{Royal Society of London journals (e.g.,
 #' \url{http://rspb.royalsocietypublishing.org/content/282/1814/20151215}). Requires
 #' \code{vol} and \code{issue} of the article.}
-#' \item{figshare}{Figshare, (e.g.,
-#' \url{http://figshare.com/articles/Catching_crabs_a_case_study_in_local_scale_English_conservation/979288}}
+#' \item{figshare}{Figshare, (e.g., \url{http://bit.ly/figshare-example})}
 #' \item{\code{esa_data_archives} & \code{esa_data}}{You must give
 #' article codes, not DOIs, for these, which you can find on the
 #' article itself. An ESA Data Archive paper - not to be confused with
@@ -47,12 +46,12 @@
 #' @param doi DOI of article (\code{character}). Note: if using ESA
 #' journal, this must be the ESA-specific article code (e.g.,
 #' E092-201).
-#' @param si number of the supplment to be downloads (1, 2, 3, etc.),
+#' @param si number of the supplement to be downloaded (1, 2, 3, etc.),
 #' or (for ESA and Science journals) the name of the supplment (e.g.,
 #' "S1_data.csv"). Can be a \code{character} or \code{numeric}.
 #' @param from Publisher of article (\code{character}). Optional,
 #' except for ESA journals (see \code{doi}), but supplying it will
-#' speed downloads. Must be one of: auto (i.e., auto-detect journal;
+#' speed up downloads. Must be one of: auto (i.e., auto-detect journal;
 #' default), plos, wiley, science, proceedings, figshare,
 #' esa_data_archives, esa_archives.
 #' @param save.name a name for the file to download
@@ -250,7 +249,7 @@ get_si_proceedings <- function(doi, si, vol, issue, save.name=NULL, dir=NULL, ca
     return(.download(url, dir, save.name))
 }
 
-#' Internal regexp functions
+# Internal regexp functions
 .grep.url <- function(url, regexp, which=1){
     html <- as.character(GET(url))
     return(.grep.text(html, regexp, which))
@@ -261,7 +260,7 @@ get_si_proceedings <- function(doi, si, vol, issue, save.name=NULL, dir=NULL, ca
     return(substr(text, pos, pos+attr(links[[1]], "match.length")[which]-1))
 }
 
-#' Internal download function
+# Internal download function
 .download <- function(url, dir, save.name, cache=TRUE){
     destination <- file.path(dir, save.name)
     if(cache==TRUE & file.exists(destination))
