@@ -16,5 +16,5 @@ test_that("ft_get_si returns...", {
 test_that("ft_get_si fails well", {
   skip_on_cran()
 
-  expect_error(ft_get_si('nonsense', 1), "Error in get_si_pub(doi) : Cannot find publisher for DOI: nonsense")
+  expect_error(ft_get_si('nonsense', 1))
 })
