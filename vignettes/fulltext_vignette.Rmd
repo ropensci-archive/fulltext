@@ -15,6 +15,8 @@ fulltext introduction
 * Text
 * Extract
 
+...you can also grab data from the supplementary materials.
+
 ## Load fulltext
 
 
@@ -389,3 +391,10 @@ x %>% chunks(c("doi", "history")) %>% tabularize()
 ## 8 10.1371/journal.pcbi.1003594       2014-01-09       2014-03-14
 ```
 
+## Download supplementary materials
+
+Just use the output from \code{ft_get_si} as if it were a file path
+
+```r
+catching.crabs <- read.csv(ft_get_si("10.6084/m9.figshare.979288", 2))
+```
