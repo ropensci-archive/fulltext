@@ -12,6 +12,15 @@
 #' ESA journals need you to give the filename of the supplement to
 #' download.
 #'
+#' For any DOIs not recognised (and if asked) the European PubMed
+#' Central API is used to look up articles. What this database calls a
+#' supplementary file varies by publisher; often they will simply be
+#' figures within articles, but we (obviously) have no way to check
+#' this at run-time. I strongly recommend you run any EPMC calls with
+#' \code{list=TRUE} the first time, to see the filenames that EPMC
+#' gives supplements, as these also often vary from what the authors
+#' gave them.
+#'
 #' Below is a list of all the publishers this supports, and examples
 #' of articles from them. I'm aware that there isn't perfect overlap
 #' between these publishers and the rest of the package; I plan to
@@ -42,7 +51,9 @@
 #' an \code{esa_data_archive} whose article code is E092-201-D1;
 #' \url{http://esapubs.org/Archive/ecol/E093/059/default.htm} is a
 #' \code{esa_archive} whose code is E093-059-D1.}
-#' }
+#' \item{epmc}{Look up an article on the Europe PubMed Central, and
+#' then download the file using their supplementary materials API
+#' (\url{http://europepmc.org/restfulwebservice})} }
 #' @param doi DOI of article (\code{character}). Note: if using ESA
 #' journal, this must be the ESA-specific article code (e.g.,
 #' E092-201).
@@ -67,6 +78,9 @@
 #' \code{numeric})
 #' @param issue Article issue (Proceedings journals only;
 #' \code{numeric})
+#' @param list if \code{TRUE}, print all files within a zip-file
+#' downloaded from EPMC (default: FALSE). This is *very* useful if
+#' using EPMC (see notes)
 #' @author Will Pearse (\email{will.pearse@@gmail.com})
 #' @examples
 #' \dontrun{
@@ -78,9 +92,10 @@
 #'                                         "esa_archives"))
 #' mammals <- read.csv(ft_get_si("E092-201", "MCDB_communities.csv",
 #'                                             "esa_data_archives"))
+#' epmc.bad <- ft_get_si("10.1371/journal.pone.0126524", "pone.0126524.g005.jpg", "epmc")
 #' }
 #' @export
-ft_get_si <- function(doi, si, from=c("auto","plos","wiley","science","proceedings","figshare","esa_data_archives","esa_archives"), save.name=NULL, dir=NULL, cache=TRUE, vol=NULL, issue=NULL){
+ft_get_si <- function(doi, si, from=c("auto","plos","wiley","science","proceedings","figshare","esa_data_archives","esa_archives","epmc"), save.name=NULL, dir=NULL, cache=TRUE, vol=NULL, issue=NULL, list=FALSE){
     #Argument handling
     if(!(is.numeric(si) | is.character(si)))
         stop("'si' must be numeric or character")
@@ -102,7 +117,7 @@ ft_get_si <- function(doi, si, from=c("auto","plos","wiley","science","proceedin
     if(from == "auto")
         from <- get_si_pub(doi)
     func <- get_si_func(from)
-    return(func(doi, si, save.name=save.name, cache=cache, vol=vol, issue=issue))
+    return(func(doi, si, save.name=save.name, cache=cache, vol=vol, issue=issue, list=list))
 }
 
 get_si_pub <- function(x){
@@ -139,10 +154,12 @@ get_si_func <- function(x) {
                      "proceedings" = get_si_proceedings,
                      "figshare" = get_si_figshare,
                      "esa_data_archives" = get_si_esa_data_archives,
-                     "esa_archives" = get_si_esa_archives
+                     "esa_archives" = get_si_esa_archives,
+                     "epmc" = get_si_epmc
                      )
+    #If all else fails, try EPMC
     if(is.null(output))
-        stop("Publisher (code) ", x, " not found")
+        output <- get_si_epmc
     return(output)
 }
 
@@ -249,6 +266,21 @@ get_si_proceedings <- function(doi, si, vol, issue, save.name=NULL, dir=NULL, ca
     return(.download(url, dir, save.name))
 }
 
+#' @importFrom XML xpathApply xmlInternalTreeParse
+get_si_epmc <- function(doi, si, vol, issue, save.name=NULL, dir=NULL, cache=TRUE, list=FALSE, ...){
+    #Argument handling
+    if(!is.character(si))
+        stop("EPMB download requires numeric SI info")
+    dir <- .tmpdir(dir)
+    save.name <- .save.name(doi, save.name, si)
+    zip.save.name <- .save.name(doi, NULL, "raw_zip.zip")
+    
+    #Find, download, and return
+    pmc.id <- xpathApply(xmlParse(paste0("http://www.ebi.ac.uk/europepmc/webservices/rest/search/query=", doi)), "//id", xmlValue)
+    zip <- tryCatch(.download(paste0("http://www.ebi.ac.uk/europepmc/webservices/rest/", pmc.id[[1]], "/supplementaryFiles"),dir,zip.save.name,cache), error=stop("Cannot find supplementary materials for (seemingly) valid EPMC article ID ",pmc.id[[1]]))
+    return(.unzip(zip, dir, save.name, cache, si, list))
+}
+
 # Internal regexp functions
 .grep.url <- function(url, regexp, which=1){
     html <- as.character(GET(url))
@@ -269,6 +301,20 @@ get_si_proceedings <- function(doi, si, vol, issue, save.name=NULL, dir=NULL, ca
     if(result != 0)
         stop("Error code", result, " downloading file; file may not exist")
     return(destination)
+}
+
+# Internal unzip function
+.unzip <- function(zip, dir, save.name, cache, si, list=FALSE){
+    files <- unzip(zip, list=TRUE)
+    if(list){
+        cat("Files in ZIP from EPMC:")
+        print(files)
+    }
+    if(!si %in% files$Name)
+        stop("Required file not in zipfile ", zip)
+    file <- unzip(zip, si)
+    file.rename(file, file.path(dir, save.name))
+    return(file.path(dir, save.name))
 }
 
 .tmpdir <- function(dir){

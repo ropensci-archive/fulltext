@@ -5,8 +5,8 @@
 \title{Download supplementary materials from journals}
 \usage{
 ft_get_si(doi, si, from = c("auto", "plos", "wiley", "science", "proceedings",
-  "figshare", "esa_data_archives", "esa_archives"), save.name = NULL,
-  dir = NULL, cache = TRUE, vol = NULL, issue = NULL)
+  "figshare", "esa_data_archives", "esa_archives", "epmc"), save.name = NULL,
+  dir = NULL, cache = TRUE, vol = NULL, issue = NULL, list = FALSE)
 }
 \arguments{
 \item{doi}{DOI of article (\code{character}). Note: if using ESA
@@ -40,6 +40,10 @@ your chosen \code{dir})}
 
 \item{issue}{Article issue (Proceedings journals only;
 \code{numeric})}
+
+\item{list}{if \code{TRUE}, print all files within a zip-file
+downloaded from EPMC (default: FALSE). This is *very* useful if
+using EPMC (see notes)}
 }
 \description{
 Put a call to this function where you would put a file-path - everything
@@ -54,6 +58,15 @@ you want to download (1, 5, etc.). ESA journals don't use DOIs
 (give the article code; see below), and Proceedings, Science, and
 ESA journals need you to give the filename of the supplement to
 download.
+
+For any DOIs not recognised (and if asked) the European PubMed
+Central API is used to look up articles. What this database calls a
+supplementary file varies by publisher; often they will simply be
+figures within articles, but we (obviously) have no way to check
+this at run-time. I strongly recommend you run any EPMC calls with
+\code{list=TRUE} the first time, to see the filenames that EPMC
+gives supplements, as these also often vary from what the authors
+gave them.
 
 Below is a list of all the publishers this supports, and examples
 of articles from them. I'm aware that there isn't perfect overlap
@@ -85,7 +98,9 @@ it's an \code{esa_data_archive}. For example,
 an \code{esa_data_archive} whose article code is E092-201-D1;
 \url{http://esapubs.org/Archive/ecol/E093/059/default.htm} is a
 \code{esa_archive} whose code is E093-059-D1.}
-}
+\item{epmc}{Look up an article on the Europe PubMed Central, and
+then download the file using their supplementary materials API
+(\url{http://europepmc.org/restfulwebservice})} }
 }
 \examples{
 \dontrun{
@@ -97,6 +112,7 @@ fungi <- read.csv(ft_get_si("E093-059", "myco_db.csv",
                                         "esa_archives"))
 mammals <- read.csv(ft_get_si("E092-201", "MCDB_communities.csv",
                                             "esa_data_archives"))
+epmc.bad <- ft_get_si("10.1371/journal.pone.0126524", "pone.0126524.g005.jpg", "epmc")
 }
 }
 \author{
