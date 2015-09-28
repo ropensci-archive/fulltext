@@ -19,7 +19,8 @@
 #' this at run-time. I strongly recommend you run any EPMC calls with
 #' \code{list=TRUE} the first time, to see the filenames that EPMC
 #' gives supplements, as these also often vary from what the authors
-#' gave them.
+#' gave them. This may actually be a 'feature', not a 'bug', if you're
+#' trying to automate some sort of meta-analysis.
 #'
 #' Below is a list of all the publishers this supports, and examples
 #' of articles from them. I'm aware that there isn't perfect overlap
@@ -39,21 +40,26 @@
 #' \item{proceedings}{Royal Society of London journals (e.g.,
 #' \url{http://rspb.royalsocietypublishing.org/content/282/1814/20151215}). Requires
 #' \code{vol} and \code{issue} of the article.}
-#' \item{figshare}{Figshare, (e.g., \url{http://bit.ly/figshare-example})}
-#' \item{\code{esa_data_archives} & \code{esa_data}}{You must give
-#' article codes, not DOIs, for these, which you can find on the
-#' article itself. An ESA Data Archive paper - not to be confused with
-#' an ESA Archive, which is the supplement to an ESA paper. The
-#' distinction seems less crazy once you're reading the paper - if it
-#' only describes a dataset, it's an \code{esa_archive} paper, else
-#' it's an \code{esa_data_archive}. For example,
+#' \item{figshare}{Figshare, (e.g.,
+#' \url{http://bit.ly/figshare-example})}
+#' \item{esa_data_archives & esa_data}{You must give article codes,
+#' not DOIs, for these, which you can find on the article itself. An
+#' ESA Data Archive paper - not to be confused with an ESA Archive,
+#' which is the supplement to an ESA paper. The distinction seems less
+#' crazy once you're reading the paper - if it only describes a
+#' dataset, it's an \code{esa_archive} paper, else it's an
+#' \code{esa_data_archive}. For example,
 #' \url{http://www.esapubs.org/archive/ecol/E092/201/default.htm} is
 #' an \code{esa_data_archive} whose article code is E092-201-D1;
 #' \url{http://esapubs.org/Archive/ecol/E093/059/default.htm} is a
 #' \code{esa_archive} whose code is E093-059-D1.}
+#' \item{biorxiv}{Load from bioRxiv (e.g.,
+#' \url{http://biorxiv.org/content/early/2015/09/11/026575})} 
 #' \item{epmc}{Look up an article on the Europe PubMed Central, and
 #' then download the file using their supplementary materials API
-#' (\url{http://europepmc.org/restfulwebservice})} }
+#' (\url{http://europepmc.org/restfulwebservice}). See comments above
+#' in 'notes' about EPMC.}
+#' }
 #' @param doi DOI of article (\code{character}). Note: if using ESA
 #' journal, this must be the ESA-specific article code (e.g.,
 #' E092-201).
@@ -82,6 +88,9 @@
 #' downloaded from EPMC (default: FALSE). This is *very* useful if
 #' using EPMC (see notes)
 #' @author Will Pearse (\email{will.pearse@@gmail.com})
+#' @note Make sure that the article from which you're attempting to
+#' download supplementary materials *has* supplementary materials. 404
+#' errors and 'file not found' errors can result from such cases.
 #' @examples
 #' \dontrun{
 #' #Put the function wherever you would put a file path
@@ -92,10 +101,42 @@
 #'                                         "esa_archives"))
 #' mammals <- read.csv(ft_get_si("E092-201", "MCDB_communities.csv",
 #'                                             "esa_data_archives"))
-#' epmc.bad <- ft_get_si("10.1371/journal.pone.0126524", "pone.0126524.g005.jpg", "epmc")
+#' epmc.fig <- ft_get_si("10.1371/journal.pone.0126524", "pone.0126524.g005.jpg", "epmc")
+#' #...note this 'SI' is not actually an SI, but rather an image from the paper.
 #' }
 #' @export
-ft_get_si <- function(doi, si, from=c("auto","plos","wiley","science","proceedings","figshare","esa_data_archives","esa_archives","epmc"), save.name=NULL, dir=NULL, cache=TRUE, vol=NULL, issue=NULL, list=FALSE){
+ft_get_si <- function(x, si, from=c("auto","plos","wiley","science","proceedings","figshare","esa_data_archives","esa_archives","epmc"), save.name=NA, dir=NA, cache=TRUE, vol=NA, issue=NA, list=FALSE){
+    #What about mixed SI types?
+    #Argument handling and ft class wrapper
+    .fix.param <- function(x, param, name){
+        if(length(x) != length(param)){
+            if((length(x) %% length(param)) != 0)
+                stop("length of ", "name (", length(param), ") is incompatible with 'x' (", length(x), ")")
+            param <- rep(param, length(x))
+        }
+        return(param)
+    }
+    if(length(x) == 0)
+        stop("'x' must contain some data!")
+    if(inherits(x, "ft_data") | inherits(x, "ft"))
+        x <- unlist(sapply(x, function(x) x$dois))
+    from <- match.arg(from)
+
+    #Multiply argument lengths
+    from <- .fix.param(x, from, "from")
+    si <- .fix.param(x, si, "si")
+    save.name <- .fix.param(x, save.name, "save.name")
+    dir <- .fix.param(x, dir, "dir")
+    vol <- .fix.param(x, vol, "vol")
+    issue <- .fix.param(x, issue, "issue")
+    cache <- .fix.param(x, cache, "cache")
+    list <- .fix.param(x, list, "list")
+
+    #Call and return
+    return(setNames(unlist(mapply(.ft_get_si, doi=x,si=si,from=from,save.name=save.name,dir=dir,cache=cache,vol=vol,issue=issue,list=list)),x))
+}
+
+.ft_get_si <- function(doi, si, from=c("auto","plos","wiley","science","proceedings","figshare","esa_data_archives","esa_archives","epmc"), save.name=NA, dir=NA, cache=TRUE, vol=NA, issue=NA, list=FALSE){
     #Argument handling
     if(!(is.numeric(si) | is.character(si)))
         stop("'si' must be numeric or character")
@@ -104,11 +145,11 @@ ft_get_si <- function(doi, si, from=c("auto","plos","wiley","science","proceedin
     from <- match.arg(from)
     
     #Setup output directory and filename
-    if(!is.null(dir)){
+    if(!is.na(dir)){
         if(!file.exists(dir))
-            stop("'dir' must exist unless NULL")
+            stop("'dir' must exist unless NA")
     } else dir <- tempdir()
-    if(is.null(save.name)){
+    if(is.na(save.name)){
         save.name <- paste(doi,si, sep="_")
         save.name <- gsub(.Platform$file.sep, "_", save.name, fixed=TRUE)
     }
@@ -129,7 +170,7 @@ get_si_pub <- function(x){
             return("figshare")
     pub <- cr_works(x)$data
     
-    if(is.null(pub) || nchar(pub)==0 || pub$prefix=="http://id.crossref.org/prefix/10.0000")
+    if(is.na(pub) || nchar(pub)==0 || pub$prefix=="http://id.crossref.org/prefix/10.0000")
         stop("Cannot find publisher for DOI: ", x)
     
     return(.grep.text(pub$member, "[0-9]+"))
@@ -141,7 +182,8 @@ get_si_func <- function(x) {
                      "340" = get_si_plos,
                      "311" = get_si_wiley,
                      "221" = get_si_science,
-                     "175" = get_si_proceedings
+                     "175" = get_si_proceedings,
+                     "246" = get_si_biorxiv
                      )
     if(!is.null(output))
         return(output)
@@ -155,6 +197,7 @@ get_si_func <- function(x) {
                      "figshare" = get_si_figshare,
                      "esa_data_archives" = get_si_esa_data_archives,
                      "esa_archives" = get_si_esa_archives,
+                     "biorxiv" = get_si_biorxiv,
                      "epmc" = get_si_epmc
                      )
     #If all else fails, try EPMC
@@ -163,7 +206,7 @@ get_si_func <- function(x) {
     return(output)
 }
 
-get_si_plos <- function(doi, si, save.name=NULL, dir=NULL, cache=TRUE, ...){
+get_si_plos <- function(doi, si, save.name=NA, dir=NA, cache=TRUE, ...){
     #Argument handling
     if(!is.numeric(si))
         stop("PLoS download requires numeric SI info")
@@ -178,13 +221,13 @@ get_si_plos <- function(doi, si, save.name=NULL, dir=NULL, cache=TRUE, ...){
         stop("Unrecognised journal in DOI")
     journal <- journals[journal]
 
-    #Download and return
+#Download and return
     destination <- file.path(dir, save.name)
     url <- paste0("http://journals.plos.org/", journal, "/article/asset?unique&id=info:doi/", doi, ".s", formatC(si, width=3, flag="0"))
     return(.download(url, dir, save.name, cache))
 }
 
-get_si_wiley <- function(doi, si, save.name=NULL, dir=NULL, cache=TRUE, ...){
+get_si_wiley <- function(doi, si, save.name=NA, dir=NA, cache=TRUE, ...){
     #Argument handling
     if(!is.numeric(si))
         stop("Wiley download requires numeric SI info")
@@ -203,7 +246,7 @@ get_si_wiley <- function(doi, si, save.name=NULL, dir=NULL, cache=TRUE, ...){
     return(.download(url, dir, save.name, cache))
 }
 
-get_si_figshare <- function(doi, si, save.name=NULL, dir=NULL, cache=TRUE, ...){
+get_si_figshare <- function(doi, si, save.name=NA, dir=NA, cache=TRUE, ...){
     #Argument handling
     if(!is.numeric(si))
         stop("FigShare download requires numeric SI info")
@@ -215,7 +258,7 @@ get_si_figshare <- function(doi, si, save.name=NULL, dir=NULL, cache=TRUE, ...){
     return(.download(url, dir, save.name, cache))
 }
 
-get_si_esa_data_archives <- function(esa, si, save.name=NULL, dir=NULL, cache=TRUE, ...){
+get_si_esa_data_archives <- function(esa, si, save.name=NA, dir=NA, cache=TRUE, ...){
     #Argument handling
     if(!is.character(si))
         stop("ESA Archives download requires character SI info")
@@ -226,7 +269,7 @@ get_si_esa_data_archives <- function(esa, si, save.name=NULL, dir=NULL, cache=TR
     esa <- gsub("-", "/", esa, fixed=TRUE)
     return(.download(paste0("http://esapubs.org/archive/ecol/", esa, "/data", "/", si), dir, save.name, cache))
 }
-get_si_esa_archives <- function(esa, si, save.name=NULL, dir=NULL, cache=TRUE, ...){
+get_si_esa_archives <- function(esa, si, save.name=NA, dir=NA, cache=TRUE, ...){
     #Argument handling
     if(!is.character(si))
         stop("ESA Archives download requires character SI info")
@@ -238,7 +281,7 @@ get_si_esa_archives <- function(esa, si, save.name=NULL, dir=NULL, cache=TRUE, .
     return(.download(paste0("http://esapubs.org/archive/ecol/", esa, "/", si), dir, save.name, cache))
 }
 
-get_si_science <- function(doi, si, save.name=NULL, dir=NULL, cache=TRUE, ...){
+get_si_science <- function(doi, si, save.name=NA, dir=NA, cache=TRUE, ...){
     #Argument handling
     if(!is.character(si))
         stop("Science download requires character SI info")
@@ -251,7 +294,7 @@ get_si_science <- function(doi, si, save.name=NULL, dir=NULL, cache=TRUE, ...){
     return(.download(url, dir, save.name, cache))
 }
 
-get_si_proceedings <- function(doi, si, vol, issue, save.name=NULL, dir=NULL, cache=TRUE, ...){
+get_si_proceedings <- function(doi, si, vol, issue, save.name=NA, dir=NA, cache=TRUE, ...){
     #Argument handling
     if(!is.numeric(si))
         stop("Proceedings download requires numeric SI info")
@@ -267,7 +310,7 @@ get_si_proceedings <- function(doi, si, vol, issue, save.name=NULL, dir=NULL, ca
 }
 
 #' @importFrom XML xpathApply xmlInternalTreeParse
-get_si_epmc <- function(doi, si, vol, issue, save.name=NULL, dir=NULL, cache=TRUE, list=FALSE, ...){
+get_si_epmc <- function(doi, si, vol, issue, save.name=NA, dir=NA, cache=TRUE, list=FALSE, ...){
     #Argument handling
     if(!is.character(si))
         stop("EPMB download requires numeric SI info")
@@ -279,6 +322,19 @@ get_si_epmc <- function(doi, si, vol, issue, save.name=NULL, dir=NULL, cache=TRU
     pmc.id <- xpathApply(xmlParse(paste0("http://www.ebi.ac.uk/europepmc/webservices/rest/search/query=", doi)), "//id", xmlValue)
     zip <- tryCatch(.download(paste0("http://www.ebi.ac.uk/europepmc/webservices/rest/", pmc.id[[1]], "/supplementaryFiles"),dir,zip.save.name,cache), error=stop("Cannot find supplementary materials for (seemingly) valid EPMC article ID ",pmc.id[[1]]))
     return(.unzip(zip, dir, save.name, cache, si, list))
+}
+
+get_si_biorxiv <- function(doi, si, save.name=NA, dir=NA, cache=TRUE, ...){
+    #Argument handling
+    if(!is.numeric(si))
+        stop("bioRxiv download requires numeric SI info")
+    dir <- .tmpdir(dir)
+    save.name <- .save.name(doi, save.name, si)
+    
+    #Find, download, and return
+    url <- paste0(.url.redir(paste0("http://dx.doi.org/", doi)), ".figures-only")
+    file <- .grep.url(url, "/highwire/filestream/[a-z0-9A-Z\\./_-]*", si)
+    return(.download(.url.redir(paste0("http://biorxiv.org",file)), dir, save.name, cache))
 }
 
 # Internal regexp functions
@@ -317,14 +373,19 @@ get_si_epmc <- function(doi, si, vol, issue, save.name=NULL, dir=NULL, cache=TRU
     return(file.path(dir, save.name))
 }
 
+# Internal URL 'redirect' function
+.url.redir <- function(x)
+    return(GET(x)$url)
+
 .tmpdir <- function(dir){
-    if(!is.null(dir)){
+    if(!is.na(dir)){
         if(!file.exists(dir))
             stop("'dir' must exist unless NULL")
     } else dir <- tempdir()
+    return(dir)
 }
 .save.name <- function(doi, save.name, file){
-    if(is.null(save.name)){
+    if(is.na(save.name)){
         save.name <- paste(doi,file, sep="_")
         save.name <- gsub(.Platform$file.sep, "_", save.name, fixed=TRUE)
     }
