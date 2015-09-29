@@ -231,6 +231,7 @@ ft_get.ft <- function(x, from=NULL, plosopts=list(), bmcopts=list(), entrezopts=
 
 #' @export
 print.ft_data <- function(x, ...) {
+  cat("<fulltext text>", sep = "\n")
   alldois <- unlist(ft_compact(pluck(x, "dois")))
   alldois <- vapply(alldois, URLdecode, "")
   namesprint <- paste(na.omit(alldois[1:10]), collapse = " ")
