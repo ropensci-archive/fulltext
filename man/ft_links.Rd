@@ -2,14 +2,19 @@
 % Please edit documentation in R/ft_links.R
 \name{ft_links}
 \alias{ft_links}
+\alias{ft_links.character}
 \alias{ft_links.ft}
 \title{Get full text links}
 \usage{
-ft_links(x, from = "plos", plosopts = list(), bmcopts = list(),
+ft_links(x, from = NULL, plosopts = list(), bmcopts = list(),
   crossrefopts = list(), entrezopts = list(), arxivopts = list(),
   biorxivopts = list(), ...)
 
-\method{ft_links}{ft}(x, from = "plos", plosopts = list(),
+\method{ft_links}{ft}(x, from = NULL, plosopts = list(), bmcopts = list(),
+  crossrefopts = list(), entrezopts = list(), arxivopts = list(),
+  biorxivopts = list(), ...)
+
+\method{ft_links}{character}(x, from = NULL, plosopts = list(),
   bmcopts = list(), crossrefopts = list(), entrezopts = list(),
   arxivopts = list(), biorxivopts = list(), ...)
 }
@@ -35,7 +40,7 @@ ft_links(x, from = "plos", plosopts = list(), bmcopts = list(),
 \item{limit}{Number of records to return.}
 }
 \value{
-An object of class ft_links, and objects of class ft_ind within each source
+An object of class ft_links
 }
 \description{
 Get full text links
@@ -62,6 +67,10 @@ out$crossref$data[[1]]
 res3$plos$data$id
 (out <- ft_links(res3))
 out$plos
+out$plos$data[[1]]
+
+# Character input
+ft_links('10.1371/journal.pone.0086169')
 }
 }
 
