@@ -2,7 +2,7 @@ language: r
 sudo: required
 
 apt_packages:
-	- poppler-utils
+  - poppler-utils
 
 r_github_packages:
   - jimhester/covr
