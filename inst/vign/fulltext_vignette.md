@@ -35,7 +35,7 @@ Search for the term _ecology_ in PLOS journals.
 ## Query:
 ##   [ecology] 
 ## Found:
-##   [PLoS: 28561; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0] 
+##   [PLoS: 29496; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0] 
 ## Returned:
 ##   [PLoS: 10; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0]
 ```
@@ -49,7 +49,7 @@ res1$plos
 
 ```
 ## Query: [ecology] 
-## Records found, returned: [28561, 10] 
+## Records found, returned: [29496, 10] 
 ## License: [CC-BY] 
 ##                                                         id
 ## 1                             10.1371/journal.pone.0059813
@@ -74,6 +74,7 @@ Using the results from `ft_search()` we can grab full text of some articles
 ```
 
 ```
+## <fulltext text>
 ## [Docs] 8 
 ## [Source] R session  
 ## [IDs] 10.1371/journal.pone.0059813 10.1371/journal.pone.0001248
@@ -122,9 +123,6 @@ out$plos
 ## [3] "10.1371/journal.pone.0080763" "10.1371/journal.pone.0102437"
 ## [5] "10.1371/journal.pone.0017342" "10.1371/journal.pone.0091497"
 ## [7] "10.1371/journal.pone.0092931" "10.1371/journal.pcbi.1003594"
-## 
-## $opts$callopts
-## list()
 ```
 
 Dig in further to get to one of the articles in XML format
@@ -156,7 +154,7 @@ ft_extract(path)
 ```
 
 ```
-## <document>/Library/Frameworks/R.framework/Versions/3.2/Resources/library/fulltext/examples/example1.pdf
+## <document>/Users/sacmac/github/ropensci/fulltext/inst/examples/example1.pdf
 ##   Pages: 18
 ##   Title: Suffering and mental health among older people living in nursing homes---a mixed-methods study
 ##   Producer: pdfTeX-1.40.10
@@ -180,6 +178,8 @@ res2$arxiv$data
 ## $path$`cond-mat/9309029`
 ## [1] "~/.fulltext/cond-mat_9309029.pdf"
 ## 
+## attr(,"format")
+## [1] "xml"
 ## 
 ## $data
 ## $data[[1]]
@@ -219,10 +219,12 @@ res <- ft_search(query = "ecology", from = "plos")
 ```
 
 ```
+## <fulltext text>
 ## [Docs] 8 
 ## [Source] R session  
-## [IDs] 10.1371/journal.pone.0059813 10.1371/journal.pone.0001248 10.1371/journal.pone.0080763
-##      10.1371/journal.pone.0102437 10.1371/journal.pone.0017342 10.1371/journal.pone.0091497
+## [IDs] 10.1371/journal.pone.0059813 10.1371/journal.pone.0001248
+##      10.1371/journal.pone.0080763 10.1371/journal.pone.0102437
+##      10.1371/journal.pone.0017342 10.1371/journal.pone.0091497
 ##      10.1371/journal.pone.0092931 10.1371/journal.pcbi.1003594 ...
 ```
 
@@ -289,12 +291,15 @@ x %>% chunks(c("doi","categories"))
 ## [1] "10.1371/journal.pone.0059813"
 ## 
 ## $plos$`10.1371/journal.pone.0059813`$categories
-##  [1] "Research Article"                 "Biology"                          "Ecology"                         
-##  [4] "Community ecology"                "Species interactions"             "Science policy"                  
-##  [7] "Research assessment"              "Research monitoring"              "Research funding"                
-## [10] "Government funding of science"    "Research laboratories"            "Science policy and economics"    
-## [13] "Science and technology workforce" "Careers in research"              "Social and behavioral sciences"  
-## [16] "Sociology"                        "Sociology of knowledge"          
+##  [1] "Research Article"                 "Biology"                         
+##  [3] "Ecology"                          "Community ecology"               
+##  [5] "Species interactions"             "Science policy"                  
+##  [7] "Research assessment"              "Research monitoring"             
+##  [9] "Research funding"                 "Government funding of science"   
+## [11] "Research laboratories"            "Science policy and economics"    
+## [13] "Science and technology workforce" "Careers in research"             
+## [15] "Social and behavioral sciences"   "Sociology"                       
+## [17] "Sociology of knowledge"          
 ## 
 ## 
 ## $plos$`10.1371/journal.pone.0001248`
@@ -302,8 +307,9 @@ x %>% chunks(c("doi","categories"))
 ## [1] "10.1371/journal.pone.0001248"
 ## 
 ## $plos$`10.1371/journal.pone.0001248`$categories
-## [1] "Research Article"             "Ecology"                      "Ecology/Ecosystem Ecology"   
-## [4] "Ecology/Evolutionary Ecology" "Ecology/Theoretical Ecology" 
+## [1] "Research Article"             "Ecology"                     
+## [3] "Ecology/Ecosystem Ecology"    "Ecology/Evolutionary Ecology"
+## [5] "Ecology/Theoretical Ecology" 
 ## 
 ## 
 ## $plos$`10.1371/journal.pone.0080763`
@@ -311,9 +317,10 @@ x %>% chunks(c("doi","categories"))
 ## [1] "10.1371/journal.pone.0080763"
 ## 
 ## $plos$`10.1371/journal.pone.0080763`$categories
-##  [1] "Research Article"     "Biology"              "Ecology"              "Autecology"          
-##  [5] "Behavioral ecology"   "Community ecology"    "Evolutionary ecology" "Population ecology"  
-##  [9] "Evolutionary biology" "Behavioral ecology"   "Evolutionary ecology" "Population biology"  
+##  [1] "Research Article"     "Biology"              "Ecology"             
+##  [4] "Autecology"           "Behavioral ecology"   "Community ecology"   
+##  [7] "Evolutionary ecology" "Population ecology"   "Evolutionary biology"
+## [10] "Behavioral ecology"   "Evolutionary ecology" "Population biology"  
 ## [13] "Population ecology"  
 ## 
 ## 
@@ -322,13 +329,27 @@ x %>% chunks(c("doi","categories"))
 ## [1] "10.1371/journal.pone.0102437"
 ## 
 ## $plos$`10.1371/journal.pone.0102437`$categories
-##  [1] "Research Article"                   "Biology and life sciences"          "Biogeography"                      
-##  [4] "Ecology"                            "Ecosystems"                         "Ecosystem engineering"             
-##  [7] "Ecosystem functioning"              "Industrial ecology"                 "Spatial and landscape ecology"     
-## [10] "Urban ecology"                      "Computer and information sciences"  "Geoinformatics"                    
-## [13] "Spatial analysis"                   "Earth sciences"                     "Geography"                         
-## [16] "Human geography"                    "Cultural geography"                 "Social geography"                  
-## [19] "Ecology and environmental sciences" "Conservation science"               "Environmental protection"          
+##  [1] "Research Article"                  
+##  [2] "Biology and life sciences"         
+##  [3] "Biogeography"                      
+##  [4] "Ecology"                           
+##  [5] "Ecosystems"                        
+##  [6] "Ecosystem engineering"             
+##  [7] "Ecosystem functioning"             
+##  [8] "Industrial ecology"                
+##  [9] "Spatial and landscape ecology"     
+## [10] "Urban ecology"                     
+## [11] "Computer and information sciences" 
+## [12] "Geoinformatics"                    
+## [13] "Spatial analysis"                  
+## [14] "Earth sciences"                    
+## [15] "Geography"                         
+## [16] "Human geography"                   
+## [17] "Cultural geography"                
+## [18] "Social geography"                  
+## [19] "Ecology and environmental sciences"
+## [20] "Conservation science"              
+## [21] "Environmental protection"          
 ## [22] "Nature-society interactions"       
 ## 
 ## 
@@ -337,11 +358,13 @@ x %>% chunks(c("doi","categories"))
 ## [1] "10.1371/journal.pone.0017342"
 ## 
 ## $plos$`10.1371/journal.pone.0017342`$categories
-##  [1] "Research Article"     "Biology"              "Ecology"              "Community ecology"   
-##  [5] "Community assembly"   "Community structure"  "Niche construction"   "Ecological metrics"  
-##  [9] "Species diversity"    "Species richness"     "Biodiversity"         "Biogeography"        
-## [13] "Population ecology"   "Mathematics"          "Statistics"           "Biostatistics"       
-## [17] "Statistical theories" "Ecology"              "Mathematics"         
+##  [1] "Research Article"     "Biology"              "Ecology"             
+##  [4] "Community ecology"    "Community assembly"   "Community structure" 
+##  [7] "Niche construction"   "Ecological metrics"   "Species diversity"   
+## [10] "Species richness"     "Biodiversity"         "Biogeography"        
+## [13] "Population ecology"   "Mathematics"          "Statistics"          
+## [16] "Biostatistics"        "Statistical theories" "Ecology"             
+## [19] "Mathematics"         
 ## 
 ## 
 ## $plos$`10.1371/journal.pone.0091497`
@@ -365,7 +388,8 @@ x %>% chunks(c("doi","categories"))
 ## [1] "10.1371/journal.pcbi.1003594"
 ## 
 ## $plos$`10.1371/journal.pcbi.1003594`$categories
-## [1] "Research Article"          "Biology and life sciences" "Computational biology"     "Microbiology"             
+## [1] "Research Article"          "Biology and life sciences"
+## [3] "Computational biology"     "Microbiology"             
 ## [5] "Theoretical biology"
 ```
 

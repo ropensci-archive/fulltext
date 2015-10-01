@@ -35,11 +35,20 @@ plugin_get_generator <- function(srce, fun) {
       out <- do.call(fun, opts)
       names(out) <- ids
       attr(out, "format") <- "xml"
-      list(found = length(out), dois = names(out), data = construct_paths(cache_options_get(), out), opts = opts)
+      dat <- if (any(sources %in% c("arxiv", "biorxiv"))) {
+        pprint_cache(out)
+      } else {
+        construct_paths(cache_options_get(), out)
+      }
+      list(found = length(out), dois = names(out), data = dat, opts = opts)
     } else {
       list(found = NULL, dois = NULL, data = NULL, opts = opts)
     }
   }
+}
+
+pprint_cache <- function(x) {
+  list(backend = NULL, path = x, data = NULL) 
 }
 
 ## make plugins
