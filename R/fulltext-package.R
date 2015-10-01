@@ -39,6 +39,7 @@
 #' xml_ns xml_children xml_name
 #' @importFrom httr HEAD GET POST upload_file content_type content write_disk stop_for_status
 #' @importFrom whisker whisker.render
+#' @importFrom rentrez entrez_search entrez_fetch entrez_link
 #' @name fulltext-package
 #' @aliases fulltext
 #' @docType package

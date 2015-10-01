@@ -1,12 +1,12 @@
-# ft_links plugins
+# ft_links plugins --------------------------------------
 plugin_links_entrez <- function(sources, ids, opts, ...){
   if (any(grepl("entrez", sources))) {
     allids <- paste(paste0(ids, "[doi]"), collapse = " OR ")
-    tmp <- entrez_search(db = "pubmed", term = allids)
+    tmp <- rentrez::entrez_search(db = "pubmed", term = allids)
     if (length(tmp$ids) == length(ids)) {
       message("Only ", length(tmp$ids), " found for Entrez, proceeding...")
     }
-    res <- entrez_link(dbfrom = "pubmed", db = "", cmd = "llinks", id = tmp$ids)
+    res <- rentrez::entrez_link(dbfrom = "pubmed", db = "", cmd = "llinks", id = tmp$ids)
     out <- lapply(res$linkouts, function(z) {
       rbind_fill(lapply(z, function(w) {
         w <- unclass(w)
@@ -31,10 +31,6 @@ plugin_links_plos <- function(sources, ids, opts, ...){
   }
 }
 
-plugin_links_bmc <- function(sources, ids, opts, ...){
-  list(found = NULL, dois = NULL,  data = NULL, opts = opts)
-}
-
 plugin_links_crossref <- function(sources, ids, opts, ...){
   if (any(grepl("crossref", sources))) {
     tmp <- lapply(ids, cr_ft_links, type = "all")
@@ -51,10 +47,34 @@ plugin_links_crossref <- function(sources, ids, opts, ...){
   }
 }
 
+plugin_links_bmc <- function(sources, ids, opts, ...){
+  list(found = NULL, dois = NULL,  data = NULL, opts = opts)
+}
+
 plugin_links_arxiv <- function(sources, ids, opts, ...){
   list(found = NULL, dois = NULL,  data = NULL, opts = opts)
 }
 
 plugin_links_biorxiv <- function(sources, ids, opts, ...){
+  list(found = NULL, dois = NULL,  data = NULL, opts = opts)
+}
+
+plugin_links_elife <- function(sources, ids, opts, ...){
+  list(found = NULL, dois = NULL,  data = NULL, opts = opts)
+}
+
+plugin_links_peerj <- function(sources, ids, opts, ...){
+  list(found = NULL, dois = NULL,  data = NULL, opts = opts)
+}
+
+plugin_links_frontiersin <- function(sources, ids, opts, ...){
+  list(found = NULL, dois = NULL,  data = NULL, opts = opts)
+}
+
+plugin_links_copernicus <- function(sources, ids, opts, ...){
+  list(found = NULL, dois = NULL,  data = NULL, opts = opts)
+}
+
+plugin_links_cogent <- function(sources, ids, opts, ...){
   list(found = NULL, dois = NULL,  data = NULL, opts = opts)
 }

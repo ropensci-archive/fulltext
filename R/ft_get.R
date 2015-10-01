@@ -1,17 +1,16 @@
 #' @title Get full text
-#' 
+#'
 #' @description \code{ft_get} is a one stop shop to fetch full text of articles,
-#' either XML or PDFs. We have specific support for PLOS via the 
-#' \code{rplos} package, Entrez via the \code{rentrez} package, and arXiv via the 
+#' either XML or PDFs. We have specific support for PLOS via the
+#' \code{rplos} package, Entrez via the \code{rentrez} package, and arXiv via the
 #' \code{aRxiv} package. For other publishers, we have helpers to \code{ft_get} to
-#' sort out links for full text based on user input. See \code{Details} for 
+#' sort out links for full text based on user input. See \code{Details} for
 #' help on how to use this function.
 #'
 #' @export
-#' @importFrom rentrez entrez_search entrez_fetch
 #'
-#' @param x Either identifiers for papers, either DOIs (or other ids) as a list of 
-#' charcter strings, or a character vector, OR an object of class \code{ft}, as 
+#' @param x Either identifiers for papers, either DOIs (or other ids) as a list of
+#' charcter strings, or a character vector, OR an object of class \code{ft}, as
 #' returned from \code{\link{ft_search}}
 #' @param from Source to query. Optional.
 #' @param plosopts PLOS options. See \code{\link[rplos]{plos_fulltext}}
@@ -23,41 +22,41 @@
 #' format that article is in is written to disk, then pulled from disk when further
 #' manipulations are done on the data. See also \code{\link{cache}}
 #' @param backend (character) One of rds, rcache, or redis
-#' @param path (character) Path to local folder. If the folder doesn't exist, we 
+#' @param path (character) Path to local folder. If the folder doesn't exist, we
 #' create it for you.
 #' @param ... Further args passed on to \code{\link[httr]{GET}}
 #'
-#' @return An object of class \code{ft_data} (of type \code{S3}) with slots for 
-#' each of the publishers. The returned object is split up by publishers because 
-#' the full text format is the same within publisher - which should facilitate 
+#' @return An object of class \code{ft_data} (of type \code{S3}) with slots for
+#' each of the publishers. The returned object is split up by publishers because
+#' the full text format is the same within publisher - which should facilitate
 #' text mining downstream as different steps may be needed for each publisher's
 #' content.
-#' 
+#'
 #' @details There are various ways to use \code{ft_get}:
 #' \itemize{
 #'  \item Pass in only DOIs - leave \code{from} parameter \code{NULL}. This route will
 #'  first query Crossref API for the publisher of the DOI, then we'll use the appropriate
-#'  method to fetch full text from the publisher. If a publisher is not found for the DOI, 
+#'  method to fetch full text from the publisher. If a publisher is not found for the DOI,
 #'  then we'll throw back a message telling you a publisher was not found.
 #'  \item Pass in DOIs (or other pub IDs) and use the \code{from} parameter. This route
-#'  means we don't have to make an extra API call to Crossref (thus, this route is faster) 
-#'  to determine the publisher for each DOI. We go straight to getting full text based on 
-#'  the publisher. 
-#'  \item Use \code{\link{ft_search}} to search for articles. Then pass that output to 
+#'  means we don't have to make an extra API call to Crossref (thus, this route is faster)
+#'  to determine the publisher for each DOI. We go straight to getting full text based on
+#'  the publisher.
+#'  \item Use \code{\link{ft_search}} to search for articles. Then pass that output to
 #'  this function, which will use info in that object. This behaves the same as the previous
-#'  option in that each DOI has publisher info so we know how to get full text for each 
+#'  option in that each DOI has publisher info so we know how to get full text for each
 #'  DOI.
 #' }
-#' 
-#' Note that some publishers are available via Entrez, but often not recent articles, 
+#'
+#' Note that some publishers are available via Entrez, but often not recent articles,
 #' where "recent" may be a few months to a year or so. In that case, make sure to specify
 #' the publisher, or else you'll get back no data.
-#' 
+#'
 #' @section Notes on specific publishers:
 #' \itemize{
-#'  \item arXiv - The IDs passed are not actually DOIs, though they look similar. 
-#'  Thus, there's no way to not pass in the \code{from} parameter as we can't 
-#'  determine unambiguously that the IDs passed in are from arXiv.org. 
+#'  \item arXiv - The IDs passed are not actually DOIs, though they look similar.
+#'  Thus, there's no way to not pass in the \code{from} parameter as we can't
+#'  determine unambiguously that the IDs passed in are from arXiv.org.
 #' }
 #'
 #' @examples \dontrun{
@@ -101,7 +100,7 @@
 #' ft_get('10.3390/nu3010063')
 #' ft_get('10.3390/nu7085279')
 #' ft_get(c('10.3390/nu3010063', '10.3390/nu7085279')) # not working, only getting 1
-#' 
+#'
 #' # If you know the publisher, give DOI and publisher
 #' ## by default, PLOS gives back XML
 #' ft_get('10.1371/journal.pone.0086169', from='plos')
@@ -167,11 +166,11 @@ ft_get <- function(x, from=NULL, plosopts=list(), bmcopts=list(), entrezopts=lis
 #' @rdname ft_get
 ft_get.character <- function(x, from=NULL, plosopts=list(), bmcopts=list(), entrezopts=list(),
                    elifeopts=list(), cache=FALSE, backend="rds", path="~/.fulltext", ...) {
-  
+
   make_dir(path)
   cacheopts <- cache_options_get()
   if (is.null(cacheopts$cache) && is.null(cacheopts$backend)) cache_options_set(cache, backend, path)
-  
+
   if (!is.null(from)) {
     from <- match.arg(from, c("plos", "entrez", "bmc", "elife", "pensoft", "arxiv", "biorxiv"))
     plos_out <- plugin_get_plos(from, x, plosopts, ...)
@@ -192,11 +191,11 @@ ft_get.character <- function(x, from=NULL, plosopts=list(), bmcopts=list(), entr
 #' @rdname ft_get
 ft_get.list <- function(x, from=NULL, plosopts=list(), bmcopts=list(), entrezopts=list(),
                         elifeopts=list(), cache=FALSE, backend="rds", path="~/.fulltext", ...) {
-  
+
   make_dir(path)
   cacheopts <- cache_options_get()
   if (is.null(cacheopts$cache) && is.null(cacheopts$backend)) cache_options_set(cache, backend, path)
-  
+
   if (!is.null(from)) {
     from <- match.arg(from, c("plos", "entrez", "bmc", "elife", "pensoft", "arxiv", "biorxiv"))
     plos_out <- plugin_get_plos(from, x, plosopts, ...)
@@ -217,7 +216,7 @@ ft_get.list <- function(x, from=NULL, plosopts=list(), bmcopts=list(), entrezopt
 #' @rdname ft_get
 ft_get.ft <- function(x, from=NULL, plosopts=list(), bmcopts=list(), entrezopts=list(),
                       elifeopts=list(), cache=FALSE, backend="rds", path="~/.fulltext", ...) {
-  
+
   make_dir(path)
   cacheopts <- cache_options_get()
   if (is.null(cacheopts$cache) && is.null(cacheopts$backend)) cache_options_set(cache, backend, path)
@@ -275,11 +274,11 @@ get_unknown <- function(x, path, ...) {
 }
 
 publisher_plugin <- function(x) {
-  switch(x, 
+  switch(x,
          `4374` = plugin_get_elife,
          `340` = plugin_get_plos,
          `4443` = plugin_get_peerj,
-         `297` = plugin_get_bmc_dois,
+         `297` = plugin_get_bmc,
          `1965` = plugin_get_frontiersin,
          `98` = plugin_get_entrez,
          `4950` = plugin_get_entrez,
@@ -293,7 +292,7 @@ publisher_plugin <- function(x) {
 }
 
 get_pub_name <- function(x) {
-  switch(x, 
+  switch(x,
          `4374` = "elife",
          `340` = "plos",
          `4443` = "peerj",
@@ -311,7 +310,7 @@ get_pub_name <- function(x) {
 }
 
 get_tm_name <- function(x) {
-  switch(x, 
+  switch(x,
          `4374` = "elife",
          `340` = "plos",
          `4443` = "peerj",

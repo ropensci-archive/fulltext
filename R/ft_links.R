@@ -3,7 +3,6 @@
 #' @export
 #' @param x Query terms
 #' @param from Source to query
-#' @param limit Number of records to return.
 #' @param plosopts PLOS options. See \code{?searchplos}
 #' @param bmcopts BMC options. See \code{?bmc_search}
 #' @param crossrefopts Crossref options. See \code{?cr_works}
@@ -127,7 +126,7 @@ publisher_plugin_links <- function(x) {
          `4374` = plugin_links_elife,
          `340` = plugin_links_plos,
          `4443` = plugin_links_peerj,
-         `297` = plugin_links_bmc_dois,
+         `297` = plugin_links_bmc,
          `1965` = plugin_links_frontiersin,
          `98` = plugin_links_entrez,
          `4950` = plugin_links_entrez,

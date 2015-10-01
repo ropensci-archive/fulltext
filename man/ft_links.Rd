@@ -36,8 +36,6 @@ ft_links(x, from = NULL, plosopts = list(), bmcopts = list(),
 \item{biorxivopts}{biorxiv options. See \code{?bx_search}}
 
 \item{...}{Further args passed on to \code{\link[httr]{GET}}. Not working right now...}
-
-\item{limit}{Number of records to return.}
 }
 \value{
 An object of class ft_links
