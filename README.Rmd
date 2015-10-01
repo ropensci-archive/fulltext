@@ -30,6 +30,7 @@ rOpenSci has a number of R packages to get either full text, metadata, or both f
 
 * Search for articles
 * Fetch articles
+* Get links for full text articles (xml, pdf)
 * Extract text from articles / convert formats
 * Collect bits of articles that you actually need
 
@@ -90,6 +91,21 @@ for instructions on how to download and install `ghostscript`. For OSX, you an a
 
 ```{r}
 ft_search(query = 'ecology', from = 'plos')
+```
+
+## Get full text links
+
+`ft_links()` - get links for articles (xml and pdf).
+
+```{r}
+res1 <- ft_search(query = 'ecology', from = 'entrez', limit = 5)
+ft_links(res1)
+```
+
+Or pass in DOIs directly
+
+```{r}
+ft_links(res1$entrez$data$doi)
 ```
 
 ## Get full text
