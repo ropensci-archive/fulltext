@@ -105,7 +105,7 @@ ft_links(res1)
 Or pass in DOIs directly
 
 ```{r}
-ft_links(res1$entrez$data$doi)
+ft_links(res1$entrez$data$doi, from = "entrez")
 ```
 
 ## Get full text

@@ -23,6 +23,7 @@ rOpenSci has a number of R packages to get either full text, metadata, or both f
 
 * Search for articles
 * Fetch articles
+* Get links for full text articles (xml, pdf)
 * Extract text from articles / convert formats
 * Collect bits of articles that you actually need
 
@@ -90,9 +91,32 @@ ft_search(query = 'ecology', from = 'plos')
 #> Query:
 #>   [ecology] 
 #> Found:
-#>   [PLoS: 29123; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0] 
+#>   [PLoS: 29496; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0] 
 #> Returned:
 #>   [PLoS: 10; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0]
+```
+
+## Get full text links
+
+`ft_links()` - get links for articles (xml and pdf).
+
+
+```r
+res1 <- ft_search(query = 'ecology', from = 'entrez', limit = 5)
+ft_links(res1)
+#> <fulltext links>
+#> [Found] 4 
+#> [IDs] ID_26420471 ID_26419522 ID_26419355 ID_26419232 ...
+```
+
+Or pass in DOIs directly
+
+
+```r
+ft_links(res1$entrez$data$doi, from = "entrez")
+#> <fulltext links>
+#> [Found] 4 
+#> [IDs] ID_26420471 ID_26419522 ID_26419355 ID_26419232 ...
 ```
 
 ## Get full text
@@ -102,6 +126,7 @@ ft_search(query = 'ecology', from = 'plos')
 
 ```r
 ft_get('10.1371/journal.pone.0086169', from = 'plos')
+#> <fulltext text>
 #> [Docs] 1 
 #> [Source] R session  
 #> [IDs] 10.1371/journal.pone.0086169 ...
@@ -114,17 +139,17 @@ ft_get('10.1371/journal.pone.0086169', from = 'plos')
 library("rplos")
 (dois <- searchplos(q = "*:*", fl = 'id',
    fq = list('doc_type:full',"article_type:\"research article\""), limit = 5)$data$id)
-#> [1] "10.1371/journal.pone.0016448" "10.1371/journal.pone.0067096"
-#> [3] "10.1371/journal.pone.0129955" "10.1371/journal.pgen.1003702"
-#> [5] "10.1371/journal.pgen.1003701"
+#> [1] "10.1371/journal.pone.0082888" "10.1371/journal.pone.0133894"
+#> [3] "10.1371/journal.pone.0082883" "10.1371/journal.pone.0050020"
+#> [5] "10.1371/journal.pone.0066417"
 x <- ft_get(dois, from = "plos")
 x %>% chunks("publisher") %>% tabularize()
 #> $plos
 #>                                               publisher
-#> 1 Public Library of Science\n        San Francisco, USA
-#> 2         Public Library of Science\nSan Francisco, USA
-#> 3      Public Library of Science\nSan Francisco, CA USA
-#> 4         Public Library of Science\nSan Francisco, USA
+#> 1     Public Library of Science\n    San Francisco, USA
+#> 2      Public Library of Science\nSan Francisco, CA USA
+#> 3     Public Library of Science\n    San Francisco, USA
+#> 4 Public Library of Science\n        San Francisco, USA
 #> 5         Public Library of Science\nSan Francisco, USA
 ```
 
@@ -133,16 +158,16 @@ x %>% chunks("publisher") %>% tabularize()
 x %>% chunks(c("doi","publisher")) %>% tabularize()
 #> $plos
 #>                            doi
-#> 1 10.1371/journal.pone.0016448
-#> 2 10.1371/journal.pone.0067096
-#> 3 10.1371/journal.pone.0129955
-#> 4 10.1371/journal.pgen.1003702
-#> 5 10.1371/journal.pgen.1003701
+#> 1 10.1371/journal.pone.0082888
+#> 2 10.1371/journal.pone.0133894
+#> 3 10.1371/journal.pone.0082883
+#> 4 10.1371/journal.pone.0050020
+#> 5 10.1371/journal.pone.0066417
 #>                                               publisher
-#> 1 Public Library of Science\n        San Francisco, USA
-#> 2         Public Library of Science\nSan Francisco, USA
-#> 3      Public Library of Science\nSan Francisco, CA USA
-#> 4         Public Library of Science\nSan Francisco, USA
+#> 1     Public Library of Science\n    San Francisco, USA
+#> 2      Public Library of Science\nSan Francisco, CA USA
+#> 3     Public Library of Science\n    San Francisco, USA
+#> 4 Public Library of Science\n        San Francisco, USA
 #> 5         Public Library of Science\nSan Francisco, USA
 ```
 
@@ -157,27 +182,27 @@ x %>%
  .$plos %>%
  select(-permissions.license)
 #>                            doi
-#> 1 10.1371/journal.pone.0016448
-#> 2 10.1371/journal.pone.0067096
-#> 3 10.1371/journal.pone.0129955
-#> 4 10.1371/journal.pgen.1003702
-#> 5 10.1371/journal.pgen.1003701
+#> 1 10.1371/journal.pone.0082888
+#> 2 10.1371/journal.pone.0133894
+#> 3 10.1371/journal.pone.0082883
+#> 4 10.1371/journal.pone.0050020
+#> 5 10.1371/journal.pone.0066417
 #>                                               publisher
-#> 1 Public Library of Science\n        San Francisco, USA
-#> 2         Public Library of Science\nSan Francisco, USA
-#> 3      Public Library of Science\nSan Francisco, CA USA
-#> 4         Public Library of Science\nSan Francisco, USA
+#> 1     Public Library of Science\n    San Francisco, USA
+#> 2      Public Library of Science\nSan Francisco, CA USA
+#> 3     Public Library of Science\n    San Francisco, USA
+#> 4 Public Library of Science\n        San Francisco, USA
 #> 5         Public Library of Science\nSan Francisco, USA
 #>   permissions.copyright.year permissions.copyright.holder
-#> 1                       2011                Friberg et al
-#> 2                       2013                      David C
-#> 3                       2015                    Lei et al
-#> 4                       2013                   Zhou et al
-#> 5                       2013                         <NA>
+#> 1                       2013                    Jing Wang
+#> 2                       2015               Voorwald et al
+#> 3                       2013        Nejati Javaremi et al
+#> 4                       2012                     Pi et al
+#> 5                       2013                   Wang et al
 #>                       permissions.license_url
-#> 1                                        <NA>
-#> 2                                        <NA>
-#> 3 http://creativecommons.org/licenses/by/4.0/
+#> 1 http://creativecommons.org/licenses/by/4.0/
+#> 2 http://creativecommons.org/licenses/by/4.0/
+#> 3                                        <NA>
 #> 4                                        <NA>
 #> 5                                        <NA>
 ```
@@ -224,7 +249,7 @@ Using `ghostscript`
 
 ```r
 (res_gs <- ft_extract(pdf, "gs"))
-#> <document>/Library/Frameworks/R.framework/Versions/3.2/Resources/library/fulltext/examples/example2.pdf
+#> <document>/Users/sacmac/github/ropensci/fulltext/inst/examples/example2.pdf
 #>   Title: pone.0107412 1..10
 #>   Producer: Acrobat Distiller 9.0.0 (Windows); modified using iText 5.0.3 (c) 1T3XT BVBA
 #>   Creation date: 2014-09-18
@@ -235,7 +260,7 @@ Using `xpdf`
 
 ```r
 (res_xpdf <- ft_extract(pdf, "xpdf"))
-#> <document>/Library/Frameworks/R.framework/Versions/3.2/Resources/library/fulltext/examples/example2.pdf
+#> <document>/Users/sacmac/github/ropensci/fulltext/inst/examples/example2.pdf
 #>   Pages: 10
 #>   Title: pone.0107412 1..10
 #>   Producer: Acrobat Distiller 9.0.0 (Windows); modified using iText 5.0.3 (c) 1T3XT BVBA
