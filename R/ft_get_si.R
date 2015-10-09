@@ -60,9 +60,10 @@
 #' (\url{http://europepmc.org/restfulwebservice}). See comments above
 #' in 'notes' about EPMC.}
 #' }
-#' @param doi DOI of article (\code{character}). Note: if using ESA
-#' journal, this must be the ESA-specific article code (e.g.,
-#' E092-201).
+#' @param x One of: vector of DOI(s) of article(s) (a
+#' \code{character}), output from \code{\link{ft_get}}, or output from
+#' \code{\link{ft_search}}. Note: if using ESA journal, you can *only*
+#' use the ESA-specific article code (e.g., E092-201).
 #' @param si number of the supplement to be downloaded (1, 2, 3, etc.),
 #' or (for ESA and Science journals) the name of the supplment (e.g.,
 #' "S1_data.csv"). Can be a \code{character} or \code{numeric}.
@@ -105,8 +106,7 @@
 #' #...note this 'SI' is not actually an SI, but rather an image from the paper.
 #' }
 #' @export
-ft_get_si <- function(x, si, from=c("auto","plos","wiley","science","proceedings","figshare","esa_data_archives","esa_archives","epmc"), save.name=NA, dir=NA, cache=TRUE, vol=NA, issue=NA, list=FALSE){
-    #What about mixed SI types?
+ft_get_si <- function(x, si, from=c("auto","plos","wiley","science","proceedings","figshare","esa_data_archives","esa_archives","biorxiv","epmc"), save.name=NA, dir=NA, cache=TRUE, vol=NA, issue=NA, list=FALSE){
     #Argument handling and ft class wrapper
     .fix.param <- function(x, param, name){
         if(length(x) != length(param)){
@@ -116,12 +116,20 @@ ft_get_si <- function(x, si, from=c("auto","plos","wiley","science","proceedings
         }
         return(param)
     }
+
+    #Setup 'from' and 'x' given length of data etc.
+    from <- match.arg(from)
     if(length(x) == 0)
         stop("'x' must contain some data!")
-    if(inherits(x, "ft_data") | inherits(x, "ft"))
+    if(inherits(x, "ft_data")){
+        from <- names(x)
         x <- unlist(sapply(x, function(x) x$dois))
-    from <- match.arg(from)
-
+    }
+    if(inherits(x, "ft")){
+        x <- unlist(sapply(x, function(x) x$data$id))
+        from <- names(x)
+    }
+    
     #Multiply argument lengths
     from <- .fix.param(x, from, "from")
     si <- .fix.param(x, si, "si")
@@ -131,12 +139,12 @@ ft_get_si <- function(x, si, from=c("auto","plos","wiley","science","proceedings
     issue <- .fix.param(x, issue, "issue")
     cache <- .fix.param(x, cache, "cache")
     list <- .fix.param(x, list, "list")
-
+    
     #Call and return
     return(setNames(unlist(mapply(.ft_get_si, doi=x,si=si,from=from,save.name=save.name,dir=dir,cache=cache,vol=vol,issue=issue,list=list)),x))
 }
 
-.ft_get_si <- function(doi, si, from=c("auto","plos","wiley","science","proceedings","figshare","esa_data_archives","esa_archives","epmc"), save.name=NA, dir=NA, cache=TRUE, vol=NA, issue=NA, list=FALSE){
+.ft_get_si <- function(doi, si, from=c("auto","plos","wiley","science","proceedings","figshare","esa_data_archives","esa_archives","biorxiv","epmc"), save.name=NA, dir=NA, cache=TRUE, vol=NA, issue=NA, list=FALSE){
     #Argument handling
     if(!(is.numeric(si) | is.character(si)))
         stop("'si' must be numeric or character")
@@ -218,7 +226,7 @@ get_si_plos <- function(doi, si, save.name=NA, dir=NA, cache=TRUE, ...){
     journal <- gsub("[0-9\\.\\/]*", "", doi)
     journal <- gsub("journal", "", journal)
     if(sum(journal %in% names(journals)) != 1)
-        stop("Unrecognised journal in DOI")
+        stop("Unrecognised PLoS journal in DOI ", doi)
     journal <- journals[journal]
 
 #Download and return
@@ -309,18 +317,19 @@ get_si_proceedings <- function(doi, si, vol, issue, save.name=NA, dir=NA, cache=
     return(.download(url, dir, save.name))
 }
 
-#' @importFrom XML xpathApply xmlInternalTreeParse
-get_si_epmc <- function(doi, si, vol, issue, save.name=NA, dir=NA, cache=TRUE, list=FALSE, ...){
+#' @importFrom xml2 xml_text xml_find_one read_xml
+get_si_epmc <- function(doi, si, save.name=NA, dir=NA, cache=TRUE, list=FALSE, ...){
     #Argument handling
     if(!is.character(si))
         stop("EPMB download requires numeric SI info")
     dir <- .tmpdir(dir)
     save.name <- .save.name(doi, save.name, si)
-    zip.save.name <- .save.name(doi, NULL, "raw_zip.zip")
+    zip.save.name <- .save.name(doi, NA, "raw_zip.zip")
     
     #Find, download, and return
-    pmc.id <- xpathApply(xmlParse(paste0("http://www.ebi.ac.uk/europepmc/webservices/rest/search/query=", doi)), "//id", xmlValue)
-    zip <- tryCatch(.download(paste0("http://www.ebi.ac.uk/europepmc/webservices/rest/", pmc.id[[1]], "/supplementaryFiles"),dir,zip.save.name,cache), error=stop("Cannot find supplementary materials for (seemingly) valid EPMC article ID ",pmc.id[[1]]))
+    pmc.id <- xml_text(xml_find_one(read_xml(paste0("http://www.ebi.ac.uk/europepmc/webservices/rest/search/query=", doi)), ".//pmcid"))
+    url <- paste0("http://www.ebi.ac.uk/europepmc/webservices/rest/", pmc.id[[1]], "/supplementaryFiles")
+    zip <- tryCatch(.download(url,dir,zip.save.name,cache), error=function(x) stop("Cannot find supplementary materials for (seemingly) valid EPMC article ID ",pmc.id[[1]]))
     return(.unzip(zip, dir, save.name, cache, si, list))
 }
 
@@ -363,7 +372,7 @@ get_si_biorxiv <- function(doi, si, save.name=NA, dir=NA, cache=TRUE, ...){
 .unzip <- function(zip, dir, save.name, cache, si, list=FALSE){
     files <- unzip(zip, list=TRUE)
     if(list){
-        cat("Files in ZIP from EPMC:")
+        cat("Files in ZIP:")
         print(files)
     }
     if(!si %in% files$Name)
@@ -380,7 +389,7 @@ get_si_biorxiv <- function(doi, si, save.name=NA, dir=NA, cache=TRUE, ...){
 .tmpdir <- function(dir){
     if(!is.na(dir)){
         if(!file.exists(dir))
-            stop("'dir' must exist unless NULL")
+            stop("'dir' must exist unless NA")
     } else dir <- tempdir()
     return(dir)
 }

@@ -5,10 +5,16 @@
 \title{Download supplementary materials from journals}
 \usage{
 ft_get_si(x, si, from = c("auto", "plos", "wiley", "science", "proceedings",
-  "figshare", "esa_data_archives", "esa_archives", "epmc"), save.name = NA,
-  dir = NA, cache = TRUE, vol = NA, issue = NA, list = FALSE)
+  "figshare", "esa_data_archives", "esa_archives", "biorxiv", "epmc"),
+  save.name = NA, dir = NA, cache = TRUE, vol = NA, issue = NA,
+  list = FALSE)
 }
 \arguments{
+\item{x}{One of: vector of DOI(s) of article(s) (a
+\code{character}), output from \code{\link{ft_get}}, or output from
+\code{\link{ft_search}}. Note: if using ESA journal, you can *only*
+use the ESA-specific article code (e.g., E092-201).}
+
 \item{si}{number of the supplement to be downloaded (1, 2, 3, etc.),
 or (for ESA and Science journals) the name of the supplment (e.g.,
 "S1_data.csv"). Can be a \code{character} or \code{numeric}.}
@@ -40,10 +46,6 @@ your chosen \code{dir})}
 \item{list}{if \code{TRUE}, print all files within a zip-file
 downloaded from EPMC (default: FALSE). This is *very* useful if
 using EPMC (see notes)}
-
-\item{doi}{DOI of article (\code{character}). Note: if using ESA
-journal, this must be the ESA-specific article code (e.g.,
-E092-201).}
 }
 \description{
 Put a call to this function where you would put a file-path - everything
@@ -105,7 +107,8 @@ an \code{esa_data_archive} whose article code is E092-201-D1;
 \item{epmc}{Look up an article on the Europe PubMed Central, and
 then download the file using their supplementary materials API
 (\url{http://europepmc.org/restfulwebservice}). See comments above
-in 'notes' about EPMC.}}
+in 'notes' about EPMC.}
+}
 }
 \note{
 Make sure that the article from which you're attempting to
