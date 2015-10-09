@@ -84,6 +84,19 @@ plugin_entrez <- function(sources, query, limit, opts){
   }
 }
 
+plugin_europe_pmc <- function(sources, query, limit, opts){
+  if (any(grepl("europmc", sources))) {
+    opts$query <- query
+    out <- do.call(eupmc_search, opts)
+    zz <- list(source = "europmc", found = out$hitCount, 
+               data = out$resultList$result, opts = opts)
+    structure(zz, class = "ft_ind", query = query)
+  } else {
+    zz <- list(source = "europmc", found = NULL, data = NULL, opts = opts)
+    structure(zz, class = "ft_ind", query = query)
+  }
+}
+
 plugin_arxiv <- function(sources, query, limit, opts){
   if (any(grepl("arxiv", sources))) {
     opts$query <- query
