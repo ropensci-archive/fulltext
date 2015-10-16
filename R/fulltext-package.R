@@ -15,6 +15,7 @@
 #' \itemize{
 #'  \item search - \code{\link{ft_search}}
 #'  \item get texts - \code{\link{ft_get}}
+#'  \item get full text links - \code{\link{ft_links}}
 #'  \item extract text from pdfs - \code{\link{ft_extract}}
 #'  \item serialize to different data formats - \code{\link{ft_serialize}}
 #'  \item extract certain article sections (e.g., authors) - \code{\link{chunks}}
@@ -32,13 +33,14 @@
 #' @section Feedback: 
 #' Let us know what you think at \url{https://github.com/ropensci/fulltext/issues}
 #' 
-#' @importFrom utils URLdecode URLencode browseURL head modifyList
+#' @importFrom utils URLdecode URLencode browseURL head modifyList download.file
 #' @importFrom methods is
 #' @importFrom stats na.omit setNames
 #' @importFrom xml2 read_html read_xml xml_find_one xml_find_all xml_text xml_contents xml_attr
 #' xml_ns xml_children xml_name
 #' @importFrom httr HEAD GET POST upload_file content_type content write_disk stop_for_status
 #' @importFrom whisker whisker.render
+#' @importFrom rentrez entrez_search entrez_fetch entrez_link
 #' @name fulltext-package
 #' @aliases fulltext
 #' @docType package

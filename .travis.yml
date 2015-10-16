@@ -1,9 +1,11 @@
 language: r
 sudo: required
 
+apt_packages:
+  - poppler-utils
+
 r_github_packages:
   - jimhester/covr
-  - ropensci/rplos
 
 after_success:
   - Rscript -e 'covr::codecov()'

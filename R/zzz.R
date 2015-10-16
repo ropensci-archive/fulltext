@@ -169,3 +169,9 @@ try_default_ <- function(expr, default, quiet = FALSE) {
 
 # Modified from plyr::tryNULL
 try_NULL <- function(expr) try_default_(expr, NULL, quiet = TRUE)
+
+move_col <- function(x, y) x[ c(names(x)[-grep(y, names(x))], y) ]
+
+names_lower <- function(x) {
+  setNames(x, tolower(names(x))) 
+}

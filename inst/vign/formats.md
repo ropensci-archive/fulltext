@@ -37,9 +37,9 @@ SERSC | [Y][serscp] | N | N |... |
 Springer Open | [Y][springeroap] | [Y][springeroax] | N |... |
 
 ^1: NLM-DTD XML schema - http://dtd.nlm.nih.gov/
-^2: Wiley and Elsevier do have a few open access journals each, 
+^2: Wiley and Elsevier do have a few open access journals each,
 which provide PDFs, but no XML. Elsevier has text mining web services
-but they are so painful to use that we will not support it here. Do 
+but they are so painful to use that we will not support it here. Do
 put pressure on these two enormous publishers to give XML of articles, at
 least for their open access journals.
 

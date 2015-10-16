@@ -33,7 +33,7 @@ test_that("ft_search returns...", {
   expect_true(cc$crossref$opts$filter[[1]])
   
   expect_is(dd$biorxiv$data, "data.frame")
-  expect_match(dd$biorxiv$data$URL[1], "http")
+  expect_match(dd$biorxiv$data$url[1], "http")
 })
 
 test_that("ft_search works for larger requests", {

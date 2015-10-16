@@ -24,6 +24,7 @@ The following are tasks/use cases supported:
 \itemize{
  \item search - \code{\link{ft_search}}
  \item get texts - \code{\link{ft_get}}
+ \item get full text links - \code{\link{ft_links}}
  \item extract text from pdfs - \code{\link{ft_extract}}
  \item serialize to different data formats - \code{\link{ft_serialize}}
  \item extract certain article sections (e.g., authors) - \code{\link{chunks}}
