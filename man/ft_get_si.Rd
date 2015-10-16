@@ -2,16 +2,32 @@
 % Please edit documentation in R/ft_get_si.R
 \name{ft_get_si}
 \alias{ft_get_si}
+\alias{ft_get_si.character}
+\alias{ft_get_si.ft}
+\alias{ft_get_si.ft_data}
 \title{Download supplementary materials from journals}
 \usage{
-ft_get_si(doi, si, from = c("auto", "plos", "wiley", "science", "proceedings",
-  "figshare", "esa_data_archives", "esa_archives"), save.name = NULL,
-  dir = NULL, cache = TRUE, vol = NULL, issue = NULL)
+ft_get_si(x, si, from = c("auto", "plos", "wiley", "science", "proceedings",
+  "figshare", "esa_data_archives", "esa_archives", "biorxiv", "epmc"),
+  save.name = NA, dir = NA, cache = TRUE, vol = NA, issue = NA,
+  list = FALSE)
+
+\method{ft_get_si}{character}(x, si, from = c("auto", "plos", "wiley",
+  "science", "proceedings", "figshare", "esa_data_archives", "esa_archives",
+  "biorxiv", "epmc"), save.name = NA, dir = NA, cache = TRUE, vol = NA,
+  issue = NA, list = FALSE)
+
+\method{ft_get_si}{ft_data}(x, si, from = NA, save.name = NA, dir = NA,
+  cache = TRUE, vol = NA, issue = NA, list = FALSE)
+
+\method{ft_get_si}{ft}(x, si, from = NA, save.name = NA, dir = NA,
+  cache = TRUE, vol = NA, issue = NA, list = FALSE)
 }
 \arguments{
-\item{doi}{DOI of article (\code{character}). Note: if using ESA
-journal, this must be the ESA-specific article code (e.g.,
-E092-201).}
+\item{x}{One of: vector of DOI(s) of article(s) (a
+\code{character}), output from \code{\link{ft_get}}, or output from
+\code{\link{ft_search}}. Note: if using ESA journal, you can *only*
+use the ESA-specific article code (e.g., E092-201).}
 
 \item{si}{number of the supplement to be downloaded (1, 2, 3, etc.),
 or (for ESA and Science journals) the name of the supplment (e.g.,
@@ -19,9 +35,10 @@ or (for ESA and Science journals) the name of the supplment (e.g.,
 
 \item{from}{Publisher of article (\code{character}). Optional,
 except for ESA journals (see \code{doi}), but supplying it will
-speed up downloads. Must be one of: auto (i.e., auto-detect journal;
-default), plos, wiley, science, proceedings, figshare,
-esa_data_archives, esa_archives.}
+speed up downloads. Must be one of: auto (i.e., auto-detect
+journal; default), plos, wiley, science, proceedings, figshare,
+esa_data_archives, esa_archives. Only use this argument if \code{x}
+isn't a vector of DOI(s).}
 
 \item{save.name}{a name for the file to download
 (\code{character}). If \code{NULL} (default) this will be a
@@ -40,6 +57,10 @@ your chosen \code{dir})}
 
 \item{issue}{Article issue (Proceedings journals only;
 \code{numeric})}
+
+\item{list}{if \code{TRUE}, print all files within a zip-file
+downloaded from EPMC (default: FALSE). This is *very* useful if
+using EPMC (see notes)}
 }
 \description{
 Put a call to this function where you would put a file-path - everything
@@ -54,6 +75,16 @@ you want to download (1, 5, etc.). ESA journals don't use DOIs
 (give the article code; see below), and Proceedings, Science, and
 ESA journals need you to give the filename of the supplement to
 download.
+
+For any DOIs not recognised (and if asked) the European PubMed
+Central API is used to look up articles. What this database calls a
+supplementary file varies by publisher; often they will simply be
+figures within articles, but we (obviously) have no way to check
+this at run-time. I strongly recommend you run any EPMC calls with
+\code{list=TRUE} the first time, to see the filenames that EPMC
+gives supplements, as these also often vary from what the authors
+gave them. This may actually be a 'feature', not a 'bug', if you're
+trying to automate some sort of meta-analysis.
 
 Below is a list of all the publishers this supports, and examples
 of articles from them. I'm aware that there isn't perfect overlap
@@ -73,19 +104,31 @@ determine the publisher.}
 \item{proceedings}{Royal Society of London journals (e.g.,
 \url{http://rspb.royalsocietypublishing.org/content/282/1814/20151215}). Requires
 \code{vol} and \code{issue} of the article.}
-\item{figshare}{Figshare, (e.g., \url{http://bit.ly/figshare-example})}
-\item{\code{esa_data_archives} & \code{esa_data}}{You must give
-article codes, not DOIs, for these, which you can find on the
-article itself. An ESA Data Archive paper - not to be confused with
-an ESA Archive, which is the supplement to an ESA paper. The
-distinction seems less crazy once you're reading the paper - if it
-only describes a dataset, it's an \code{esa_archive} paper, else
-it's an \code{esa_data_archive}. For example,
+\item{figshare}{Figshare, (e.g.,
+\url{http://bit.ly/figshare-example})}
+\item{esa_data_archives & esa_data}{You must give article codes,
+not DOIs, for these, which you can find on the article itself. An
+ESA Data Archive paper - not to be confused with an ESA Archive,
+which is the supplement to an ESA paper. The distinction seems less
+crazy once you're reading the paper - if it only describes a
+dataset, it's an \code{esa_archive} paper, else it's an
+\code{esa_data_archive}. For example,
 \url{http://www.esapubs.org/archive/ecol/E092/201/default.htm} is
 an \code{esa_data_archive} whose article code is E092-201-D1;
 \url{http://esapubs.org/Archive/ecol/E093/059/default.htm} is a
 \code{esa_archive} whose code is E093-059-D1.}
+\item{biorxiv}{Load from bioRxiv (e.g.,
+\url{http://biorxiv.org/content/early/2015/09/11/026575})}
+\item{epmc}{Look up an article on the Europe PubMed Central, and
+then download the file using their supplementary materials API
+(\url{http://europepmc.org/restfulwebservice}). See comments above
+in 'notes' about EPMC.}
 }
+}
+\note{
+Make sure that the article from which you're attempting to
+download supplementary materials *has* supplementary materials. 404
+errors and 'file not found' errors can result from such cases.
 }
 \examples{
 \dontrun{
@@ -97,6 +140,8 @@ fungi <- read.csv(ft_get_si("E093-059", "myco_db.csv",
                                         "esa_archives"))
 mammals <- read.csv(ft_get_si("E092-201", "MCDB_communities.csv",
                                             "esa_data_archives"))
+epmc.fig <- ft_get_si("10.1371/journal.pone.0126524", "pone.0126524.g005.jpg", "epmc")
+#...note this 'SI' is not actually an SI, but rather an image from the paper.
 }
 }
 \author{
