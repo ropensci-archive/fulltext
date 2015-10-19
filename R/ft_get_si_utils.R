@@ -10,15 +10,30 @@
     pos <- as.numeric(links[[1]][which])
     return(substr(text, pos, pos+attr(links[[1]], "match.length")[which]-1))
 }
+.file.suffix <- function(text, max.length=4){
+    suffix <- .grep.text(text, "[a-zA-Z]+$")
+    if(nchar(suffix) <= max.length & nchar(suffix) > 0)
+        return(suffix)
+    return(NA)
+}
 
 # Internal download function
 .download <- function(url, dir, save.name, cache=TRUE){
     destination <- file.path(dir, save.name)
-    if(cache==TRUE & file.exists(destination))
+    suffix <- .file.suffix(url, 4)
+    
+    if(cache==TRUE & file.exists(destination)){
+        if(!is.na(suffix))
+            attr(destination, "suffix") <- suffix
         return(destination)
+    }
+    
     result <- download.file(url, destination, quiet=TRUE)
     if(result != 0)
         stop("Error code", result, " downloading file; file may not exist")
+    
+    if(!is.na(suffix))
+        attr(destination, "suffix") <- suffix
     return(destination)
 }
 
