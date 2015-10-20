@@ -6,7 +6,7 @@
 \usage{
 ft_search(query, from = "plos", limit = 10, plosopts = list(),
   bmcopts = list(), crossrefopts = list(), entrezopts = list(),
-  arxivopts = list(), biorxivopts = list(), ...)
+  arxivopts = list(), biorxivopts = list(), euroopts = list(), ...)
 }
 \arguments{
 \item{query}{Query terms}
@@ -69,6 +69,10 @@ res$arxiv
 # BMC - can be very slow
 (res <- ft_search(query='ecology', from='bmc'))
 res$bmc
+
+# Europe PMC
+(res <- ft_search(query='ecology', from='europmc'))
+res$europmc
 
 # PLOS, Crossref, and arxiv
 (res <- ft_search(query='ecology', from=c('plos','crossref','arxiv')))

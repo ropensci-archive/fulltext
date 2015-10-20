@@ -9,7 +9,7 @@ _/ ____\_ __|  | |  |_/  |_  ____ ___  ____/  |_
                                 \/      \/
 ```
 
-__Get full text across all da (open access) journals__
+__Get full text articles from (almost) anywhere__
 
 [![Build Status](https://api.travis-ci.org/ropensci/fulltext.png)](https://travis-ci.org/ropensci/fulltext)
 [![Build status](https://ci.appveyor.com/api/projects/status/y487h3ec5wc2s20m/branch/master?svg=true)](https://ci.appveyor.com/project/sckott/fulltext/branch/master)
@@ -19,20 +19,19 @@ __Get full text across all da (open access) journals__
 
 rOpenSci has a number of R packages to get either full text, metadata, or both from various publishers. The goal of `fulltext` is to integrate these packages to create a single interface to many data sources.
 
-`fulltext` attempts to make it easy to do text-mining by supporting the following steps:
+`fulltext` makes it easy to do text-mining by supporting the following steps:
 
 * Search for articles
 * Fetch articles
 * Get links for full text articles (xml, pdf)
 * Extract text from articles / convert formats
 * Collect bits of articles that you actually need
+* Download supplementary materials from papers
 
 Additional steps we hope to include in future versions:
 
-* Analysis enable via the [tm](https://cran.rstudio.com/web/packages/tm/) package and friends, or via [Spark-R](https://amplab-extras.github.io/SparkR-pkg/)
+* Analysis enabled via the [tm](https://cran.rstudio.com/web/packages/tm/) package and friends, and via [Spark-R](https://amplab-extras.github.io/SparkR-pkg/) to handle especially large jobs
 * Visualization
-
-You can also download supplementary materials from papers.
 
 Data sources in `fulltext` include:
 
@@ -42,13 +41,18 @@ Data sources in `fulltext` include:
 * [arXiv](https://arxiv.org) - via the `aRxiv` package
 * [bioRxiv](http://biorxiv.org/) - via the `biorxivr` package
 * [PMC/Pubmed via Entrez](http://www.ncbi.nlm.nih.gov/) - via the `rentrez` package
+* Many more are supported via the above sources (e.g., _Royal Society Open Science_ is 
+available via Pubmed)
 * We __will__ add more, as publishers open up, and as we have time...See the [master list here](https://github.com/ropensci/fulltext/issues/4#issuecomment-52376743)
 
-We'd love your feedback. Let us know what you think in [the issue tracker](https://github.com/ropensci/fulltext/issues).
+Authorization: A number of publishers require authorization via API key, and some even more
+draconian authorization processes involving checking IP addresses. We are working on supporting
+all the various authorization things for different publishers, but of course all the OA content
+is already easily available. 
 
-Article full text formats by publisher:
+We'd love your feedback. Let us know what you think in [the issue tracker](https://github.com/ropensci/fulltext/issues)
 
-* [https://github.com/ropensci/fulltext/blob/master/vignettes/formats.Rmd](https://github.com/ropensci/fulltext/blob/master/vignettes/formats.Rmd)
+Article full text formats by publisher:  [https://github.com/ropensci/fulltext/blob/master/vignettes/formats.Rmd](https://github.com/ropensci/fulltext/blob/master/vignettes/formats.Rmd)
 
 ## Installation
 
@@ -91,9 +95,9 @@ ft_search(query = 'ecology', from = 'plos')
 #> Query:
 #>   [ecology] 
 #> Found:
-#>   [PLoS: 29496; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0] 
+#>   [PLoS: 29751; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0] 
 #> Returned:
-#>   [PLoS: 10; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0]
+#>   [PLoS: 10; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0]
 ```
 
 ## Get full text links
@@ -106,7 +110,7 @@ res1 <- ft_search(query = 'ecology', from = 'entrez', limit = 5)
 ft_links(res1)
 #> <fulltext links>
 #> [Found] 4 
-#> [IDs] ID_26420471 ID_26419522 ID_26419355 ID_26419232 ...
+#> [IDs] ID_26478753 ID_26475579 ID_26474754 ID_26474753 ID_26474751 ...
 ```
 
 Or pass in DOIs directly
@@ -116,7 +120,7 @@ Or pass in DOIs directly
 ft_links(res1$entrez$data$doi, from = "entrez")
 #> <fulltext links>
 #> [Found] 4 
-#> [IDs] ID_26420471 ID_26419522 ID_26419355 ID_26419232 ...
+#> [IDs] ID_26478753 ID_26475579 ID_26474754 ID_26474753 ID_26474751 ...
 ```
 
 ## Get full text
@@ -139,18 +143,18 @@ ft_get('10.1371/journal.pone.0086169', from = 'plos')
 library("rplos")
 (dois <- searchplos(q = "*:*", fl = 'id',
    fq = list('doc_type:full',"article_type:\"research article\""), limit = 5)$data$id)
-#> [1] "10.1371/journal.pone.0082888" "10.1371/journal.pone.0133894"
-#> [3] "10.1371/journal.pone.0082883" "10.1371/journal.pone.0050020"
-#> [5] "10.1371/journal.pone.0066417"
+#> [1] "10.1371/journal.pbio.0050316" "10.1371/journal.pone.0030133"
+#> [3] "10.1371/journal.pone.0012724" "10.1371/journal.pbio.0050323"
+#> [5] "10.1371/journal.pone.0030142"
 x <- ft_get(dois, from = "plos")
 x %>% chunks("publisher") %>% tabularize()
 #> $plos
 #>                                               publisher
-#> 1     Public Library of Science\n    San Francisco, USA
-#> 2      Public Library of Science\nSan Francisco, CA USA
-#> 3     Public Library of Science\n    San Francisco, USA
+#> 1 Public Library of Science\n        San Francisco, USA
+#> 2 Public Library of Science\n        San Francisco, USA
+#> 3         Public Library of Science\nSan Francisco, USA
 #> 4 Public Library of Science\n        San Francisco, USA
-#> 5         Public Library of Science\nSan Francisco, USA
+#> 5 Public Library of Science\n        San Francisco, USA
 ```
 
 
@@ -158,17 +162,17 @@ x %>% chunks("publisher") %>% tabularize()
 x %>% chunks(c("doi","publisher")) %>% tabularize()
 #> $plos
 #>                            doi
-#> 1 10.1371/journal.pone.0082888
-#> 2 10.1371/journal.pone.0133894
-#> 3 10.1371/journal.pone.0082883
-#> 4 10.1371/journal.pone.0050020
-#> 5 10.1371/journal.pone.0066417
+#> 1 10.1371/journal.pbio.0050316
+#> 2 10.1371/journal.pone.0030133
+#> 3 10.1371/journal.pone.0012724
+#> 4 10.1371/journal.pbio.0050323
+#> 5 10.1371/journal.pone.0030142
 #>                                               publisher
-#> 1     Public Library of Science\n    San Francisco, USA
-#> 2      Public Library of Science\nSan Francisco, CA USA
-#> 3     Public Library of Science\n    San Francisco, USA
+#> 1 Public Library of Science\n        San Francisco, USA
+#> 2 Public Library of Science\n        San Francisco, USA
+#> 3         Public Library of Science\nSan Francisco, USA
 #> 4 Public Library of Science\n        San Francisco, USA
-#> 5         Public Library of Science\nSan Francisco, USA
+#> 5 Public Library of Science\n        San Francisco, USA
 ```
 
 Use `dplyr` to data munge
@@ -182,34 +186,36 @@ x %>%
  .$plos %>%
  select(-permissions.license)
 #>                            doi
-#> 1 10.1371/journal.pone.0082888
-#> 2 10.1371/journal.pone.0133894
-#> 3 10.1371/journal.pone.0082883
-#> 4 10.1371/journal.pone.0050020
-#> 5 10.1371/journal.pone.0066417
+#> 1 10.1371/journal.pbio.0050316
+#> 2 10.1371/journal.pone.0030133
+#> 3 10.1371/journal.pone.0012724
+#> 4 10.1371/journal.pbio.0050323
+#> 5 10.1371/journal.pone.0030142
 #>                                               publisher
-#> 1     Public Library of Science\n    San Francisco, USA
-#> 2      Public Library of Science\nSan Francisco, CA USA
-#> 3     Public Library of Science\n    San Francisco, USA
+#> 1 Public Library of Science\n        San Francisco, USA
+#> 2 Public Library of Science\n        San Francisco, USA
+#> 3         Public Library of Science\nSan Francisco, USA
 #> 4 Public Library of Science\n        San Francisco, USA
-#> 5         Public Library of Science\nSan Francisco, USA
+#> 5 Public Library of Science\n        San Francisco, USA
 #>   permissions.copyright.year permissions.copyright.holder
-#> 1                       2013                    Jing Wang
-#> 2                       2015               Voorwald et al
-#> 3                       2013        Nejati Javaremi et al
-#> 4                       2012                     Pi et al
-#> 5                       2013                   Wang et al
-#>                       permissions.license_url
-#> 1 http://creativecommons.org/licenses/by/4.0/
-#> 2 http://creativecommons.org/licenses/by/4.0/
-#> 3                                        <NA>
-#> 4                                        <NA>
-#> 5                                        <NA>
+#> 1                       2007                  Miall et al
+#> 2                       2012              Wulfmeyer et al
+#> 3                       2010                 Sorbye et al
+#> 4                       2007                  Xiang et al
+#> 5                       2012                Kreakie et al
+#>   permissions.license_url
+#> 1                    <NA>
+#> 2                    <NA>
+#> 3                    <NA>
+#> 4                    <NA>
+#> 5                    <NA>
 ```
 
 ## Supplementary materials
 
 Grab supplementary materials for (re-)analysis of data
+
+`ft_get_si()` accepts article identifiers, and output from `ft_search()`, `ft_get()`
 
 
 ```r
@@ -249,7 +255,7 @@ Using `ghostscript`
 
 ```r
 (res_gs <- ft_extract(pdf, "gs"))
-#> <document>/Users/sacmac/github/ropensci/fulltext/inst/examples/example2.pdf
+#> <document>/Library/Frameworks/R.framework/Versions/3.2/Resources/library/fulltext/examples/example2.pdf
 #>   Title: pone.0107412 1..10
 #>   Producer: Acrobat Distiller 9.0.0 (Windows); modified using iText 5.0.3 (c) 1T3XT BVBA
 #>   Creation date: 2014-09-18
@@ -260,7 +266,7 @@ Using `xpdf`
 
 ```r
 (res_xpdf <- ft_extract(pdf, "xpdf"))
-#> <document>/Users/sacmac/github/ropensci/fulltext/inst/examples/example2.pdf
+#> <document>/Library/Frameworks/R.framework/Versions/3.2/Resources/library/fulltext/examples/example2.pdf
 #>   Pages: 10
 #>   Title: pone.0107412 1..10
 #>   Producer: Acrobat Distiller 9.0.0 (Windows); modified using iText 5.0.3 (c) 1T3XT BVBA
@@ -321,10 +327,6 @@ pdfx(file = pdf5)
 #>    <article>
 #>  .....
 ```
-
-## TODO
-
-* `ft_plot()` - vizualize metadata or full text data
 
 ## Meta
 
