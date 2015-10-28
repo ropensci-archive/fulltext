@@ -72,7 +72,7 @@ get_si_wiley <- function(doi, si, save.name=NA, dir=NA, cache=TRUE, ...){
     save.name <- .save.name(doi, save.name, si)
 
     #Download SI HTML page and find SI link
-    html <- as.character(GET(paste0("http://onlinelibrary.wiley.com/doi/", doi, "/suppinfo")))
+    html <- as.character(GET(paste0("http://onlinelibrary.wiley.com/wol1/doi/", doi, "/suppinfo")))
     links <- gregexpr("(asset/supinfo/)[-0-9a-zA-Z\\.\\?\\=\\&\\,\\;_]*", as.character(html), useBytes=FALSE)
     pos <- as.numeric(links[[si]])
     link <- substr(html, pos, pos+attr(links[[si]], "match.length")-1)
