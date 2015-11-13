@@ -64,7 +64,8 @@ get_si_plos <- function(doi, si, save.name=NA, dir=NA, cache=TRUE, ...){
     return(.download(url, dir, save.name, cache))
 }
 
-get_si_wiley <- function(doi, si, save.name=NA, dir=NA, cache=TRUE, ...){
+#' @importFrom httr timeout
+get_si_wiley <- function(doi, si, save.name=NA, dir=NA, cache=TRUE, timeout=10, ...){
     #Argument handling
     if(!is.numeric(si))
         stop("Wiley download requires numeric SI info")
@@ -72,12 +73,27 @@ get_si_wiley <- function(doi, si, save.name=NA, dir=NA, cache=TRUE, ...){
     save.name <- .save.name(doi, save.name, si)
 
     #Download SI HTML page and find SI link
-    html <- as.character(GET(paste0("http://onlinelibrary.wiley.com/wol1/doi/", doi, "/suppinfo")))
-    links <- gregexpr("(asset/supinfo/)[-0-9a-zA-Z\\.\\?\\=\\&\\,\\;_]*", as.character(html), useBytes=FALSE)
-    pos <- as.numeric(links[[si]])
-    link <- substr(html, pos, pos+attr(links[[si]], "match.length")-1)
+    # - requires check for new Ecology Letters page (...the page seems buggy...)
+    html <- tryCatch(as.character(GET(paste0("http://onlinelibrary.wiley.com/doi/", doi, "/full"), httr::timeout(timeout))),
+                     silent=TRUE, error = function(x) NA)
+    #Check for failure to download and try old address style
+    if(is.na(html))
+        html <- as.character(GET(paste0("http://onlinelibrary.wiley.com/wol1/doi/", doi, "/full"), httr::timeout(timeout)))
+    links <- gregexpr("(asset/supinfo/)[-0-9a-zA-Z\\.\\?\\=\\&\\,\\;_]*", html, useBytes=FALSE)
+    if(any(links[[1]] == -1))
+        links <- gregexpr("(asset/supinfo)[-0-9a-zA-Z\\.\\?\\=\\&\\,\\;_%]*", html, useBytes=FALSE)
+    #Re-start entire search with new URL etc.
+    if(any(links[[1]] == -1)){
+        html <- as.character(GET(paste0("http://onlinelibrary.wiley.com/wol1/doi/", doi, "/full"), httr::timeout(timeout)))
+        links <- gregexpr("(asset/supinfo)[-0-9a-zA-Z\\.\\?\\=\\&\\,\\;_%]*", html, useBytes=FALSE)
+    }
+        
+    if(si > length(links[[1]]))
+        stop("SI number '", si, "' greater than number of detected SIs (", length(links[[1]]), ")")
+    pos <- as.numeric(links[[1]][si])
+    link <- substr(html, pos, pos+attr(links[[1]], "match.length")[si]-1)
     url <- paste0("http://onlinelibrary.wiley.com/store/", doi, "/", link)
-
+    
     #Download and return
     destination <- file.path(dir, save.name)
     return(.download(url, dir, save.name, cache))

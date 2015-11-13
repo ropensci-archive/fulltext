@@ -7,6 +7,8 @@
 }
 .grep.text <- function(text, regexp, which=1){
     links <- gregexpr(regexp, text)
+    if(which > length(links[[1]]))
+        stop("SI number '", which, "' greater than number of detected SIs (", length(links[[1]]), ")")
     pos <- as.numeric(links[[1]][which])
     return(substr(text, pos, pos+attr(links[[1]], "match.length")[which]-1))
 }

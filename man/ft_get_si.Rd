@@ -10,18 +10,18 @@
 ft_get_si(x, si, from = c("auto", "plos", "wiley", "science", "proceedings",
   "figshare", "esa_data_archives", "esa_archives", "biorxiv", "epmc"),
   save.name = NA, dir = NA, cache = TRUE, vol = NA, issue = NA,
-  list = FALSE)
+  list = FALSE, timeout = 10)
 
 \method{ft_get_si}{character}(x, si, from = c("auto", "plos", "wiley",
   "science", "proceedings", "figshare", "esa_data_archives", "esa_archives",
   "biorxiv", "epmc"), save.name = NA, dir = NA, cache = TRUE, vol = NA,
-  issue = NA, list = FALSE)
+  issue = NA, list = FALSE, timeout = 10)
 
 \method{ft_get_si}{ft_data}(x, si, from = NA, save.name = NA, dir = NA,
-  cache = TRUE, vol = NA, issue = NA, list = FALSE)
+  cache = TRUE, vol = NA, issue = NA, list = FALSE, timeout = 10)
 
 \method{ft_get_si}{ft}(x, si, from = NA, save.name = NA, dir = NA,
-  cache = TRUE, vol = NA, issue = NA, list = FALSE)
+  cache = TRUE, vol = NA, issue = NA, list = FALSE, timeout = 10)
 }
 \arguments{
 \item{x}{One of: vector of DOI(s) of article(s) (a
@@ -61,6 +61,9 @@ your chosen \code{dir})}
 \item{list}{if \code{TRUE}, print all files within a zip-file
 downloaded from EPMC (default: FALSE). This is *very* useful if
 using EPMC (see notes)}
+
+\item{timeout}{how long to wait for successful download (default 10
+seconds)}
 }
 \description{
 Put a call to this function where you would put a file-path - everything

@@ -33,6 +33,8 @@
 #' @param list if \code{TRUE}, print all files within a zip-file
 #' downloaded from EPMC (default: FALSE). This is *very* useful if
 #' using EPMC (see notes)
+#' @param timeout how long to wait for successful download (default 10
+#' seconds)
 #' @author Will Pearse (\email{will.pearse@@gmail.com})
 #' @note Make sure that the article from which you're attempting to
 #' download supplementary materials *has* supplementary materials. 404
@@ -57,10 +59,10 @@
 #' }
 #' @template ft_get_si
 #' @export
-ft_get_si <- function(x, si, from=c("auto","plos","wiley","science","proceedings","figshare","esa_data_archives","esa_archives","biorxiv","epmc"), save.name=NA, dir=NA, cache=TRUE, vol=NA, issue=NA, list=FALSE) UseMethod("ft_get_si")
+ft_get_si <- function(x, si, from=c("auto","plos","wiley","science","proceedings","figshare","esa_data_archives","esa_archives","biorxiv","epmc"), save.name=NA, dir=NA, cache=TRUE, vol=NA, issue=NA, list=FALSE, timeout=10) UseMethod("ft_get_si")
 #' @export
 #' @rdname ft_get_si
-ft_get_si.character <- function(x, si, from=c("auto","plos","wiley","science","proceedings","figshare","esa_data_archives","esa_archives","biorxiv","epmc"), save.name=NA, dir=NA, cache=TRUE, vol=NA, issue=NA, list=FALSE){
+ft_get_si.character <- function(x, si, from=c("auto","plos","wiley","science","proceedings","figshare","esa_data_archives","esa_archives","biorxiv","epmc"), save.name=NA, dir=NA, cache=TRUE, vol=NA, issue=NA, list=FALSE, timeout=10){
     #Basic argument handling
     if(length(x) == 0)
         stop("'x' must contain some data!")
@@ -77,11 +79,12 @@ ft_get_si.character <- function(x, si, from=c("auto","plos","wiley","science","p
     issue <- .fix.param(x, issue, "issue")
     cache <- .fix.param(x, cache, "cache")
     list <- .fix.param(x, list, "list")
+    timeout <- .fix.param(x, timeout, "timeout")
     
     ############################
     #Recurse if needed (can't use Recall because of potential argument length problems)
     if(length(x) > 1)
-        return(setNames(unlist(mapply(ft_get_si.character, x=x,si=si,from=from,save.name=save.name,dir=dir,cache=cache,vol=vol,issue=issue,list=list)),x))
+        return(setNames(unlist(mapply(ft_get_si.character, x=x,si=si,from=from,save.name=save.name,dir=dir,cache=cache,vol=vol,issue=issue,list=list,timeout=timeout)),x))
     ############################
     #...Do work
 
@@ -99,24 +102,24 @@ ft_get_si.character <- function(x, si, from=c("auto","plos","wiley","science","p
     if(from == "auto")
         from <- get_si_pub(x)
     func <- get_si_func(from)
-    return(func(x, si, save.name=save.name, cache=cache, vol=vol, issue=issue, list=list))
+    return(func(x, si, save.name=save.name, cache=cache, vol=vol, issue=issue, list=list, timeout=timeout))
 }
 #' @export
 #' @rdname ft_get_si
-ft_get_si.ft_data <- function(x, si, from=NA, save.name=NA, dir=NA, cache=TRUE, vol=NA, issue=NA, list=FALSE){
+ft_get_si.ft_data <- function(x, si, from=NA, save.name=NA, dir=NA, cache=TRUE, vol=NA, issue=NA, list=FALSE, timeout=10){
     if(!is.na(from))
         warning("Ignoring 'from' argument")
     from <- names(x)
     x <- unlist(sapply(x, function(x) x$dois))
     from <- .fix.param(x, from, "from")
-    return(setNames(unlist(mapply(ft_get_si.character, x=x,si=si,from=from,save.name=save.name,dir=dir,cache=cache,vol=vol,issue=issue,list=list)),x))
+    return(setNames(unlist(mapply(ft_get_si.character, x=x,si=si,from=from,save.name=save.name,dir=dir,cache=cache,vol=vol,issue=issue,list=list,timeout=timeout)),x))
 }
 #' @export
 #' @rdname ft_get_si
-ft_get_si.ft <- function(x, si, from=NA, save.name=NA, dir=NA, cache=TRUE, vol=NA, issue=NA, list=FALSE){
+ft_get_si.ft <- function(x, si, from=NA, save.name=NA, dir=NA, cache=TRUE, vol=NA, issue=NA, list=FALSE, timeout=10){
     if(!is.na(from))
         warning("Ignoring 'from' argument")
     x <- unlist(sapply(x, function(x) x$data$id))
     from <- names(x)
-    return(setNames(unlist(mapply(ft_get_si.character, x=x,si=si,from=from,save.name=save.name,dir=dir,cache=cache,vol=vol,issue=issue,list=list)),x))
+    return(setNames(unlist(mapply(ft_get_si.character, x=x,si=si,from=from,save.name=save.name,dir=dir,cache=cache,vol=vol,issue=issue,list=list,timeout=timeout)),x))
 }

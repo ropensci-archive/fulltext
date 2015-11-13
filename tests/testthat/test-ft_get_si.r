@@ -17,6 +17,13 @@ test_that("ft_get_si returns...", {
   expect_true(file.exists(ft_get_si("10.1101/016386", 1)))
   expect_true(file.exists(ft_get_si("10.1371/journal.pone.0126524", "pone.0126524.g005.jpg", "epmc")))
 
+  #Extra checks for Wiley
+  expect_true(file.exists(ft_get_si("10.1111/ele.12437", si=1)))
+  expect_true(file.exists(ft_get_si("10.1111/ele.12437", si=2)))
+  expect_true(file.exists(ft_get_si("10.1002/ece3.1679", si=2)))
+  expect_error(ft_get_si('10.1111/ele.12437', si=3))
+  
+
   #Multiple downloads and ft_data are handled well
   expect_true(all(file.exists(ft_get_si(c("10.1101/016386", "10.1111/ele.12437"), si=1))))
   expect_true(all(file.exists(ft_get_si(c("10.1101/016386", "10.1111/ele.12437"), si=2:1))))
@@ -29,4 +36,5 @@ test_that("ft_get_si fails well", {
   skip_on_cran()
 
   expect_error(ft_get_si('nonsense', 1))
+  expect_error(ft_get_si('10.6084/m9.figshare.979288', 20))
 })
