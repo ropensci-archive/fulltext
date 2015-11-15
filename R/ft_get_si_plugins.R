@@ -7,7 +7,7 @@ get_si_pub <- function(x){
             return("figshare")
     pub <- cr_works(x)$data
     
-    if(is.na(pub) || nchar(pub)==0 || pub$prefix=="http://id.crossref.org/prefix/10.0000")
+    if(pub$prefix=="http://id.crossref.org/prefix/10.0000")
         stop("Cannot find publisher for DOI: ", x)
     
     return(.grep.text(pub$member, "[0-9]+"))
