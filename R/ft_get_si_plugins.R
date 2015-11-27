@@ -65,6 +65,7 @@ get_si_plos <- function(doi, si, save.name=NA, dir=NA, cache=TRUE, ...){
 }
 
 #' @importFrom httr timeout
+#' @importFrom xml2 read_html xml_attr xml_find_all
 get_si_wiley <- function(doi, si, save.name=NA, dir=NA, cache=TRUE, timeout=10, ...){
     #Argument handling
     if(!is.numeric(si))
@@ -76,23 +77,17 @@ get_si_wiley <- function(doi, si, save.name=NA, dir=NA, cache=TRUE, timeout=10, 
     # - requires check for new Ecology Letters page (...the page seems buggy...)
     html <- tryCatch(as.character(GET(paste0("http://onlinelibrary.wiley.com/doi/", doi, "/full"), httr::timeout(timeout))),
                      silent=TRUE, error = function(x) NA)
-    #Check for failure to download and try old address style
     if(is.na(html))
         html <- as.character(GET(paste0("http://onlinelibrary.wiley.com/wol1/doi/", doi, "/full"), httr::timeout(timeout)))
     links <- gregexpr("(asset/supinfo/)[-0-9a-zA-Z\\.\\?\\=\\&\\,\\;_]*", html, useBytes=FALSE)
     if(any(links[[1]] == -1))
         links <- gregexpr("(asset/supinfo)[-0-9a-zA-Z\\.\\?\\=\\&\\,\\;_%]*", html, useBytes=FALSE)
-    #Re-start entire search with new URL etc.
-    if(any(links[[1]] == -1)){
-        html <- as.character(GET(paste0("http://onlinelibrary.wiley.com/wol1/doi/", doi, "/full"), httr::timeout(timeout)))
-        links <- gregexpr("(asset/supinfo)[-0-9a-zA-Z\\.\\?\\=\\&\\,\\;_%]*", html, useBytes=FALSE)
-    }
-        
-    if(si > length(links[[1]]))
-        stop("SI number '", si, "' greater than number of detected SIs (", length(links[[1]]), ")")
-    pos <- as.numeric(links[[1]][si])
-    link <- substr(html, pos, pos+attr(links[[1]], "match.length")[si]-1)
-    url <- paste0("http://onlinelibrary.wiley.com/store/", doi, "/", link)
+    
+    html <- read_html(html)
+    urls <- xml_attr(xml_find_all(html, '//a[contains(@href,"supinfo")]'), "href")
+    if(si > length(urls))
+        stop("SI number '", si, "' greater than number of detected SIs (", length(urls), ")")
+    url <- urls[si]
     
     #Download and return
     destination <- file.path(dir, save.name)
