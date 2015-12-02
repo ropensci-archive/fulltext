@@ -7,7 +7,7 @@ get_si_pub <- function(x){
             return("figshare")
     pub <- cr_works(x)$data
     
-    if(is.na(pub) || nchar(pub)==0 || pub$prefix=="http://id.crossref.org/prefix/10.0000")
+    if(pub$prefix=="http://id.crossref.org/prefix/10.0000")
         stop("Cannot find publisher for DOI: ", x)
     
     return(.grep.text(pub$member, "[0-9]+"))
@@ -64,7 +64,9 @@ get_si_plos <- function(doi, si, save.name=NA, dir=NA, cache=TRUE, ...){
     return(.download(url, dir, save.name, cache))
 }
 
-get_si_wiley <- function(doi, si, save.name=NA, dir=NA, cache=TRUE, ...){
+#' @importFrom httr timeout
+#' @importFrom xml2 read_html xml_attr xml_find_all
+get_si_wiley <- function(doi, si, save.name=NA, dir=NA, cache=TRUE, timeout=10, ...){
     #Argument handling
     if(!is.numeric(si))
         stop("Wiley download requires numeric SI info")
@@ -72,12 +74,21 @@ get_si_wiley <- function(doi, si, save.name=NA, dir=NA, cache=TRUE, ...){
     save.name <- .save.name(doi, save.name, si)
 
     #Download SI HTML page and find SI link
-    html <- as.character(GET(paste0("http://onlinelibrary.wiley.com/doi/", doi, "/suppinfo")))
-    links <- gregexpr("(asset/supinfo/)[-0-9a-zA-Z\\.\\?\\=\\&\\,\\;_]*", as.character(html), useBytes=FALSE)
-    pos <- as.numeric(links[[si]])
-    link <- substr(html, pos, pos+attr(links[[si]], "match.length")-1)
-    url <- paste0("http://onlinelibrary.wiley.com/store/", doi, "/", link)
-
+    # - requires check for new Ecology Letters page (...the page seems buggy...)
+    html <- tryCatch(as.character(GET(paste0("http://onlinelibrary.wiley.com/doi/", doi, "/full"), httr::timeout(timeout))),
+                     silent=TRUE, error = function(x) NA)
+    if(is.na(html))
+        html <- as.character(GET(paste0("http://onlinelibrary.wiley.com/wol1/doi/", doi, "/full"), httr::timeout(timeout)))
+    links <- gregexpr("(asset/supinfo/)[-0-9a-zA-Z\\.\\?\\=\\&\\,\\;_]*", html, useBytes=FALSE)
+    if(any(links[[1]] == -1))
+        links <- gregexpr("(asset/supinfo)[-0-9a-zA-Z\\.\\?\\=\\&\\,\\;_%]*", html, useBytes=FALSE)
+    
+    html <- read_html(html)
+    urls <- xml_attr(xml_find_all(html, '//a[contains(@href,"supinfo")]'), "href")
+    if(si > length(urls))
+        stop("SI number '", si, "' greater than number of detected SIs (", length(urls), ")")
+    url <- urls[si]
+    
     #Download and return
     destination <- file.path(dir, save.name)
     return(.download(url, dir, save.name, cache))

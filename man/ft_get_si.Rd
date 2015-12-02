@@ -10,18 +10,18 @@
 ft_get_si(x, si, from = c("auto", "plos", "wiley", "science", "proceedings",
   "figshare", "esa_data_archives", "esa_archives", "biorxiv", "epmc"),
   save.name = NA, dir = NA, cache = TRUE, vol = NA, issue = NA,
-  list = FALSE)
+  list = FALSE, timeout = 10)
 
 \method{ft_get_si}{character}(x, si, from = c("auto", "plos", "wiley",
   "science", "proceedings", "figshare", "esa_data_archives", "esa_archives",
   "biorxiv", "epmc"), save.name = NA, dir = NA, cache = TRUE, vol = NA,
-  issue = NA, list = FALSE)
+  issue = NA, list = FALSE, timeout = 10)
 
 \method{ft_get_si}{ft_data}(x, si, from = NA, save.name = NA, dir = NA,
-  cache = TRUE, vol = NA, issue = NA, list = FALSE)
+  cache = TRUE, vol = NA, issue = NA, list = FALSE, timeout = 10)
 
 \method{ft_get_si}{ft}(x, si, from = NA, save.name = NA, dir = NA,
-  cache = TRUE, vol = NA, issue = NA, list = FALSE)
+  cache = TRUE, vol = NA, issue = NA, list = FALSE, timeout = 10)
 }
 \arguments{
 \item{x}{One of: vector of DOI(s) of article(s) (a
@@ -61,6 +61,9 @@ your chosen \code{dir})}
 \item{list}{if \code{TRUE}, print all files within a zip-file
 downloaded from EPMC (default: FALSE). This is *very* useful if
 using EPMC (see notes)}
+
+\item{timeout}{how long to wait for successful download (default 10
+seconds)}
 }
 \description{
 Put a call to this function where you would put a file-path - everything
@@ -74,7 +77,9 @@ you want to download data from, and the number of the supplement
 you want to download (1, 5, etc.). ESA journals don't use DOIs
 (give the article code; see below), and Proceedings, Science, and
 ESA journals need you to give the filename of the supplement to
-download.
+download. The file extensions (suffixes) of files are returned as
+\code{suffix} attributes (see first example), which may be useful
+if you don't know the format of the file you're downloading.
 
 For any DOIs not recognised (and if asked) the European PubMed
 Central API is used to look up articles. What this database calls a
@@ -134,6 +139,11 @@ errors and 'file not found' errors can result from such cases.
 \dontrun{
 #Put the function wherever you would put a file path
 crabs <- read.csv(ft_get_si("10.6084/m9.figshare.979288", 2))
+
+#View the suffix (file extension) of downloaded files
+# - note that not all files are uploaded/stored with useful file extensions!
+ft_get_si("10.6084/m9.figshare.979288", 2)
+attr(ft_get_si("10.6084/m9.figshare.979288", 2), "suffix")
 
 #ESA data papers and regular articles *must* be marked
 fungi <- read.csv(ft_get_si("E093-059", "myco_db.csv",

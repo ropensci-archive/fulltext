@@ -4,7 +4,9 @@
 #' you want to download (1, 5, etc.). ESA journals don't use DOIs
 #' (give the article code; see below), and Proceedings, Science, and
 #' ESA journals need you to give the filename of the supplement to
-#' download.
+#' download. The file extensions (suffixes) of files are returned as
+#' \code{suffix} attributes (see first example), which may be useful
+#' if you don't know the format of the file you're downloading.
 #'
 #' For any DOIs not recognised (and if asked) the European PubMed
 #' Central API is used to look up articles. What this database calls a
