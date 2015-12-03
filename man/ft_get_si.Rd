@@ -33,12 +33,17 @@ use the ESA-specific article code (e.g., E092-201).}
 or (for ESA and Science journals) the name of the supplment (e.g.,
 "S1_data.csv"). Can be a \code{character} or \code{numeric}.}
 
-\item{from}{Publisher of article (\code{character}). Optional,
-except for ESA journals (see \code{doi}), but supplying it will
-speed up downloads. Must be one of: auto (i.e., auto-detect
-journal; default), plos, wiley, science, proceedings, figshare,
-esa_data_archives, esa_archives. Only use this argument if \code{x}
-isn't a vector of DOI(s).}
+\item{from}{Publisher of article (\code{character}). The default
+(\code{auto}) uses crossref (\code{\link[rcrossref]{cr_works}}) to
+detect the journal's publisher. Specifying the journal can somewhat
+speed up your download, or be used to force a download from EPMC
+(see details). You *must* specify if downloading from an ESA
+journal (\code{esa_data_archives}, \code{esa_archives}). You can
+only use this argument if \code{x} is a vector of DOI(s). Must be
+one of: \code{auto} (i.e., auto-detect journal; default),
+\code{plos}, \code{wiley}, \code{science}, \code{proceedings},
+\code{figshare}, \code{esa_data_archives}, \code{esa_archives},
+\code{biorxiv}, or \code{epmc}.}
 
 \item{save.name}{a name for the file to download
 (\code{character}). If \code{NULL} (default) this will be a

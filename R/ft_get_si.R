@@ -11,12 +11,17 @@
 #' @param si number of the supplement to be downloaded (1, 2, 3, etc.),
 #' or (for ESA and Science journals) the name of the supplment (e.g.,
 #' "S1_data.csv"). Can be a \code{character} or \code{numeric}.
-#' @param from Publisher of article (\code{character}). Optional,
-#' except for ESA journals (see \code{doi}), but supplying it will
-#' speed up downloads. Must be one of: auto (i.e., auto-detect
-#' journal; default), plos, wiley, science, proceedings, figshare,
-#' esa_data_archives, esa_archives. Only use this argument if \code{x}
-#' isn't a vector of DOI(s).
+#' @param from Publisher of article (\code{character}). The default
+#' (\code{auto}) uses crossref (\code{\link[rcrossref]{cr_works}}) to
+#' detect the journal's publisher. Specifying the journal can somewhat
+#' speed up your download, or be used to force a download from EPMC
+#' (see details). You *must* specify if downloading from an ESA
+#' journal (\code{esa_data_archives}, \code{esa_archives}). You can
+#' only use this argument if \code{x} is a vector of DOI(s). Must be
+#' one of: \code{auto} (i.e., auto-detect journal; default),
+#' \code{plos}, \code{wiley}, \code{science}, \code{proceedings},
+#' \code{figshare}, \code{esa_data_archives}, \code{esa_archives},
+#' \code{biorxiv}, or \code{epmc}.
 #' @param save.name a name for the file to download
 #' (\code{character}). If \code{NULL} (default) this will be a
 #' combination of the DOI and SI number
@@ -108,7 +113,7 @@ ft_get_si.character <- function(x, si, from=c("auto","plos","wiley","science","p
 #' @rdname ft_get_si
 ft_get_si.ft_data <- function(x, si, from=NA, save.name=NA, dir=NA, cache=TRUE, vol=NA, issue=NA, list=FALSE, timeout=10){
     if(!is.na(from))
-        warning("Ignoring 'from' argument")
+        stop("Cannot use 'from' argument with 'ft_data' input")
     from <- names(x)
     x <- unlist(sapply(x, function(x) x$dois))
     from <- .fix.param(x, from, "from")
@@ -118,7 +123,7 @@ ft_get_si.ft_data <- function(x, si, from=NA, save.name=NA, dir=NA, cache=TRUE, 
 #' @rdname ft_get_si
 ft_get_si.ft <- function(x, si, from=NA, save.name=NA, dir=NA, cache=TRUE, vol=NA, issue=NA, list=FALSE, timeout=10){
     if(!is.na(from))
-        warning("Ignoring 'from' argument")
+        stop("Cannot use 'from' argument with 'ft' input")
     x <- unlist(sapply(x, function(x) x$data$id))
     from <- names(x)
     return(setNames(unlist(mapply(ft_get_si.character, x=x,si=si,from=from,save.name=save.name,dir=dir,cache=cache,vol=vol,issue=issue,list=list,timeout=timeout)),x))
