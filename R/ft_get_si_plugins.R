@@ -138,7 +138,7 @@ get_si_science <- function(doi, si, save.name=NA, dir=NA, cache=TRUE, ...){
 
     #Find, download, and return
     url <- paste0("http://www.sciencemag.org", .grep.url(paste0("http://www.sciencemag.org/lookup/doi/", doi), "(/content/)[0-9/]*"), "/suppl/DC1")
-    url <- paste0("http://www.sciencemag.org", .grep.url(url, "(/content/suppl/)[A-Z0-9/\\.]*(Appendix_BanksLeite_etal.txt)"))
+    url <- paste0("http://www.sciencemag.org", .grep.url(url, "(/content/suppl/)[A-Z0-9/\\.]*"))
     return(.download(url, dir, save.name, cache))
 }
 
