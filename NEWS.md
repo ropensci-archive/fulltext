@@ -1,3 +1,15 @@
+fulltext 0.1.6
+===============
+
+### MINOR IMPROVEMENTS
+
+* More documentation added for the `from` parameter for `ft_get_si()` to clarify its use, and fails better when used inappropriately (#68) (#77)
+* `ft_get_si()` now gives file type information as attributes so that downstream uses can access that information instead of having to guess file types (#69)
+
+### BUG FIXES
+
+* Fixes to `ft_get_si()` to work with changes in the publisher Wiley's URL changes (#71) (#73)
+
 fulltext 0.1.4
 ===============
 
