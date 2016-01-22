@@ -93,12 +93,6 @@ Many articles
 ft_get(c('10.7554/eLife.04300','10.7554/eLife.03032'), from = 'elife')
 ```
 
-### Articles from BMC
-
-```{r}
-ft_get('http://www.microbiomejournal.com/content/download/xml/2049-2618-2-7.xml', from = 'bmc')
-```
-
 ### Articles from Frontiers in Pharmacology (publisher: Frontiers)
 
 ```{r}
@@ -123,13 +117,13 @@ ft_get(res$entrez$data$doi[1:3], from = 'entrez')
 
 ## Caching
 
-To cache results or not. If \code{cache=TRUE}, raw XML, or other format that article is 
+To cache results or not. If `cache=TRUE`, raw XML, or other format that article is 
 in is written to disk, then pulled from disk when further manipulations are done on 
-the data. See also \code{\link{cache}}
+the data.
 
 ```{r}
 cache_options_set(cache = TRUE)
-(res <- ft_get('10.1371/journal.pone.0086169', from = 'plos', cache = TRUE))
+(res <- ft_get('10.1371/journal.pone.0086169', from = 'plos'))
 ```
 
 > Note how the [source] field has "rds - <path to file>" - indicating that the text is 

@@ -51,24 +51,18 @@ res$plos
 #> 
 #> $data
 #> $data$backend
-#> NULL
+#> [1] "rds"
 #> 
 #> $data$path
-#> [1] "session"
+#> [1] "~/.fulltext/2d2c936d084e563dc2784a63b78c8b95.rds"
 #> 
 #> $data$data
-#> 1 full-text articles retrieved 
-#> Min. Length: 110717 - Max. Length: 110717 
-#> DOIs: 10.1371/journal.pone.0086169 ... 
+#> NULL
 #> 
-#> NOTE: extract xml strings like output['<doi>']
 #> 
 #> $opts
 #> $opts$doi
 #> [1] "10.1371/journal.pone.0086169"
-#> 
-#> $opts$callopts
-#> list()
 ```
 
 Indexing to the `data` slot takes us to another list with metadata and the article
@@ -77,17 +71,13 @@ Indexing to the `data` slot takes us to another list with metadata and the artic
 ```r
 res$plos$data
 #> $backend
-#> NULL
+#> [1] "rds"
 #> 
 #> $path
-#> [1] "session"
+#> [1] "~/.fulltext/2d2c936d084e563dc2784a63b78c8b95.rds"
 #> 
 #> $data
-#> 1 full-text articles retrieved 
-#> Min. Length: 110717 - Max. Length: 110717 
-#> DOIs: 10.1371/journal.pone.0086169 ... 
-#> 
-#> NOTE: extract xml strings like output['<doi>']
+#> NULL
 ```
 
 Going down one more index gets us the data object, using the DOI searched to get the text. 
@@ -112,15 +102,16 @@ You can get a bunch of DOIs first, e.g., from PLOS using the `rplos` package
 library("rplos")
 (dois <- searchplos(q = "*:*", fl = 'id',
    fq = list('doc_type:full', "article_type:\"research article\""), limit = 5)$data$id)
-#> [1] "10.1371/journal.pone.0031384" "10.1371/journal.pone.0031385"
-#> [3] "10.1371/journal.pone.0107441" "10.1371/journal.pone.0000339"
-#> [5] "10.1371/journal.pone.0046739"
+#> [1] "10.1371/journal.pone.0068036" "10.1371/journal.pone.0064513"
+#> [3] "10.1371/journal.pone.0053239" "10.1371/journal.ppat.1000439"
+#> [5] "10.1371/journal.ppat.1000438"
 ft_get(dois, from = 'plos')
+#> <fulltext text>
 #> [Docs] 5 
-#> [Source] R session  
-#> [IDs] 10.1371/journal.pone.0031384 10.1371/journal.pone.0031385
-#>      10.1371/journal.pone.0107441 10.1371/journal.pone.0000339
-#>      10.1371/journal.pone.0046739 ...
+#> [Source] rds - /Users/sacmac/.fulltext 
+#> [IDs] 10.1371/journal.pone.0068036 10.1371/journal.pone.0064513
+#>      10.1371/journal.pone.0053239 10.1371/journal.ppat.1000439
+#>      10.1371/journal.ppat.1000438 ...
 ```
 
 ## Different data sources
@@ -132,12 +123,14 @@ One article
 
 ```r
 ft_get('10.7554/eLife.04300', from = 'elife')
+#> <fulltext text>
 #> [Docs] 1 
-#> [Source] R session  
+#> [Source] rds - /Users/sacmac/.fulltext 
 #> [IDs] 10.7554/eLife.04300 ...
 ft_get(c('10.7554/eLife.04300','10.7554/eLife.03032'), from = 'elife')
+#> <fulltext text>
 #> [Docs] 2 
-#> [Source] R session  
+#> [Source] rds - /Users/sacmac/.fulltext 
 #> [IDs] 10.7554/eLife.04300 10.7554/eLife.03032 ...
 ```
 
@@ -146,19 +139,10 @@ Many articles
 
 ```r
 ft_get(c('10.7554/eLife.04300','10.7554/eLife.03032'), from = 'elife')
+#> <fulltext text>
 #> [Docs] 2 
-#> [Source] R session  
+#> [Source] rds - /Users/sacmac/.fulltext 
 #> [IDs] 10.7554/eLife.04300 10.7554/eLife.03032 ...
-```
-
-### Articles from BMC
-
-
-```r
-ft_get('http://www.microbiomejournal.com/content/download/xml/2049-2618-2-7.xml', from = 'bmc')
-#> [Docs] 1 
-#> [Source] R session  
-#> [IDs] 10.1186/2049-2618-2-7 ...
 ```
 
 ### Articles from Frontiers in Pharmacology (publisher: Frontiers)
@@ -167,9 +151,10 @@ ft_get('http://www.microbiomejournal.com/content/download/xml/2049-2618-2-7.xml'
 ```r
 doi <- '10.3389/fphar.2014.00109'
 ft_get(doi, from = "entrez")
+#> <fulltext text>
 #> [Docs] 1 
-#> [Source] R session  
-#> [IDs] 4050532 ...
+#> [Source] rds - /Users/sacmac/.fulltext 
+#> [IDs] 10.3389/fphar.2014.00109 ...
 ```
 
 ## Search using ft_search()
@@ -182,15 +167,15 @@ For example, search entrez, get some DOIs, then fetch some articles
 #> Query:
 #>   [ecology] 
 #> Found:
-#>   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 96493; arxiv: 0; biorxiv: 0] 
+#>   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 97443; arxiv: 0; biorxiv: 0; Europe PMC: 0] 
 #> Returned:
-#>   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 10; arxiv: 0; biorxiv: 0]
+#>   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 10; arxiv: 0; biorxiv: 0; Europe PMC: 0]
 res$entrez$data$doi
-#>  [1] "10.1186/s40168-015-0093-6"   "10.1186/s13062-015-0070-9"  
-#>  [3] "10.1038/srep12693"           "10.1038/srep12427"          
-#>  [5] "10.1007/s13205-014-0241-x"   "10.1007/s13205-014-0242-9"  
-#>  [7] "10.1093/aobpla/plv071"       "10.1136/bmjopen-2014-007471"
-#>  [9] "10.1038/srep12267"           "10.1038/srep12436"
+#>  [1] "10.1016/j.amepre.2015.08.019" "10.1186/s12859-016-0892-1"   
+#>  [3] "10.1186/s12983-016-0135-3"    "10.1093/beheco/arv150"       
+#>  [5] "10.1093/beheco/arv136"        "10.1093/fampra/cmv081"       
+#>  [7] "10.1093/aobpla/plv140"        "10.1590/1678-775720140261"   
+#>  [9] "10.7717/peerj.1569"           "10.7717/peerj.1555"
 ```
 
 Get articles
@@ -198,21 +183,24 @@ Get articles
 
 ```r
 ft_get(res$entrez$data$doi[1:3], from = 'entrez')
+#> <fulltext text>
 #> [Docs] 3 
-#> [Source] R session  
-#> [IDs] 4526283 4526193 4523847 ...
+#> [Source] rds - /Users/sacmac/.fulltext 
+#> [IDs] 10.1016/j.amepre.2015.08.019 10.1186/s12859-016-0892-1
+#>      10.1186/s12983-016-0135-3 ...
 ```
 
 ## Caching
 
-To cache results or not. If \code{cache=TRUE}, raw XML, or other format that article is 
+To cache results or not. If `cache=TRUE`, raw XML, or other format that article is 
 in is written to disk, then pulled from disk when further manipulations are done on 
-the data. See also \code{\link{cache}}
+the data.
 
 
 ```r
 cache_options_set(cache = TRUE)
-(res <- ft_get('10.1371/journal.pone.0086169', from = 'plos', cache = TRUE))
+(res <- ft_get('10.1371/journal.pone.0086169', from = 'plos'))
+#> <fulltext text>
 #> [Docs] 1 
 #> [Source] rds - /Users/sacmac/.fulltext 
 #> [IDs] 10.1371/journal.pone.0086169 ...
@@ -228,6 +216,7 @@ the printed object doesn't indicate it)
 
 ```r
 res %>% collect
+#> <fulltext text>
 #> [Docs] 1 
 #> [Source] rds - /Users/sacmac/.fulltext 
 #> [IDs] 10.1371/journal.pone.0086169 ...

@@ -95,7 +95,7 @@ ft_search(query = 'ecology', from = 'plos')
 #> Query:
 #>   [ecology] 
 #> Found:
-#>   [PLoS: 29751; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0] 
+#>   [PLoS: 31172; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0] 
 #> Returned:
 #>   [PLoS: 10; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0]
 ```
@@ -109,8 +109,8 @@ ft_search(query = 'ecology', from = 'plos')
 res1 <- ft_search(query = 'ecology', from = 'entrez', limit = 5)
 ft_links(res1)
 #> <fulltext links>
-#> [Found] 4 
-#> [IDs] ID_26478753 ID_26475579 ID_26474754 ID_26474753 ID_26474751 ...
+#> [Found] 2 
+#> [IDs] ID_26787189 ID_26477897 ...
 ```
 
 Or pass in DOIs directly
@@ -119,8 +119,8 @@ Or pass in DOIs directly
 ```r
 ft_links(res1$entrez$data$doi, from = "entrez")
 #> <fulltext links>
-#> [Found] 4 
-#> [IDs] ID_26478753 ID_26475579 ID_26474754 ID_26474753 ID_26474751 ...
+#> [Found] 2 
+#> [IDs] ID_26787189 ID_26477897 ...
 ```
 
 ## Get full text
@@ -143,18 +143,18 @@ ft_get('10.1371/journal.pone.0086169', from = 'plos')
 library("rplos")
 (dois <- searchplos(q = "*:*", fl = 'id',
    fq = list('doc_type:full',"article_type:\"research article\""), limit = 5)$data$id)
-#> [1] "10.1371/journal.pbio.0050316" "10.1371/journal.pone.0030133"
-#> [3] "10.1371/journal.pone.0012724" "10.1371/journal.pbio.0050323"
-#> [5] "10.1371/journal.pone.0030142"
+#> [1] "10.1371/journal.pone.0068036" "10.1371/journal.pone.0064513"
+#> [3] "10.1371/journal.pone.0053239" "10.1371/journal.ppat.1000439"
+#> [5] "10.1371/journal.ppat.1000438"
 x <- ft_get(dois, from = "plos")
 x %>% chunks("publisher") %>% tabularize()
 #> $plos
 #>                                               publisher
-#> 1 Public Library of Science\n        San Francisco, USA
-#> 2 Public Library of Science\n        San Francisco, USA
-#> 3         Public Library of Science\nSan Francisco, USA
-#> 4 Public Library of Science\n        San Francisco, USA
-#> 5 Public Library of Science\n        San Francisco, USA
+#> 1         Public Library of Science\nSan Francisco, USA
+#> 2         Public Library of Science\nSan Francisco, USA
+#> 3 Public Library of Science\n        San Francisco, USA
+#> 4         Public Library of Science\nSan Francisco, USA
+#> 5         Public Library of Science\nSan Francisco, USA
 ```
 
 
@@ -162,17 +162,17 @@ x %>% chunks("publisher") %>% tabularize()
 x %>% chunks(c("doi","publisher")) %>% tabularize()
 #> $plos
 #>                            doi
-#> 1 10.1371/journal.pbio.0050316
-#> 2 10.1371/journal.pone.0030133
-#> 3 10.1371/journal.pone.0012724
-#> 4 10.1371/journal.pbio.0050323
-#> 5 10.1371/journal.pone.0030142
+#> 1 10.1371/journal.pone.0068036
+#> 2 10.1371/journal.pone.0064513
+#> 3 10.1371/journal.pone.0053239
+#> 4 10.1371/journal.ppat.1000439
+#> 5 10.1371/journal.ppat.1000438
 #>                                               publisher
-#> 1 Public Library of Science\n        San Francisco, USA
-#> 2 Public Library of Science\n        San Francisco, USA
-#> 3         Public Library of Science\nSan Francisco, USA
-#> 4 Public Library of Science\n        San Francisco, USA
-#> 5 Public Library of Science\n        San Francisco, USA
+#> 1         Public Library of Science\nSan Francisco, USA
+#> 2         Public Library of Science\nSan Francisco, USA
+#> 3 Public Library of Science\n        San Francisco, USA
+#> 4         Public Library of Science\nSan Francisco, USA
+#> 5         Public Library of Science\nSan Francisco, USA
 ```
 
 Use `dplyr` to data munge
@@ -186,23 +186,23 @@ x %>%
  .$plos %>%
  select(-permissions.license)
 #>                            doi
-#> 1 10.1371/journal.pbio.0050316
-#> 2 10.1371/journal.pone.0030133
-#> 3 10.1371/journal.pone.0012724
-#> 4 10.1371/journal.pbio.0050323
-#> 5 10.1371/journal.pone.0030142
+#> 1 10.1371/journal.pone.0068036
+#> 2 10.1371/journal.pone.0064513
+#> 3 10.1371/journal.pone.0053239
+#> 4 10.1371/journal.ppat.1000439
+#> 5 10.1371/journal.ppat.1000438
 #>                                               publisher
-#> 1 Public Library of Science\n        San Francisco, USA
-#> 2 Public Library of Science\n        San Francisco, USA
-#> 3         Public Library of Science\nSan Francisco, USA
-#> 4 Public Library of Science\n        San Francisco, USA
-#> 5 Public Library of Science\n        San Francisco, USA
+#> 1         Public Library of Science\nSan Francisco, USA
+#> 2         Public Library of Science\nSan Francisco, USA
+#> 3 Public Library of Science\n        San Francisco, USA
+#> 4         Public Library of Science\nSan Francisco, USA
+#> 5         Public Library of Science\nSan Francisco, USA
 #>   permissions.copyright.year permissions.copyright.holder
-#> 1                       2007                  Miall et al
-#> 2                       2012              Wulfmeyer et al
-#> 3                       2010                 Sorbye et al
-#> 4                       2007                  Xiang et al
-#> 5                       2012                Kreakie et al
+#> 1                       2013                  Singh et al
+#> 2                       2013                     Li et al
+#> 3                       2013                 Harper et al
+#> 4                       2009               Narvaiza et al
+#> 5                       2009                         <NA>
 #>   permissions.license_url
 #> 1                    <NA>
 #> 2                    <NA>
@@ -220,14 +220,9 @@ Grab supplementary materials for (re-)analysis of data
 
 ```r
 catching.crabs <- read.csv(ft_get_si("10.6084/m9.figshare.979288", 2))
+#> Error in .grep.text(html, regexp, which): SI number '2' greater than number of detected SIs (1)
 head(catching.crabs)
-#>   trap.no. length.deployed no..crabs
-#> 1        1          10 sec         0
-#> 2        2          10 sec         0
-#> 3        3          10 sec         0
-#> 4        4          10 sec         0
-#> 5        5          10 sec         0
-#> 6        1           1 min         0
+#> Error in head(catching.crabs): object 'catching.crabs' not found
 ```
 
 ## Cache

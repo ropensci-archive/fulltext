@@ -34,7 +34,6 @@ Imports:
     digest,
     whisker
 Suggests:
-    roxygen2,
     testthat,
     knitr
 RoxygenNote: 5.0.1
