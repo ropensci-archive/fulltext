@@ -1,4 +1,4 @@
-#' @title Europe PMC utilities
+#' Europe PMC utilities
 #' 
 #' @export
 #' @keywords internal

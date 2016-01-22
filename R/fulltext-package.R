@@ -19,7 +19,7 @@
 #'  \item extract text from pdfs - \code{\link{ft_extract}}
 #'  \item serialize to different data formats - \code{\link{ft_serialize}}
 #'  \item extract certain article sections (e.g., authors) - \code{\link{chunks}}
-#'  \item grab supplementary materials for (re-)analysis of data - \code{\link{ft_get_si()}}
+#'  \item grab supplementary materials for (re-)analysis of data - \code{\link{ft_get_si}}
 #'  accepts article identifiers, and output from \code{\link{ft_search}} and 
 #'  \code{\link{ft_get}}
 #' }

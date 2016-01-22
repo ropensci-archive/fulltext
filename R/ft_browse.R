@@ -1,7 +1,6 @@
-#' @title Browse an article in your default browser
+#' Browse an article in your default browser
 #'
 #' @name ft_browse
-#'
 #' @param x An object of class \code{ft_data} - the output from a call to 
 #' \code{\link{ft_get}}
 #' @param what (character) One of macrodocs (default), publisher, or whisker.
