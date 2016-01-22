@@ -27,6 +27,8 @@ ft_search(query, from = "plos", limit = 10, plosopts = list(),
 
 \item{biorxivopts}{biorxiv options. See \code{?bx_search}}
 
+\item{euroopts}{Euro PMC options. See \code{?eupmc_search}}
+
 \item{...}{Further args passed on to \code{\link[httr]{GET}}. Not working right now...}
 }
 \value{

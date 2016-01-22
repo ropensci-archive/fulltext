@@ -21,6 +21,9 @@ return the url.}
 \item{output}{A file path, if not given, uses a temporary file, deleted up on leaving the
 R session.}
 }
+\description{
+Browse an article in your default browser
+}
 \details{
 \code{what=whisker} not operational yet. When operational, will use whisker to open
 html page from XML content, each section parsed into separate section.

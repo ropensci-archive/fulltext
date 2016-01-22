@@ -39,6 +39,9 @@ the search by setting the parameter value to \code{TRUE}}
 \code{eupmc_search} returns a list with results. \code{eupmc_fields} returns 
 a data.frame. \code{eupmc_xml} returns an object of class \code{xml_document}
 }
+\description{
+Europe PMC utilities
+}
 \details{
 resulttype parameter options:
 \itemize{
