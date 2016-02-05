@@ -54,13 +54,13 @@ pdfx_POST <- function(file, ...) {
   res <- POST(url, config = c(content_type("application/pdf"), ...), body = upload_file(file))
   pdfx_err(res)
   stopifnot(res$headers$`content-type` == "text/xml")
-  content(res, as = "text")
+  content(res, as = "text", encoding = "UTF-8")
 }
 
 pdfx_err <- function(x) {
   stopifnot(is(x, "response"))
   if (!x$status_code == 200)  {
-    xml <- content(x, "text")
+    xml <- content(x, "text", encoding = "UTF-8")
     stop(x$status_code, " - ", xml2::xml_text(xml2::read_xml(xml)), 
          call. = FALSE)
   }
@@ -74,7 +74,7 @@ pdfx_GET <- function(input, type="html", write_path, ...) {
   if (type == "html") {
     res <- GET(url, ...)
     if (!res$status_code == 200) stop("something's wrong", call. = FALSE)
-    xml2::read_html(content(res, "text"))
+    xml2::read_html(content(res, "text", encoding = "UTF-8"))
   } else {
     res <- GET(url, write_disk(path = write_path), ...)
     if (!res$status_code == 200) stop("something's wrong", call. = FALSE)

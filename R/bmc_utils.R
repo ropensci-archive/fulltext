@@ -30,7 +30,7 @@ bmc_search <- function(terms, limit=10, page=1, ...) {
   args <- ft_compact(list(terms = terms, itemsPerPage = limit, page = page, format = 'json'))
   out <- GET(url, query = args, ...)
   stop_for_status(out)
-  tt <- content(out)
+  tt <- content(out, "text", encoding = 'UTF-8')
   urls <- vapply(tt$entries, function(z) z[['articleFullUrl']], "character")
   ids <- lapply(tt$entries, function(z) list(arxId = z[['arxId']], url = z[['articleFullUrl']]))
   list(urls = urls, ids = ids, results = tt)

@@ -54,7 +54,7 @@ eupmc_search <- function(query, resulttype = NULL, synonym = FALSE, per_page = 2
   newargs <- paste(names(args), args, sep = "=", collapse = "&")
   out <- GET(URLencode(paste0(eupmc_base(), "search/", newargs)), ...)
   eupmc_errors(out)
-  tt <- content(out, "text")
+  tt <- content(out, "text", encoding = "UTF-8")
   jsonlite::fromJSON(tt)
 }
 
@@ -64,7 +64,7 @@ eupmc_search <- function(query, resulttype = NULL, synonym = FALSE, per_page = 2
 eupmc_fields <- function(...) {
   out <- GET(URLencode(paste0(eupmc_base(), "fields")), ...)
   eupmc_errors(out)
-  tt <- content(out, "text")
+  tt <- content(out, "text", encoding = "UTF-8")
   tmp <- xml2::as_list(xml2::read_xml(tt))
   out <- lapply(tmp$searchTermList, function(z) {
     setNames(rbind.data.frame(z), c('term', 'datasets'))
@@ -78,7 +78,7 @@ eupmc_fields <- function(...) {
 eupmc_xml <- function(id, ...) {
   out <- GET(URLencode(paste0(eupmc_base(), id, "/fullTextXML")), ...)
   eupmc_errors(out)
-  tt <- content(out, "text")
+  tt <- content(out, "text", encoding = "UTF-8")
   xml2::read_xml(tt)
 }
 

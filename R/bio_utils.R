@@ -1,7 +1,7 @@
 biorxiv_search <- function(query, limit = 10, ...) {
   url <- file.path(bior_base(), URLencode(paste0(query, " numresults:30")))
   res <- GET(url)
-  html <- xml2::read_html(content(res, "text"))
+  html <- xml2::read_html(content(res, "text", encoding = 'UTF-8'))
   found <- get_found(html)
   init_ret <- length(xml2::xml_find_all(html, "//*[contains(text(), 'dx.doi.org')]"))
   html_pages <- NULL
@@ -9,7 +9,7 @@ biorxiv_search <- function(query, limit = 10, ...) {
     urls <- make_next_pages(min(c(found, limit)), init_ret, url)
     html_pages <- lapply(urls, function(z) {
       tmp <- GET(z)
-      xml2::read_html(content(tmp, "text"))
+      xml2::read_html(content(tmp, "text", encoding = 'UTF-8'))
     })
   }
   all_html <- unlist(list(list(html), html_pages), recursive = FALSE)
