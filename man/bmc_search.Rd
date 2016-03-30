@@ -4,41 +4,38 @@
 \alias{bmc_search}
 \title{Search for gene sequences available for a species from NCBI.}
 \usage{
-bmc_search(terms, limit = 10, page = 1, ...)
+bmc_search(query, limit = 10, offset = 1, key = NULL, ...)
 }
 \arguments{
-\item{terms}{Search terms.}
+\item{query}{Search terms.}
 
-\item{limit}{Number of records to return. Max 25. Default 10.}
+\item{limit}{Number of records to return. Default 10.}
 
-\item{page}{Page number. Only applies if more than 25 results.}
+\item{offset}{Record number to start at. Default: 1}
 
 \item{...}{Further args passed on to \code{\link[httr]{GET}}}
 }
 \value{
-A list.
+A list of length 2
 }
 \description{
 Search for gene sequences available for a species from NCBI.
 }
 \examples{
 \dontrun{
-bmc_search(terms = 'ecology')
-bmc_search(terms = 'fire', limit=3)
-bmc_search(terms = 'fire', limit=2, page=1)
-bmc_search(terms = 'fire', limit=2, page=2)
-
-(out <- bmc_search(terms = 'fire', limit=5))
+bmc_search(query='ecology')
+bmc_search('fire', limit=3)
+bmc_search('fire', limit=2, page=1)
+bmc_search('fire', limit=2, page=2)
 
 # Search, then get full text
-out <- bmc_search(terms = 'ecology')
-out$urls # you could use these to go to the website
-out$ids # used to construct download urls in bmc_xml
-browseURL(out$urls[1])
+out <- bmc_search('ecology')
+(urls <- vapply(out$records$url, "[[", "", 'value'))
+browseURL(urls[1])
 
 # curl debugging help
 library('httr')
-bmc_search(terms = 'ecology', config=verbose())
+bmc_search('ecology', config=verbose())
 }
 }
 \keyword{internal}

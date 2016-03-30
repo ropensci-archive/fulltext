@@ -39,14 +39,14 @@ plugin_crossref <- function(sources, query, limit, opts){
 
 plugin_bmc <- function(sources, query, limit, opts){
   if (any(grepl("bmc", sources))) {
-    opts$terms <- query
+    opts$query <- query
     opts$limit <- limit
     out <- do.call(bmc_search, opts)
-    dat <- do.call(rbind, lapply(out$results$entries, data.frame, stringsAsFactors = FALSE))
+    dat <- out$records
     dat <- names_lower(dat)
-    opts$query <- opts$terms; opts$terms <- NULL
-    zz <- list(source = "bmc", found = NA, data = dat, opts = opts, 
-               license = list(type = "variable, see `isOpenAccess` field in results"))
+    opts$query <- NULL
+    zz <- list(source = "bmc", found = out$result$total, data = dat, opts = opts, 
+               license = list(type = "variable, see `openaccess` field in results"))
     structure(zz, class = "ft_ind", query = query)
   } else {
     zz <- list(source = "bmc", found = NULL, data = NULL, opts = opts)
