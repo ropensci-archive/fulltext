@@ -32,7 +32,7 @@ returned from \code{\link{ft_search}}}
 
 \item{plosopts}{PLOS options. See \code{\link[rplos]{plos_fulltext}}}
 
-\item{bmcopts}{BMC options. See \code{\link{bmc_xml}}}
+\item{bmcopts}{BMC options. none}
 
 \item{entrezopts}{Entrez options. See \code{\link[rentrez]{entrez_search}} and
 \code{\link{entrez_fetch}}}

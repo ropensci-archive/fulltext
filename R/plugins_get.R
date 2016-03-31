@@ -84,6 +84,13 @@ bmc_ft <- function(dois, ...) {
   })
 }
 
+# lapply(dois, function(x) {
+#   "http://genesenvironment.biomedcentral.com/track/pdf/10.1186/s41021-015-0002-z?site=genesenvironment.biomedcentral.com"
+#   'http://genesenvironment.biomedcentral.com/content/download/xml/10.1186/s41021-015-0002-z.xml'
+#   sprintf("http://www.microbiomejournal.com/content/download/xml/%s.xml", 
+#           strextract(x, "[0-9-]+$"))
+# })
+
 elife_paper <- function(dois, ...) {
   lapply(dois, function(x) {
     url <- sprintf("http://elife.elifesciences.org/elife-source-xml/%s", x)
