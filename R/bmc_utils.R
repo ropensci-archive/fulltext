@@ -38,7 +38,7 @@ check_key_bmc <- function(x) {
     Sys.getenv("SPRINGER_KEY", "")
   else x
   if (tmp == "") {
-    getOption("springer_key", stop("you need a user name for the Springer/BMC API", 
+    getOption("springer_key", stop("you need an API key for the Springer/BMC API", 
                                         call. = FALSE))
   }
   else {
