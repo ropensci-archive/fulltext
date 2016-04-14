@@ -14,7 +14,7 @@
 #' returned from \code{\link{ft_search}}
 #' @param from Source to query. Optional.
 #' @param plosopts PLOS options. See \code{\link[rplos]{plos_fulltext}}
-#' @param bmcopts BMC options. none
+#' @param bmcopts BMC options. parameter DEPRECATED
 #' @param entrezopts Entrez options. See \code{\link[rentrez]{entrez_search}} and
 #' \code{\link{entrez_fetch}}
 #' @param elifeopts eLife options
@@ -57,6 +57,9 @@
 #'  \item arXiv - The IDs passed are not actually DOIs, though they look similar.
 #'  Thus, there's no way to not pass in the \code{from} parameter as we can't
 #'  determine unambiguously that the IDs passed in are from arXiv.org.
+#'  \item bmc - is a hot mess since the Springer acquisition. It's been removed
+#'  as an officially supported plugin, some DOIs from them may still work when
+#'  passed in here, who knows, it's a mess.
 #' }
 #'
 #' @examples \dontrun{
@@ -67,7 +70,7 @@
 #' ft_get('10.7717/peerj.228')
 #' ## eLife
 #' ft_get('10.7554/eLife.03032')
-#' ## BMC
+#' ## some BMC DOIs will work, but some may not, who knows
 #' ft_get(c('10.1186/2049-2618-2-7', '10.1186/2193-1801-3-7'))
 #' ## FrontiersIn
 #' res <- ft_get(c('10.3389/fphar.2014.00109', '10.3389/feart.2015.00009'))
@@ -119,13 +122,6 @@
 #' dois <- ft_search("elife[journal]", from = "entrez")
 #' ft_get(dois)
 #'
-#' # bmc
-#' ft_get('http://www.microbiomejournal.com/content/download/xml/2049-2618-2-7.xml', from='bmc')
-#' urls <- c('http://www.biomedcentral.com/content/download/xml/1471-2393-14-71.xml',
-#'  'http://www.springerplus.com/content/download/xml/2193-1801-3-7.xml',
-#'  'http://www.microbiomejournal.com/content/download/xml/2049-2618-2-7.xml')
-#' ft_get(urls, from='bmc')
-#'
 #' # Frontiers in Pharmacology (publisher: Frontiers)
 #' doi <- '10.3389/fphar.2014.00109'
 #' ft_get(doi, from="entrez")
@@ -167,20 +163,25 @@ ft_get <- function(x, from=NULL, plosopts=list(), bmcopts=list(), entrezopts=lis
 ft_get.character <- function(x, from=NULL, plosopts=list(), bmcopts=list(), entrezopts=list(),
                    elifeopts=list(), cache=FALSE, backend="rds", path="~/.fulltext", ...) {
 
+  calls <- names(sapply(match.call(), deparse))[-1]
+  calls_vec <- "bmcopts" %in% calls
+  if (any(calls_vec)) {
+    stop("The parameters bmcopts has been removed. Some BMC DOIs may still work, who knows", call. = FALSE)
+  }
+  
   make_dir(path)
   cacheopts <- cache_options_get()
   if (is.null(cacheopts$cache) && is.null(cacheopts$backend)) cache_options_set(cache, backend, path)
 
   if (!is.null(from)) {
-    from <- match.arg(from, c("plos", "entrez", "bmc", "elife", "pensoft", "arxiv", "biorxiv"))
+    from <- match.arg(from, c("plos", "entrez", "elife", "pensoft", "arxiv", "biorxiv"))
     plos_out <- plugin_get_plos(from, x, plosopts, ...)
     entrez_out <- plugin_get_entrez(from, x, entrezopts, ...)
-    bmc_out <- plugin_get_bmc(from, x, bmcopts, ...)
     elife_out <- plugin_get_elife(from, x, elifeopts, ...)
     pensoft_out <- plugin_get_pensoft(from, x, list(), ...)
     arxiv_out <- plugin_get_arxiv(from, x, list(), path, ...)
     biorxiv_out <- plugin_get_biorxiv(from, x, list(), path, ...)
-    structure(list(plos = plos_out, entrez = entrez_out, bmc = bmc_out, elife = elife_out,
+    structure(list(plos = plos_out, entrez = entrez_out, elife = elife_out,
                    pensoft = pensoft_out, arxiv = arxiv_out, biorxiv = biorxiv_out), class = "ft_data")
   } else {
     get_unknown(x, path, ...)
@@ -200,12 +201,11 @@ ft_get.list <- function(x, from=NULL, plosopts=list(), bmcopts=list(), entrezopt
     from <- match.arg(from, c("plos", "entrez", "bmc", "elife", "pensoft", "arxiv", "biorxiv"))
     plos_out <- plugin_get_plos(from, x, plosopts, ...)
     entrez_out <- plugin_get_entrez(from, x, entrezopts, ...)
-    bmc_out <- plugin_get_bmc(from, x, bmcopts, ...)
     elife_out <- plugin_get_elife(from, x, elifeopts, ...)
     pensoft_out <- plugin_get_pensoft(from, x, ...)
     arxiv_out <- plugin_get_arxiv(from, x, path, ...)
     biorxiv_out <- plugin_get_biorxiv(from, x, path, ...)
-    structure(list(plos = plos_out, entrez = entrez_out, bmc = bmc_out, elife = elife_out,
+    structure(list(plos = plos_out, entrez = entrez_out, elife = elife_out,
                    pensoft = pensoft_out, arxiv = arxiv_out, biorxiv = biorxiv_out), class = "ft_data")
   } else {
     get_unknown(x, path, ...)
@@ -224,8 +224,7 @@ ft_get.ft <- function(x, from=NULL, plosopts=list(), bmcopts=list(), entrezopts=
   from <- names(x[sapply(x, function(v) !is.null(v$data))])
   plos_out <- plugin_get_plos(from, x$plos$data$id, plosopts, ...)
   entrez_out <- plugin_get_entrez(from, x$entrez$data$doi, entrezopts, ...)
-  bmc_out <- plugin_get_bmc(from, x$bmc$data, bmcopts, ...)
-  structure(list(plos = plos_out, entrez = entrez_out, bmc = bmc_out), class = "ft_data")
+  structure(list(plos = plos_out, entrez = entrez_out), class = "ft_data")
 }
 
 #' @export

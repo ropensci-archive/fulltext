@@ -7,6 +7,7 @@
 #' @param offset Record number to start at. Default: 1
 #' @param ... Further args passed on to \code{\link[httr]{GET}}
 #' @return A list of length 2
+#' @references \url{}
 #' @examples \dontrun{
 #' bmc_search(query='ecology')
 #' bmc_search('fire', limit=3)

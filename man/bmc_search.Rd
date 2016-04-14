@@ -38,5 +38,8 @@ library('httr')
 bmc_search('ecology', config=verbose())
 }
 }
+\references{
+\url{}
+}
 \keyword{internal}
 
