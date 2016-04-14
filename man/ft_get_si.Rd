@@ -157,6 +157,9 @@ mammals <- read.csv(ft_get_si("E092-201", "MCDB_communities.csv",
                                             "esa_data_archives"))
 epmc.fig <- ft_get_si("10.1371/journal.pone.0126524", "pone.0126524.g005.jpg", "epmc")
 #...note this 'SI' is not actually an SI, but rather an image from the paper.
+
+# curl options
+ft_get_si("E093-059", "myco_db.csv", "esa_archives")
 }
 }
 \author{
