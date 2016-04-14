@@ -32,7 +32,7 @@ returned from \code{\link{ft_search}}}
 
 \item{plosopts}{PLOS options. See \code{\link[rplos]{plos_fulltext}}}
 
-\item{bmcopts}{BMC options. See \code{\link{bmc_xml}}}
+\item{bmcopts}{BMC options. parameter DEPRECATED}
 
 \item{entrezopts}{Entrez options. See \code{\link[rentrez]{entrez_search}} and
 \code{\link{entrez_fetch}}}
@@ -92,6 +92,9 @@ the publisher, or else you'll get back no data.
  \item arXiv - The IDs passed are not actually DOIs, though they look similar.
  Thus, there's no way to not pass in the \code{from} parameter as we can't
  determine unambiguously that the IDs passed in are from arXiv.org.
+ \item bmc - is a hot mess since the Springer acquisition. It's been removed
+ as an officially supported plugin, some DOIs from them may still work when
+ passed in here, who knows, it's a mess.
 }
 }
 \examples{
@@ -103,7 +106,7 @@ ft_get('10.1371/journal.pone.0086169')
 ft_get('10.7717/peerj.228')
 ## eLife
 ft_get('10.7554/eLife.03032')
-## BMC
+## some BMC DOIs will work, but some may not, who knows
 ft_get(c('10.1186/2049-2618-2-7', '10.1186/2193-1801-3-7'))
 ## FrontiersIn
 res <- ft_get(c('10.3389/fphar.2014.00109', '10.3389/feart.2015.00009'))
@@ -154,13 +157,6 @@ ft_get(c('10.7554/eLife.04300', '10.7554/eLife.03032'), from='elife')
 ## search for elife papers via Entrez
 dois <- ft_search("elife[journal]", from = "entrez")
 ft_get(dois)
-
-# bmc
-ft_get('http://www.microbiomejournal.com/content/download/xml/2049-2618-2-7.xml', from='bmc')
-urls <- c('http://www.biomedcentral.com/content/download/xml/1471-2393-14-71.xml',
- 'http://www.springerplus.com/content/download/xml/2193-1801-3-7.xml',
- 'http://www.microbiomejournal.com/content/download/xml/2049-2618-2-7.xml')
-ft_get(urls, from='bmc')
 
 # Frontiers in Pharmacology (publisher: Frontiers)
 doi <- '10.3389/fphar.2014.00109'

@@ -6,7 +6,8 @@
 \usage{
 ft_search(query, from = "plos", limit = 10, plosopts = list(),
   bmcopts = list(), crossrefopts = list(), entrezopts = list(),
-  arxivopts = list(), biorxivopts = list(), euroopts = list(), ...)
+  arxivopts = list(), biorxivopts = list(), euroopts = list(),
+  bmc_key = NULL, ...)
 }
 \arguments{
 \item{query}{Query terms}
@@ -29,10 +30,14 @@ ft_search(query, from = "plos", limit = 10, plosopts = list(),
 
 \item{euroopts}{Euro PMC options. See \code{?eupmc_search}}
 
+\item{bmc_key}{(character) A API key for Springer/BMC. See Details. Required when 
+searching BMC - otherwise, not needed. Default: \code{NULL}}
+
 \item{...}{Further args passed on to \code{\link[httr]{GET}}. Not working right now...}
 }
 \value{
-An object of class ft, and objects of class ft_ind within each source
+An object of class \code{ft}, and objects of class \code{ft_ind} within 
+each source
 }
 \description{
 \code{ft_search} is a one stop shop for searching for articles across
@@ -43,6 +48,15 @@ via internal helper functions in this package. Many publishers content is search
 via Crossref and Entrez - of course this doesn't mean that we can get full text
 for those articles. In the output objects of this function, we attempt to help by
 indicating what license is used for articles.
+}
+\section{BMC Authentication}{
+
+BMC is integrated into Springer Publishers now, and that API requires an API key. 
+Get your key by signing up here \url{https://dev.springer.com/}, then you'll get
+a key. Pass the key to the parameter \code{bmc_key} or to a param named \code{key}
+in the param \code{bmcopts}. However, the best option is to save the key in your
+\code{.Renviron} file like \code{SPRINGER_KEY=yourkey}, or in your \code{.Rprofile}
+file like \code{springer_key="your key"}
 }
 \examples{
 \dontrun{

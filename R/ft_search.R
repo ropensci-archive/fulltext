@@ -25,9 +25,20 @@
 #' @param arxivopts arxiv options. See \code{?arxiv_search}
 #' @param biorxivopts biorxiv options. See \code{?bx_search}
 #' @param euroopts Euro PMC options. See \code{?eupmc_search}
+#' @param bmc_key (character) A API key for Springer/BMC. See Details. Required when 
+#' searching BMC - otherwise, not needed. Default: \code{NULL}
 #' @param ... Further args passed on to \code{\link[httr]{GET}}. Not working right now...
+#' 
+#' @section BMC Authentication:
+#' BMC is integrated into Springer Publishers now, and that API requires an API key. 
+#' Get your key by signing up here \url{https://dev.springer.com/}, then you'll get
+#' a key. Pass the key to the parameter \code{bmc_key} or to a param named \code{key}
+#' in the param \code{bmcopts}. However, the best option is to save the key in your
+#' \code{.Renviron} file like \code{SPRINGER_KEY=yourkey}, or in your \code{.Rprofile}
+#' file like \code{springer_key="your key"}
 #'
-#' @return An object of class ft, and objects of class ft_ind within each source
+#' @return An object of class \code{ft}, and objects of class \code{ft_ind} within 
+#' each source
 #'
 #' @examples \dontrun{
 #' # Plos
@@ -75,13 +86,14 @@ ft_search <- function(query, from = 'plos', limit = 10,
                       arxivopts = list(),
                       biorxivopts = list(),
                       euroopts = list(),
+                      bmc_key = NULL,
                       ...) {
 
   from <- match.arg(from, 
                     c("plos", "bmc", "crossref", "entrez", "arxiv", "biorxiv", "europmc"), 
                     several.ok = TRUE)
   plos_out <- plugin_plos(from, query, limit, plosopts)
-  bmc_out <- plugin_bmc(from, query, limit, bmcopts)
+  bmc_out <- plugin_bmc(from, query, limit, cbmc(bmcopts, list(key = bmc_key)))
   cr_out <- plugin_crossref(from, query, limit, crossrefopts)
   en_out <- plugin_entrez(from, query, limit, entrezopts)
   arx_out <- plugin_arxiv(from, query, limit, arxivopts)
@@ -138,4 +150,9 @@ null_len <- function(x) if (is.null(x)) 0 else x
 
 print_if <- function(x, n) {
   if (!is.null(x)) ft_trunc_mat(x, n)
+}
+
+cbmc <- function(x, y) {
+  if ("key" %in% names(x)) x$key <- NULL
+  as.list(c(x, y))
 }
