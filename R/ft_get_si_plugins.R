@@ -94,16 +94,26 @@ get_si_wiley <- function(doi, si, save.name=NA, dir=NA, cache=TRUE, timeout=10, 
     return(.download(url, dir, save.name, cache))
 }
 
+#' @importFrom jsonlite fromJSON
+#' @importFrom xml2 xml_text xml_find_one
 get_si_figshare <- function(doi, si, save.name=NA, dir=NA, cache=TRUE, ...){
     #Argument handling
-    if(!is.numeric(si))
-        stop("FigShare download requires numeric SI info")
+    if(!(is.numeric(si) | is.character(si)))
+        stop("FigShare download requires numeric or character SI info")
     dir <- .tmpdir(dir)
     save.name <- .save.name(doi, save.name, si)
     
     #Find, download, and return
-    url <- .grep.url(paste0("http://dx.doi.org/", doi), "(http://files\\.figshare\\.com/)[-a-zA-Z0-9\\_/\\.]*", si)
-    return(.download(url, dir, save.name, cache))
+    html <- read_html(content(GET(paste0("http://dx.doi.org/", doi)), "text"))
+    results <- fromJSON(xml_text(xml_find_one(html, "//script[@type=\"text/json\"]")))$article$files
+    if(is.numeric(si)){
+        if(si > nrow(results))
+            stop("SI number '", si, "' greater than number of detected SIs (", nrow(results), ")")
+        return(.download(results$downloadUrl[si], dir, save.name, cache))
+    }
+    if(!si %in% results$name)
+        stop("SI name not in files on FigShare (which are: ", paste(results$name,collapse=","), ")")
+    return(.download(results$downloadUrl[results$name==si], dir, save.name, cache))
 }
 
 get_si_esa_data_archives <- function(esa, si, save.name=NA, dir=NA, cache=TRUE, ...){
