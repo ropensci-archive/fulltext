@@ -36,4 +36,5 @@ Imports:
 Suggests:
     testthat,
     knitr
+Remotes: ropensci/rcrossref
 RoxygenNote: 5.0.1
