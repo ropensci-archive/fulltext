@@ -6,6 +6,7 @@ apt_packages:
 
 r_github_packages:
   - jimhester/covr
+  - ropensci/rcrossref
 
 after_success:
   - Rscript -e 'covr::codecov()'

@@ -25,7 +25,7 @@ Imports:
     xml2,
     jsonlite,
     rplos (>= 0.5.2),
-    rcrossref,
+    rcrossref (>= 0.5.4),
     aRxiv,
     rentrez,
     tm,
