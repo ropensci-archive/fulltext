@@ -22,7 +22,7 @@ __Get full text articles from (almost) anywhere__
 [![Build status](https://ci.appveyor.com/api/projects/status/y487h3ec5wc2s20m/branch/master?svg=true)](https://ci.appveyor.com/project/sckott/fulltext/branch/master)
 [![codecov.io](https://codecov.io/github/ropensci/fulltext/coverage.svg?branch=master)](https://codecov.io/github/ropensci/fulltext?branch=master)
 [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/fulltext)](https://github.com/metacran/cranlogs.app)
-[![cran version](http://www.r-pkg.org/badges/version/fulltext)](http://cran.rstudio.com/web/packages/fulltext)
+[![cran version](http://www.r-pkg.org/badges/version/fulltext)](https://cran.r-project.org/package=fulltext)
 
 rOpenSci has a number of R packages to get either full text, metadata, or both from various publishers. The goal of `fulltext` is to integrate these packages to create a single interface to many data sources.
 
@@ -37,7 +37,7 @@ rOpenSci has a number of R packages to get either full text, metadata, or both f
 
 Additional steps we hope to include in future versions:
 
-* Analysis enabled via the [tm](https://cran.rstudio.com/web/packages/tm/) package and friends, and via [Spark-R](https://amplab-extras.github.io/SparkR-pkg/) to handle especially large jobs
+* Analysis enabled via the [tm](https://cran.r-project.org/package=tm) package and friends, and via [Spark-R](https://amplab-extras.github.io/SparkR-pkg/) to handle especially large jobs
 * Visualization
 
 Data sources in `fulltext` include:
@@ -87,7 +87,7 @@ If you want to use `ft_extract()` function, it currently has two options for how
 
 * `xpdf` installation: See http://www.foolabs.com/xpdf/download.html for instructions on how to download and install `xpdf`. For OSX, you an also get `xpdf` via [Homebrew](https://github.com/homebrew/homebrew-x11/blob/master/xpdf.rb) with `brew install xpdf`. Apparently, you can optionally install Poppler, which is built on `xpdf`. Get it at http://poppler.freedesktop.org/
 * `ghostscript` installation: See http://www.ghostscript.com/doc/9.16/Install.htm  
-for instructions on how to download and install `ghostscript`. For OSX, you an also get `ghostscript` via [Homebrew](https://github.com/Homebrew/homebrew/blob/master/Library/Formula/ghostscript.rb) with `brew install gs`.
+for instructions on how to download and install `ghostscript`. For OSX, you an also get `ghostscript` via <https://github.com/Homebrew/homebrew-core/blob/master/Formula/ghostscript.rb> with `brew install gs`.
 
 ## Search
 

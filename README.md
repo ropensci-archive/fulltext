@@ -15,7 +15,7 @@ __Get full text articles from (almost) anywhere__
 [![Build status](https://ci.appveyor.com/api/projects/status/y487h3ec5wc2s20m/branch/master?svg=true)](https://ci.appveyor.com/project/sckott/fulltext/branch/master)
 [![codecov.io](https://codecov.io/github/ropensci/fulltext/coverage.svg?branch=master)](https://codecov.io/github/ropensci/fulltext?branch=master)
 [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/fulltext)](https://github.com/metacran/cranlogs.app)
-[![cran version](http://www.r-pkg.org/badges/version/fulltext)](http://cran.rstudio.com/web/packages/fulltext)
+[![cran version](http://www.r-pkg.org/badges/version/fulltext)](https://cran.r-project.org/package=fulltext)
 
 rOpenSci has a number of R packages to get either full text, metadata, or both from various publishers. The goal of `fulltext` is to integrate these packages to create a single interface to many data sources.
 
@@ -30,7 +30,7 @@ rOpenSci has a number of R packages to get either full text, metadata, or both f
 
 Additional steps we hope to include in future versions:
 
-* Analysis enabled via the [tm](https://cran.rstudio.com/web/packages/tm/) package and friends, and via [Spark-R](https://amplab-extras.github.io/SparkR-pkg/) to handle especially large jobs
+* Analysis enabled via the [tm](https://cran.r-project.org/package=tm) package and friends, and via [Spark-R](https://amplab-extras.github.io/SparkR-pkg/) to handle especially large jobs
 * Visualization
 
 Data sources in `fulltext` include:
@@ -83,7 +83,7 @@ If you want to use `ft_extract()` function, it currently has two options for how
 
 * `xpdf` installation: See http://www.foolabs.com/xpdf/download.html for instructions on how to download and install `xpdf`. For OSX, you an also get `xpdf` via [Homebrew](https://github.com/homebrew/homebrew-x11/blob/master/xpdf.rb) with `brew install xpdf`. Apparently, you can optionally install Poppler, which is built on `xpdf`. Get it at http://poppler.freedesktop.org/
 * `ghostscript` installation: See http://www.ghostscript.com/doc/9.16/Install.htm  
-for instructions on how to download and install `ghostscript`. For OSX, you an also get `ghostscript` via [Homebrew](https://github.com/Homebrew/homebrew/blob/master/Library/Formula/ghostscript.rb) with `brew install gs`.
+for instructions on how to download and install `ghostscript`. For OSX, you an also get `ghostscript` via <https://github.com/Homebrew/homebrew-core/blob/master/Formula/ghostscript.rb> with `brew install gs`.
 
 ## Search
 
@@ -95,7 +95,7 @@ ft_search(query = 'ecology', from = 'plos')
 #> Query:
 #>   [ecology] 
 #> Found:
-#>   [PLoS: 31172; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0] 
+#>   [PLoS: 33966; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0] 
 #> Returned:
 #>   [PLoS: 10; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0]
 ```
@@ -109,8 +109,8 @@ ft_search(query = 'ecology', from = 'plos')
 res1 <- ft_search(query = 'ecology', from = 'entrez', limit = 5)
 ft_links(res1)
 #> <fulltext links>
-#> [Found] 2 
-#> [IDs] ID_26787189 ID_26477897 ...
+#> [Found] 3 
+#> [IDs] ID_27439703 ID_27439360 ID_27434666 ...
 ```
 
 Or pass in DOIs directly
@@ -119,8 +119,8 @@ Or pass in DOIs directly
 ```r
 ft_links(res1$entrez$data$doi, from = "entrez")
 #> <fulltext links>
-#> [Found] 2 
-#> [IDs] ID_26787189 ID_26477897 ...
+#> [Found] 3 
+#> [IDs] ID_27439703 ID_27439360 ID_27434666 ...
 ```
 
 ## Get full text
@@ -143,36 +143,30 @@ ft_get('10.1371/journal.pone.0086169', from = 'plos')
 library("rplos")
 (dois <- searchplos(q = "*:*", fl = 'id',
    fq = list('doc_type:full',"article_type:\"research article\""), limit = 5)$data$id)
-#> [1] "10.1371/journal.pone.0068036" "10.1371/journal.pone.0064513"
-#> [3] "10.1371/journal.pone.0053239" "10.1371/journal.ppat.1000439"
-#> [5] "10.1371/journal.ppat.1000438"
+#> [1] "10.1371/journal.pone.0063114" "10.1371/journal.pone.0039479"
+#> [3] "10.1371/journal.pone.0003940" "10.1371/journal.pcbi.0030082"
+#> [5] "10.1371/journal.pone.0051856"
 x <- ft_get(dois, from = "plos")
 x %>% chunks("publisher") %>% tabularize()
 #> $plos
-#>                                               publisher
-#> 1         Public Library of Science\nSan Francisco, USA
-#> 2         Public Library of Science\nSan Francisco, USA
-#> 3 Public Library of Science\n        San Francisco, USA
-#> 4         Public Library of Science\nSan Francisco, USA
-#> 5         Public Library of Science\nSan Francisco, USA
+#>                                     publisher
+#> 1 Public Library of ScienceSan Francisco, USA
+#> 2 Public Library of ScienceSan Francisco, USA
+#> 3 Public Library of ScienceSan Francisco, USA
+#> 4 Public Library of ScienceSan Francisco, USA
+#> 5 Public Library of ScienceSan Francisco, USA
 ```
 
 
 ```r
 x %>% chunks(c("doi","publisher")) %>% tabularize()
 #> $plos
-#>                            doi
-#> 1 10.1371/journal.pone.0068036
-#> 2 10.1371/journal.pone.0064513
-#> 3 10.1371/journal.pone.0053239
-#> 4 10.1371/journal.ppat.1000439
-#> 5 10.1371/journal.ppat.1000438
-#>                                               publisher
-#> 1         Public Library of Science\nSan Francisco, USA
-#> 2         Public Library of Science\nSan Francisco, USA
-#> 3 Public Library of Science\n        San Francisco, USA
-#> 4         Public Library of Science\nSan Francisco, USA
-#> 5         Public Library of Science\nSan Francisco, USA
+#>                            doi                                   publisher
+#> 1 10.1371/journal.pone.0063114 Public Library of ScienceSan Francisco, USA
+#> 2 10.1371/journal.pone.0039479 Public Library of ScienceSan Francisco, USA
+#> 3 10.1371/journal.pone.0003940 Public Library of ScienceSan Francisco, USA
+#> 4 10.1371/journal.pcbi.0030082 Public Library of ScienceSan Francisco, USA
+#> 5 10.1371/journal.pone.0051856 Public Library of ScienceSan Francisco, USA
 ```
 
 Use `dplyr` to data munge
@@ -185,24 +179,18 @@ x %>%
  tabularize() %>%
  .$plos %>%
  select(-permissions.license)
-#>                            doi
-#> 1 10.1371/journal.pone.0068036
-#> 2 10.1371/journal.pone.0064513
-#> 3 10.1371/journal.pone.0053239
-#> 4 10.1371/journal.ppat.1000439
-#> 5 10.1371/journal.ppat.1000438
-#>                                               publisher
-#> 1         Public Library of Science\nSan Francisco, USA
-#> 2         Public Library of Science\nSan Francisco, USA
-#> 3 Public Library of Science\n        San Francisco, USA
-#> 4         Public Library of Science\nSan Francisco, USA
-#> 5         Public Library of Science\nSan Francisco, USA
+#>                            doi                                   publisher
+#> 1 10.1371/journal.pone.0063114 Public Library of ScienceSan Francisco, USA
+#> 2 10.1371/journal.pone.0039479 Public Library of ScienceSan Francisco, USA
+#> 3 10.1371/journal.pone.0003940 Public Library of ScienceSan Francisco, USA
+#> 4 10.1371/journal.pcbi.0030082 Public Library of ScienceSan Francisco, USA
+#> 5 10.1371/journal.pone.0051856 Public Library of ScienceSan Francisco, USA
 #>   permissions.copyright.year permissions.copyright.holder
-#> 1                       2013                  Singh et al
-#> 2                       2013                     Li et al
-#> 3                       2013                 Harper et al
-#> 4                       2009               Narvaiza et al
-#> 5                       2009                         <NA>
+#> 1                       2013              Schaafsma et al
+#> 2                       2012            Novoseltsev et al
+#> 3                       2008                Luchman et al
+#> 4                       2007                Puccini et al
+#> 5                       2012              Ambrosini et al
 #>   permissions.license_url
 #> 1                    <NA>
 #> 2                    <NA>
@@ -220,7 +208,7 @@ Grab supplementary materials for (re-)analysis of data
 
 ```r
 catching.crabs <- read.csv(ft_get_si("10.6084/m9.figshare.979288", 2))
-#> Error in .grep.text(html, regexp, which): SI number '2' greater than number of detected SIs (1)
+#> Error in ft_get_si.character("10.6084/m9.figshare.979288", 2): '...' used in an incorrect context
 head(catching.crabs)
 #> Error in head(catching.crabs): object 'catching.crabs' not found
 ```
@@ -250,7 +238,7 @@ Using `ghostscript`
 
 ```r
 (res_gs <- ft_extract(pdf, "gs"))
-#> <document>/Library/Frameworks/R.framework/Versions/3.2/Resources/library/fulltext/examples/example2.pdf
+#> <document>/Users/sacmac/github/ropensci/fulltext/inst/examples/example2.pdf
 #>   Title: pone.0107412 1..10
 #>   Producer: Acrobat Distiller 9.0.0 (Windows); modified using iText 5.0.3 (c) 1T3XT BVBA
 #>   Creation date: 2014-09-18
@@ -261,7 +249,7 @@ Using `xpdf`
 
 ```r
 (res_xpdf <- ft_extract(pdf, "xpdf"))
-#> <document>/Library/Frameworks/R.framework/Versions/3.2/Resources/library/fulltext/examples/example2.pdf
+#> <document>/Users/sacmac/github/ropensci/fulltext/inst/examples/example2.pdf
 #>   Pages: 10
 #>   Title: pone.0107412 1..10
 #>   Producer: Acrobat Distiller 9.0.0 (Windows); modified using iText 5.0.3 (c) 1T3XT BVBA
