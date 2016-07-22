@@ -1,3 +1,11 @@
+fulltext 0.1.8
+===============
+
+### MINOR IMPROVEMENTS
+
+* require newest `rcrossref` and `rplos` versions that use `dplyr::bind_rows()` instead
+of `dplyr::rbind_all()` to avoid errors/warnings (#89) (#90)
+
 fulltext 0.1.6
 ===============
 
