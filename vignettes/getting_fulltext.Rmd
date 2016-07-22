@@ -34,7 +34,7 @@ data from more than 1 data source.
 
 ```r
 names(res)
-#> [1] "plos"    "entrez"  "bmc"     "elife"   "pensoft" "arxiv"   "biorxiv"
+#> [1] "plos"    "entrez"  "elife"   "pensoft" "arxiv"   "biorxiv"
 ```
 
 Let's dig into the `plos` source object, which is another list, including metadata the 
@@ -51,14 +51,17 @@ res$plos
 #> 
 #> $data
 #> $data$backend
-#> [1] "rds"
-#> 
-#> $data$path
-#> [1] "~/.fulltext/2d2c936d084e563dc2784a63b78c8b95.rds"
-#> 
-#> $data$data
 #> NULL
 #> 
+#> $data$path
+#> [1] "session"
+#> 
+#> $data$data
+#> 1 full-text articles retrieved 
+#> Min. Length: 110717 - Max. Length: 110717 
+#> DOIs: 10.1371/journal.pone.0086169 ... 
+#> 
+#> NOTE: extract xml strings like output['<doi>']
 #> 
 #> $opts
 #> $opts$doi
@@ -71,13 +74,17 @@ Indexing to the `data` slot takes us to another list with metadata and the artic
 ```r
 res$plos$data
 #> $backend
-#> [1] "rds"
+#> NULL
 #> 
 #> $path
-#> [1] "~/.fulltext/2d2c936d084e563dc2784a63b78c8b95.rds"
+#> [1] "session"
 #> 
 #> $data
-#> NULL
+#> 1 full-text articles retrieved 
+#> Min. Length: 110717 - Max. Length: 110717 
+#> DOIs: 10.1371/journal.pone.0086169 ... 
+#> 
+#> NOTE: extract xml strings like output['<doi>']
 ```
 
 Going down one more index gets us the data object, using the DOI searched to get the text. 
@@ -102,16 +109,16 @@ You can get a bunch of DOIs first, e.g., from PLOS using the `rplos` package
 library("rplos")
 (dois <- searchplos(q = "*:*", fl = 'id',
    fq = list('doc_type:full', "article_type:\"research article\""), limit = 5)$data$id)
-#> [1] "10.1371/journal.pone.0068036" "10.1371/journal.pone.0064513"
-#> [3] "10.1371/journal.pone.0053239" "10.1371/journal.ppat.1000439"
-#> [5] "10.1371/journal.ppat.1000438"
+#> [1] "10.1371/journal.pone.0063114" "10.1371/journal.pone.0039479"
+#> [3] "10.1371/journal.pone.0003940" "10.1371/journal.pcbi.0030082"
+#> [5] "10.1371/journal.pone.0051856"
 ft_get(dois, from = 'plos')
 #> <fulltext text>
 #> [Docs] 5 
-#> [Source] rds - /Users/sacmac/.fulltext 
-#> [IDs] 10.1371/journal.pone.0068036 10.1371/journal.pone.0064513
-#>      10.1371/journal.pone.0053239 10.1371/journal.ppat.1000439
-#>      10.1371/journal.ppat.1000438 ...
+#> [Source] R session  
+#> [IDs] 10.1371/journal.pone.0063114 10.1371/journal.pone.0039479
+#>      10.1371/journal.pone.0003940 10.1371/journal.pcbi.0030082
+#>      10.1371/journal.pone.0051856 ...
 ```
 
 ## Different data sources
@@ -125,12 +132,12 @@ One article
 ft_get('10.7554/eLife.04300', from = 'elife')
 #> <fulltext text>
 #> [Docs] 1 
-#> [Source] rds - /Users/sacmac/.fulltext 
+#> [Source] R session  
 #> [IDs] 10.7554/eLife.04300 ...
 ft_get(c('10.7554/eLife.04300','10.7554/eLife.03032'), from = 'elife')
 #> <fulltext text>
 #> [Docs] 2 
-#> [Source] rds - /Users/sacmac/.fulltext 
+#> [Source] R session  
 #> [IDs] 10.7554/eLife.04300 10.7554/eLife.03032 ...
 ```
 
@@ -141,7 +148,7 @@ Many articles
 ft_get(c('10.7554/eLife.04300','10.7554/eLife.03032'), from = 'elife')
 #> <fulltext text>
 #> [Docs] 2 
-#> [Source] rds - /Users/sacmac/.fulltext 
+#> [Source] R session  
 #> [IDs] 10.7554/eLife.04300 10.7554/eLife.03032 ...
 ```
 
@@ -153,7 +160,7 @@ doi <- '10.3389/fphar.2014.00109'
 ft_get(doi, from = "entrez")
 #> <fulltext text>
 #> [Docs] 1 
-#> [Source] rds - /Users/sacmac/.fulltext 
+#> [Source] R session  
 #> [IDs] 10.3389/fphar.2014.00109 ...
 ```
 
@@ -167,15 +174,15 @@ For example, search entrez, get some DOIs, then fetch some articles
 #> Query:
 #>   [ecology] 
 #> Found:
-#>   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 97443; arxiv: 0; biorxiv: 0; Europe PMC: 0] 
+#>   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 109655; arxiv: 0; biorxiv: 0; Europe PMC: 0] 
 #> Returned:
 #>   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 10; arxiv: 0; biorxiv: 0; Europe PMC: 0]
 res$entrez$data$doi
-#>  [1] "10.1016/j.amepre.2015.08.019" "10.1186/s12859-016-0892-1"   
-#>  [3] "10.1186/s12983-016-0135-3"    "10.1093/beheco/arv150"       
-#>  [5] "10.1093/beheco/arv136"        "10.1093/fampra/cmv081"       
-#>  [7] "10.1093/aobpla/plv140"        "10.1590/1678-775720140261"   
-#>  [9] "10.7717/peerj.1569"           "10.7717/peerj.1555"
+#>  [1] "10.1109/ICASSP.2016.7472887"   NA                             
+#>  [3] "10.1186/s12936-016-1386-3"     "10.1186/s13071-016-1688-x"    
+#>  [5] "10.7554/eLife.16415"           "10.1155/2016/6018686"         
+#>  [7] "10.1155/2016/3654093"          "10.1080/20477724.2016.1180775"
+#>  [9] "10.3389/fimmu.2016.00253"      "10.3389/fmicb.2016.01026"
 ```
 
 Get articles
@@ -183,11 +190,9 @@ Get articles
 
 ```r
 ft_get(res$entrez$data$doi[1:3], from = 'entrez')
-#> <fulltext text>
-#> [Docs] 3 
-#> [Source] rds - /Users/sacmac/.fulltext 
-#> [IDs] 10.1016/j.amepre.2015.08.019 10.1186/s12859-016-0892-1
-#>      10.1186/s12983-016-0135-3 ...
+#> Error: These are probably not DOIs:
+#> 
+#> NA
 ```
 
 ## Caching

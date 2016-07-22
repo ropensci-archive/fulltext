@@ -22,7 +22,7 @@ Copernicus | [Y][copp] | [Y][copx] ^[1] | N |... |
 De Gruyter | [Y][degrutp] | N | N |... |
 Dovepress | [Y][dovep] | N | N |... |
 eLife | [Y][ep] | [Y][ex] | N |... |
-FrontiersIn | [Y][fp] | [Y][fx] ^[1] | Y | ReadCube in browser |
+FrontiersIn | Y | Y ^[1] | Y | ReadCube in browser |
 Hindawi | [Y][hp] | [Y][hx] | [Y][he] | Don't show XML link on page  |
 Karger | [Y][kp] | [Y][kx] | N |... |
 MDPI | [Y][mdpip] | [Y][mdpix] | N |... |
@@ -45,7 +45,6 @@ least for their open access journals.
 
 [plp]: http://www.plosone.org/article/fetchObject.action?uri=info%3Adoi%2F10.1371%2Fjournal.pone.0107510&representation=PDF
 [peerjp]: https://peerj.com/articles/1142.pdf
-[fp]: http://journal.frontiersin.org/Journal/10.3389/fnagi.2014.00336/pdf
 [pep]: http://zookeys.pensoft.net/lib/ajax_srv/article_elements_srv.php?action=download_pdf&item_id=4351
 [ep]: http://elifesciences.org/content/elife/2/e00471.full.pdf
 [bp]: http://www.gigasciencejournal.com/content/pdf/2047-217X-3-27.pdf
@@ -69,7 +68,6 @@ least for their open access journals.
 
 [plx]: http://www.plosone.org/article/fetchObjectAttachment.action?uri=info%3Adoi%2F10.1371%2Fjournal.pone.0107510&representation=XML
 [peerjx]: https://peerj.com/articles/1142.xml
-[fx]: http://journal.frontiersin.org/Journal/10.3389/fnagi.2014.00336/xml/nlm
 [pex]: http://zookeys.pensoft.net/lib/ajax_srv/article_elements_srv.php?action=download_xml&item_id=4351
 [ex]: http://elifesciences.org/content/3/e04165.source.xml
 [bx]: http://www.gigasciencejournal.com/content/download/xml/2047-217X-3-27.xml

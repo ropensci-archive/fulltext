@@ -34,7 +34,7 @@ Search for the term _ecology_ in PLOS journals.
 #> Query:
 #>   [ecology] 
 #> Found:
-#>   [PLoS: 31172; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0] 
+#>   [PLoS: 33966; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0] 
 #> Returned:
 #>   [PLoS: 10; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0]
 ```
@@ -45,19 +45,19 @@ Each publisher/search-engine has a slot with metadata and data
 ```r
 res1$plos
 #> Query: [ecology] 
-#> Records found, returned: [31172, 10] 
+#> Records found, returned: [33966, 10] 
 #> License: [CC-BY] 
 #>                                                         id
 #> 1                             10.1371/journal.pone.0059813
 #> 2                             10.1371/journal.pone.0001248
 #> 3  10.1371/annotation/69333ae7-757a-4651-831c-f28c5eb02120
 #> 4                             10.1371/journal.pone.0080763
-#> 5                             10.1371/journal.pone.0102437
-#> 6                             10.1371/journal.pone.0017342
-#> 7                             10.1371/journal.pone.0140306
-#> 8                             10.1371/journal.pone.0091497
+#> 5                             10.1371/journal.pone.0155019
+#> 6                             10.1371/journal.pone.0102437
+#> 7                             10.1371/journal.pone.0017342
+#> 8                             10.1371/journal.pone.0140306
 #> 9                             10.1371/journal.pone.0092931
-#> 10 10.1371/annotation/28ac6052-4f87-4b88-a817-0cd5743e83d6
+#> 10                            10.1371/journal.pone.0091497
 ```
 
 ## Get full text
@@ -68,12 +68,13 @@ Using the results from `ft_search()` we can grab full text of some articles
 ```r
 (out <- ft_get(res1))
 #> <fulltext text>
-#> [Docs] 8 
-#> [Source] R session  
+#> [Docs] 9 
+#> [Source] rds - /Users/sacmac/.fulltext 
 #> [IDs] 10.1371/journal.pone.0059813 10.1371/journal.pone.0001248
-#>      10.1371/journal.pone.0080763 10.1371/journal.pone.0102437
-#>      10.1371/journal.pone.0017342 10.1371/journal.pone.0140306
-#>      10.1371/journal.pone.0091497 10.1371/journal.pone.0092931 ...
+#>      10.1371/journal.pone.0080763 10.1371/journal.pone.0155019
+#>      10.1371/journal.pone.0102437 10.1371/journal.pone.0017342
+#>      10.1371/journal.pone.0140306 10.1371/journal.pone.0092931
+#>      10.1371/journal.pone.0091497 ...
 ```
 
 Dig in to the PLOS data
@@ -82,37 +83,33 @@ Dig in to the PLOS data
 ```r
 out$plos
 #> $found
-#> [1] 8
+#> [1] 9
 #> 
 #> $dois
 #> [1] "10.1371/journal.pone.0059813" "10.1371/journal.pone.0001248"
-#> [3] "10.1371/journal.pone.0080763" "10.1371/journal.pone.0102437"
-#> [5] "10.1371/journal.pone.0017342" "10.1371/journal.pone.0140306"
-#> [7] "10.1371/journal.pone.0091497" "10.1371/journal.pone.0092931"
+#> [3] "10.1371/journal.pone.0080763" "10.1371/journal.pone.0155019"
+#> [5] "10.1371/journal.pone.0102437" "10.1371/journal.pone.0017342"
+#> [7] "10.1371/journal.pone.0140306" "10.1371/journal.pone.0092931"
+#> [9] "10.1371/journal.pone.0091497"
 #> 
 #> $data
 #> $data$backend
-#> NULL
+#> [1] "rds"
 #> 
 #> $data$path
-#> [1] "session"
+#> [1] "~/.fulltext/f1ede8ef2055d6ee3e8d2fb4f77021bc.rds"
 #> 
 #> $data$data
-#> 8 full-text articles retrieved 
-#> Min. Length: 3828 - Max. Length: 98949 
-#> DOIs: 10.1371/journal.pone.0059813 10.1371/journal.pone.0001248
-#>   10.1371/journal.pone.0080763 10.1371/journal.pone.0102437
-#>   10.1371/journal.pone.0017342 10.1371/journal.pone.0140306
-#>   10.1371/journal.pone.0091497 10.1371/journal.pone.0092931 ... 
+#> NULL
 #> 
-#> NOTE: extract xml strings like output['<doi>']
 #> 
 #> $opts
 #> $opts$doi
 #> [1] "10.1371/journal.pone.0059813" "10.1371/journal.pone.0001248"
-#> [3] "10.1371/journal.pone.0080763" "10.1371/journal.pone.0102437"
-#> [5] "10.1371/journal.pone.0017342" "10.1371/journal.pone.0140306"
-#> [7] "10.1371/journal.pone.0091497" "10.1371/journal.pone.0092931"
+#> [3] "10.1371/journal.pone.0080763" "10.1371/journal.pone.0155019"
+#> [5] "10.1371/journal.pone.0102437" "10.1371/journal.pone.0017342"
+#> [7] "10.1371/journal.pone.0140306" "10.1371/journal.pone.0092931"
+#> [9] "10.1371/journal.pone.0091497"
 ```
 
 Dig in further to get to one of the articles in XML format
@@ -121,11 +118,7 @@ Dig in further to get to one of the articles in XML format
 ```r
 library("xml2")
 xml2::read_xml(out$plos$data$data$`10.1371/journal.pone.0059813`)
-#> {xml_document}
-#> <article>
-#> [1] <front>\n<journal-meta>\n<journal-id journal-id-type="nlm-ta">PLoS O ...
-#> [2] <body>\n  <sec id="s1">\n<title>Introduction</title>\n<p>Ecologists  ...
-#> [3] <back>\n<ack>\n<p>Curtis Flather, Mark Burgman, Leon Blaustein, Yaac ...
+#> Error in UseMethod("read_xml"): no applicable method for 'read_xml' applied to an object of class "NULL"
 ```
 
 ## Extract text from pdfs
@@ -138,7 +131,7 @@ You can extract from any pdf from a file path, like:
 ```r
 path <- system.file("examples", "example1.pdf", package = "fulltext")
 ft_extract(path)
-#> <document>/Library/Frameworks/R.framework/Versions/3.2/Resources/library/fulltext/examples/example1.pdf
+#> <document>/Users/sacmac/github/ropensci/fulltext/inst/examples/example1.pdf
 #>   Pages: 18
 #>   Title: Suffering and mental health among older people living in nursing homes---a mixed-methods study
 #>   Producer: pdfTeX-1.40.10
@@ -198,12 +191,13 @@ Here, we'll search for some PLOS articles, then get their full text, then extrac
 res <- ft_search(query = "ecology", from = "plos")
 (x <- ft_get(res))
 #> <fulltext text>
-#> [Docs] 8 
-#> [Source] R session  
+#> [Docs] 9 
+#> [Source] rds - /Users/sacmac/.fulltext 
 #> [IDs] 10.1371/journal.pone.0059813 10.1371/journal.pone.0001248
-#>      10.1371/journal.pone.0080763 10.1371/journal.pone.0102437
-#>      10.1371/journal.pone.0017342 10.1371/journal.pone.0140306
-#>      10.1371/journal.pone.0091497 10.1371/journal.pone.0092931 ...
+#>      10.1371/journal.pone.0080763 10.1371/journal.pone.0155019
+#>      10.1371/journal.pone.0102437 10.1371/journal.pone.0017342
+#>      10.1371/journal.pone.0140306 10.1371/journal.pone.0092931
+#>      10.1371/journal.pone.0091497 ...
 ```
 
 Extract DOIs
@@ -212,44 +206,7 @@ Extract DOIs
 ```r
 x %>% chunks("doi")
 #> $plos
-#> $plos$`10.1371/journal.pone.0059813`
-#> $plos$`10.1371/journal.pone.0059813`$doi
-#> [1] "10.1371/journal.pone.0059813"
-#> 
-#> 
-#> $plos$`10.1371/journal.pone.0001248`
-#> $plos$`10.1371/journal.pone.0001248`$doi
-#> [1] "10.1371/journal.pone.0001248"
-#> 
-#> 
-#> $plos$`10.1371/journal.pone.0080763`
-#> $plos$`10.1371/journal.pone.0080763`$doi
-#> [1] "10.1371/journal.pone.0080763"
-#> 
-#> 
-#> $plos$`10.1371/journal.pone.0102437`
-#> $plos$`10.1371/journal.pone.0102437`$doi
-#> [1] "10.1371/journal.pone.0102437"
-#> 
-#> 
-#> $plos$`10.1371/journal.pone.0017342`
-#> $plos$`10.1371/journal.pone.0017342`$doi
-#> [1] "10.1371/journal.pone.0017342"
-#> 
-#> 
-#> $plos$`10.1371/journal.pone.0140306`
-#> $plos$`10.1371/journal.pone.0140306`$doi
-#> [1] "10.1371/journal.pone.0140306"
-#> 
-#> 
-#> $plos$`10.1371/journal.pone.0091497`
-#> $plos$`10.1371/journal.pone.0091497`$doi
-#> [1] "10.1371/journal.pone.0091497"
-#> 
-#> 
-#> $plos$`10.1371/journal.pone.0092931`
-#> $plos$`10.1371/journal.pone.0092931`$doi
-#> [1] "10.1371/journal.pone.0092931"
+#> list()
 ```
 
 Extract DOIs and categories
@@ -258,109 +215,7 @@ Extract DOIs and categories
 ```r
 x %>% chunks(c("doi","categories"))
 #> $plos
-#> $plos$`10.1371/journal.pone.0059813`
-#> $plos$`10.1371/journal.pone.0059813`$doi
-#> [1] "10.1371/journal.pone.0059813"
-#> 
-#> $plos$`10.1371/journal.pone.0059813`$categories
-#>  [1] "Research Article"                 "Biology"                         
-#>  [3] "Ecology"                          "Community ecology"               
-#>  [5] "Species interactions"             "Science policy"                  
-#>  [7] "Research assessment"              "Research monitoring"             
-#>  [9] "Research funding"                 "Government funding of science"   
-#> [11] "Research laboratories"            "Science policy and economics"    
-#> [13] "Science and technology workforce" "Careers in research"             
-#> [15] "Social and behavioral sciences"   "Sociology"                       
-#> [17] "Sociology of knowledge"          
-#> 
-#> 
-#> $plos$`10.1371/journal.pone.0001248`
-#> $plos$`10.1371/journal.pone.0001248`$doi
-#> [1] "10.1371/journal.pone.0001248"
-#> 
-#> $plos$`10.1371/journal.pone.0001248`$categories
-#> [1] "Research Article"             "Ecology"                     
-#> [3] "Ecology/Ecosystem Ecology"    "Ecology/Evolutionary Ecology"
-#> [5] "Ecology/Theoretical Ecology" 
-#> 
-#> 
-#> $plos$`10.1371/journal.pone.0080763`
-#> $plos$`10.1371/journal.pone.0080763`$doi
-#> [1] "10.1371/journal.pone.0080763"
-#> 
-#> $plos$`10.1371/journal.pone.0080763`$categories
-#>  [1] "Research Article"     "Biology"              "Ecology"             
-#>  [4] "Autecology"           "Behavioral ecology"   "Community ecology"   
-#>  [7] "Evolutionary ecology" "Population ecology"   "Evolutionary biology"
-#> [10] "Behavioral ecology"   "Evolutionary ecology" "Population biology"  
-#> [13] "Population ecology"  
-#> 
-#> 
-#> $plos$`10.1371/journal.pone.0102437`
-#> $plos$`10.1371/journal.pone.0102437`$doi
-#> [1] "10.1371/journal.pone.0102437"
-#> 
-#> $plos$`10.1371/journal.pone.0102437`$categories
-#>  [1] "Research Article"                  
-#>  [2] "Biology and life sciences"         
-#>  [3] "Biogeography"                      
-#>  [4] "Ecology"                           
-#>  [5] "Ecosystems"                        
-#>  [6] "Ecosystem engineering"             
-#>  [7] "Ecosystem functioning"             
-#>  [8] "Industrial ecology"                
-#>  [9] "Spatial and landscape ecology"     
-#> [10] "Urban ecology"                     
-#> [11] "Computer and information sciences" 
-#> [12] "Geoinformatics"                    
-#> [13] "Spatial analysis"                  
-#> [14] "Earth sciences"                    
-#> [15] "Geography"                         
-#> [16] "Human geography"                   
-#> [17] "Cultural geography"                
-#> [18] "Social geography"                  
-#> [19] "Ecology and environmental sciences"
-#> [20] "Conservation science"              
-#> [21] "Environmental protection"          
-#> [22] "Nature-society interactions"       
-#> 
-#> 
-#> $plos$`10.1371/journal.pone.0017342`
-#> $plos$`10.1371/journal.pone.0017342`$doi
-#> [1] "10.1371/journal.pone.0017342"
-#> 
-#> $plos$`10.1371/journal.pone.0017342`$categories
-#>  [1] "Research Article"     "Biology"              "Ecology"             
-#>  [4] "Community ecology"    "Community assembly"   "Community structure" 
-#>  [7] "Niche construction"   "Ecological metrics"   "Species diversity"   
-#> [10] "Species richness"     "Biodiversity"         "Biogeography"        
-#> [13] "Population ecology"   "Mathematics"          "Statistics"          
-#> [16] "Biostatistics"        "Statistical theories" "Ecology"             
-#> [19] "Mathematics"         
-#> 
-#> 
-#> $plos$`10.1371/journal.pone.0140306`
-#> $plos$`10.1371/journal.pone.0140306`$doi
-#> [1] "10.1371/journal.pone.0140306"
-#> 
-#> $plos$`10.1371/journal.pone.0140306`$categories
-#> [1] "Correction"
-#> 
-#> 
-#> $plos$`10.1371/journal.pone.0091497`
-#> $plos$`10.1371/journal.pone.0091497`$doi
-#> [1] "10.1371/journal.pone.0091497"
-#> 
-#> $plos$`10.1371/journal.pone.0091497`$categories
-#> [1] "Correction"
-#> 
-#> 
-#> $plos$`10.1371/journal.pone.0092931`
-#> $plos$`10.1371/journal.pone.0092931`$doi
-#> [1] "10.1371/journal.pone.0092931"
-#> 
-#> $plos$`10.1371/journal.pone.0092931`$categories
-#> [1] "Correction"
+#> list()
 ```
 
 `tabularize` attempts to help you put the data that comes out of `chunks()` in to a `data.frame`, that we all know and love. 
@@ -369,14 +224,6 @@ x %>% chunks(c("doi","categories"))
 ```r
 x %>% chunks(c("doi", "history")) %>% tabularize()
 #> $plos
-#>                            doi history.received history.accepted
-#> 1 10.1371/journal.pone.0059813       2012-09-16       2013-02-19
-#> 2 10.1371/journal.pone.0001248       2007-07-02       2007-11-06
-#> 3 10.1371/journal.pone.0080763       2013-08-15       2013-10-16
-#> 4 10.1371/journal.pone.0102437       2013-11-27       2014-06-19
-#> 5 10.1371/journal.pone.0017342       2010-08-24       2011-01-31
-#> 6 10.1371/journal.pone.0140306             <NA>             <NA>
-#> 7 10.1371/journal.pone.0091497             <NA>             <NA>
-#> 8 10.1371/journal.pone.0092931             <NA>             <NA>
+#> NULL
 ```
 
