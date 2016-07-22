@@ -69,7 +69,7 @@ Using the results from `ft_search()` we can grab full text of some articles
 (out <- ft_get(res1))
 #> <fulltext text>
 #> [Docs] 9 
-#> [Source] rds - /Users/sacmac/.fulltext 
+#> [Source] R session  
 #> [IDs] 10.1371/journal.pone.0059813 10.1371/journal.pone.0001248
 #>      10.1371/journal.pone.0080763 10.1371/journal.pone.0155019
 #>      10.1371/journal.pone.0102437 10.1371/journal.pone.0017342
@@ -94,14 +94,21 @@ out$plos
 #> 
 #> $data
 #> $data$backend
-#> [1] "rds"
-#> 
-#> $data$path
-#> [1] "~/.fulltext/f1ede8ef2055d6ee3e8d2fb4f77021bc.rds"
-#> 
-#> $data$data
 #> NULL
 #> 
+#> $data$path
+#> [1] "session"
+#> 
+#> $data$data
+#> 9 full-text articles retrieved 
+#> Min. Length: 3828 - Max. Length: 98949 
+#> DOIs: 10.1371/journal.pone.0059813 10.1371/journal.pone.0001248
+#>   10.1371/journal.pone.0080763 10.1371/journal.pone.0155019
+#>   10.1371/journal.pone.0102437 10.1371/journal.pone.0017342
+#>   10.1371/journal.pone.0140306 10.1371/journal.pone.0092931
+#>   10.1371/journal.pone.0091497 ... 
+#> 
+#> NOTE: extract xml strings like output['<doi>']
 #> 
 #> $opts
 #> $opts$doi
@@ -118,7 +125,11 @@ Dig in further to get to one of the articles in XML format
 ```r
 library("xml2")
 xml2::read_xml(out$plos$data$data$`10.1371/journal.pone.0059813`)
-#> Error in UseMethod("read_xml"): no applicable method for 'read_xml' applied to an object of class "NULL"
+#> {xml_document}
+#> <article article-type="research-article" dtd-version="3.0" lang="en" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:xlink="http://www.w3.org/1999/xlink">
+#> [1] <front>\n  <journal-meta>\n    <journal-id journal-id-type="nlm-ta"> ...
+#> [2] <body>\n  <sec id="s1">\n    <title>Introduction</title>\n    <p>Eco ...
+#> [3] <back>\n  <ack>\n    <p>Curtis Flather, Mark Burgman, Leon Blaustein ...
 ```
 
 ## Extract text from pdfs
@@ -192,7 +203,7 @@ res <- ft_search(query = "ecology", from = "plos")
 (x <- ft_get(res))
 #> <fulltext text>
 #> [Docs] 9 
-#> [Source] rds - /Users/sacmac/.fulltext 
+#> [Source] R session  
 #> [IDs] 10.1371/journal.pone.0059813 10.1371/journal.pone.0001248
 #>      10.1371/journal.pone.0080763 10.1371/journal.pone.0155019
 #>      10.1371/journal.pone.0102437 10.1371/journal.pone.0017342
@@ -206,7 +217,49 @@ Extract DOIs
 ```r
 x %>% chunks("doi")
 #> $plos
-#> list()
+#> $plos$`10.1371/journal.pone.0059813`
+#> $plos$`10.1371/journal.pone.0059813`$doi
+#> [1] "10.1371/journal.pone.0059813"
+#> 
+#> 
+#> $plos$`10.1371/journal.pone.0001248`
+#> $plos$`10.1371/journal.pone.0001248`$doi
+#> [1] "10.1371/journal.pone.0001248"
+#> 
+#> 
+#> $plos$`10.1371/journal.pone.0080763`
+#> $plos$`10.1371/journal.pone.0080763`$doi
+#> [1] "10.1371/journal.pone.0080763"
+#> 
+#> 
+#> $plos$`10.1371/journal.pone.0155019`
+#> $plos$`10.1371/journal.pone.0155019`$doi
+#> [1] "10.1371/journal.pone.0155019"
+#> 
+#> 
+#> $plos$`10.1371/journal.pone.0102437`
+#> $plos$`10.1371/journal.pone.0102437`$doi
+#> [1] "10.1371/journal.pone.0102437"
+#> 
+#> 
+#> $plos$`10.1371/journal.pone.0017342`
+#> $plos$`10.1371/journal.pone.0017342`$doi
+#> [1] "10.1371/journal.pone.0017342"
+#> 
+#> 
+#> $plos$`10.1371/journal.pone.0140306`
+#> $plos$`10.1371/journal.pone.0140306`$doi
+#> [1] "10.1371/journal.pone.0140306"
+#> 
+#> 
+#> $plos$`10.1371/journal.pone.0092931`
+#> $plos$`10.1371/journal.pone.0092931`$doi
+#> [1] "10.1371/journal.pone.0092931"
+#> 
+#> 
+#> $plos$`10.1371/journal.pone.0091497`
+#> $plos$`10.1371/journal.pone.0091497`$doi
+#> [1] "10.1371/journal.pone.0091497"
 ```
 
 Extract DOIs and categories
@@ -215,7 +268,159 @@ Extract DOIs and categories
 ```r
 x %>% chunks(c("doi","categories"))
 #> $plos
-#> list()
+#> $plos$`10.1371/journal.pone.0059813`
+#> $plos$`10.1371/journal.pone.0059813`$doi
+#> [1] "10.1371/journal.pone.0059813"
+#> 
+#> $plos$`10.1371/journal.pone.0059813`$categories
+#>  [1] "Research Article"                 "Biology"                         
+#>  [3] "Ecology"                          "Community ecology"               
+#>  [5] "Species interactions"             "Science policy"                  
+#>  [7] "Research assessment"              "Research monitoring"             
+#>  [9] "Research funding"                 "Government funding of science"   
+#> [11] "Research laboratories"            "Science policy and economics"    
+#> [13] "Science and technology workforce" "Careers in research"             
+#> [15] "Social and behavioral sciences"   "Sociology"                       
+#> [17] "Sociology of knowledge"          
+#> 
+#> 
+#> $plos$`10.1371/journal.pone.0001248`
+#> $plos$`10.1371/journal.pone.0001248`$doi
+#> [1] "10.1371/journal.pone.0001248"
+#> 
+#> $plos$`10.1371/journal.pone.0001248`$categories
+#> [1] "Research Article"             "Ecology"                     
+#> [3] "Ecology/Ecosystem Ecology"    "Ecology/Evolutionary Ecology"
+#> [5] "Ecology/Theoretical Ecology" 
+#> 
+#> 
+#> $plos$`10.1371/journal.pone.0080763`
+#> $plos$`10.1371/journal.pone.0080763`$doi
+#> [1] "10.1371/journal.pone.0080763"
+#> 
+#> $plos$`10.1371/journal.pone.0080763`$categories
+#>  [1] "Research Article"     "Biology"              "Ecology"             
+#>  [4] "Autecology"           "Behavioral ecology"   "Community ecology"   
+#>  [7] "Evolutionary ecology" "Population ecology"   "Evolutionary biology"
+#> [10] "Behavioral ecology"   "Evolutionary ecology" "Population biology"  
+#> [13] "Population ecology"  
+#> 
+#> 
+#> $plos$`10.1371/journal.pone.0155019`
+#> $plos$`10.1371/journal.pone.0155019`$doi
+#> [1] "10.1371/journal.pone.0155019"
+#> 
+#> $plos$`10.1371/journal.pone.0155019`$categories
+#>  [1] "Research Article"                  
+#>  [2] "Biology and life sciences"         
+#>  [3] "Behavior"                          
+#>  [4] "Recreation"                        
+#>  [5] "Biology and life sciences"         
+#>  [6] "Ecology"                           
+#>  [7] "Ecosystems"                        
+#>  [8] "Ecology and environmental sciences"
+#>  [9] "Ecology"                           
+#> [10] "Ecosystems"                        
+#> [11] "Ecology and environmental sciences"
+#> [12] "Conservation science"              
+#> [13] "Earth sciences"                    
+#> [14] "Geography"                         
+#> [15] "Human geography"                   
+#> [16] "Land use"                          
+#> [17] "Social sciences"                   
+#> [18] "Human geography"                   
+#> [19] "Land use"                          
+#> [20] "Biology and life sciences"         
+#> [21] "Ecology"                           
+#> [22] "Ecosystems"                        
+#> [23] "Ecosystem functioning"             
+#> [24] "Ecology and environmental sciences"
+#> [25] "Ecology"                           
+#> [26] "Ecosystems"                        
+#> [27] "Ecosystem functioning"             
+#> [28] "Biology and life sciences"         
+#> [29] "Ecology"                           
+#> [30] "Ecological metrics"                
+#> [31] "Productivity (ecology)"            
+#> [32] "Ecology and environmental sciences"
+#> [33] "Ecology"                           
+#> [34] "Ecological metrics"                
+#> [35] "Productivity (ecology)"            
+#> [36] "Biology and life sciences"         
+#> [37] "Ecology"                           
+#> [38] "Theoretical ecology"               
+#> [39] "Ecology and environmental sciences"
+#> [40] "Ecology"                           
+#> [41] "Theoretical ecology"               
+#> [42] "Social sciences"                   
+#> [43] "Economics"                         
+#> 
+#> 
+#> $plos$`10.1371/journal.pone.0102437`
+#> $plos$`10.1371/journal.pone.0102437`$doi
+#> [1] "10.1371/journal.pone.0102437"
+#> 
+#> $plos$`10.1371/journal.pone.0102437`$categories
+#>  [1] "Research Article"                  
+#>  [2] "Biology and life sciences"         
+#>  [3] "Biogeography"                      
+#>  [4] "Ecology"                           
+#>  [5] "Ecosystems"                        
+#>  [6] "Ecosystem engineering"             
+#>  [7] "Ecosystem functioning"             
+#>  [8] "Industrial ecology"                
+#>  [9] "Spatial and landscape ecology"     
+#> [10] "Urban ecology"                     
+#> [11] "Computer and information sciences" 
+#> [12] "Geoinformatics"                    
+#> [13] "Spatial analysis"                  
+#> [14] "Earth sciences"                    
+#> [15] "Geography"                         
+#> [16] "Human geography"                   
+#> [17] "Cultural geography"                
+#> [18] "Social geography"                  
+#> [19] "Ecology and environmental sciences"
+#> [20] "Conservation science"              
+#> [21] "Environmental protection"          
+#> [22] "Nature-society interactions"       
+#> 
+#> 
+#> $plos$`10.1371/journal.pone.0017342`
+#> $plos$`10.1371/journal.pone.0017342`$doi
+#> [1] "10.1371/journal.pone.0017342"
+#> 
+#> $plos$`10.1371/journal.pone.0017342`$categories
+#>  [1] "Research Article"     "Biology"              "Ecology"             
+#>  [4] "Community ecology"    "Community assembly"   "Community structure" 
+#>  [7] "Niche construction"   "Ecological metrics"   "Species diversity"   
+#> [10] "Species richness"     "Biodiversity"         "Biogeography"        
+#> [13] "Population ecology"   "Mathematics"          "Statistics"          
+#> [16] "Biostatistics"        "Statistical theories" "Ecology"             
+#> [19] "Mathematics"         
+#> 
+#> 
+#> $plos$`10.1371/journal.pone.0140306`
+#> $plos$`10.1371/journal.pone.0140306`$doi
+#> [1] "10.1371/journal.pone.0140306"
+#> 
+#> $plos$`10.1371/journal.pone.0140306`$categories
+#> [1] "Correction"
+#> 
+#> 
+#> $plos$`10.1371/journal.pone.0092931`
+#> $plos$`10.1371/journal.pone.0092931`$doi
+#> [1] "10.1371/journal.pone.0092931"
+#> 
+#> $plos$`10.1371/journal.pone.0092931`$categories
+#> [1] "Correction"
+#> 
+#> 
+#> $plos$`10.1371/journal.pone.0091497`
+#> $plos$`10.1371/journal.pone.0091497`$doi
+#> [1] "10.1371/journal.pone.0091497"
+#> 
+#> $plos$`10.1371/journal.pone.0091497`$categories
+#> [1] "Correction"
 ```
 
 `tabularize` attempts to help you put the data that comes out of `chunks()` in to a `data.frame`, that we all know and love. 
@@ -224,6 +429,15 @@ x %>% chunks(c("doi","categories"))
 ```r
 x %>% chunks(c("doi", "history")) %>% tabularize()
 #> $plos
-#> NULL
+#>                            doi history.received history.accepted
+#> 1 10.1371/journal.pone.0059813       2012-09-16       2013-02-19
+#> 2 10.1371/journal.pone.0001248       2007-07-02       2007-11-06
+#> 3 10.1371/journal.pone.0080763       2013-08-15       2013-10-16
+#> 4 10.1371/journal.pone.0155019       2015-09-22       2016-04-22
+#> 5 10.1371/journal.pone.0102437       2013-11-27       2014-06-19
+#> 6 10.1371/journal.pone.0017342       2010-08-24       2011-01-31
+#> 7 10.1371/journal.pone.0140306             <NA>             <NA>
+#> 8 10.1371/journal.pone.0092931             <NA>             <NA>
+#> 9 10.1371/journal.pone.0091497             <NA>             <NA>
 ```
 
