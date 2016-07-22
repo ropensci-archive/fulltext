@@ -327,8 +327,8 @@ get_tm_name <- function(x) {
 }
 
 get_publisher <- function(x) {
-  z <- tryCatch(cr_works(x)$data$member, warning = function(e) e)
-  if (is(z, "warning")) {
+  z <- cr_works(x)$data$member
+  if (length(z) == 0) {
     NULL
   } else {
     as.character(strextract(z, "[0-9]+"))

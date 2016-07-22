@@ -24,9 +24,7 @@ plugin_crossref <- function(sources, query, limit, opts){
     opts$query <- query
     opts$limit <- limit
     opts$filter <- c(has_license = TRUE)
-    # opts$filter <- c(`license.url`='http://creativecommons.org/licenses/by/3.0/deed.en_US')
-    out <- tryCatch(do.call(cr_works, opts), warning = function(w) w)
-    if (is(out, "simpleWarning")) stop(out$message, call. = FALSE)
+    out <- do.call(cr_works, opts)
     out$data <- names_lower(out$data)
     zz <- list(source = "crossref", found = out$meta$total_results, data = out$data, opts = opts, 
                license = list(type = "variable, see individual records"))
