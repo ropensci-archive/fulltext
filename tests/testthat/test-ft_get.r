@@ -23,13 +23,13 @@ test_that("ft_get basic functionality works ...", {
 
 test_that("ft_get works for all data providers", {
   skip_on_cran()
-  
+
   ## PeerJ
   bb <- ft_get('10.7717/peerj.228')
   ## eLife
   cc <- ft_get('10.7554/eLife.03032', from = "elife")
   ## BMC
-  dd <- ft_get('10.1186/2049-2618-2-7', from = "bmc")
+  #dd <- ft_get('10.1186/2049-2618-2-7', from = "bmc")
   ## FrontiersIn
   ee <- ft_get('10.3389/fphar.2014.00109')
   ## Hindawi - via Entrez
@@ -48,7 +48,7 @@ test_that("ft_get works for all data providers", {
   nn <- ft_get('10.1159/000369331')
   ## CogentOA Publisher - via Entrez
   oo <- ft_get('10.1080/23311916.2014.938430')
-  
+
   expect_is(bb, "ft_data")
   expect_is(cc, "ft_data")
   expect_is(dd, "ft_data")

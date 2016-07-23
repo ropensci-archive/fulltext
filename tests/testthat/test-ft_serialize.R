@@ -35,7 +35,7 @@ test_that("ft_serialize returns...", {
   expect_is(tolist, "ft_parsed")
   expect_is(tofile, "ft_parsed")
   expect_is(torcache, "ft_parsed")
-  
+
   expect_is(tojson$plos, "list")
   expect_is(tojson$plos$found, "integer")
   expect_is(tojson$plos$dois, "character")
@@ -44,19 +44,19 @@ test_that("ft_serialize returns...", {
   expect_is(tojson$plos$data$data, "plosft")
   expect_is(tojson$plos$data$data[[1]], "json")
 
-  expect_is(tojsonparsed, "list")
+  expect_is(tojsonparsed, "data.frame")
   expect_is(toxmlparsed, "xml_document")
   expect_is(tolistparsed, "list")
   expect_is(tofileloc, "character")
   expect_is(torcacheloc, "character")
-  
+
   expect_match(tofileloc, "fulltext_cache")
   expect_match(torcacheloc, "Rcache")
 })
 
 test_that("ft_serialize fails well", {
   skip_on_cran()
-  
+
   res <- ft_get('10.1371/journal.pone.0087376', from='plos')
 
   # bad path given
