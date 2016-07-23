@@ -7,7 +7,6 @@
 #' @param offset Record number to start at. Default: 1
 #' @param ... Further args passed on to \code{\link[httr]{GET}}
 #' @return A list of length 2
-#' @references \url{}
 #' @examples \dontrun{
 #' bmc_search(query='ecology')
 #' bmc_search('fire', limit=3)
@@ -35,11 +34,11 @@ bmc_search <- function(query, limit = 10, offset = 1, key = NULL, ...) {
 }
 
 check_key_bmc <- function(x) {
-  tmp <- if (is.null(x)) 
+  tmp <- if (is.null(x))
     Sys.getenv("SPRINGER_KEY", "")
   else x
   if (tmp == "") {
-    getOption("springer_key", stop("you need an API key for the Springer/BMC API", 
+    getOption("springer_key", stop("you need an API key for the Springer/BMC API",
                                         call. = FALSE))
   }
   else {

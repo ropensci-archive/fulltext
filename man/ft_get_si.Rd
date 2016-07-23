@@ -10,18 +10,18 @@
 ft_get_si(x, si, from = c("auto", "plos", "wiley", "science", "proceedings",
   "figshare", "esa_data_archives", "esa_archives", "biorxiv", "epmc"),
   save.name = NA, dir = NA, cache = TRUE, vol = NA, issue = NA,
-  list = FALSE, timeout = 10)
+  list = FALSE, timeout = 10, ...)
 
 \method{ft_get_si}{character}(x, si, from = c("auto", "plos", "wiley",
   "science", "proceedings", "figshare", "esa_data_archives", "esa_archives",
   "biorxiv", "epmc"), save.name = NA, dir = NA, cache = TRUE, vol = NA,
-  issue = NA, list = FALSE, timeout = 10)
+  issue = NA, list = FALSE, timeout = 10, ...)
 
 \method{ft_get_si}{ft_data}(x, si, from = NA, save.name = NA, dir = NA,
-  cache = TRUE, vol = NA, issue = NA, list = FALSE, timeout = 10)
+  cache = TRUE, vol = NA, issue = NA, list = FALSE, timeout = 10, ...)
 
 \method{ft_get_si}{ft}(x, si, from = NA, save.name = NA, dir = NA,
-  cache = TRUE, vol = NA, issue = NA, list = FALSE, timeout = 10)
+  cache = TRUE, vol = NA, issue = NA, list = FALSE, timeout = 10, ...)
 }
 \arguments{
 \item{x}{One of: vector of DOI(s) of article(s) (a
@@ -69,10 +69,12 @@ using EPMC (see notes)}
 
 \item{timeout}{how long to wait for successful download (default 10
 seconds)}
+
+\item{...}{Further args passed on to \code{\link[httr]{GET}}}
 }
 \description{
-Put a call to this function where you would put a file-path - everything 
-is cached by default, so you don't have to worry about multiple downloads 
+Put a call to this function where you would put a file-path - everything
+is cached by default, so you don't have to worry about multiple downloads
 in the same session.
 }
 \details{
