@@ -29,7 +29,7 @@ biorxiv_search <- function(query, limit = 10, ...) {
 bior_base <- function() "http://www.biorxiv.org/search"
 
 find_one_try <- function(html, x) {
-  res <- tryCatch(suppressWarnings(xml2::xml_find_one(html, sprintf("//meta[@name='%s']", x))), error = function(e) e)
+  res <- tryCatch(suppressWarnings(xml2::xml_find_first(html, sprintf("//meta[@name='%s']", x))), error = function(e) e)
   if (is(res, "error")) {
     NA
   } else {
@@ -47,7 +47,7 @@ find_all_try <- function(html, x) {
 }
 
 get_found <- function(x) {
-  tmp <- suppressWarnings(xml2::xml_find_one(x, '//div[@class="highwire-search-summary"]'))
+  tmp <- suppressWarnings(xml2::xml_find_first(x, '//div[@class="highwire-search-summary"]'))
   as.numeric(strextract(xml2::xml_text(tmp), "[0-9]+"))
 }
 

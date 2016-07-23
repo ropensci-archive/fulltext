@@ -45,7 +45,7 @@
 #     opts$raw <- TRUE
 #     out <- do.call(bmc_xml, opts)
 #     dois <- sapply(out, function(x) {
-#       xml2::xml_text(xml2::xml_find_one(xml2::read_xml(x), "//fm//bibl//pubid[@idtype='doi']"))
+#       xml2::xml_text(xml2::xml_find_first(xml2::read_xml(x), "//fm//bibl//pubid[@idtype='doi']"))
 #     })
 #     attr(out, "format") <- "xml"
 #     list(found = length(out), dois = dois, data = out, opts = opts)

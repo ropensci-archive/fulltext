@@ -257,17 +257,17 @@ publisher <- function(b, from){
 
 journal_meta <- function(b, from){
   switch(from,
-         elife = lapply(xml2::xml_children(xml2::xml_find_one(b, "//journal-meta")), xml_node_parse),
-         plos = lapply(xml2::xml_children(xml2::xml_find_one(b, "//journal-meta")), xml_node_parse),
-         entrez = lapply(xml2::xml_children(xml2::xml_find_one(b, "//journal-meta")), xml_node_parse)
+         elife = lapply(xml2::xml_children(xml2::xml_find_first(b, "//journal-meta")), xml_node_parse),
+         plos = lapply(xml2::xml_children(xml2::xml_find_first(b, "//journal-meta")), xml_node_parse),
+         entrez = lapply(xml2::xml_children(xml2::xml_find_first(b, "//journal-meta")), xml_node_parse)
   )
 }
 
 article_meta <- function(b, from){
   switch(from,
-         elife = lapply(xml2::xml_children(xml2::xml_find_one(b, "//article-meta")), xml_node_parse),
-         plos = lapply(xml2::xml_children(xml2::xml_find_one(b, "//article-meta")), xml_node_parse),
-         entrez = lapply(xml2::xml_children(xml2::xml_find_one(b, "//article-meta")), xml_node_parse)
+         elife = lapply(xml2::xml_children(xml2::xml_find_first(b, "//article-meta")), xml_node_parse),
+         plos = lapply(xml2::xml_children(xml2::xml_find_first(b, "//article-meta")), xml_node_parse),
+         entrez = lapply(xml2::xml_children(xml2::xml_find_first(b, "//article-meta")), xml_node_parse)
   )
 }
 
@@ -288,7 +288,7 @@ permissions <- function(b, from){
 }
 
 getperms <- function(v){
-  tmp <- sapply(xml2::xml_children(xml2::xml_find_one(v, "//permissions")), xml_node_parse)
+  tmp <- sapply(xml2::xml_children(xml2::xml_find_first(v, "//permissions")), xml_node_parse)
   tmp$license <- paste0(tmp$license[[1]], collapse = " ")
   lichref <- tryCatch(xml2::xml_attr(xml2::xml_find_all(v, "//permissions/license//ext-link"), "href"), error = function(e) e)
   tmp$license_url <- if (is(lichref, "simpleError") || length(lichref) == 0) NA else lichref
@@ -349,7 +349,7 @@ tabularize <- function(x){
 }
 
 f1txt <- function(x, xpath) {
-  vapply(xml2::xml_text(xml2::xml_find_one(x, xpath)), strtrim, "", USE.NAMES = FALSE)
+  vapply(xml2::xml_text(xml2::xml_find_first(x, xpath)), strtrim, "", USE.NAMES = FALSE)
 }
 
 falltxt <- function(x, xpath) {

@@ -112,21 +112,27 @@ ft_get_si.character <- function(x, si, from=c("auto","plos","wiley","science","p
     #...Do work
 
     #Setup output directory and filename
-    if(!is.na(dir)){
-        if(!file.exists(dir))
-            stop("'dir' must exist unless NA")
-    } else dir <- tempdir()
-    if(is.na(save.name)){
-        save.name <- paste(x,si, sep="_")
-        save.name <- gsub(.Platform$file.sep, "_", save.name, fixed=TRUE)
+    if (!is.na(dir)) {
+      if (!file.exists(dir)) {
+        stop("'dir' must exist unless NA", call. = FALSE)
+      }
+    } else {
+      dir <- tempdir()
+    }
+    
+    if (is.na(save.name)) {
+      save.name <- paste(x, si, sep = "_")
+      save.name <- gsub(.Platform$file.sep, "_", save.name, fixed = TRUE)
     }
 
     #Find publisher, download, and return
-    if(from == "auto")
-        from <- get_si_pub(x)
+    if (from == "auto") {
+      from <- get_si_pub(x)
+    }
     func <- get_si_func(from)
     return(func(x, si, save.name=save.name, cache=cache, vol=vol, issue=issue, list=list, timeout=timeout, ...))
 }
+
 #' @export
 #' @rdname ft_get_si
 ft_get_si.ft_data <- function(x, si, from=NA, save.name=NA, dir=NA, cache=TRUE,
@@ -139,6 +145,7 @@ ft_get_si.ft_data <- function(x, si, from=NA, save.name=NA, dir=NA, cache=TRUE,
     return(setNames(unlist(mapply(ft_get_si.character, x=x,si=si,from=from,save.name=save.name,
                                   dir=dir,cache=cache,vol=vol,issue=issue,list=list,timeout=timeout, ...)), x))
 }
+
 #' @export
 #' @rdname ft_get_si
 ft_get_si.ft <- function(x, si, from=NA, save.name=NA, dir=NA, cache=TRUE, vol=NA,

@@ -20,22 +20,26 @@
 }
 
 # Internal download function
-.download <- function(url, dir, save.name, cache=TRUE){
+.download <- function(url, dir, save.name, cache=TRUE, ...){
     destination <- file.path(dir, save.name)
     suffix <- .file.suffix(url, 4)
     
-    if(cache==TRUE & file.exists(destination)){
-        if(!is.na(suffix))
-            attr(destination, "suffix") <- suffix
-        return(destination)
+    if (cache && file.exists(destination)) {
+      if (!is.na(suffix)) {
+        attr(destination, "suffix") <- suffix
+      }
+      return(destination)
     }
     
-    result <- download.file(url, destination, quiet=TRUE)
-    if(result != 0)
-        stop("Error code", result, " downloading file; file may not exist")
+    #result <- download.file(url, destination, quiet=TRUE)
+    result <- GET(url, write_disk(destination, TRUE), ...)
+    if (result$status_code > 201) {
+      stop(result$status_code, ": downloading file; file may not exist", call. = FALSE)
+    }
     
-    if(!is.na(suffix))
-        attr(destination, "suffix") <- suffix
+    if (!is.na(suffix)) {
+      attr(destination, "suffix") <- suffix
+    }
     return(destination)
 }
 
