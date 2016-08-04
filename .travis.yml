@@ -1,12 +1,11 @@
 language: r
-sudo: required
+sudo: false
+cache: packages
 
-apt_packages:
-  - poppler-utils
-
-r_github_packages:
-  - jimhester/covr
-  - ropensci/rcrossref
+addons:
+  apt:
+    packages:
+      - poppler-utils
 
 after_success:
   - Rscript -e 'covr::codecov()'
