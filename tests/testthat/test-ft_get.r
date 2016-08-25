@@ -51,7 +51,7 @@ test_that("ft_get works for all data providers", {
 
   expect_is(bb, "ft_data")
   expect_is(cc, "ft_data")
-  expect_is(dd, "ft_data")
+  #expect_is(dd, "ft_data")
   expect_is(ee, "ft_data")
   expect_is(ff, "ft_data")
   expect_is(gg, "ft_data")
