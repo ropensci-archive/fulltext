@@ -24,7 +24,7 @@ Imports:
     magrittr,
     xml2 (>= 1.0.0),
     jsonlite,
-    rplos (>= 0.6.0),
+    rplos (>= 0.6.4),
     rcrossref (>= 0.5.4),
     aRxiv,
     rentrez,
@@ -37,4 +37,5 @@ Suggests:
     testthat,
     knitr,
     covr
+Remotes: ropensci/rplos
 RoxygenNote: 5.0.1
