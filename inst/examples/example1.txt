@@ -1,0 +1,1057 @@
+Suffering and mental health among older
+people living in nursing homes—a
+mixed-methods study
+Jorunn Drageset1,2 , Elin Dysvik3 , Birgitte Espehaug1 , Gerd Karin Natvig2
+and Bodil Furnes3
+1 Faculty of Health and Social Sciences, Bergen University College, Norway
+2 Department of Global Public Health and Primary Care, University of Bergen, Norway
+3 Department of Health Studies, Faculty of Social Sciences, University of Stavanger, Norway
+
+ABSTRACT
+
+Submitted 31 March 2015
+Accepted 2 July 2015
+Published 30 July 2015
+Corresponding author
+Jorunn Drageset,
+Jorunn.Drageset@hib.no
+Academic editor
+Lia Fernandes
+Additional Information and
+Declarations can be found on
+page 14
+DOI 10.7717/peerj.1120
+Copyright
+2015 Drageset et al.
+Distributed under
+Creative Commons CC-BY 4.0
+OPEN ACCESS
+
+Background. Knowledge about mixed-methods perspectives that examine anxiety,
+depression, social support, mental health and the phenomenon of suffering among
+cognitively intact NH residents is scarce. We aimed to explore suffering and mental
+health among cognitively intact NH residents.
+Methods. This study used a mixed-methods design to explore different aspects
+of the same phenomena of interest to gain a more comprehensive understanding.
+The qualitative core component comprised a qualitative interview from 18 nursing
+home residents (≥65 years) about experiences related to pain, grief and loss. The
+supplementary component comprised interview from the same respondents using
+the SF-36 Health Survey subscales, the Hospital Anxiety and Depression Scale and the
+Social Provisions Scale.
+Results. The individual descriptions reveal suffering caused by painful experiences
+during life. The quantitative results indicated that symptoms of anxiety and
+depression were related to mental health and symptoms of anxiety were related to
+bodily pain and emotional role limitations. Attachment and social integration were
+associated with vitality and social functioning.
+Discussion. To improve the situation, more attention should be paid to the residents’
+suffering related to anxiety, depression and psychosocial relations.
+Subjects Geriatrics, Nursing, Psychiatry and Psychology, Palliative Care
+Keywords Suffering, Mental health, Mix-methods, Nursing homes
+
+INTRODUCTION
+Nursing home (NH) residents without cognitive impairment comprise a minority of
+NH residents and often have somatic and/or other mental health conditions (Nygaard,
+Naik & Ruths, 2000; Linton & Lach, 2007; Selbaek et al., 2007). NH residents may also
+experience stressful events such as relational losses, loss of home and loss of spouse,
+relatives and friends. Such conditions may cause them to experience suffering (Morse,
+2001; Cassel, 2004; Ferrell & Coyle, 2008) and affect both mental and physical health (Travis
+et al., 2004; Garcia et al., 2005). Morse (2011) describes suffering as a basic emotional
+experience that follows illnesses that threaten one’s physical or psychosocial integration.
+
+How to cite this article Drageset et al. (2015), Suffering and mental health among older people living in nursing homes—a mixedmethods study. PeerJ 3:e1120; DOI 10.7717/peerj.1120
+
+Thus, suffering refers to human existence as a whole, whereas experiencing suffering
+can mean being unable to keep oneself together as a whole entity. Alleviating suffering
+implies lessening people’s sense of vulnerability (Rehnsfeldt & Eriksson, 2004). Studies
+from Canada (Daneault et al., 2004) and Finland (Kuuppelomaki & Lauri, 1998) found
+that people report suffering in three dimensions; physical, mental and social well-being.
+Physical suffering includes pain, mental suffering is mostly expressed as depression and
+social suffering is often caused by disease that results in isolation and withdrawal from
+social contact (Kuuppelomaki & Lauri, 1998).
+Depression is common among older people living in NHs (Smalbrugge et al.,
+2005a; Smalbrugge et al., 2006a; Drageset, Eide & Ranhoff, 2011; Drageset, Eide & Ranhoff,
+2013); the prevalence is 34–41%. Depression is often experienced together with anxiety,
+where anxiety tends to follow traumatic events and loss situations (Bland, 2012), such as
+loss of significant others but also functional abilities and loss caused by disease.
+Only a few studies of the associations between the experience of anxiety and depression
+and quality of life among older cognitively intact people in NHs have been published
+(Smalbrugge et al., 2006b; Rodriguez-Blazquez et al., 2012). In Spain, Rodriguez-Blazquez et
+al. (2012) found that depression, health status and the interaction of age and institutionalization were related to well-being. In a study in the Netherlands among NH residents,
+Smalbrugge et al. (2006b) studied the impact of depression and anxiety on well-being and
+found that depression and/or anxiety were associated with significantly worse psychosocial
+well-being.
+Another source of suffering may be social isolation, resulting from difficulty in
+maintaining social contact because of disabilities and loss of spouse and friends (Drageset,
+Kirkevold & Espehaug, 2010). For some NH residents, it means that they no longer have
+anyone close in their social network. The experience of suffering may be a reaction to the
+lack of someone close (Morse, 2011).
+Social support may alleviate the experience of suffering and, in turn, may affect mental
+and physical health. Social support involves qualitative aspects of human relationships,
+such as the content and the availability of relationships with significant others (Sarason,
+Sarason & Pierce, 1990). Social support is conceptualized in the literature from three
+dimensions (affect, affirmation and aid (Kahn, 1979)) to five dimensions (emotional
+support, esteem support, material support, instrumental support and active support
+(Cobb, 1979; Cohen, Lynn & Gottlieb, 2000)). Most authors include dimensions related
+to emotional support, confirmation support and practical support. Few relevant studies of
+social support and quality of life among mental intact NH residents have been conducted.
+In a quantitative study, Tseng & Wang (2001) found that social support from nursing aides
+and the frequency of interaction with family significantly predict the quality of life of
+NH residents. In a qualitative NH study in Norway, Bergland & Kirkevold (2005) found
+that residents reported positive peer relationships, and positive relationships with family
+were essential for thriving. A qualitative study in Canada (Welsh, Moore & Getzlaf, 2012)
+explored meaning in life for NH residents. Connectedness and engaging in “normal”
+activities emerged as enhancing meaning in life for the residents. A systematic qualitative
+
+Drageset et al. (2015), PeerJ, DOI 10.7717/peerj.1120
+
+2/18
+
+review of NH life in relation to residents’ quality of life reported connectedness with others
+as being essential for residents’ quality of life (Bradshaw, Playford & Riazi, 2012).
+We have recently found that NH residents reported symptoms of anxiety and depression
+(Drageset, Eide & Ranhoff, 2013), and some dimensions of social support (attachment,
+nurturance and reassurance of worth) have been shown to be important for health-related
+quality of life (Drageset et al., 2009a). Based on our recent findings and the present
+literature review, one may question that cognitively intact NH residents who report
+symptoms of anxiety and depression and a lack of social contact are particularly prone to
+reduced health-related quality of life (HRQOL) and the increased experience of suffering.
+Some studies have investigated the association between anxiety, depression, social
+support and HRQOL among cognitively intact NH residents (Kuuppelomaki & Lauri,
+1998; Tseng & Wang, 2001; Bergland & Kirkevold, 2005; Drageset et al., 2009a; Bradshaw,
+Playford & Riazi, 2012; Welsh, Moore & Getzlaf, 2012; Drageset, Eide & Ranhoff, 2013),
+but we found no relevant studies about mixed-methods perspectives that examine this
+association and the phenomenon of suffering. Better care and treatment for older people
+with no cognitive impairment living in NHs requires focusing on well-being at a holistic
+level. This means including emotional well-being and the availability of meaningful social
+relationships. Meeting this challenge requires extending the perspectives beyond what one
+specific research approach can give.
+
+AIM
+The aim of this study was to investigate suffering and mental health among cognitively
+intact NH residents more broadly by using a mixed-methods design. The specific research
+questions were as follows.
+• How do older people living in NHs experience their life situation?
+• What is the association between sociodemographic and illness variables and anxiety,
+depression and health-related quality of life for NH residents?
+• How can the quantitative findings extend findings from qualitative analysis for NH
+residents?
+
+METHODS
+Design and population
+Since we wanted to explore different aspects of the same phenomena, we used a qualitative
+mixed-methods design with concurrently components: qualitative and quantitative (Morse
+& Niehaus, 2009). The theoretical drive or the inductive direction of a research project
+guides the qualitative methodological core (Morse et al., 2006) and allows researchers
+to explore experiences qualitatively and to build a theoretical model of suffering during
+anxiety, depression and social support subdimensions and health-related quality of life.
+These methods differ from other approaches because the qualitative core component is
+guiding the study, which may stand alone, and the supplementary quantitative component
+is used to expand certain details of the findings to indicate the validity of the core findings.
+
+Drageset et al. (2015), PeerJ, DOI 10.7717/peerj.1120
+
+3/18
+
+The qualitative core component in the study comprised a qualitative interview about
+life experiences related to pain, grief and loss and psychosocial topics from 18 respondents.
+The supplementary component in the study comprised the same 18 respondents, in which
+we interviewed the participants face to face using the SF-36 Health Survey subdimensions
+bodily pain, vitality, social functioning, role–emotional and mental health; the Hospital
+Anxiety and Depression Scale (HADS); and the Social Provisions Scale (SPS). The
+supplementary component (findings from the quantitative analysis) enabled us to explore
+significant relationships and may inform the qualitative findings.
+This study used a simultaneous design (Fig. 1). Once we analyzed the qualitative core
+component and completed the supplementary components, we first described the findings
+on the core component. We then integrated the final descriptions from the quantitative
+components, and these constitute a results narrative on which the discussion is based
+(Fig. 1).
+This study is part of a study conducted in 2004–2005 (Drageset et al., 2009b), with
+follow-up until 2011. At the end of follow-up, 19 NH residents were still alive, and 18 were
+included based on the inclusion criteria: aged 65 years and older, cognitively intact, capable
+of carrying out a conversation and residing in the NH for at least 6 months. Cognitively
+intact was defined as having a Clinical Dementia Rating (CDR) ≤0.5 (Hughes et al.,
+1982). CDR was developed as a staging instrument for dementia and is scored as no (0),
+questionable (0.5), mild (1), moderate (2) and severe (3) dementia, and the overall level
+of dementia is derived by using a standard algorithm (Morris, 1993). Trained nurses who
+had observed the residents for at least 4 weeks assessed CDR and were instructed to base
+their CDR scoring on mental functioning and not to include physical frailty. The CDR has
+shown high interrater reliability for physicians and other health professionals (McCulla et
+al., 1989). Exclusion criteria were: lived shorter than 6 months in an NH, CDR score >0.5
+and those who had their general health status assessed by a doctor or nurse, who indicated
+that the residents could not converse with the researcher. A primary care nurse invited
+them to participate.
+
+Ethical approval
+The project involved a sample collected during 2010–2011. We obtained informed
+consent. The Western Norway Regional Committee for Medical and Health Research
+Ethics and the Norwegian Social Science Data Services approved the study (REK.Vest nr.
+62.03/2009/1550).
+
+Data collection
+Qualitative data
+We collected data through individual interviews. We developed a semistructured interview
+guide based on our previous research findings. We asked informants about mental health
+and physical health (including their experience of depression, anxiety, loss and pain). We
+performed interviews in the residents’ room, and they lasted 45–90 min. The interviewer
+(first author) conducted conversations in which participants were encouraged to describe
+their experience regarding the questions in the interview guide. The respondents’ answers
+
+Drageset et al. (2015), PeerJ, DOI 10.7717/peerj.1120
+
+4/18
+
+Figure 1 Schematic overview. The left pathway illustrates the core component of the project (qualitative
+data). The right pathway illustrates the supplemental components of the project (qualitative data). The
+point of interface is the position at which the core and supplemental components meet. The “results
+narrative” refers to the write-up of the core-component findings with the addition of the results of the
+supplemental components.
+
+to the questions also led to spontaneous follow-up questions from the interviewer.
+The 18 interviews were taped and transcribed verbatim. In all, this resulted in detailed
+descriptions.
+Quantitative data
+We obtained the quantitative data through face-to-face data collection. The 18 interviews
+took place in the respondent’s room or at another appropriate location in the NH. The
+principal investigator (JD) performed the quantitative interviews: read the questions to the
+participants, circled the indicated answer and recorded the demographic information. This
+was necessary, since many of the residents have problems holding a pen and have reduced
+vision.
+
+Drageset et al. (2015), PeerJ, DOI 10.7717/peerj.1120
+
+5/18
+
+Assessment instruments
+We collected sociodemographic variables such as age, sex, marital status, education level
+and comorbidity from patient records. We scored comorbidity using the Functional
+Comorbidity Index, a clinically based measure (Groll et al., 2005). This index includes
+18 diagnoses scored “yes = 1” and “no = 0.” A maximum score of 18 indicates the highest
+number of comorbid illnesses.
+We measured health-related quality of life using the SF-36 (Ware & Sherbourne,
+1992; Ware, 2005). The SF-36 comprises 36 questions along eight dimensions: physical
+functioning (10 items), general health (five items), mental health (five items), bodily
+pain (two items), role limitation related to physical problems (four items), role limitation
+related to emotional problems (three items), social functioning (two items) and vitality
+(four items). An additional item, reported health transition, notes changes in general
+health during the past year. The response scores for each dimension are added, and the
+total is converted to a score on a scale from 0 (poor health) to 100 (optimal health) (Ware,
+2005). In this study, we used the subdimensions bodily pain, vitality, social functioning,
+role–emotional and mental health. The SF-36 has been used in numerous studies in
+geriatrics and appears to be reliable: Cronbach’s alpha: 0.68–0.94 (Lyons et al., 1994;
+Berlowitz et al., 1995; Pit et al., 1996). It has also demonstrated good construct validity
+(Lyons et al., 1994) and convergent validity (Andresen et al., 1999).
+We used HADS (Zigmond & Snaith, 1983) to assess depression and anxiety symptoms.
+HADS is well validated (Bjelland et al., 2002). HADS has seven items for anxiety (HADS-A)
+and seven for depression (HADS-D). Each item is scored on a four-point scale from 0 (not
+present) to 3 (considerable). The maximum score is 21 on each subscale, and a higher score
+indicates a higher symptom load (Zigmond & Snaith, 1983). A score of 8–10 indicates
+possible cases of anxiety or depression, and a score ≥11 indicates cases of anxiety or
+depression that require further investigation and possibly treatment (Zigmond & Snaith,
+1983). HADS has been translated into Norwegian and has been found to be reliable and
+valid for older people (Stordal et al., 2001; Stordal et al., 2003) and reliable and valid among
+NH residents (Haugan & Drageset, 2014).
+We assessed social support using the revised SPS (Cutrona & Russell, 1987). The scale
+contains 24 items, four for each of the six social provisions worked out in detail by Weiss
+(1974). Russell et al. (1984) simplified the response format to a four-point rating scale:
+“strongly disagree,” “disagree,” “agree” and “strongly agree.” According to Cutrona &
+Russell (1987), Andersson & Stevens (1993) and Mancini & Blieszner (1992), four of the
+original six subscales were selected: “attachment” (emotional closeness from which one
+drives a sense of security); “social integration” (relationships in which the person shares
+concerns and common interests); “opportunities for nurturance” (being responsible for
+the care of others); and “reassurance of worth” (a sense of competence and esteem). High
+scores indicate high social provision. The SPS, with four subdimensions “attachment,”
+“social integration,” “nurturance” and “reassurance of worth,” has been used in studies of
+older people living in the community (Andersson & Stevens, 1993; Bondevik & Skogstad,
+
+Drageset et al. (2015), PeerJ, DOI 10.7717/peerj.1120
+
+6/18
+
+1996; Saevareid et al., 2010) and among NH residents (Bondevik & Skogstad, 1998;
+Drageset, 2002; Drageset et al., 2009b).
+
+Data analysis
+Qualitative data
+We analyzed the interview data by using elements of qualitative content analysis
+(Graneheim & Lundman, 2004; Kvale & Brinkmann, 2009). The analytical process occurred
+in six stages (see Table 3 for details): (1) transcribing the interview; (2) open independent
+reading of all material to gain an overall impression of the text; (3) identifying meaning
+units; (4) categorization; (5) abstracting two subthemes and a theme (Table 3); and (6)
+reflection and discussion.
+Quantitative data
+We used descriptive statistics for the demographic variables and the comorbidity variables.
+We applied nonparametric test statistics to test for distributional differences in SF-36
+subscales among groups defined by sex (Mann–Whitney U-test) and marital status
+(Kruskal–Wallis test). We calculated Spearman correlation coefficients to study associations between comorbidity, age, anxiety, depression, social support dimensions and SF-36
+subdimensions: bodily pain, social functioning, role–emotional, vitality and mental health.
+
+RESULTS
+Respondents’ characteristics
+Table 1 presents descriptive statistics for the demographic variables and the comorbidity
+variables. Of the 19 NH residents, 18 (95%) met the inclusion criteria; 1 (5%) declined to
+participate.
+Of the 18 respondents, 11 (62%) were women. The mean age was 84.8 years (SD 7.6).
+The mean number of comorbid illnesses was 1.9 (median 2.0, SD 1.3, range 0–5).
+
+Qualitative data
+During the interviews, the informants often strived to express their feelings verbally.
+Nevertheless, the qualitative data reveal many previous and current life experiences related
+to psychosocial aspects and suffering. Among these, the informants described several loss
+and traumatic experiences related to death (of parents, siblings, relatives and friends), war,
+starving and isolation. During the conversation, the individuals often return to stories
+from childhood and upbringing. According to the qualitative analysis, one main theme
+was lifelong suffering as a complex psychosocial entity, with two subthemes: “pain from
+experience in early life” and “painful experience in recent life” (Table 4).
+Such early-life experiences are often related to loss by death, instability and lack of
+hope in their upbringing. Several descriptions reflect this psychosocial complexity, and
+representative quotations are presented here to give the participants a voice:
+• “I have a lifelong grief caused by traumatic experiences from the war.” (P)
+• “I feel grief caused by difficult experiences during my childhood.” (Q)
+
+Drageset et al. (2015), PeerJ, DOI 10.7717/peerj.1120
+
+7/18
+
+Table 1 Characteristics of the respondents.
+n
+
+%
+
+18
+
+100
+
+7
+11
+
+38.9
+61.1
+
+3
+7
+8
+0
+
+16.7
+38.9
+44.4
+0
+
+11
+4
+3
+
+61.1
+22.2
+16.7
+
+8
+4
+4
+
+44.4
+33.3
+22.2
+
+17
+1
+
+94.1
+5.9
+
+Sex
+Male
+Female
+Age (years)
+65–74
+75–84
+85–94
+≥95
+Marital status
+Widowed
+Married or cohabiting
+Unmarried
+Education
+Lowest: primary school
+Middle: <3 years after primary school
+Highest: ≥3 years after primary school
+Illnessesa
+Yes
+No
+
+Notes.
+a
+Functional Comorbidity Index includes 18 diagnoses scored “yes = 1” and “no = 0.” A maximum score of 18 indicates
+the highest number of comorbid illnesses.
+
+• “Unstable upbringing and hopelessness have been painful.” (F)
+The interviewees strongly emphasized earlier painful life experiences. Loss and grief seem
+to be especially attached to these.
+Current life experiences are also related to loss by death, and lack of social relations, lack
+of courage to live and lack of hope are prominent. Many descriptions revealed resignation
+and hopelessness:
+• “I just sit here.” (O)
+• “I am in despair and lonely, but that’s life for us old people, and I cannot do anything
+about it.” (F)
+• “I feel like a prisoner and several times I wish that I did not exist. I have had enough!” “I
+live in a cemetery.” (Q)
+• “I am crying all day long.” (A)
+• “I lie in bed, feel totally isolated, and cannot take care of myself.” (F)
+• “Noise from other people all the time is quite stressful.” (D)
+The qualitative data reveal clear patterns and similarities in the descriptions. In their
+present life situation, loneliness, despair and depressive thoughts are prominent, and they
+express several attempts to endure their situation.
+
+Drageset et al. (2015), PeerJ, DOI 10.7717/peerj.1120
+
+8/18
+
+Table 2 Means and standard deviation (SD) for each of five subscales of SF-36 according to sociodemographic and comorbid illnesses, and correlation coefficient for anxiety, depression and social
+support dimensions (n = 18).
+
+All
+Sexa
+Women
+Men
+P*
+Age (years)b
+P*
+Marital statusc
+Widowed
+Married
+Unmarried
+P*
+Anxietyb
+P*
+Depressionb
+P*
+Attachmentb
+P*
+Social integrationb
+P*
+Reassurance of
+worthb
+P*
+Nurturanceb
+P*
+Grolls indexb,d
+P*
+
+Bodily pain
+
+Vitality
+
+Social
+functioning
+
+Role limitations,
+emotional
+
+Mental
+health
+
+64.1 (27.4)
+
+43.9 (12.7)
+
+81.2 (17.3)
+
+72.2 (36.6)
+
+68.4 (13.1)
+
+61.7 (28.2)
+61.7 (28.2)
+0.791
+−0.14
+(0.572)
+
+46.8 (11.9)
+40.0 (13.4)
+0.211
+0.125
+(0.684)
+
+78.4 (17.8)
+85.7 (16.8)
+0.425
+0.10
+(0.684)
+
+66.7 (42.2))
+80.9 (26.2)
+0.659
+0.08
+(0.745)
+
+66.2 (13–2)
+72.0 (13.1)
+0.425
+0.04
+(0.883)
+
+69.5 (29.4)
+61.2 (31.1)
+48.3 (6.4)
+0.71
+−0.56
+(0.018)
+−0.05
+(0.845)
+−0.145
+(0.566)
+0.391
+(0.109)
+−0.407
+
+45.0 (13.6)
+47.5 (8.7)
+35.0 (13.2)
+0.41
+−0.23
+(0.385)
+−0.23
+(0.157)
+0.562
+(0.015)
+0.014
+(0.957)
+0.334
+
+83.0 (16.7)
+81.2 (21.7)
+75.0 (21.7)
+0.83
+−0.34
+(0.178)
+−0.26
+(0.309)
+0.257
+(0.304)
+0.536
+(0.022)
+0.258
+
+69.7 (40.7)
+75.0 (38.5)
+77.8 (38.5)
+0.94
+−0.58
+(0.016)
+−0.16
+(0.535)
+−0.111
+(0.661)
+−0.108
+(0.670)
+−0.243
+
+68.0 (13.6)
+70.0 (16.5)
+68.0 (10.6)
+0.93
+−0.86
+(<0.001)
+−0.62
+(0.007)
+0.214
+(0.395)
+−0.146
+(0.564)
+0.005
+
+(0.094)
+0.430
+(0.075)
+−0.412
+(0.101)
+
+(0.175)
+0.035
+(0.889)
+−0.48
+(0.050)
+
+(0.301)
+0.030
+(0.907)
+−0.15
+(0.555)
+
+(0.331)
+−0.486
+(0.041)
+−0.40
+(0.108)
+
+(0.983)
+−0.125
+(0.622)
+−0.44
+(0.078)
+
+Notes.
+a
+Mann–Whitney U test.
+b Spearman correlation coefficient.
+c
+Kruskal–Wallis test.
+d Functional comorbidity index. A maximum score of 18 indicates the highest number of comorbid illnesses.
+* bold, statistical significance at 0.05.
+
+• “If you are unable to come into contact with others, you will feel the loneliness strongly
+and you also feel invisible.” (P)
+The current life experiences also contained several contradictory descriptions:
+• “[Life] is very sad, it is terrible, but I have nothing to complain about.” (J)
+• “. . . , I just have to accept.” (H)
+
+Drageset et al. (2015), PeerJ, DOI 10.7717/peerj.1120
+
+9/18
+
+Table 3 Stages of the qualitative analytical process.
+(1) Transcription
+(2) Open reading
+
+(3) Identifying meaning units
+(4) Categories
+
+(5) Forming themes
+
+(6) Reflection and discussion
+
+Data were transcribed and organized according to the
+interview guide
+Two co-authors carefully and independently read and
+discussed the interview text to obtain an overall impression
+of the participants’ experiences
+Patterns in the data were identified by dividing the text into
+meaning units
+Important nuances were discovered by searching for common
+and distinctive features as well as variation and agreement
+about suitable categories
+Two subthemes were formulated
+Thereafter, analytical reflection and abstraction were
+performed by searching for an overall theme
+Dialogue was searched for relevant theory to illuminate and
+deepen understanding of the findings
+
+Table 4 The qualitative content analysis.
+Categories
+
+Subtheme
+
+Theme
+
+Earlier life experiences
+Loss by death
+Instability
+Lack of hope
+Mental strain
+Traumatic events
+Present life experiences
+Loss by death
+Loss of health
+Lack of social relationships
+Lack of courage to live
+Lack of hope
+
+Painful experiences in earlier life
+
+Suffering as a lifelong complex psychosocial entity
+
+Painful experiences in recent life
+
+The individual stories consistently described existence as a state the informants have to
+endure and adapt to. In this process, several expressed that good relationships (staff and
+relatives) and mobility are very important. The relationships with health care providers are
+especially important.
+• “I do not always trust the health care workers, but they are okay.” (F)
+Or more explicitly stated: “We need health care workers who care for us.”
+
+Quantitative data
+In general, residents scored highest on role–emotional and social functioning and lowest
+on vitality (Table 2). Women reported lower, but not statistically significantly lower, scores
+than men on all subdimensions except for vitality and bodily pain.
+
+Drageset et al. (2015), PeerJ, DOI 10.7717/peerj.1120
+
+10/18
+
+The health-related quality of life subdimensions bodily pain (P = 0.02), role–emotional
+(P = 0.02) and mental health (P < 0.001) were negatively associated with anxiety.
+Increasing depression scores were negatively associated with mental health (P = 0.007).
+Attachment was positively associated with vitality (P = 0.02) and social integration with
+social functioning (P = 0.02). Nurturance was negatively associated with role–emotional
+(P = 0.04).
+Cronbach’s alpha for the SF-36 subscales ranged from 0.60 to 0.85, with role–emotional
+showing the highest values and vitality the lowest.
+
+RESULTS NARRATIVE
+The results narrative summarizes the core component findings, with the supplementary
+component adding certain information to specific areas (Morse & Niehaus, 2009). Both
+data sets showed that suffering is prominent and that anxiety and depression predict
+worse mental health. Findings from both the qualitative findings and quantitative data
+highlight social relationships as important for mental health and, conversely, lack of social
+relationships as a source of suffering. The qualitative data provided many descriptions
+of the life situation in an NH in which many difficult experiences throughout a long
+life are prominent. As such, the qualitative data provided detailed information about
+several psychosocial aspects and experienced suffering. Additional, the supplementary
+component, quantitative data, showed that emotional closeness and relationships with
+people who share concerns and interests is important.
+The combined findings call for several improvements in care among the residents, which
+more accurately reflects their concerns aimed at alleviating suffering.
+
+DISCUSSION
+This study among cognitively intact NH residents showed that the individual stories
+reveal that psychosocial aspects and the phenomenon of suffering are related to painful
+experiences during life. The quantitative data showed that symptoms of both anxiety and
+depression were related to mental health. The association between anxiety and depression
+and mental health may suggest that more symptoms of both anxiety and depression
+contribute to worse mental health. Other studies among NH residents (Smalbrugge et al.,
+2005b; Smalbrugge et al., 2006b; Rodriguez-Blazquez et al., 2012) reported associations
+between the presence of depression and/or anxiety symptoms and worse well-being.
+One explanation for our results could be that most of our respondents were widows or
+widowers, have multiple diagnoses and were dependent in the activities of daily living. All
+these circumstances may be experienced as losses, contribute to symptoms of depression
+(Bland, 2012) and influence mental health (Ferrell & Coyle, 2008) and the experience
+of suffering (Kuuppelomaki & Lauri, 1998; Ferrell & Coyle, 2008; Morse, 2011). The
+informants also clearly expressed the experience of suffering by telling stories containing
+both earlier and current life events. Morse (2011) emphasizes the significance of assisting
+the residents in moving from endurance to emotional release when coping with suffering.
+Interpersonal encounters seem to play an important role here to help the person who is
+
+Drageset et al. (2015), PeerJ, DOI 10.7717/peerj.1120
+
+11/18
+
+suffering in this process (Yalom, 2005), and nurses must maintain a culture that includes
+such basic elements of nursing.
+Symptoms of anxiety were related to the bodily pain subdimension of the health-related
+quality of life. This dimension of the SF-36 measures the intensity of bodily pain and
+the extent to which bodily pain interferes with normal activities (Ware, 2005). Among
+older NH residents, Smalbrugge et al. (2006b) found associations between anxiety and
+well-being. But in contrast to our study, the diagnosis of anxiety was reported and the study
+did not explicit focus on pain. Pain is a source of suffering (Cassel, 2004; Ferrell & Coyle,
+2008) and a primary source of physical suffering (Kuuppelomaki & Lauri, 1998).
+Our study indicated that higher levels of attachment and social integration are
+associated with higher levels of vitality and social functioning, or conversely, a lower level
+of attachment and social integration corresponds to lower levels of vitality and social
+functioning.
+The positive relationship between attachment and vitality suggests that the emotional
+content of the relationship with significant others is an important component of vitality.
+In addition, the stories from the residents underline the importance of social relationships
+and mobility as important aspects of this. Our extended findings are in accordance with
+other studies that report positive associations between social support and well-being
+(Tseng & Wang, 2001; Bergland & Kirkevold, 2005; Drageset et al., 2009b; RodriguezBlazquez et al., 2012). Weiss (1973) and Weiss (1974) emphasizes that significant others
+are spouses and very close friends who provide the feeling of intimacy, security and peace,
+and a lack of significant others contributes to experiencing negative feeling as emotional
+loneliness. Because of the respondents’ advanced age, disability and dependence, they are
+more likely to have difficulty in maintaining close social contact. Social and emotional
+support seems to be important in combating depression in the general population (Grav et
+al., 2012) and loneliness among NH residents (Drageset, Kirkevold & Espehaug, 2010).
+The relationship between opportunity for nurturance and emotional role limitations
+(whether emotional problems interfered with such social activities as visiting friends
+and relatives) suggests that providing more support for others would contribute to
+increasing role limitations. Weiss (1974) emphasizes that nurturance differs from the other
+provisions by enquiring whether older people themselves provide support. Responsibility
+for someone, usually children, gives meaning to an individual’s life in meeting obligations
+in various activities. One explanation for our results could be loss of the ability to give the
+necessary support: the relationship does not make sense to the extent that one wishes.
+The individuals detailed many stories that reveal existential experiences related to
+suffering. These findings clearly give nuances in a holistically way and with information
+from the results from the quantitative supplementary component the researcher is
+able to build synthesis of the qualitative findings to the quantitative results which is
+necessary to draw conclusion. This could also clarify clinical significance and contribute
+to more clinically meaningful approaches. Such extended findings represent a valuable
+contribution in planning individual care.
+
+Drageset et al. (2015), PeerJ, DOI 10.7717/peerj.1120
+
+12/18
+
+Methodological considerations
+There are quantitative studies examining anxiety and depression, social support and the
+quality of life, but this type of study has limitations. Suffering is a life phenomenon that
+provides deeper understanding and different types of knowledge. Integrating quantitative
+and qualitative results using mixed methods could therefore provide more meaningful
+findings than one method alone (Tashakkori & Creswell, 2007).
+Because we used a cross-sectional study design, we cannot firmly conclude on the
+direction of a possible causal effect or preclude that these associations are effects of other
+unmeasured determinants. However, the supplementary component can explain and
+contribute to deeper knowledge about psychosocial aspects and well-being so that this
+relationship appears more clearly. Further, because the study followed a cohort (n = 227,
+30 NHs) of frail cognitively intact NH residents from 2004–2005 to 2011, the sample size
+was small at the end of follow-up. Despite the small sample size and low statistical power,
+we found meaningful statistical associations that inform the qualitative findings.
+As discussed, the research problem is multifaceted and complex. The integrated
+research strategy offered by a mixed-methods design therefore enabled us to clarify
+different aspects of the phenomena (Richards & Morse, 2007). This tradition maintains
+that one method alone will not comprehensively answer our research questions. As
+such, both qualitative and quantitative methods are used to collect and analyze the data
+(Morse & Niehaus, 2009). In our study, the core component is qualitative data consist of
+details and important qualitative date about experiences related to suffering in NH. The
+supplementary component (the quantitative results), by clarifying the connection between
+anxiety and depression, informed and supported the core component (the qualitative
+data), as described by Morse et al. (2006). In this way, the mixed-methods design validated
+our findings while conforming to the rules inherent in each paradigm. Further, using a
+mixed-methods design with the use of a semistructured qualitative interview may increase
+the subjectivity of evaluation and create difficulty in replicating the study.
+Two of the authors have skills primarily in the quantitative core method, and two
+authors were primarily qualitative researchers. In addition, a statistician was responsible
+for the quantitative data analysis. In this way, the researchers represented the different
+and overlapping research fields necessary for using a mixed-methods design. In terms
+of validity, we believe that our different platforms and expertise represented a critical
+contribution in the continuous discussion about possible interpretations during the whole
+research process.
+
+CONCLUSION AND CLINICAL IMPLICATIONS
+The individual stories reveal that psychosocial aspects and the phenomenon of suffering
+are related to painful experiences during life. Symptoms of anxiety and depression were
+negatively associated with mental health, and symptoms of anxiety were associated with
+bodily pain. Attachment and social integration were associated with vitality and social
+functioning. As demonstrated, the supplementary component informed and supported
+the core component and contributes to extending knowledge about the study topic. To
+
+Drageset et al. (2015), PeerJ, DOI 10.7717/peerj.1120
+
+13/18
+
+improve the situation of residents, more attention should be paid to the residents’ suffering
+related to anxiety, depression and relationships. The challenge for health care providers is
+to grasp the individual experience of the patients and the meaning these experiences may
+have for them. This requires that health care personnel listen to each individual and help
+them to find their own strategies to live with the losses. By building on earlier successful
+strategies, patients can be helped to understand current suffering. Listening to the patients
+in this way requires time, patience and professional competence. A management structure
+that focuses on how to meet each resident’s needs individually, such as a care plan for each
+patient and a primary contact, is also essential. Further, it is also important that health
+care personnel help the individuals to participate in meaningful activities and interactions
+with peers, friends and family. Future studies are needed to corroborate or analyze more in
+depth the present results about suffering.
+
+ADDITIONAL INFORMATION AND DECLARATIONS
+Funding
+Bergen University College and the University of Bergen supported this research. The
+funders had no role in study design, data collection and analysis, decision to publish, or
+preparation of the manuscript.
+
+Grant Disclosures
+The following grant information was disclosed by the authors:
+Bergen University College.
+University of Bergen.
+
+Competing Interests
+The authors declare there are no competing interests.
+
+Author Contributions
+• Jorunn Drageset conceived and designed the experiments, performed the experiments,
+analyzed the data, contributed reagents/materials/analysis tools, wrote the paper,
+prepared figures and/or tables, reviewed drafts of the paper.
+• Elin Dysvik and Bodil Furnes conceived and designed the experiments, analyzed the
+data, contributed reagents/materials/analysis tools, wrote the paper, prepared figures
+and/or tables, reviewed drafts of the paper.
+• Birgitte Espehaug analyzed the data, contributed reagents/materials/analysis tools,
+wrote the paper, prepared figures and/or tables, reviewed drafts of the paper.
+• Gerd Karin Natvig conceived and designed the experiments, wrote the paper, prepared
+figures and/or tables, reviewed drafts of the paper.
+
+Human Ethics
+The following information was supplied relating to ethical approvals (i.e., approving body
+and any reference numbers):
+
+Drageset et al. (2015), PeerJ, DOI 10.7717/peerj.1120
+
+14/18
+
+The project involved a sample collected during 2009–2010. We obtained informed
+consent. The Western Norway Regional Committee for Medical and Health Research
+Ethics and the Norwegian Social Science Data Services approved the study (REK.Vest nr.
+62.03/2009/1550).
+
+Data Deposition
+The following information was supplied regarding the deposition of related data:
+According to the Norwegian ACT 2008-06-20 no. 44: Act on medical and health research
+(the Health Research Act) regulated in the paragraph 7 Duty of confidentiality and 13 Main
+rule on consent, we cannot make the raw data available.
+
+REFERENCES
+Andersson L, Stevens N. 1993. Associations between early experiences with parents and well-being
+in old age. Journal of Gerontology 48:109–116 DOI 10.1093/geronj/48.3.P109.
+Andresen EM, Gravitt GW, Aydelotte ME, Podgorski CA. 1999. Limitations of the SF-36 in a
+sample of nursing home residents. Age and Ageing 28:562–566 DOI 10.1093/ageing/28.6.562.
+Bergland A, Kirkevold M. 2005. Resident–caregiver relationships and thriving among nursing
+home residents. Research on Nursing and Health 28:365–375 DOI 10.1002/nur.20097.
+Berlowitz DR, Du W, Kazis L, Lewis S. 1995. Health-related quality of life of nursing home
+residents: differences in patient and provider perceptions. Journal of the American Geriatric
+Society 43:799–802 DOI 10.1111/j.1532-5415.1995.tb07055.x.
+Bjelland I, Dahl AA, Haug TT, Neckelmann D. 2002. The validity of the hospital anxiety and
+depression scale. An updated literature review. Journal of Psychosomal Research 52:69–77
+DOI 10.1016/S0022-3999(01)00296-3.
+Bland P. 2012. Tackling anxiety and depression in older people in primary care. Practitioner
+256:17–20.
+Bondevik M, Skogstad A. 1996. Loneliness among the oldest old, a comparison between residents
+living in nursing homes and residents living in the community. International Journal of Aging
+and Human Development 43:181–197 DOI 10.2190/9C14-NHUX-XQPL-GA5J.
+Bondevik M, Skogstad A. 1998. The oldest old, ADL, social network, and loneliness. Western
+Journal of Nursing Research 20:325–343 DOI 10.1177/019394599802000305.
+Bradshaw SA, Playford ED, Riazi A. 2012. Living well in care homes: a systematic review of
+qualitative studies. Age and Ageing 41:429–440 DOI 10.1093/ageing/afs069.
+Cassel JE. 2004. The nature of suffering and the goals of medicine. Oxford: Oxford University Press.
+Cobb S. 1979. Social support and health through the life course. In: Riley MW, ed. Aging from
+birth to death: interdisciplinary perspectives. Boulder: Westview Press, 93–106.
+Cohen S, Lynn U, Gottlieb B. 2000. Social support measurement and intervention: a guide for health
+and social scientists. Oxford: Oxford University Press.
+Cutrona CE, Russell DW. 1987. The provisions of social relationships and adaptation to
+stress. In: Jones WH, Perlman D, eds. Advances in personal relationships. A research annual I.
+Greenwich: JAI Press, 37–67.
+Daneault S, Lussier V, Mongeau S, Paille P, Hudon E, Dion D, Yelle L. 2004. The nature of
+suffering and its relief in the terminally ill: a qualitative study. Journal of Palliative Care 20:7–11.
+
+Drageset et al. (2015), PeerJ, DOI 10.7717/peerj.1120
+
+15/18
+
+Drageset J. 2002. Loneliness at nursing homes—does a network have any importance for loneliness
+among nursing home residents? Nordic Journal of Nursing Research and Clinical Studies/Vård i
+Norden 22:9–14 DOI 10.1177/010740830202200202.
+Drageset J, Eide GE, Nygaard HA, Bondevik M, Nortvedt MW, Natvig GK. 2009b. The impact of
+social support and sense of coherence on health-related quality of life among nursing home
+residents—a questionnaire survey in Bergen, Norway. International Journal of Nursing Studies
+46:65–75 DOI 10.1016/j.ijnurstu.2008.07.005.
+Drageset J, Eide GE, Ranhoff AH. 2011. Depression is associated with poor functioning in
+activities of daily living among nursing home residents without cognitive impairment. Journal
+of Clinical Nursing 20:3111–3118 DOI 10.1111/j.1365-2702.2010.03663.x.
+Drageset J, Eide GE, Ranhoff AH. 2013. Anxiety and depression among nursing home
+residents without cognitive impairment. Scandinavian Journal of Caring Sciences 27:872–881
+DOI 10.1111/j.1471-6712.2012.01095.x.
+Drageset J, Kirkevold M, Espehaug B. 2010. Loneliness and social support among nursing home
+residents without cognitive impairment: a questionnaire survey. International Journal of Nursing
+Studies 48:611–619 DOI 10.1016/j.ijnurstu.2010.09.008.
+Drageset J, Natvig GK, Eide GE, Bondevik M, Nortvedt MW, Nygaard HA. 2009a. Health-related
+quality of life among old residents of nursing homes in Norway. International Journal of Nursing
+Practice 15:455–466 DOI 10.1111/j.1440-172X.2009.01794.x.
+Ferrell BR, Coyle N. 2008. The nature of suffering and the goals of nursing. Oncology Nursing
+Forum 35:241–247 DOI 10.1188/08.ONF.241-247.
+Garcia EL, Banegas JR, Perez-Regadera AG, Cabrera RH, Rodriguez-Artalejo F. 2005. Social
+network and health-related quality of life in older adults: a population-based study in Spain.
+Quality of Life Research 14:511–520 DOI 10.1007/s11136-004-5329-z.
+Graneheim UH, Lundman B. 2004. Qualitative content analysis in nursing research: concepts,
+procedures and measures to achieve trustworthiness. Nurse Education Today 24:105–112
+DOI 10.1016/j.nedt.2003.10.001.
+Grav S, Hellzèn O, Romild U, Stordal E. 2012. Association between social support and depression
+in the general population: the HUNT study, a cross-sectional survey. Journal of Clinical Nursing
+21:111–120 DOI 10.1111/j.1365-2702.2011.03868.x.
+Groll DL, To T, Bombardier C, Wright JG. 2005. The development of a comorbidity index
+with physical function as the outcome. Journal of Clinical Epidemiology 58:595–602
+DOI 10.1016/j.jclinepi.2004.10.018.
+Haugan G, Drageset J. 2014. The hospital anxiety and depression scale—dimensionality, reliability
+and construct validity among cognitively intact nursing home patients. Journal of Affective
+Disorders 165:8–15 DOI 10.1016/j.jad.2014.04.042.
+Hughes CP, Berg L, Danziger WL, Coben LA, Martin RL. 1982. A new clinical scale for the staging
+of dementia. British Journal of Psychiatry 140:566–572 DOI 10.1192/bjp.140.6.566.
+Kahn RL. 1979. Aging and social support. In: Riley MW, ed. Aging from birth to death:
+interdisciplinary perspectives. Boulder: Westview Press, 77–91.
+Kuuppelomaki M, Lauri S. 1998. Cancer patients’ reported experiences of suffering. Cancer
+Nursing 21:364–369 DOI 10.1097/00002820-199810000-00008.
+Kvale S, Brinkmann S. 2009. Interviews: learning the craft of qualitative research interviewing.
+Thousand Oaks: Sage Publications.
+Linton A, Lach H. 2007. Matteson & McConnell’s gerontological nursing: concepts and practice.
+Philadelphia: Saunders.
+
+Drageset et al. (2015), PeerJ, DOI 10.7717/peerj.1120
+
+16/18
+
+Lyons RA, Perry HM, Beverley N, Littlepage C. 1994. Evidence for the validity of the
+short-form 36 questionnaire SF-36 in an elderly population. Age and Ageing 23:182–184
+DOI 10.1093/ageing/23.3.182.
+Mancini JA, Blieszner R. 1992. Social provisions in adulthood: concept and measurement in close
+relationships. Journal of Gerontology 47:14–20 DOI 10.1093/geronj/47.1.P14.
+McCulla MM, Coats M, Van Fleet N, Duchek J, Grant E, Morris JC. 1989. Reliability of
+clinical nurse specialists in the staging of dementia. Archives of Neurology 46:1210–1211
+DOI 10.1001/archneur.1989.00520470070029.
+Morris JC. 1993. The Clinical Dementia Rating (CDR): current version and scoring rules.
+Neurology 43:2412–2414 DOI 10.1212/WNL.43.11.2412-a.
+Morse JM. 2001. Toward a praxis theory of suffering. Advances in Nursing Science 24:47–59
+DOI 10.1097/00012272-200109000-00007.
+Morse JM. 2011. The praxis theory of suffering. In: Butts JB, Rich KL, eds. Philosophies and theories
+in advanced nursing practice. Sudbury: Jones & Bartlett, 569–602.
+Morse JM, Niehaus L. 2009. Mixed-method design: principles and procedures. Walnut Creek: Left
+Coast Press.
+Morse JM, Niehaus L, Wolfe RR, Wilkins S. 2006. The role of the theoretical drive in maintaining
+validity in mixed-method research. Qualitative Research in Psychology 3:279–291.
+Nygaard HA, Naik M, Ruths S. 2000. Mental svikt hos sykehjemspasienter (Mental impairment
+among nursing home residents). Tidsskrift for den Norske Legeforening 120:3113–3116.
+Pit SW, Schurink J, Nair BR, Byles J, Heller RF. 1996. Use of the short-form-36 health survey
+to assess quality of life among Australian elderly. Australian Journal of Ageing 15:132–135
+DOI 10.1111/j.1741-6612.1996.tb00011.x.
+Rehnsfeldt A, Eriksson K. 2004. The progression of suffering implies alleviated suffering.
+Scandinavian Journal of Caring Sciences 18:264–272 DOI 10.1111/j.1471-6712.2004.00281.x.
+Richards L, Morse JM. 2007. Users’ guide to qualitative methods. Thousand Oaks: Sage
+Publications.
+Rodriguez-Blazquez C, Forjaz MJ, Prieto-Flores ME, Rojo-Perez F, Fernandez-Mayoralas G,
+Martinez-Martin P. 2012. Health status and well-being of older adults living in the community
+and in residential care settings: are differences influenced by age? Aging and Mental Health
+16:884–891 DOI 10.1080/13607863.2012.684664.
+Russell D, Cutrona CE, Rose J, Yurko K. 1984. Social and emotional loneliness: an examination
+of Weiss’s typology of loneliness. Journal of Personality and Social Psychology 46:1313–1321
+DOI 10.1037/0022-3514.46.6.1313.
+Saevareid HI, Thygesen E, Lindstrom TC, Nygaard HA. 2010. Association between self-reported
+care needs and the allocation of care in Norwegian home nursing care recipients. International
+Journal of Older People Nursing 7:20–28 DOI 10.1111/j.1748-3743.2010.00247.x.
+Sarason BR, Sarason IG, Pierce GR. 1990. Social support: an interactional view. New York: Wiley.
+Selbaek G, Kirkevold O, Engedal K, Selbaek G, Kirkevold O, Engedal K. 2007. The prevalence
+of psychiatric symptoms and behavioural disturbances and the use of psychotropic drugs
+in Norwegian nursing homes. International Journal of Geriatric Psychiatry 22:843–849
+DOI 10.1002/gps.1749.
+Smalbrugge M, Jongenelis L, Pot AM, Beekman AT, Eefsting JA. 2005b. Comorbidity of
+depression and anxiety in nursing home patients. Interational Journal of Geriatric Psychiatry
+20:218–226 DOI 10.1002/gps.1269.
+
+Drageset et al. (2015), PeerJ, DOI 10.7717/peerj.1120
+
+17/18
+
+Smalbrugge M, Jongenelis L, Pot AM, Eefsting JA, Ribbe MW, Beekman AT. 2006a. Incidence
+and outcome of depressive symptoms in nursing home patients in the Netherlands. American
+Journal of Geriatric Psychiatry 14:1069–1076 DOI 10.1097/01.JGP.0000224605.37317.88.
+Smalbrugge M, Pot AM, Jongenelis K, Beekman AT, Eefsting JA. 2005a. Prevalence and
+correlates of anxiety among nursing home patients. Journal of Affective Disorders 88:145–153
+DOI 10.1016/j.jad.2005.06.006.
+Smalbrugge M, Pot AM, Jongenelis L, Gundy CM, Beekman AT, Eefsting JA. 2006b. The impact
+of depression and anxiety on well being, disability and use of health care services in nursing
+home patients. International Journal of Geriatric Psychiatry 21:325–332 DOI 10.1002/gps.1466.
+Stordal E, Bjartveit Krüger M, Dahl NH, Krüger Ø, Mykletun A, Dahl AA. 2001. Depression
+in relation to age and gender in the general population: the Nord-Trøndelag Health Study
+(HUNT). Acta Psychiatrica Scandinavica 104:210–216 DOI 10.1034/j.1600-0447.2001.00130.x.
+Stordal E, Bjelland I, Dahl AA, Mykletun A. 2003. Anxiety and depression in individuals with
+somatic health problems: the Nord-Trondelag Health Study (HUNT). Scandinavian Journal of
+Primary Health Care 21:136–141 DOI 10.1080/02813430310002030.
+Tashakkori A, Creswell J. 2007. Exploring the nature of research questions in mixed methods
+research. Journal of Mixed Methods Research 1:207–211 DOI 10.1177/1558689807302814.
+Travis LA, Lyness JM, Shields CG, King DA, Cox C. 2004. Social support, depression, and
+functional disability in older adult primary-care patients. American Journal of Geriatric
+Psychiatry 12:265–271 DOI 10.1097/00019442-200405000-00005.
+Tseng SZ, Wang RH. 2001. Quality of life and related factors among elderly nursing home residents
+in southern Taiwan. Public Health Nursing 18:304–311 DOI 10.1046/j.1525-1446.2001.00304.x.
+Ware JE. 2005. SF-36 Health Survey manual and interpretation guide. Boston: Medical Outcomes
+Trust.
+Ware Jr JE, Sherbourne CD. 1992. The MOS 36-item short-form health survey. SF-36. I.
+Conceptual framework and item selection. Medical Care 30:473–483
+DOI 10.1097/00005650-199206000-00002.
+Weiss RS. 1973. Loneliness. The experience of emotional and social isolation. Cambridge:
+Massachusetts Institute of Technology.
+Weiss RS. 1974. The provisions of social relationships. In: Rubin Z, ed. Doing unto others.
+Englewood Cliffs: Prentice-Hall, 17–26.
+Welsh D, Moore SL, Getzlaf BA. 2012. Meaning in life: the perspective of long-term care residents.
+Research in Gerontological Nursing 5:185–194 DOI 10.3928/19404921-20120605-05.
+Yalom ID. 2005. The theory and practice of group psychotherapy. New York: Basic Books.
+Zigmond AS, Snaith RP. 1983. The hospital anxiety and depression scale. Acta Psychiatrica
+Scandinavica 67:361–370 DOI 10.1111/j.1600-0447.1983.tb09716.x.
+
+Drageset et al. (2015), PeerJ, DOI 10.7717/peerj.1120
+
+18/18
+
+

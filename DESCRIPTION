@@ -26,6 +26,7 @@ Imports:
     jsonlite,
     rplos (>= 0.6.4),
     rcrossref (>= 0.5.4),
+    crminer,
     aRxiv,
     rentrez,
     tm,
@@ -37,5 +38,5 @@ Suggests:
     testthat,
     knitr,
     covr
-Remotes: ropensci/rplos
+Remotes: ropensci/rplos, ropensci/crminer
 RoxygenNote: 5.0.1
