@@ -7,64 +7,87 @@
 ft_search(query, from = "plos", limit = 10, plosopts = list(),
   bmcopts = list(), crossrefopts = list(), entrezopts = list(),
   arxivopts = list(), biorxivopts = list(), euroopts = list(),
-  bmc_key = NULL, ...)
+  scopusopts = list(), ...)
 }
 \arguments{
-\item{query}{Query terms}
+\item{query}{(character) Query terms}
 
-\item{from}{Source to query}
+\item{from}{(character) Source to query, one of more of plos, bmc, crossref,
+entrez, arxiv, biorxiv, europmc, or scopus.}
 
-\item{limit}{Number of records to return.}
+\item{limit}{(integer) Number of records to return. default: 10}
 
-\item{plosopts}{PLOS options. See \code{?searchplos}}
+\item{plosopts}{(list) PLOS options. See \code{\link[rplos]{searchplos}}}
 
-\item{bmcopts}{BMC options. See \code{?bmc_search}}
+\item{bmcopts}{(list) BMC options. See \code{\link{bmc_search}}}
 
-\item{crossrefopts}{Crossref options. See \code{?cr_works}}
+\item{crossrefopts}{(list) Crossref options. See 
+\code{\link[rcrossref]{cr_works}}}
 
-\item{entrezopts}{Entrez options. See \code{?entrez_search}}
+\item{entrezopts}{(list) Entrez options. See 
+\code{\link[rentrez]{entrez_search}}}
 
-\item{arxivopts}{arxiv options. See \code{?arxiv_search}}
+\item{arxivopts}{(list) arxiv options. See \code{\link[aRxiv]{arxiv_search}}}
 
-\item{biorxivopts}{biorxiv options. See \code{?bx_search}}
+\item{biorxivopts}{(list) biorxiv options. See \code{\link{biorxiv_search}}}
 
-\item{euroopts}{Euro PMC options. See \code{?eupmc_search}}
+\item{euroopts}{(list) Euro PMC options. See \code{\link{eupmc_search}}}
 
-\item{bmc_key}{(character) A API key for Springer/BMC. See Details. Required when 
-searching BMC - otherwise, not needed. Default: \code{NULL}}
+\item{scopusopts}{(list) Scopus options. See \code{\link{scopus_search}}}
 
-\item{...}{Further args passed on to \code{\link[httr]{GET}}. Not working right now...}
+\item{...}{Further args passed on to \code{\link[httr]{GET}}. Not working 
+right now...}
 }
 \value{
-An object of class \code{ft}, and objects of class \code{ft_ind} within 
-each source
+An object of class \code{ft}, and objects of class \code{ft_ind} 
+within each source. You can access each data source with \code{$}
 }
 \description{
-\code{ft_search} is a one stop shop for searching for articles across
-many publishers and repositories. We currently support search for PLOS via the 
-\code{rplos} package, Crossref via the \code{rcrossref} package, Entrez via the 
-\code{rentrez} package, arXiv via the \code{aRxiv} package, and BMC and Biorxiv
-via internal helper functions in this package. Many publishers content is searchable
-via Crossref and Entrez - of course this doesn't mean that we can get full text
-for those articles. In the output objects of this function, we attempt to help by
-indicating what license is used for articles.
+\code{ft_search} is a one stop shop for searching for articles 
+across many publishers and repositories. We currently support search for 
+PLOS via the  \pkg{rplos} package, Crossref via the \pkg{rcrossref} 
+package, Entrez via the \pkg{rentrez} package, arXiv via the \pkg{aRxiv} 
+package, and BMC, Biorxiv, EueroPMC, and Scopus via internal helper 
+functions in this package. 
+
+Many publishers content is searchable via Crossref and Entrez - of course 
+this doesn't mean that we can get full text for those articles. In the 
+output objects of this function, we attempt to help by indicating what 
+license is used for articles.
 }
+\section{Source specific options}{
+
+Each of \code{plosopts}, \code{scopusopts}, etc. expect a named list.
+}
+
 \section{BMC Authentication}{
 
-BMC is integrated into Springer Publishers now, and that API requires an API key. 
-Get your key by signing up here \url{https://dev.springer.com/}, then you'll get
-a key. Pass the key to the parameter \code{bmc_key} or to a param named \code{key}
-in the param \code{bmcopts}. However, the best option is to save the key in your
-\code{.Renviron} file like \code{SPRINGER_KEY=yourkey}, or in your \code{.Rprofile}
-file like \code{springer_key="your key"}
+BMC is integrated into Springer Publishers now, and that API requires an 
+API key.  Get your key by signing up here \url{https://dev.springer.com/}, 
+then you'll get a key. Pass the key to a named parameter \code{key} to 
+\code{bmcopts}. Or, save your key in your \code{.Renviron} file as
+\code{SPRINGER_KEY}, and we'll read it in for you, and you don't have to
+pass in anything.
+}
+
+\section{Scopus Authentication}{
+
+Scopus requires an API key to search their service. Go to 
+\url{https://dev.elsevier.com/user/registration}, register for an account, 
+then when you're in your account, create an API key. Pass in as variable 
+\code{key} to \code{scopusopts}, or follow above instructions for storing 
+your key, under the name \code{ELSEVIER_SCOPUS_KEY}, and we'll read it in
+for you.
 }
 \examples{
 \dontrun{
 # Plos
 (res1 <- ft_search(query='ecology', from='plos'))
 res1$plos
-ft_search(query='climate change', from='plos', limit=500, plosopts=list(
-   fl=c('id','author','eissn','journal','counter_total_all','alm_twitterCount')))
+ft_search(query='climate change', from='plos', limit=500, 
+  plosopts=list(
+   fl=c('id','author','eissn','journal','counter_total_all',
+   'alm_twitterCount')))
 
 # Crossref
 (res2 <- ft_search(query='ecology', from='crossref'))
@@ -89,6 +112,11 @@ res$bmc
 # Europe PMC
 (res <- ft_search(query='ecology', from='europmc'))
 res$europmc
+
+# Scopus
+(res <- ft_search(query = 'ecology', from = 'scopus', 
+   scopusopts = list(key = Sys.getenv('ELSEVIER_SCOPUS_KEY'))))
+res$scopus
 
 # PLOS, Crossref, and arxiv
 (res <- ft_search(query='ecology', from=c('plos','crossref','arxiv')))

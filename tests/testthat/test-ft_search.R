@@ -36,6 +36,19 @@ test_that("ft_search returns...", {
   expect_match(dd$biorxiv$data$url[1], "http")
 })
 
+test_that("ft_search works with scopus", {
+  skip_on_cran()
+  
+  aa <- ft_search(query = 'ecology', from = 'scopus')
+  
+  expect_is(aa, "ft")
+  expect_is(aa$scopus, "ft_ind")
+  expect_is(aa$scopus$opts, "list")
+  expect_equal(aa$scopus$source, "scopus")
+  expect_type(aa$scopus$found, "double")
+  expect_is(aa$scopus$data, "data.frame")
+})
+
 test_that("ft_search works for larger requests", {
   skip_on_cran()
   

@@ -124,3 +124,21 @@ plugin_biorxivr <- function(sources, query, limit, opts){
     structure(zz, class = "ft_ind", query = query)
   }
 }
+
+plugin_scopus <- function(sources, query, limit, opts){
+  if (any(grepl("scopus", sources))) {
+    opts$query <- query
+    opts$count <- limit
+    out <- do.call(scopus_search, opts)
+    df <- out$`search-results`$entry
+    df$`@_fa` <- df$link <- NULL
+    zz <- list(source = "scopus", 
+               found = as.numeric(out$`search-results`$`opensearch:totalResults`), 
+               data = df, 
+               opts = opts)
+    structure(zz, class = "ft_ind", query = query)
+  } else {
+    zz <- list(source = "scopus", found = NULL, data = NULL, opts = opts)
+    structure(zz, class = "ft_ind", query = query)
+  }
+}

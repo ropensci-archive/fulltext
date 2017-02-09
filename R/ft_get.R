@@ -273,20 +273,23 @@ get_unknown <- function(x, path, ...) {
 }
 
 publisher_plugin <- function(x) {
-  switch(x,
-         `4374` = plugin_get_elife,
-         `340` = plugin_get_plos,
-         `4443` = plugin_get_peerj,
-         `297` = plugin_get_bmc,
-         `1965` = plugin_get_frontiersin,
-         `98` = plugin_get_entrez,
-         `4950` = plugin_get_entrez,
-         `2258` = plugin_get_entrez,
-         `3145` = plugin_get_copernicus,
-         `246` = plugin_get_biorxiv,
-         `127` = plugin_get_entrez,
-         `301` = plugin_get_cogent,
-         `1968` = plugin_get_entrez
+  switch(
+    x,
+    `4374` = plugin_get_elife,
+    `340` = plugin_get_plos,
+    `4443` = plugin_get_peerj,
+    `297` = plugin_get_bmc,
+    `1965` = plugin_get_frontiersin,
+    `98` = plugin_get_entrez,
+    `4950` = plugin_get_entrez,
+    `2258` = plugin_get_entrez,
+    `3145` = plugin_get_copernicus,
+    `246` = plugin_get_biorxiv,
+    `127` = plugin_get_entrez,
+    `301` = plugin_get_cogent,
+    `1968` = plugin_get_entrez,
+    `78` = plugin_get_elsevier,
+    stop("no plugin for Crossref member ", x, " yet\nopen an issue at https://github.com/ropensci/fulltext/issues", call. = FALSE)
   )
 }
 

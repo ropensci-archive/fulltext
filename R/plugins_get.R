@@ -64,6 +64,7 @@ plugin_get_crossref <- plugin_get_generator("crossref", cr_ft_xml)
 plugin_get_entrez <- plugin_get_generator("entrez", entrez_get)
 plugin_get_biorxiv <- plugin_get_generator("biorxiv", biorxiv_ft)
 plugin_get_arxiv <- plugin_get_generator("arxiv", arxiv_ft)
+#plugin_get_elsevier <- plugin_get_generator("elsevier", elsevier_get)
 
 ## getters - could stand to make closure for the below as well, FIXME
 entrez_get <- function(ids, ...){
@@ -151,3 +152,13 @@ biorxiv_ft <- function(dois, basepath, ...) {
     tmp$request$output$path
   })
 }
+
+# elsevier_ft <- function(dois, basepath, ...) {
+#   lapply(dois, function(x) {
+#     res <- HEAD(paste0("http://dx.doi.org/", x))
+#     url <- paste0(res$url, ".full.pdf")
+#     path <- file.path(basepath, sub("/", "_", sprintf("%s.pdf", x)))
+#     tmp <- httr::GET(url, write_disk(path, TRUE), ...)
+#     tmp$request$output$path
+#   })
+# }
