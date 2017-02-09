@@ -4,8 +4,21 @@
 \alias{scopus_search}
 \title{Scopus search}
 \usage{
-scopus_search(query = NULL, type = "search", search_type = "scopus",
-  key = NULL, ...)
+scopus_search(query = NULL, count = 25, type = "search",
+  search_type = "scopus", key = NULL, ...)
+}
+\arguments{
+\item{query}{query terms, as a single character vector}
+
+\item{count}{results to return: default: 25}
+
+\item{type}{type of search, default: search}
+
+\item{search_type}{search type, default: scopus}
+
+\item{key}{api key}
+
+\item{...}{curl options}
 }
 \description{
 Scopus search

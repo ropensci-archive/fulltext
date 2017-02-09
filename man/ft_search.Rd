@@ -117,6 +117,9 @@ res$europmc
 (res <- ft_search(query = 'ecology', from = 'scopus', 
    scopusopts = list(key = Sys.getenv('ELSEVIER_SCOPUS_KEY'))))
 res$scopus
+## pagination
+(res <- ft_search(query = 'ecology', from = 'scopus', 
+   scopusopts = list(key = Sys.getenv('ELSEVIER_SCOPUS_KEY')), limit = 5))
 
 # PLOS, Crossref, and arxiv
 (res <- ft_search(query='ecology', from=c('plos','crossref','arxiv')))

@@ -2,7 +2,12 @@
 #' 
 #' @export
 #' @keywords internal
-#' @references \url{}
+#' @param query query terms, as a single character vector
+#' @param count results to return: default: 25
+#' @param type type of search, default: search
+#' @param search_type search type, default: scopus
+#' @param key api key
+#' @param ... curl options
 #' @examples \dontrun{
 #' scopus_search(query = "ecology")
 #' }

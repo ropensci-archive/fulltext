@@ -288,7 +288,7 @@ publisher_plugin <- function(x) {
     `127` = plugin_get_entrez,
     `301` = plugin_get_cogent,
     `1968` = plugin_get_entrez,
-    `78` = plugin_get_elsevier,
+    #`78` = plugin_get_elsevier,
     stop("no plugin for Crossref member ", x, " yet\nopen an issue at https://github.com/ropensci/fulltext/issues", call. = FALSE)
   )
 }
