@@ -5,7 +5,7 @@ cache: packages
 addons:
   apt:
     packages:
-      - poppler-utils
+      - libpoppler-cpp-dev
 
 after_success:
   - Rscript -e 'covr::codecov()'
