@@ -4,7 +4,7 @@
 \alias{scopus_search}
 \title{Scopus search}
 \usage{
-scopus_search(query = NULL, count = 25, type = "search",
+scopus_search(query = NULL, count = 25, start = 0, type = "search",
   search_type = "scopus", key = NULL, ...)
 }
 \arguments{

@@ -92,6 +92,9 @@
 #' ## pagination
 #' (res <- ft_search(query = 'ecology', from = 'scopus', 
 #'    scopusopts = list(key = Sys.getenv('ELSEVIER_SCOPUS_KEY')), limit = 5))
+#' (res <- ft_search(query = 'ecology', from = 'scopus', 
+#'    scopusopts = list(key = Sys.getenv('ELSEVIER_SCOPUS_KEY')), 
+#'    limit = 5, start = 5))
 #'
 #' # PLOS, Crossref, and arxiv
 #' (res <- ft_search(query='ecology', from=c('plos','crossref','arxiv')))
@@ -100,7 +103,7 @@
 #' res$crossref
 #' }
 
-ft_search <- function(query, from = 'plos', limit = 10,
+ft_search <- function(query, from = 'plos', limit = 10, start = 0,
                       plosopts = list(),
                       bmcopts = list(),
                       crossrefopts = list(),
@@ -115,14 +118,14 @@ ft_search <- function(query, from = 'plos', limit = 10,
                     c("plos", "bmc", "crossref", "entrez", "arxiv", 
                       "biorxiv", "europmc", "scopus"), 
                     several.ok = TRUE)
-  plos_out <- plugin_plos(from, query, limit, plosopts)
-  bmc_out <- plugin_bmc(from, query, limit, bmcopts)
-  cr_out <- plugin_crossref(from, query, limit, crossrefopts)
-  en_out <- plugin_entrez(from, query, limit, entrezopts)
-  arx_out <- plugin_arxiv(from, query, limit, arxivopts)
-  bio_out <- plugin_biorxivr(from, query, limit, biorxivopts)
-  euro_out <- plugin_europe_pmc(from, query, limit, euroopts)
-  scopus_out <- plugin_scopus(from, query, limit, scopusopts)
+  plos_out <- plugin_plos(from, query, limit, start, plosopts)
+  bmc_out <- plugin_bmc(from, query, limit, start, bmcopts)
+  cr_out <- plugin_crossref(from, query, limit, start, crossrefopts)
+  en_out <- plugin_entrez(from, query, limit, start, entrezopts)
+  arx_out <- plugin_arxiv(from, query, limit, start, arxivopts)
+  bio_out <- plugin_biorxivr(from, query, limit, start, biorxivopts)
+  euro_out <- plugin_europe_pmc(from, query, limit, start, euroopts)
+  scopus_out <- plugin_scopus(from, query, limit, start, scopusopts)
 
   res <- list(plos = plos_out, bmc = bmc_out, crossref = cr_out,
               entrez = en_out, arxiv = arx_out, biorxiv = bio_out, 

@@ -4,10 +4,10 @@
 \alias{ft_search}
 \title{Search for full text}
 \usage{
-ft_search(query, from = "plos", limit = 10, plosopts = list(),
-  bmcopts = list(), crossrefopts = list(), entrezopts = list(),
-  arxivopts = list(), biorxivopts = list(), euroopts = list(),
-  scopusopts = list(), ...)
+ft_search(query, from = "plos", limit = 10, start = 0,
+  plosopts = list(), bmcopts = list(), crossrefopts = list(),
+  entrezopts = list(), arxivopts = list(), biorxivopts = list(),
+  euroopts = list(), scopusopts = list(), ...)
 }
 \arguments{
 \item{query}{(character) Query terms}
@@ -120,6 +120,9 @@ res$scopus
 ## pagination
 (res <- ft_search(query = 'ecology', from = 'scopus', 
    scopusopts = list(key = Sys.getenv('ELSEVIER_SCOPUS_KEY')), limit = 5))
+(res <- ft_search(query = 'ecology', from = 'scopus', 
+   scopusopts = list(key = Sys.getenv('ELSEVIER_SCOPUS_KEY')), 
+   limit = 5, start = 5))
 
 # PLOS, Crossref, and arxiv
 (res <- ft_search(query='ecology', from=c('plos','crossref','arxiv')))

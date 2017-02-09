@@ -11,10 +11,11 @@
 #' @examples \dontrun{
 #' scopus_search(query = "ecology")
 #' }
-scopus_search <- function(query = NULL, count = 25, type = "search", 
+scopus_search <- function(query = NULL, count = 25, start = 0, type = "search", 
                           search_type = "scopus", key = NULL, ... ) {
   key <- check_key_scopus(key)
-  args <- list(query = query, apiKey = key, count = count)
+  if (count > 25) stop("'count' for Scopus must be 25 or less", call. = FALSE)
+  args <- ft_compact(list(query = query, apiKey = key, count = count, start = start))
   res <- httr::GET(scopus_base(), query = args, ...)
   httr::stop_for_status(res)
   txt <- httr::content(res, "text", encoding = "UTF-8")
