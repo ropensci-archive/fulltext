@@ -9,6 +9,7 @@
 #' @examples \dontrun{
 #' # Scopus
 #' opts <- list(key = Sys.getenv('ELSEVIER_SCOPUS_KEY'))
+#' 
 #' ## search
 #' (res <- ft_search(query = 'biology', from = 'scopus', scopusopts = opts, 
 #'   limit = 25))
@@ -18,6 +19,17 @@
 #' out
 #' 
 #' (out <- ft_abstract(x = dois[1:15], scopusopts = opts))
+#' 
+#' # use scopus Ids
+#' (res <- ft_search(query = 'biology', from = 'scopus', scopusopts = opts, 
+#'   limit = 25))
+#' ids <- fulltext::strextract(res$scopus$data$`dc:identifier`, "[0-9]+")
+#' (out <- ft_abstract(x = ids[1:4], 
+#'   scopusopts = list(
+#'     key = Sys.getenv('ELSEVIER_SCOPUS_KEY'),
+#'     id_type = "scopus_id"
+#'   )
+#' ))
 #' }
 ft_abstract <- function(x, from = "scopus", scopusopts = list(),  ...) {
   UseMethod("ft_abstract")
