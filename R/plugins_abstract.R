@@ -4,7 +4,7 @@ plugin_abstract_scopus <- function(dois, opts, ...) {
     opts$x <- z
     list(
       doi = z, 
-      abstract = do.call(scopus_abstract_, opts)
+      abstract = do.call(scopus_abstract, opts)
     )
   })
 }
