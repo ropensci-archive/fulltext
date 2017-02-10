@@ -44,7 +44,7 @@ check_key_scopus <- function(x) {
 scopus_abstract <- function(x, key, id_type = "doi", ...) {
   args <- ft_compact(list(apiKey = key))
   url <- file.path(scopus_base(), "abstract", id_type, x)
-  res <- httr::GET(url, query = args, verbose())
+  res <- httr::GET(url, query = args, ...)
   httr::stop_for_status(res)
   txt <- httr::content(res, "text", encoding = "UTF-8")
   json <- jsonlite::fromJSON(txt, flatten = TRUE)
