@@ -31,6 +31,9 @@ res <- scopus_search(query = "ecology")
 res
 
 #scopus_search(query = x, type = "abstract")
+
+# looping through
+res <- scopus_search_loop(query = "ecology community elk cow")
 }
 }
 \keyword{internal}

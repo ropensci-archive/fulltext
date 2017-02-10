@@ -86,7 +86,7 @@
 #' res$europmc
 #' 
 #' # Scopus
-#' (res <- ft_search(query = 'ecology', from = 'scopus', 
+#' (res <- ft_search(query = 'ecology', from = 'scopus', limit = 100,
 #'    scopusopts = list(key = Sys.getenv('ELSEVIER_SCOPUS_KEY'))))
 #' res$scopus
 #' ## pagination
@@ -95,6 +95,11 @@
 #' (res <- ft_search(query = 'ecology', from = 'scopus', 
 #'    scopusopts = list(key = Sys.getenv('ELSEVIER_SCOPUS_KEY')), 
 #'    limit = 5, start = 5))
+#' ## lots of results
+#' (res <- ft_search(query = "ecology community elk cow", from = 'scopus', 
+#'    limit = 100,
+#'    scopusopts = list(key = Sys.getenv('ELSEVIER_SCOPUS_KEY'))))
+#' res$scopus
 #'
 #' # PLOS, Crossref, and arxiv
 #' (res <- ft_search(query='ecology', from=c('plos','crossref','arxiv')))

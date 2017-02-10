@@ -14,6 +14,9 @@
 #' res
 #' 
 #' #scopus_search(query = x, type = "abstract")
+#' 
+#' # looping through
+#' res <- scopus_search_loop(query = "ecology community elk cow")
 #' }
 scopus_search <- function(query = NULL, count = 25, start = 0, type = "search", 
                           search_type = "scopus", key = NULL, ... ) {
@@ -25,6 +28,43 @@ scopus_search <- function(query = NULL, count = 25, start = 0, type = "search",
   txt <- httr::content(res, "text", encoding = "UTF-8")
   jsonlite::fromJSON(txt, flatten = TRUE)
 }
+
+scopus_search_loop <- function(query = NULL, count = 25, type = "search", 
+                          search_type = "scopus", key = NULL, ... ) {
+  key <- check_key_scopus(key)
+  if (count > 25) lim <- 25
+  #if (count > 25) stop("'count' for Scopus must be 25 or less", call. = FALSE)
+  args <- ft_compact(list(query = query, apiKey = key, count = lim))
+  
+  url <- file.path(scopus_base(), "search/scopus")
+  out <- list()
+  end <- FALSE
+  i <- 0
+  while (!end) {
+    i <- i + 1
+    res <- scopus_get(url, args)
+    tot <- as.numeric(res$`search-results`$`opensearch:totalResults`)
+    out[[i]] <- res$`search-results`$entry
+    links <- res$`search-results`$link
+    url <- links[links$`@ref` == "next", '@href']
+    if (NROW(rbl(out)) >= min(c(count, tot))) end <- TRUE
+  }
+  list(results = rbl(out), found = tot)
+}
+
+rbl <- function(x) {
+  (xxxxx <- data.table::setDF(
+    data.table::rbindlist(x, use.names = TRUE, fill = TRUE)
+  ))
+}
+
+scopus_get <- function(url, args, ...) {
+  res <- httr::GET(url, query = args, ...)
+  httr::stop_for_status(res)
+  txt <- httr::content(res, "text", encoding = "UTF-8")
+  jsonlite::fromJSON(txt, flatten = TRUE)
+}
+
 
 scopus_base <- function() "http://api.elsevier.com/content"
 
