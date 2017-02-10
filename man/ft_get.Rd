@@ -8,20 +8,21 @@
 \title{Get full text}
 \usage{
 ft_get(x, from = NULL, plosopts = list(), bmcopts = list(),
-  entrezopts = list(), elifeopts = list(), cache = FALSE,
-  backend = "rds", path = "~/.fulltext", ...)
+  entrezopts = list(), elifeopts = list(), elsevieropts = list(),
+  cache = FALSE, backend = "rds", path = "~/.fulltext", ...)
 
 \method{ft_get}{character}(x, from = NULL, plosopts = list(),
   bmcopts = list(), entrezopts = list(), elifeopts = list(),
-  cache = FALSE, backend = "rds", path = "~/.fulltext", ...)
+  elsevieropts = list(), cache = FALSE, backend = "rds",
+  path = "~/.fulltext", ...)
 
 \method{ft_get}{list}(x, from = NULL, plosopts = list(), bmcopts = list(),
-  entrezopts = list(), elifeopts = list(), cache = FALSE,
-  backend = "rds", path = "~/.fulltext", ...)
+  entrezopts = list(), elifeopts = list(), elsevieropts = list(),
+  cache = FALSE, backend = "rds", path = "~/.fulltext", ...)
 
 \method{ft_get}{ft}(x, from = NULL, plosopts = list(), bmcopts = list(),
-  entrezopts = list(), elifeopts = list(), cache = FALSE,
-  backend = "rds", path = "~/.fulltext", ...)
+  entrezopts = list(), elifeopts = list(), elsevieropts = list(),
+  cache = FALSE, backend = "rds", path = "~/.fulltext", ...)
 }
 \arguments{
 \item{x}{Either identifiers for papers, either DOIs (or other ids) as a list of
@@ -187,6 +188,16 @@ res <- ft_get('10.1371/journal.pone.0086169', from='plos', cache=TRUE, backend="
 # Search entrez, and pass to ft_get()
 (res <- ft_search(query='ecology', from='entrez'))
 ft_get(res)
+
+# elsevier, ugh
+ft_get(x = "10.1016/j.trac.2016.01.027", from = "elsevier"
+  elsevieropts = list(key = Sys.getenv('ELSEVIER_SCOPUS_KEY')))
+  
+# wiley, ugh
+ft_get(x = "", from = "wiley")
+
+# spring, ugh
+ft_get(x = "", from = "springer")
 }
 }
 

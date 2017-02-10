@@ -4,25 +4,29 @@
 #' @keywords internal
 #' @param query query terms, as a single character vector
 #' @param count results to return: default: 25
+#' @param start offset value, default: 0
 #' @param type type of search, default: search
 #' @param search_type search type, default: scopus
 #' @param key api key
-#' @param ... curl options
+#' @param ... curl options passed on to \code{\link[httr]{GET}}
 #' @examples \dontrun{
-#' scopus_search(query = "ecology")
+#' res <- scopus_search(query = "ecology")
+#' res
+#' 
+#' #scopus_search(query = x, type = "abstract")
 #' }
 scopus_search <- function(query = NULL, count = 25, start = 0, type = "search", 
                           search_type = "scopus", key = NULL, ... ) {
   key <- check_key_scopus(key)
   if (count > 25) stop("'count' for Scopus must be 25 or less", call. = FALSE)
   args <- ft_compact(list(query = query, apiKey = key, count = count, start = start))
-  res <- httr::GET(scopus_base(), query = args, ...)
+  res <- httr::GET(file.path(scopus_base(), "search/scopus"), query = args, ...)
   httr::stop_for_status(res)
   txt <- httr::content(res, "text", encoding = "UTF-8")
   jsonlite::fromJSON(txt, flatten = TRUE)
 }
 
-scopus_base <- function() "http://api.elsevier.com/content/search/scopus"
+scopus_base <- function() "http://api.elsevier.com/content"
 
 check_key_scopus <- function(x) {
   tmp <- if (is.null(x)) {
@@ -36,62 +40,12 @@ check_key_scopus <- function(x) {
   }
   return(tmp)
 }
-  # type = match.arg(type)
-  # content_type = match.arg(content_type)
-  # 
-  # root_http = paste(root_http, content_type, sep = "/")
-  # 
-  # search_type = switch(type,
-  #                      search = match.arg(search_type),
-  #                      embase = "article",
-  #                      serial = "title",
-  #                      nonserial = "title",
-  #                      entitlement = "entitlement",
-  #                      holdings = "report.url",
-  #                      "citation-count" = "citation-count",
-  #                      citations = "citations"
-  # )
-  # if (type %in% c("entitlement","recommendation")) {
-  #   type = "article"
-  # }
-  # if (type %in% c("citation-count", "citations")) {
-  #   type = "abstract"
-  # }
-  # 
-  # http = paste(type, search_type, sep = "/")
-  # if (!is.null(http_end)) {
-  #   http = paste0(http, http_end)
-  # }
-  # http = gsub("/$", "", http)
-  # http = gsub("//", "/", http)
-  # http = paste(root_http, http, sep = "/")
-  # 
-  # if (verbose){
-  #   message(paste0("HTTP specified is:", http, "\n"))
-  # }
-  # if (!is.null(api_key)){
-  #   qlist = list(
-  #     "apiKey" = api_key,
-  #     query = query,
-  #     ...)
-  # } else {
-  #   qlist =  list(
-  #     query = query, ...)
-  # }
-  # if (is.null(query)){
-  #   qlist$query = NULL
-  # }
-  # if (length(qlist) > 0){
-  #   r = GET(http,
-  #           query = qlist,
-  #           add_headers(headers)
-  #   )
-  # } else {
-  #   r = GET(http,
-  #           add_headers(headers)
-  #   )
-  # }
-  # cr = content(r)
-  # return(list(get_statement = r, content = cr))
-#}
 
+scopus_abstract <- function(x, key, ...) {
+  args <- ft_compact(list(apiKey = key))
+  res <- httr::GET(file.path(scopus_base(), "abstract/doi", x), query = args, ...)
+  httr::stop_for_status(res)
+  txt <- httr::content(res, "text", encoding = "UTF-8")
+  json <- jsonlite::fromJSON(txt, flatten = TRUE)
+  json$`abstracts-retrieval-response`$coredata$`dc:description`
+}

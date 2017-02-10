@@ -12,20 +12,25 @@ scopus_search(query = NULL, count = 25, start = 0, type = "search",
 
 \item{count}{results to return: default: 25}
 
+\item{start}{offset value, default: 0}
+
 \item{type}{type of search, default: search}
 
 \item{search_type}{search type, default: scopus}
 
 \item{key}{api key}
 
-\item{...}{curl options}
+\item{...}{curl options passed on to \code{\link[httr]{GET}}}
 }
 \description{
 Scopus search
 }
 \examples{
 \dontrun{
-scopus_search(query = "ecology")
+res <- scopus_search(query = "ecology")
+res
+
+#scopus_search(query = x, type = "abstract")
 }
 }
 \keyword{internal}

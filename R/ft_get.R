@@ -151,17 +151,31 @@
 #' # Search entrez, and pass to ft_get()
 #' (res <- ft_search(query='ecology', from='entrez'))
 #' ft_get(res)
+#' 
+#' # elsevier, ugh
+#' ft_get(x = "10.1016/j.trac.2016.01.027", from = "elsevier"
+#'   elsevieropts = list(key = Sys.getenv('ELSEVIER_SCOPUS_KEY')))
+#'   
+#' # wiley, ugh
+#' ft_get(x = "", from = "wiley")
+#' 
+#' # spring, ugh
+#' ft_get(x = "", from = "springer")
 #' }
 
-ft_get <- function(x, from=NULL, plosopts=list(), bmcopts=list(), entrezopts=list(), elifeopts=list(),
-                   cache=FALSE, backend="rds", path="~/.fulltext", ...){
+ft_get <- function(x, from = NULL, plosopts = list(), bmcopts = list(), 
+                   entrezopts = list(), elifeopts = list(), 
+                   elsevieropts = list(),  cache = FALSE, backend = "rds", 
+                   path = "~/.fulltext", ...) {
   UseMethod("ft_get")
 }
 
 #' @export
 #' @rdname ft_get
-ft_get.character <- function(x, from=NULL, plosopts=list(), bmcopts=list(), entrezopts=list(),
-                   elifeopts=list(), cache=FALSE, backend="rds", path="~/.fulltext", ...) {
+ft_get.character <- function(x, from=NULL, plosopts=list(), bmcopts=list(), 
+                             entrezopts=list(), elifeopts=list(), 
+                             elsevieropts = list(),  
+                             cache=FALSE, backend="rds", path="~/.fulltext", ...) {
 
   calls <- names(sapply(match.call(), deparse))[-1]
   calls_vec <- "bmcopts" %in% calls
@@ -174,15 +188,18 @@ ft_get.character <- function(x, from=NULL, plosopts=list(), bmcopts=list(), entr
   if (is.null(cacheopts$cache) && is.null(cacheopts$backend)) cache_options_set(cache, backend, path)
 
   if (!is.null(from)) {
-    from <- match.arg(from, c("plos", "entrez", "elife", "pensoft", "arxiv", "biorxiv"))
+    from <- match.arg(from, c("plos", "entrez", "elife", "pensoft", 
+                              "arxiv", "biorxiv", "elsevier"))
     plos_out <- plugin_get_plos(from, x, plosopts, ...)
     entrez_out <- plugin_get_entrez(from, x, entrezopts, ...)
     elife_out <- plugin_get_elife(from, x, elifeopts, ...)
     pensoft_out <- plugin_get_pensoft(from, x, list(), ...)
     arxiv_out <- plugin_get_arxiv(from, x, list(), path, ...)
     biorxiv_out <- plugin_get_biorxiv(from, x, list(), path, ...)
+    els_out <- plugin_get_elsevier(from, x, list(), path, ...)
     structure(list(plos = plos_out, entrez = entrez_out, elife = elife_out,
-                   pensoft = pensoft_out, arxiv = arxiv_out, biorxiv = biorxiv_out), class = "ft_data")
+                   pensoft = pensoft_out, arxiv = arxiv_out,
+                   biorxiv = biorxiv_out, elsevier = els_out), class = "ft_data")
   } else {
     get_unknown(x, path, ...)
   }
@@ -190,8 +207,9 @@ ft_get.character <- function(x, from=NULL, plosopts=list(), bmcopts=list(), entr
 
 #' @export
 #' @rdname ft_get
-ft_get.list <- function(x, from=NULL, plosopts=list(), bmcopts=list(), entrezopts=list(),
-                        elifeopts=list(), cache=FALSE, backend="rds", path="~/.fulltext", ...) {
+ft_get.list <- function(x, from=NULL, plosopts=list(), bmcopts=list(), 
+                        entrezopts=list(), elifeopts=list(), elsevieropts = list(),
+                        cache=FALSE, backend="rds", path="~/.fulltext", ...) {
 
   make_dir(path)
   cacheopts <- cache_options_get()
@@ -205,8 +223,10 @@ ft_get.list <- function(x, from=NULL, plosopts=list(), bmcopts=list(), entrezopt
     pensoft_out <- plugin_get_pensoft(from, x, ...)
     arxiv_out <- plugin_get_arxiv(from, x, path, ...)
     biorxiv_out <- plugin_get_biorxiv(from, x, path, ...)
+    els_out <- plugin_get_elsevier(from, x, path, ...)
     structure(list(plos = plos_out, entrez = entrez_out, elife = elife_out,
-                   pensoft = pensoft_out, arxiv = arxiv_out, biorxiv = biorxiv_out), class = "ft_data")
+                   pensoft = pensoft_out, arxiv = arxiv_out, 
+                   biorxiv = biorxiv_out, elsevier = els_out), class = "ft_data")
   } else {
     get_unknown(x, path, ...)
   }
@@ -214,8 +234,9 @@ ft_get.list <- function(x, from=NULL, plosopts=list(), bmcopts=list(), entrezopt
 
 #' @export
 #' @rdname ft_get
-ft_get.ft <- function(x, from=NULL, plosopts=list(), bmcopts=list(), entrezopts=list(),
-                      elifeopts=list(), cache=FALSE, backend="rds", path="~/.fulltext", ...) {
+ft_get.ft <- function(x, from=NULL, plosopts=list(), bmcopts=list(), 
+                      entrezopts=list(), elifeopts=list(), elsevieropts = list(),
+                      cache=FALSE, backend="rds", path="~/.fulltext", ...) {
 
   make_dir(path)
   cacheopts <- cache_options_get()
@@ -226,6 +247,8 @@ ft_get.ft <- function(x, from=NULL, plosopts=list(), bmcopts=list(), entrezopts=
   entrez_out <- plugin_get_entrez(from, x$entrez$data$doi, entrezopts, ...)
   structure(list(plos = plos_out, entrez = entrez_out), class = "ft_data")
 }
+
+
 
 #' @export
 print.ft_data <- function(x, ...) {
@@ -288,7 +311,7 @@ publisher_plugin <- function(x) {
     `127` = plugin_get_entrez,
     `301` = plugin_get_cogent,
     `1968` = plugin_get_entrez,
-    #`78` = plugin_get_elsevier,
+    `78` = plugin_get_elsevier,
     stop("no plugin for Crossref member ", x, " yet\nopen an issue at https://github.com/ropensci/fulltext/issues", call. = FALSE)
   )
 }
@@ -307,7 +330,8 @@ get_pub_name <- function(x) {
          `246` = "biorxiv",
          `127` = "karger",
          `301` = "cogent",
-         `1968` = "mdpi"
+         `1968` = "mdpi",
+         `78` = "elsevier"
   )
 }
 
@@ -325,7 +349,8 @@ get_tm_name <- function(x) {
          `246` = "biorxiv",
          `127` = "entrez",
          `301` = "cogent",
-         `1968` = "entrez"
+         `1968` = "entrez",
+         `78` = "elsevier"
   )
 }
 
