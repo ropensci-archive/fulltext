@@ -77,14 +77,6 @@ Load library
 library('fulltext')
 ```
 
-## Extraction tools
-
-If you want to use `ft_extract()` function, it currently has two options for how to extract text from PDFs: `xpdf` and `ghostscript`.
-
-* `xpdf` installation: See http://www.foolabs.com/xpdf/download.html for instructions on how to download and install `xpdf`. For OSX, you an also get `xpdf` via [Homebrew](https://github.com/Homebrew/homebrew-core/blob/master/Formula/xpdf.rb) with `brew install xpdf`. Apparently, you can optionally install Poppler, which is built on `xpdf`. Get it at http://poppler.freedesktop.org/
-* `ghostscript` installation: See http://www.ghostscript.com/doc/9.16/Install.htm
-for instructions on how to download and install `ghostscript`. For OSX, you an also get `ghostscript` via <https://github.com/Homebrew/homebrew-core/blob/master/Formula/ghostscript.rb> with `brew install gs`.
-
 ## Search
 
 `ft_search()` - get metadata on a search query.
@@ -143,9 +135,9 @@ ft_get('10.1371/journal.pone.0086169', from = 'plos')
 library("rplos")
 (dois <- searchplos(q = "*:*", fl = 'id',
    fq = list('doc_type:full',"article_type:\"research article\""), limit = 5)$data$id)
-#> [1] "10.1371/journal.pone.0102148" "10.1371/journal.pone.0102138"
-#> [3] "10.1371/journal.pone.0102147" "10.1371/journal.pone.0102132"
-#> [5] "10.1371/journal.pone.0036392"
+#> [1] "10.1371/journal.pone.0102138" "10.1371/journal.pone.0102147"
+#> [3] "10.1371/journal.pone.0102132" "10.1371/journal.pone.0036392"
+#> [5] "10.1371/journal.pone.0102240"
 x <- ft_get(dois, from = "plos")
 x %>% chunks("publisher") %>% tabularize()
 #> $plos
@@ -162,11 +154,11 @@ x %>% chunks("publisher") %>% tabularize()
 x %>% chunks(c("doi","publisher")) %>% tabularize()
 #> $plos
 #>                            doi                                   publisher
-#> 1 10.1371/journal.pone.0102148 Public Library of ScienceSan Francisco, USA
-#> 2 10.1371/journal.pone.0102138 Public Library of ScienceSan Francisco, USA
-#> 3 10.1371/journal.pone.0102147 Public Library of ScienceSan Francisco, USA
-#> 4 10.1371/journal.pone.0102132 Public Library of ScienceSan Francisco, USA
-#> 5 10.1371/journal.pone.0036392 Public Library of ScienceSan Francisco, USA
+#> 1 10.1371/journal.pone.0102138 Public Library of ScienceSan Francisco, USA
+#> 2 10.1371/journal.pone.0102147 Public Library of ScienceSan Francisco, USA
+#> 3 10.1371/journal.pone.0102132 Public Library of ScienceSan Francisco, USA
+#> 4 10.1371/journal.pone.0036392 Public Library of ScienceSan Francisco, USA
+#> 5 10.1371/journal.pone.0102240 Public Library of ScienceSan Francisco, USA
 ```
 
 Use `dplyr` to data munge
@@ -180,23 +172,23 @@ x %>%
  .$plos %>%
  select(-permissions.license)
 #>                            doi                                   publisher
-#> 1 10.1371/journal.pone.0102148 Public Library of ScienceSan Francisco, USA
-#> 2 10.1371/journal.pone.0102138 Public Library of ScienceSan Francisco, USA
-#> 3 10.1371/journal.pone.0102147 Public Library of ScienceSan Francisco, USA
-#> 4 10.1371/journal.pone.0102132 Public Library of ScienceSan Francisco, USA
-#> 5 10.1371/journal.pone.0036392 Public Library of ScienceSan Francisco, USA
+#> 1 10.1371/journal.pone.0102138 Public Library of ScienceSan Francisco, USA
+#> 2 10.1371/journal.pone.0102147 Public Library of ScienceSan Francisco, USA
+#> 3 10.1371/journal.pone.0102132 Public Library of ScienceSan Francisco, USA
+#> 4 10.1371/journal.pone.0036392 Public Library of ScienceSan Francisco, USA
+#> 5 10.1371/journal.pone.0102240 Public Library of ScienceSan Francisco, USA
 #>   permissions.copyright.year permissions.copyright.holder
-#> 1                       2014                  Deres et al
-#> 2                       2014                    Ong et al
-#> 3                       2014               Songstad et al
-#> 4                       2014                 Suzuki et al
-#> 5                       2012                Doubeni et al
+#> 1                       2014                    Ong et al
+#> 2                       2014               Songstad et al
+#> 3                       2014                 Suzuki et al
+#> 4                       2012                Doubeni et al
+#> 5                       2014               Hirayama et al
 #>                       permissions.license_url
 #> 1 http://creativecommons.org/licenses/by/4.0/
 #> 2 http://creativecommons.org/licenses/by/4.0/
 #> 3 http://creativecommons.org/licenses/by/4.0/
-#> 4 http://creativecommons.org/licenses/by/4.0/
-#> 5                                        <NA>
+#> 4                                        <NA>
+#> 5 http://creativecommons.org/licenses/by/4.0/
 ```
 
 ## Supplementary materials
@@ -231,31 +223,17 @@ ft_get('10.1371/journal.pone.0086169', from='plos', cache=TRUE)
 
 There are going to be cases in which some results you find in `ft_search()` have full text available in text, xml, or other machine readable formats, but some may be open access, but only in pdf format. We have a series of convenience functions in this package to help extract text from pdfs, both locally and remotely.
 
-Locally, using code adapted from the package `tm`, and various pdf to text parsing backends
+Locally, using code adapted from the package `tm`, and two pdf to text parsing backends
 
 
 ```r
 pdf <- system.file("examples", "example2.pdf", package = "fulltext")
 ```
 
-Using `ghostscript`
-
 
 ```r
-(res_gs <- ft_extract(pdf, "gs"))
+(res <- ft_extract(pdf))
 #> <document>/Library/Frameworks/R.framework/Versions/3.3/Resources/library/fulltext/examples/example2.pdf
-#>   Title: pone.0107412 1..10
-#>   Producer: Acrobat Distiller 9.0.0 (Windows); modified using iText 5.0.3 (c) 1T3XT BVBA
-#>   Creation date: 2014-09-18
-```
-
-Using `xpdf`
-
-
-```r
-(res_xpdf <- ft_extract(pdf, "xpdf"))
-#> <document>/Library/Frameworks/R.framework/Versions/3.3/Resources/library/fulltext/examples/example2.pdf
-#>   Pages: 10
 #>   Title: pone.0107412 1..10
 #>   Producer: Acrobat Distiller 9.0.0 (Windows); modified using iText 5.0.3 (c) 1T3XT BVBA
 #>   Creation date: 2014-09-18
@@ -266,7 +244,7 @@ Or extract directly into a `tm` Corpus
 
 ```r
 paths <- sapply(paste0("example", 2:5, ".pdf"), function(x) system.file("examples", x, package = "fulltext"))
-(corpus_xpdf <- ft_extract_corpus(paths, "xpdf"))
+(corpus <- ft_extract_corpus(paths))
 #> $meta
 #>           names                           class
 #> 1 content, meta PlainTextDocument, TextDocument
@@ -280,7 +258,7 @@ paths <- sapply(paste0("example", 2:5, ".pdf"), function(x) system.file("example
 #> Content:  documents: 4
 #> 
 #> attr(,"class")
-#> [1] "xpdf"
+#> [1] "ft_extract"
 ```
 
 Extract pdf remotely on the web, using a service called `PDFX`

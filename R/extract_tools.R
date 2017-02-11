@@ -1,20 +1,17 @@
 #' @title PDF extraction tools
+#' 
+#' @description Details on the various tools for extracting pdfs in 
+#' \pkg{fulltext}
 #'
-#' @description If you want to use \code{\link{ft_extract}} function, it currently has 
-#' two options for how to extract text from PDFs: xpdf and ghostscript.
+#' @section ft_extract:
+#' The \code{\link{ft_extract}} function for extracting text 
+#' from PDFs used to allow two engines: xpdf and ghostscript. But now only 
+#' uses Poppler via the \pkg{pdftools} package.
 #' 
-#' @section xpdf installation: 
-#' See http://www.foolabs.com/xpdf/download.html for instructions on how to download 
-#' and install `xpdf`. For OSX, you an also get `xpdf` via 
-#' Homebrew (https://github.com/homebrew/homebrew-x11/blob/master/xpdf.rb) with 
-#' \code{brew install xpdf}. Apparently, you can optionally install Poppler, which is 
-#' built on xpdf. Get it at http://poppler.freedesktop.org/
-#' 
-#' @section ghostscript installation: 
-#' See http://www.ghostscript.com/doc/9.16/Install.htm for instructions on how to 
-#' download and install `ghostscript`. For OSX, you an also get `ghostscript` via 
-#' Homebrew (https://github.com/Homebrew/homebrew/blob/master/Library/Formula/ghostscript.rb) 
-#' with \code{brew install gs}
+#' @section ft_extract_corpus:
+#' The \code{\link{ft_extract_corpus}} function for extracting text 
+#' from PDFs into a \pkg{tm} corpus used to allow two engines: xpdf and 
+#' ghostscript. But now only uses Poppler via the \pkg{pdftools} package.
 #' 
 #' @name extract_tools
 NULL

@@ -2,60 +2,27 @@
 % Please edit documentation in R/ft_extract.R
 \name{ft_extract}
 \alias{ft_extract}
-\alias{print.gs_char}
-\alias{print.xpdf_char}
 \title{Extract text from a single pdf document}
 \usage{
-ft_extract(x, which = "xpdf", ...)
-
-\method{print}{gs_char}(x, ...)
-
-\method{print}{xpdf_char}(x, ...)
+ft_extract(x)
 }
 \arguments{
 \item{x}{Path to a pdf file, or an object of class \code{ft_data}, the 
 output from \code{\link{ft_get}}}
-
-\item{which}{One of gs or xpdf (default).}
-
-\item{...}{further args passed on}
 }
 \value{
-An object of class gs_char, xpdf_char
+An object of class \code{pdft_char} in the case of character input, 
+or of class \code{ft_data} in the case of \code{ft_data} input
 }
 \description{
 \code{ft_extract} attemps to make it easy to extract text from 
-PDFs, using a variety of extraction tools. Inputs can be either paths to PDF
+PDFs, using \pkg{pdftools}. Inputs can be either paths to PDF
 files, or the output of \code{\link{ft_get}} (class \code{ft_data}).
-}
-\details{
-For xpdf, you can pass on addition options via flags. See Examples.
-Right now, you can't pass options to Ghostscript if you're using the gs option.
-
-xpdf installation: See \url{http://www.foolabs.com/xpdf/download.html} for 
-instructions on how to download and install xpdf. For OSX, you an also get 
-xpdf via homebrew.
-
-ghostscript installation: See \url{http://www.ghostscript.com/doc/9.16/Install.htm} 
-for instructions on how to download and install ghostscript
 }
 \examples{
 \dontrun{
 path <- system.file("examples", "example1.pdf", package = "fulltext")
-
-(res_xpdf <- ft_extract(path)) # xpdf is the default
-(res_xpdf <- ft_extract(path, "xpdf"))
-(res_gs <- ft_extract(path, "gs"))
-
-# pass on options to xpdf
-## preserve layout from pdf
-ft_extract(path, "xpdf", "-layout")
-## preserve table structure as much as possible
-ft_extract(path, "xpdf", "-table")
-## last page to convert is page 2
-ft_extract(path, "xpdf", "-l 2")
-## first page to convert is page 3
-ft_extract(path, "xpdf", "-f 3")
+(res <- ft_extract(path))
 
 # use on output of ft_get() to extract pdf to text
 ## arxiv

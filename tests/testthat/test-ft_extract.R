@@ -5,22 +5,12 @@ test_that("ft_extract returns...", {
 
   path <- system.file("examples", "example1.pdf", package = "fulltext")
 
-  res_default <- ft_extract(path)
-  res_xpdf <- ft_extract(path, "xpdf")
-  res_gs <- ft_extract(path, "gs")
+  res <- ft_extract(path)
 
   # correct classes
-  expect_is(res_default, "xpdf_char")
-  expect_is(res_xpdf, "xpdf_char")
-  expect_is(res_gs, "gs_char")
-
-  expect_equal(res_default, res_xpdf)
-
-  expect_is(res_default$meta, "list")
-  expect_is(res_default$data, "character")
-
-  expect_is(res_gs$meta, "list")
-  expect_is(res_gs$data, "character")
+  expect_is(res, "pdft_char")
+  expect_is(res$meta, "list")
+  expect_is(res$data, "character")
 
   # cleanup
   ## FIXME - probably within ft_extract should do cleanup...

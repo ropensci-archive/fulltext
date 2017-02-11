@@ -4,14 +4,14 @@ test_that("ft_extract_corpus returns...", {
   skip_on_cran()
   
   path <- system.file("examples", "example1.pdf", package = "fulltext")
-  res <- ft_extract_corpus(path, "xpdf")
+  res <- ft_extract_corpus(path)
   tmres <- tm::TermDocumentMatrix(res$data)
   
   # correct classes
   expect_true(file.exists(path))
   expect_is(path, "character")
   
-  expect_is(res, "xpdf")
+  expect_is(res, "ft_extract")
   expect_is(res$meta, "data.frame")
   expect_is(res$data, "VCorpus")
   
@@ -28,4 +28,7 @@ test_that("ft_extract_corpus fails well", {
   expect_error(ft_extract_corpus())
   expect_error(ft_extract_corpus(5), "invalid 'file' argument")
   expect_error(ft_extract_corpus('adfafsdf'), "These do not exist")
+  
+  # catch defunct params
+  expect_error(ft_extract_corpus(path, "xpdf"), "unused argument")
 })

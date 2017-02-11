@@ -2,31 +2,24 @@
 % Please edit documentation in R/ft_extract_corpus.R
 \name{ft_extract_corpus}
 \alias{ft_extract_corpus}
-\title{Extract text from one to many pdf documents into a tm Corpus or Vcorpus.}
+\title{Extract text from one to many pdf documents into a tm corpus}
 \usage{
-ft_extract_corpus(paths, which = "xpdf", ...)
+ft_extract_corpus(paths)
 }
 \arguments{
-\item{paths}{Path to one or more pdfs}
-
-\item{which}{One of gs or xpdf.}
-
-\item{...}{further args passed on to \code{readerControl} parameter
-in \code{\link[tm]{Corpus}}}
+\item{paths}{Path to one or more pdfs, and they must exist}
 }
 \value{
 A tm Corpus (or VCorpus, later that is)
 }
 \description{
-Extract text from one to many pdf documents into a tm Corpus or Vcorpus.
+Extract text from one to many pdf documents into a tm corpus
 }
 \examples{
 \dontrun{
 path <- system.file("examples", "example1.pdf", package = "fulltext")
-(res <- ft_extract_corpus(path, "xpdf"))
+(res <- ft_extract_corpus(path))
 tm::TermDocumentMatrix(res$data)
-
-(res_gs <- ft_extract_corpus(path, "gs"))
 }
 }
 \seealso{

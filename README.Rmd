@@ -81,14 +81,6 @@ Load library
 library('fulltext')
 ```
 
-## Extraction tools
-
-If you want to use `ft_extract()` function, it currently has two options for how to extract text from PDFs: `xpdf` and `ghostscript`.
-
-* `xpdf` installation: See http://www.foolabs.com/xpdf/download.html for instructions on how to download and install `xpdf`. For OSX, you an also get `xpdf` via [Homebrew](https://github.com/Homebrew/homebrew-core/blob/master/Formula/xpdf.rb) with `brew install xpdf`. Apparently, you can optionally install Poppler, which is built on `xpdf`. Get it at http://poppler.freedesktop.org/
-* `ghostscript` installation: See http://www.ghostscript.com/doc/9.16/Install.htm
-for instructions on how to download and install `ghostscript`. For OSX, you an also get `ghostscript` via <https://github.com/Homebrew/homebrew-core/blob/master/Formula/ghostscript.rb> with `brew install gs`.
-
 ## Search
 
 `ft_search()` - get metadata on a search query.
@@ -168,29 +160,21 @@ ft_get('10.1371/journal.pone.0086169', from='plos', cache=TRUE)
 
 There are going to be cases in which some results you find in `ft_search()` have full text available in text, xml, or other machine readable formats, but some may be open access, but only in pdf format. We have a series of convenience functions in this package to help extract text from pdfs, both locally and remotely.
 
-Locally, using code adapted from the package `tm`, and various pdf to text parsing backends
+Locally, using code adapted from the package `tm`, and two pdf to text parsing backends
 
 ```{r}
 pdf <- system.file("examples", "example2.pdf", package = "fulltext")
 ```
 
-Using `ghostscript`
-
 ```{r}
-(res_gs <- ft_extract(pdf, "gs"))
-```
-
-Using `xpdf`
-
-```{r}
-(res_xpdf <- ft_extract(pdf, "xpdf"))
+(res <- ft_extract(pdf))
 ```
 
 Or extract directly into a `tm` Corpus
 
 ```{r}
 paths <- sapply(paste0("example", 2:5, ".pdf"), function(x) system.file("examples", x, package = "fulltext"))
-(corpus_xpdf <- ft_extract_corpus(paths, "xpdf"))
+(corpus <- ft_extract_corpus(paths))
 ```
 
 Extract pdf remotely on the web, using a service called `PDFX`

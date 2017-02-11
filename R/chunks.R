@@ -1,21 +1,22 @@
 #' @title Extract chunks of data from articles
 #'
-#' @description \code{chunks} makes it easy to extract sections of an article. You
-#' can extract just authors across all articles, or all references sections, or
-#' the complete text of each article. Then you can pass the output downstream for
-#' vizualization and analysis.
+#' @description \code{chunks} makes it easy to extract sections of an article. 
+#' You can extract just authors across all articles, or all references 
+#' sections, or the complete text of each article. Then you can pass the 
+#' output downstream for vizualization and analysis.
 #'
 #' @export
-#'
 #' @param x An object of class \code{ft_data}, the output from a call to
 #' \code{\link{ft_get}}
-#' @param what What to get, can be one or more in a vector or list. See Details.
+#' @param what What to get, can be one or more in a vector or list. 
+#' See Details.
 #'
 #' @details Options for the \code{what} parameter:
 #' \itemize{
 #'  \item front - Publisher, journal and article metadata elements
 #'  \item body - Body of the article
-#'  \item back - Back of the article, acknowledgments, author contributions, references
+#'  \item back - Back of the article, acknowledgments, author contributions, 
+#'  references
 #'  \item title - Article title
 #'  \item doi - Article DOI
 #'  \item categories - Publisher's categories, if any
@@ -33,7 +34,8 @@
 #'  \item history - Dates, recieved, published, accepted, etc.
 #' }
 #'
-#' Note that we currently only support PLOS, eLife, and Entrez right now, more to come.
+#' Note that we currently only support PLOS, eLife, and Entrez right now, 
+#' more to come.
 #'
 #' @return A list of output, one for each thing requested
 #' @examples \dontrun{
@@ -42,7 +44,8 @@
 #'
 #' library("rplos")
 #' (dois <- searchplos(q="*:*", fl='id',
-#'    fq=list('doc_type:full',"article_type:\"research article\""), limit=5)$data$id)
+#'    fq=list('doc_type:full',"article_type:\"research article\""), 
+#'      limit=5)$data$id)
 #' x <- ft_get(dois, from="plos")
 #' x %>% chunks("front")
 #' x %>% chunks("body")
@@ -60,15 +63,16 @@
 #'
 #' # Coerce list output to a data.frame, where possible
 #' (dois <- searchplos(q="*:*", fl='id',
-#'    fq=list('doc_type:full',"article_type:\"research article\""), limit=5)$data$id)
+#'    fq=list('doc_type:full',"article_type:\"research article\""), 
+#'      limit=5)$data$id)
 #' x <- ft_get(dois, from="plos")
 #' x %>% chunks("publisher") %>% tabularize()
 #' x %>% chunks("refs") %>% tabularize()
 #' x %>% chunks(c("doi","publisher")) %>% tabularize()
 #' x %>% chunks(c("doi","publisher","permissions")) %>% tabularize()
 #'
-#' x <- ft_get(c("10.3389/fnagi.2014.00130",'10.1155/2014/249309','10.1155/2014/162024'),
-#'    from='entrez')
+#' x <- ft_get(c("10.3389/fnagi.2014.00130",'10.1155/2014/249309',
+#'   '10.1155/2014/162024'), from='entrez')
 #' x %>% chunks("doi") %>% tabularize()
 #' x %>% chunks("authors") %>% tabularize()
 #' x %>% chunks(c("doi","publisher","permissions")) %>% tabularize()
@@ -84,8 +88,8 @@
 #'  chunks("publisher")
 #'
 #' # Via entrez
-#' res <- ft_get(c("10.3389/fnagi.2014.00130",'10.1155/2014/249309','10.1155/2014/162024'),
-#'    from='entrez')
+#' res <- ft_get(c("10.3389/fnagi.2014.00130",'10.1155/2014/249309',
+#'    '10.1155/2014/162024'), from='entrez')
 #' chunks(res, what="abstract")
 #' chunks(res, what="title")
 #' chunks(res, what="keywords")
@@ -93,8 +97,10 @@
 #'
 #' (res <- ft_search(query='ecology', from='entrez'))
 #' ft_get(res$entrez$data$doi, from='entrez') %>% chunks("title")
-#' ft_get(res$entrez$data$doi[1:4], from='entrez') %>% chunks("acknowledgments")
-#' ft_get(res$entrez$data$doi[1:4], from='entrez') %>% chunks(c('title','keywords'))
+#' ft_get(res$entrez$data$doi[1:4], from='entrez') %>%
+#'   chunks("acknowledgments")
+#' ft_get(res$entrez$data$doi[1:4], from='entrez') %>% 
+#'   chunks(c('title','keywords'))
 #'
 #' # From eLife
 #' x <- ft_get(c('10.7554/eLife.04251', '10.7554/eLife.04986'), from='elife')
