@@ -23,14 +23,14 @@ microsoft_search(query, count = 10, offset = 0, orderby = NULL,
 \description{
 Microsoft Acadmic search
 }
-\details{
-- https://www.microsoft.com/cognitive-services/en-us/Academic-Knowledge-API/documentation/QueryExpressionSyntax
-- https://westus.dev.cognitive.microsoft.com/docs/services/56332331778daf02acc0a50b/operations/565d753be597ed16ac3ffc03
-}
 \examples{
 \dontrun{
 microsoft_search(query = "Ti='biology'...")
 }
+}
+\references{
+https://www.microsoft.com/cognitive-services/en-us/Academic-Knowledge-API/documentation/QueryExpressionSyntax
+https://westus.dev.cognitive.microsoft.com/docs/services/56332331778daf02acc0a50b/operations/565d753be597ed16ac3ffc03
 }
 \keyword{internal}
 
