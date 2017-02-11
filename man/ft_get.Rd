@@ -2,25 +2,9 @@
 % Please edit documentation in R/ft_get.R
 \name{ft_get}
 \alias{ft_get}
-\alias{ft_get.character}
-\alias{ft_get.ft}
-\alias{ft_get.list}
 \title{Get full text}
 \usage{
 ft_get(x, from = NULL, plosopts = list(), bmcopts = list(),
-  entrezopts = list(), elifeopts = list(), elsevieropts = list(),
-  cache = FALSE, backend = "rds", path = "~/.fulltext", ...)
-
-\method{ft_get}{character}(x, from = NULL, plosopts = list(),
-  bmcopts = list(), entrezopts = list(), elifeopts = list(),
-  elsevieropts = list(), cache = FALSE, backend = "rds",
-  path = "~/.fulltext", ...)
-
-\method{ft_get}{list}(x, from = NULL, plosopts = list(), bmcopts = list(),
-  entrezopts = list(), elifeopts = list(), elsevieropts = list(),
-  cache = FALSE, backend = "rds", path = "~/.fulltext", ...)
-
-\method{ft_get}{ft}(x, from = NULL, plosopts = list(), bmcopts = list(),
   entrezopts = list(), elifeopts = list(), elsevieropts = list(),
   cache = FALSE, backend = "rds", path = "~/.fulltext", ...)
 }

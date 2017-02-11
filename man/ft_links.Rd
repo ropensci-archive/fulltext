@@ -2,22 +2,10 @@
 % Please edit documentation in R/ft_links.R
 \name{ft_links}
 \alias{ft_links}
-\alias{ft_links.character}
-\alias{ft_links.ft}
-\alias{ft_links.ft_ind}
 \title{Get full text links}
 \usage{
 ft_links(x, from = NULL, plosopts = list(), crossrefopts = list(),
   entrezopts = list(), bmcopts = list(), ...)
-
-\method{ft_links}{ft}(x, from = NULL, plosopts = list(),
-  crossrefopts = list(), entrezopts = list(), bmcopts = list(), ...)
-
-\method{ft_links}{ft_ind}(x, from = NULL, plosopts = list(),
-  crossrefopts = list(), entrezopts = list(), bmcopts = list(), ...)
-
-\method{ft_links}{character}(x, from = NULL, plosopts = list(),
-  crossrefopts = list(), entrezopts = list(), bmcopts = list(), ...)
 }
 \arguments{
 \item{x}{One of \code{ft}, \code{ft_ind}, or a character string of DOIs.}

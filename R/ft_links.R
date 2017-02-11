@@ -122,7 +122,6 @@ ft_links <- function(x, from = NULL, plosopts = list(), crossrefopts = list(),
 }
 
 #' @export
-#' @rdname ft_links
 ft_links.ft <- function(x, from = NULL, 
                         plosopts = list(),
                         crossrefopts = list(),
@@ -140,7 +139,6 @@ ft_links.ft <- function(x, from = NULL,
 }
 
 #' @export
-#' @rdname ft_links
 ft_links.ft_ind <- function(x, from = NULL, 
                         plosopts = list(),
                         crossrefopts = list(),
@@ -158,7 +156,6 @@ ft_links.ft_ind <- function(x, from = NULL,
 }
 
 #' @export
-#' @rdname ft_links
 ft_links.character <- function(x, from = NULL, 
                         plosopts = list(),
                         crossrefopts = list(),

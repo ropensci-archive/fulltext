@@ -2,26 +2,12 @@
 % Please edit documentation in R/ft_get_si.R
 \name{ft_get_si}
 \alias{ft_get_si}
-\alias{ft_get_si.character}
-\alias{ft_get_si.ft}
-\alias{ft_get_si.ft_data}
 \title{Download supplementary materials from journals}
 \usage{
 ft_get_si(x, si, from = c("auto", "plos", "wiley", "science", "proceedings",
   "figshare", "esa_data_archives", "esa_archives", "biorxiv", "epmc"),
   save.name = NA, dir = NA, cache = TRUE, vol = NA, issue = NA,
   list = FALSE, timeout = 10, ...)
-
-\method{ft_get_si}{character}(x, si, from = c("auto", "plos", "wiley",
-  "science", "proceedings", "figshare", "esa_data_archives", "esa_archives",
-  "biorxiv", "epmc"), save.name = NA, dir = NA, cache = TRUE, vol = NA,
-  issue = NA, list = FALSE, timeout = 10, ...)
-
-\method{ft_get_si}{ft_data}(x, si, from = NA, save.name = NA, dir = NA,
-  cache = TRUE, vol = NA, issue = NA, list = FALSE, timeout = 10, ...)
-
-\method{ft_get_si}{ft}(x, si, from = NA, save.name = NA, dir = NA,
-  cache = TRUE, vol = NA, issue = NA, list = FALSE, timeout = 10, ...)
 }
 \arguments{
 \item{x}{One of: vector of DOI(s) of article(s) (a

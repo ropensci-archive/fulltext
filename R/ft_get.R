@@ -172,7 +172,6 @@ ft_get <- function(x, from = NULL, plosopts = list(), bmcopts = list(),
 }
 
 #' @export
-#' @rdname ft_get
 ft_get.character <- function(x, from=NULL, plosopts=list(), bmcopts=list(), 
                              entrezopts=list(), elifeopts=list(), 
                              elsevieropts = list(),  
@@ -207,7 +206,6 @@ ft_get.character <- function(x, from=NULL, plosopts=list(), bmcopts=list(),
 }
 
 #' @export
-#' @rdname ft_get
 ft_get.list <- function(x, from=NULL, plosopts=list(), bmcopts=list(), 
                         entrezopts=list(), elifeopts=list(), elsevieropts = list(),
                         cache=FALSE, backend="rds", path="~/.fulltext", ...) {
@@ -234,7 +232,6 @@ ft_get.list <- function(x, from=NULL, plosopts=list(), bmcopts=list(),
 }
 
 #' @export
-#' @rdname ft_get
 ft_get.ft <- function(x, from=NULL, plosopts=list(), bmcopts=list(), 
                       entrezopts=list(), elifeopts=list(), elsevieropts = list(),
                       cache=FALSE, backend="rds", path="~/.fulltext", ...) {

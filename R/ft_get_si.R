@@ -3,7 +3,9 @@
 #' Put a call to this function where you would put a file-path - everything
 #' is cached by default, so you don't have to worry about multiple downloads
 #' in the same session.
-#'
+#' 
+#' @export
+#' @template ft_get_si
 #' @param x One of: vector of DOI(s) of article(s) (a
 #' \code{character}), output from \code{\link{ft_get}}, or output from
 #' \code{\link{ft_search}}. Note: if using ESA journal, you can *only*
@@ -45,8 +47,7 @@
 #' @note Make sure that the article from which you're attempting to
 #' download supplementary materials *has* supplementary materials. 404
 #' errors and 'file not found' errors can result from such cases.
-#' @examples
-#' \dontrun{
+#' @examples \dontrun{
 #' #Put the function wherever you would put a file path
 #' crabs <- read.csv(ft_get_si("10.6084/m9.figshare.979288", 2))
 #'
@@ -66,8 +67,6 @@
 #' # curl options
 #' ft_get_si("E093-059", "myco_db.csv", "esa_archives")
 #' }
-#' @template ft_get_si
-#' @export
 ft_get_si <- function(x, si, from=c("auto","plos","wiley","science","proceedings",
                                     "figshare","esa_data_archives","esa_archives",
                                     "biorxiv","epmc"),
@@ -78,7 +77,6 @@ ft_get_si <- function(x, si, from=c("auto","plos","wiley","science","proceedings
 }
 
 #' @export
-#' @rdname ft_get_si
 ft_get_si.character <- function(x, si, from=c("auto","plos","wiley","science","proceedings",
                                               "figshare","esa_data_archives","esa_archives",
                                               "biorxiv","epmc"),
@@ -134,7 +132,6 @@ ft_get_si.character <- function(x, si, from=c("auto","plos","wiley","science","p
 }
 
 #' @export
-#' @rdname ft_get_si
 ft_get_si.ft_data <- function(x, si, from=NA, save.name=NA, dir=NA, cache=TRUE,
                               vol=NA, issue=NA, list=FALSE, timeout=10, ...){
     if(!is.na(from))
@@ -147,7 +144,6 @@ ft_get_si.ft_data <- function(x, si, from=NA, save.name=NA, dir=NA, cache=TRUE,
 }
 
 #' @export
-#' @rdname ft_get_si
 ft_get_si.ft <- function(x, si, from=NA, save.name=NA, dir=NA, cache=TRUE, vol=NA,
                          issue=NA, list=FALSE, timeout=10, ...){
     if(!is.na(from))
