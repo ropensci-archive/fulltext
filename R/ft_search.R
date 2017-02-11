@@ -29,6 +29,8 @@
 #' @param biorxivopts (list) biorxiv options. See \code{\link{biorxiv_search}}
 #' @param euroopts (list) Euro PMC options. See \code{\link{eupmc_search}}
 #' @param scopusopts (list) Scopus options. See \code{\link{scopus_search}}
+#' @param maopts (list) Microsoft Academic options. See 
+#' \code{\link{microsoft_search}}
 #' @param ... Further args passed on to \code{\link[httr]{GET}}. Not working 
 #' right now...
 #' 

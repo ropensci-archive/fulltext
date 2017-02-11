@@ -18,6 +18,7 @@
 #' @param entrezopts Entrez options. See \code{\link[rentrez]{entrez_search}} and
 #' \code{\link{entrez_fetch}}
 #' @param elifeopts eLife options
+#' @param elsevieropts elsevier options
 #' @param cache (logical) To cache results or not. If \code{cache=TRUE}, raw XML, or other
 #' format that article is in is written to disk, then pulled from disk when further
 #' manipulations are done on the data. See also \code{\link{cache}}

@@ -40,6 +40,8 @@ returned from \code{\link{ft_search}}}
 
 \item{elifeopts}{eLife options}
 
+\item{elsevieropts}{elsevier options}
+
 \item{cache}{(logical) To cache results or not. If \code{cache=TRUE}, raw XML, or other
 format that article is in is written to disk, then pulled from disk when further
 manipulations are done on the data. See also \code{\link{cache}}}

@@ -38,6 +38,9 @@ entrez, arxiv, biorxiv, europmc, or scopus.}
 
 \item{scopusopts}{(list) Scopus options. See \code{\link{scopus_search}}}
 
+\item{maopts}{(list) Microsoft Academic options. See 
+\code{\link{microsoft_search}}}
+
 \item{...}{Further args passed on to \code{\link[httr]{GET}}. Not working 
 right now...}
 }

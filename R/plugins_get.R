@@ -161,6 +161,6 @@ elsevier_ft <- function(dois, ...) {
       `CR-Clickthrough-Client-Token` = Sys.getenv("CROSSREF_TDM_ELSEVIER"),
       Accept = "text/xml"
     )
-    httr::content(httr::GET(url, header, verbose()), as = "text", encoding = "UTF-8")
+    httr::content(httr::GET(url, header, ...), as = "text", encoding = "UTF-8")
   })
 }
