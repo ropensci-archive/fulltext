@@ -7,7 +7,7 @@
 ft_search(query, from = "plos", limit = 10, start = 0,
   plosopts = list(), bmcopts = list(), crossrefopts = list(),
   entrezopts = list(), arxivopts = list(), biorxivopts = list(),
-  euroopts = list(), scopusopts = list(), ...)
+  euroopts = list(), scopusopts = list(), maopts = list(), ...)
 }
 \arguments{
 \item{query}{(character) Query terms}
@@ -16,6 +16,9 @@ ft_search(query, from = "plos", limit = 10, start = 0,
 entrez, arxiv, biorxiv, europmc, or scopus.}
 
 \item{limit}{(integer) Number of records to return. default: 10}
+
+\item{start}{(integer) Record number to start at. Only used for 
+'scopus' right now. default: 0}
 
 \item{plosopts}{(list) PLOS options. See \code{\link[rplos]{searchplos}}}
 
@@ -134,6 +137,12 @@ res$scopus
 res$plos
 res$arxiv
 res$crossref
+
+# Microsoft academic search
+key <- Sys.getenv("MICROSOFT_ACADEMIC_KEY")
+(res <- ft_search("Ti='ecology'...", from = "microsoft", 
+  maopts = list(key = key)))
+res$ma
 }
 }
 

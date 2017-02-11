@@ -17,6 +17,8 @@
 #' @param from (character) Source to query, one of more of plos, bmc, crossref,
 #' entrez, arxiv, biorxiv, europmc, or scopus.
 #' @param limit (integer) Number of records to return. default: 10
+#' @param start (integer) Record number to start at. Only used for 
+#' 'scopus' right now. default: 0
 #' @param plosopts (list) PLOS options. See \code{\link[rplos]{searchplos}}
 #' @param bmcopts (list) BMC options. See \code{\link{bmc_search}}
 #' @param crossrefopts (list) Crossref options. See 
@@ -106,6 +108,12 @@
 #' res$plos
 #' res$arxiv
 #' res$crossref
+#' 
+#' # Microsoft academic search
+#' key <- Sys.getenv("MICROSOFT_ACADEMIC_KEY")
+#' (res <- ft_search("Ti='ecology'...", from = "microsoft", 
+#'   maopts = list(key = key)))
+#' res$ma
 #' }
 
 ft_search <- function(query, from = 'plos', limit = 10, start = 0,
@@ -117,11 +125,12 @@ ft_search <- function(query, from = 'plos', limit = 10, start = 0,
                       biorxivopts = list(),
                       euroopts = list(),
                       scopusopts = list(),
+                      maopts = list(),
                       ...) {
 
   from <- match.arg(from, 
                     c("plos", "bmc", "crossref", "entrez", "arxiv", 
-                      "biorxiv", "europmc", "scopus"), 
+                      "biorxiv", "europmc", "scopus", "microsoft"), 
                     several.ok = TRUE)
   plos_out <- plugin_plos(from, query, limit, start, plosopts)
   bmc_out <- plugin_bmc(from, query, limit, start, bmcopts)
@@ -131,10 +140,11 @@ ft_search <- function(query, from = 'plos', limit = 10, start = 0,
   bio_out <- plugin_biorxivr(from, query, limit, start, biorxivopts)
   euro_out <- plugin_europe_pmc(from, query, limit, start, euroopts)
   scopus_out <- plugin_scopus(from, query, limit, start, scopusopts)
+  ma_out <- plugin_ma(from, query, limit, start, maopts)
 
   res <- list(plos = plos_out, bmc = bmc_out, crossref = cr_out,
               entrez = en_out, arxiv = arx_out, biorxiv = bio_out, 
-              europmc = euro_out, scopus = scopus_out)
+              europmc = euro_out, scopus = scopus_out, ma = ma_out)
   structure(res, class = "ft", query = query)
 }
 
@@ -154,7 +164,8 @@ print.ft <- function(x, ...) {
     sprintf("arxiv: %s", null_len(x$arxiv$found)),
     sprintf("biorxiv: %s", null_len(x$biorxiv$found)),
     sprintf("Europe PMC: %s", null_len(x$europmc$found)),
-    sprintf("Scopus: %s]", null_len(x$scopus$found)),
+    sprintf("Scopus: %s", null_len(x$scopus$found)),
+    sprintf("Microsoft: %s]", null_len(x$ma$found)),
     sep = "; "), "\n")
 
   cat("Returned:\n")
@@ -166,7 +177,8 @@ print.ft <- function(x, ...) {
     sprintf("arxiv: %s", NROW(x$arxiv$data)),
     sprintf("biorxiv: %s", NROW(x$biorxiv$data)),
     sprintf("Europe PMC: %s", NROW(x$europmc$data)),
-    sprintf("Scopus: %s]", NROW(x$scopus$data)),
+    sprintf("Scopus: %s", NROW(x$scopus$data)),
+    sprintf("Microsoft: %s]", NROW(x$ma$data)),
     sep = "; "), "\n")
 }
 

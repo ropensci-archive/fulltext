@@ -145,3 +145,20 @@ plugin_scopus <- function(sources, query, limit, start, opts){
     structure(zz, class = "ft_ind", query = query)
   }
 }
+
+plugin_ma <- function(sources, query, limit, start, opts){
+  if (any(grepl("microsoft", sources))) {
+    opts$query <- query
+    opts$count <- limit
+    opts$offset <- start
+    out <- do.call(microsoft_search, opts)
+    zz <- list(source = "microsoft", 
+               found = NULL,
+               data = out, 
+               opts = opts)
+    structure(zz, class = "ft_ind", query = query)
+  } else {
+    zz <- list(source = "microsoft", found = NULL, data = NULL, opts = opts)
+    structure(zz, class = "ft_ind", query = query)
+  }
+}
