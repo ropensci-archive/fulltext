@@ -33,15 +33,20 @@ plugin_links_plos <- function(sources, ids, opts, ...){
 
 plugin_links_crossref <- function(sources, ids, opts, ...){
   if (any(grepl("crossref", sources))) {
-    tmp <- lapply(ids, cr_ft_links, type = "all")
+    safe_crm_links <- function(x, type = "xml", ...) {
+      tryCatch(crminer::crm_links(x, type, ...), error = function(e) NULL)
+    }
+    tmp <- ft_compact(lapply(ids, safe_crm_links, type = "all"))
     out <- lapply(tmp, function(z) {
       rbind_fill(lapply(z, function(w) {
-        data.frame(list(url = w[1], doi = attr(w, "doi"), type = attr(w, "type")), stringsAsFactors = FALSE)
+        data.frame(list(url = w[1], doi = attr(w, "doi"), type = attr(w, "type")), 
+                   stringsAsFactors = FALSE)
       }))
     })
     out <- ft_compact(out)
-    out <- setNames(out, sapply(out, function(x) x$doi[1]))
-    list(found = length(ft_compact(out)), ids = names(out), data = out, opts = opts)
+    out <- stats::setNames(out, sapply(out, function(x) x$doi[1]))
+    list(found = length(ft_compact(out)), ids = names(out), 
+         data = out, opts = opts)
   } else {
     emptylist(opts)
   }

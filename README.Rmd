@@ -48,14 +48,14 @@ Data sources in `fulltext` include:
 * [arXiv](https://arxiv.org) - via the `aRxiv` package
 * [bioRxiv](http://biorxiv.org/) - via the `biorxivr` package
 * [PMC/Pubmed via Entrez](http://www.ncbi.nlm.nih.gov/) - via the `rentrez` package
-* Many more are supported via the above sources (e.g., _Royal Society Open Science_ is 
+* Many more are supported via the above sources (e.g., _Royal Society Open Science_ is
 available via Pubmed)
 * We __will__ add more, as publishers open up, and as we have time...See the [master list here](https://github.com/ropensci/fulltext/issues/4#issuecomment-52376743)
 
 Authorization: A number of publishers require authorization via API key, and some even more
 draconian authorization processes involving checking IP addresses. We are working on supporting
 all the various authorization things for different publishers, but of course all the OA content
-is already easily available. 
+is already easily available.
 
 We'd love your feedback. Let us know what you think in [the issue tracker](https://github.com/ropensci/fulltext/issues)
 
@@ -83,10 +83,10 @@ library('fulltext')
 
 ## Extraction tools
 
-If you want to use `ft_extract()` function, it currently has two options for how to extract text from PDFs: `xpdf` and `ghostscript`. 
+If you want to use `ft_extract()` function, it currently has two options for how to extract text from PDFs: `xpdf` and `ghostscript`.
 
-* `xpdf` installation: See http://www.foolabs.com/xpdf/download.html for instructions on how to download and install `xpdf`. For OSX, you an also get `xpdf` via [Homebrew](https://github.com/homebrew/homebrew-x11/blob/master/xpdf.rb) with `brew install xpdf`. Apparently, you can optionally install Poppler, which is built on `xpdf`. Get it at http://poppler.freedesktop.org/
-* `ghostscript` installation: See http://www.ghostscript.com/doc/9.16/Install.htm  
+* `xpdf` installation: See http://www.foolabs.com/xpdf/download.html for instructions on how to download and install `xpdf`. For OSX, you an also get `xpdf` via [Homebrew](https://github.com/Homebrew/homebrew-core/blob/master/Formula/xpdf.rb) with `brew install xpdf`. Apparently, you can optionally install Poppler, which is built on `xpdf`. Get it at http://poppler.freedesktop.org/
+* `ghostscript` installation: See http://www.ghostscript.com/doc/9.16/Install.htm
 for instructions on how to download and install `ghostscript`. For OSX, you an also get `ghostscript` via <https://github.com/Homebrew/homebrew-core/blob/master/Formula/ghostscript.rb> with `brew install gs`.
 
 ## Search

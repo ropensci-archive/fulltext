@@ -64,6 +64,7 @@ plugin_get_crossref <- plugin_get_generator("crossref", cr_ft_xml)
 plugin_get_entrez <- plugin_get_generator("entrez", entrez_get)
 plugin_get_biorxiv <- plugin_get_generator("biorxiv", biorxiv_ft)
 plugin_get_arxiv <- plugin_get_generator("arxiv", arxiv_ft)
+plugin_get_elsevier <- plugin_get_generator("elsevier", elsevier_ft)
 
 ## getters - could stand to make closure for the below as well, FIXME
 entrez_get <- function(ids, ...){
@@ -149,5 +150,17 @@ biorxiv_ft <- function(dois, basepath, ...) {
     path <- file.path(basepath, sub("/", "_", sprintf("%s.pdf", x)))
     tmp <- httr::GET(url, write_disk(path, TRUE), ...)
     tmp$request$output$path
+  })
+}
+
+elsevier_ft <- function(dois, ...) {
+  lapply(dois, function(x) {
+    res <- rcrossref::cr_works(dois = x)$data$link[[1]]
+    url <- res[res$content.type == "text/xml", "URL"][[1]]
+    header <- httr::add_headers(
+      `CR-Clickthrough-Client-Token` = Sys.getenv("CROSSREF_TDM_ELSEVIER"),
+      Accept = "text/xml"
+    )
+    httr::content(httr::GET(url, header, ...), as = "text", encoding = "UTF-8")
   })
 }
