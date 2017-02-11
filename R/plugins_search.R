@@ -23,10 +23,11 @@ plugin_crossref <- function(sources, query, limit, start, opts){
   if (any(grepl("crossref", sources))) {
     opts$query <- query
     opts$limit <- limit
+    opts$offset <- start
     opts$filter <- c(has_license = TRUE)
     out <- do.call(cr_works, opts)
     out$data <- names_lower(out$data)
-    zz <- list(source = "crossref", found = out$meta$total_results, data = out$data, opts = opts, 
+    zz <- list(source = "crossref", found = out$meta$total_results, data = out$data, opts = opts,
                license = list(type = "variable, see individual records"))
     structure(zz, class = "ft_ind", query = query)
   } else {

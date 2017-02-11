@@ -32,7 +32,7 @@ scopus_search <- function(query = NULL, count = 25, start = 0, type = "search",
 scopus_search_loop <- function(query = NULL, count = 25, type = "search", 
                           search_type = "scopus", key = NULL, ... ) {
   key <- check_key_scopus(key)
-  if (count > 25) lim <- 25
+  lim <- if (count > 25) 25 else count
   #if (count > 25) stop("'count' for Scopus must be 25 or less", call. = FALSE)
   args <- ft_compact(list(query = query, apiKey = key, count = lim))
   
