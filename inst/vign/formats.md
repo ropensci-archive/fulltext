@@ -15,7 +15,7 @@ Publisher | pdf | xml | epub | Notes |
 AIRCC | [Y][airccp] | N |  N |... |
 arXiv | [Y][arxivp] | N |  N |... |
 Bentham | [Y][bep] | N |  N |... |
-BiomedCentral | [Y][bp] | [Y][bx] | N |... |
+BiomedCentral | [Y][bp] | N | N |... |
 bioRxiv | [Y][biorxivp] | N | N |... |
 CogentOA | [Y][coap] | [Y][coax] | N |... |
 Copernicus | [Y][copp] | [Y][copx] ^[1] | N |... |
@@ -30,7 +30,7 @@ Nature | [Y][naturep] | N | N |... |
 PeerJ | [Y][peerjp] | [Y][peerjx] | N |... |
 Pensoft | [Y][pep] | [Y][pex] | N |... |
 PLoS | [Y][plp] | [Y][plx] ^[1] | N |... |
-Sage | [Y][sp] | N | N |... |
+Sage | Y | N | N |... |
 Scielo | [Y][scielop] | [Y][scielox] | N | May only be some journals |
 ScienceOpen | [Y][sciopp] | [Y][sciopx] | N |... |
 SERSC | [Y][serscp] | N | N |... |
@@ -47,11 +47,10 @@ least for their open access journals.
 [peerjp]: https://peerj.com/articles/1142.pdf
 [pep]: http://zookeys.pensoft.net/lib/ajax_srv/article_elements_srv.php?action=download_pdf&item_id=4351
 [ep]: http://elifesciences.org/content/elife/2/e00471.full.pdf
-[bp]: http://www.gigasciencejournal.com/content/pdf/2047-217X-3-27.pdf
+[bp]: http://download.springer.com/static/pdf/460/art%253A10.1186%252Fs40246-016-0095-x.pdf?originUrl=http%3A%2F%2Fhumgenomics.biomedcentral.com%2Farticle%2F10.1186%2Fs40246-016-0095-x&token2=exp=1486800088~acl=%2Fstatic%2Fpdf%2F460%2Fart%25253A10.1186%25252Fs40246-016-0095-x.pdf*~hmac=0e7ec37c796ce7fbdf96d39183eb3114e65b87a2a94e82011c581a101789368b
 [hp]: http://downloads.hindawi.com/journals/crid/2014/246965.pdf
 [kp]: http://www.karger.com/Article/Pdf/370302
 [coap]: http://cogentoa.tandfonline.com/doi/pdf/10.1080/23311908.2014.986922
-[sp]: http://gph.sagepub.com/content/1/2333794X14548199.full.pdf
 [copp]: http://www.biogeosciences.net/11/7331/2014/bg-11-7331-2014.pdf
 [bep]: http://benthamopen.com/contents/pdf/TONEUJ/TONEUJ-9-21.pdf
 [arxivp]: http://arxiv.org/pdf/1507.08559v1.pdf?
@@ -70,7 +69,6 @@ least for their open access journals.
 [peerjx]: https://peerj.com/articles/1142.xml
 [pex]: http://zookeys.pensoft.net/lib/ajax_srv/article_elements_srv.php?action=download_xml&item_id=4351
 [ex]: http://elifesciences.org/content/3/e04165.source.xml
-[bx]: http://www.gigasciencejournal.com/content/download/xml/2047-217X-3-27.xml
 [hx]: http://downloads.hindawi.com/journals/tswj/2014/649260.xml
 [kx]: http://downloads.hindawi.com/journals/crid/2014/246965.pdf
 [coax]: http://cogentoa.tandfonline.com/doi/xml/10.1080/23311908.2014.986922
