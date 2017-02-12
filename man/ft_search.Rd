@@ -13,7 +13,7 @@ ft_search(query, from = "plos", limit = 10, start = 0,
 \item{query}{(character) Query terms}
 
 \item{from}{(character) Source to query, one of more of plos, bmc, crossref,
-entrez, arxiv, biorxiv, europmc, or scopus.}
+entrez, arxiv, biorxiv, europmc, scopus, or ma}
 
 \item{limit}{(integer) Number of records to return. default: 10}
 

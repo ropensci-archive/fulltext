@@ -4,19 +4,21 @@
 \alias{ft_abstract}
 \title{Get abstracts}
 \usage{
-ft_abstract(x, from = "scopus", scopusopts = list(), ...)
+ft_abstract(x, from = "scopus", scopusopts = list(), maopts = list(), ...)
 }
 \arguments{
 \item{x}{(character) DOIs as a character vector}
 
 \item{from}{Source to query. only scopus for now}
 
-\item{scopusopts}{eLife options}
+\item{scopusopts}{Scopus options}
+
+\item{maopts}{Microsoft Academic options}
 
 \item{...}{Further args passed on to \code{\link[httr]{GET}}}
 }
 \value{
-An object of class \code{ft_abstract} xxx
+An object of class \code{ft_abstract}
 }
 \description{
 Get abstracts
@@ -46,6 +48,19 @@ ids <- fulltext:::strextract(res$scopus$data$`dc:identifier`, "[0-9]+")
     id_type = "scopus_id"
   )
 ))
+
+# Microsoft
+key <- Sys.getenv("MICROSOFT_ACADEMIC_KEY")
+(res <- ft_search("Ti='ecology'...", from = "microsoft", 
+  maopts = list(key = key)))
+ids <- res$ma$data$Id
+(out <- ft_abstract(x = ids, from = "microsoft",
+  maopts = list(
+    key = Sys.getenv('MICROSOFT_ACADEMIC_KEY')
+  )
+))
+out$ma
+cat(unlist(lapply(out$ma, "[[", "abstract")), sep = "\\n\\n")
 }
 }
 

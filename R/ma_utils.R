@@ -29,6 +29,10 @@ microsoft_search <- function(query, count = 10, offset = 0, orderby = NULL,
   cbind(out$entities, ee)
 }
 
+microsoft_abstract <- function(query, key = NULL, ...) {
+  microsoft_search(query = query, key = key, atts = c("Id", "E"))$D
+}
+
 # ma_evaluate("Ti='biology'...")
 ma_evaluate <- function(query, count = 10, offset = 0, orderby = NULL, 
                         atts = "Id,AA.AuN,J.JN,Ti,Y,E,CC", key = NULL, ...) {

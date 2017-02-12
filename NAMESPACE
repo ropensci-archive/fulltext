@@ -3,6 +3,7 @@
 S3method(collect,ft_data)
 S3method(ft_abstract,character)
 S3method(ft_abstract,default)
+S3method(ft_abstract,numeric)
 S3method(ft_extract,character)
 S3method(ft_extract,ft_data)
 S3method(ft_get,character)
