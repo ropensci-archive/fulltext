@@ -47,6 +47,11 @@ test_that("ft_search works with scopus", {
   expect_equal(aa$scopus$source, "scopus")
   expect_type(aa$scopus$found, "double")
   expect_is(aa$scopus$data, "data.frame")
+  
+  ## no results
+  res <- ft_search(query = '[TITLE-ABS-KEY (("Chen caeculescens atlantica") AND (demograph* OR model OR population) AND (climate OR "climatic factor" OR "climatic driver" OR precipitation OR rain OR temperature))]', from = 'scopus')
+  expect_is(res, "ft")
+  expect_equal(NROW(res$scopus$data), 0)
 })
 
 test_that("ft_search works for larger requests", {

@@ -44,10 +44,15 @@ scopus_search_loop <- function(query = NULL, count = 25, type = "search",
     i <- i + 1
     res <- scopus_get(url, args)
     tot <- as.numeric(res$`search-results`$`opensearch:totalResults`)
-    out[[i]] <- res$`search-results`$entry
-    links <- res$`search-results`$link
-    url <- links[links$`@ref` == "next", '@href']
-    if (NROW(rbl(out)) >= min(c(count, tot))) end <- TRUE
+    if (tot < 1) {
+      end <- TRUE
+      out[[i]] <- data.frame(NULL)
+    } else {
+      out[[i]] <- res$`search-results`$entry
+      links <- res$`search-results`$link
+      url <- links[links$`@ref` == "next", '@href']
+      if (NROW(rbl(out)) >= min(c(count, tot))) end <- TRUE
+    }
   }
   list(results = rbl(out), found = tot)
 }
