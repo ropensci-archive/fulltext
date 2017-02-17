@@ -25,7 +25,8 @@ Microsoft Acadmic search
 }
 \examples{
 \dontrun{
-microsoft_search(query = "Ti='biology'...")
+microsoft_search(query = "Ti='biology'...", 
+  key = Sys.getenv("MICROSOFT_ACADEMIC_KEY"))
 }
 }
 \references{
@@ -34,4 +35,3 @@ https://www.microsoft.com/cognitive-services/en-us/Academic-Knowledge-API/docume
 https://westus.dev.cognitive.microsoft.com/docs/services/56332331778daf02acc0a50b/operations/565d753be597ed16ac3ffc03
 }
 \keyword{internal}
-

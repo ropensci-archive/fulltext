@@ -175,3 +175,9 @@ move_col <- function(x, y) x[ c(names(x)[-grep(y, names(x))], y) ]
 names_lower <- function(x) {
   setNames(x, tolower(names(x))) 
 }
+
+rbl <- function(x) {
+  (xxxxx <- data.table::setDF(
+    data.table::rbindlist(x, use.names = TRUE, fill = TRUE)
+  ))
+}

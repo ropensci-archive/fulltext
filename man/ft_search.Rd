@@ -85,6 +85,7 @@ then when you're in your account, create an API key. Pass in as variable
 your key, under the name \code{ELSEVIER_SCOPUS_KEY}, and we'll read it in
 for you.
 }
+
 \examples{
 \dontrun{
 # Plos
@@ -148,4 +149,3 @@ key <- Sys.getenv("MICROSOFT_ACADEMIC_KEY")
 res$ma
 }
 }
-

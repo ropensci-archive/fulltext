@@ -2,16 +2,16 @@
 % Please edit documentation in R/zzz.R
 \name{ft_type_sum}
 \alias{ft_type_sum}
-\alias{ft_type_sum.Date}
-\alias{ft_type_sum.POSIXt}
-\alias{ft_type_sum.array}
-\alias{ft_type_sum.character}
 \alias{ft_type_sum.default}
+\alias{ft_type_sum.character}
+\alias{ft_type_sum.Date}
 \alias{ft_type_sum.factor}
 \alias{ft_type_sum.integer}
 \alias{ft_type_sum.logical}
+\alias{ft_type_sum.array}
 \alias{ft_type_sum.matrix}
 \alias{ft_type_sum.numeric}
+\alias{ft_type_sum.POSIXt}
 \title{Type summary}
 \usage{
 ft_type_sum(x)
@@ -40,4 +40,3 @@ ft_type_sum(x)
 Type summary
 }
 \keyword{internal}
-

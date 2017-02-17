@@ -84,6 +84,7 @@ the publisher, or else you'll get back no data.
  passed in here, who knows, it's a mess.
 }
 }
+
 \examples{
 \dontrun{
 # If you just have DOIs and don't know the publisher
@@ -186,4 +187,3 @@ ft_get(x = "", from = "wiley")
 ft_get(x = "", from = "springer")
 }
 }
-

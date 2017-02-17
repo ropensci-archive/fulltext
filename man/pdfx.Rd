@@ -50,4 +50,3 @@ tarfile <- tempfile(fileext = "tar.gz")
 pdfx_targz(input = out, write_path = tarfile)
 }
 }
-

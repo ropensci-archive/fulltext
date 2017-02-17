@@ -2,8 +2,8 @@
 % Please edit documentation in R/fulltext-package.R
 \docType{package}
 \name{fulltext-package}
-\alias{fulltext}
 \alias{fulltext-package}
+\alias{fulltext}
 \title{Fulltext search and retrieval of scholarly texts.}
 \description{
 fulltext is a single interface to many sources of scholarly 
@@ -54,8 +54,8 @@ directly.
 Let us know what you think at 
 \url{https://github.com/ropensci/fulltext/issues}
 }
+
 \author{
 Scott Chamberlain <myrmecocystus@gmail.com>
 }
 \keyword{package}
-

@@ -127,4 +127,3 @@ x \%>\% chunks("refs_dois")
 x \%>\% chunks(c("abstract", "executive_summary"))
 }
 }
-

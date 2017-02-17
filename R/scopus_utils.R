@@ -2,13 +2,21 @@
 #' 
 #' @export
 #' @keywords internal
-#' @param query query terms, as a single character vector
-#' @param count results to return: default: 25
-#' @param start offset value, default: 0
-#' @param type type of search, default: search
-#' @param search_type search type, default: scopus
-#' @param key api key
+#' @param query (character) query terms, as a single character vector
+#' @param count (integer/numeric) results to return: default: 25
+#' @param start (integer/numeric) offset value, default: 0
+#' @param type (character) type of search, default: search
+#' @param search_type (character) search type, default: scopus
+#' @param key (character) api key. get a key at 
+#' \url{https://dev.elsevier.com/index.html}
 #' @param ... curl options passed on to \code{\link[httr]{GET}}
+#' @details Rate limits for search are 20,000 per every 7 days. You likely
+#' won't make that many requests in 7 days, but if you do e.g., make 20K in
+#' 5 days, then you have to wait 2 days for the clock to reset, than you'll 
+#' be able to make 20K again. 
+#' 
+#' See \url{https://dev.elsevier.com/api_key_settings.html} for rate 
+#' limit information.
 #' @examples \dontrun{
 #' res <- scopus_search(query = "ecology")
 #' res
@@ -22,11 +30,8 @@ scopus_search <- function(query = NULL, count = 25, start = 0, type = "search",
                           search_type = "scopus", key = NULL, ... ) {
   key <- check_key_scopus(key)
   if (count > 25) stop("'count' for Scopus must be 25 or less", call. = FALSE)
-  args <- ft_compact(list(query = query, apiKey = key, count = count, start = start))
-  res <- httr::GET(file.path(scopus_base(), "search/scopus"), query = args, ...)
-  httr::stop_for_status(res)
-  txt <- httr::content(res, "text", encoding = "UTF-8")
-  jsonlite::fromJSON(txt, flatten = TRUE)
+  args <- ft_compact(list(query = query, count = count, start = start))
+  scopus_get(file.path(scopus_base(), "search/scopus"), args, key, ...)
 }
 
 scopus_search_loop <- function(query = NULL, count = 25, type = "search", 
@@ -34,7 +39,7 @@ scopus_search_loop <- function(query = NULL, count = 25, type = "search",
   key <- check_key_scopus(key)
   lim <- if (count > 25) 25 else count
   #if (count > 25) stop("'count' for Scopus must be 25 or less", call. = FALSE)
-  args <- ft_compact(list(query = query, apiKey = key, count = lim))
+  args <- ft_compact(list(query = query, count = lim))
   
   url <- file.path(scopus_base(), "search/scopus")
   out <- list()
@@ -42,7 +47,7 @@ scopus_search_loop <- function(query = NULL, count = 25, type = "search",
   i <- 0
   while (!end) {
     i <- i + 1
-    res <- scopus_get(url, args)
+    res <- scopus_get(url, args, key, ...)
     tot <- as.numeric(res$`search-results`$`opensearch:totalResults`)
     if (tot < 1) {
       end <- TRUE
@@ -57,19 +62,19 @@ scopus_search_loop <- function(query = NULL, count = 25, type = "search",
   list(results = rbl(out), found = tot)
 }
 
-rbl <- function(x) {
-  (xxxxx <- data.table::setDF(
-    data.table::rbindlist(x, use.names = TRUE, fill = TRUE)
-  ))
+scopus_abstract <- function(x, key, id_type = "doi", ...) {
+  url <- file.path(scopus_base(), "abstract", id_type, x)
+  json <- scopus_get(url, list(), key, ...)
+  json$`abstracts-retrieval-response`$coredata$`dc:description`
 }
 
-scopus_get <- function(url, args, ...) {
-  res <- httr::GET(url, query = args, ...)
-  httr::stop_for_status(res)
+scopus_get <- function(url, args, key, ...) {
+  res <- httr::GET(url, query = args, httr::add_headers(`X-ELS-APIKey` = key), 
+                   ...)
+  scopus_error_handle(res)
   txt <- httr::content(res, "text", encoding = "UTF-8")
   jsonlite::fromJSON(txt, flatten = TRUE)
 }
-
 
 scopus_base <- function() "http://api.elsevier.com/content"
 
@@ -86,12 +91,15 @@ check_key_scopus <- function(x) {
   return(tmp)
 }
 
-scopus_abstract <- function(x, key, id_type = "doi", ...) {
-  args <- ft_compact(list(apiKey = key))
-  url <- file.path(scopus_base(), "abstract", id_type, x)
-  res <- httr::GET(url, query = args, ...)
-  httr::stop_for_status(res)
-  txt <- httr::content(res, "text", encoding = "UTF-8")
-  json <- jsonlite::fromJSON(txt, flatten = TRUE)
-  json$`abstracts-retrieval-response`$coredata$`dc:description`
+scopus_error_handle <- function(x) {
+  if (x$status_code > 201) {
+    txt <- httr::content(x, "text", encoding = "UTF-8")
+    json <- jsonlite::fromJSON(x, flatten = TRUE)  
+    mssg <- json$`service-error`$status$statusText
+    if (is.null(mssg)) httr::stop_for_status(x)
+    stop(mssg, call. = FALSE)
+  }
+  if ('www-authenticate' %in% names(x$headers)) {
+    warning(sprintf("  for %s ", x), x$headers$`www-authenticate`, call. = FALSE)
+  } 
 }

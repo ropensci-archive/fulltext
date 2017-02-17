@@ -39,4 +39,3 @@ bmc_search('ecology', config=verbose())
 }
 }
 \keyword{internal}
-

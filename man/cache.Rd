@@ -2,9 +2,9 @@
 % Please edit documentation in R/cache.R
 \name{cache}
 \alias{cache}
-\alias{cache_clear}
-\alias{cache_options_get}
 \alias{cache_options_set}
+\alias{cache_options_get}
+\alias{cache_clear}
 \title{Cache blobs of json, xml or pdfs of text from ft_get() function}
 \usage{
 cache_options_set(cache = TRUE, backend = "rds", path = "~/.fulltext")
@@ -48,4 +48,3 @@ out$entrez
 out \%>\% collect() \%>\% chunks("title")
 }
 }
-

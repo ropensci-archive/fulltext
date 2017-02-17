@@ -28,4 +28,3 @@ ft_providers(publisher="hindawi")
 ft_providers(publisher="journal")
 }
 }
-

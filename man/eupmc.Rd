@@ -2,8 +2,8 @@
 % Please edit documentation in R/europe_pmc_utils.R
 \name{eupmc}
 \alias{eupmc}
-\alias{eupmc_fields}
 \alias{eupmc_search}
+\alias{eupmc_fields}
 \alias{eupmc_xml}
 \title{Europe PMC utilities}
 \usage{
@@ -72,4 +72,3 @@ eupmc_xml('PMC3257301')
 }
 }
 \keyword{internal}
-

@@ -51,4 +51,3 @@ out \%>\% ft_browse_sections("abstract")
 out \%>\% ft_browse_sections("body")
 }
 }
-

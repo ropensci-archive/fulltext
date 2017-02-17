@@ -25,4 +25,3 @@ tm::TermDocumentMatrix(res$data)
 \seealso{
 \code{\link{ft_extract}}
 }
-

@@ -43,4 +43,3 @@ y$plos$data$data
 x \%>\% collect() \%>\% get_text()
 }
 }
-

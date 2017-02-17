@@ -22,4 +22,3 @@ biorxiv_search(query = "ecology", config = verbose())
 }
 }
 \keyword{internal}
-
