@@ -4,7 +4,9 @@ get_si_pub <- function(x){
 
     #Doing the check here saves one internet call
     if(grepl("figshare", x))
-            return("figshare")
+        return("figshare")
+    if(grepl("dryad", x))
+        return("dryad")
     pub <- cr_works(x)$data
     
     if(pub$prefix=="http://id.crossref.org/prefix/10.0000")
@@ -35,7 +37,8 @@ get_si_func <- function(x) {
                      "esa_data_archives" = get_si_esa_data_archives,
                      "esa_archives" = get_si_esa_archives,
                      "biorxiv" = get_si_biorxiv,
-                     "epmc" = get_si_epmc
+                     "epmc" = get_si_epmc,
+                     "dryad" = get_si_dryad
                      )
     #If all else fails, try EPMC
     if(is.null(output))
@@ -194,4 +197,17 @@ get_si_biorxiv <- function(doi, si, save.name=NA, dir=NA, cache=TRUE, ...){
     url <- paste0(.url.redir(paste0("http://dx.doi.org/", doi)), ".figures-only")
     file <- .grep.url(url, "/highwire/filestream/[a-z0-9A-Z\\./_-]*", si)
     return(.download(.url.redir(paste0("http://biorxiv.org",file)), dir, save.name, cache))
+}
+
+get_si_dryad <- function(doi, si, save.name=NA, dir=NA, cache=TRUE, ...){
+    #Argument handling
+    if(!is.character(si))
+        stop("DataDRYAD download requires numeric SI info")
+    dir <- .tmpdir(dir)
+    save.name <- .save.name(doi, save.name, si)
+    
+    #Find, download, and return
+    url <- .url.redir(paste0("http://dx.doi.org/", doi))
+    file <- .grep.url(url, paste0("/bitstream/handle/[0-9]+/dryad\\.[0-9]+/", si))
+    return(.download(.url.redir(paste0("http://datadryad.org",file)), dir, save.name, cache))
 }
