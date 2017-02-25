@@ -144,7 +144,7 @@ get_article <- function(x, path, type, ...) {
         tfile <- tempfile()
         res <- httr::GET(x, write_disk(tfile, TRUE))
         httr::stop_for_status(res)
-        pdftools::pdf_text(tfile)
+        crminer::crm_extract(tfile)
       },
       xml = {
         res <- httr::GET(x, ...)
