@@ -26,7 +26,7 @@ Imports:
     jsonlite,
     rplos (>= 0.6.4),
     rcrossref (>= 0.5.4),
-    crminer,
+    crminer (>= 0.0.7.9100),
     aRxiv,
     rentrez,
     tm,

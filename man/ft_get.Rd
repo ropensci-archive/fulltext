@@ -4,9 +4,10 @@
 \alias{ft_get}
 \title{Get full text}
 \usage{
-ft_get(x, from = NULL, plosopts = list(), bmcopts = list(),
-  entrezopts = list(), elifeopts = list(), elsevieropts = list(),
-  cache = FALSE, backend = "rds", path = "~/.fulltext", ...)
+ft_get(x, from = NULL, type = "xml", plosopts = list(),
+  bmcopts = list(), entrezopts = list(), elifeopts = list(),
+  elsevieropts = list(), cache = FALSE, backend = "rds",
+  path = "~/.fulltext", ...)
 }
 \arguments{
 \item{x}{Either identifiers for papers, either DOIs (or other ids) as a list of
@@ -185,5 +186,22 @@ ft_get(x = "", from = "wiley")
 
 # spring, ugh
 ft_get(x = "", from = "springer")
+
+
+# From ft_links output
+## Crossref
+(res2 <- ft_search(query = 'ecology', from = 'crossref', limit = 100))
+(out <- ft_links(res2))
+(ress <- ft_get(x = out, type = "pdf"))
+
+## PLOS
+(res2 <- ft_search(query = 'ecology', from = 'plos', limit = 4))
+(out <- ft_links(res2))
+(ress <- ft_get(x = out, type = "pdf"))
+ress$plos$dois
+ress$plos$data
+ress$plos$data$`10.1371/journal.pone.0059813`
+ress$plos$data$`10.1371/journal.pone.0059813`$data
+ress$plos$data$`10.1371/journal.pone.0059813`$path
 }
 }

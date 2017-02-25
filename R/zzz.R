@@ -173,7 +173,7 @@ try_NULL <- function(expr) try_default_(expr, NULL, quiet = TRUE)
 move_col <- function(x, y) x[ c(names(x)[-grep(y, names(x))], y) ]
 
 names_lower <- function(x) {
-  setNames(x, tolower(names(x))) 
+  stats::setNames(x, tolower(names(x))) 
 }
 
 rbl <- function(x) {

@@ -13,6 +13,10 @@ construct_paths <- function(co, x){
   }
 }
 
+pprint_cache <- function(x) {
+  list(backend = NULL, path = x, data = NULL) 
+}
+
 ## plugin generator
 plugin_get_generator <- function(srce, fun) {
   function(sources, ids, opts, path = NULL, ...) {
@@ -45,10 +49,6 @@ plugin_get_generator <- function(srce, fun) {
       list(found = NULL, dois = NULL, data = NULL, opts = opts)
     }
   }
-}
-
-pprint_cache <- function(x) {
-  list(backend = NULL, path = x, data = NULL) 
 }
 
 ## make plugins

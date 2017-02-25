@@ -1,4 +1,4 @@
-# ft_links plugins --------------------------------------
+2# ft_links plugins --------------------------------------
 plugin_links_entrez <- function(sources, ids, opts, ...){
   if (any(grepl("entrez", sources))) {
     allids <- paste(paste0(ids, "[doi]"), collapse = " OR ")
@@ -24,7 +24,7 @@ plugin_links_plos <- function(sources, ids, opts, ...){
   if (any(grepl("plos", sources))) {
     ids <- grep("annotation", ids, value = TRUE, invert = TRUE)
     tmp <- as.list(setNames(rplos::full_text_urls(ids), ids))
-    tmp <- lapply(tmp, function(z) list(xml = z, pdf = sub("XML", "PDF", z)))
+    tmp <- lapply(tmp, function(z) list(xml = z, pdf = sub("manuscript", "printable", z)))
     list(found = length(tmp), ids = names(tmp), data = tmp, opts = opts)
   } else {
     emptylist(opts)
@@ -39,8 +39,8 @@ plugin_links_crossref <- function(sources, ids, opts, ...){
     tmp <- ft_compact(lapply(ids, safe_crm_links, type = "all"))
     out <- lapply(tmp, function(z) {
       rbind_fill(lapply(z, function(w) {
-        data.frame(list(url = w[1], doi = attr(w, "doi"), type = attr(w, "type")), 
-                   stringsAsFactors = FALSE)
+        data.frame(url = w[1], doi = attr(w, "doi"), type = attr(w, "type"),
+                   member = attr(z, "member"), stringsAsFactors = FALSE)
       }))
     })
     out <- ft_compact(out)

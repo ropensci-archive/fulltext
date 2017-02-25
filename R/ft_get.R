@@ -162,9 +162,26 @@
 #' 
 #' # spring, ugh
 #' ft_get(x = "", from = "springer")
+#' 
+#' 
+#' # From ft_links output
+#' ## Crossref
+#' (res2 <- ft_search(query = 'ecology', from = 'crossref', limit = 100))
+#' (out <- ft_links(res2))
+#' (ress <- ft_get(x = out, type = "pdf"))
+#' 
+#' ## PLOS
+#' (res2 <- ft_search(query = 'ecology', from = 'plos', limit = 4))
+#' (out <- ft_links(res2))
+#' (ress <- ft_get(x = out, type = "pdf"))
+#' ress$plos$dois
+#' ress$plos$data
+#' ress$plos$data$`10.1371/journal.pone.0059813`
+#' ress$plos$data$`10.1371/journal.pone.0059813`$data
+#' ress$plos$data$`10.1371/journal.pone.0059813`$path
 #' }
 
-ft_get <- function(x, from = NULL, plosopts = list(), bmcopts = list(), 
+ft_get <- function(x, from = NULL, type = "xml", plosopts = list(), bmcopts = list(), 
                    entrezopts = list(), elifeopts = list(), 
                    elsevieropts = list(),  cache = FALSE, backend = "rds", 
                    path = "~/.fulltext", ...) {
@@ -172,7 +189,15 @@ ft_get <- function(x, from = NULL, plosopts = list(), bmcopts = list(),
 }
 
 #' @export
-ft_get.character <- function(x, from=NULL, plosopts=list(), bmcopts=list(), 
+ft_get.default <- function(x, from=NULL, type = "xml", plosopts=list(), bmcopts=list(), 
+                      entrezopts=list(), elifeopts=list(), elsevieropts = list(),
+                      cache=FALSE, backend="rds", path="~/.fulltext", ...) {
+  
+  stop("no 'ft_get' method for ", class(x), call. = FALSE)
+}
+
+#' @export
+ft_get.character <- function(x, from=NULL, type = "xml", plosopts=list(), bmcopts=list(), 
                              entrezopts=list(), elifeopts=list(), 
                              elsevieropts = list(),  
                              cache=FALSE, backend="rds", path="~/.fulltext", ...) {
@@ -206,7 +231,7 @@ ft_get.character <- function(x, from=NULL, plosopts=list(), bmcopts=list(),
 }
 
 #' @export
-ft_get.list <- function(x, from=NULL, plosopts=list(), bmcopts=list(), 
+ft_get.list <- function(x, from=NULL, type = "xml", plosopts=list(), bmcopts=list(), 
                         entrezopts=list(), elifeopts=list(), elsevieropts = list(),
                         cache=FALSE, backend="rds", path="~/.fulltext", ...) {
 
@@ -232,7 +257,7 @@ ft_get.list <- function(x, from=NULL, plosopts=list(), bmcopts=list(),
 }
 
 #' @export
-ft_get.ft <- function(x, from=NULL, plosopts=list(), bmcopts=list(), 
+ft_get.ft <- function(x, from=NULL, type = "xml", plosopts=list(), bmcopts=list(), 
                       entrezopts=list(), elifeopts=list(), elsevieropts = list(),
                       cache=FALSE, backend="rds", path="~/.fulltext", ...) {
 
@@ -245,6 +270,30 @@ ft_get.ft <- function(x, from=NULL, plosopts=list(), bmcopts=list(),
   entrez_out <- plugin_get_entrez(from, x$entrez$data$doi, entrezopts, ...)
   structure(list(plos = plos_out, entrez = entrez_out), class = "ft_data")
 }
+
+#' @export
+ft_get.ft_links <- function(x, from=NULL, type = "xml", plosopts=list(), bmcopts=list(), 
+                      entrezopts=list(), elifeopts=list(), elsevieropts = list(),
+                      crossrefopts = list(), cache=FALSE, backend="rds", 
+                      path="~/.fulltext", ...) {
+  
+  make_dir(path)
+  cacheopts <- cache_options_get()
+  if (is.null(cacheopts$cache) && is.null(cacheopts$backend)) {
+    cache_options_set(cache, backend, path)
+  }
+  
+  from <- names(x[sapply(x, function(v) !is.null(v$data))])
+  plos_out <- plugin_get_links_plos(from, urls = x$plos$data, 
+                                    plosopts, type, cache, ...)
+  crossref_out <- plugin_get_links_crossref(from, urls = x$crossref$data, 
+                                            crossrefopts, type, cache, ...)
+  structure(list(plos = plos_out, crossref = crossref_out), class = "ft_data")
+}
+
+
+
+
 
 
 

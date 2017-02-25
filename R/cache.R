@@ -50,11 +50,10 @@ cache_options_get <- function(){
 cache_save <- function(obj, backend, path, db) {
   backend <- match.arg(backend, choices = c('rds', 'rcache', 'redis'))
   switch(backend,
-         rds = save_rds(obj, path),
+         rds = save_rds(x = obj, path),
          rcache = save_rcache2(obj),
          redis = save_redis2(obj)
-         #            ,
-         #            sqlite = save_sqlite(db=db, obj, key)
+         # sqlite = save_sqlite(db=db, obj, key)
   )
 }
 
