@@ -6,8 +6,8 @@
 \usage{
 ft_get(x, from = NULL, type = "xml", plosopts = list(),
   bmcopts = list(), entrezopts = list(), elifeopts = list(),
-  elsevieropts = list(), cache = FALSE, backend = "rds",
-  path = "~/.fulltext", ...)
+  elsevieropts = list(), crossrefopts = list(), cache = FALSE,
+  backend = "rds", path = "~/.fulltext", ...)
 }
 \arguments{
 \item{x}{Either identifiers for papers, either DOIs (or other ids) as a list of
@@ -15,6 +15,8 @@ charcter strings, or a character vector, OR an object of class \code{ft}, as
 returned from \code{\link{ft_search}}}
 
 \item{from}{Source to query. Optional.}
+
+\item{type}{(character) one of xml (default), pdf}
 
 \item{plosopts}{PLOS options. See \code{\link[rplos]{plos_fulltext}}}
 
@@ -26,6 +28,8 @@ returned from \code{\link{ft_search}}}
 \item{elifeopts}{eLife options}
 
 \item{elsevieropts}{elsevier options}
+
+\item{crossrefopts}{Crossref options}
 
 \item{cache}{(logical) To cache results or not. If \code{cache=TRUE}, raw XML, or other
 format that article is in is written to disk, then pulled from disk when further

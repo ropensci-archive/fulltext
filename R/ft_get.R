@@ -13,12 +13,14 @@
 #' charcter strings, or a character vector, OR an object of class \code{ft}, as
 #' returned from \code{\link{ft_search}}
 #' @param from Source to query. Optional.
+#' @param type (character) one of xml (default), pdf
 #' @param plosopts PLOS options. See \code{\link[rplos]{plos_fulltext}}
 #' @param bmcopts BMC options. parameter DEPRECATED
 #' @param entrezopts Entrez options. See \code{\link[rentrez]{entrez_search}} and
 #' \code{\link{entrez_fetch}}
 #' @param elifeopts eLife options
 #' @param elsevieropts elsevier options
+#' @param crossrefopts Crossref options
 #' @param cache (logical) To cache results or not. If \code{cache=TRUE}, raw XML, or other
 #' format that article is in is written to disk, then pulled from disk when further
 #' manipulations are done on the data. See also \code{\link{cache}}
@@ -181,26 +183,28 @@
 #' ress$plos$data$`10.1371/journal.pone.0059813`$path
 #' }
 
-ft_get <- function(x, from = NULL, type = "xml", plosopts = list(), bmcopts = list(), 
-                   entrezopts = list(), elifeopts = list(), 
-                   elsevieropts = list(),  cache = FALSE, backend = "rds", 
-                   path = "~/.fulltext", ...) {
+ft_get <- function(x, from = NULL, type = "xml", plosopts = list(), 
+                   bmcopts = list(), entrezopts = list(), elifeopts = list(), 
+                   elsevieropts = list(), crossrefopts = list(), cache = FALSE, 
+                   backend = "rds", path = "~/.fulltext", ...) {
   UseMethod("ft_get")
 }
 
 #' @export
-ft_get.default <- function(x, from=NULL, type = "xml", plosopts=list(), bmcopts=list(), 
-                      entrezopts=list(), elifeopts=list(), elsevieropts = list(),
-                      cache=FALSE, backend="rds", path="~/.fulltext", ...) {
-  
+ft_get.default <- function(x, from=NULL, type = "xml", plosopts=list(), 
+                           bmcopts=list(), entrezopts=list(), elifeopts=list(), 
+                           elsevieropts = list(), crossrefopts = list(), 
+                           cache=FALSE, backend="rds", path="~/.fulltext", ...){
   stop("no 'ft_get' method for ", class(x), call. = FALSE)
 }
 
 #' @export
-ft_get.character <- function(x, from=NULL, type = "xml", plosopts=list(), bmcopts=list(), 
-                             entrezopts=list(), elifeopts=list(), 
-                             elsevieropts = list(),  
-                             cache=FALSE, backend="rds", path="~/.fulltext", ...) {
+ft_get.character <- function(x, from=NULL, type = "xml", plosopts=list(), 
+                             bmcopts=list(), entrezopts=list(), 
+                             elifeopts=list(), 
+                             elsevieropts = list(),  crossrefopts = list(), 
+                             cache=FALSE, backend="rds", 
+                             path="~/.fulltext", ...) {
 
   calls <- names(sapply(match.call(), deparse))[-1]
   calls_vec <- "bmcopts" %in% calls
@@ -210,7 +214,9 @@ ft_get.character <- function(x, from=NULL, type = "xml", plosopts=list(), bmcopt
   
   make_dir(path)
   cacheopts <- cache_options_get()
-  if (is.null(cacheopts$cache) && is.null(cacheopts$backend)) cache_options_set(cache, backend, path)
+  if (is.null(cacheopts$cache) && is.null(cacheopts$backend)) {
+    cache_options_set(cache, backend, path)
+  }
 
   if (!is.null(from)) {
     from <- match.arg(from, c("plos", "entrez", "elife", "pensoft", 
@@ -231,16 +237,20 @@ ft_get.character <- function(x, from=NULL, type = "xml", plosopts=list(), bmcopt
 }
 
 #' @export
-ft_get.list <- function(x, from=NULL, type = "xml", plosopts=list(), bmcopts=list(), 
-                        entrezopts=list(), elifeopts=list(), elsevieropts = list(),
+ft_get.list <- function(x, from=NULL, type = "xml", plosopts=list(), 
+                        bmcopts=list(), entrezopts=list(), elifeopts=list(), 
+                        elsevieropts = list(), crossrefopts = list(), 
                         cache=FALSE, backend="rds", path="~/.fulltext", ...) {
 
   make_dir(path)
   cacheopts <- cache_options_get()
-  if (is.null(cacheopts$cache) && is.null(cacheopts$backend)) cache_options_set(cache, backend, path)
+  if (is.null(cacheopts$cache) && is.null(cacheopts$backend)) {
+    cache_options_set(cache, backend, path)
+  }
 
   if (!is.null(from)) {
-    from <- match.arg(from, c("plos", "entrez", "bmc", "elife", "pensoft", "arxiv", "biorxiv"))
+    from <- match.arg(from, c("plos", "entrez", "bmc", "elife", 
+                              "pensoft", "arxiv", "biorxiv"))
     plos_out <- plugin_get_plos(from, x, plosopts, ...)
     entrez_out <- plugin_get_entrez(from, x, entrezopts, ...)
     elife_out <- plugin_get_elife(from, x, elifeopts, ...)
@@ -250,20 +260,24 @@ ft_get.list <- function(x, from=NULL, type = "xml", plosopts=list(), bmcopts=lis
     els_out <- plugin_get_elsevier(from, x, path, ...)
     structure(list(plos = plos_out, entrez = entrez_out, elife = elife_out,
                    pensoft = pensoft_out, arxiv = arxiv_out, 
-                   biorxiv = biorxiv_out, elsevier = els_out), class = "ft_data")
+                   biorxiv = biorxiv_out, elsevier = els_out), 
+              class = "ft_data")
   } else {
     get_unknown(x, path, ...)
   }
 }
 
 #' @export
-ft_get.ft <- function(x, from=NULL, type = "xml", plosopts=list(), bmcopts=list(), 
-                      entrezopts=list(), elifeopts=list(), elsevieropts = list(),
-                      cache=FALSE, backend="rds", path="~/.fulltext", ...) {
+ft_get.ft <- function(x, from=NULL, type = "xml", plosopts=list(), 
+                      bmcopts=list(), entrezopts=list(), elifeopts=list(), 
+                      elsevieropts = list(), crossrefopts = list(), cache=FALSE,
+                      backend="rds", path="~/.fulltext", ...) {
 
   make_dir(path)
   cacheopts <- cache_options_get()
-  if (is.null(cacheopts$cache) && is.null(cacheopts$backend)) cache_options_set(cache, backend, path)
+  if (is.null(cacheopts$cache) && is.null(cacheopts$backend)) {
+    cache_options_set(cache, backend, path)
+  }
 
   from <- names(x[sapply(x, function(v) !is.null(v$data))])
   plos_out <- plugin_get_plos(from, x$plos$data$id, plosopts, ...)
@@ -272,10 +286,10 @@ ft_get.ft <- function(x, from=NULL, type = "xml", plosopts=list(), bmcopts=list(
 }
 
 #' @export
-ft_get.ft_links <- function(x, from=NULL, type = "xml", plosopts=list(), bmcopts=list(), 
-                      entrezopts=list(), elifeopts=list(), elsevieropts = list(),
-                      crossrefopts = list(), cache=FALSE, backend="rds", 
-                      path="~/.fulltext", ...) {
+ft_get.ft_links <- function(x, from=NULL, type = "xml", plosopts=list(), 
+                            bmcopts=list(), entrezopts=list(), elifeopts=list(), 
+                            elsevieropts = list(), crossrefopts = list(), 
+                            cache=FALSE, backend="rds", path="~/.fulltext", ...){
   
   make_dir(path)
   cacheopts <- cache_options_get()
