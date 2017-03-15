@@ -20,11 +20,12 @@ ft_links(x, from = NULL, plosopts = list(), crossrefopts = list(),
 
 \item{bmcopts}{BMC options. See \code{?bmc_search}}
 
-\item{...}{Further args passed on to \code{\link[httr]{GET}}. Not working right now...}
+\item{...}{Further args passed on to \code{\link[httr]{GET}}. Not working 
+right now...}
 }
 \value{
-An object of class ft_links, with either a list or data.frame for each 
-DOI, with links for XML and PDF links (typically).
+An object of class ft_links, with either a list or data.frame for 
+each DOI, with links for XML and PDF links (typically).
 }
 \description{
 Get full text links
@@ -69,13 +70,15 @@ out$crossref$data[[1]]
 (out <- ft_links(res2$crossref))
 out$crossref
 ## from character vector of DOIs
-x <- c("10.1016/s1754-5048(14)00139-1", "10.1016/b978-0-12-378260-1.50017-8")
+x <- c("10.1016/s1754-5048(14)00139-1", 
+       "10.1016/b978-0-12-378260-1.50017-8")
 (out2 <- ft_links(x, from = "crossref"))
 out2$crossref
 
 # PLOS
 (res3 <- ft_search(query='ecology', from='plos', plosopts=list(
-   fl=c('id','author','eissn','journal','counter_total_all','alm_twitterCount'))))
+   fl=c('id','author','eissn','journal','counter_total_all',
+        'alm_twitterCount'))))
 res3$plos$data$id
 ## directly from ft_search output
 (out <- ft_links(res3))

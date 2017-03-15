@@ -273,16 +273,35 @@ ft_get.ft <- function(x, from=NULL, type = "xml", plosopts=list(),
                       elsevieropts = list(), crossrefopts = list(), cache=FALSE,
                       backend="rds", path="~/.fulltext", ...) {
 
+  # caching setup
   make_dir(path)
   cacheopts <- cache_options_get()
   if (is.null(cacheopts$cache) && is.null(cacheopts$backend)) {
     cache_options_set(cache, backend, path)
   }
-
+  
+  # warn on sources that aren't supported yet and will be skipped
   from <- names(x[sapply(x, function(v) !is.null(v$data))])
-  plos_out <- plugin_get_plos(from, x$plos$data$id, plosopts, ...)
-  entrez_out <- plugin_get_entrez(from, x$entrez$data$doi, entrezopts, ...)
-  structure(list(plos = plos_out, entrez = entrez_out), class = "ft_data")
+  not_supported <- c("elife", "pensoft", "bmc", "arxiv", 
+                     "biorxiv", "europmc", "scopus", "microsoft")
+  if (any(from %in% not_supported)) {
+    message(sprintf(
+      "the following not supported and will be skipped:\n  %s",
+      paste0(not_supported[not_supported %in% from], collapse = ", ")
+    ))
+  }
+
+  plos_out <- plugin_get_plos("plos", x$plos$data$id, plosopts, ...)
+  entrez_out <- plugin_get_entrez("entrez", x$entrez$data$doi, 
+                                  entrezopts, ...)
+  cr_out <- NULL
+  if ("crossref" %in% from) {
+    crl <- ft_links(x$crossref$data$doi, from = "crossref")
+    cr_out <- plugin_get_links_crossref(from, urls = crl$crossref$data, 
+                                        crossrefopts, type, cache, ...)
+  }
+  structure(list(plos = plos_out, entrez = entrez_out, 
+                 crossref = cr_out), class = "ft_data")
 }
 
 #' @export

@@ -68,13 +68,34 @@ plugin_get_elsevier <- plugin_get_generator("elsevier", elsevier_ft)
 
 ## getters - could stand to make closure for the below as well, FIXME
 entrez_get <- function(ids, ...){
-  res <- rentrez::entrez_search(db = "pmc", term = paste0(sprintf('%s[doi]', ids), collapse = "|"), ...)
+  res <- rentrez::entrez_search(db = "pmc", 
+                                term = paste0(sprintf('%s[doi]', ids), 
+                                              collapse = "|"), ...)
   if (length(res$ids) == 0) {
-    res <- rentrez::entrez_search(db = "pubmed", term = paste0(sprintf('%s[doi]', ids), collapse = "|"), ...)
-    vapply(res$ids, function(z) rentrez::entrez_fetch(db = 'pubmed', id = z, rettype = "xml", ...), character(1))
+    res <- rentrez::entrez_search(db = "pubmed", 
+                                  term = paste0(sprintf('%s[doi]', ids), 
+                                                collapse = "|"), ...)
+    tmp <- vapply(res$ids, function(z) {
+      rentrez::entrez_fetch(db = 'pubmed', id = z, rettype = "xml", ...)
+    }, character(1))
   } else {
-    vapply(res$ids, function(z) rentrez::entrez_fetch(db = 'pmc', id = z, rettype = "xml", ...), character(1))
+    tmp <- vapply(res$ids, function(z) {
+      rentrez::entrez_fetch(db = 'pmc', id = z, rettype = "xml", ...)
+    }, character(1))
   }
+  structure(tmp, class = "entrez_ft")
+}
+
+#' @export
+print.entrez_ft <- function(x, ...) {
+  namesprint <- paste(stats::na.omit(names(x)[1:10]), collapse = " ")
+  lengths <- vapply(x, nchar, 1, USE.NAMES = FALSE)
+  cat(sprintf("%s full-text articles retrieved", length(x)), 
+      "\n")
+  cat(sprintf("Min. Length: %s - Max. Length: %s", min(lengths), 
+              max(lengths)), "\n")
+  cat(rplos:::rplos_wrap(sprintf("DOIs:\n %s ...", namesprint)), "\n\n")
+  cat("NOTE: extract xml strings like output['<doi>']")
 }
 
 bmc_ft <- function(dois, ...) {

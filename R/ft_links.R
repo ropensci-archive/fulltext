@@ -7,10 +7,11 @@
 #' @param bmcopts BMC options. See \code{?bmc_search}
 #' @param crossrefopts Crossref options. See \code{?cr_works}
 #' @param entrezopts Entrez options. See \code{?entrez_search}
-#' @param ... Further args passed on to \code{\link[httr]{GET}}. Not working right now...
+#' @param ... Further args passed on to \code{\link[httr]{GET}}. Not working 
+#' right now...
 #'
-#' @return An object of class ft_links, with either a list or data.frame for each 
-#' DOI, with links for XML and PDF links (typically). 
+#' @return An object of class ft_links, with either a list or data.frame for 
+#' each DOI, with links for XML and PDF links (typically). 
 #' 
 #' @details Inputs can be an object of class \code{ft}, \code{ft_ind}, or a 
 #' character string of DOIs. You can specify a specific source for four sources
@@ -50,13 +51,15 @@
 #' (out <- ft_links(res2$crossref))
 #' out$crossref
 #' ## from character vector of DOIs
-#' x <- c("10.1016/s1754-5048(14)00139-1", "10.1016/b978-0-12-378260-1.50017-8")
+#' x <- c("10.1016/s1754-5048(14)00139-1", 
+#'        "10.1016/b978-0-12-378260-1.50017-8")
 #' (out2 <- ft_links(x, from = "crossref"))
 #' out2$crossref
 #' 
 #' # PLOS
 #' (res3 <- ft_search(query='ecology', from='plos', plosopts=list(
-#'    fl=c('id','author','eissn','journal','counter_total_all','alm_twitterCount'))))
+#'    fl=c('id','author','eissn','journal','counter_total_all',
+#'         'alm_twitterCount'))))
 #' res3$plos$data$id
 #' ## directly from ft_search output
 #' (out <- ft_links(res3))
