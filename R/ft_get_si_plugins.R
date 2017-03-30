@@ -208,6 +208,6 @@ get_si_dryad <- function(doi, si, save.name=NA, dir=NA, cache=TRUE, ...){
     
     #Find, download, and return
     url <- .url.redir(paste0("http://dx.doi.org/", doi))
-    file <- .grep.url(url, paste0("/bitstream/handle/[0-9]+/dryad\\.[0-9]+/", si))
+    file <- .grep.url(url, paste0("/bitstream/handle/[0-9]+/dryad\\.[0-9]+/", URLencode(si,reserved=TRUE)))
     return(.download(.url.redir(paste0("http://datadryad.org",file)), dir, save.name, cache))
 }
