@@ -17,7 +17,15 @@ test_that("ft_get_si returns...", {
   expect_true(file.exists(ft_get_si("10.1098/rspb.2015.0338", vol=282, issue=1811, 1)))
   expect_true(file.exists(ft_get_si("10.1101/016386", 1)))
   expect_true(file.exists(ft_get_si("10.1371/journal.pone.0126524", "pone.0126524.g005.jpg", "epmc")))
-  expect_true(file.exists(ft_get_si("10.5061/dryad.34m6j", "datafile.csv")))
+  
+  #DRYAD
+  expect_error(file <- ft_get_si("10.5061/dryad.34m6j", "datafile.csv"), NA)
+  expect_error(data <- read.csv(file), NA)
+  expect_equal(dim(data), c(145,49))
+  expect_error(file <- ft_get_si("10.5061/dryad.55610", "Data (revised).txt"), NA)
+  expect_error(data <- read.delim(file), NA)
+  expect_equal(dim(data), c(740,25))
+    
   
   #Extra checks for Wiley
   expect_true(file.exists(ft_get_si("10.1111/ele.12437", si=1)))
