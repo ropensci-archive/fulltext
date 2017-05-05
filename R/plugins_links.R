@@ -39,8 +39,9 @@ plugin_links_crossref <- function(sources, ids, opts, ...){
     tmp <- ft_compact(lapply(ids, safe_crm_links, type = "all"))
     out <- lapply(tmp, function(z) {
       rbind_fill(lapply(z, function(w) {
-        data.frame(url = w[1], doi = attr(w, "doi"), type = attr(w, "type"),
-                   member = attr(z, "member"), stringsAsFactors = FALSE)
+        data.frame(url = w[[1]], doi = attr(w, "doi"), type = attr(w, "type"),
+                   member = attr(w, "member") %||% "", 
+                   stringsAsFactors = FALSE)
       }))
     })
     out <- ft_compact(out)

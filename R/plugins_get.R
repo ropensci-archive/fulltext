@@ -37,7 +37,11 @@ plugin_get_generator <- function(srce, fun) {
       if (any(sources %in% c("arxiv", "biorxiv"))) opts$basepath <- path
       opts <- c(opts, callopts)
       out <- do.call(fun, opts)
-      names(out) <- ids
+      # deals with case where no results
+      if (length(out) == 0) {
+        return(list(found = NULL, dois = NULL, data = NULL, opts = opts))
+      }
+      #names(out) <- ids
       attr(out, "format") <- "xml"
       dat <- if (any(sources %in% c("arxiv", "biorxiv"))) {
         pprint_cache(out)
@@ -82,6 +86,12 @@ entrez_get <- function(ids, ...){
     tmp <- vapply(res$ids, function(z) {
       rentrez::entrez_fetch(db = 'pmc', id = z, rettype = "xml", ...)
     }, character(1))
+    if (length(tmp) != 0) {
+      tmp <- stats::setNames(
+        as.list(tmp),
+        strsplit(gsub("\\[doi\\]", "", res$QueryTranslation), " OR ")[[1]]
+      )
+    }
   }
   structure(tmp, class = "entrez_ft")
 }
