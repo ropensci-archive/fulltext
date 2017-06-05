@@ -29,7 +29,7 @@ biorxiv_search <- function(query, limit = 10, ...) {
     dois <- strtrim(strextract(
       xml2::xml_text(
         xml2::xml_find_all(
-          html, 
+          w, 
           '//div[@class="highwire-cite-metadata"]//span[@class="highwire-cite-metadata-doi highwire-cite-metadata"]')
       ),
       "https.+"
