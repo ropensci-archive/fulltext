@@ -4,13 +4,25 @@
 #' @keywords internal
 #' @param query query terms
 #' @param limit records to return. default: 10
+#' @param date_from,date_to date begin and end, of form YYYY-MM-DD
 #' @param ... curl options passed on to \code{\link[httr]{GET}}
+#' @details We search Biorxiv first, get DOIs, then search Crossref - 
+#' one consequence of this is that you may get back less than the number of 
+#' results you requested even if Biorxiv found equal to or more than 
+#' the amount you requested - BECAUSE we take the DOIs from the results and 
+#' go out to Crossref to get what we think is better metadata than what
+#' Biorxiv has.
 #' @examples \dontrun{
-#' biorxiv_search(query = "ecology", config = verbose())
+#' biorxiv_search(query = "ecology")
+#' biorxiv_search(query = "owls", date_from = "2016-01-01", 
+#'   date_to = "2016-12-30", limit = 10)
 #' }
-biorxiv_search <- function(query, limit = 10, ...) {
+biorxiv_search <- function(query, limit = 10, date_from = NULL, 
+                           date_to = NULL, ...) {
+  
   url <- file.path(bior_base(), URLencode(paste0(query, " numresults:30")))
-  res <- GET(url, ...)
+  args <- ft_compact(list(limit_from = date_from, limit_to = date_to))
+  res <- GET(url, query = args)
   html <- xml2::read_html(content(res, "text", encoding = 'UTF-8'))
   found <- get_found(html)
   init_ret <- length(xml2::xml_find_all(html, "//*[contains(text(), 'doi.org')]"))
@@ -24,8 +36,6 @@ biorxiv_search <- function(query, limit = 10, ...) {
   }
   all_html <- unlist(list(list(html), html_pages), recursive = FALSE)
   res <- lapply(all_html, function(w) {
-    #href <- xml2::xml_find_all(w, "//a[contains(@href, '/content/early')]")
-    #hrefs <- vapply(href, function(y) xml_attr(y, "href"), "")
     dois <- strtrim(strextract(
       xml2::xml_text(
         xml2::xml_find_all(
@@ -34,9 +44,6 @@ biorxiv_search <- function(query, limit = 10, ...) {
       ),
       "https.+"
     ))
-    #doi <- xml2::xml_find_all(html, "//*[contains(text(), 'doi.org')]")
-    #dois_url <- vapply(doi, function(y) strtrim(xml2::xml_text(xml2::xml_contents(y))[[2]]), "")
-    #dois <- gsub("https://doi.org/", "", dois_url)
     suppressWarnings(rcrossref::cr_works(dois))$data
   })
   dat <- do.call(rbind, res)
