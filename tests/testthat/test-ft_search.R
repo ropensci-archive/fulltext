@@ -90,4 +90,7 @@ test_that("ft_search fails well", {
   # no data found, not error, but no data
   expect_message(ft_search(5, from = 'plos'), "Sorry, no data found")
   expect_equal(suppressMessages(ft_search(5, from = 'plos')$plos$found), 0)
+  
+  expect_error(biorxiv_search("asdfasdfasdfasfasfd"), 
+               "no results found in Biorxiv")
 })

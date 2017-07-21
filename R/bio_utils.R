@@ -25,6 +25,7 @@ biorxiv_search <- function(query, limit = 10, date_from = NULL,
   res <- GET(url, query = args)
   html <- xml2::read_html(content(res, "text", encoding = 'UTF-8'))
   found <- get_found(html)
+  if (length(found) == 0) stop("no results found in Biorxiv")
   init_ret <- length(xml2::xml_find_all(html, "//*[contains(text(), 'doi.org')]"))
   html_pages <- NULL
   if (init_ret < limit) {
