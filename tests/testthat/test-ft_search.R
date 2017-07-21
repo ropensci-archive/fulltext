@@ -7,7 +7,7 @@ test_that("ft_search returns...", {
   flds <- c('id','author','eissn','journal','counter_total_all','alm_twitterCount')
   bb <- ft_search(query = 'climate change', from = 'plos', plosopts = list(fl = flds))
   cc <- ft_search(query = 'ecology', from = 'crossref')
-  dd <- ft_search(query = 'ecology', from = 'biorxiv')
+  dd <- ft_search(query = 'owls', from = 'biorxiv')
   
   # correct classes
   expect_is(aa, "ft")

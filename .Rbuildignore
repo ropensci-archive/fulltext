@@ -13,7 +13,6 @@ README.Rmd
 ^.*\.xml
 ^CONDUCT\.md$
 cran-comments.md
-tests/test-all.R
 ^cran-comments\.md$
 ^revdep$
 .github
