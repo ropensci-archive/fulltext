@@ -37,7 +37,7 @@ rOpenSci has a number of R packages to get either full text, metadata, or both f
 
 Additional steps we hope to include in future versions:
 
-* Analysis enabled via the [tm](https://cran.r-project.org/package=tm) package and friends, and via [Spark-R](https://amplab-extras.github.io/SparkR-pkg/) to handle especially large jobs
+* Analysis enabled via the [tm](https://cran.r-project.org/package=tm) package and friends
 * Visualization
 
 Data sources in `fulltext` include:
@@ -208,6 +208,11 @@ pdfx(file = pdf5)
 #>  .....
 ```
 
+## Contributors
+
+* Scott Chamberlain <http://github.com/sckott>
+* Will Pearse <https://github.com/willpearse>
+
 ## Meta
 
 * Please [report any issues or bugs](https://github.com/ropensci/fulltext/issues).
@@ -215,4 +220,4 @@ pdfx(file = pdf5)
 * Get citation information for `fulltext`: `citation(package = 'fulltext')`
 * Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
 
-[![rofooter](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)
+[![rofooter](https://ropensci.org/public_images/github_footer.png)](https://ropensci.org)

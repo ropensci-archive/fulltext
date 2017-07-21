@@ -9,8 +9,10 @@ Description: Provides a single interface to many sources of full text
     data formats used in and outside of R.
 Version: 0.1.8.9526
 License: MIT + file LICENSE
-Authors@R: person("Scott", "Chamberlain", role = c("aut", "cre"),
-    email = "myrmecocystus@gmail.com")
+Authors@R: c(
+    person("Scott", "Chamberlain", role = c("aut", "cre"), email = "myrmecocystus@gmail.com"),
+    person("Will", "Pearse", role = "ctb")
+    )
 URL: https://github.com/ropensci/fulltext
 BugReports: https://github.com/ropensci/fulltext/issues
 LazyLoad: yes

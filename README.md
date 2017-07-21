@@ -30,7 +30,7 @@ rOpenSci has a number of R packages to get either full text, metadata, or both f
 
 Additional steps we hope to include in future versions:
 
-* Analysis enabled via the [tm](https://cran.r-project.org/package=tm) package and friends, and via [Spark-R](https://amplab-extras.github.io/SparkR-pkg/) to handle especially large jobs
+* Analysis enabled via the [tm](https://cran.r-project.org/package=tm) package and friends
 * Visualization
 
 Data sources in `fulltext` include:
@@ -87,7 +87,7 @@ ft_search(query = 'ecology', from = 'plos')
 #> Query:
 #>   [ecology] 
 #> Found:
-#>   [PLoS: 36692; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
+#>   [PLoS: 39041; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
 #> Returned:
 #>   [PLoS: 10; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0]
 ```
@@ -101,8 +101,8 @@ ft_search(query = 'ecology', from = 'plos')
 res1 <- ft_search(query = 'ecology', from = 'entrez', limit = 5)
 ft_links(res1)
 #> <fulltext links>
-#> [Found] 5 
-#> [IDs] ID_28166832 ID_28166755 ID_28007834 ID_27974440 ID_21935658 ...
+#> [Found] 1 
+#> [IDs] ID_28724921 ...
 ```
 
 Or pass in DOIs directly
@@ -111,8 +111,8 @@ Or pass in DOIs directly
 ```r
 ft_links(res1$entrez$data$doi, from = "entrez")
 #> <fulltext links>
-#> [Found] 5 
-#> [IDs] ID_28166832 ID_28166755 ID_28007834 ID_27974440 ID_21935658 ...
+#> [Found] 1 
+#> [IDs] ID_28724921 ...
 ```
 
 ## Get full text
@@ -135,9 +135,9 @@ ft_get('10.1371/journal.pone.0086169', from = 'plos')
 library("rplos")
 (dois <- searchplos(q = "*:*", fl = 'id',
    fq = list('doc_type:full',"article_type:\"research article\""), limit = 5)$data$id)
-#> [1] "10.1371/journal.pone.0102138" "10.1371/journal.pone.0102147"
-#> [3] "10.1371/journal.pone.0102132" "10.1371/journal.pone.0036392"
-#> [5] "10.1371/journal.pone.0102240"
+#> [1] "10.1371/journal.pone.0003649" "10.1371/journal.pone.0057589"
+#> [3] "10.1371/journal.pone.0003616" "10.1371/journal.pone.0003505"
+#> [5] "10.1371/journal.pone.0003677"
 x <- ft_get(dois, from = "plos")
 x %>% chunks("publisher") %>% tabularize()
 #> $plos
@@ -154,11 +154,11 @@ x %>% chunks("publisher") %>% tabularize()
 x %>% chunks(c("doi","publisher")) %>% tabularize()
 #> $plos
 #>                            doi                                   publisher
-#> 1 10.1371/journal.pone.0102138 Public Library of ScienceSan Francisco, USA
-#> 2 10.1371/journal.pone.0102147 Public Library of ScienceSan Francisco, USA
-#> 3 10.1371/journal.pone.0102132 Public Library of ScienceSan Francisco, USA
-#> 4 10.1371/journal.pone.0036392 Public Library of ScienceSan Francisco, USA
-#> 5 10.1371/journal.pone.0102240 Public Library of ScienceSan Francisco, USA
+#> 1 10.1371/journal.pone.0003649 Public Library of ScienceSan Francisco, USA
+#> 2 10.1371/journal.pone.0057589 Public Library of ScienceSan Francisco, USA
+#> 3 10.1371/journal.pone.0003616 Public Library of ScienceSan Francisco, USA
+#> 4 10.1371/journal.pone.0003505 Public Library of ScienceSan Francisco, USA
+#> 5 10.1371/journal.pone.0003677 Public Library of ScienceSan Francisco, USA
 ```
 
 Use `dplyr` to data munge
@@ -171,24 +171,12 @@ x %>%
  tabularize() %>%
  .$plos %>%
  select(-permissions.license)
-#>                            doi                                   publisher
-#> 1 10.1371/journal.pone.0102138 Public Library of ScienceSan Francisco, USA
-#> 2 10.1371/journal.pone.0102147 Public Library of ScienceSan Francisco, USA
-#> 3 10.1371/journal.pone.0102132 Public Library of ScienceSan Francisco, USA
-#> 4 10.1371/journal.pone.0036392 Public Library of ScienceSan Francisco, USA
-#> 5 10.1371/journal.pone.0102240 Public Library of ScienceSan Francisco, USA
-#>   permissions.copyright.year permissions.copyright.holder
-#> 1                       2014                    Ong et al
-#> 2                       2014               Songstad et al
-#> 3                       2014                 Suzuki et al
-#> 4                       2012                Doubeni et al
-#> 5                       2014               Hirayama et al
-#>                       permissions.license_url
-#> 1 http://creativecommons.org/licenses/by/4.0/
-#> 2 http://creativecommons.org/licenses/by/4.0/
-#> 3 http://creativecommons.org/licenses/by/4.0/
-#> 4                                        <NA>
-#> 5 http://creativecommons.org/licenses/by/4.0/
+#>                            doi                                   publisher permissions.copyright.year permissions.copyright.holder permissions.license_url
+#> 1 10.1371/journal.pone.0003649 Public Library of ScienceSan Francisco, USA                       2008           Rajagovindan et al                    <NA>
+#> 2 10.1371/journal.pone.0057589 Public Library of ScienceSan Francisco, USA                       2013                   Dane et al                    <NA>
+#> 3 10.1371/journal.pone.0003616 Public Library of ScienceSan Francisco, USA                       2008                Bandera et al                    <NA>
+#> 4 10.1371/journal.pone.0003505 Public Library of ScienceSan Francisco, USA                       2008                Brodeur et al                    <NA>
+#> 5 10.1371/journal.pone.0003677 Public Library of ScienceSan Francisco, USA                       2008              Kuparinen et al                    <NA>
 ```
 
 ## Supplementary materials
@@ -233,7 +221,7 @@ pdf <- system.file("examples", "example2.pdf", package = "fulltext")
 
 ```r
 (res <- ft_extract(pdf))
-#> <document>/Library/Frameworks/R.framework/Versions/3.3/Resources/library/fulltext/examples/example2.pdf
+#> <document>/Users/sacmac/github/ropensci/fulltext/inst/examples/example2.pdf
 #>   Title: pone.0107412 1..10
 #>   Producer: Acrobat Distiller 9.0.0 (Windows); modified using iText 5.0.3 (c) 1T3XT BVBA
 #>   Creation date: 2014-09-18
@@ -246,15 +234,11 @@ Or extract directly into a `tm` Corpus
 paths <- sapply(paste0("example", 2:5, ".pdf"), function(x) system.file("examples", x, package = "fulltext"))
 (corpus <- ft_extract_corpus(paths))
 #> $meta
-#>           names                           class
-#> 1 content, meta PlainTextDocument, TextDocument
-#> 2 content, meta PlainTextDocument, TextDocument
-#> 3 content, meta PlainTextDocument, TextDocument
-#> 4 content, meta PlainTextDocument, TextDocument
+#> data frame with 0 columns and 0 rows
 #> 
 #> $data
-#> <<VCorpus>>
-#> Metadata:  corpus specific: 0, document level (indexed): 0
+#> <<SimpleCorpus>>
+#> Metadata:  corpus specific: 1, document level (indexed): 0
 #> Content:  documents: 4
 #> 
 #> attr(,"class")
@@ -294,6 +278,11 @@ pdfx(file = pdf5)
 #>  .....
 ```
 
+## Contributors
+
+* Scott Chamberlain <http://github.com/sckott>
+* Will Pearse <https://github.com/willpearse>
+
 ## Meta
 
 * Please [report any issues or bugs](https://github.com/ropensci/fulltext/issues).
@@ -301,4 +290,4 @@ pdfx(file = pdf5)
 * Get citation information for `fulltext`: `citation(package = 'fulltext')`
 * Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
 
-[![rofooter](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)
+[![rofooter](https://ropensci.org/public_images/github_footer.png)](https://ropensci.org)
