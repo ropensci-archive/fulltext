@@ -51,7 +51,7 @@ test_that("ft_get_si - curl options work", {
   unlink(list.files(tempdir(), pattern = "979288", full.names = TRUE))
   unlink(list.files(tempdir(), pattern = "rspb", full.names = TRUE))
   
-  expect_error(ft_get_si('10.6084/m9.figshare.979288', 2, config = timeout(0.001)))
-  expect_output(ft_get_si("10.1371/journal.pone.0127900", 1, config = progress()), "100%")
-  expect_output(ft_get_si("10.1098/rspb.2015.0338", vol=282, issue=1811, 1, config = progress()), "100%")
+  expect_error(ft_get_si('10.6084/m9.figshare.979288', 2, cache=FALSE, config = timeout(0.0001)))
+  expect_output(ft_get_si("10.1371/journal.pone.0127900", 1, cache=FALSE, config = progress()), "Downloading")
+  expect_output(ft_get_si("10.1098/rspb.2015.0338", vol=282, issue=1811, 1, cache=FALSE, config = progress()), "100%")
 })

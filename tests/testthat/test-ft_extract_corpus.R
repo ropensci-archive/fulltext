@@ -13,7 +13,7 @@ test_that("ft_extract_corpus returns...", {
   
   expect_is(res, "ft_extract")
   expect_is(res$meta, "data.frame")
-  expect_is(res$data, "VCorpus")
+  expect_is(res$data, "SimpleCorpus")
   
   expect_is(tmres, "TermDocumentMatrix")
   

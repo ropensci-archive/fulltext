@@ -60,7 +60,6 @@ test_that("ft_abstract basic functionality works - Microsoft", {
   expect_is(aa$ma, "list")
   expect_is(aa$ma[[1]], "list")
   expect_named(aa$ma[[1]], c('id', 'abstract'))
-  expect_is(aa$ma[[1]]$abstract, 'character')
 })
 
 test_that("ft_abstract fails well", {
