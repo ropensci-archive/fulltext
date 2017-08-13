@@ -88,7 +88,7 @@ test_that("ft_search fails well", {
   # bad source
   expect_error(ft_search("foobar", from = 'stuff'), "'arg' should be one of")
   # no data found, not error, but no data
-  expect_message(ft_search(5, from = 'plos'), "Sorry, no data found")
+  expect_equal(NROW(ft_search(5, from = 'plos')$plos$data), 0)
   expect_equal(suppressMessages(ft_search(5, from = 'plos')$plos$found), 0)
   
   expect_error(biorxiv_search("asdfasdfasdfasfasfd"), 
