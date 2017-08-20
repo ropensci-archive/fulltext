@@ -3,7 +3,7 @@
 #' @description \code{chunks} makes it easy to extract sections of an article. 
 #' You can extract just authors across all articles, or all references 
 #' sections, or the complete text of each article. Then you can pass the 
-#' output downstream for vizualization and analysis.
+#' output downstream for visualization and analysis.
 #'
 #' @export
 #' @param x An object of class \code{ft_data}, the output from a call to

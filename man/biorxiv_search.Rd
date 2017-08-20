@@ -28,7 +28,7 @@ Biorxiv has.
 }
 \examples{
 \dontrun{
-biorxiv_search(query = "ecology")
+biorxiv_search(query = "owls")
 biorxiv_search(query = "owls", date_from = "2016-01-01", 
   date_to = "2016-12-30", limit = 10)
 }
