@@ -23,7 +23,7 @@ A list of output, one for each thing requested
 \code{chunks} makes it easy to extract sections of an article. 
 You can extract just authors across all articles, or all references 
 sections, or the complete text of each article. Then you can pass the 
-output downstream for vizualization and analysis.
+output downstream for visualization and analysis.
 }
 \details{
 Options for the \code{what} parameter:

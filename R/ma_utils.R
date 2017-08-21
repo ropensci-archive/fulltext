@@ -1,10 +1,10 @@
-#' Microsoft Acadmic search
+#' Microsoft Academic search
 #' 
 #' @export
 #' @keywords internal
 #' @param query (character) query terms
-#' @param count (intger) number of records to return. default: 10
-#' @param offset (intger) record to start at. default: 0
+#' @param count (integer) number of records to return. default: 10
+#' @param offset (integer) record to start at. default: 0
 #' @param orderby (character) field to sort results by
 #' @param atts (character) character vector of fields to return
 #' @param key (character) microsoft academic API key, see Details.

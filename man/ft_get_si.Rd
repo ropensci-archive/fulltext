@@ -16,7 +16,7 @@ ft_get_si(x, si, from = c("auto", "plos", "wiley", "science", "proceedings",
 use the ESA-specific article code (e.g., E092-201).}
 
 \item{si}{number of the supplement to be downloaded (1, 2, 3, etc.),
-or (for ESA and Science journals) the name of the supplment (e.g.,
+or (for ESA and Science journals) the name of the supplement (e.g.,
 "S1_data.csv"). Can be a \code{character} or \code{numeric}.}
 
 \item{from}{Publisher of article (\code{character}). The default

@@ -2,7 +2,7 @@
 % Please edit documentation in R/ma_utils.R
 \name{microsoft_search}
 \alias{microsoft_search}
-\title{Microsoft Acadmic search}
+\title{Microsoft Academic search}
 \usage{
 microsoft_search(query, count = 10, offset = 0, orderby = NULL,
   atts = c("Id", "AA.AuN", "J.JN", "Ti", "Y", "E", "CC"), key = NULL, ...)
@@ -10,9 +10,9 @@ microsoft_search(query, count = 10, offset = 0, orderby = NULL,
 \arguments{
 \item{query}{(character) query terms}
 
-\item{count}{(intger) number of records to return. default: 10}
+\item{count}{(integer) number of records to return. default: 10}
 
-\item{offset}{(intger) record to start at. default: 0}
+\item{offset}{(integer) record to start at. default: 0}
 
 \item{orderby}{(character) field to sort results by}
 
@@ -21,7 +21,7 @@ microsoft_search(query, count = 10, offset = 0, orderby = NULL,
 \item{key}{(character) microsoft academic API key, see Details.}
 }
 \description{
-Microsoft Acadmic search
+Microsoft Academic search
 }
 \examples{
 \dontrun{

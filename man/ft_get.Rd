@@ -11,7 +11,7 @@ ft_get(x, from = NULL, type = "xml", plosopts = list(),
 }
 \arguments{
 \item{x}{Either identifiers for papers, either DOIs (or other ids) as a list of
-charcter strings, or a character vector, OR an object of class \code{ft}, as
+character strings, or a character vector, OR an object of class \code{ft}, as
 returned from \code{\link{ft_search}}}
 
 \item{from}{Source to query. Optional.}
