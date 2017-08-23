@@ -40,7 +40,7 @@ test_that("ft_get works for all data providers", {
   ## FIXME, used to work, no mas
   #hh <- ft_get('10.3897/zookeys.499.8360', from = "pensoft")
   ## Copernicus - via Entrez
-  jj <- ft_get('10.5194/angeo-31-2157-2013')
+  ## jj <- ft_get('10.5194/angeo-31-2157-2013')
   ## arXiv
   kk <- ft_get('cond-mat/9309029', from = "arxiv")
   ## bioRxiv
