@@ -3,7 +3,7 @@
 # cache helper --------------------------------------
 construct_paths <- function(co, x){
   if (!co$cache) {
-    list(backend = NULL, 
+    list(backend = NULL,
          path = "session",
          data = x)
   } else {
@@ -14,7 +14,7 @@ construct_paths <- function(co, x){
 }
 
 pprint_cache <- function(x) {
-  list(backend = NULL, path = x, data = NULL) 
+  list(backend = NULL, path = x, data = NULL)
 }
 
 ## plugin generator
@@ -23,7 +23,7 @@ plugin_get_generator <- function(srce, fun) {
     if (any(grepl("plos", sources))) {
       ids <- grep("annotation", ids, value = TRUE, invert = TRUE)
     }
-    
+
     callopts <- list(...)
     if (any(grepl(eval(srce), sources))) {
       if (!any(grepl("arxiv", sources))) check_dois(ids)
@@ -72,12 +72,12 @@ plugin_get_elsevier <- plugin_get_generator("elsevier", elsevier_ft)
 
 ## getters - could stand to make closure for the below as well, FIXME
 entrez_get <- function(ids, ...){
-  res <- rentrez::entrez_search(db = "pmc", 
-                                term = paste0(sprintf('%s[doi]', ids), 
+  res <- rentrez::entrez_search(db = "pmc",
+                                term = paste0(sprintf('%s[doi]', ids),
                                               collapse = "|"), ...)
   if (length(res$ids) == 0) {
-    res <- rentrez::entrez_search(db = "pubmed", 
-                                  term = paste0(sprintf('%s[doi]', ids), 
+    res <- rentrez::entrez_search(db = "pubmed",
+                                  term = paste0(sprintf('%s[doi]', ids),
                                                 collapse = "|"), ...)
     tmp <- vapply(res$ids, function(z) {
       rentrez::entrez_fetch(db = 'pubmed', id = z, rettype = "xml", ...)
@@ -100,9 +100,9 @@ entrez_get <- function(ids, ...){
 print.entrez_ft <- function(x, ...) {
   namesprint <- paste(stats::na.omit(names(x)[1:10]), collapse = " ")
   lengths <- vapply(x, nchar, 1, USE.NAMES = FALSE)
-  cat(sprintf("%s full-text articles retrieved", length(x)), 
+  cat(sprintf("%s full-text articles retrieved", length(x)),
       "\n")
-  cat(sprintf("Min. Length: %s - Max. Length: %s", min(lengths), 
+  cat(sprintf("Min. Length: %s - Max. Length: %s", min(lengths),
               max(lengths)), "\n")
   cat(rplos:::rplos_wrap(sprintf("DOIs:\n %s ...", namesprint)), "\n\n")
   cat("NOTE: extract xml strings like output['<doi>']")
@@ -110,7 +110,7 @@ print.entrez_ft <- function(x, ...) {
 
 bmc_ft <- function(dois, ...) {
   lapply(dois, function(x) {
-    url <- sprintf("http://www.microbiomejournal.com/content/download/xml/%s.xml", 
+    url <- sprintf("http://www.microbiomejournal.com/content/download/xml/%s.xml",
                    strextract(x, "[0-9-]+$"))
     httr::content(httr::GET(url, ...), as = "text", encoding = "UTF-8")
   })
@@ -119,7 +119,7 @@ bmc_ft <- function(dois, ...) {
 # lapply(dois, function(x) {
 #   "http://genesenvironment.biomedcentral.com/track/pdf/10.1186/s41021-015-0002-z?site=genesenvironment.biomedcentral.com"
 #   'http://genesenvironment.biomedcentral.com/content/download/xml/10.1186/s41021-015-0002-z.xml'
-#   sprintf("http://www.microbiomejournal.com/content/download/xml/%s.xml", 
+#   sprintf("http://www.microbiomejournal.com/content/download/xml/%s.xml",
 #           strextract(x, "[0-9-]+$"))
 # })
 
@@ -185,13 +185,13 @@ biorxiv_ft <- function(dois, basepath, ...) {
 }
 
 elsevier_ft <- function(dois, ...) {
-  lapply(dois, function(x) {
+  stats::setNames(lapply(dois, function(x) {
     res <- rcrossref::cr_works(dois = x)$data$link[[1]]
     url <- res[res$content.type == "text/xml", "URL"][[1]]
     header <- httr::add_headers(
-      `CR-Clickthrough-Client-Token` = Sys.getenv("CROSSREF_TDM_ELSEVIER"),
+      `CR-Clickthrough-Client-Token` = Sys.getenv("CROSSREF_TDM"),
       Accept = "text/xml"
     )
     httr::content(httr::GET(url, header, ...), as = "text", encoding = "UTF-8")
-  })
+  }), dois)
 }

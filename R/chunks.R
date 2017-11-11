@@ -1,21 +1,21 @@
 #' @title Extract chunks of data from articles
 #'
-#' @description \code{chunks} makes it easy to extract sections of an article. 
-#' You can extract just authors across all articles, or all references 
-#' sections, or the complete text of each article. Then you can pass the 
+#' @description \code{chunks} makes it easy to extract sections of an article.
+#' You can extract just authors across all articles, or all references
+#' sections, or the complete text of each article. Then you can pass the
 #' output downstream for visualization and analysis.
 #'
 #' @export
 #' @param x An object of class \code{ft_data}, the output from a call to
 #' \code{\link{ft_get}}
-#' @param what What to get, can be one or more in a vector or list. 
+#' @param what What to get, can be one or more in a vector or list.
 #' See Details.
 #'
 #' @details Options for the \code{what} parameter:
 #' \itemize{
 #'  \item front - Publisher, journal and article metadata elements
 #'  \item body - Body of the article
-#'  \item back - Back of the article, acknowledgments, author contributions, 
+#'  \item back - Back of the article, acknowledgments, author contributions,
 #'  references
 #'  \item title - Article title
 #'  \item doi - Article DOI
@@ -34,8 +34,8 @@
 #'  \item history - Dates, recieved, published, accepted, etc.
 #' }
 #'
-#' Note that we currently only support PLOS, eLife, and Entrez right now, 
-#' more to come.
+#' Note that we currently only support PLOS, eLife, Entrez, and Elsevier
+#' right now; more to come.
 #'
 #' @return A list of output, one for each thing requested
 #' @examples \dontrun{
@@ -44,7 +44,7 @@
 #'
 #' library("rplos")
 #' (dois <- searchplos(q="*:*", fl='id',
-#'    fq=list('doc_type:full',"article_type:\"research article\""), 
+#'    fq=list('doc_type:full',"article_type:\"research article\""),
 #'      limit=5)$data$id)
 #' x <- ft_get(dois, from="plos")
 #' x %>% chunks("front")
@@ -63,7 +63,7 @@
 #'
 #' # Coerce list output to a data.frame, where possible
 #' (dois <- searchplos(q="*:*", fl='id',
-#'    fq=list('doc_type:full',"article_type:\"research article\""), 
+#'    fq=list('doc_type:full',"article_type:\"research article\""),
 #'      limit=5)$data$id)
 #' x <- ft_get(dois, from="plos")
 #' x %>% chunks("publisher") %>% tabularize()
@@ -99,7 +99,7 @@
 #' ft_get(res$entrez$data$doi, from='entrez') %>% chunks("title")
 #' ft_get(res$entrez$data$doi[1:4], from='entrez') %>%
 #'   chunks("acknowledgments")
-#' ft_get(res$entrez$data$doi[1:4], from='entrez') %>% 
+#' ft_get(res$entrez$data$doi[1:4], from='entrez') %>%
 #'   chunks(c('title','keywords'))
 #'
 #' # From eLife
@@ -168,7 +168,8 @@ title <- function(b, from){
   switch(from,
          elife = f1txt(b, "//title-group/article-title"),
          plos = f1txt(b, "//title-group/article-title"),
-         entrez = f1txt(b, "//title-group/article-title")
+         entrez = f1txt(b, "//title-group/article-title"),
+         elsevier = f1txt(b, "//dc:title")
   )
 }
 
@@ -176,7 +177,8 @@ doi <- function(b, from){
   switch(from,
          elife = f1txt(b, "//article-id[@pub-id-type='doi']"),
          plos = f1txt(b, "//article-id[@pub-id-type='doi']"),
-         entrez = f1txt(b, "//article-id[@pub-id-type='doi']")
+         entrez = f1txt(b, "//article-id[@pub-id-type='doi']"),
+         elsevier = f1txt(b, "//dc:identifier")
   )
 }
 
@@ -184,7 +186,8 @@ categories <- function(b, from){
   switch(from,
          elife = xml2::xml_text(xml_find_all(xml2::xml_find_all(b, "//article-categories")[[1]], "//subject")),
          plos = xml2::xml_text(xml_find_all(xml2::xml_find_all(b, "//article-categories")[[1]], "//subject")),
-         entrez = xml2::xml_text(xml_find_all(xml2::xml_find_all(b, "//article-categories")[[1]], "//subject"))
+         entrez = xml2::xml_text(xml_find_all(xml2::xml_find_all(b, "//article-categories")[[1]], "//subject")),
+         elsevier = falltxt(b, "//dcterms:subject")
   )
 }
 
@@ -196,84 +199,107 @@ authors <- function(b, from){
            surname = f1txt(z, "name/surname"))
     })
   }
-  switch(from,
-         elife = get_auth(b),
-         plos = get_auth(b),
-         entrez = get_auth(b)
+  switch(
+    from,
+    elife = get_auth(b),
+    plos = get_auth(b),
+    entrez = get_auth(b),
+    elsevier = falltxt(b, "//dc:creator")
   )
 }
 
 keywords <- function(b, from){
-  switch(from,
-         elife = xml2::xml_text(xml2::xml_find_all(b, "//kwd-group[@kwd-group-type='author-keywords']/kwd")),
-         plos = NULL,
-         entrez = xml2::xml_text(xml2::xml_find_all(b, "//kwd-group/kwd"))
+  switch(
+    from,
+    elife = xml2::xml_text(xml2::xml_find_all(b, "//kwd-group[@kwd-group-type='author-keywords']/kwd")),
+    plos = NULL,
+    entrez = xml2::xml_text(xml2::xml_find_all(b, "//kwd-group/kwd")),
+    elsevier = falltxt(b, "//ce:keyword")
   )
 }
 
 body <- function(b, from){
-  switch(from,
-         elife = xml_text(xml_find_all(b, "//body//p")),
-         plos = xml_text(xml_find_all(b, "//body//p"))
+  switch(
+    from,
+    elife = xml_text(xml_find_all(b, "//body//p")),
+    plos = xml_text(xml_find_all(b, "//body//p")),
+    elsevier = {
+      xml_ns_strip(b)
+      falltxt(b, "//body")
+    }
   )
 }
 
 abstract <- function(b, from){
-  switch(from,
-         elife = xml_text(xml_find_all(xml_find_all(b, '//abstract[@hwp:id="abstract-1"]', ns = xml_ns(b))[[1]], "p")[1]),
-         plos = falltxt(b, "//abstract"),
-         entrez = falltxt(b, "//abstract")
+  switch(
+    from,
+    elife = xml_text(xml_find_all(xml_find_all(b, '//abstract[@hwp:id="abstract-1"]', ns = xml_ns(b))[[1]], "p")[1]),
+    plos = falltxt(b, "//abstract"),
+    entrez = falltxt(b, "//abstract"),
+    elsevier = f1txt(b, "//dc:description")
   )
 }
 
 exec_summary <- function(b, from){
-  switch(from,
-         elife = {
-           tmp <- xml_text(xml_find_all(b, '//abstract[@abstract-type="executive-summary"]/p', ns = xml_ns(b)))
-           tmp[-length(tmp)]
-         },
-         plos = NULL,
-         entrez = NULL
+  switch(
+    from,
+    elife = {
+      tmp <- xml_text(xml_find_all(b, '//abstract[@abstract-type="executive-summary"]/p', ns = xml_ns(b)))
+      tmp[-length(tmp)]
+    },
+    plos = NULL,
+    entrez = NULL,
+    elsevier = NULL
   )
 }
 
 refs_dois <- function(b, from){
-  switch(from,
-         elife = falltxt(b, "//ref-list/ref//pub-id[@pub-id-type='doi']"),
-         plos = NULL,
-         entrez = NULL
+  switch(
+    from,
+    elife = falltxt(b, "//ref-list/ref//pub-id[@pub-id-type='doi']"),
+    plos = NULL,
+    entrez = NULL,
+    elsevier = NULL
   )
 }
 
 refs <- function(b, from){
-  switch(from,
-         elife = NULL,
-         plos = falltxt(b, "//ref-list/ref/mixed-citation"),
-         entrez = falltxt(b, "//ref-list/ref")
+  switch(
+    from,
+    elife = NULL,
+    plos = falltxt(b, "//ref-list/ref/mixed-citation"),
+    entrez = falltxt(b, "//ref-list/ref"),
+    elsevier = falltxt(b, "//ce:bib-reference")
   )
 }
 
 publisher <- function(b, from){
-  switch(from,
-         elife = falltxt(b, "//publisher"),
-         plos = falltxt(b, "//publisher"),
-         entrez = falltxt(b, "//publisher")
+  switch(
+    from,
+    elife = falltxt(b, "//publisher"),
+    plos = falltxt(b, "//publisher"),
+    entrez = falltxt(b, "//publisher"),
+    elsevier = f1txt(b, "//prism:publisher")
   )
 }
 
 journal_meta <- function(b, from){
-  switch(from,
-         elife = lapply(xml2::xml_children(xml2::xml_find_first(b, "//journal-meta")), xml_node_parse),
-         plos = lapply(xml2::xml_children(xml2::xml_find_first(b, "//journal-meta")), xml_node_parse),
-         entrez = lapply(xml2::xml_children(xml2::xml_find_first(b, "//journal-meta")), xml_node_parse)
+  switch(
+    from,
+    elife = lapply(xml2::xml_children(xml2::xml_find_first(b, "//journal-meta")), xml_node_parse),
+    plos = lapply(xml2::xml_children(xml2::xml_find_first(b, "//journal-meta")), xml_node_parse),
+    entrez = lapply(xml2::xml_children(xml2::xml_find_first(b, "//journal-meta")), xml_node_parse),
+    elsevier = NULL
   )
 }
 
 article_meta <- function(b, from){
-  switch(from,
-         elife = lapply(xml2::xml_children(xml2::xml_find_first(b, "//article-meta")), xml_node_parse),
-         plos = lapply(xml2::xml_children(xml2::xml_find_first(b, "//article-meta")), xml_node_parse),
-         entrez = lapply(xml2::xml_children(xml2::xml_find_first(b, "//article-meta")), xml_node_parse)
+  switch(
+    from,
+    elife = lapply(xml2::xml_children(xml2::xml_find_first(b, "//article-meta")), xml_node_parse),
+    plos = lapply(xml2::xml_children(xml2::xml_find_first(b, "//article-meta")), xml_node_parse),
+    entrez = lapply(xml2::xml_children(xml2::xml_find_first(b, "//article-meta")), xml_node_parse),
+    elsevier = NULL
   )
 }
 
@@ -281,7 +307,8 @@ acknowledgments <- function(b, from){
   switch(from,
          elife = falltxt(b, "//ack/p"),
          plos = falltxt(b, "//ack/p"),
-         entrez = falltxt(b, "//ack/p")
+         entrez = falltxt(b, "//ack/p"),
+         elsevier = f1txt(b, "//ce:acknowledgment")
   )
 }
 
@@ -289,7 +316,14 @@ permissions <- function(b, from){
   switch(from,
          elife = getperms(b),
          plos = getperms(b),
-         entrez = getperms(b)
+         entrez = getperms(b),
+         elsevier = {
+            tmp <- xml2::xml_find_first(b, "//xocs:copyright-info")
+            list(
+              copyright_text = f1txt(tmp, "xocs:cp-license-lines"),
+              copyright_notice = f1txt(tmp, "xocs:cp-notices")
+            )
+         }
   )
 }
 
@@ -305,7 +339,8 @@ front <- function(b, from){
   switch(from,
          elife = get_forb(b, "//front"),
          plos = get_forb(b, "//front"),
-         entrez = get_forb(b, "//front")
+         entrez = get_forb(b, "//front"),
+         elsevier = NULL
   )
 }
 
@@ -313,7 +348,8 @@ back <- function(b, from){
   switch(from,
          elife = get_forb(b, "//back"),
          plos = get_forb(b, "//back"),
-         entrez = get_forb(b, "//back")
+         entrez = get_forb(b, "//back"),
+         elsevier = NULL
   )
 }
 
@@ -328,7 +364,8 @@ history <- function(b, from){
   switch(from,
          elife = history2date(b),
          plos = history2date(b),
-         entrez = history2date(b)
+         entrez = history2date(b),
+         elsevier = NULL
   )
 }
 

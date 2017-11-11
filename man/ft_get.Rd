@@ -182,9 +182,9 @@ res <- ft_get('10.1371/journal.pone.0086169', from='plos', cache=TRUE, backend="
 ft_get(res)
 
 # elsevier, ugh
-ft_get(x = "10.1016/j.trac.2016.01.027", from = "elsevier"
-  elsevieropts = list(key = Sys.getenv('ELSEVIER_SCOPUS_KEY')))
-  
+## set an environment variable like Sys.setenv(CROSSREF_TDM = "your key")
+ft_get(x = "10.1016/j.trac.2016.01.027", from = "elsevier")
+
 # wiley, ugh
 ft_get(x = "", from = "wiley")
 

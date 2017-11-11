@@ -7,7 +7,7 @@ Description: Provides a single interface to many sources of full text
     included for searching for articles, downloading full or partial
     text, downloading supplementary materials, converting to various
     data formats used in and outside of R.
-Version: 0.1.8.9526
+Version: 0.1.8.9619
 License: MIT + file LICENSE
 Authors@R: c(
     person("Scott", "Chamberlain", role = c("aut", "cre"), email = "myrmecocystus@gmail.com"),
@@ -29,6 +29,7 @@ Imports:
     rplos (>= 0.6.4),
     rcrossref (>= 0.5.4),
     crminer (>= 0.1.0),
+    microdemic (>= 0.1.0),
     aRxiv,
     rentrez,
     tm,
