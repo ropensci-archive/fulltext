@@ -6,8 +6,8 @@
 \usage{
 ft_get(x, from = NULL, type = "xml", plosopts = list(),
   bmcopts = list(), entrezopts = list(), elifeopts = list(),
-  elsevieropts = list(), crossrefopts = list(), cache = FALSE,
-  backend = "rds", path = "~/.fulltext", ...)
+  elsevieropts = list(), wileyopts = list(), crossrefopts = list(),
+  cache = FALSE, backend = "rds", path = "~/.fulltext", ...)
 }
 \arguments{
 \item{x}{Either identifiers for papers, either DOIs (or other ids) as a list of
@@ -186,10 +186,11 @@ ft_get(res)
 ft_get(x = "10.1016/j.trac.2016.01.027", from = "elsevier")
 
 # wiley, ugh
-ft_get(x = "", from = "wiley")
+## Wiley has only PDF, so type parameter doesn't do anything
+ft_get(x = "10.1006\%2Fasle.2001.0035", from = "wiley")
 
 # spring, ugh
-ft_get(x = "", from = "springer")
+# ft_get(x = "", from = "springer")
 
 
 # From ft_links output

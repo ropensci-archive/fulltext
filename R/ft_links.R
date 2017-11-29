@@ -97,6 +97,14 @@
 #' ft_links('10.7717/peerj.228')
 #' ft_links(c('10.7717/peerj.228', '10.7717/peerj.1200'))
 #' 
+#' ## wiley
+#' res <- ft_links('10.1006/asle.2001.0035', from = "crossref")
+#' res$crossref$data[[1]]$url
+#' 
+#' ## informa
+#' res <- ft_links('10.1174/02134749660569378', from = "crossref")
+#' res$crossref$data[[1]]$url
+#' 
 #' ## frontiersin
 #' (res <- ft_links('10.3389/fphar.2014.00109'))
 #' res$frontiersin

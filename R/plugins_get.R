@@ -34,7 +34,7 @@ plugin_get_generator <- function(srce, fun) {
       } else {
         opts$dois <- ids
       }
-      if (any(sources %in% c("arxiv", "biorxiv"))) opts$basepath <- path
+      if (any(sources %in% c("arxiv", "biorxiv", "wiley"))) opts$basepath <- path
       opts <- c(opts, callopts)
       out <- do.call(fun, opts)
       # deals with case where no results
@@ -69,6 +69,7 @@ plugin_get_entrez <- plugin_get_generator("entrez", entrez_get)
 plugin_get_biorxiv <- plugin_get_generator("biorxiv", biorxiv_ft)
 plugin_get_arxiv <- plugin_get_generator("arxiv", arxiv_ft)
 plugin_get_elsevier <- plugin_get_generator("elsevier", elsevier_ft)
+plugin_get_wiley <- plugin_get_generator("wiley", wiley_ft)
 
 ## getters - could stand to make closure for the below as well, FIXME
 entrez_get <- function(ids, ...){
@@ -193,5 +194,21 @@ elsevier_ft <- function(dois, ...) {
       Accept = "text/xml"
     )
     httr::content(httr::GET(url, header, ...), as = "text", encoding = "UTF-8")
+  }), dois)
+}
+
+wiley_ft <- function(dois, basepath, ...) {
+  stats::setNames(lapply(dois, function(x) {
+    res <- rcrossref::cr_works(dois = x)$data$link[[1]]
+    url <- res[res$content.type == "unspecified", "URL"][[1]]
+    header <- httr::add_headers(
+      `CR-Clickthrough-Client-Token` = Sys.getenv("CROSSREF_TDM"),
+      Accept = "application/pdf"
+    )
+    path <- file.path(basepath, 
+      sprintf("%s.pdf", gsub("/|\\(|\\)|<|>|;|:|\\.", "_", x))
+    )
+    tmp <- httr::GET(url, header, httr::write_disk(path, TRUE), ...)
+    tmp$request$output$path
   }), dois)
 }
