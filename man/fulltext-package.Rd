@@ -6,56 +6,112 @@
 \alias{fulltext}
 \title{Fulltext search and retrieval of scholarly texts.}
 \description{
-fulltext is a single interface to many sources of scholarly 
-texts. In practice, this means only ones that are legally useable. We will 
-support sources that require authentication on a case by case basis - that 
-is, if more than just a few people will use it, and it's not too 
+fulltext is a single interface to many sources of scholarly
+texts. In practice, this means only ones that are legally useable. We will
+support sources that require authentication on a case by case basis - that
+is, if more than just a few people will use it, and it's not too
 burdensome to include, then we can include that source.
 }
 \section{What's included}{
 
-We currently include support for search and full text retrieval for a variety 
-of publishers. See \code{\link{ft_search}} for what we include for search, 
-and  \code{\link{ft_get}} for what we include for full text retrieval.
+We currently include support for search and full text retrieval for a variety
+of publishers. See \code{\link[=ft_search]{ft_search()}} for what we include for search,
+and  \code{\link[=ft_get]{ft_get()}} for what we include for full text retrieval.
 }
 
 \section{Use cases}{
 
 The following are tasks/use cases supported:
 \itemize{
- \item search - \code{\link{ft_search}}
- \item get texts - \code{\link{ft_get}}
- \item get full text links - \code{\link{ft_links}}
- \item get abstracts - \code{\link{ft_abstract}}
- \item extract text from pdfs - \code{\link{ft_extract}}
- \item serialize to different data formats - \code{\link{ft_serialize}}
- \item extract certain article sections (e.g., authors) - 
- \code{\link{chunks}}
- \item grab supplementary materials for (re-)analysis of data - 
- \code{\link{ft_get_si}} accepts article identifiers, and output from 
- \code{\link{ft_search}} and  \code{\link{ft_get}}
+\item search - \code{\link[=ft_search]{ft_search()}}
+\item get texts - \code{\link[=ft_get]{ft_get()}}
+\item get full text links - \code{\link[=ft_links]{ft_links()}}
+\item get abstracts - \code{\link[=ft_abstract]{ft_abstract()}}
+\item extract text from pdfs - \code{\link[=ft_extract]{ft_extract()}}
+\item serialize to different data formats - \code{\link[=ft_serialize]{ft_serialize()}}
+\item extract certain article sections (e.g., authors) - \code{\link[=chunks]{chunks()}}
+\item grab supplementary materials for (re-)analysis of data -
+\code{\link[=ft_get_si]{ft_get_si()}} accepts article identifiers, and output from
+\code{\link[=ft_search]{ft_search()}} and  \code{\link[=ft_get]{ft_get()}}
 }
 }
 
 \section{DOI delays}{
 
-Beware that DOIs are not searchable via Crossref/Entrez immediately. The 
-delay may be as much as a few days, though should be less than a day. This 
-delay should become shorter as services improve. The point of this is that 
-you man not find a match for a relatively new DOI (e.g., for an article 
+Beware that DOIs are not searchable via Crossref/Entrez immediately. The
+delay may be as much as a few days, though should be less than a day. This
+delay should become shorter as services improve. The point of this is that
+you man not find a match for a relatively new DOI (e.g., for an article
 published the same day). We've tried to account for this for some publishers.
-For example, for Crossref we search Crossref for a match for a DOI, and if 
-none is found we attempt to retrieve the full text from the publisher 
+For example, for Crossref we search Crossref for a match for a DOI, and if
+none is found we attempt to retrieve the full text from the publisher
 directly.
 }
 
+\section{Rate limits}{
+
+\strong{Scopus}: 10,000 per 7 days. See
+\url{https://dev.elsevier.com/api_key_settings.html} for rate
+limit information.
+
+\strong{Microsoft}: 10,000 per month, and 1 per second.
+
+\strong{PLOS}: There are no known rate limits for PLOS, though if you do
+hit something let us know.
+
+\strong{Crossref}: From time to time Crossref needs to impose rate limits
+to ensure that the free API is usable by all. Any rate limits that are in
+effect will be advertised in the \code{X-Rate-Limit-Limit} and
+\code{X-Rate-Limit-Interval} HTTP headers. This boils down to: they allow X
+number of requests per some time period. The numbers can change so we
+can't give a rate limit that will always be in effect. If you're curious
+pass in \code{verbose = TRUE} to your function call, and you'll get headers
+that will display these rate limits. See also \strong{Authentication}.
+}
+
+\section{Authentication}{
+
+
+\strong{BMC}: BMC is integrated into Springer Publishers now,
+and that API requires an API key.  Get your key by signing up at
+\url{https://dev.springer.com/}, then you'll get a key. Pass the key to a
+named parameter \code{key} to \code{bmcopts}. Or, save your key in your \code{.Renviron}
+file as \code{SPRINGER_KEY}, and we'll read it in for you, and you don't
+have to pass in anything.
+
+\strong{Scopus}: Scopus requires an API key to search their service. Go to
+\url{https://dev.elsevier.com/index.html}, register for an account,
+then when you're in your account, create an API key. Pass in as variable
+\code{key} to \code{scopusopts}, or store your key under the name
+\code{ELSEVIER_SCOPUS_KEY} as an environment variable in \code{.Renviron}, and
+we'll read it in for you. See \link{Startup} for help.
+
+\strong{Microsoft}: Get a key by creating an account at
+\url{https://www.microsoft.com/cognitive-services/en-us/subscriptions},
+then requesting a key fir \strong{Academic}. Store it as an environment
+variable in your \code{.Renviron} file - see \link{Startup} for help. Pass your
+API key into \code{maopts} as a named element in a list like
+\code{list(key = Sys.getenv('MICROSOFT_ACADEMIC_KEY'))}
+
+\strong{Crossref}: Crossref encourages requests with contact information
+(an email address) and will forward you to a dedicated API cluster
+for improved performance when you share your email address with them.
+\url{https://github.com/CrossRef/rest-api-doc#good-manners--more-reliable-service}
+To pass your email address to Crossref via this client, store it
+as an environment variable in \code{.Renviron} like \code{crossref_email = name@example.com}
+
+None needed for \strong{PLOS}, \strong{eLife}, \strong{arxiv}, \strong{biorxiv}, \strong{Euro PMC}, or
+\strong{Entrez} (though soon you will get better rate limtits with auth for Entrez)
+}
+
 \section{Feedback}{
- 
-Let us know what you think at 
-\url{https://github.com/ropensci/fulltext/issues}
+
+Let us know what you think at \url{https://github.com/ropensci/fulltext/issues}
 }
 
 \author{
-Scott Chamberlain <myrmecocystus@gmail.com>
+Scott Chamberlain \href{mailto:myrmecocystus@gmail.com}{myrmecocystus@gmail.com}
+
+Will Pearse
 }
 \keyword{package}

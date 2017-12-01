@@ -25,7 +25,7 @@ Microsoft Academic search
 }
 \examples{
 \dontrun{
-microsoft_search(query = "Ti='biology'...", 
+microsoft_search(query = "Ti='biology'...",
   key = Sys.getenv("MICROSOFT_ACADEMIC_KEY"))
 }
 }

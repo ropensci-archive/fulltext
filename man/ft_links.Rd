@@ -20,27 +20,29 @@ ft_links(x, from = NULL, plosopts = list(), crossrefopts = list(),
 
 \item{bmcopts}{BMC options. See \code{?bmc_search}}
 
-\item{...}{Further args passed on to \code{\link[httr]{GET}}. Not working 
+\item{...}{Further args passed on to \code{\link[httr]{GET}}. Not working
 right now...}
 }
 \value{
-An object of class ft_links, with either a list or data.frame for 
+An object of class ft_links, with either a list or data.frame for
 each DOI, with links for XML and PDF links (typically).
 }
 \description{
 Get full text links
 }
 \details{
-Inputs can be an object of class \code{ft}, \code{ft_ind}, or a 
+Inputs can be an object of class \code{ft}, \code{ft_ind}, or a
 character string of DOIs. You can specify a specific source for four sources
-(PLOS, BMC, Crossref, and Entrez), but any other publishers we guess the 
-publisher form the input DOI(s), then attempt to generate full text links 
+(PLOS, BMC, Crossref, and Entrez), but any other publishers we guess the
+publisher form the input DOI(s), then attempt to generate full text links
 based on the publisher (if found). Of course, guessing the publisher makes
 things slower as it requires an HTTP request.
 
-Strategy varies by publisher. For some we can construct XML and PDF links 
-only from the DOI. For others, we need to make an HTTP request to the 
+Strategy varies by publisher. For some we can construct XML and PDF links
+only from the DOI. For others, we need to make an HTTP request to the
 publisher to get additional information - this of course makes things slower.
+
+See \strong{Rate Limits} in \link{fulltext-package} for Rate Limiting information.
 }
 \examples{
 \dontrun{

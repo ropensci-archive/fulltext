@@ -17,13 +17,13 @@ eupmc_xml(id, ...)
 \arguments{
 \item{query}{(character) Search terms. Required.}
 
-\item{resulttype}{(character) The result type can either be idlist, core or lite. 
-This parameter determines the fields returned by XML and JSON formats, but it has 
+\item{resulttype}{(character) The result type can either be idlist, core or lite.
+This parameter determines the fields returned by XML and JSON formats, but it has
 no effect on the DC format. See Details.}
 
-\item{synonym}{(boolean) Synonym searches are not made by default (Default: \code{FALSE}), 
-however queries can be expanded using MeSH terminology and the UniProt synonyms list. 
-For example aspirin, a synonym would be acetylsalicylic acid;this could be included in 
+\item{synonym}{(boolean) Synonym searches are not made by default (Default: \code{FALSE}),
+however queries can be expanded using MeSH terminology and the UniProt synonyms list.
+For example aspirin, a synonym would be acetylsalicylic acid;this could be included in
 the search by setting the parameter value to \code{TRUE}}
 
 \item{per_page}{(integer) Number of records to return. Max: 1000. Default: 25}
@@ -32,11 +32,11 @@ the search by setting the parameter value to \code{TRUE}}
 
 \item{...}{Further args passed on to \code{\link[httr]{GET}}}
 
-\item{id}{A single Europe PMC article identifier, begins with "PMC", followed by numbers, e.g., 
+\item{id}{A single Europe PMC article identifier, begins with "PMC", followed by numbers, e.g.,
 "PMC3257301"}
 }
 \value{
-\code{eupmc_search} returns a list with results. \code{eupmc_fields} returns 
+\code{eupmc_search} returns a list with results. \code{eupmc_fields} returns
 a data.frame. \code{eupmc_xml} returns an object of class \code{xml_document}
 }
 \description{
@@ -45,11 +45,11 @@ Europe PMC utilities
 \details{
 resulttype parameter options:
 \itemize{
- \item idlist - returns a list of IDs and sources for the given search terms
- \item lite - returns key metadata for the given search terms; this is the default 
- value if the parameter is unspecified.
- \item core - returns full metadata for a given publication ID; including abstract, 
- full text links, and MeSH terms.
+\item idlist - returns a list of IDs and sources for the given search terms
+\item lite - returns key metadata for the given search terms; this is the default
+value if the parameter is unspecified.
+\item core - returns full metadata for a given publication ID; including abstract,
+full text links, and MeSH terms.
 }
 }
 \examples{

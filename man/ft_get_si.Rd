@@ -12,7 +12,7 @@ ft_get_si(x, si, from = c("auto", "plos", "wiley", "science", "proceedings",
 \arguments{
 \item{x}{One of: vector of DOI(s) of article(s) (a
 \code{character}), output from \code{\link{ft_get}}, or output from
-\code{\link{ft_search}}. Note: if using ESA journal, you can *only*
+\code{\link{ft_search}}. Note: if using ESA journal, you can \emph{only}
 use the ESA-specific article code (e.g., E092-201).}
 
 \item{si}{number of the supplement to be downloaded (1, 2, 3, etc.),
@@ -23,7 +23,7 @@ or (for ESA and Science journals) the name of the supplement (e.g.,
 (\code{auto}) uses crossref (\code{\link[rcrossref]{cr_works}}) to
 detect the journal's publisher. Specifying the journal can somewhat
 speed up your download, or be used to force a download from EPMC
-(see details). You *must* specify if downloading from an ESA
+(see details). You \emph{must} specify if downloading from an ESA
 journal (\code{esa_data_archives}, \code{esa_archives}). You can
 only use this argument if \code{x} is a vector of DOI(s). Must be
 one of: \code{auto} (i.e., auto-detect journal; default),
@@ -50,7 +50,7 @@ your chosen \code{dir})}
 \code{numeric})}
 
 \item{list}{if \code{TRUE}, print all files within a zip-file
-downloaded from EPMC (default: FALSE). This is *very* useful if
+downloaded from EPMC (default: FALSE). This is \emph{very} useful if
 using EPMC (see notes)}
 
 \item{timeout}{how long to wait for successful download (default 10
@@ -126,7 +126,7 @@ in 'notes' about EPMC.}
 }
 \note{
 Make sure that the article from which you're attempting to
-download supplementary materials *has* supplementary materials. 404
+download supplementary materials \emph{has} supplementary materials. 404
 errors and 'file not found' errors can result from such cases.
 }
 \examples{

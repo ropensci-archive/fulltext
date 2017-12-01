@@ -34,24 +34,14 @@
 #' @param ... Further args passed on to \code{\link[httr]{GET}}. Not working 
 #' right now...
 #' 
-#' @section Source specific options:
-#' Each of \code{plosopts}, \code{scopusopts}, etc. expect a named list.
+#' @details Each of \code{plosopts}, \code{scopusopts}, etc. expect 
+#' a named list.
 #' 
-#' @section BMC Authentication:
-#' BMC is integrated into Springer Publishers now, and that API requires an 
-#' API key.  Get your key by signing up here \url{https://dev.springer.com/}, 
-#' then you'll get a key. Pass the key to a named parameter \code{key} to 
-#' \code{bmcopts}. Or, save your key in your \code{.Renviron} file as
-#' \code{SPRINGER_KEY}, and we'll read it in for you, and you don't have to
-#' pass in anything.
+#' @details See **Rate Limits** in [fulltext-package] for Rate 
+#' Limiting information.
 #' 
-#' @section Scopus Authentication:
-#' Scopus requires an API key to search their service. Go to 
-#' \url{https://dev.elsevier.com/user/registration}, register for an account, 
-#' then when you're in your account, create an API key. Pass in as variable 
-#' \code{key} to \code{scopusopts}, or follow above instructions for storing 
-#' your key, under the name \code{ELSEVIER_SCOPUS_KEY}, and we'll read it in
-#' for you.
+#' See **Authentication** in [fulltext-package] for information on 
+#' authenticating. 
 #'
 #' @return An object of class \code{ft}, and objects of class \code{ft_ind} 
 #' within each source. You can access each data source with \code{$}

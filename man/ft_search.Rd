@@ -17,17 +17,17 @@ entrez, arxiv, biorxiv, europmc, scopus, or ma}
 
 \item{limit}{(integer) Number of records to return. default: 10}
 
-\item{start}{(integer) Record number to start at. Only used for 
+\item{start}{(integer) Record number to start at. Only used for
 'scopus' right now. default: 0}
 
 \item{plosopts}{(list) PLOS options. See \code{\link[rplos]{searchplos}}}
 
 \item{bmcopts}{(list) BMC options. See \code{\link{bmc_search}}}
 
-\item{crossrefopts}{(list) Crossref options. See 
+\item{crossrefopts}{(list) Crossref options. See
 \code{\link[rcrossref]{cr_works}}}
 
-\item{entrezopts}{(list) Entrez options. See 
+\item{entrezopts}{(list) Entrez options. See
 \code{\link[rentrez]{entrez_search}}}
 
 \item{arxivopts}{(list) arxiv options. See \code{\link[aRxiv]{arxiv_search}}}
@@ -38,54 +38,39 @@ entrez, arxiv, biorxiv, europmc, scopus, or ma}
 
 \item{scopusopts}{(list) Scopus options. See \code{\link{scopus_search}}}
 
-\item{maopts}{(list) Microsoft Academic options. See 
+\item{maopts}{(list) Microsoft Academic options. See
 \code{\link{microsoft_search}}}
 
-\item{...}{Further args passed on to \code{\link[httr]{GET}}. Not working 
+\item{...}{Further args passed on to \code{\link[httr]{GET}}. Not working
 right now...}
 }
 \value{
-An object of class \code{ft}, and objects of class \code{ft_ind} 
+An object of class \code{ft}, and objects of class \code{ft_ind}
 within each source. You can access each data source with \code{$}
 }
 \description{
-\code{ft_search} is a one stop shop for searching for articles 
-across many publishers and repositories. We currently support search for 
-PLOS via the  \pkg{rplos} package, Crossref via the \pkg{rcrossref} 
-package, Entrez via the \pkg{rentrez} package, arXiv via the \pkg{aRxiv} 
-package, and BMC, Biorxiv, EueroPMC, and Scopus via internal helper 
-functions in this package. 
+\code{ft_search} is a one stop shop for searching for articles
+across many publishers and repositories. We currently support search for
+PLOS via the  \pkg{rplos} package, Crossref via the \pkg{rcrossref}
+package, Entrez via the \pkg{rentrez} package, arXiv via the \pkg{aRxiv}
+package, and BMC, Biorxiv, EueroPMC, and Scopus via internal helper
+functions in this package.
 
-Many publishers content is searchable via Crossref and Entrez - of course 
-this doesn't mean that we can get full text for those articles. In the 
-output objects of this function, we attempt to help by indicating what 
+Many publishers content is searchable via Crossref and Entrez - of course
+this doesn't mean that we can get full text for those articles. In the
+output objects of this function, we attempt to help by indicating what
 license is used for articles.
 }
-\section{Source specific options}{
+\details{
+Each of \code{plosopts}, \code{scopusopts}, etc. expect
+a named list.
 
-Each of \code{plosopts}, \code{scopusopts}, etc. expect a named list.
+See \strong{Rate Limits} in \link{fulltext-package} for Rate
+Limiting information.
+
+See \strong{Authentication} in \link{fulltext-package} for information on
+authenticating.
 }
-
-\section{BMC Authentication}{
-
-BMC is integrated into Springer Publishers now, and that API requires an 
-API key.  Get your key by signing up here \url{https://dev.springer.com/}, 
-then you'll get a key. Pass the key to a named parameter \code{key} to 
-\code{bmcopts}. Or, save your key in your \code{.Renviron} file as
-\code{SPRINGER_KEY}, and we'll read it in for you, and you don't have to
-pass in anything.
-}
-
-\section{Scopus Authentication}{
-
-Scopus requires an API key to search their service. Go to 
-\url{https://dev.elsevier.com/user/registration}, register for an account, 
-then when you're in your account, create an API key. Pass in as variable 
-\code{key} to \code{scopusopts}, or follow above instructions for storing 
-your key, under the name \code{ELSEVIER_SCOPUS_KEY}, and we'll read it in
-for you.
-}
-
 \examples{
 \dontrun{
 # Plos

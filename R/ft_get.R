@@ -54,6 +54,8 @@
 #' Note that some publishers are available via Entrez, but often not recent articles,
 #' where "recent" may be a few months to a year or so. In that case, make sure to specify
 #' the publisher, or else you'll get back no data.
+#' 
+#' See **Rate Limits** in [fulltext-package] for Rate Limiting information.
 #'
 #' @section Notes on specific publishers:
 #' \itemize{

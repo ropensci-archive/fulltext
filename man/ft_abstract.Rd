@@ -10,8 +10,8 @@ ft_abstract(x, from = "plos", plosopts = list(), scopusopts = list(),
 \arguments{
 \item{x}{(character) DOIs as a character vector}
 
-\item{from}{Source to query. One or more of plos (default), scopus, or 
-microsoft}
+\item{from}{Source to query. One or more of plos (default),
+crossref, scopus, or microsoft}
 
 \item{plosopts}{PLOS options}
 
@@ -20,6 +20,8 @@ microsoft}
 \item{maopts}{Microsoft Academic options}
 
 \item{...}{curl options passed on to \code{\link[httr]{GET}}}
+
+\item{crossrefopts}{Crossref options}
 }
 \value{
 An object of class \code{ft_abstract}
@@ -27,40 +29,10 @@ An object of class \code{ft_abstract}
 \description{
 Get abstracts
 }
-\section{Authentication}{
-
-You need to use authentication for Scopus and Microsoft. Details:
-
-\strong{Scopus}: Get a key at \url{https://dev.elsevier.com/index.html}, 
-store it as an environment variable in your \code{.Renviron} file - 
-see \code{\link{Startup}} for help.
-
-Pass your API key into \code{scopusopts} as a named element in 
-a list, e.g, \code{list(key = Sys.getenv('ELSEVIER_SCOPUS_KEY'))}
-
-\strong{Microsoft}: Get a key by creating an account at 
-\url{https://www.microsoft.com/cognitive-services/en-us/subscriptions}, then
-requesting a key fir \strong{Academic}. Store it as an environment 
-variable in your \code{.Renviron} file - see \code{\link{Startup}} for help.
-
-Pass your API key into \code{maopts} as a named element in 
-a list, e.g, \code{list(key = Sys.getenv('MICROSOFT_ACADEMIC_KEY'))}
-
-\strong{PLOS}: none needed
+\details{
+See \strong{Rate Limits} in \link{fulltext-package} for
+Rate Limiting information.
 }
-
-\section{Rate limits}{
-
-\strong{Scopus}: rate limits are: 10,000 per 7 days. See 
-\url{https://dev.elsevier.com/api_key_settings.html} for rate 
-limit information.
-
-\strong{Microsoft}: rate limits are: 10,000 per month, and 1 per second.
-
-\strong{PLOS}: There are no known rate limits for PLOS, though if you do 
-hit something let me know.
-}
-
 \examples{
 \dontrun{
 # PLOS

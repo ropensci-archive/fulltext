@@ -60,33 +60,35 @@ help on how to use this function.
 \details{
 There are various ways to use \code{ft_get}:
 \itemize{
- \item Pass in only DOIs - leave \code{from} parameter \code{NULL}. This route will
- first query Crossref API for the publisher of the DOI, then we'll use the appropriate
- method to fetch full text from the publisher. If a publisher is not found for the DOI,
- then we'll throw back a message telling you a publisher was not found.
- \item Pass in DOIs (or other pub IDs) and use the \code{from} parameter. This route
- means we don't have to make an extra API call to Crossref (thus, this route is faster)
- to determine the publisher for each DOI. We go straight to getting full text based on
- the publisher.
- \item Use \code{\link{ft_search}} to search for articles. Then pass that output to
- this function, which will use info in that object. This behaves the same as the previous
- option in that each DOI has publisher info so we know how to get full text for each
- DOI.
+\item Pass in only DOIs - leave \code{from} parameter \code{NULL}. This route will
+first query Crossref API for the publisher of the DOI, then we'll use the appropriate
+method to fetch full text from the publisher. If a publisher is not found for the DOI,
+then we'll throw back a message telling you a publisher was not found.
+\item Pass in DOIs (or other pub IDs) and use the \code{from} parameter. This route
+means we don't have to make an extra API call to Crossref (thus, this route is faster)
+to determine the publisher for each DOI. We go straight to getting full text based on
+the publisher.
+\item Use \code{\link{ft_search}} to search for articles. Then pass that output to
+this function, which will use info in that object. This behaves the same as the previous
+option in that each DOI has publisher info so we know how to get full text for each
+DOI.
 }
 
 Note that some publishers are available via Entrez, but often not recent articles,
 where "recent" may be a few months to a year or so. In that case, make sure to specify
 the publisher, or else you'll get back no data.
+
+See \strong{Rate Limits} in \link{fulltext-package} for Rate Limiting information.
 }
 \section{Notes on specific publishers}{
 
 \itemize{
- \item arXiv - The IDs passed are not actually DOIs, though they look similar.
- Thus, there's no way to not pass in the \code{from} parameter as we can't
- determine unambiguously that the IDs passed in are from arXiv.org.
- \item bmc - is a hot mess since the Springer acquisition. It's been removed
- as an officially supported plugin, some DOIs from them may still work when
- passed in here, who knows, it's a mess.
+\item arXiv - The IDs passed are not actually DOIs, though they look similar.
+Thus, there's no way to not pass in the \code{from} parameter as we can't
+determine unambiguously that the IDs passed in are from arXiv.org.
+\item bmc - is a hot mess since the Springer acquisition. It's been removed
+as an officially supported plugin, some DOIs from them may still work when
+passed in here, who knows, it's a mess.
 }
 }
 

@@ -28,25 +28,25 @@ output downstream for visualization and analysis.
 \details{
 Options for the \code{what} parameter:
 \itemize{
- \item front - Publisher, journal and article metadata elements
- \item body - Body of the article
- \item back - Back of the article, acknowledgments, author contributions,
- references
- \item title - Article title
- \item doi - Article DOI
- \item categories - Publisher's categories, if any
- \item authors - Authors
- \item keywords - Keywords
- \item abstract - Article abstract
- \item executive_summary - Article executive summary
- \item refs - References
- \item refs_dois - References DOIs - if available
- \item publisher - Publisher name
- \item journal_meta - Journal metadata
- \item article_meta - Article metadata
- \item acknowledgments - Acknowledgments
- \item permissions - Article permissions
- \item history - Dates, recieved, published, accepted, etc.
+\item front - Publisher, journal and article metadata elements
+\item body - Body of the article
+\item back - Back of the article, acknowledgments, author contributions,
+references
+\item title - Article title
+\item doi - Article DOI
+\item categories - Publisher's categories, if any
+\item authors - Authors
+\item keywords - Keywords
+\item abstract - Article abstract
+\item executive_summary - Article executive summary
+\item refs - References
+\item refs_dois - References DOIs - if available
+\item publisher - Publisher name
+\item journal_meta - Journal metadata
+\item article_meta - Article metadata
+\item acknowledgments - Acknowledgments
+\item permissions - Article permissions
+\item history - Dates, recieved, published, accepted, etc.
 }
 
 Note that we currently only support PLOS, eLife, Entrez, and Elsevier

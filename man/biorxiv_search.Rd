@@ -19,10 +19,10 @@ biorxiv_search(query, limit = 10, date_from = NULL, date_to = NULL, ...)
 Biorxiv search
 }
 \details{
-We search Biorxiv first, get DOIs, then search Crossref - 
-one consequence of this is that you may get back less than the number of 
-results you requested even if Biorxiv found equal to or more than 
-the amount you requested - BECAUSE we take the DOIs from the results and 
+We search Biorxiv first, get DOIs, then search Crossref -
+one consequence of this is that you may get back less than the number of
+results you requested even if Biorxiv found equal to or more than
+the amount you requested - BECAUSE we take the DOIs from the results and
 go out to Crossref to get what we think is better metadata than what
 Biorxiv has.
 }

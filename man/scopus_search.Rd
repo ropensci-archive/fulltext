@@ -18,7 +18,7 @@ scopus_search(query = NULL, count = 25, start = 0, type = "search",
 
 \item{search_type}{(character) search type, default: scopus}
 
-\item{key}{(character) api key. get a key at 
+\item{key}{(character) api key. get a key at
 \url{https://dev.elsevier.com/index.html}}
 
 \item{...}{curl options passed on to \code{\link[httr]{GET}}}
@@ -29,10 +29,10 @@ Scopus search
 \details{
 Rate limits for search are 20,000 per every 7 days. You likely
 won't make that many requests in 7 days, but if you do e.g., make 20K in
-5 days, then you have to wait 2 days for the clock to reset, than you'll 
-be able to make 20K again. 
+5 days, then you have to wait 2 days for the clock to reset, than you'll
+be able to make 20K again.
 
-See \url{https://dev.elsevier.com/api_key_settings.html} for rate 
+See \url{https://dev.elsevier.com/api_key_settings.html} for rate
 limit information.
 }
 \examples{

@@ -23,6 +23,8 @@
 #' Strategy varies by publisher. For some we can construct XML and PDF links 
 #' only from the DOI. For others, we need to make an HTTP request to the 
 #' publisher to get additional information - this of course makes things slower.
+#' 
+#' See **Rate Limits** in [fulltext-package] for Rate Limiting information.
 #'
 #' @examples \dontrun{
 #' # Entrez
