@@ -1,6 +1,6 @@
 #' @title Search for full text
 #' 
-#' @description \code{ft_search} is a one stop shop for searching for articles 
+#' @description `ft_search` is a one stop shop for searching for articles 
 #' across many publishers and repositories. We currently support search for 
 #' PLOS via the  \pkg{rplos} package, Crossref via the \pkg{rcrossref} 
 #' package, Entrez via the \pkg{rentrez} package, arXiv via the \pkg{aRxiv} 
@@ -19,32 +19,28 @@
 #' @param limit (integer) Number of records to return. default: 10
 #' @param start (integer) Record number to start at. Only used for 
 #' 'scopus' right now. default: 0
-#' @param plosopts (list) PLOS options. See \code{\link[rplos]{searchplos}}
-#' @param bmcopts (list) BMC options. See \code{\link{bmc_search}}
-#' @param crossrefopts (list) Crossref options. See 
-#' \code{\link[rcrossref]{cr_works}}
-#' @param entrezopts (list) Entrez options. See 
-#' \code{\link[rentrez]{entrez_search}}
-#' @param arxivopts (list) arxiv options. See \code{\link[aRxiv]{arxiv_search}}
-#' @param biorxivopts (list) biorxiv options. See \code{\link{biorxiv_search}}
-#' @param euroopts (list) Euro PMC options. See \code{\link{eupmc_search}}
-#' @param scopusopts (list) Scopus options. See \code{\link{scopus_search}}
+#' @param plosopts (list) PLOS options. See [rplos::searchplos()]
+#' @param bmcopts (list) BMC options. See [bmc_search()]
+#' @param crossrefopts (list) Crossref options. See [rcrossref::cr_works()]
+#' @param entrezopts (list) Entrez options. See [rentrez::entrez_search()]
+#' @param arxivopts (list) arxiv options. See [aRxiv::arxiv_search()]
+#' @param biorxivopts (list) biorxiv options. See [biorxiv_search()]
+#' @param euroopts (list) Euro PMC options. See [eupmc_search()]
+#' @param scopusopts (list) Scopus options. See [scopus_search()]
 #' @param maopts (list) Microsoft Academic options. See 
-#' \code{\link{microsoft_search}}
-#' @param ... Further args passed on to \code{\link[httr]{GET}}. Not working 
+#' [microsoft_search()]
+#' @param ... Further args passed on to [httr::GET()]. Not working 
 #' right now...
 #' 
-#' @details Each of \code{plosopts}, \code{scopusopts}, etc. expect 
+#' @details Each of `plosopts`, `scopusopts`, etc. expect 
 #' a named list.
 #' 
-#' @details See **Rate Limits** in [fulltext-package] for Rate 
-#' Limiting information.
-#' 
-#' See **Authentication** in [fulltext-package] for information on 
-#' authenticating. 
+#' @details See **Rate Limits** and **Authentication** in 
+#' [fulltext-package] for rate limiting and authentication information,
+#' respectively
 #'
-#' @return An object of class \code{ft}, and objects of class \code{ft_ind} 
-#' within each source. You can access each data source with \code{$}
+#' @return An object of class `ft`, and objects of class `ft_ind`
+#' within each source. You can access each data source with `$`
 #'
 #' @examples \dontrun{
 #' # Plos

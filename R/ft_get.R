@@ -1,51 +1,51 @@
 #' @title Get full text
 #'
-#' @description \code{ft_get} is a one stop shop to fetch full text of articles,
+#' @description `ft_get` is a one stop shop to fetch full text of articles,
 #' either XML or PDFs. We have specific support for PLOS via the
-#' \code{rplos} package, Entrez via the \code{rentrez} package, and arXiv via the
-#' \code{aRxiv} package. For other publishers, we have helpers to \code{ft_get} to
-#' sort out links for full text based on user input. See \code{Details} for
+#' \pkg{rplos} package, Entrez via the \pkg{rentrez} package, and arXiv via the
+#' \pkg{aRxiv} package. For other publishers, we have helpers to `ft_get` to
+#' sort out links for full text based on user input. See `Details` for
 #' help on how to use this function.
 #'
 #' @export
 #'
 #' @param x Either identifiers for papers, either DOIs (or other ids) as a list of
-#' character strings, or a character vector, OR an object of class \code{ft}, as
-#' returned from \code{\link{ft_search}}
+#' character strings, or a character vector, OR an object of class `ft`, as
+#' returned from [ft_search()]
 #' @param from Source to query. Optional.
 #' @param type (character) one of xml (default), pdf
-#' @param plosopts PLOS options. See \code{\link[rplos]{plos_fulltext}}
+#' @param plosopts PLOS options. See [rplos::plos_fulltext()]
 #' @param bmcopts BMC options. parameter DEPRECATED
-#' @param entrezopts Entrez options. See \code{\link[rentrez]{entrez_search}} and
-#' \code{\link{entrez_fetch}}
+#' @param entrezopts Entrez options. See [rentrez::entrez_search()] and
+#' [entrez_fetch()]
 #' @param elifeopts eLife options
 #' @param elsevieropts elsevier options
 #' @param crossrefopts Crossref options
-#' @param cache (logical) To cache results or not. If \code{cache=TRUE}, raw XML, or other
+#' @param cache (logical) To cache results or not. If `cache=TRUE`, raw XML, or other
 #' format that article is in is written to disk, then pulled from disk when further
-#' manipulations are done on the data. See also \code{\link{cache}}
+#' manipulations are done on the data. See also [cache()]
 #' @param backend (character) One of rds, rcache, or redis
 #' @param path (character) Path to local folder. If the folder doesn't exist, we
 #' create it for you.
-#' @param ... Further args passed on to \code{\link[httr]{GET}}
+#' @param ... Further args passed on to [httr::GET()]
 #'
-#' @return An object of class \code{ft_data} (of type \code{S3}) with slots for
+#' @return An object of class `ft_data` (of type `S3`) with slots for
 #' each of the publishers. The returned object is split up by publishers because
 #' the full text format is the same within publisher - which should facilitate
 #' text mining downstream as different steps may be needed for each publisher's
 #' content.
 #'
-#' @details There are various ways to use \code{ft_get}:
+#' @details There are various ways to use `ft_get`:
 #' \itemize{
-#'  \item Pass in only DOIs - leave \code{from} parameter \code{NULL}. This route will
+#'  \item Pass in only DOIs - leave `from` parameter `NULL`. This route will
 #'  first query Crossref API for the publisher of the DOI, then we'll use the appropriate
 #'  method to fetch full text from the publisher. If a publisher is not found for the DOI,
 #'  then we'll throw back a message telling you a publisher was not found.
-#'  \item Pass in DOIs (or other pub IDs) and use the \code{from} parameter. This route
+#'  \item Pass in DOIs (or other pub IDs) and use the `from` parameter. This route
 #'  means we don't have to make an extra API call to Crossref (thus, this route is faster)
 #'  to determine the publisher for each DOI. We go straight to getting full text based on
 #'  the publisher.
-#'  \item Use \code{\link{ft_search}} to search for articles. Then pass that output to
+#'  \item Use [ft_search()] to search for articles. Then pass that output to
 #'  this function, which will use info in that object. This behaves the same as the previous
 #'  option in that each DOI has publisher info so we know how to get full text for each
 #'  DOI.
@@ -55,8 +55,10 @@
 #' where "recent" may be a few months to a year or so. In that case, make sure to specify
 #' the publisher, or else you'll get back no data.
 #' 
-#' See **Rate Limits** in [fulltext-package] for Rate Limiting information.
-#'
+#' See **Rate Limits** and **Authentication** in 
+#' [fulltext-package] for rate limiting and authentication information,
+#' respectively
+#' 
 #' @section Notes on specific publishers:
 #' \itemize{
 #'  \item arXiv - The IDs passed are not actually DOIs, though they look similar.

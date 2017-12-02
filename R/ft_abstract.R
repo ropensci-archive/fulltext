@@ -8,8 +8,8 @@
 #' @param scopusopts Scopus options
 #' @param maopts Microsoft Academic options
 #' @param crossrefopts Crossref options
-#' @param ... curl options passed on to \code{\link[httr]{GET}}
-#' @return An object of class \code{ft_abstract}
+#' @param ... curl options passed on to [httr::GET()]
+#' @return An object of class `ft_abstract`
 #' @details See **Rate Limits** and **Authentication** in 
 #' [fulltext-package] for rate limiting and authentication information,
 #' respectively

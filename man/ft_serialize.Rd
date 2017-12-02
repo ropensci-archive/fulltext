@@ -12,14 +12,16 @@ ft_get_keys(x)
 \arguments{
 \item{x}{Input object, output from a call to \code{ft_get}. Required.}
 
-\item{to}{(character) Format to serialize to. One of list, xml, json, ... Required.
-Output to xml returns object of class XMLInternalDocument.}
+\item{to}{(character) Format to serialize to. One of list,
+xml, json, ... Required. Output to xml returns object of
+class XMLInternalDocument.}
 
-\item{from}{(character) Format \code{x} is currently in. Function attempts to use metadata
-provided, or guess from data itself. Optional. CURRENTLY IGNORED.}
+\item{from}{(character) Format \code{x} is currently in. Function attempts
+to use metadata provided, or guess from data itself. Optional.
+CURRENTLY IGNORED.}
 
-\item{...}{Further args passed on to \code{\link[xml2]{read_xml}} or
-\code{\link[jsonlite]{toJSON}}}
+\item{...}{Further args passed on to \code{\link[xml2:read_xml]{xml2::read_xml()}} or
+\code{\link[jsonlite:toJSON]{jsonlite::toJSON()}}}
 }
 \value{
 An object of class \code{ft_parsed}
@@ -29,7 +31,7 @@ An object of class \code{ft_parsed}
 your data is in unparsed XML (i.e., character class), you can convert to
 parsed XML. If in XML, you can convert to (ugly-ish) JSON, or a list. In
 addition, this function allows you to save to various places, including
-Rds files, cached via \code{\link{R.cache}}, or to Redis.
+Rds files, cached via \code{R.cache}, or to Redis.
 }
 \examples{
 \dontrun{

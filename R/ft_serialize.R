@@ -1,24 +1,26 @@
 #' @title Serialize raw text to other formats, including to disk
 #' 
-#' @description \code{ft_serialize} helps you convert to various data formats. If 
+#' @description `ft_serialize` helps you convert to various data formats. If 
 #' your data is in unparsed XML (i.e., character class), you can convert to 
 #' parsed XML. If in XML, you can convert to (ugly-ish) JSON, or a list. In 
 #' addition, this function allows you to save to various places, including 
-#' Rds files, cached via \code{\link{R.cache}}, or to Redis.
+#' Rds files, cached via `R.cache`, or to Redis.
 #'
 #' @importFrom digest digest
 #' @importFrom rredis redisClose redisSet redisConnect redisGet
 #' @importFrom R.cache saveCache loadCache
 #' @export
 #'
-#' @param x Input object, output from a call to \code{ft_get}. Required.
-#' @param to (character) Format to serialize to. One of list, xml, json, ... Required.
-#' Output to xml returns object of class XMLInternalDocument.
-#' @param from (character) Format \code{x} is currently in. Function attempts to use metadata
-#' provided, or guess from data itself. Optional. CURRENTLY IGNORED.
-#' @param ... Further args passed on to \code{\link[xml2]{read_xml}} or
-#' \code{\link[jsonlite]{toJSON}}
-#' @return An object of class \code{ft_parsed}
+#' @param x Input object, output from a call to `ft_get`. Required.
+#' @param to (character) Format to serialize to. One of list, 
+#' xml, json, ... Required. Output to xml returns object of 
+#' class XMLInternalDocument.
+#' @param from (character) Format `x` is currently in. Function attempts 
+#' to use metadata provided, or guess from data itself. Optional. 
+#' CURRENTLY IGNORED.
+#' @param ... Further args passed on to [xml2::read_xml()] or
+#' [jsonlite::toJSON()]
+#' @return An object of class `ft_parsed`
 #' @examples \dontrun{
 #' dois <- c('10.1371/journal.pone.0087376','10.1371%2Fjournal.pone.0086169',
 #' '10.1371/journal.pone.0102976','10.1371/journal.pone.0105225',

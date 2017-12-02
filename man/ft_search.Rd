@@ -20,28 +20,26 @@ entrez, arxiv, biorxiv, europmc, scopus, or ma}
 \item{start}{(integer) Record number to start at. Only used for
 'scopus' right now. default: 0}
 
-\item{plosopts}{(list) PLOS options. See \code{\link[rplos]{searchplos}}}
+\item{plosopts}{(list) PLOS options. See \code{\link[rplos:searchplos]{rplos::searchplos()}}}
 
-\item{bmcopts}{(list) BMC options. See \code{\link{bmc_search}}}
+\item{bmcopts}{(list) BMC options. See \code{\link[=bmc_search]{bmc_search()}}}
 
-\item{crossrefopts}{(list) Crossref options. See
-\code{\link[rcrossref]{cr_works}}}
+\item{crossrefopts}{(list) Crossref options. See \code{\link[rcrossref:cr_works]{rcrossref::cr_works()}}}
 
-\item{entrezopts}{(list) Entrez options. See
-\code{\link[rentrez]{entrez_search}}}
+\item{entrezopts}{(list) Entrez options. See \code{\link[rentrez:entrez_search]{rentrez::entrez_search()}}}
 
-\item{arxivopts}{(list) arxiv options. See \code{\link[aRxiv]{arxiv_search}}}
+\item{arxivopts}{(list) arxiv options. See \code{\link[aRxiv:arxiv_search]{aRxiv::arxiv_search()}}}
 
-\item{biorxivopts}{(list) biorxiv options. See \code{\link{biorxiv_search}}}
+\item{biorxivopts}{(list) biorxiv options. See \code{\link[=biorxiv_search]{biorxiv_search()}}}
 
-\item{euroopts}{(list) Euro PMC options. See \code{\link{eupmc_search}}}
+\item{euroopts}{(list) Euro PMC options. See \code{\link[=eupmc_search]{eupmc_search()}}}
 
-\item{scopusopts}{(list) Scopus options. See \code{\link{scopus_search}}}
+\item{scopusopts}{(list) Scopus options. See \code{\link[=scopus_search]{scopus_search()}}}
 
 \item{maopts}{(list) Microsoft Academic options. See
-\code{\link{microsoft_search}}}
+\code{\link[=microsoft_search]{microsoft_search()}}}
 
-\item{...}{Further args passed on to \code{\link[httr]{GET}}. Not working
+\item{...}{Further args passed on to \code{\link[httr:GET]{httr::GET()}}. Not working
 right now...}
 }
 \value{
@@ -65,11 +63,9 @@ license is used for articles.
 Each of \code{plosopts}, \code{scopusopts}, etc. expect
 a named list.
 
-See \strong{Rate Limits} in \link{fulltext-package} for Rate
-Limiting information.
-
-See \strong{Authentication} in \link{fulltext-package} for information on
-authenticating.
+See \strong{Rate Limits} and \strong{Authentication} in
+\link{fulltext-package} for rate limiting and authentication information,
+respectively
 }
 \examples{
 \dontrun{

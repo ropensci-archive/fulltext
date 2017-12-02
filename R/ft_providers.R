@@ -6,7 +6,7 @@
 #' @param journal Query terms
 #' @param publisher Source to query
 #' @param limit Number of records to return.
-#' @param ... Further args passed on to \code{\link[httr]{GET}}
+#' @param ... Further args passed on to [httr::GET()]
 #' 
 #' @return An object of class ft_p
 #' @examples \dontrun{

@@ -1,10 +1,11 @@
-#' Cache blobs of json, xml or pdfs of text from ft_get() function
+#' Cache blobs of json, xml or pdfs of text from `ft_get()` function
 #'
 #' @name cache
 #'
-#' @param cache (logical) If TRUE, cache results, if not objects saved within R session.
+#' @param cache (logical) If `TRUE`, cache results, if not objects saved 
+#' within R session.
 #' @param backend (character) One of rds, rcache, redis
-#' @param path path to local storage. used only if \code{backend="rds"}
+#' @param path path to local storage. used only if `backend="rds"`
 #' @param cachetype The cache type
 #'
 #' @examples \dontrun{

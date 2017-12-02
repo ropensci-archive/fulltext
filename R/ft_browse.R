@@ -1,16 +1,16 @@
 #' Browse an article in your default browser
 #'
 #' @name ft_browse
-#' @param x An object of class \code{ft_data} - the output from a call to 
-#' \code{\link{ft_get}}
+#' @param x An object of class `ft_data` - the output from a call to 
+#' [ft_get()]
 #' @param what (character) One of macrodocs (default), publisher, or whisker.
 #' @param output A file path, if not given, uses a temporary file, deleted up on leaving the
 #' R session.
-#' @param browse (logical) Whether to browse (default) or not. If \code{FALSE},
+#' @param browse (logical) Whether to browse (default) or not. If `FALSE`,
 #' return the url.
 #'
 #' @details
-#' \code{what=whisker} not operational yet. When operational, will use whisker to open
+#' `what=whisker` not operational yet. When operational, will use whisker to open
 #' html page from XML content, each section parsed into separate section.
 #'
 #' @examples \dontrun{

@@ -13,7 +13,7 @@ bmc_search(query, limit = 10, offset = 1, key = NULL, ...)
 
 \item{offset}{Record number to start at. Default: 1}
 
-\item{...}{Further args passed on to \code{\link[httr]{GET}}}
+\item{...}{Further args passed on to \code{\link[httr:GET]{httr::GET()}}}
 }
 \value{
 A list of length 2

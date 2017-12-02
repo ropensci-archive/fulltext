@@ -1,19 +1,19 @@
 #' Get full text links
 #'
 #' @export
-#' @param x One of \code{ft}, \code{ft_ind}, or a character string of DOIs.
-#' @param from Source to query. Ignored when \code{ft_ind} class passed.
-#' @param plosopts PLOS options. See \code{?searchplos}
-#' @param bmcopts BMC options. See \code{?bmc_search}
-#' @param crossrefopts Crossref options. See \code{?cr_works}
-#' @param entrezopts Entrez options. See \code{?entrez_search}
-#' @param ... Further args passed on to \code{\link[httr]{GET}}. Not working 
+#' @param x One of `ft`, `ft_ind`, or a character string of DOIs.
+#' @param from Source to query. Ignored when `ft_ind` class passed.
+#' @param plosopts PLOS options. See `?searchplos`
+#' @param bmcopts BMC options. See `?bmc_search`
+#' @param crossrefopts Crossref options. See `?cr_works`
+#' @param entrezopts Entrez options. See `?entrez_search`
+#' @param ... Further args passed on to [httr::GET()]. Not working 
 #' right now...
 #'
 #' @return An object of class ft_links, with either a list or data.frame for 
 #' each DOI, with links for XML and PDF links (typically). 
 #' 
-#' @details Inputs can be an object of class \code{ft}, \code{ft_ind}, or a 
+#' @details Inputs can be an object of class `ft`, `ft_ind`, or a 
 #' character string of DOIs. You can specify a specific source for four sources
 #' (PLOS, BMC, Crossref, and Entrez), but any other publishers we guess the 
 #' publisher form the input DOI(s), then attempt to generate full text links 
@@ -24,8 +24,10 @@
 #' only from the DOI. For others, we need to make an HTTP request to the 
 #' publisher to get additional information - this of course makes things slower.
 #' 
-#' See **Rate Limits** in [fulltext-package] for Rate Limiting information.
-#'
+#' See **Rate Limits** and **Authentication** in 
+#' [fulltext-package] for rate limiting and authentication information,
+#' respectively
+#' 
 #' @examples \dontrun{
 #' # Entrez
 #' (res1 <- ft_search(query='ecology', from='entrez'))

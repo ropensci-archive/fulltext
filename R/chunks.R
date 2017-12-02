@@ -1,38 +1,37 @@
 #' @title Extract chunks of data from articles
 #'
-#' @description \code{chunks} makes it easy to extract sections of an article.
+#' @description `chunks` makes it easy to extract sections of an article.
 #' You can extract just authors across all articles, or all references
 #' sections, or the complete text of each article. Then you can pass the
 #' output downstream for visualization and analysis.
 #'
 #' @export
-#' @param x An object of class \code{ft_data}, the output from a call to
-#' \code{\link{ft_get}}
+#' @param x An object of class `ft_data`, the output from a call to
+#' [ft_get()]
 #' @param what What to get, can be one or more in a vector or list.
 #' See Details.
 #'
-#' @details Options for the \code{what} parameter:
-#' \itemize{
-#'  \item front - Publisher, journal and article metadata elements
-#'  \item body - Body of the article
-#'  \item back - Back of the article, acknowledgments, author contributions,
+#' @details Options for the `what` parameter:
+#' 
+#' * front - Publisher, journal and article metadata elements
+#' * body - Body of the article
+#' * back - Back of the article, acknowledgments, author contributions,
 #'  references
-#'  \item title - Article title
-#'  \item doi - Article DOI
-#'  \item categories - Publisher's categories, if any
-#'  \item authors - Authors
-#'  \item keywords - Keywords
-#'  \item abstract - Article abstract
-#'  \item executive_summary - Article executive summary
-#'  \item refs - References
-#'  \item refs_dois - References DOIs - if available
-#'  \item publisher - Publisher name
-#'  \item journal_meta - Journal metadata
-#'  \item article_meta - Article metadata
-#'  \item acknowledgments - Acknowledgments
-#'  \item permissions - Article permissions
-#'  \item history - Dates, recieved, published, accepted, etc.
-#' }
+#' * title - Article title
+#' * doi - Article DOI
+#' * categories - Publisher's categories, if any
+#' * authors - Authors
+#' * keywords - Keywords
+#' * abstract - Article abstract
+#' * executive_summary - Article executive summary
+#' * refs - References
+#' * refs_dois - References DOIs - if available
+#' * publisher - Publisher name
+#' * journal_meta - Journal metadata
+#' * article_meta - Article metadata
+#' * acknowledgments - Acknowledgments
+#' * permissions - Article permissions
+#' * history - Dates, recieved, published, accepted, etc.
 #'
 #' Note that we currently only support PLOS, eLife, Entrez, and Elsevier
 #' right now; more to come.

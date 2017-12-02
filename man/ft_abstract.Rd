@@ -21,7 +21,7 @@ scopus, microsoft, or crossref}
 
 \item{crossrefopts}{Crossref options}
 
-\item{...}{curl options passed on to \code{\link[httr]{GET}}}
+\item{...}{curl options passed on to \code{\link[httr:GET]{httr::GET()}}}
 }
 \value{
 An object of class \code{ft_abstract}

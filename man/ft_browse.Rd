@@ -11,7 +11,7 @@ ft_browse_sections(x, what = "abstract", output = NULL, browse = TRUE)
 }
 \arguments{
 \item{x}{An object of class \code{ft_data} - the output from a call to
-\code{\link{ft_get}}}
+\code{\link[=ft_get]{ft_get()}}}
 
 \item{what}{(character) One of macrodocs (default), publisher, or whisker.}
 

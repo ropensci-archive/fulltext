@@ -12,18 +12,18 @@ ft_get(x, from = NULL, type = "xml", plosopts = list(),
 \arguments{
 \item{x}{Either identifiers for papers, either DOIs (or other ids) as a list of
 character strings, or a character vector, OR an object of class \code{ft}, as
-returned from \code{\link{ft_search}}}
+returned from \code{\link[=ft_search]{ft_search()}}}
 
 \item{from}{Source to query. Optional.}
 
 \item{type}{(character) one of xml (default), pdf}
 
-\item{plosopts}{PLOS options. See \code{\link[rplos]{plos_fulltext}}}
+\item{plosopts}{PLOS options. See \code{\link[rplos:plos_fulltext]{rplos::plos_fulltext()}}}
 
 \item{bmcopts}{BMC options. parameter DEPRECATED}
 
-\item{entrezopts}{Entrez options. See \code{\link[rentrez]{entrez_search}} and
-\code{\link{entrez_fetch}}}
+\item{entrezopts}{Entrez options. See \code{\link[rentrez:entrez_search]{rentrez::entrez_search()}} and
+\code{\link[=entrez_fetch]{entrez_fetch()}}}
 
 \item{elifeopts}{eLife options}
 
@@ -33,14 +33,14 @@ returned from \code{\link{ft_search}}}
 
 \item{cache}{(logical) To cache results or not. If \code{cache=TRUE}, raw XML, or other
 format that article is in is written to disk, then pulled from disk when further
-manipulations are done on the data. See also \code{\link{cache}}}
+manipulations are done on the data. See also \code{\link[=cache]{cache()}}}
 
 \item{backend}{(character) One of rds, rcache, or redis}
 
 \item{path}{(character) Path to local folder. If the folder doesn't exist, we
 create it for you.}
 
-\item{...}{Further args passed on to \code{\link[httr]{GET}}}
+\item{...}{Further args passed on to \code{\link[httr:GET]{httr::GET()}}}
 }
 \value{
 An object of class \code{ft_data} (of type \code{S3}) with slots for
@@ -52,8 +52,8 @@ content.
 \description{
 \code{ft_get} is a one stop shop to fetch full text of articles,
 either XML or PDFs. We have specific support for PLOS via the
-\code{rplos} package, Entrez via the \code{rentrez} package, and arXiv via the
-\code{aRxiv} package. For other publishers, we have helpers to \code{ft_get} to
+\pkg{rplos} package, Entrez via the \pkg{rentrez} package, and arXiv via the
+\pkg{aRxiv} package. For other publishers, we have helpers to \code{ft_get} to
 sort out links for full text based on user input. See \code{Details} for
 help on how to use this function.
 }
@@ -68,7 +68,7 @@ then we'll throw back a message telling you a publisher was not found.
 means we don't have to make an extra API call to Crossref (thus, this route is faster)
 to determine the publisher for each DOI. We go straight to getting full text based on
 the publisher.
-\item Use \code{\link{ft_search}} to search for articles. Then pass that output to
+\item Use \code{\link[=ft_search]{ft_search()}} to search for articles. Then pass that output to
 this function, which will use info in that object. This behaves the same as the previous
 option in that each DOI has publisher info so we know how to get full text for each
 DOI.
@@ -78,7 +78,9 @@ Note that some publishers are available via Entrez, but often not recent article
 where "recent" may be a few months to a year or so. In that case, make sure to specify
 the publisher, or else you'll get back no data.
 
-See \strong{Rate Limits} in \link{fulltext-package} for Rate Limiting information.
+See \strong{Rate Limits} and \strong{Authentication} in
+\link{fulltext-package} for rate limiting and authentication information,
+respectively
 }
 \section{Notes on specific publishers}{
 

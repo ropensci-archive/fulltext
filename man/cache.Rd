@@ -5,7 +5,7 @@
 \alias{cache_options_set}
 \alias{cache_options_get}
 \alias{cache_clear}
-\title{Cache blobs of json, xml or pdfs of text from ft_get() function}
+\title{Cache blobs of json, xml or pdfs of text from \code{ft_get()} function}
 \usage{
 cache_options_set(cache = TRUE, backend = "rds", path = "~/.fulltext")
 
@@ -14,7 +14,8 @@ cache_options_get()
 cache_clear(cachetype = NULL)
 }
 \arguments{
-\item{cache}{(logical) If TRUE, cache results, if not objects saved within R session.}
+\item{cache}{(logical) If \code{TRUE}, cache results, if not objects saved
+within R session.}
 
 \item{backend}{(character) One of rds, rcache, redis}
 
@@ -23,7 +24,7 @@ cache_clear(cachetype = NULL)
 \item{cachetype}{The cache type}
 }
 \description{
-Cache blobs of json, xml or pdfs of text from ft_get() function
+Cache blobs of json, xml or pdfs of text from \code{ft_get()} function
 }
 \examples{
 \dontrun{

@@ -1,14 +1,14 @@
 #' @title Extract text from a single pdf document
 #' 
-#' @description \code{ft_extract} attemps to make it easy to extract text from 
+#' @description `ft_extract` attemps to make it easy to extract text from 
 #' PDFs, using \pkg{pdftools}. Inputs can be either paths to PDF
-#' files, or the output of \code{\link{ft_get}} (class \code{ft_data}). 
+#' files, or the output of [ft_get()] (class `ft_data`). 
 #' 
 #' @export
-#' @param x Path to a pdf file, or an object of class \code{ft_data}, the 
-#' output from \code{\link{ft_get}}
-#' @return An object of class \code{pdft_char} in the case of character input, 
-#' or of class \code{ft_data} in the case of \code{ft_data} input
+#' @param x Path to a pdf file, or an object of class `ft_data`, the 
+#' output from [ft_get()]
+#' @return An object of class `pdft_char` in the case of character input, 
+#' or of class `ft_data` in the case of `ft_data` input
 #' @examples \dontrun{
 #' path <- system.file("examples", "example1.pdf", package = "fulltext")
 #' (res <- ft_extract(path))

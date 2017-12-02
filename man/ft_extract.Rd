@@ -8,7 +8,7 @@ ft_extract(x)
 }
 \arguments{
 \item{x}{Path to a pdf file, or an object of class \code{ft_data}, the
-output from \code{\link{ft_get}}}
+output from \code{\link[=ft_get]{ft_get()}}}
 }
 \value{
 An object of class \code{pdft_char} in the case of character input,
@@ -17,7 +17,7 @@ or of class \code{ft_data} in the case of \code{ft_data} input
 \description{
 \code{ft_extract} attemps to make it easy to extract text from
 PDFs, using \pkg{pdftools}. Inputs can be either paths to PDF
-files, or the output of \code{\link{ft_get}} (class \code{ft_data}).
+files, or the output of \code{\link[=ft_get]{ft_get()}} (class \code{ft_data}).
 }
 \examples{
 \dontrun{

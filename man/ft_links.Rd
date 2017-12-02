@@ -20,7 +20,7 @@ ft_links(x, from = NULL, plosopts = list(), crossrefopts = list(),
 
 \item{bmcopts}{BMC options. See \code{?bmc_search}}
 
-\item{...}{Further args passed on to \code{\link[httr]{GET}}. Not working
+\item{...}{Further args passed on to \code{\link[httr:GET]{httr::GET()}}. Not working
 right now...}
 }
 \value{
@@ -42,7 +42,9 @@ Strategy varies by publisher. For some we can construct XML and PDF links
 only from the DOI. For others, we need to make an HTTP request to the
 publisher to get additional information - this of course makes things slower.
 
-See \strong{Rate Limits} in \link{fulltext-package} for Rate Limiting information.
+See \strong{Rate Limits} and \strong{Authentication} in
+\link{fulltext-package} for rate limiting and authentication information,
+respectively
 }
 \examples{
 \dontrun{

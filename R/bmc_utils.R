@@ -5,7 +5,7 @@
 #' @param query Search terms.
 #' @param limit Number of records to return. Default 10.
 #' @param offset Record number to start at. Default: 1
-#' @param ... Further args passed on to \code{\link[httr]{GET}}
+#' @param ... Further args passed on to [httr::GET()]
 #' @return A list of length 2
 #' @examples \dontrun{
 #' bmc_search(query='ecology')
