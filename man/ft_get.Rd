@@ -27,7 +27,9 @@ returned from \code{\link[=ft_search]{ft_search()}}}
 
 \item{elifeopts}{eLife options}
 
-\item{elsevieropts}{elsevier options}
+\item{elsevieropts}{Elsevier options}
+
+\item{wileyopts}{Wiley options}
 
 \item{crossrefopts}{Crossref options}
 

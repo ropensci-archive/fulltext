@@ -19,8 +19,9 @@
 #' @param entrezopts Entrez options. See [rentrez::entrez_search()] and
 #' [entrez_fetch()]
 #' @param elifeopts eLife options
-#' @param elsevieropts elsevier options
+#' @param elsevieropts Elsevier options
 #' @param crossrefopts Crossref options
+#' @param wileyopts Wiley options
 #' @param cache (logical) To cache results or not. If `cache=TRUE`, raw XML, or other
 #' format that article is in is written to disk, then pulled from disk when further
 #' manipulations are done on the data. See also [cache()]
@@ -207,7 +208,7 @@ ft_get.default <- function(x, from=NULL, type = "xml", plosopts=list(),
 
 #' @export
 ft_get.character <- function(x, from=NULL, type = "xml", plosopts=list(),
-                             entrezopts=list(),
+                             bmcopts = list(), entrezopts=list(),
                              elifeopts=list(),
                              elsevieropts = list(), wileyopts = list(), 
                              crossrefopts = list(), cache=FALSE, backend="rds",
@@ -241,7 +242,7 @@ ft_get.character <- function(x, from=NULL, type = "xml", plosopts=list(),
 
 #' @export
 ft_get.list <- function(x, from=NULL, type = "xml", plosopts=list(),
-                        entrezopts=list(), elifeopts=list(),
+                        bmcopts = list(), entrezopts=list(), elifeopts=list(),
                         elsevieropts = list(), wileyopts = list(), 
                         crossrefopts = list(),
                         cache=FALSE, backend="rds", path="~/.fulltext", ...) {
