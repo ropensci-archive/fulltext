@@ -2,15 +2,17 @@
 #'
 #' @export
 #' @param x (character) DOIs as a character vector
-#' @param from Source to query. One or more of plos (default), scopus, or 
-#' microsoft
+#' @param from Source to query. One or more of plos (default), 
+#' scopus, microsoft, or crossref
 #' @param plosopts PLOS options
 #' @param scopusopts Scopus options
 #' @param maopts Microsoft Academic options
+#' @param crossrefopts Crossref options
 #' @param ... curl options passed on to \code{\link[httr]{GET}}
 #' @return An object of class \code{ft_abstract}
-#' @details See **Rate Limits** in [fulltext-package] for 
-#' Rate Limiting information.
+#' @details See **Rate Limits** and **Authentication** in 
+#' [fulltext-package] for rate limiting and authentication information,
+#' respectively
 #' 
 #' @examples \dontrun{
 #' # PLOS
@@ -59,33 +61,46 @@
 #' ))
 #' out$ma
 #' cat(unlist(lapply(out$ma, "[[", "abstract")), sep = "\n\n")
+#' 
+#' # Crossref
+#' (res <- ft_search("ecology", from = "crossref", 
+#'   crossrefopts = list(filter = c(has_abstract = TRUE))))
+#' ids <- res$crossref$data$doi
+#' (out <- ft_abstract(x = ids, from = "crossref"))
+#' out$crossref
 #' }
 ft_abstract <- function(x, from = "plos", plosopts = list(), 
-                        scopusopts = list(), maopts = list(), ...) {
+                        scopusopts = list(), maopts = list(), 
+                        crossrefopts = list(), ...) {
   UseMethod("ft_abstract")
 }
 
 #' @export
 ft_abstract.default <- function(x, from = "plos", plosopts = list(), 
-                                scopusopts = list(), maopts = list(), ...) {
+                                scopusopts = list(), maopts = list(), 
+                                crossrefopts = list(), ...) {
   stop("'ft_abstract' does not suport class ", class(x), call. = FALSE)
 }
 
 #' @export
 ft_abstract.numeric <- function(x, from = "plos", plosopts = list(), 
-                                scopusopts = list(), maopts = list(), ...) {
+                                scopusopts = list(), maopts = list(), 
+                                crossrefopts = list(), ...) {
   ft_abstract(as.character(x), from, plosopts, scopusopts, maopts, ...)
 }
 
 #' @export
 ft_abstract.character <- function(x, from = "plos", plosopts = list(), 
-                                  scopusopts = list(), maopts = list(), ...) {
-  from <- match.arg(from, c("plos", "scopus", "microsoft"))
+                                  scopusopts = list(), maopts = list(), 
+                                  crossrefopts = list(), ...) {
+
+  from <- match.arg(from, c("plos", "scopus", "microsoft", "crossref"))
   plos_out <- plugin_abstract_plos(from, x, plosopts)
   scopus_out <- plugin_abstract_scopus(from, x, scopusopts)
   ma_out <- plugin_abstract_microsoft(from, x, maopts)
-  structure(list(plos = plos_out, scopus = scopus_out, ma = ma_out), 
-            class = "ft_abstract")
+  cr_out <- plugin_abstract_crossref(from, x, crossrefopts)
+  structure(list(plos = plos_out, scopus = scopus_out, 
+    ma = ma_out, crossref = cr_out), class = "ft_abstract")
 }
 
 #' @export
@@ -95,7 +110,8 @@ print.ft_abstract <- function(x, ...) {
   cat(paste(
     sprintf("  [PLOS: %s", len_abs(x$plos)),
     sprintf("Scopus: %s", len_abs(x$scopus)),
-    sprintf("Microsoft: %s]", len_abs(x$ma)),
+    sprintf("Microsoft: %s", len_abs(x$ma)), 
+    sprintf("Crossref: %s]", len_abs(x$crossref)), 
     sep = "; "), "\n")
 }
 

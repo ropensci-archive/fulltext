@@ -24,7 +24,11 @@ plugin_crossref <- function(sources, query, limit, start, opts){
     opts$query <- query
     opts$limit <- limit
     opts$offset <- start
-    opts$filter <- c(has_license = TRUE)
+    if ("filter" %in% names(opts)) {
+      opts$filter <- c(c(has_license = TRUE), opts$filter)
+    } else {
+      opts$filter <- c(has_license = TRUE)  
+    }
     out <- do.call(cr_works, opts)
     out$data <- names_lower(out$data)
     zz <- list(source = "crossref", found = out$meta$total_results, data = out$data, opts = opts,

@@ -48,6 +48,23 @@ plugin_abstract_microsoft <- function(sources, ids, opts, ...) {
   }
 }
 
+plugin_abstract_crossref <- function(sources, ids, opts, ...) {
+  if (any(grepl("crossref", sources))) {
+    lapply(ids, function(z) {
+      list(
+        id = z, 
+        abstract = rcrossref::cr_works(dois = z)$data$abstract
+      )
+    })
+    # tmp <- rcrossref::cr_works(dois = ids, select = c('DOI', 'abstract'))
+    # tmp$data
+  } else {
+    lapply(ids, function(z) {
+      list(id = z, abstract = "")
+    })
+  }
+}
+
 ##### utils
 plos_abstract <- function(x, ...) {
   rplos::searchplos(q = paste0("doi:", x), fl = "abstract", ...)$data[[1]]

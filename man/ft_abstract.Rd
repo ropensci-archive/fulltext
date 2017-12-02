@@ -5,13 +5,13 @@
 \title{Get abstracts}
 \usage{
 ft_abstract(x, from = "plos", plosopts = list(), scopusopts = list(),
-  maopts = list(), ...)
+  maopts = list(), crossrefopts = list(), ...)
 }
 \arguments{
 \item{x}{(character) DOIs as a character vector}
 
 \item{from}{Source to query. One or more of plos (default),
-crossref, scopus, or microsoft}
+scopus, microsoft, or crossref}
 
 \item{plosopts}{PLOS options}
 
@@ -19,9 +19,9 @@ crossref, scopus, or microsoft}
 
 \item{maopts}{Microsoft Academic options}
 
-\item{...}{curl options passed on to \code{\link[httr]{GET}}}
-
 \item{crossrefopts}{Crossref options}
+
+\item{...}{curl options passed on to \code{\link[httr]{GET}}}
 }
 \value{
 An object of class \code{ft_abstract}
@@ -30,8 +30,9 @@ An object of class \code{ft_abstract}
 Get abstracts
 }
 \details{
-See \strong{Rate Limits} in \link{fulltext-package} for
-Rate Limiting information.
+See \strong{Rate Limits} and \strong{Authentication} in
+\link{fulltext-package} for rate limiting and authentication information,
+respectively
 }
 \examples{
 \dontrun{
@@ -81,5 +82,12 @@ ids <- res$ma$data$Id
 ))
 out$ma
 cat(unlist(lapply(out$ma, "[[", "abstract")), sep = "\\n\\n")
+
+# Crossref
+(res <- ft_search("ecology", from = "crossref", 
+  crossrefopts = list(filter = c(has_abstract = TRUE))))
+ids <- res$crossref$data$doi
+(out <- ft_abstract(x = ids, from = "crossref"))
+out$crossref
 }
 }

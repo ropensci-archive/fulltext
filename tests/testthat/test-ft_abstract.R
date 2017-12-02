@@ -12,7 +12,7 @@ test_that("ft_abstract basic functionality works - PLOS", {
   aa <- ft_abstract(x = dois, from = "plos")
   
   expect_is(aa, "ft_abstract")
-  expect_named(aa, c('plos', 'scopus', 'ma'))
+  expect_named(aa, c('plos', 'scopus', 'ma', 'crossref'))
   expect_is(aa$plos, "list")
   expect_is(aa$plos[[1]], "list")
   expect_named(aa$plos[[1]], c('doi', 'abstract'))
@@ -45,7 +45,7 @@ test_that("ft_abstract basic functionality works - PLOS", {
 test_that("ft_abstract basic functionality works - Microsoft", {
   skip_on_cran()
   
-  opts <- list(key <- Sys.getenv("MICROSOFT_ACADEMIC_KEY"))
+  key <- Sys.getenv("MICROSOFT_ACADEMIC_KEY")
   res <- ft_search("Ti='ecology'...", from = "microsoft", 
      maopts = list(key = key))
   ids <- res$ma$data$Id
