@@ -27,7 +27,7 @@ Imports:
     xml2 (>= 1.1.1),
     jsonlite,
     rplos (>= 0.8.0),
-    rcrossref (>= 0.7.0.9416),
+    rcrossref (>= 0.8.0),
     crminer (>= 0.1.4),
     microdemic (>= 0.1.0),
     aRxiv,
@@ -38,7 +38,6 @@ Imports:
     digest,
     whisker,
     data.table
-Remotes: ropensci/rcrossref
 Suggests:
     testthat,
     knitr
