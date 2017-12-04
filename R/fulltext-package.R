@@ -70,10 +70,11 @@
 #' `ELSEVIER_SCOPUS_KEY` as an environment variable in `.Renviron`, and 
 #' we'll read it in for you. See [Startup] for help.
 #'  
-#' **Microsoft**: Get a key by creating an account at 
+#' **Microsoft**: Get a key by creating an Azure account at 
 #' <https://www.microsoft.com/cognitive-services/en-us/subscriptions>, 
-#' then requesting a key fir **Academic**. Store it as an environment 
-#' variable in your `.Renviron` file - see [Startup] for help. Pass your 
+#' then requesting a key for **Academic Knowledge API** within 
+#' **Cognitive Services**. Store it as an environment variable in your 
+#' `.Renviron` file - see [Startup] for help. Pass your 
 #' API key into `maopts` as a named element in a list like 
 #' `list(key = Sys.getenv('MICROSOFT_ACADEMIC_KEY'))`
 #' 
@@ -103,7 +104,7 @@
 #' @importFrom rplos searchplos plos_fulltext
 #' @importFrom rcrossref cr_works cr_ft_links
 #' @importFrom aRxiv arxiv_search
-#' @importFrom microdemic ma_abstract
+#' @importFrom microdemic ma_abstract ma_evaluate
 #' @name fulltext-package
 #' @aliases fulltext
 #' @docType package

@@ -21,7 +21,7 @@ scopus, microsoft, or crossref}
 
 \item{crossrefopts}{Crossref options}
 
-\item{...}{curl options passed on to \code{\link[httr:GET]{httr::GET()}}}
+\item{...}{curl options passed on to \code{\link[httr:GET]{httr::GET()}} or \code{crul::HttpClient}}
 }
 \value{
 An object of class \code{ft_abstract}
@@ -72,7 +72,7 @@ ids <- fulltext:::strextract(res$scopus$data$`dc:identifier`, "[0-9]+")
 
 # Microsoft
 key <- Sys.getenv("MICROSOFT_ACADEMIC_KEY")
-(res <- ft_search("Ti='ecology'...", from = "microsoft", 
+(res <- ft_search("Y=[2010, 2012)", from = "microsoft", 
   maopts = list(key = key)))
 ids <- res$ma$data$Id
 (out <- ft_abstract(x = ids, from = "microsoft",

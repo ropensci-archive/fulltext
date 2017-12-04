@@ -9,7 +9,8 @@ test_that("ft_abstract basic functionality works - PLOS", {
      plosopts = list(fq = list('doc_type:full', '-article_type:correction',
                     '-article_type:viewpoints')))
   dois <- res$plos$data$id
-  aa <- ft_abstract(x = dois, from = "plos")
+  Sys.sleep(1)
+  aa <- ft_abstract(x = dois[1:2], from = "plos")
   
   expect_is(aa, "ft_abstract")
   expect_named(aa, c('plos', 'scopus', 'ma', 'crossref'))
@@ -46,17 +47,15 @@ test_that("ft_abstract basic functionality works - Microsoft", {
   skip_on_cran()
   
   key <- Sys.getenv("MICROSOFT_ACADEMIC_KEY")
-  res <- ft_search("Ti='ecology'...", from = "microsoft", 
+  res <- ft_search("Y=[2010, 2012)", from = "microsoft", 
      maopts = list(key = key))
   ids <- res$ma$data$Id
-  aa <- ft_abstract(x = ids, from = "microsoft",
-                    maopts = list(
-                      key = Sys.getenv('MICROSOFT_ACADEMIC_KEY')
-                    )
-  )
+  Sys.sleep(1)
+  aa <- ft_abstract(x = ids[1:2], from = "microsoft",
+    maopts = list(key = Sys.getenv('MICROSOFT_ACADEMIC_KEY')))
   
   expect_is(aa, "ft_abstract")
-  expect_named(aa, c('plos', 'scopus', 'ma'))
+  expect_named(aa, c('plos', 'scopus', 'ma', 'crossref'))
   expect_is(aa$ma, "list")
   expect_is(aa$ma[[1]], "list")
   expect_named(aa$ma[[1]], c('id', 'abstract'))

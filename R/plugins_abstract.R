@@ -35,10 +35,10 @@ plugin_abstract_microsoft <- function(sources, ids, opts, ...) {
   if (any(grepl("microsoft", sources))) {
     lapply(ids, function(z) {
       opts$query <- paste0("Id=", z)
-      opts$sleep <- 1
+      #opts$sleep <- 1
       list(
         id = z, 
-        abstract = do.call(microsoft_abstract, opts)
+        abstract = do.call(microdemic::ma_abstract, opts)
       )
     })
   } else {
@@ -56,8 +56,6 @@ plugin_abstract_crossref <- function(sources, ids, opts, ...) {
         abstract = rcrossref::cr_works(dois = z)$data$abstract
       )
     })
-    # tmp <- rcrossref::cr_works(dois = ids, select = c('DOI', 'abstract'))
-    # tmp$data
   } else {
     lapply(ids, function(z) {
       list(id = z, abstract = "")

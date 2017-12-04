@@ -21,12 +21,11 @@ microsoft_search(query, count = 10, offset = 0, orderby = NULL,
 \item{key}{(character) microsoft academic API key, see Details.}
 }
 \description{
-Microsoft Academic search
+Wraps \code{microdemic::ma_evaluate}
 }
 \examples{
 \dontrun{
-microsoft_search(query = "Ti='biology'...",
-  key = Sys.getenv("MICROSOFT_ACADEMIC_KEY"))
+microsoft_search(query = "Y='19'...", key = Sys.getenv("MICROSOFT_ACADEMIC_KEY"))
 }
 }
 \references{

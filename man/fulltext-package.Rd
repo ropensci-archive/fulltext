@@ -86,10 +86,11 @@ then when you're in your account, create an API key. Pass in as variable
 \code{ELSEVIER_SCOPUS_KEY} as an environment variable in \code{.Renviron}, and
 we'll read it in for you. See \link{Startup} for help.
 
-\strong{Microsoft}: Get a key by creating an account at
+\strong{Microsoft}: Get a key by creating an Azure account at
 \url{https://www.microsoft.com/cognitive-services/en-us/subscriptions},
-then requesting a key fir \strong{Academic}. Store it as an environment
-variable in your \code{.Renviron} file - see \link{Startup} for help. Pass your
+then requesting a key for \strong{Academic Knowledge API} within
+\strong{Cognitive Services}. Store it as an environment variable in your
+\code{.Renviron} file - see \link{Startup} for help. Pass your
 API key into \code{maopts} as a named element in a list like
 \code{list(key = Sys.getenv('MICROSOFT_ACADEMIC_KEY'))}
 

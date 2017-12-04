@@ -8,7 +8,7 @@
 #' @param scopusopts Scopus options
 #' @param maopts Microsoft Academic options
 #' @param crossrefopts Crossref options
-#' @param ... curl options passed on to [httr::GET()]
+#' @param ... curl options passed on to [httr::GET()] or `crul::HttpClient`
 #' @return An object of class `ft_abstract`
 #' @details See **Rate Limits** and **Authentication** in 
 #' [fulltext-package] for rate limiting and authentication information,
@@ -51,7 +51,7 @@
 #' 
 #' # Microsoft
 #' key <- Sys.getenv("MICROSOFT_ACADEMIC_KEY")
-#' (res <- ft_search("Ti='ecology'...", from = "microsoft", 
+#' (res <- ft_search("Y=[2010, 2012)", from = "microsoft", 
 #'   maopts = list(key = key)))
 #' ids <- res$ma$data$Id
 #' (out <- ft_abstract(x = ids, from = "microsoft",
