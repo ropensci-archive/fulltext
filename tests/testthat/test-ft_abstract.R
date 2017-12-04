@@ -9,8 +9,7 @@ test_that("ft_abstract basic functionality works - PLOS", {
      plosopts = list(fq = list('doc_type:full', '-article_type:correction',
                     '-article_type:viewpoints')))
   dois <- res$plos$data$id
-  Sys.sleep(1)
-  aa <- ft_abstract(x = dois[1:2], from = "plos")
+  aa <- ft_abstract(x = dois[1:5], from = "plos")
   
   expect_is(aa, "ft_abstract")
   expect_named(aa, c('plos', 'scopus', 'ma', 'crossref'))
@@ -59,6 +58,22 @@ test_that("ft_abstract basic functionality works - Microsoft", {
   expect_is(aa$ma, "list")
   expect_is(aa$ma[[1]], "list")
   expect_named(aa$ma[[1]], c('id', 'abstract'))
+})
+
+test_that("ft_abstract basic functionality works - Crossref", {
+  skip_on_cran()
+  
+  res <- ft_search("ecology", from = "crossref", 
+    crossrefopts = list(filter = c(has_abstract = TRUE)))
+  ids <- res$crossref$data$doi
+  aa <- ft_abstract(x = ids, from = "crossref")
+  
+  expect_is(aa, "ft_abstract")
+  expect_named(aa, c('plos', 'scopus', 'ma', 'crossref'))
+  expect_is(aa$crossref, "list")
+  expect_is(aa$crossref[[1]], "list")
+  expect_named(aa$crossref[[1]], c('id', 'abstract'))
+  expect_is(aa$crossref[[1]]$abstract, "character")
 })
 
 test_that("ft_abstract fails well", {
