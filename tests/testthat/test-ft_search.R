@@ -6,6 +6,7 @@ test_that("ft_search returns...", {
   aa <- ft_search(query = 'ecology', from = 'plos')
   flds <- c('id','author','eissn','journal','counter_total_all','alm_twitterCount')
   bb <- ft_search(query = 'climate change', from = 'plos', plosopts = list(fl = flds))
+  Sys.sleep(1)
   cc <- ft_search(query = 'ecology', from = 'crossref')
   dd <- ft_search(query = 'owls', from = 'biorxiv')
   
