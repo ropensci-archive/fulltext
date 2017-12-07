@@ -2,12 +2,15 @@
 % Please edit documentation in R/ft_get.R
 \name{ft_get}
 \alias{ft_get}
+\alias{ft_get_ls}
 \title{Get full text}
 \usage{
 ft_get(x, from = NULL, type = "xml", plosopts = list(),
   bmcopts = list(), entrezopts = list(), elifeopts = list(),
   elsevieropts = list(), wileyopts = list(), crossrefopts = list(),
   cache = FALSE, backend = "rds", path = "~/.fulltext", ...)
+
+ft_get_ls()
 }
 \arguments{
 \item{x}{Either identifiers for papers, either DOIs (or other ids) as a list of
@@ -97,6 +100,9 @@ passed in here, who knows, it's a mess.
 }
 
 \examples{
+# List publishers included
+ft_get_ls()
+
 \dontrun{
 # If you just have DOIs and don't know the publisher
 ## PLOS
@@ -138,6 +144,10 @@ ft_get('10.1080/23311916.2014.938430')
 ft_get('10.3390/nu3010063')
 ft_get('10.3390/nu7085279')
 ft_get(c('10.3390/nu3010063', '10.3390/nu7085279')) # not working, only getting 1
+
+# Scientific Societies
+ft_get("10.1094/PHYTO-12-16-0425-RVW")
+
 
 # If you know the publisher, give DOI and publisher
 ## by default, PLOS gives back XML

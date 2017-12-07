@@ -34,14 +34,16 @@ plugin_get_generator <- function(srce, fun) {
       } else {
         opts$dois <- ids
       }
-      if (any(sources %in% c("arxiv", "biorxiv", "wiley"))) opts$basepath <- path
+      if (
+        any(sources %in% 
+          c("arxiv", "biorxiv", "wiley", "scientificsocieties"))
+      ) opts$basepath <- path
       opts <- c(opts, callopts)
       out <- do.call(fun, opts)
       # deals with case where no results
       if (length(out) == 0) {
         return(list(found = NULL, dois = NULL, data = NULL, opts = opts))
       }
-      #names(out) <- ids
       attr(out, "format") <- "xml"
       dat <- if (any(sources %in% c("arxiv", "biorxiv"))) {
         pprint_cache(out)
@@ -70,6 +72,7 @@ plugin_get_biorxiv <- plugin_get_generator("biorxiv", biorxiv_ft)
 plugin_get_arxiv <- plugin_get_generator("arxiv", arxiv_ft)
 plugin_get_elsevier <- plugin_get_generator("elsevier", elsevier_ft)
 plugin_get_wiley <- plugin_get_generator("wiley", wiley_ft)
+plugin_get_scientificsocieties <- plugin_get_generator("scientificsocieties", scientificsocieties_ft)
 
 ## getters - could stand to make closure for the below as well, FIXME
 entrez_get <- function(ids, ...){
@@ -117,13 +120,6 @@ bmc_ft <- function(dois, ...) {
   })
 }
 
-# lapply(dois, function(x) {
-#   "http://genesenvironment.biomedcentral.com/track/pdf/10.1186/s41021-015-0002-z?site=genesenvironment.biomedcentral.com"
-#   'http://genesenvironment.biomedcentral.com/content/download/xml/10.1186/s41021-015-0002-z.xml'
-#   sprintf("http://www.microbiomejournal.com/content/download/xml/%s.xml",
-#           strextract(x, "[0-9-]+$"))
-# })
-
 elife_paper <- function(dois, ...) {
   lapply(dois, function(x) {
     url <- sprintf("http://elife.elifesciences.org/elife-source-xml/%s", x)
@@ -170,7 +166,7 @@ arxiv_ft <- function(dois, basepath, ...) {
   lapply(dois, function(x) {
     url <- sprintf("http://arxiv.org/pdf/%s.pdf", x)
     path <- file.path(basepath, sub("/", "_", sprintf("%s.pdf", x)))
-    tmp <- httr::GET(url, write_disk(path, TRUE), ...)
+    tmp <- httr::GET(url, httr::write_disk(path, TRUE), ...)
     tmp$request$output$path
   })
 }
@@ -180,7 +176,7 @@ biorxiv_ft <- function(dois, basepath, ...) {
     res <- HEAD(paste0("http://dx.doi.org/", x))
     url <- paste0(res$url, ".full.pdf")
     path <- file.path(basepath, sub("/", "_", sprintf("%s.pdf", x)))
-    tmp <- httr::GET(url, write_disk(path, TRUE), ...)
+    tmp <- httr::GET(url, httr::write_disk(path, TRUE), ...)
     tmp$request$output$path
   })
 }
@@ -209,6 +205,21 @@ wiley_ft <- function(dois, basepath, ...) {
       sprintf("%s.pdf", gsub("/|\\(|\\)|<|>|;|:|\\.", "_", x))
     )
     tmp <- httr::GET(url, header, httr::write_disk(path, TRUE), ...)
+    tmp$request$output$path
+  }), dois)
+}
+
+scientificsocieties_ft <- function(dois, basepath, ...) {
+  stats::setNames(lapply(dois, function(x) {
+    lk <- tryCatch(crminer::crm_links(x, ...)[[1]][[1]], error = function(e) e)
+    if (inherits(lk, "error")) return(NULL)
+    path <- file.path(basepath, sprintf("%s.pdf", gsub("/|\\(|\\)|<|>|;|:|\\.", "_", x)))
+    tmp <- httr::GET(lk, httr::write_disk(path, TRUE), httr::config(followlocation = 1), ...)
+    if (!grepl("application/pdf", tmp$headers$`content-type`)) {
+      unlink(path)
+      warning("you may not have access to ", x, " or an error occurred")
+      return(NULL)
+    }
     tmp$request$output$path
   }), dois)
 }

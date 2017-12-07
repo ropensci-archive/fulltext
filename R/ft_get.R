@@ -70,7 +70,11 @@
 #'  passed in here, who knows, it's a mess.
 #' }
 #'
-#' @examples \dontrun{
+#' @examples 
+#' # List publishers included
+#' ft_get_ls()
+#' 
+#' \dontrun{
 #' # If you just have DOIs and don't know the publisher
 #' ## PLOS
 #' ft_get('10.1371/journal.pone.0086169')
@@ -111,7 +115,11 @@
 #' ft_get('10.3390/nu3010063')
 #' ft_get('10.3390/nu7085279')
 #' ft_get(c('10.3390/nu3010063', '10.3390/nu7085279')) # not working, only getting 1
+#' 
+#' # Scientific Societies
+#' ft_get("10.1094/PHYTO-12-16-0425-RVW")
 #'
+#' 
 #' # If you know the publisher, give DOI and publisher
 #' ## by default, PLOS gives back XML
 #' ft_get('10.1371/journal.pone.0086169', from='plos')
@@ -334,6 +342,13 @@ ft_get.ft_links <- function(x, from=NULL, type = "xml", plosopts=list(),
 }
 
 
+#' @export
+#' @rdname ft_get
+ft_get_ls <- function() {
+  nms <- ls("package:fulltext", pattern = "plugin_get_")
+  nms <- grep("_links|generator", nms, invert = TRUE, value = TRUE)
+  gsub("plugin_get_", "", nms)
+}
 
 
 
@@ -402,6 +417,7 @@ publisher_plugin <- function(x) {
     `1968` = plugin_get_entrez,
     `78` = plugin_get_elsevier,
     `311` = plugin_get_wiley,
+    `1665` = plugin_get_scientificsocieties,
     stop("no plugin for Crossref member ", x, 
       " yet\nopen an issue at https://github.com/ropensci/fulltext/issues")
   )
@@ -423,7 +439,8 @@ get_pub_name <- function(x) {
          `301` = "cogent",
          `1968` = "mdpi",
          `78` = "elsevier",
-         `311` = "wiley"
+         `311` = "wiley",
+         `1665` = "scientificsocieties"
   )
 }
 
@@ -443,7 +460,8 @@ get_tm_name <- function(x) {
          `301` = "cogent",
          `1968` = "entrez",
          `78` = "elsevier",
-         `311` = "wiley"
+         `311` = "wiley",
+         `1665` = "scientificsocieties"
   )
 }
 
