@@ -2,12 +2,15 @@
 % Please edit documentation in R/ft_search.R
 \name{ft_search}
 \alias{ft_search}
+\alias{ft_search_ls}
 \title{Search for full text}
 \usage{
 ft_search(query, from = "plos", limit = 10, start = 0,
   plosopts = list(), bmcopts = list(), crossrefopts = list(),
   entrezopts = list(), arxivopts = list(), biorxivopts = list(),
   euroopts = list(), scopusopts = list(), maopts = list(), ...)
+
+ft_search_ls()
 }
 \arguments{
 \item{query}{(character) Query terms}
@@ -68,6 +71,9 @@ See \strong{Rate Limits} and \strong{Authentication} in
 respectively
 }
 \examples{
+# List publishers included
+ft_search_ls()
+
 \dontrun{
 # Plos
 (res1 <- ft_search(query='ecology', from='plos'))

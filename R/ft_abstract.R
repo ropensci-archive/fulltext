@@ -14,7 +14,11 @@
 #' [fulltext-package] for rate limiting and authentication information,
 #' respectively
 #' 
-#' @examples \dontrun{
+#' @examples
+#' # List publishers included
+#' ft_abstract_ls()
+#' 
+#' \dontrun{
 #' # PLOS
 #' ## search
 #' (res <- ft_search(query = 'biology', from = 'plos', limit = 25, 
@@ -102,6 +106,14 @@ ft_abstract.character <- function(x, from = "plos", plosopts = list(),
   structure(list(plos = plos_out, scopus = scopus_out, 
     ma = ma_out, crossref = cr_out), class = "ft_abstract")
 }
+
+#' @export
+#' @rdname ft_abstract
+ft_abstract_ls <- function() {
+  nms <- ls("package:fulltext", pattern = "plugin_abstract_")
+  gsub("plugin_abstract_", "", nms)
+}
+
 
 #' @export
 print.ft_abstract <- function(x, ...) {

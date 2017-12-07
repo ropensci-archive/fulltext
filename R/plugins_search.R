@@ -1,4 +1,4 @@
-plugin_plos <- function(sources, query, limit, start, opts){
+plugin_search_plos <- function(sources, query, limit, start, opts){
   if (any(grepl("plos", sources))) {
     opts$q <- query
     opts$limit <- limit
@@ -19,7 +19,7 @@ plugin_plos <- function(sources, query, limit, start, opts){
   }
 }
 
-plugin_crossref <- function(sources, query, limit, start, opts){
+plugin_search_crossref <- function(sources, query, limit, start, opts){
   if (any(grepl("crossref", sources))) {
     opts$query <- query
     opts$limit <- limit
@@ -40,7 +40,7 @@ plugin_crossref <- function(sources, query, limit, start, opts){
   }
 }
 
-plugin_bmc <- function(sources, query, limit, start, opts){
+plugin_search_bmc <- function(sources, query, limit, start, opts){
   if (any(grepl("bmc", sources))) {
     opts$query <- query
     opts$limit <- limit
@@ -57,7 +57,7 @@ plugin_bmc <- function(sources, query, limit, start, opts){
   }
 }
 
-plugin_entrez <- function(sources, query, limit, start, opts){
+plugin_search_entrez <- function(sources, query, limit, start, opts){
   if (any(grepl("entrez", sources))) {
     opts$db <- "pmc"
     opts$term <- query
@@ -87,7 +87,7 @@ plugin_entrez <- function(sources, query, limit, start, opts){
   }
 }
 
-plugin_europe_pmc <- function(sources, query, limit, start, opts){
+plugin_search_europe_pmc <- function(sources, query, limit, start, opts){
   if (any(grepl("europmc", sources))) {
     opts$query <- query
     out <- do.call(eupmc_search, opts)
@@ -100,7 +100,7 @@ plugin_europe_pmc <- function(sources, query, limit, start, opts){
   }
 }
 
-plugin_arxiv <- function(sources, query, limit, start, opts){
+plugin_search_arxiv <- function(sources, query, limit, start, opts){
   if (any(grepl("arxiv", sources))) {
     opts$query <- query
     opts$limit <- limit
@@ -115,7 +115,7 @@ plugin_arxiv <- function(sources, query, limit, start, opts){
   }
 }
 
-plugin_biorxivr <- function(sources, query, limit, start, opts){
+plugin_search_biorxivr <- function(sources, query, limit, start, opts){
   if (any(grepl("biorxiv", sources))) {
     opts$query <- query
     opts$limit <- limit
@@ -130,7 +130,7 @@ plugin_biorxivr <- function(sources, query, limit, start, opts){
   }
 }
 
-plugin_scopus <- function(sources, query, limit, start, opts){
+plugin_search_scopus <- function(sources, query, limit, start, opts){
   if (any(grepl("scopus", sources))) {
     opts$query <- query
     opts$count <- limit
@@ -151,7 +151,7 @@ plugin_scopus <- function(sources, query, limit, start, opts){
   }
 }
 
-plugin_ma <- function(sources, query, limit, start, opts){
+plugin_search_ma <- function(sources, query, limit, start, opts){
   if (any(grepl("microsoft", sources))) {
     opts$query <- query
     opts$count <- limit

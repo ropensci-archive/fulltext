@@ -2,10 +2,13 @@
 % Please edit documentation in R/ft_abstract.R
 \name{ft_abstract}
 \alias{ft_abstract}
+\alias{ft_abstract_ls}
 \title{Get abstracts}
 \usage{
 ft_abstract(x, from = "plos", plosopts = list(), scopusopts = list(),
   maopts = list(), crossrefopts = list(), ...)
+
+ft_abstract_ls()
 }
 \arguments{
 \item{x}{(character) DOIs as a character vector}
@@ -35,6 +38,9 @@ See \strong{Rate Limits} and \strong{Authentication} in
 respectively
 }
 \examples{
+# List publishers included
+ft_abstract_ls()
+
 \dontrun{
 # PLOS
 ## search

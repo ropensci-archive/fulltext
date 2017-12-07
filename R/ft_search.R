@@ -42,7 +42,11 @@
 #' @return An object of class `ft`, and objects of class `ft_ind`
 #' within each source. You can access each data source with `$`
 #'
-#' @examples \dontrun{
+#' @examples 
+#' # List publishers included
+#' ft_search_ls()
+#' 
+#' \dontrun{
 #' # Plos
 #' (res1 <- ft_search(query='ecology', from='plos'))
 #' res1$plos
@@ -120,21 +124,30 @@ ft_search <- function(query, from = 'plos', limit = 10, start = 0,
                     c("plos", "bmc", "crossref", "entrez", "arxiv", 
                       "biorxiv", "europmc", "scopus", "microsoft"), 
                     several.ok = TRUE)
-  plos_out <- plugin_plos(from, query, limit, start, plosopts)
-  bmc_out <- plugin_bmc(from, query, limit, start, bmcopts)
-  cr_out <- plugin_crossref(from, query, limit, start, crossrefopts)
-  en_out <- plugin_entrez(from, query, limit, start, entrezopts)
-  arx_out <- plugin_arxiv(from, query, limit, start, arxivopts)
-  bio_out <- plugin_biorxivr(from, query, limit, start, biorxivopts)
-  euro_out <- plugin_europe_pmc(from, query, limit, start, euroopts)
-  scopus_out <- plugin_scopus(from, query, limit, start, scopusopts)
-  ma_out <- plugin_ma(from, query, limit, start, maopts)
+  plos_out <- plugin_search_plos(from, query, limit, start, plosopts)
+  bmc_out <- plugin_search_bmc(from, query, limit, start, bmcopts)
+  cr_out <- plugin_search_crossref(from, query, limit, start, crossrefopts)
+  en_out <- plugin_search_entrez(from, query, limit, start, entrezopts)
+  arx_out <- plugin_search_arxiv(from, query, limit, start, arxivopts)
+  bio_out <- plugin_search_biorxivr(from, query, limit, start, biorxivopts)
+  euro_out <- plugin_search_europe_pmc(from, query, limit, start, euroopts)
+  scopus_out <- plugin_search_scopus(from, query, limit, start, scopusopts)
+  ma_out <- plugin_search_ma(from, query, limit, start, maopts)
 
   res <- list(plos = plos_out, bmc = bmc_out, crossref = cr_out,
               entrez = en_out, arxiv = arx_out, biorxiv = bio_out, 
               europmc = euro_out, scopus = scopus_out, ma = ma_out)
   structure(res, class = "ft", query = query)
 }
+
+#' @export
+#' @rdname ft_search
+ft_search_ls <- function() {
+  nms <- ls("package:fulltext", pattern = "plugin_search_")
+  gsub("plugin_search_", "", nms)
+}
+
+
 
 #' @export
 print.ft <- function(x, ...) {

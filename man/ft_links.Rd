@@ -2,10 +2,13 @@
 % Please edit documentation in R/ft_links.R
 \name{ft_links}
 \alias{ft_links}
+\alias{ft_links_ls}
 \title{Get full text links}
 \usage{
 ft_links(x, from = NULL, plosopts = list(), crossrefopts = list(),
   entrezopts = list(), bmcopts = list(), ...)
+
+ft_links_ls()
 }
 \arguments{
 \item{x}{One of \code{ft}, \code{ft_ind}, or a character string of DOIs.}
@@ -47,6 +50,9 @@ See \strong{Rate Limits} and \strong{Authentication} in
 respectively
 }
 \examples{
+# List publishers included
+ft_links_ls()
+
 \dontrun{
 # Entrez
 (res1 <- ft_search(query='ecology', from='entrez'))

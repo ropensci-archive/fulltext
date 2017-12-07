@@ -28,7 +28,11 @@
 #' [fulltext-package] for rate limiting and authentication information,
 #' respectively
 #' 
-#' @examples \dontrun{
+#' @examples 
+#' # List publishers included
+#' ft_links_ls()
+#' 
+#' \dontrun{
 #' # Entrez
 #' (res1 <- ft_search(query='ecology', from='entrez'))
 #' res1$entrez$data$doi
@@ -192,6 +196,14 @@ ft_links.character <- function(x, from = NULL,
     get_unknown_links(x, ...)
   }
 }
+
+#' @export
+#' @rdname ft_links
+ft_links_ls <- function() {
+  nms <- ls("package:fulltext", pattern = "plugin_links_")
+  gsub("plugin_links_", "", nms)
+}
+
 
 #' @export
 print.ft_links <- function(x, ...) {

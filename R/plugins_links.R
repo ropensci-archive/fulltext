@@ -1,4 +1,4 @@
-2# ft_links plugins --------------------------------------
+# ft_links plugins --------------------------------------
 plugin_links_entrez <- function(sources, ids, opts, ...){
   if (any(grepl("entrez", sources))) {
     allids <- paste(paste0(ids, "[doi]"), collapse = " OR ")
