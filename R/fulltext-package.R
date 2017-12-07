@@ -36,11 +36,17 @@
 #' directly.
 #' 
 #' @section Rate limits:
-#' **Scopus**: 10,000 per 7 days. See 
+#' **Scopus**: 20,000 per 7 days. See 
 #' <https://dev.elsevier.com/api_key_settings.html> for rate 
-#' limit information.
+#' limit information. To see what your personal rate limit details are, 
+#' request verbose HTTP request output - this will vary on the function
+#' you are using - see the docs for the function. See the response 
+#' headers `X-RateLimit-Limit`, `X-RateLimit-Remaining`, and 
+#' `X-RateLimit-Reset` (your limit, those requests remaining, and UTC 
+#' date/time it will reset)
 #' 
-#' **Microsoft**: 10,000 per month, and 1 per second.
+#' **Microsoft**: 10,000 per month, and 1 per second. There are no rate 
+#' limit headers, sorry :(
 #' 
 #' **PLOS**: There are no known rate limits for PLOS, though if you do 
 #' hit something let us know.

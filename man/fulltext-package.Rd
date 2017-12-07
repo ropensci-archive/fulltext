@@ -50,11 +50,17 @@ directly.
 
 \section{Rate limits}{
 
-\strong{Scopus}: 10,000 per 7 days. See
+\strong{Scopus}: 20,000 per 7 days. See
 \url{https://dev.elsevier.com/api_key_settings.html} for rate
-limit information.
+limit information. To see what your personal rate limit details are,
+request verbose HTTP request output - this will vary on the function
+you are using - see the docs for the function. See the response
+headers \code{X-RateLimit-Limit}, \code{X-RateLimit-Remaining}, and
+\code{X-RateLimit-Reset} (your limit, those requests remaining, and UTC
+date/time it will reset)
 
-\strong{Microsoft}: 10,000 per month, and 1 per second.
+\strong{Microsoft}: 10,000 per month, and 1 per second. There are no rate
+limit headers, sorry :(
 
 \strong{PLOS}: There are no known rate limits for PLOS, though if you do
 hit something let us know.
