@@ -36,7 +36,7 @@ plugin_get_generator <- function(srce, fun) {
       }
       if (
         any(sources %in% 
-          c("arxiv", "biorxiv", "wiley", "scientificsocieties"))
+          c("arxiv", "biorxiv", "wiley", "scientificsocieties", "informa"))
       ) opts$basepath <- path
       opts <- c(opts, callopts)
       out <- do.call(fun, opts)
@@ -65,7 +65,7 @@ plugin_get_peerj <- plugin_get_generator("peerj", peerj_ft)
 plugin_get_frontiersin <- plugin_get_generator("frontiersin", frontiersin_ft)
 plugin_get_pensoft <- plugin_get_generator("pensoft", pensoft_ft)
 plugin_get_copernicus <- plugin_get_generator("copernicus", copernicus_ft)
-plugin_get_cogent <- plugin_get_generator("cogent", cogent_ft)
+# plugin_get_cogent <- plugin_get_generator("cogent", cogent_ft)
 plugin_get_crossref <- plugin_get_generator("crossref", cr_ft_xml)
 plugin_get_entrez <- plugin_get_generator("entrez", entrez_get)
 plugin_get_biorxiv <- plugin_get_generator("biorxiv", biorxiv_ft)
@@ -73,6 +73,7 @@ plugin_get_arxiv <- plugin_get_generator("arxiv", arxiv_ft)
 plugin_get_elsevier <- plugin_get_generator("elsevier", elsevier_ft)
 plugin_get_wiley <- plugin_get_generator("wiley", wiley_ft)
 plugin_get_scientificsocieties <- plugin_get_generator("scientificsocieties", scientificsocieties_ft)
+plugin_get_informa <- plugin_get_generator("informa", informa_ft)
 
 ## getters - could stand to make closure for the below as well, FIXME
 entrez_get <- function(ids, ...){
@@ -155,12 +156,12 @@ copernicus_ft <- function(dois, ...) {
   })
 }
 
-cogent_ft <- function(dois, ...) {
-  lapply(dois, function(x) {
-    url <- paste0("http://cogentoa.tandfonline.com/doi/xml/", x)
-    httr::content(httr::GET(url, ...), as = "text", encoding = "UTF-8")
-  })
-}
+# cogent_ft <- function(dois, ...) {
+#   lapply(dois, function(x) {
+#     url <- paste0("http://cogentoa.tandfonline.com/doi/xml/", x)
+#     httr::content(httr::GET(url, ...), as = "text", encoding = "UTF-8")
+#   })
+# }
 
 arxiv_ft <- function(dois, basepath, ...) {
   lapply(dois, function(x) {
@@ -210,6 +211,21 @@ wiley_ft <- function(dois, basepath, ...) {
 }
 
 scientificsocieties_ft <- function(dois, basepath, ...) {
+  stats::setNames(lapply(dois, function(x) {
+    lk <- tryCatch(crminer::crm_links(x, ...)[[1]][[1]], error = function(e) e)
+    if (inherits(lk, "error")) return(NULL)
+    path <- file.path(basepath, sprintf("%s.pdf", gsub("/|\\(|\\)|<|>|;|:|\\.", "_", x)))
+    tmp <- httr::GET(lk, httr::write_disk(path, TRUE), httr::config(followlocation = 1), ...)
+    if (!grepl("application/pdf", tmp$headers$`content-type`)) {
+      unlink(path)
+      warning("you may not have access to ", x, " or an error occurred")
+      return(NULL)
+    }
+    tmp$request$output$path
+  }), dois)
+}
+
+informa_ft <- function(dois, basepath, ...) {
   stats::setNames(lapply(dois, function(x) {
     lk <- tryCatch(crminer::crm_links(x, ...)[[1]][[1]], error = function(e) e)
     if (inherits(lk, "error")) return(NULL)

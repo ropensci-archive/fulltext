@@ -107,39 +107,49 @@ ft_get_ls()
 # If you just have DOIs and don't know the publisher
 ## PLOS
 ft_get('10.1371/journal.pone.0086169')
+
 ## PeerJ
 ft_get('10.7717/peerj.228')
+
 ## eLife
 ft_get('10.7554/eLife.03032')
+
 ## some BMC DOIs will work, but some may not, who knows
 ft_get(c('10.1186/2049-2618-2-7', '10.1186/2193-1801-3-7'))
+
 ## FrontiersIn
 res <- ft_get(c('10.3389/fphar.2014.00109', '10.3389/feart.2015.00009'))
+
 ## Hindawi - via Entrez
 res <- ft_get(c('10.1155/2014/292109','10.1155/2014/162024','10.1155/2014/249309'))
+
 ## F1000Research - via Entrez
 ft_get('10.12688/f1000research.6522.1')
 ## Two different publishers via Entrez - retains publisher names
 res <- ft_get(c('10.1155/2014/292109', '10.12688/f1000research.6522.1'))
 res$hindawi
 res$f1000research
+
 ## Pensoft
 ft_get('10.3897/zookeys.499.8360')
 ### you'll need to specify the publisher for a DOI from a recent publication
 ft_get('10.3897/zookeys.515.9332', from = "pensoft")
+
 ## Copernicus
 out <- ft_get(c('10.5194/angeo-31-2157-2013', '10.5194/bg-12-4577-2015'))
 out$copernicus
+
 ## arXiv - only pdf, you have to pass in the from parameter
 res <- ft_get(x='cond-mat/9309029', from = "arxiv", cache=TRUE, backend="rds")
 res \%>\% ft_extract
+
 ## bioRxiv - only pdf
 res <- ft_get(x='10.1101/012476')
 res$biorxiv
+
 ## Karger Publisher
 ft_get('10.1159/000369331')
-## CogentOA Publisher
-ft_get('10.1080/23311916.2014.938430')
+
 ## MDPI Publisher
 ft_get('10.3390/nu3010063')
 ft_get('10.3390/nu7085279')
@@ -148,6 +158,11 @@ ft_get(c('10.3390/nu3010063', '10.3390/nu7085279')) # not working, only getting 
 # Scientific Societies
 ft_get("10.1094/PHYTO-12-16-0425-RVW")
 
+# Informa
+ft_get("10.1080/03088839.2014.926032")
+ft_get("10.1080/03088839.2013.863435")
+### CogentOA - part of Inform/Taylor Francis now
+ft_get('10.1080/23311916.2014.938430')
 
 # If you know the publisher, give DOI and publisher
 ## by default, PLOS gives back XML
