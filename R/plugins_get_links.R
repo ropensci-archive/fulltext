@@ -39,9 +39,12 @@ plugin_get_links_crossref <- function(from, urls, opts = list(), type,
   # fetch text
   res <- lapply(out, function(z) {
     attr(z$url, "member") <- z$member
-    tmp <- tryCatch(
-      crminer::crm_text(url = z$url, type = type, 
-                        cache = cache, overwrite_unspecified = TRUE),
+    tmp <- tryCatch({
+      tdm <- crminer::as_tdmurl(z$url, type)
+      attr(tdm, "member") <- attr(z$url, "member")
+      crminer::crm_text(url = tdm, type = type, 
+        cache = cache, overwrite_unspecified = TRUE)
+      },
       error = function(e) e
     )
     if (inherits(tmp, "error")) tmp$message else tmp

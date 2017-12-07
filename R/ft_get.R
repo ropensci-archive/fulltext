@@ -182,13 +182,17 @@
 #'
 #' # From ft_links output
 #' ## Crossref
-#' (res2 <- ft_search(query = 'ecology', from = 'crossref', limit = 100))
+#' (res2 <- ft_search(query = 'ecology', from = 'crossref', limit = 3))
 #' (out <- ft_links(res2))
 #' (ress <- ft_get(x = out, type = "pdf"))
+#' 
+#' (x <- ft_links("10.1111/2041-210X.12656", "crossref"))
+#' (y <- ft_get(x))
 #'
 #' ## PLOS
 #' (res2 <- ft_search(query = 'ecology', from = 'plos', limit = 4))
 #' (out <- ft_links(res2))
+#' out$plos
 #' (ress <- ft_get(x = out, type = "pdf"))
 #' ress$plos$dois
 #' ress$plos$data
