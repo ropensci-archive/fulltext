@@ -2,7 +2,7 @@
 #' 
 #' Wraps `microdemic::ma_evaluate`
 #'
-#' @export
+#' @name microsoft-internals
 #' @keywords internal
 #' @param query (character) query terms
 #' @param count (integer) number of records to return. default: 10
@@ -17,6 +17,9 @@
 #' @examples \dontrun{
 #' microsoft_search(query = "Y='19'...", key = Sys.getenv("MICROSOFT_ACADEMIC_KEY"))
 #' }
+
+#' @export
+#' @rdname microsoft-internals
 microsoft_search <- function(query, count = 10, offset = 0, orderby = NULL,
   atts = c("Id", "AA.AuN", "J.JN", "Ti", "Y", "E", "CC"), key = NULL, ...) {
 
@@ -26,6 +29,23 @@ microsoft_search <- function(query, count = 10, offset = 0, orderby = NULL,
     dat <- dat[names(dat) %in% c('DN', 'VFN', 'DOI', 'D')]
     data.frame(dat, stringsAsFactors = FALSE)
   }))
+  out$E <- NULL
+  cbind(out, ee)
+}
+
+#' @export
+#' @rdname microsoft-internals
+microsoft_links <- function(query, count = 10, offset = 0, orderby = NULL,
+  atts = c("Id", "AA.AuN", "J.JN", "Ti", "Y", "E", "CC"), key = NULL, ...) {
+
+  out <- microdemic::ma_evaluate(query, count, offset, orderby, atts, key, ...)
+  ee <- stats::setNames(lapply(out$E, function(z) {
+    dat <- jsonlite::fromJSON(z)
+    S <- dat$S
+    if (is.null(S)) return(data.frame(NULL))
+    names(S) <- c('type', 'url')
+    dat
+  }), out$Id)
   out$E <- NULL
   cbind(out, ee)
 }
