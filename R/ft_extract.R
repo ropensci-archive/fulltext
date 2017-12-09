@@ -48,7 +48,9 @@ ft_extract.ft_data <- function(x) {
 do_extraction <- function(x) {
   structure(lapply(x, function(y) {
     for (i in seq_along(y$data$path)) {
-      y$data$data[[i]] <- crminer::crm_extract(y$data$path[[i]])$text
+      ext <- strextract(y$data$path[[i]], "\\.[A-Za-z]{3}")
+      z <- if (grepl("rds", ext)) readRDS(y$data$path[[i]])[[1]] else y$data$path[[i]]
+      y$data$data[[i]] <- pdftools::pdf_text(z)
     }
     y$data$data <- unclass(y$data$data)
     return( y )

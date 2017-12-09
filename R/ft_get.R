@@ -13,7 +13,7 @@
 #' character strings, or a character vector, OR an object of class `ft`, as
 #' returned from [ft_search()]
 #' @param from Source to query. Optional.
-#' @param type (character) one of xml (default), pdf
+#' @param type (character) one of xml (default) or pdf
 #' @param plosopts PLOS options. See [rplos::plos_fulltext()]
 #' @param bmcopts BMC options. parameter DEPRECATED
 #' @param entrezopts Entrez options. See [rentrez::entrez_search()] and
@@ -52,22 +52,39 @@
 #'  DOI.
 #' }
 #'
-#' Note that some publishers are available via Entrez, but often not recent articles,
-#' where "recent" may be a few months to a year or so. In that case, make sure to specify
-#' the publisher, or else you'll get back no data.
+#' Note that some publishers are available via Entrez, but often not recent 
+#' articles, where "recent" may be a few months to a year or so. In that case, 
+#' make sure to specify the publisher, or else you'll get back no data.
 #' 
 #' See **Rate Limits** and **Authentication** in 
 #' [fulltext-package] for rate limiting and authentication information,
 #' respectively
 #' 
+#' @section Notes on the `type` parameter:
+#' Type is sometimes ignored, sometimes used. For certain data sources, 
+#' they only accept one type. By data source/publisher:
+#' 
+#' - PLOS: pdf and xml
+#' - Entrez: only xml
+#' - eLife: pdf and xml
+#' - Pensoft: pdf and xml
+#' - arXiv: only pdf
+#' - BiorXiv: only pdf
+#' - Elsevier: pdf and xml
+#' - Wiley: only pdf
+#' - other data sources/publishers: there are too many to cover here - will 
+#' try to make a helper in the future for what is covered by different 
+#' publishers
+#' 
 #' @section Notes on specific publishers:
 #' \itemize{
-#'  \item arXiv - The IDs passed are not actually DOIs, though they look similar.
-#'  Thus, there's no way to not pass in the \code{from} parameter as we can't
-#'  determine unambiguously that the IDs passed in are from arXiv.org.
-#'  \item bmc - is a hot mess since the Springer acquisition. It's been removed
-#'  as an officially supported plugin, some DOIs from them may still work when
-#'  passed in here, who knows, it's a mess.
+#'  \item arXiv - The IDs passed are not actually DOIs, though they look 
+#'  similar. Thus, there's no way to not pass in the \code{from} parameter 
+#'  as we can't determine unambiguously that the IDs passed in are from 
+#'  arXiv.org.
+#'  \item bmc - is a hot mess since the Springer acquisition. It's been 
+#'  removed as an officially supported plugin, some DOIs from them may 
+#'  still work when passed in here, who knows, it's a mess.
 #' }
 #'
 #' @examples 
@@ -81,18 +98,35 @@
 #' 
 #' ## PeerJ
 #' ft_get('10.7717/peerj.228')
+#' cache_options_set(TRUE)
+#' ft_get('10.7717/peerj.228')
 #' 
 #' ## eLife
+#' ### xml
 #' ft_get('10.7554/eLife.03032')
+#' res <- ft_get('10.7554/eLife.03032', from = "elife")
+#' cache_options_set(TRUE)
+#' cache_options_get()
+#' elife_xml <- ft_get('10.7554/eLife.03032', from = "elife")
+#' elife_xml$elife
+#' ### pdf
+#' elife_pdf <- ft_get('10.7554/eLife.03032', from = "elife", type = "pdf")
+#' elife_pdf$elife
 #' 
 #' ## some BMC DOIs will work, but some may not, who knows
 #' ft_get(c('10.1186/2049-2618-2-7', '10.1186/2193-1801-3-7'))
 #' 
 #' ## FrontiersIn
 #' res <- ft_get(c('10.3389/fphar.2014.00109', '10.3389/feart.2015.00009'))
+#' res
+#' res$frontiersin
 #' 
 #' ## Hindawi - via Entrez
-#' res <- ft_get(c('10.1155/2014/292109','10.1155/2014/162024','10.1155/2014/249309'))
+#' res <- ft_get(c('10.1155/2014/292109','10.1155/2014/162024',
+#'   '10.1155/2014/249309'))
+#' res
+#' res$hindawi$data$path
+#' res %>% collect()
 #' 
 #' ## F1000Research - via Entrez
 #' ft_get('10.12688/f1000research.6522.1')
@@ -219,8 +253,7 @@
 ft_get <- function(x, from = NULL, type = "xml", plosopts = list(),
                    bmcopts = list(), entrezopts = list(), elifeopts = list(),
                    elsevieropts = list(), wileyopts = list(), 
-                   crossrefopts = list(), cache = FALSE,
-                   backend = "rds", path = "~/.fulltext", ...) {
+                   crossrefopts = list(), ...) {
   UseMethod("ft_get")
 }
 
@@ -228,8 +261,7 @@ ft_get <- function(x, from = NULL, type = "xml", plosopts = list(),
 ft_get.default <- function(x, from=NULL, type = "xml", plosopts=list(),
                            bmcopts=list(), entrezopts=list(), elifeopts=list(),
                            elsevieropts = list(), wileyopts = list(), 
-                           crossrefopts = list(), cache=FALSE, backend="rds", 
-                           path="~/.fulltext", ...){
+                           crossrefopts = list(), ...){
   stop("no 'ft_get' method for ", class(x), call. = FALSE)
 }
 
@@ -238,32 +270,25 @@ ft_get.character <- function(x, from=NULL, type = "xml", plosopts=list(),
                              bmcopts = list(), entrezopts=list(),
                              elifeopts=list(),
                              elsevieropts = list(), wileyopts = list(), 
-                             crossrefopts = list(), cache=FALSE, backend="rds",
-                             path="~/.fulltext", ...) {
-
-  make_dir(path)
-  cacheopts <- cache_options_get()
-  if (is.null(cacheopts$cache) && is.null(cacheopts$backend)) {
-    cache_options_set(cache, backend, path)
-  }
-
+                             crossrefopts = list(), ...) {
+  check_type(type)
   if (!is.null(from)) {
     from <- match.arg(from, c("plos", "entrez", "elife", "pensoft",
       "arxiv", "biorxiv", "elsevier", "wiley"))
-    plos_out <- plugin_get_plos(from, x, plosopts, ...)
-    entrez_out <- plugin_get_entrez(from, x, entrezopts, ...)
-    elife_out <- plugin_get_elife(from, x, elifeopts, ...)
-    pensoft_out <- plugin_get_pensoft(from, x, list(), ...)
-    arxiv_out <- plugin_get_arxiv(from, x, list(), path, ...)
-    biorxiv_out <- plugin_get_biorxiv(from, x, list(), path, ...)
-    els_out <- plugin_get_elsevier(from, x, elsevieropts, path, ...)
-    wiley_out <- plugin_get_wiley(from, x, wileyopts, path, ...)
+    plos_out <- plugin_get_plos(from, x, plosopts, type, ...)
+    entrez_out <- plugin_get_entrez(from, x, entrezopts, type, ...)
+    elife_out <- plugin_get_elife(from, x, elifeopts, type, ...)
+    pensoft_out <- plugin_get_pensoft(from, x, list(), type, ...)
+    arxiv_out <- plugin_get_arxiv(from, x, list(), type, ...)
+    biorxiv_out <- plugin_get_biorxiv(from, x, list(), type, ...)
+    els_out <- plugin_get_elsevier(from, x, elsevieropts, type, ...)
+    wiley_out <- plugin_get_wiley(from, x, wileyopts, type, ...)
     structure(list(plos = plos_out, entrez = entrez_out, elife = elife_out,
                    pensoft = pensoft_out, arxiv = arxiv_out,
                    biorxiv = biorxiv_out, elsevier = els_out, 
                    wiley = wiley_out), class = "ft_data")
   } else {
-    get_unknown(x, path, ...)
+    get_unknown(x, type, ...)
   }
 }
 
@@ -271,32 +296,25 @@ ft_get.character <- function(x, from=NULL, type = "xml", plosopts=list(),
 ft_get.list <- function(x, from=NULL, type = "xml", plosopts=list(),
                         bmcopts = list(), entrezopts=list(), elifeopts=list(),
                         elsevieropts = list(), wileyopts = list(), 
-                        crossrefopts = list(),
-                        cache=FALSE, backend="rds", path="~/.fulltext", ...) {
-
-  make_dir(path)
-  cacheopts <- cache_options_get()
-  if (is.null(cacheopts$cache) && is.null(cacheopts$backend)) {
-    cache_options_set(cache, backend, path)
-  }
-
+                        crossrefopts = list(), ...) {
+  check_type(type)
   if (!is.null(from)) {
     from <- match.arg(from, c("plos", "entrez", "elife", "pensoft", 
       "arxiv", "biorxiv", "elsevier", "wiley"))
-    plos_out <- plugin_get_plos(from, x, plosopts, ...)
-    entrez_out <- plugin_get_entrez(from, x, entrezopts, ...)
-    elife_out <- plugin_get_elife(from, x, elifeopts, ...)
-    pensoft_out <- plugin_get_pensoft(from, x, ...)
-    arxiv_out <- plugin_get_arxiv(from, x, path, ...)
-    biorxiv_out <- plugin_get_biorxiv(from, x, path, ...)
-    els_out <- plugin_get_elsevier(from, x, elsevieropts, path, ...)
-    wiley_out <- plugin_get_wiley(from, x, wileyopts, path, ...)
+    plos_out <- plugin_get_plos(from, x, plosopts, type, ...)
+    entrez_out <- plugin_get_entrez(from, x, entrezopts, type, ...)
+    elife_out <- plugin_get_elife(from, x, elifeopts, type, ...)
+    pensoft_out <- plugin_get_pensoft(from, x, list(), type, ...)
+    arxiv_out <- plugin_get_arxiv(from, x, list(), type, ...)
+    biorxiv_out <- plugin_get_biorxiv(from, x, list(), type, ...)
+    els_out <- plugin_get_elsevier(from, x, elsevieropts, type, ...)
+    wiley_out <- plugin_get_wiley(from, x, wileyopts, type, ...)
     structure(list(plos = plos_out, entrez = entrez_out, elife = elife_out,
                    pensoft = pensoft_out, arxiv = arxiv_out,
                    biorxiv = biorxiv_out, elsevier = els_out, 
                    wiley = wiley_out), class = "ft_data")
   } else {
-    get_unknown(x, path, ...)
+    get_unknown(x, type, ...)
   }
 }
 
@@ -304,16 +322,9 @@ ft_get.list <- function(x, from=NULL, type = "xml", plosopts=list(),
 ft_get.ft <- function(x, from=NULL, type = "xml", plosopts=list(),
                       bmcopts=list(), entrezopts=list(), elifeopts=list(),
                       elsevieropts = list(), wileyopts = list(), 
-                      crossrefopts = list(), cache=FALSE,
-                      backend="rds", path="~/.fulltext", ...) {
+                      crossrefopts = list(), ...) {
 
-  # caching setup
-  make_dir(path)
-  cacheopts <- cache_options_get()
-  if (is.null(cacheopts$cache) && is.null(cacheopts$backend)) {
-    cache_options_set(cache, backend, path)
-  }
-
+  check_type(type)
   # warn on sources that aren't supported yet and will be skipped
   from <- names(x[sapply(x, function(v) !is.null(v$data))])
   not_supported <- c("elife", "pensoft", "bmc", "arxiv",
@@ -343,15 +354,9 @@ ft_get.ft <- function(x, from=NULL, type = "xml", plosopts=list(),
 ft_get.ft_links <- function(x, from=NULL, type = "xml", plosopts=list(),
                             bmcopts=list(), entrezopts=list(), elifeopts=list(),
                             elsevieropts = list(), wileyopts = list(), 
-                            crossrefopts = list(),
-                            cache=FALSE, backend="rds", path="~/.fulltext", ...){
+                            crossrefopts = list(), ...){
 
-  make_dir(path)
-  cacheopts <- cache_options_get()
-  if (is.null(cacheopts$cache) && is.null(cacheopts$backend)) {
-    cache_options_set(cache, backend, path)
-  }
-
+  check_type(type)
   from <- names(x[sapply(x, function(v) !is.null(v$data))])
   plos_out <- plugin_get_links_plos(from, urls = x$plos$data,
                                     plosopts, type, cache, ...)
@@ -399,12 +404,8 @@ print_backend <- function(x) {
   if (!is.null(x)) x else "R session"
 }
 
-make_dir <- function(path) {
-  dir.create(path, showWarnings = FALSE, recursive = TRUE)
-}
-
 # get unknown from DOIs where from=NULL ------------------
-get_unknown <- function(x, path, ...) {
+get_unknown <- function(x, type, ...) {
   pubs <- ft_compact(sapply(x, get_publisher))
   df <- data.frame(pub = unlist(unname(pubs)), doi = names(pubs), stringsAsFactors = FALSE)
   dfsplit <- split(df, df$pub)
@@ -413,7 +414,7 @@ get_unknown <- function(x, path, ...) {
     fun <- publisher_plugin(names(dfsplit)[i])
     pub_nm <- get_pub_name(names(dfsplit)[i])
     tm_nm <- get_tm_name(names(dfsplit)[i])
-    out[[ pub_nm ]] <- fun(tm_nm, dfsplit[[i]]$doi, list(), path = path, ...)
+    out[[ pub_nm ]] <- fun(tm_nm, dfsplit[[i]]$doi, list(), type, ...)
   }
   structure(out, class = "ft_data")
 }
@@ -494,4 +495,9 @@ get_publisher <- function(x) {
   } else {
     as.character(strextract(z, "[0-9]+"))
   }
+}
+
+check_type <- function(x) {
+  if (!is.character(x)) stop("'type' parameter must be character")
+  if (!x %in% c('xml', 'pdf')) stop("'type' parameter must be 'xml' or 'pdf'")
 }

@@ -5,8 +5,30 @@
 #' @param cache (logical) If `TRUE`, cache results, if not objects saved 
 #' within R session.
 #' @param backend (character) One of rds, rcache, redis
-#' @param path path to local storage. used only if `backend="rds"`
+#' @param path (character) End of directory path. Default: "fulltext". 
+#' See Details.
 #' @param cachetype The cache type
+#' 
+#' @section Managing cached files:
+#' The dafault cache directory is `paste0(rappdirs::user_cache_dir(), "/R/fulltext")`, 
+#' but you can set your own path using `cache_path_set()`
+#'
+#' `cache_delete` only accepts 1 file name, while
+#' `cache_delete_all` doesn't accept any names, but deletes all files.
+#' For deleting many specific files, use `cache_delete` in a [lapply()]
+#' type call
+#'
+#' 
+#' @section Useful user functions for managing cached files:
+#' \itemize{
+#'  \item `ftxt_cache$list()` returns a character vector of full
+#'  path file names
+#'  \item `ftxt_cache$files()` returns file objects with metadata
+#'  \item `ftxt_cache$details()` returns files with details
+#'  \item `ftxt_cache$delete()` delete specific files
+#'  \item `ftxt_cache$delete_all()` delete all files, returns nothing
+#' }
+#'
 #'
 #' @examples \dontrun{
 #' ft_get('10.1371/journal.pone.0086169', from='plos', cache=FALSE)
@@ -28,14 +50,38 @@
 #' out <- ft_get(res)
 #' out$entrez
 #' out %>% collect() %>% chunks("title")
+#' 
+#' 
+#' # Manage cached files with this object
+#' ftxt_cache
+#'
+#' # list files in cache
+#' ftxt_cache$list()
+#' 
+#' # list details of files in cache
+#' ftxt_cache$details()
+#'
+#' # delete certain database files
+#' # ftxt_cache$delete("file path")
+#' # ftxt_cache$list()
+#'
+#' # delete all files in cache
+#' # ftxt_cache$delete_all()
+#' # ftxt_cache$list()
 #' }
 
 #' @export
 #' @rdname cache
-cache_options_set <- function(cache = TRUE, backend = "rds", path="~/.fulltext"){
+cache_options_set <- function(cache = TRUE, backend = "rds", path = "fulltext") {
   options(ft_cache = cache)
   options(ft_backend = if (!cache) NULL else backend)
-  options(ft_path = if (!cache || backend %in% c("redis", "rcache")) NULL else path)
+  if (!cache || backend %in% c("redis", "rcache")) {
+    path <- NULL 
+  } else {
+    ftxt_cache$cache_path_set(path)
+    path <- ftxt_cache$cache_path_get()
+  }
+  options(ft_path = path)
 }
 
 #' @export
@@ -48,7 +94,7 @@ cache_options_get <- function(){
 }
 
 ############# save cache
-cache_save <- function(obj, backend, path, db) {
+cache_save <- function(obj, backend, path, db = NULL) {
   backend <- match.arg(backend, choices = c('rds', 'rcache', 'redis'))
   switch(backend,
          rds = save_rds(x = obj, path),
@@ -58,16 +104,26 @@ cache_save <- function(obj, backend, path, db) {
   )
 }
 
-save_rds <- function(x, path="~/") {
+save_rds <- function(x, path) {
+  # make base caching directory if it doesn't exist
+  ftxt_cache$mkdir()
+
+  # make hash of object
   hash <- digest::digest(x)
+
+  # make file path
   filepath <- file.path(path, paste0(hash, ".rds"))
+
+  # save as compressed binary 
   saveRDS(object = x, file = filepath)
+
+  # return file path
   return( filepath )
 }
 
 save_redis2 <- function(x) {
   tt <- suppressWarnings(tryCatch(redisConnect(), error = function(e) e))
-  if (is(tt, "simpleError")) {
+  if (inherits(tt, "simpleError")) {
     stop("Start redis. Go to your terminal/shell and type redis-server, then hit enter")
   } else {
     key <- digest::digest(x)
@@ -95,18 +151,12 @@ cache_get <- function(key=NULL, backend=NULL, path=NULL, db=NULL) {
            rds = get_rds(key),
            rcache = get_rcache(key),
            redis = get_redis(key)
-           #          ,
-           #          sqlite = get_sqlite(key, db=db)
+           # sqlite = get_sqlite(key, db=db)
     )
   }
 }
 
-get_rds <- function(z){
-  if (is.null(z))
-    NULL
-  else
-    readRDS(z)
-}
+get_rds <- function(z) if (is.null(z)) return(NULL) else readRDS(z)
 
 get_redis <- function(key) {
   if (is.null(key)) {

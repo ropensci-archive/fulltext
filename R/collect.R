@@ -10,7 +10,9 @@
 #' @param ... Further args, ignored.
 #' @examples \dontrun{
 #' # Get some data, stash in rds file
-#' x <- ft_get('10.1371/journal.pone.0086169', from='plos', cache=TRUE, backend="rds")
+#' cache_options_get()
+#' cache_options_set(cache=TRUE, backend="rds")
+#' x <- ft_get('10.1371/journal.pone.0086169', from='plos')
 #' 
 #' # note that the data is not in the object, gives NULL
 #' x$plos$data$data
@@ -22,10 +24,20 @@
 #' y$plos$data$data
 #' 
 #' # Let's get the actual 
+#' ## collect() alone, replaces file pointers with parsed text, maintaining
+#' ## object structure
+#' x %>% collect() 
+#' ## pulls the text out of the object
 #' x %>% collect() %>% get_text()
 #' }
 collect <- function(x, ...) {
   UseMethod("collect")
+}
+
+#' @export
+#' @rdname collect
+collect.default <- function(x, ...) {
+  stop("no 'collect' method for ", class(x), call. = FALSE)
 }
 
 #' @export
