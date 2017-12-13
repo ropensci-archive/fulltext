@@ -31,8 +31,7 @@
       "@type": "Person",
       "givenName": "Scott",
       "familyName": "Chamberlain",
-      "email": "myrmecocystus@gmail.com",
-      "@id": "orcid.org/0000-0003-1444-9135"
+      "email": "myrmecocystus@gmail.com"
     }
   ],
   "contributor": [
@@ -46,8 +45,7 @@
     "@type": "Person",
     "givenName": "Scott",
     "familyName": "Chamberlain",
-    "email": "myrmecocystus@gmail.com",
-    "@id": "orcid.org/0000-0003-1444-9135"
+    "email": "myrmecocystus@gmail.com"
   },
   "softwareSuggestions": [
     {
@@ -288,5 +286,5 @@
   "contIntegration": "https://travis-ci.org/ropensci/fulltext",
   "releaseNotes": "https://github.com/ropensci/fulltext/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/fulltext/blob/master/README.md",
-  "fileSize": "3764.968KB"
+  "fileSize": "3764.962KB"
 }

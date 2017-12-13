@@ -13,7 +13,7 @@ Authors@R: c(
     person("Scott", "Chamberlain",
         role = c("aut", "cre"),
         email = "myrmecocystus@gmail.com",
-        comment = c(ORCID = "orcid.org/0000-0003-1444-9135")),
+        comment = c(ORCID = "0000-0003-1444-9135")),
     person("Will", "Pearse",
         role = "ctb")
     )
