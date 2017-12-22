@@ -38,7 +38,8 @@ Imports:
     digest,
     whisker,
     data.table,
-    hoardr
+    hoardr,
+    pdftools
 Suggests:
     testthat,
     knitr
