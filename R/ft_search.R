@@ -143,7 +143,7 @@ ft_search <- function(query, from = 'plos', limit = 10, start = 0,
 #' @export
 #' @rdname ft_search
 ft_search_ls <- function() {
-  nms <- ls("package:fulltext", pattern = "plugin_search_")
+  nms <- ls(getNamespace("fulltext"), all.names = TRUE, pattern = "plugin_search_")
   gsub("plugin_search_", "", nms)
 }
 

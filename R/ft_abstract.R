@@ -110,7 +110,7 @@ ft_abstract.character <- function(x, from = "plos", plosopts = list(),
 #' @export
 #' @rdname ft_abstract
 ft_abstract_ls <- function() {
-  nms <- ls("package:fulltext", pattern = "plugin_abstract_")
+  nms <- ls(getNamespace("fulltext"), all.names = TRUE, pattern = "plugin_abstract_")
   gsub("plugin_abstract_", "", nms)
 }
 

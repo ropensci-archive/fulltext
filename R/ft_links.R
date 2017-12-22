@@ -200,7 +200,7 @@ ft_links.character <- function(x, from = NULL,
 #' @export
 #' @rdname ft_links
 ft_links_ls <- function() {
-  nms <- ls("package:fulltext", pattern = "plugin_links_")
+  nms <- ls(getNamespace("fulltext"), all.names = TRUE, pattern = "plugin_links_")
   gsub("plugin_links_", "", nms)
 }
 
