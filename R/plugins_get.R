@@ -200,6 +200,7 @@ entrez_ft <- function(ids, type = "xml", ...){
       cat(paste0("path exists: ", path), sep="\n")
       return(ft_object(path, z, 'xml'))
     }
+    # have to keep this httr usage
     invisible(rentrez::entrez_fetch(db = db, id = z, 
       rettype = "xml", config = httr::write_disk(path, cache_options_get()$overwrite)))
     ft_object(path, z, 'xml')
@@ -217,6 +218,7 @@ bmc_ft <- function(dois, type = "xml", ...) {
       cat(paste0("path exists: ", path), sep="\n")
       return(ft_object(path, z, 'xml'))
     }
+    # have to keep this httr usage
     invisible(rentrez::entrez_fetch(db = 'pubmed', id = z, 
       rettype = "xml", config = httr::write_disk(path, cache_options_get()$overwrite)))
     ft_object(path, z, 'xml')

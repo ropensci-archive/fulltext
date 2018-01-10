@@ -55,7 +55,7 @@ plugin_links_crossref <- function(sources, ids, opts, ...){
 
 plugin_links_bmc <- function(sources, ids, opts, ...){
   if (any(grepl("bmc", sources))) {
-    tmp <- setNames(bmc_link(ids), ids)
+    tmp <- stats::setNames(bmc_link(ids), ids)
     list(found = length(tmp), ids = names(tmp), data = tmp, opts = opts)
   } else {
     emptylist(opts)

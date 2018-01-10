@@ -30,10 +30,10 @@ the search by setting the parameter value to \code{TRUE}}
 
 \item{page}{Page (integer) Page numbers start at 1. Default: 1}
 
-\item{...}{Further args passed on to \code{\link[httr]{GET}}}
+\item{...}{curl options passed on to \link[crul:HttpClient]{crul::HttpClient}}
 
-\item{id}{A single Europe PMC article identifier, begins with "PMC", followed by numbers, e.g.,
-"PMC3257301"}
+\item{id}{A single Europe PMC article identifier, begins with "PMC", followed by
+numbers, e.g.,  "PMC3257301"}
 }
 \value{
 \code{eupmc_search} returns a list with results. \code{eupmc_fields} returns

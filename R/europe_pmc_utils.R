@@ -13,20 +13,19 @@
 #' the search by setting the parameter value to \code{TRUE}
 #' @param per_page (integer) Number of records to return. Max: 1000. Default: 25
 #' @param page Page (integer) Page numbers start at 1. Default: 1
-#' @param ... Further args passed on to \code{\link[httr]{GET}}
-#' @param id A single Europe PMC article identifier, begins with "PMC", followed by numbers, e.g., 
-#' "PMC3257301"
+#' @param ... curl options passed on to [crul::HttpClient]
+#' @param id A single Europe PMC article identifier, begins with "PMC", followed by 
+#' numbers, e.g.,  "PMC3257301"
 #' 
-#' @return \code{eupmc_search} returns a list with results. \code{eupmc_fields} returns 
-#' a data.frame. \code{eupmc_xml} returns an object of class \code{xml_document}
+#' @return `eupmc_search` returns a list with results. `eupmc_fields` returns 
+#' a data.frame. `eupmc_xml` returns an object of class `xml_document`
 #' @details resulttype parameter options:
-#' \itemize{
-#'  \item idlist - returns a list of IDs and sources for the given search terms
-#'  \item lite - returns key metadata for the given search terms; this is the default 
+#' 
+#' - idlist - returns a list of IDs and sources for the given search terms
+#' - lite - returns key metadata for the given search terms; this is the default 
 #'  value if the parameter is unspecified.
-#'  \item core - returns full metadata for a given publication ID; including abstract, 
+#' - core - returns full metadata for a given publication ID; including abstract, 
 #'  full text links, and MeSH terms.
-#' }
 #' 
 #' @examples \dontrun{
 #' # search
