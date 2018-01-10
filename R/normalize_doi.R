@@ -15,7 +15,7 @@ doi_store <- function(id, id_norm) {
 ## ids: a vector of DOIs
 ## id_norm: a vector of normalized DOIs
 dois_store <- function(ids, id_norm) {
-  store$mset(ids_norm, ids)
+  store$mset(id_norm, ids)
 }
 
 # lookup a DOI

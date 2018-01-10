@@ -145,7 +145,7 @@ plugin_get_links_plos <- function(from, urls, opts = list(), type, ...) {
 
 get_article <- function(x, path, ...) {
   res <- httr::GET(x, httr::write_disk(path, TRUE), ...)
-  if (tmp$status_code > 201) unlink(path)
+  if (res$status_code > 201) unlink(path)
   httr::stop_for_status(res)
   res$request$output$path
 }

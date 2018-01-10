@@ -15,6 +15,8 @@ cache_options_get()
 See Details.}
 
 \item{backend}{(character) Only "ext" supported for now.}
+
+\item{overwrite}{(logical) overwrite cached file or not. Default: \code{FALSE}}
 }
 \description{
 Cache blobs of json, xml or pdfs of text from \code{ft_get()} function

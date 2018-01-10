@@ -553,7 +553,7 @@ get_unknown <- function(x, type, try_unknown, ...) {
 ftdoi_get <- function(path, opts = list()) {
   cli <- crul::HttpClient$new(
     url = "https://ftdoi.org", 
-    headers = list(`User-Agent` = paste0('fulltext/', packageVersion('fulltext'))),
+    headers = list(`User-Agent` = paste0('fulltext/', utils::packageVersion('fulltext'))),
     opts = opts
   )    
   cli$get(path)

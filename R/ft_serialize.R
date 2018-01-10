@@ -7,8 +7,6 @@
 #' Rds files, cached via `R.cache`, or to Redis.
 #'
 #' @importFrom digest digest
-#' @importFrom rredis redisClose redisSet redisConnect redisGet
-#' @importFrom R.cache saveCache loadCache
 #' @export
 #'
 #' @param x Input object, output from a call to `ft_get`. Required.
@@ -60,15 +58,16 @@
 
 ft_serialize <- function(x, to='xml', from=NULL, ...) {
   is_or(x, c('ft_data', 'ft_parsed'))
-  to <- match.arg(to, c('json','xml','list','file','rcache','redis'))
+  # to <- match.arg(to, c('json','xml','list','file','rcache','redis'))
+  to <- match.arg(to, c('json','xml','list','file'))
   fmt <- attributes(x$plos$data$data)$format
   tmp <- switch(to,
                 xml = to_xml(x, fmt, ...),
                 json = to_json(x, fmt, ...),
                 list = to_list(x, fmt, ...),
-                file = save_file(x, x),
-                rcache = save_rcache(x),
-                redis = save_redis(x)
+                file = save_file(x, x)
+                # rcache = save_rcache(x),
+                # redis = save_redis(x)
   )
   structure(tmp, class = "ft_parsed", type = to, location = attr(tmp, "location"))
 }
@@ -146,54 +145,54 @@ save_file <- function(x, y, path="~/.fulltext_cache") {
   structure(x, location = filepath)
 }
 
-save_rcache <- function(x) {
-  x <- serialize_rcache(x)
-  structure(x, location = "~/.Rcache")
-}
+# save_rcache <- function(x) {
+#   x <- serialize_rcache(x)
+#   structure(x, location = "~/.Rcache")
+# }
 
-save_redis <- function(x) {
-  tt <- suppressWarnings(tryCatch(redisConnect(), error = function(e) e))
-  if (is(tt, "simpleError")) {
-    stop("Start redis. Go to your terminal/shell and type redis-server, then hit enter")
-  } else {
-    x <- serialize_redis(x)
-    redisClose()
-    structure(x, location = "Redis")
-  }
-}
+# save_redis <- function(x) {
+#   tt <- suppressWarnings(tryCatch(redisConnect(), error = function(e) e))
+#   if (is(tt, "simpleError")) {
+#     stop("Start redis. Go to your terminal/shell and type redis-server, then hit enter")
+#   } else {
+#     x <- serialize_redis(x)
+#     redisClose()
+#     structure(x, location = "Redis")
+#   }
+# }
 
-serialize_rcache <- function(x) {
-  for (i in seq_along(x)) {
-    if (is.null(x[[i]]$data)) {
-      x[[i]]$data$data <- NULL
-    } else {
-      for (j in seq_along(x[[i]]$data$data)) {
-        nn <- paste(names(x[i]), names(x[[i]]$data$data[j]), sep = "_")
-        x[[i]]$data$data[[j]] <- saveCache(object = x[[i]]$data$data[[j]], key = list(nn))
-      }
-    }
-  }
-  return( x )
-}
+# serialize_rcache <- function(x) {
+#   for (i in seq_along(x)) {
+#     if (is.null(x[[i]]$data)) {
+#       x[[i]]$data$data <- NULL
+#     } else {
+#       for (j in seq_along(x[[i]]$data$data)) {
+#         nn <- paste(names(x[i]), names(x[[i]]$data$data[j]), sep = "_")
+#         x[[i]]$data$data[[j]] <- saveCache(object = x[[i]]$data$data[[j]], key = list(nn))
+#       }
+#     }
+#   }
+#   return( x )
+# }
 
-serialize_redis <- function(x) {
-  for (i in seq_along(x)) {
-    if (is.null( x[[i]]$data )) {
-      x[[i]]$data$data <- NULL
-    } else {
-      for (j in seq_along(x[[i]]$data$data)) {
-        nn <- paste(names(x[i]), names(x[[i]]$data$data[j]), sep = "_")
-        x[[i]]$data$data[[j]] <- redis_set_(nn, x[[i]]$data$data[[j]])
-      }
-    }
-  }
-  return( x )
-}
+# serialize_redis <- function(x) {
+#   for (i in seq_along(x)) {
+#     if (is.null( x[[i]]$data )) {
+#       x[[i]]$data$data <- NULL
+#     } else {
+#       for (j in seq_along(x[[i]]$data$data)) {
+#         nn <- paste(names(x[i]), names(x[[i]]$data$data[j]), sep = "_")
+#         x[[i]]$data$data[[j]] <- redis_set_(nn, x[[i]]$data$data[[j]])
+#       }
+#     }
+#   }
+#   return( x )
+# }
 
-redis_set_ <- function(x, y) {
-  redisSet(x, y)
-  x
-}
+# redis_set_ <- function(x, y) {
+#   redisSet(x, y)
+#   x
+# }
 
 #' @export
 #' @rdname ft_serialize

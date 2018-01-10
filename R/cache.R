@@ -2,9 +2,10 @@
 #'
 #' @name cache
 #'
-#' @param backend (character) Only "ext" supported for now.
 #' @param path (character) End of directory path. Default: "fulltext". 
 #' See Details.
+#' @param backend (character) Only "ext" supported for now.
+#' @param overwrite (logical) overwrite cached file or not. Default: `FALSE`
 #' 
 #' @section Managing cached files:
 #' The dafault cache directory is `paste0(rappdirs::user_cache_dir(), "/R/fulltext")`, 
@@ -79,13 +80,12 @@ cache_get <- function(key=NULL, backend=NULL, path=NULL, db=NULL) {
   } else {
     backend <- match.arg(backend, choices = 'ext')
     key <- path.expand(key)
-    switch(backend,
-           ext = get_ext(key), 
-           rds = get_rds(key),
-           rcache = get_rcache(key),
-           redis = get_redis(key)
+    switch(backend, ext = get_ext(key))
+           # rds = get_rds(key)
+           # rcache = get_rcache(key),
+           # redis = get_redis(key)
            # sqlite = get_sqlite(key, db=db)
-    )
+    # )
   }
 }
 
