@@ -1,7 +1,7 @@
 #' @title Collect data from a remote source in fulltext
 #' 
-#' @description `collect` grabs full text data from a remote storage 
-#' device. `get_text` is a convenience function to grab the nested text 
+#' @description `ft_collect` grabs full text data from a remote storage 
+#' device. `ft_text` is a convenience function to grab the nested text 
 #' data and bring it up in the list for easier access
 #' 
 #' @name collect
@@ -23,31 +23,31 @@
 #' x$plos$data$data
 #' 
 #' # Collect data from the rds file
-#' y <- x %>% collect()
+#' y <- x %>% ft_collect()
 #' 
 #' # note how the data is now in the object
 #' y$plos$data$data
 #' 
 #' # Let's get the actual 
-#' ## collect() alone, replaces file pointers with parsed text, 
+#' ## ft_collect() alone, replaces file pointers with parsed text, 
 #' ##  maintaining object structure
-#' x %>% collect() 
+#' x %>% ft_collect() 
 #' ## pulls the text out of the object
-#' x %>% collect() %>% get_text()
+#' x %>% ft_collect() %>% ft_text()
 #' }
-collect <- function(x, ...) {
-  UseMethod("collect")
+ft_collect <- function(x, ...) {
+  UseMethod("ft_collect")
 }
 
 #' @export
 #' @rdname collect
-collect.default <- function(x, ...) {
-  stop("no 'collect' method for ", class(x)[[1]], call. = FALSE)
+ft_collect.default <- function(x, ...) {
+  stop("no 'ft_collect' method for ", class(x)[[1]], call. = FALSE)
 }
 
 #' @export
 #' @rdname collect
-collect.ft_data <- function(x, ...) {
+ft_collect.ft_data <- function(x, ...) {
   for (i in seq_along(x)) {
     path <- x[[i]]$data$path
     x[[i]]$data$data <- lapply(path, function(z) {
@@ -63,19 +63,19 @@ collect.ft_data <- function(x, ...) {
 
 #' @export
 #' @rdname collect
-get_text <- function(x, ...) {
-  UseMethod("get_text")
+ft_text <- function(x, ...) {
+  UseMethod("ft_text")
 }
 
 #' @export
 #' @rdname collect
-get_text.default <- function(x, ...) {
-  stop("no 'get_text' method for ", class(x)[[1]], call. = FALSE)
+ft_text.default <- function(x, ...) {
+  stop("no 'ft_text' method for ", class(x)[[1]], call. = FALSE)
 }
 
 #' @export
 #' @rdname collect
-get_text.ft_data <- function(x, ...) {
+ft_text.ft_data <- function(x, ...) {
   lapply(x, function(z) {
     unclass(z$data$data)
   })

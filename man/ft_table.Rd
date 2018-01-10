@@ -5,7 +5,7 @@
 \title{Collect metadata and text into a data.frame}
 \usage{
 ft_table(path = NULL, type = NULL, encoding = NULL,
-  xml_extract_text = TRUE, ...)
+  xml_extract_text = TRUE)
 }
 \arguments{
 \item{path}{a directory path, must exist}
@@ -15,7 +15,8 @@ Can be one of pdf, xml, or plain (file extensions: pdf, xml, and txt, respective
 
 \item{encoding}{(character) encoding, if \code{NULL} we get it from \code{getOption("encoding")}}
 
-\item{xml_extract_text}{(logical)}
+\item{xml_extract_text}{(logical) for XML, should we extract the text (\code{TRUE}) or
+return a string as XML (\code{FALSE}). Default: \code{TRUE}}
 }
 \description{
 Facilitates downstream processing with text mining packages

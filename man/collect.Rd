@@ -2,24 +2,25 @@
 % Please edit documentation in R/collect.R
 \name{collect}
 \alias{collect}
-\alias{collect.default}
-\alias{collect.ft_data}
-\alias{get_text}
-\alias{get_text.default}
-\alias{get_text.ft_data}
+\alias{ft_collect}
+\alias{ft_collect.default}
+\alias{ft_collect.ft_data}
+\alias{ft_text}
+\alias{ft_text.default}
+\alias{ft_text.ft_data}
 \title{Collect data from a remote source in fulltext}
 \usage{
-collect(x, ...)
+ft_collect(x, ...)
 
-\method{collect}{default}(x, ...)
+\method{ft_collect}{default}(x, ...)
 
-\method{collect}{ft_data}(x, ...)
+\method{ft_collect}{ft_data}(x, ...)
 
-get_text(x, ...)
+ft_text(x, ...)
 
-\method{get_text}{default}(x, ...)
+\method{ft_text}{default}(x, ...)
 
-\method{get_text}{ft_data}(x, ...)
+\method{ft_text}{ft_data}(x, ...)
 }
 \arguments{
 \item{x}{Input. An object of class \code{ft_data}}
@@ -27,8 +28,8 @@ get_text(x, ...)
 \item{...}{Further args, ignored.}
 }
 \description{
-\code{collect} grabs full text data from a remote storage
-device. \code{get_text} is a convenience function to grab the nested text
+\code{ft_collect} grabs full text data from a remote storage
+device. \code{ft_text} is a convenience function to grab the nested text
 data and bring it up in the list for easier access
 }
 \details{
@@ -47,16 +48,16 @@ x <- ft_get('10.1371/journal.pone.0086169', from='plos')
 x$plos$data$data
 
 # Collect data from the rds file
-y <- x \%>\% collect()
+y <- x \%>\% ft_collect()
 
 # note how the data is now in the object
 y$plos$data$data
 
 # Let's get the actual 
-## collect() alone, replaces file pointers with parsed text, 
+## ft_collect() alone, replaces file pointers with parsed text, 
 ##  maintaining object structure
-x \%>\% collect() 
+x \%>\% ft_collect() 
 ## pulls the text out of the object
-x \%>\% collect() \%>\% get_text()
+x \%>\% ft_collect() \%>\% ft_text()
 }
 }

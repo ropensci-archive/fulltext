@@ -8,7 +8,8 @@
 #' @param type (character) type of files to get. Default is `NULL` which gets all types. 
 #' Can be one of pdf, xml, or plain (file extensions: pdf, xml, and txt, respectively)
 #' @param encoding (character) encoding, if `NULL` we get it from `getOption("encoding")`
-#' @param xml_extract_text (logical)
+#' @param xml_extract_text (logical) for XML, should we extract the text (`TRUE`) or 
+#' return a string as XML (`FALSE`). Default: `TRUE`
 #' @details You can alternatively use `readtext::readtext()` or similar functions
 #' to achieve a similar outcome.
 #' @examples  
@@ -27,7 +28,7 @@
 #' x <- ft_table(xml_extract_text = FALSE)
 #' x
 #' }
-ft_table <- function(path = NULL, type = NULL, encoding = NULL, xml_extract_text = TRUE, ...) {
+ft_table <- function(path = NULL, type = NULL, encoding = NULL, xml_extract_text = TRUE) {
   if (is.null(path)) path <- cache_options_get()$path
   if (!is.character(path)) stop("'path' must be character class")
   if (!file.exists(path)) stop(path, " does not exist")

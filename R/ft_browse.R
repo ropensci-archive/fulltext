@@ -69,7 +69,7 @@ ft_browse_sections <- function(x, what = "abstract", output=NULL, browse = TRUE)
   origwhat <- what
   what <- match.arg(what, sections(), FALSE)
   what <- c("doi", what)
-  input <- unname(chunks(x, what)[[1]])
+  input <- unname(ft_chunks(x, what)[[1]])
   input <- lapply(input, function(x) setNames(x, c("doi","target")))
   for (i in seq_along(input)) {
     input[[i]] <- c(input[[i]], collapse = i)

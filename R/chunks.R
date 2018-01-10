@@ -1,6 +1,6 @@
 #' @title Extract chunks of data from articles
 #'
-#' @description `chunks` makes it easy to extract sections of an article.
+#' @description `ft_chunks` makes it easy to extract sections of an article.
 #' You can extract just authors across all articles, or all references
 #' sections, or the complete text of each article. Then you can pass the
 #' output downstream for visualization and analysis.
@@ -39,79 +39,79 @@
 #' @return A list of output, one for each thing requested
 #' @examples \dontrun{
 #' x <- ft_get('10.1371/journal.pone.0086169', from='plos')
-#' chunks(x, what="authors")
+#' ft_chunks(x, what="authors")
 #'
 #' library("rplos")
 #' (dois <- searchplos(q="*:*", fl='id',
 #'    fq=list('doc_type:full',"article_type:\"research article\""),
 #'      limit=5)$data$id)
 #' x <- ft_get(dois, from="plos")
-#' x %>% chunks("front")
-#' x %>% chunks("body")
-#' x %>% chunks("back")
-#' x %>% chunks("history")
-#' x %>% chunks(c("doi","history")) %>% tabularize()
-#' x %>% chunks("authors")
-#' x %>% chunks(c("doi","categories"))
-#' x %>% chunks("all")
-#' x %>% chunks("publisher")
-#' x %>% chunks("acknowledgments")
-#' x %>% chunks("permissions")
-#' x %>% chunks("journal_meta")
-#' x %>% chunks("article_meta")
+#' x %>% ft_chunks("front")
+#' x %>% ft_chunks("body")
+#' x %>% ft_chunks("back")
+#' x %>% ft_chunks("history")
+#' x %>% ft_chunks(c("doi","history")) %>% ft_tabularize()
+#' x %>% ft_chunks("authors")
+#' x %>% ft_chunks(c("doi","categories"))
+#' x %>% ft_chunks("all")
+#' x %>% ft_chunks("publisher")
+#' x %>% ft_chunks("acknowledgments")
+#' x %>% ft_chunks("permissions")
+#' x %>% ft_chunks("journal_meta")
+#' x %>% ft_chunks("article_meta")
 #'
 #' # Coerce list output to a data.frame, where possible
 #' (dois <- searchplos(q="*:*", fl='id',
 #'    fq=list('doc_type:full',"article_type:\"research article\""),
 #'      limit=5)$data$id)
 #' x <- ft_get(dois, from="plos")
-#' x %>% chunks("publisher") %>% tabularize()
-#' x %>% chunks("refs") %>% tabularize()
-#' x %>% chunks(c("doi","publisher")) %>% tabularize()
-#' x %>% chunks(c("doi","publisher","permissions")) %>% tabularize()
+#' x %>% ft_chunks("publisher") %>% ft_tabularize()
+#' x %>% ft_chunks("refs") %>% ft_tabularize()
+#' x %>% ft_chunks(c("doi","publisher")) %>% ft_tabularize()
+#' x %>% ft_chunks(c("doi","publisher","permissions")) %>% ft_tabularize()
 #'
 #' x <- ft_get(c("10.3389/fnagi.2014.00130",'10.1155/2014/249309',
 #'   '10.1155/2014/162024'), from='entrez')
-#' x %>% chunks("doi") %>% tabularize()
-#' x %>% chunks("authors") %>% tabularize()
-#' x %>% chunks(c("doi","publisher","permissions")) %>% tabularize()
-#' x %>% chunks("history") %>% tabularize()
+#' x %>% ft_chunks("doi") %>% ft_tabularize()
+#' x %>% ft_chunks("authors") %>% ft_tabularize()
+#' x %>% ft_chunks(c("doi","publisher","permissions")) %>% ft_tabularize()
+#' x %>% ft_chunks("history") %>% ft_tabularize()
 #'
 #' x <- ft_get('10.3389/fnagi.2014.00130', from='entrez')
-#' x %>% chunks("keywords")
+#' x %>% ft_chunks("keywords")
 #'
 #' # Piping workflow
 #' opts <- list(fq=list('doc_type:full',"article_type:\"research article\""))
 #' ft_search(query='ecology', from='plos', plosopts = opts)$plos$data$id %>%
 #'  ft_get(from = "plos") %>%
-#'  chunks("publisher")
+#'  ft_chunks("publisher")
 #'
 #' # Via entrez
 #' res <- ft_get(c("10.3389/fnagi.2014.00130",'10.1155/2014/249309',
 #'    '10.1155/2014/162024'), from='entrez')
-#' chunks(res, what="abstract")
-#' chunks(res, what="title")
-#' chunks(res, what="keywords")
-#' chunks(res, what="publisher")
+#' ft_chunks(res, what="abstract")
+#' ft_chunks(res, what="title")
+#' ft_chunks(res, what="keywords")
+#' ft_chunks(res, what="publisher")
 #'
 #' (res <- ft_search(query='ecology', from='entrez'))
-#' ft_get(res$entrez$data$doi, from='entrez') %>% chunks("title")
+#' ft_get(res$entrez$data$doi, from='entrez') %>% ft_chunks("title")
 #' ft_get(res$entrez$data$doi[1:4], from='entrez') %>%
-#'   chunks("acknowledgments")
+#'   ft_chunks("acknowledgments")
 #' ft_get(res$entrez$data$doi[1:4], from='entrez') %>%
-#'   chunks(c('title','keywords'))
+#'   ft_chunks(c('title','keywords'))
 #'
 #' # From eLife
 #' x <- ft_get(c('10.7554/eLife.04251', '10.7554/eLife.04986'), from='elife')
-#' x %>% chunks("abstract")
-#' x %>% chunks("publisher")
-#' x %>% chunks("journal_meta")
-#' x %>% chunks("acknowledgments")
-#' x %>% chunks("refs_dois")
-#' x %>% chunks(c("abstract", "executive_summary"))
+#' x %>% ft_chunks("abstract")
+#' x %>% ft_chunks("publisher")
+#' x %>% ft_chunks("journal_meta")
+#' x %>% ft_chunks("acknowledgments")
+#' x %>% ft_chunks("refs_dois")
+#' x %>% ft_chunks(c("abstract", "executive_summary"))
 #' }
 
-chunks <- function(x, what='all') {
+ft_chunks <- function(x, what='all') {
   is_ft_data(x)
   what <- match.arg(unlist(what), c("all", sections()), TRUE)
   out <- list()
@@ -377,8 +377,8 @@ history2date <- function(r){
 }
 
 #' @export
-#' @rdname chunks
-tabularize <- function(x){
+#' @rdname ft_chunks
+ft_tabularize <- function(x){
   # each publisher
   out <- lapply(x, function(a){
     # each article
