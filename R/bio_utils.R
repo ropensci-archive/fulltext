@@ -5,7 +5,7 @@
 #' @param query query terms
 #' @param limit records to return. default: 10
 #' @param date_from,date_to date begin and end, of form YYYY-MM-DD
-#' @param ... curl options passed on to \code{\link[httr]{GET}}
+#' @param ... curl options passed on to [crul:HttpClient]
 #' @details We search Biorxiv first, get DOIs, then search Crossref - 
 #' one consequence of this is that you may get back less than the number of 
 #' results you requested even if Biorxiv found equal to or more than 
@@ -22,8 +22,9 @@ biorxiv_search <- function(query, limit = 10, date_from = NULL,
   
   url <- file.path(bior_base(), URLencode(paste0(query, " numresults:30")))
   args <- ft_compact(list(limit_from = date_from, limit_to = date_to))
-  res <- GET(url, query = args)
-  html <- xml2::read_html(content(res, "text", encoding = 'UTF-8'))
+  cli <- crul::HttpClient$new(url = url, opts = list(...))
+  res <- cli$get(query = args)
+  html <- xml2::read_html(res$parse('UTF-8'))
   found <- get_found(html)
   if (length(found) == 0) stop("no results found in Biorxiv")
   init_ret <- length(xml2::xml_find_all(html, "//*[contains(text(), 'doi.org')]"))
@@ -31,8 +32,8 @@ biorxiv_search <- function(query, limit = 10, date_from = NULL,
   if (init_ret < limit) {
     urls <- make_next_pages(min(c(found, limit)), init_ret, url)
     html_pages <- lapply(urls, function(z) {
-      tmp <- GET(z)
-      xml2::read_html(content(tmp, "text", encoding = 'UTF-8'))
+      tmp <- crul::HttpClient$new(url = z)$get()
+      xml2::read_html(tmp$parse('UTF-8'))
     })
   }
   all_html <- unlist(list(list(html), html_pages), recursive = FALSE)
@@ -52,7 +53,7 @@ biorxiv_search <- function(query, limit = 10, date_from = NULL,
   list(found = found, data = dat)
 }
 
-bior_base <- function() "http://www.biorxiv.org/search"
+bior_base <- function() "https://www.biorxiv.org/search"
 
 find_one_try <- function(html, x) {
   res <- tryCatch(suppressWarnings(xml2::xml_find_first(html, sprintf("//meta[@name='%s']", x))), error = function(e) e)

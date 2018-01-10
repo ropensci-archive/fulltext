@@ -49,17 +49,20 @@ plugin_get_links_crossref <- function(from, urls, opts = list(), type, ...) {
         cat(paste0("path exists: ", path), sep="\n")
         res[[ names(out)[i] ]] <- ft_object(path, names(out)[i], type)
       } else {
-        header <- httr::add_headers(
-          `CR-Clickthrough-Client-Token` = Sys.getenv("CROSSREF_TDM"),
-          Accept = paste0(switch(type, xml = "text/", pdf = "application/"), type)
+        cli <- crul::HttpClient$new(
+          url = lk, 
+          headers = list(
+            `CR-Clickthrough-Client-Token` = Sys.getenv("CROSSREF_TDM"),
+            Accept = paste0(switch(type, xml = "text/", pdf = "application/"), type)
+          ),
+          opts = list(followlocation = 1)
         )
-        tmp <- httr::GET(lk, header, httr::config(followlocation = TRUE), 
-          httr::write_disk(path, cache_options_get()$overwrite))
+        tmp <- cli$get(disk = path)
         if (tmp$status_code > 201) {
           unlink(path)
           res[[ names(out)[i] ]] <- NULL
         } else {
-          res[[ names(out)[i] ]] <- ft_object(tmp$request$output$path, names(out)[i], type)
+          res[[ names(out)[i] ]] <- ft_object(tmp$content, names(out)[i], type)
         }
       }
     }
@@ -144,8 +147,9 @@ plugin_get_links_plos <- function(from, urls, opts = list(), type, ...) {
 }
 
 get_article <- function(x, path, ...) {
-  res <- httr::GET(x, httr::write_disk(path, TRUE), ...)
+  cli <- crul::HttpClient$new(url = x, opts = list(...))
+  res <- cli$get()
   if (res$status_code > 201) unlink(path)
-  httr::stop_for_status(res)
-  res$request$output$path
+  res$raise_for_status()
+  res$content
 }

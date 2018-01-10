@@ -13,7 +13,7 @@ biorxiv_search(query, limit = 10, date_from = NULL, date_to = NULL, ...)
 
 \item{date_from, date_to}{date begin and end, of form YYYY-MM-DD}
 
-\item{...}{curl options passed on to \code{\link[httr]{GET}}}
+\item{...}{curl options passed on to \link{crul:HttpClient}}
 }
 \description{
 Biorxiv search

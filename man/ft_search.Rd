@@ -42,8 +42,7 @@ entrez, arxiv, biorxiv, europmc, scopus, or ma}
 \item{maopts}{(list) Microsoft Academic options. See
 \code{\link[=microsoft_search]{microsoft_search()}}}
 
-\item{...}{Further args passed on to \code{\link[httr:GET]{httr::GET()}}. Not working
-right now...}
+\item{...}{ignored right now}
 }
 \value{
 An object of class \code{ft}, and objects of class \code{ft_ind}
@@ -88,7 +87,7 @@ ft_search(query='climate change', from='plos', limit=500,
 res2$crossref
 
 # BioRxiv
-(res <- ft_search(query='ecology', from='biorxiv'))
+(res <- ft_search(query='owls', from='biorxiv'))
 res$biorxiv
 
 # Entrez

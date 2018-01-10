@@ -8,8 +8,9 @@
 #' @param type (character) type of search, default: search
 #' @param search_type (character) search type, default: scopus
 #' @param key (character) api key. get a key at 
-#' \url{https://dev.elsevier.com/index.html}
-#' @param ... curl options passed on to \code{\link[httr]{GET}}
+#' <https://dev.elsevier.com/index.html>
+#' @param ... curl options passed on to [crul::HttpClient]
+#' 
 #' @details Rate limits for search are 20,000 per every 7 days. You likely
 #' won't make that many requests in 7 days, but if you do e.g., make 20K in
 #' 5 days, then you have to wait 2 days for the clock to reset, than you'll 
@@ -69,14 +70,18 @@ scopus_abstract <- function(x, key, id_type = "doi", ...) {
 }
 
 scopus_get <- function(url, args, key, ...) {
-  res <- httr::GET(url, query = args, httr::add_headers(`X-ELS-APIKey` = key), 
-                   ...)
+  cli <- crul::HttpClient$new(
+    url = url, 
+    headers = list(`X-ELS-APIKey` = key),
+    opts = list(...)
+  )
+  res <- cli$get(query = args)
   scopus_error_handle(res)
-  txt <- httr::content(res, "text", encoding = "UTF-8")
+  txt <- res$parse("UTF-8")
   jsonlite::fromJSON(txt, flatten = TRUE)
 }
 
-scopus_base <- function() "http://api.elsevier.com/content"
+scopus_base <- function() "https://api.elsevier.com/content"
 
 check_key_scopus <- function(x) {
   tmp <- if (is.null(x)) {
@@ -93,13 +98,14 @@ check_key_scopus <- function(x) {
 
 scopus_error_handle <- function(x) {
   if (x$status_code > 201) {
-    txt <- httr::content(x, "text", encoding = "UTF-8")
+    txt <- x$parse("UTF-8")
     json <- jsonlite::fromJSON(x, flatten = TRUE)  
     mssg <- json$`service-error`$status$statusText
-    if (is.null(mssg)) httr::stop_for_status(x)
+    if (is.null(mssg)) x$raise_for_status()
     stop(mssg, call. = FALSE)
   }
-  if ('www-authenticate' %in% names(x$headers)) {
-    warning(sprintf("  for %s ", x), x$headers$`www-authenticate`, call. = FALSE)
+  if ('www-authenticate' %in% names(x$response_headers)) {
+    warning(sprintf("  for %s ", x), x$response_headers$`www-authenticate`, 
+      call. = FALSE)
   } 
 }

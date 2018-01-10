@@ -21,7 +21,7 @@ scopus_search(query = NULL, count = 25, start = 0, type = "search",
 \item{key}{(character) api key. get a key at
 \url{https://dev.elsevier.com/index.html}}
 
-\item{...}{curl options passed on to \code{\link[httr]{GET}}}
+\item{...}{curl options passed on to \link[crul:HttpClient]{crul::HttpClient}}
 }
 \description{
 Scopus search

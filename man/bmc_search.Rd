@@ -13,7 +13,7 @@ bmc_search(query, limit = 10, offset = 1, key = NULL, ...)
 
 \item{offset}{Record number to start at. Default: 1}
 
-\item{...}{Further args passed on to \code{\link[httr:GET]{httr::GET()}}}
+\item{...}{curl options passed on to \link[crul:HttpClient]{crul::HttpClient}}
 }
 \value{
 A list of length 2
@@ -34,8 +34,7 @@ out <- bmc_search('ecology')
 browseURL(urls[1])
 
 # curl debugging help
-library('httr')
-bmc_search('ecology', config=verbose())
+bmc_search('ecology', verbose = TRUE)
 }
 }
 \keyword{internal}

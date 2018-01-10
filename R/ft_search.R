@@ -29,8 +29,7 @@
 #' @param scopusopts (list) Scopus options. See [scopus_search()]
 #' @param maopts (list) Microsoft Academic options. See 
 #' [microsoft_search()]
-#' @param ... Further args passed on to [httr::GET()]. Not working 
-#' right now...
+#' @param ... ignored right now
 #' 
 #' @details Each of `plosopts`, `scopusopts`, etc. expect 
 #' a named list.
@@ -60,7 +59,7 @@
 #' res2$crossref
 #'
 #' # BioRxiv
-#' (res <- ft_search(query='ecology', from='biorxiv'))
+#' (res <- ft_search(query='owls', from='biorxiv'))
 #' res$biorxiv
 #'
 #' # Entrez

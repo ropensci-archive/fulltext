@@ -7,8 +7,7 @@
 #' @param bmcopts BMC options. See `?bmc_search`
 #' @param crossrefopts Crossref options. See `?cr_works`
 #' @param entrezopts Entrez options. See `?entrez_search`
-#' @param ... Further args passed on to [httr::GET()]. Not working 
-#' right now...
+#' @param ... ignored right now
 #'
 #' @return An object of class ft_links, with either a list or data.frame for 
 #' each DOI, with links for XML and PDF links (typically). 

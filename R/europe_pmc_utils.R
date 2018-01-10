@@ -45,16 +45,23 @@
 #' # get full text XML
 #' eupmc_xml('PMC3257301')
 #' }
-eupmc_search <- function(query, resulttype = NULL, synonym = FALSE, per_page = 25, page = 1, ...) {
+eupmc_search <- function(query, resulttype = NULL, synonym = FALSE, per_page = 25, 
+  page = 1, ...) {
+
   is_it(per_page, "numeric")
   is_it(page, "numeric")
   is_it(synonym, "logical")
-  args <- ft_compact(list(query = query, resulttype = resulttype, synonym = ft_as_log(synonym), 
-                          pageSize = per_page, page = page, format = "json"))
+  args <- ft_compact(list(query = query, resulttype = resulttype, 
+    synonym = ft_as_log(synonym), pageSize = per_page, page = page, 
+    format = "json"))
   newargs <- paste(names(args), args, sep = "=", collapse = "&")
-  out <- GET(URLencode(paste0(eupmc_base(), "search/", newargs)), ...)
+  cli <- crul::HttpClient$new(
+    url = URLencode(paste0(eupmc_base(), "search/", newargs)),
+    opts = list(...)
+  )
+  out <- cli$get()
   eupmc_errors(out)
-  tt <- content(out, "text", encoding = "UTF-8")
+  tt <- out$parse("UTF-8")
   jsonlite::fromJSON(tt)
 }
 
@@ -62,23 +69,27 @@ eupmc_search <- function(query, resulttype = NULL, synonym = FALSE, per_page = 2
 #' @keywords internal
 #' @rdname eupmc
 eupmc_fields <- function(...) {
-  out <- GET(URLencode(paste0(eupmc_base(), "fields")), ...)
+  cli <- crul::HttpClient$new(
+    url = URLencode(paste0(eupmc_base(), "fields")),
+    opts = list(...))
+  out <- cli$get()
   eupmc_errors(out)
-  tt <- content(out, "text", encoding = "UTF-8")
+  tt <- out$parse("UTF-8")
   tmp <- xml2::as_list(xml2::read_xml(tt))
-  out <- lapply(tmp$searchTermList, function(z) {
-    setNames(rbind.data.frame(z), c('term', 'datasets'))
-  })
-  do.call("rbind.data.frame", unname(out))
+  data.frame(terms = unname(unlist(lapply(tmp$searchTermList, "[[", "term"))), 
+    stringsAsFactors=FALSE)
 }
 
 #' @export
 #' @keywords internal
 #' @rdname eupmc
 eupmc_xml <- function(id, ...) {
-  out <- GET(URLencode(paste0(eupmc_base(), id, "/fullTextXML")), ...)
+  cli <- crul::HttpClient$new(
+    url = URLencode(paste0(eupmc_base(), id, "/fullTextXML")), 
+    opts = list(...))
+  out <- cli$get()
   eupmc_errors(out)
-  tt <- content(out, "text", encoding = "UTF-8")
+  tt <- out$parse("UTF-8")
   xml2::read_xml(tt)
 }
 

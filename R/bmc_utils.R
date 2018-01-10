@@ -5,7 +5,7 @@
 #' @param query Search terms.
 #' @param limit Number of records to return. Default 10.
 #' @param offset Record number to start at. Default: 1
-#' @param ... Further args passed on to [httr::GET()]
+#' @param ... curl options passed on to [crul::HttpClient]
 #' @return A list of length 2
 #' @examples \dontrun{
 #' bmc_search(query='ecology')
@@ -19,15 +19,16 @@
 #' browseURL(urls[1])
 #'
 #' # curl debugging help
-#' library('httr')
-#' bmc_search('ecology', config=verbose())
+#' bmc_search('ecology', verbose = TRUE)
 #' }
 bmc_search <- function(query, limit = 10, offset = 1, key = NULL, ...) {
   url <- 'http://api.springer.com/metadata/json'
-  args <- ft_compact(list(q = query, p = limit, s = offset, api_key = check_key_bmc(key)))
-  out <- GET(url, query = args, ...)
-  stop_for_status(out)
-  tt <- content(out, "text", encoding = 'UTF-8')
+  args <- ft_compact(list(q = query, p = limit, s = offset, 
+    api_key = check_key_bmc(key)))
+  cli <- crul::HttpClient$new(url = url, opts = list(...))
+  out <- cli$get(query = args)
+  out$raise_for_status()
+  tt <- out$parse('UTF-8')
   res <- jsonlite::fromJSON(tt)
   res$result$total <- as.numeric(res$result$total)
   return(res)
