@@ -12,8 +12,8 @@ CONTRIBUTING.md
 README.Rmd
 ^.*\.xml
 ^CONDUCT\.md$
-cran-comments.md
 ^cran-comments\.md$
 ^revdep$
 .github
 ^notes\.md$
+^codemeta\.json$
