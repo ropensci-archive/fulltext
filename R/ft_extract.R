@@ -45,16 +45,21 @@ ft_extract.ft_data <- function(x) {
   do_extraction(x)
 }
 
+#' @export
+ft_extract.raw <- function(x) {
+  pdftools::pdf_text(x)
+}
+
 do_extraction <- function(x) {
-  structure(lapply(x, function(y) {
-    for (i in seq_along(y$data$path)) {
-      ext <- strextract(y$data$path[[i]], "\\.[A-Za-z]{3}")
-      z <- if (grepl("rds", ext)) readRDS(y$data$path[[i]])[[1]] else y$data$path[[i]]
-      y$data$data[[i]] <- pdftools::pdf_text(z)
-    }
-    y$data$data <- unclass(y$data$data)
-    return( y )
-  }), class = "ft_data")
+  for (i in seq_along(x)) {
+    path <- x[[i]]$data$path
+    x[[i]]$data$data <- lapply(path, function(z) {
+      ext <- strextract(z$path, "\\.[A-Za-z]{3}")
+      w <- if (grepl("pdf", ext)) z$path else return(NULL)
+      pdftools::pdf_text(w)
+    })
+  }
+  return(x)
 }
 
 #' @export

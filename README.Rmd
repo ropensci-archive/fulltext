@@ -112,6 +112,20 @@ ft_links(res1$entrez$data$doi, from = "entrez")
 ft_get('10.1371/journal.pone.0086169', from = 'plos')
 ```
 
+### Interop with other packages downstream
+
+```{r}
+res <- ft_get(c('10.7554/eLife.03032', '10.7554/eLife.32763'), 
+  from = "elife", type = "pdf")
+library(readtext)
+x <- readtext(file.path(ftxt_cache$cache_path_get(), "/*.pdf"))
+```
+
+```{r}
+library(quanteda)
+corpus(x)
+```
+
 ## Extract chunks
 
 ```{r}

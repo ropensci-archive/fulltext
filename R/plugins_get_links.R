@@ -1,7 +1,6 @@
 # get plugins for ft_links input --------------------------------------
 
-plugin_get_links_crossref <- function(from, urls, opts = list(), type, 
-                                      cache, ...) {
+plugin_get_links_crossref <- function(from, urls, opts = list(), type, ...) {
   # pick URLs
   out <- list()
   for (i in seq_along(urls)) {
@@ -37,41 +36,54 @@ plugin_get_links_crossref <- function(from, urls, opts = list(), type,
   out <- ft_compact(out)
   
   # fetch text
-  res <- lapply(out, function(z) {
-    attr(z$url, "member") <- z$member
-    tmp <- tryCatch({
-      tdm <- crminer::as_tdmurl(z$url, type)
-      attr(tdm, "member") <- attr(z$url, "member")
-      crminer::crm_text(url = tdm, type = type, 
-        cache = cache, overwrite_unspecified = TRUE)
-      },
-      error = function(e) e
-    )
-    if (inherits(tmp, "error")) tmp$message else tmp
-  })
+  res <- list()
+  for (i in seq_along(out)) {
+    tdm <- crminer::as_tdmurl(out[[i]]$url, type)
+    lk <- tdm[[type]]
+    if (is.null(lk)) {
+      # res[[i]] <- ft_object(NULL, names(out)[i], type)
+      res[[ names(out)[i] ]] <- NULL
+    } else {
+      path <- make_key(names(out)[i], type)
+      if (file.exists(path) && !cache_options_get()$overwrite) {
+        cat(paste0("path exists: ", path), sep="\n")
+        res[[ names(out)[i] ]] <- ft_object(path, names(out)[i], type)
+      } else {
+        header <- httr::add_headers(
+          `CR-Clickthrough-Client-Token` = Sys.getenv("CROSSREF_TDM"),
+          Accept = paste0(switch(type, xml = "text/", pdf = "application/"), type)
+        )
+        tmp <- httr::GET(lk, header, httr::config(followlocation = TRUE), 
+          httr::write_disk(path, cache_options_get()$overwrite))
+        if (tmp$status_code > 201) {
+          unlink(path)
+          res[[ names(out)[i] ]] <- NULL
+        } else {
+          res[[ names(out)[i] ]] <- ft_object(tmp$request$output$path, names(out)[i], type)
+        }
+      }
+    }
+  }
   
   list(
     found = length(res),
-    dois = names(res), 
-    data = lapply(res, function(w) {
-      list(
-        backend = NULL,
-        path = attr(w, "path"),
-        data = tryCatch(w$text, error = function(e) NULL),
-        error = if (inherits(tryCatch(w$text, error = function(e) e), "error")) {
-          w
-        } else {
-          NULL
-        }
-      )
-    }),
-    # data = construct_paths(cache_options_get(), out),
+    dois = pluck(res, "id", ""), 
+    data = list(
+      backend = "ext",
+      cache_path = cache_options_get()$path,
+      path = stats::setNames(lapply(res, function(w) {
+        list(
+          path = w$path,
+          id = w$id,
+          type = w$type
+        )
+      }), pluck(res, "id", ""))
+    ),
     opts = opts
   )
 }
 
-plugin_get_links_plos <- function(from, urls, opts = list(), type, 
-                                      cache, ...) {
+plugin_get_links_plos <- function(from, urls, opts = list(), type, ...) {
   # pick URLs
   out <- list()
   for (i in seq_along(urls)) {
@@ -101,60 +113,39 @@ plugin_get_links_plos <- function(from, urls, opts = list(), type,
   copts <- cache_options_get()
   artout <- list()
   for (i in seq_along(out)) {
-    path <- NULL
-    if (copts$cache) {
-      path <- paste0(
-        file.path(copts$path, gsub("/", "_", names(out)[i])),
-        ".", out[[i]]$type
-      )
+    path <- make_key(names(out)[i], type)
+    if (file.exists(path) && !cache_options_get()$overwrite) {
+      cat(paste0("path exists: ", path), sep="\n")
+      artout[[ names(out)[i] ]]$path <- path
+    } else {
+      tmp <- tryCatch(get_article(out[[i]]$url, path), error = function(e) e)
+      artout[[ names(out)[i] ]]$path <- 
+        if (inherits(tmp, "error")) NULL else path
     }
-    tmp <- tryCatch(get_article(out[[i]]$url, path, out[[i]]$type), 
-                    error = function(e) e)
-    artout[[ names(out)[i] ]]$path <- 
-      if (inherits(tmp, "error")) NULL else path
-    artout[[ names(out)[i] ]]$text <- 
-      if (inherits(tmp, "error")) tmp$message else tmp
+    artout[[ names(out)[i] ]]$id <- names(out)[i]
   }
   
   list(
     found = length(artout),
     dois = names(artout), 
-    data = lapply(artout, function(w) {
-      list(
-        backend = NULL,
-        path = w$path,
-        data = tryCatch(w$text, error = function(e) NULL),
-        error = if (inherits(tryCatch(w$text, error = function(e) e), "error")) {
-          w
-        } else {
-          NULL
-        }
-      )
-    }),
+    data = list(
+      backend = "ext",
+      cache_path = copts$path,
+      path = stats::setNames(lapply(artout, function(w) {
+        list(
+          path = w$path,
+          id = w$id,
+          type = type
+        )
+      }), names(artout))
+    ),
     opts = opts
   )
 }
 
-get_article <- function(x, path, type, ...) {
-  if (!is.null(path)) {
-    res <- httr::GET(x, write_disk(path, TRUE), ...)
-    httr::stop_for_status(res)
-    res$request$output$path
-  } else {
-    switch(
-      type,
-      pdf = {
-        tfile <- tempfile()
-        res <- httr::GET(x, write_disk(tfile, TRUE))
-        httr::stop_for_status(res)
-        crminer::crm_extract(tfile)
-      },
-      xml = {
-        res <- httr::GET(x, ...)
-        httr::stop_for_status(res)
-        httr::content(res, "text", encoding = "UTF-8")
-      }
-    )
-  }
+get_article <- function(x, path, ...) {
+  res <- httr::GET(x, httr::write_disk(path, TRUE), ...)
+  if (tmp$status_code > 201) unlink(path)
+  httr::stop_for_status(res)
+  res$request$output$path
 }
-

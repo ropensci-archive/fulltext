@@ -9,7 +9,8 @@
 #' @param offset (integer) record to start at. default: 0
 #' @param orderby (character) field to sort results by
 #' @param atts (character) character vector of fields to return
-#' @param key (character) microsoft academic API key, see Details.
+#' @param key (character) microsoft academic API key, see `Authentication` section 
+#' in [fulltext-package]
 #' @references
 #' https://academic.microsoft.com/
 #' https://www.microsoft.com/cognitive-services/en-us/Academic-Knowledge-API/documentation/QueryExpressionSyntax

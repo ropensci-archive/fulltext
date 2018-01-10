@@ -103,6 +103,7 @@
 #' @importFrom stats na.omit setNames
 #' @importFrom xml2 read_html read_xml xml_find_first xml_find_all xml_text
 #' xml_contents xml_attr xml_ns xml_children xml_name xml_ns_strip
+#' @importFrom crul HttpClient
 #' @importFrom httr HEAD GET POST upload_file content_type content write_disk
 #' stop_for_status
 #' @importFrom whisker whisker.render
@@ -111,6 +112,8 @@
 #' @importFrom rcrossref cr_works cr_ft_links
 #' @importFrom aRxiv arxiv_search
 #' @importFrom microdemic ma_abstract ma_evaluate
+#' @importFrom storr storr_rds
+#' @importFrom tibble as_tibble
 #' @name fulltext-package
 #' @aliases fulltext
 #' @docType package

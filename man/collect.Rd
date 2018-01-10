@@ -2,16 +2,22 @@
 % Please edit documentation in R/collect.R
 \name{collect}
 \alias{collect}
+\alias{collect.default}
 \alias{collect.ft_data}
 \alias{get_text}
+\alias{get_text.default}
 \alias{get_text.ft_data}
 \title{Collect data from a remote source in fulltext}
 \usage{
 collect(x, ...)
 
+\method{collect}{default}(x, ...)
+
 \method{collect}{ft_data}(x, ...)
 
 get_text(x, ...)
+
+\method{get_text}{default}(x, ...)
 
 \method{get_text}{ft_data}(x, ...)
 }
@@ -25,10 +31,17 @@ get_text(x, ...)
 device. \code{get_text} is a convenience function to grab the nested text
 data and bring it up in the list for easier access
 }
+\details{
+Note that for xml or plain text the result of this call
+is actual text you can read. For pdf the result is raw bytes -
+use \code{\link[=ft_extract]{ft_extract()}} to convert raw to text.
+}
 \examples{
 \dontrun{
 # Get some data, stash in rds file
-x <- ft_get('10.1371/journal.pone.0086169', from='plos', cache=TRUE, backend="rds")
+cache_options_get()
+cache_options_set(cache=TRUE, backend="rds")
+x <- ft_get('10.1371/journal.pone.0086169', from='plos')
 
 # note that the data is not in the object, gives NULL
 x$plos$data$data
@@ -40,6 +53,10 @@ y <- x \%>\% collect()
 y$plos$data$data
 
 # Let's get the actual 
+## collect() alone, replaces file pointers with parsed text, 
+##  maintaining object structure
+x \%>\% collect() 
+## pulls the text out of the object
 x \%>\% collect() \%>\% get_text()
 }
 }

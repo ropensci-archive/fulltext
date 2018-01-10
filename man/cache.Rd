@@ -4,48 +4,61 @@
 \alias{cache}
 \alias{cache_options_set}
 \alias{cache_options_get}
-\alias{cache_clear}
 \title{Cache blobs of json, xml or pdfs of text from \code{ft_get()} function}
 \usage{
-cache_options_set(cache = TRUE, backend = "rds", path = "~/.fulltext")
+cache_options_set(path = "fulltext", backend = "ext", overwrite = FALSE)
 
 cache_options_get()
-
-cache_clear(cachetype = NULL)
 }
 \arguments{
-\item{cache}{(logical) If \code{TRUE}, cache results, if not objects saved
-within R session.}
+\item{path}{(character) End of directory path. Default: "fulltext".
+See Details.}
 
-\item{backend}{(character) One of rds, rcache, redis}
-
-\item{path}{path to local storage. used only if \code{backend="rds"}}
-
-\item{cachetype}{The cache type}
+\item{backend}{(character) Only "ext" supported for now.}
 }
 \description{
 Cache blobs of json, xml or pdfs of text from \code{ft_get()} function
 }
+\section{Managing cached files}{
+
+The dafault cache directory is \code{paste0(rappdirs::user_cache_dir(), "/R/fulltext")},
+but you can set your own path using \code{cache_path_set()}
+
+\code{cache_delete} only accepts 1 file name, while
+\code{cache_delete_all} doesn't accept any names, but deletes all files.
+For deleting many specific files, use \code{cache_delete} in a \code{\link[=lapply]{lapply()}}
+type call
+}
+
+\section{Useful user functions for managing cached files}{
+
+\itemize{
+\item \code{ftxt_cache$list()} returns a character vector of full
+path file names
+\item \code{ftxt_cache$files()} returns file objects with metadata
+\item \code{ftxt_cache$details()} returns files with details
+\item \code{ftxt_cache$delete()} delete specific files
+\item \code{ftxt_cache$delete_all()} delete all files, returns nothing
+}
+}
+
 \examples{
 \dontrun{
-ft_get('10.1371/journal.pone.0086169', from='plos', cache=FALSE)
-ft_get('10.1371/journal.pone.0086169', from='plos', cache=TRUE)
+# Manage cached files with this object
+ftxt_cache
 
-cache_options_set(backend="redis")
-cache_options_get()
-(x <- ft_get('10.1371/journal.pone.0086169', from='plos', cache=TRUE, backend="redis"))
-x \%>\% collect()
+# list files in cache
+ftxt_cache$list()
 
-cache_options_set(backend="rcache")
-cache_options_get()
-(x <- ft_get('10.1371/journal.pone.0086169', from='plos'))
-x \%>\% collect()
+# list details of files in cache
+ftxt_cache$details()
 
-# Many different sources
-(res <- ft_search(query='ecology', from='entrez'))
-cache_options_set(backend="rds")
-out <- ft_get(res)
-out$entrez
-out \%>\% collect() \%>\% chunks("title")
+# delete certain database files
+# ftxt_cache$delete("file path")
+# ftxt_cache$list()
+
+# delete all files in cache
+# ftxt_cache$delete_all()
+# ftxt_cache$list()
 }
 }
