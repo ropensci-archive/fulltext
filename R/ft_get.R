@@ -349,6 +349,7 @@ ft_get.character <- function(x, from=NULL, type = "xml", try_unknown = TRUE, plo
                              elsevieropts = list(), wileyopts = list(), 
                              crossrefopts = list(), ...) {
   check_type(type)
+  check_cache()
   if (!is.null(from)) {
     from <- match.arg(from, c("plos", "entrez", "elife", "pensoft",
       "arxiv", "biorxiv", "elsevier", "wiley"))
@@ -375,6 +376,7 @@ ft_get.list <- function(x, from=NULL, type = "xml", try_unknown = TRUE, plosopts
                         elsevieropts = list(), wileyopts = list(), 
                         crossrefopts = list(), ...) {
   check_type(type)
+  check_cache()
   if (!is.null(from)) {
     from <- match.arg(from, c("plos", "entrez", "elife", "pensoft", 
       "arxiv", "biorxiv", "elsevier", "wiley"))
@@ -402,6 +404,7 @@ ft_get.ft <- function(x, from=NULL, type = "xml", try_unknown = TRUE, plosopts=l
                       crossrefopts = list(), ...) {
 
   check_type(type)
+  check_cache()
   # warn on sources that aren't supported yet and will be skipped
   from <- names(x[sapply(x, function(v) !is.null(v$data))])
   not_supported <- c("elife", "pensoft", "bmc", "arxiv",
@@ -434,6 +437,7 @@ ft_get.ft_links <- function(x, from=NULL, type = "xml", try_unknown = TRUE, plos
                             crossrefopts = list(), ...){
 
   check_type(type)
+  check_cache()
   if (is.null(cache_options_get()$cache)) cache_options_set(FALSE)
   from <- names(x[sapply(x, function(v) !is.null(v$data))])
   plos_out <- plugin_get_links_plos(from, urls = x$plos$data,

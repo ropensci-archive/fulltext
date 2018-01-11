@@ -76,3 +76,6 @@ get_ext <- function(x) {
     '.txt' = paste0(readLines(x), collapse = " ")
   )
 }
+
+# check that directory is created for the cache in case user changes location
+check_cache <- function() ftxt_cache$mkdir()

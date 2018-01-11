@@ -121,7 +121,7 @@ ft_chunks <- function(x, what='all') {
     } else {
       out[[names(x[i])]] <-
       lapply(x[[i]]$data$data, function(q){
-        qparsed <- xml2::read_xml(q)
+        qparsed <- if (inherits(q, "xml_document")) q else xml2::read_xml(q)
         get_what(data = qparsed, what, names(x[i]))
       })
     }

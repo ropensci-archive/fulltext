@@ -1,5 +1,5 @@
 ftxt_cache <- NULL # nocov start
-store <- NULL
+fulltext_store <- NULL
 
 .onLoad <- function(libname, pkgname){
   x <- hoardr::hoard()
@@ -9,8 +9,8 @@ store <- NULL
   # set cache default options
   cache_options_set()
 
-  # create storr store
-  store <<- storr::storr_rds(
+  # create storr fulltext_store
+  fulltext_store <<- storr::storr_rds(
     paste0(cache_options_get()$path, "_storr"), 
     mangle_key = TRUE)
 } # nocov end
