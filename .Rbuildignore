@@ -11,7 +11,7 @@ vignettes/margins.sty
 CONTRIBUTING.md
 README.Rmd
 ^.*\.xml
-^CONDUCT\.md$
+^CODE_OF_CONDUCT\.md$
 ^cran-comments\.md$
 ^revdep$
 .github
