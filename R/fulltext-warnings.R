@@ -1,6 +1,8 @@
 #' fulltext warnings details
 #' 
-#' What can you do about the various warnings: 
+#' What can you do about the various warnings?
+#' 
+#' This document is in relation to the function [ft_get()]
 #' 
 #' @section No plugin:
 #' 
@@ -46,5 +48,5 @@
 #' give that warning.
 #' 
 #' 
-#' @name fulltext-warnings
+#' @name ft_get-warnings
 NULL

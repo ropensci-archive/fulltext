@@ -142,7 +142,7 @@
 #' 
 #' @section Warnings:
 #' You will see warnings thrown in the R shell or in the resulting object. 
-#' See [fulltext-warnings] for more information on what warnings mean.
+#' See [ft_get-warnings] for more information on what warnings mean.
 #'
 #' @examples 
 #' # List publishers included

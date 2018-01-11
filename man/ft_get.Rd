@@ -182,7 +182,7 @@ still work when passed in here, who knows, it's a mess.
 \section{Warnings}{
 
 You will see warnings thrown in the R shell or in the resulting object.
-See \link{fulltext-warnings} for more information on what warnings mean.
+See \link{ft_get-warnings} for more information on what warnings mean.
 }
 
 \examples{
