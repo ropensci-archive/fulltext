@@ -1,4 +1,4 @@
-#' Cache blobs of json, xml or pdfs of text from `ft_get()` function
+#' Set or get cache options
 #'
 #' @name cache
 #'
@@ -6,6 +6,8 @@
 #' See Details.
 #' @param backend (character) Only "ext" supported for now.
 #' @param overwrite (logical) overwrite cached file or not. Default: `FALSE`
+#' 
+#' @seealso [ftxt_cache]
 #' 
 #' @section Managing cached files:
 #' The dafault cache directory is `paste0(rappdirs::user_cache_dir(), "/R/fulltext")`, 
@@ -16,36 +18,13 @@
 #' For deleting many specific files, use `cache_delete` in a [lapply()]
 #' type call
 #'
-#' 
-#' @section Useful user functions for managing cached files:
-#' \itemize{
-#'  \item `ftxt_cache$list()` returns a character vector of full
-#'  path file names
-#'  \item `ftxt_cache$files()` returns file objects with metadata
-#'  \item `ftxt_cache$details()` returns files with details
-#'  \item `ftxt_cache$delete()` delete specific files
-#'  \item `ftxt_cache$delete_all()` delete all files, returns nothing
-#' }
-#'
 #'
 #' @examples \dontrun{
-#' # Manage cached files with this object
-#' ftxt_cache
-#'
-#' # list files in cache
-#' ftxt_cache$list()
-#' 
-#' # list details of files in cache
-#' ftxt_cache$details()
-#'
-#' # delete certain database files
-#' # ftxt_cache$delete("file path")
-#' # ftxt_cache$list()
-#'
-#' # delete all files in cache
-#' # ftxt_cache$delete_all()
-#' # ftxt_cache$list()
+#' cache_options_get()
+#' cache_options_set(path = "foobar")
+#' cache_options_get()
 #' }
+NULL
 
 #' @export
 #' @rdname cache

@@ -4,7 +4,7 @@
 \alias{cache}
 \alias{cache_options_set}
 \alias{cache_options_get}
-\title{Cache blobs of json, xml or pdfs of text from \code{ft_get()} function}
+\title{Set or get cache options}
 \usage{
 cache_options_set(path = "fulltext", backend = "ext", overwrite = FALSE)
 
@@ -19,7 +19,7 @@ See Details.}
 \item{overwrite}{(logical) overwrite cached file or not. Default: \code{FALSE}}
 }
 \description{
-Cache blobs of json, xml or pdfs of text from \code{ft_get()} function
+Set or get cache options
 }
 \section{Managing cached files}{
 
@@ -32,35 +32,13 @@ For deleting many specific files, use \code{cache_delete} in a \code{\link[=lapp
 type call
 }
 
-\section{Useful user functions for managing cached files}{
-
-\itemize{
-\item \code{ftxt_cache$list()} returns a character vector of full
-path file names
-\item \code{ftxt_cache$files()} returns file objects with metadata
-\item \code{ftxt_cache$details()} returns files with details
-\item \code{ftxt_cache$delete()} delete specific files
-\item \code{ftxt_cache$delete_all()} delete all files, returns nothing
-}
-}
-
 \examples{
 \dontrun{
-# Manage cached files with this object
-ftxt_cache
-
-# list files in cache
-ftxt_cache$list()
-
-# list details of files in cache
-ftxt_cache$details()
-
-# delete certain database files
-# ftxt_cache$delete("file path")
-# ftxt_cache$list()
-
-# delete all files in cache
-# ftxt_cache$delete_all()
-# ftxt_cache$list()
+cache_options_get()
+cache_options_set(path = "foobar")
+cache_options_get()
 }
+}
+\seealso{
+\link{ftxt_cache}
 }
