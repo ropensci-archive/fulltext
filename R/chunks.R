@@ -39,7 +39,7 @@
 #' @return A list of output, one for each thing requested
 #' @examples \dontrun{
 #' x <- ft_get('10.1371/journal.pone.0086169', from='plos')
-#' ft_chunks(x, what="authors")
+#' x %>% ft_collect %>% ft_chunks(what="authors")
 #'
 #' library("rplos")
 #' (dois <- searchplos(q="*:*", fl='id',
@@ -61,10 +61,11 @@
 #' x %>% ft_chunks("article_meta")
 #'
 #' # Coerce list output to a data.frame, where possible
-#' (dois <- searchplos(q="*:*", fl='id',
-#'    fq=list('doc_type:full',"article_type:\"research article\""),
-#'      limit=5)$data$id)
-#' x <- ft_get(dois, from="plos")
+#' dois <- c('10.7554/elife.28589', '10.7554/elife.14009', '10.7554/elife.13941', 
+#'   '10.7554/elife.22170', '10.7554/elife.29285')
+#' x <- ft_get(dois) 
+#' x <- x %>% ft_collect()
+#' x$elife
 #' x %>% ft_chunks("publisher") %>% ft_tabularize()
 #' x %>% ft_chunks("refs") %>% ft_tabularize()
 #' x %>% ft_chunks(c("doi","publisher")) %>% ft_tabularize()
@@ -72,12 +73,14 @@
 #'
 #' x <- ft_get(c("10.3389/fnagi.2014.00130",'10.1155/2014/249309',
 #'   '10.1155/2014/162024'), from='entrez')
+#' x <- x %>% ft_collect()
 #' x %>% ft_chunks("doi") %>% ft_tabularize()
 #' x %>% ft_chunks("authors") %>% ft_tabularize()
 #' x %>% ft_chunks(c("doi","publisher","permissions")) %>% ft_tabularize()
 #' x %>% ft_chunks("history") %>% ft_tabularize()
 #'
 #' x <- ft_get('10.3389/fnagi.2014.00130', from='entrez')
+#' x <- x %>% ft_collect()
 #' x %>% ft_chunks("keywords")
 #'
 #' # Piping workflow
@@ -89,17 +92,20 @@
 #' # Via entrez
 #' res <- ft_get(c("10.3389/fnagi.2014.00130",'10.1155/2014/249309',
 #'    '10.1155/2014/162024'), from='entrez')
+#' res <- res %>% ft_collect()
 #' ft_chunks(res, what="abstract")
 #' ft_chunks(res, what="title")
 #' ft_chunks(res, what="keywords")
 #' ft_chunks(res, what="publisher")
 #'
 #' (res <- ft_search(query='ecology', from='entrez'))
-#' ft_get(res$entrez$data$doi, from='entrez') %>% ft_chunks("title")
+#' ft_get(res$entrez$data$doi, from='entrez') %>% ft_collect() %>% ft_chunks("title")
 #' ft_get(res$entrez$data$doi[1:4], from='entrez') %>%
-#'   ft_chunks("acknowledgments")
+#'  ft_collect() %>% 
+#'  ft_chunks("acknowledgments")
 #' ft_get(res$entrez$data$doi[1:4], from='entrez') %>%
-#'   ft_chunks(c('title','keywords'))
+#'  ft_collect() %>% 
+#'  ft_chunks(c('title','keywords'))
 #'
 #' # From eLife
 #' x <- ft_get(c('10.7554/eLife.04251', '10.7554/eLife.04986'), from='elife')
@@ -119,6 +125,9 @@ ft_chunks <- function(x, what='all') {
     if (is.null(x[[i]]$found)) {
       out[[names(x[i])]] <- NULL
     } else {
+      if (is.null(x[[i]]$data$data)) {
+        warning("perhaps you need to run ft_collect()?")
+      }
       out[[names(x[i])]] <-
       lapply(x[[i]]$data$data, function(q){
         qparsed <- if (inherits(q, "xml_document")) q else xml2::read_xml(q)
