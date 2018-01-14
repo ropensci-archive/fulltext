@@ -91,7 +91,7 @@ ft_search(query = 'ecology', from = 'crossref')
 #> Query:
 #>   [ecology] 
 #> Found:
-#>   [PLoS: 0; BMC: 0; Crossref: 143880; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
+#>   [PLoS: 0; BMC: 0; Crossref: 144060; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
 #> Returned:
 #>   [PLoS: 0; BMC: 0; Crossref: 10; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0]
 ```
@@ -106,7 +106,7 @@ res1 <- ft_search(query = 'ecology', from = 'entrez', limit = 5)
 ft_links(res1)
 #> <fulltext links>
 #> [Found] 4 
-#> [IDs] ID_28701144 ID_28328896 ID_23802897 ID_19305948 ...
+#> [IDs] ID_29326987 ID_29319501 ID_29313491 ID_27758730 ID_27436048 ...
 ```
 
 Or pass in DOIs directly
@@ -116,7 +116,7 @@ Or pass in DOIs directly
 ft_links(res1$entrez$data$doi, from = "entrez")
 #> <fulltext links>
 #> [Found] 4 
-#> [IDs] ID_28701144 ID_28328896 ID_23802897 ID_19305948 ...
+#> [IDs] ID_29326987 ID_29319501 ID_29313491 ID_27758730 ID_27436048 ...
 ```
 
 ## Get full text
@@ -212,31 +212,12 @@ pdf <- system.file("examples", "example2.pdf", package = "fulltext")
 
 
 ```r
-(res <- ft_extract(pdf))
+ft_extract(pdf)
 #> <document>/Library/Frameworks/R.framework/Versions/3.4/Resources/library/fulltext/examples/example2.pdf
 #>   Title: pone.0107412 1..10
 #>   Producer: Acrobat Distiller 9.0.0 (Windows); modified using iText 5.0.3 (c) 1T3XT BVBA
 #>   Creation date: 2014-09-18
 ```
-
-Or extract directly into a `tm` Corpus
-
-
-```r
-paths <- sapply(paste0("example", 2:5, ".pdf"), function(x) system.file("examples", x, package = "fulltext"))
-(corpus <- ft_extract_corpus(paths))
-#> $meta
-#> data frame with 0 columns and 0 rows
-#> 
-#> $data
-#> <<SimpleCorpus>>
-#> Metadata:  corpus specific: 1, document level (indexed): 0
-#> Content:  documents: 4
-#> 
-#> attr(,"class")
-#> [1] "ft_extract"
-```
-
 
 ### Interoperability with other packages downstream
 

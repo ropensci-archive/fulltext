@@ -163,16 +163,8 @@ pdf <- system.file("examples", "example2.pdf", package = "fulltext")
 ```
 
 ```{r}
-(res <- ft_extract(pdf))
+ft_extract(pdf)
 ```
-
-Or extract directly into a `tm` Corpus
-
-```{r}
-paths <- sapply(paste0("example", 2:5, ".pdf"), function(x) system.file("examples", x, package = "fulltext"))
-(corpus <- ft_extract_corpus(paths))
-```
-
 
 ### Interoperability with other packages downstream
 
