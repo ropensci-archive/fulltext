@@ -5,7 +5,7 @@
 #' @param query query terms
 #' @param limit records to return. default: 10
 #' @param date_from,date_to date begin and end, of form YYYY-MM-DD
-#' @param ... curl options passed on to [crul:HttpClient]
+#' @param ... curl options passed on to [crul::HttpClient]
 #' @details We search Biorxiv first, get DOIs, then search Crossref - 
 #' one consequence of this is that you may get back less than the number of 
 #' results you requested even if Biorxiv found equal to or more than 
