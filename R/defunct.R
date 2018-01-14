@@ -1,6 +1,6 @@
 #' This function is defunct.
 #' @export
-#' @rdname fulltext-defunct
+#' @rdname ft_extract_corpus-defunct
 #' @keywords internal
 ft_extract_corpus <- function(...){
   .Defunct(msg = "function removed. see ?fulltext-defunct")
@@ -8,7 +8,7 @@ ft_extract_corpus <- function(...){
 
 #' This function is defunct.
 #' @export
-#' @rdname fulltext-defunct
+#' @rdname pdfx-defunct
 #' @keywords internal
 pdfx <- function(...){
   .Defunct(msg = "function removed. see ?fulltext-defunct")
@@ -16,7 +16,7 @@ pdfx <- function(...){
 
 #' This function is defunct.
 #' @export
-#' @rdname fulltext-defunct
+#' @rdname chunks-defunct
 #' @keywords internal
 chunks <- function(...){
   .Defunct(new = "ft_chunks", package = "fulltext", msg = "function name changed to ft_chunks")
@@ -24,7 +24,7 @@ chunks <- function(...){
 
 #' This function is defunct.
 #' @export
-#' @rdname fulltext-defunct
+#' @rdname tabularize-defunct
 #' @keywords internal
 tabularize <- function(...){
   .Defunct(new = "ft_tabularize", package = "fulltext", msg = "function name changed to ft_tabularize")
@@ -32,7 +32,7 @@ tabularize <- function(...){
 
 #' This function is defunct.
 #' @export
-#' @rdname fulltext-defunct
+#' @rdname collect-defunct
 #' @keywords internal
 collect <- function(...){
   .Defunct(new = "ft_collect", package = "fulltext", msg = "function name changed to ft_collect")
@@ -40,12 +40,11 @@ collect <- function(...){
 
 #' This function is defunct.
 #' @export
-#' @rdname fulltext-defunct
+#' @rdname get_text-defunct
 #' @keywords internal
 get_text <- function(...){
   .Defunct(new = "ft_text", package = "fulltext", msg = "function name changed to ft_text")
 }
-
 
 
 #' Defunct functions in fulltext
@@ -59,7 +58,6 @@ get_text <- function(...){
 #'  - [tabularize]: Function name changed to [ft_tabularize()]
 #'  - [collect]: Function name changed to [ft_collect()]
 #'  - [get_text]: Function name changed to [ft_text()]
-#' }
 #' 
 #' @name fulltext-defunct
 NULL
