@@ -37,7 +37,6 @@ Imports:
     microdemic (>= 0.1.0),
     aRxiv,
     rentrez (>= 1.1.0),
-    tm,
     digest,
     whisker,
     data.table,

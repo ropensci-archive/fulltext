@@ -3,7 +3,7 @@
 #' @export
 #' @param paths Path to one or more pdfs, and they must exist
 #' @return A tm Corpus (or VCorpus, later that is)
-#' @seealso \code{\link{ft_extract}}
+#' @seealso [ft_extract()]
 #' @examples \dontrun{
 #' path <- system.file("examples", "example1.pdf", package = "fulltext")
 #' (res <- ft_extract_corpus(path))

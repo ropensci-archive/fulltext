@@ -19,14 +19,12 @@
 #' res2 <- ft_extract(res)
 #' res$arxiv$data
 #' res2$arxiv$data
-#' res2$arxiv$data$data[[1]]$data
 #' 
 #' ## biorxiv
 #' res <- ft_get('10.1101/012476')
 #' res2 <- ft_extract(res)
 #' res$biorxiv$data
 #' res2$biorxiv$data
-#' res2$biorxiv$data$data[[1]]$data
 #' }
 ft_extract <- function(x) {
   UseMethod("ft_extract")

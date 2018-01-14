@@ -22,17 +22,6 @@
 #'
 #' # open to publisher site
 #' ft_browse(x, "publisher")
-#'
-#' # Browse sections
-#' x <- ft_get(c('10.1371/journal.pone.0086169',"10.1371/journal.pone.0110535"), from='plos')
-#' ft_browse_sections(x, "abstract")
-#' ft_browse_sections(x, "categories")
-#'
-#' opts <- list(fq=list('doc_type:full',"article_type:\"research article\""))
-#' out <- ft_search(query='ecology', from='plos', plosopts = opts)$plos$data$id %>%
-#'  ft_get(from = "plos")
-#' out %>% ft_browse_sections("abstract")
-#' out %>% ft_browse_sections("body")
 #' }
 
 #' @export
