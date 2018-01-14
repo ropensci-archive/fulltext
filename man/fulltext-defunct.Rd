@@ -2,16 +2,37 @@
 % Please edit documentation in R/defunct.R
 \name{ft_extract_corpus}
 \alias{ft_extract_corpus}
+\alias{pdfx}
+\alias{chunks}
+\alias{tabularize}
+\alias{collect}
+\alias{get_text}
 \alias{fulltext-defunct}
 \title{This function is defunct.}
 \usage{
 ft_extract_corpus(...)
+
+pdfx(...)
+
+chunks(...)
+
+tabularize(...)
+
+collect(...)
+
+get_text(...)
 }
 \description{
 This function is defunct.
 
-\itemize{
-\item \code{\link{ft_extract_corpus}}: Function removed.
-}
+This function is defunct.
+
+This function is defunct.
+
+This function is defunct.
+
+This function is defunct.
+
+This function is defunct.
 }
 \keyword{internal}

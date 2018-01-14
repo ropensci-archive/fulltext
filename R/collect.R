@@ -4,7 +4,6 @@
 #' device. `ft_text` is a convenience function to grab the nested text 
 #' data and bring it up in the list for easier access
 #' 
-#' @name collect
 #' @export
 #' @param x Input. An object of class \code{ft_data}
 #' @param ... Further args, ignored.
@@ -40,13 +39,11 @@ ft_collect <- function(x, ...) {
 }
 
 #' @export
-#' @rdname collect
 ft_collect.default <- function(x, ...) {
   stop("no 'ft_collect' method for ", class(x)[[1]], call. = FALSE)
 }
 
 #' @export
-#' @rdname collect
 ft_collect.ft_data <- function(x, ...) {
   for (i in seq_along(x)) {
     path <- x[[i]]$data$path
@@ -62,19 +59,19 @@ ft_collect.ft_data <- function(x, ...) {
 }
 
 #' @export
-#' @rdname collect
+#' @rdname ft_collect
 ft_text <- function(x, ...) {
   UseMethod("ft_text")
 }
 
 #' @export
-#' @rdname collect
+#' @rdname ft_collect
 ft_text.default <- function(x, ...) {
   stop("no 'ft_text' method for ", class(x)[[1]], call. = FALSE)
 }
 
 #' @export
-#' @rdname collect
+#' @rdname ft_collect
 ft_text.ft_data <- function(x, ...) {
   lapply(x, function(z) {
     unclass(z$data$data)
