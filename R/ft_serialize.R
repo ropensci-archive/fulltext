@@ -49,8 +49,8 @@ ft_serialize <- function(x, to = 'xml', from = NULL, ...) {
 #' @export
 print.ft_parsed <- function(x, ...) {
   alldois <- unlist(ft_compact(sapply(x, function(z) names(z$data$data))))
-  alldois <- vapply(alldois, URLdecode, "")
-  namesprint <- paste(na.omit(alldois[1:10]), collapse = " ")
+  alldois <- vapply(alldois, utils::URLdecode, "")
+  namesprint <- paste(stats::na.omit(alldois[1:10]), collapse = " ")
   totgot <- sum(sapply(x, function(y) length(y$data$data)))
   cat(sprintf("[Docs] %s", totgot), "\n")
   cat(sprintf("[Source] %s", attr(x, "type")), "\n")

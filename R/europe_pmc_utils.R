@@ -55,7 +55,7 @@ eupmc_search <- function(query, resulttype = NULL, synonym = FALSE, per_page = 2
     format = "json"))
   newargs <- paste(names(args), args, sep = "=", collapse = "&")
   cli <- crul::HttpClient$new(
-    url = URLencode(paste0(eupmc_base(), "search/", newargs)),
+    url = utils::URLencode(paste0(eupmc_base(), "search/", newargs)),
     opts = list(...)
   )
   out <- cli$get()
@@ -69,7 +69,7 @@ eupmc_search <- function(query, resulttype = NULL, synonym = FALSE, per_page = 2
 #' @rdname eupmc
 eupmc_fields <- function(...) {
   cli <- crul::HttpClient$new(
-    url = URLencode(paste0(eupmc_base(), "fields")),
+    url = utils::URLencode(paste0(eupmc_base(), "fields")),
     opts = list(...))
   out <- cli$get()
   eupmc_errors(out)
@@ -84,7 +84,7 @@ eupmc_fields <- function(...) {
 #' @rdname eupmc
 eupmc_xml <- function(id, ...) {
   cli <- crul::HttpClient$new(
-    url = URLencode(paste0(eupmc_base(), id, "/fullTextXML")), 
+    url = utils::URLencode(paste0(eupmc_base(), id, "/fullTextXML")), 
     opts = list(...))
   out <- cli$get()
   eupmc_errors(out)
@@ -107,5 +107,5 @@ eupmc_errors <- function(x) {
 }
 
 is_it <- function(x, y) {
-  if (!is(x, y)) stop(sprintf("%s must be %s", deparse(substitute(x)), y), call. = FALSE)  
+  if (!inherits(x, y)) stop(sprintf("%s must be %s", deparse(substitute(x)), y), call. = FALSE)  
 }

@@ -44,11 +44,11 @@ get_ft <- function(x, type, url, path, headers = list(), ...) {
     opts = c(list(followlocation = 1, ...)),
     headers = headers
   )
-  cat(paste0("within get_ft: ", cli$url), sep="\n")
+  #cat(paste0("within get_ft: ", cli$url), sep="\n")
   res <- tryCatch(cli$get(disk = path), 
     error = function(e) e, 
     warning = function(w) w)
-  cat(class(res)[1L], sep = "\n")
+  #cat(class(res)[1L], sep = "\n")
 
   # if an error cleanup by deleting the file
   if (

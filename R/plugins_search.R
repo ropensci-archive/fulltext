@@ -10,7 +10,7 @@ plugin_search_plos <- function(sources, query, limit, start, opts){
                               the terms of the Creative Commons Attribution License, which permits
                               unrestricted use, distribution, and reproduction in any medium,
                               provided the original author and source are credited.'))
-    if (!is(zz$data, "data.frame")) zz$data <- data.frame(NULL)
+    if (!inherits(zz$data, "data.frame")) zz$data <- data.frame(NULL)
     zz <- names_lower(zz)
     structure(zz, class = "ft_ind", query = query)
   } else {

@@ -97,10 +97,6 @@
 #' @section Feedback:
 #' Let us know what you think at <https://github.com/ropensci/fulltext/issues>
 #'
-#' @importFrom utils URLdecode URLencode browseURL head modifyList
-#' download.file unzip
-#' @importFrom methods is
-#' @importFrom stats na.omit setNames
 #' @importFrom xml2 read_html read_xml xml_find_first xml_find_all xml_text
 #' xml_contents xml_attr xml_ns xml_children xml_name xml_ns_strip
 #' @importFrom crul HttpClient

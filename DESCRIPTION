@@ -7,7 +7,7 @@ Description: Provides a single interface to many sources of full text
     included for searching for articles, downloading full or partial
     text, downloading supplementary materials, converting to various
     data formats used in and outside of R.
-Version: 0.9.9.9310
+Version: 0.9.9.9314
 License: MIT + file LICENSE
 Authors@R: c(
     person("Scott", "Chamberlain",
@@ -23,9 +23,6 @@ LazyLoad: yes
 VignetteBuilder: knitr
 Roxygen: list(wrap = FALSE, markdown = TRUE)
 Imports:
-    methods,
-    utils,
-    stats,
     crul (>= 0.4.0),
     httr (>= 1.3.1),
     magrittr,

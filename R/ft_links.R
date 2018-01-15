@@ -208,7 +208,7 @@ ft_links_ls <- function() {
 print.ft_links <- function(x, ...) {
   cat("<fulltext links>", sep = "\n")
   alldois <- unlist(ft_compact(pluck(x, "ids")))
-  namesprint <- paste(na.omit(alldois[1:10]), collapse = " ")
+  namesprint <- paste(stats::na.omit(alldois[1:10]), collapse = " ")
   totgot <- sum(unlist(pluck(x, "found")))
   cat(sprintf("[Found] %s", totgot), "\n")
   cat(ft_wrap(sprintf("[IDs]\n %s ...", namesprint)), "\n\n")

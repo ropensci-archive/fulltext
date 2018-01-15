@@ -51,7 +51,7 @@ get_si_plos <- function(doi, si, save.name=NA, dir=NA, cache=TRUE, ...){
     save.name <- .save.name(doi, save.name, si)
 
     #Find journal from DOI
-    journals <- setNames(c("plosone", "plosbiology", "plosmedicine", "plosgenetics", "ploscompbiol", "plospathogens", "plosntds"), c("pone", "pbio", "pmed", "pgen", "pcbi", "ppat", "pntd"))
+    journals <- stats::setNames(c("plosone", "plosbiology", "plosmedicine", "plosgenetics", "ploscompbiol", "plospathogens", "plosntds"), c("pone", "pbio", "pmed", "pgen", "pcbi", "ppat", "pntd"))
     journal <- gsub("[0-9\\.\\/]*", "", doi)
     journal <- gsub("journal", "", journal)
     if(sum(journal %in% names(journals)) != 1)

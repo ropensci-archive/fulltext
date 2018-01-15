@@ -31,7 +31,6 @@
       return(destination)
     }
     
-    #result <- download.file(url, destination, quiet=TRUE)
     result <- GET(url, write_disk(destination, TRUE), ...)
     if (result$status_code > 201) {
       stop(result$status_code, ": downloading file; file may not exist", call. = FALSE)
@@ -45,14 +44,14 @@
 
 # Internal unzip function
 .unzip <- function(zip, dir, save.name, cache, si, list=FALSE){
-    files <- unzip(zip, list=TRUE)
+    files <- utils::unzip(zip, list=TRUE)
     if(list){
         cat("Files in ZIP:")
         print(files)
     }
     if(!si %in% files$Name)
         stop("Required file not in zipfile ", zip)
-    file <- unzip(zip, si)
+    file <- utils::unzip(zip, si)
     file.rename(file, file.path(dir, save.name))
     return(file.path(dir, save.name))
 }

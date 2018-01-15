@@ -103,7 +103,7 @@ ft_get_si.character <- function(x, si, from=c("auto","plos","wiley","science","p
     ############################
     #Recurse if needed (can't use Recall because of potential argument length problems)
     if(length(x) > 1)
-        return(setNames(unlist(mapply(ft_get_si.character, x=x,si=si,from=from,
+        return(stats::setNames(unlist(mapply(ft_get_si.character, x=x,si=si,from=from,
                                       save.name=save.name,dir=dir,cache=cache,
                                       vol=vol,issue=issue,list=list,timeout=timeout)),x))
     ############################
@@ -139,7 +139,7 @@ ft_get_si.ft_data <- function(x, si, from=NA, save.name=NA, dir=NA, cache=TRUE,
     from <- names(x)
     x <- unlist(sapply(x, function(x) x$dois))
     from <- .fix.param(x, from, "from")
-    return(setNames(unlist(mapply(ft_get_si.character, x=x,si=si,from=from,save.name=save.name,
+    return(stats::setNames(unlist(mapply(ft_get_si.character, x=x,si=si,from=from,save.name=save.name,
                                   dir=dir,cache=cache,vol=vol,issue=issue,list=list,timeout=timeout, ...)), x))
 }
 
@@ -150,6 +150,6 @@ ft_get_si.ft <- function(x, si, from=NA, save.name=NA, dir=NA, cache=TRUE, vol=N
         stop("Cannot use 'from' argument with 'ft' input")
     x <- unlist(sapply(x, function(x) x$data$id))
     from <- names(x)
-    return(setNames(unlist(mapply(ft_get_si.character, x=x,si=si,from=from,save.name=save.name,
+    return(stats::setNames(unlist(mapply(ft_get_si.character, x=x,si=si,from=from,save.name=save.name,
                                   dir=dir,cache=cache,vol=vol,issue=issue,list=list,timeout=timeout, ...)),x))
 }

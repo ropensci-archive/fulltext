@@ -8,7 +8,7 @@ ft_trunc_mat <- function(x, n = NULL){
     if (is.na(rows) || rows > 100) { n <- 10 }
     else { n <- rows }
   }
-  df <- as.data.frame(head(x, n))
+  df <- as.data.frame(utils::head(x, n))
   if (nrow(df) == 0)
     return()
   #   is_list <- vapply(df, is.list, logical(1))
@@ -117,7 +117,7 @@ ft_obj_type <- function (x)
     paste0("<S3:", paste0(class(x), collapse = ", "), ">")
   }
   else {
-    paste0("<S4:", paste0(is(x), collapse = ", "), ">")
+    paste0("<S4:", paste0(inherits(x), collapse = ", "), ">")
   }
 }
 
@@ -134,8 +134,8 @@ is_doi <- function(x) {
 }
 
 check_dois <- function(x) {
-  stopifnot(is(x, "list") || is(x, "vector"))
-  x <- vapply(x, URLdecode, "")
+  stopifnot(inherits(x, "list") || inherits(x, "vector"))
+  x <- vapply(x, utils::URLdecode, "")
   res <- vapply(x, is_doi, logical(1))
   if (all(res)) {
     TRUE
@@ -152,7 +152,7 @@ strextract <- function(str, pattern) regmatches(str, regexpr(pattern, str))
 strtrim <- function(str) gsub("^\\s+|\\s+$", "", str)
 
 xml_node_parse <- function(x) {
-  as.list(setNames(strtrim(xml_text(x)), xml_name(x)))
+  as.list(stats::setNames(strtrim(xml_text(x)), xml_name(x)))
 }
 
 # Modified from plyr::try_default

@@ -28,13 +28,13 @@
 #' @rdname ft_browse
 ft_browse <- function(x, what = "macrodocs", browse = TRUE) {
   what <- match.arg(what, c("macrodocs","publisher","whisker"))
-  if (!is(x, "ft_data")) stop("x must be of class ft_data", call. = FALSE)
+  if (!inherits(x, "ft_data")) stop("x must be of class ft_data", call. = FALSE)
   doi <- get_doi(x)
   url <- switch(what,
                 macrodocs = paste0(md(), doi),
                 publisher = paste0(dx(), doi),
                 whisker = stop("not working yet :)", call. = FALSE))
-  if (browse) browseURL(url) else url
+  if (browse) utils::browseURL(url) else url
 }
 
 md <- function() "http://macrodocs.org/?doi="
@@ -59,7 +59,7 @@ ft_browse_sections <- function(x, what = "abstract", output=NULL, browse = TRUE)
   what <- match.arg(what, sections(), FALSE)
   what <- c("doi", what)
   input <- unname(ft_chunks(x, what)[[1]])
-  input <- lapply(input, function(x) setNames(x, c("doi","target")))
+  input <- lapply(input, function(x) stats::setNames(x, c("doi","target")))
   for (i in seq_along(input)) {
     input[[i]] <- c(input[[i]], collapse = i)
   }
@@ -70,7 +70,7 @@ ft_browse_sections <- function(x, what = "abstract", output=NULL, browse = TRUE)
   if (is.null(output))
     output <- tempfile(fileext = ".html")
   write(rendered, file = output)
-  if (browse) browseURL(output) else output
+  if (browse) utils::browseURL(output) else output
 }
 
 template <-

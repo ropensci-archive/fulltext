@@ -464,8 +464,8 @@ ft_get_ls <- function() {
 print.ft_data <- function(x, ...) {
   cat("<fulltext text>", sep = "\n")
   alldois <- unlist(ft_compact(pluck(x, "dois")))
-  alldois <- vapply(alldois, URLdecode, "")
-  namesprint <- paste(na.omit(alldois[1:10]), collapse = " ")
+  alldois <- vapply(alldois, utils::URLdecode, "")
+  namesprint <- paste(stats::na.omit(alldois[1:10]), collapse = " ")
   totgot <- sum(unlist(pluck(x, "found")))
 
   cat(sprintf("[Docs] %s", totgot), "\n")

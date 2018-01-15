@@ -20,7 +20,7 @@
 biorxiv_search <- function(query, limit = 10, date_from = NULL, 
                            date_to = NULL, ...) {
   
-  url <- file.path(bior_base(), URLencode(paste0(query, " numresults:30")))
+  url <- file.path(bior_base(), utils::URLencode(paste0(query, " numresults:30")))
   args <- ft_compact(list(limit_from = date_from, limit_to = date_to))
   cli <- crul::HttpClient$new(url = url, opts = list(...))
   res <- cli$get(query = args)
@@ -57,7 +57,7 @@ bior_base <- function() "https://www.biorxiv.org/search"
 
 find_one_try <- function(html, x) {
   res <- tryCatch(suppressWarnings(xml2::xml_find_first(html, sprintf("//meta[@name='%s']", x))), error = function(e) e)
-  if (is(res, "error")) {
+  if (inherits(res, "error")) {
     NA
   } else {
     xml_attr(res, "content")
@@ -66,7 +66,7 @@ find_one_try <- function(html, x) {
 
 find_all_try <- function(html, x) {
   res <- tryCatch(suppressWarnings(xml2::xml_find_all(html, sprintf("//meta[@name='%s']", x))), error = function(e) e)
-  if (is(res, "error")) {
+  if (inherits(res, "error")) {
     NA
   } else {
     xml_attr(res, "content")

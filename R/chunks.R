@@ -148,7 +148,7 @@ sections <- function() {
 
 get_what <- function(data, what, from){
   if ( any(what == "all") ) what <- sections()
-  setNames(lapply(what, function(z){
+  stats::setNames(lapply(what, function(z){
     switch(z,
            front = front(data, from),
            body = body(data, from),
@@ -339,7 +339,7 @@ getperms <- function(v){
   tmp <- sapply(xml2::xml_children(xml2::xml_find_first(v, "//permissions")), xml_node_parse)
   tmp$license <- paste0(tmp$license[[1]], collapse = " ")
   lichref <- tryCatch(xml2::xml_attr(xml2::xml_find_all(v, "//permissions/license//ext-link"), "href"), error = function(e) e)
-  tmp$license_url <- if (is(lichref, "simpleError") || length(lichref) == 0) NA else lichref
+  tmp$license_url <- if (inherits(lichref, "simpleError") || length(lichref) == 0) NA else lichref
   lapply(tmp, strtrim)
 }
 
@@ -382,7 +382,7 @@ history2date <- function(r){
   out <- lapply(tmp, function(rr){
     as.Date(paste0(sapply(c('day','month','year'), function(vv) f1txt(rr, vv)), collapse = "-"), "%d-%m-%Y")
   })
-  setNames(out, sapply(tmp, xml_attr, attr = "date-type"))
+  stats::setNames(out, sapply(tmp, xml_attr, attr = "date-type"))
 }
 
 #' @export
@@ -408,5 +408,5 @@ falltxt <- function(x, xpath) {
 }
 
 is_ft_data <- function(x) {
-  if (!is(x, "ft_data")) stop("Input to x must be of class ft_data", call. = FALSE)
+  if (!inherits(x, "ft_data")) stop("Input to x must be of class ft_data", call. = FALSE)
 }
