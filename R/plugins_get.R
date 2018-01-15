@@ -156,7 +156,7 @@ plugin_get_aaas <- plugin_get_generator("aaas", aaas_ft)
 
 
 ## getters - could stand to make closure for the below as well, FIXME
-# plos - wrapper around rplos::plos_fulltext
+# plos - wrapper around rplos::plos_fulltext, via .plos_fulltext
 plos_wrapper <- function(dois, type, ...) {
   stats::setNames(lapply(dois, function(x) {
     path <- make_key(x, type)
@@ -164,7 +164,7 @@ plos_wrapper <- function(dois, type, ...) {
       message(paste0("path exists: ", path))
       return(ft_object(path, x, type))
     }
-    tmp <- tryCatch(rplos::plos_fulltext(x, disk = path, ...), 
+    tmp <- tryCatch(.plos_fulltext(x, disk = path, ...), 
       error = function(e) e, 
       warning = function(w) w)
     if (inherits(tmp, c("error", "warning"))) {

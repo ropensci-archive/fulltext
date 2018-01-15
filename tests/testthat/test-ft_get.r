@@ -19,6 +19,8 @@ test_that("ft_get basic functionality works ...", {
 test_that("ft_get works for all data providers", {
   skip_on_cran()
 
+  ## PLOS
+  aa <- sm(ft_get(c('10.1371/journal.pone.0086169', '10.1371/journal.pbio.0000062')))
   ## PeerJ
   bb <- sm(ft_get('10.7717/peerj.228'))
   ## eLife
@@ -45,6 +47,7 @@ test_that("ft_get works for all data providers", {
   ## CogentOA Publisher - via Entrez
   oo <- sm(ft_get('10.1080/23311916.2014.938430'))
 
+  expect_is(aa, "ft_data")
   expect_is(bb, "ft_data")
   expect_is(cc, "ft_data")
   #expect_is(dd, "ft_data")
