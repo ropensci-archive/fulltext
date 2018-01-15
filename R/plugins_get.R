@@ -83,7 +83,7 @@ http_mssg <- function(x) {
 }
 # check_cached <- function(x, type, path) {
 #   if (file.exists(path) && !cache_options_get()$overwrite) {
-#     cat(paste0("path exists: ", path), sep="\n")
+#     message(paste0("path exists: ", path))
 #     return(ft_object(path, x, type))
 #   }   
 # }
@@ -161,7 +161,7 @@ plos_wrapper <- function(dois, type, ...) {
   stats::setNames(lapply(dois, function(x) {
     path <- make_key(x, type)
     if (file.exists(path) && !cache_options_get()$overwrite) {
-      cat(paste0("path exists: ", path), sep="\n")
+      message(paste0("path exists: ", path))
       return(ft_object(path, x, type))
     }
     tmp <- tryCatch(rplos::plos_fulltext(x, disk = path, ...), 
@@ -197,7 +197,7 @@ entrez_ft <- function(ids, type = "xml", ...){
   stats::setNames(lapply(res$ids, function(z) {
     path <- make_key(z, 'xml')
     if (file.exists(path) && !cache_options_get()$overwrite) {
-      cat(paste0("path exists: ", path), sep="\n")
+      message(paste0("path exists: ", path))
       return(ft_object(path, z, 'xml'))
     }
     # have to keep this httr usage
@@ -215,7 +215,7 @@ bmc_ft <- function(dois, type = "xml", ...) {
   stats::setNames(lapply(res$ids, function(z) {
     path <- make_key(z, 'xml')
     if (file.exists(path) && !cache_options_get()$overwrite) {
-      cat(paste0("path exists: ", path), sep="\n")
+      message(paste0("path exists: ", path))
       return(ft_object(path, z, 'xml'))
     }
     # have to keep this httr usage
@@ -230,7 +230,7 @@ elife_ft <- function(dois, type, ...) {
   stats::setNames(lapply(dois, function(x) {
     path <- make_key(x, type)
     if (file.exists(path) && !cache_options_get()$overwrite) {
-      cat(paste0("path exists: ", path), sep="\n")
+      message(paste0("path exists: ", path))
       return(ft_object(path, x, type))
     }
     lk <- tcat(crminer::crm_links(x))
@@ -245,7 +245,7 @@ peerj_ft <- function(dois, type, ...) {
   stats::setNames(lapply(dois, function(x) {
     path <- make_key(x, type)
     if (file.exists(path) && !cache_options_get()$overwrite) {
-      cat(paste0("path exists: ", path), sep="\n")
+      message(paste0("path exists: ", path))
       return(ft_object(path, x, type))
     }
     url <- sprintf("https://peerj.com/articles/%s.%s", 
@@ -259,7 +259,7 @@ frontiersin_ft <- function(dois, type, ...) {
   stats::setNames(lapply(dois, function(x) {
     path <- make_key(x, type)
     if (file.exists(path) && !cache_options_get()$overwrite) {
-      cat(paste0("path exists: ", path), sep="\n")
+      message(paste0("path exists: ", path))
       return(ft_object(path, x, type))
     }
     url <- sprintf("https://www.frontiersin.org/articles/%s/%s", x, 
@@ -273,7 +273,7 @@ pensoft_ft <- function(dois, type, ...) {
   stats::setNames(lapply(dois, function(x) {
     path <- make_key(x, type)
     if (file.exists(path) && !cache_options_get()$overwrite) {
-      cat(paste0("path exists: ", path), sep="\n")
+      message(paste0("path exists: ", path))
       return(ft_object(path, x, type))
     }
     res <- tcat(crul::HttpClient$new(url = "https://ftdoi.org")$get(sprintf("api/doi/%s/", x)))
@@ -292,7 +292,7 @@ copernicus_ft <- function(dois, type, ...) {
   stats::setNames(lapply(dois, function(x) {
     path <- make_key(x, type)
     if (file.exists(path) && !cache_options_get()$overwrite) {
-      cat(paste0("path exists: ", path), sep="\n")
+      message(paste0("path exists: ", path))
       return(ft_object(path, x, type))
     }
     res <- tcat(crul::HttpClient$new(url = paste0("https://doi.org/", x))$head())
@@ -317,7 +317,7 @@ arxiv_ft <- function(dois, type = "pdf", ...) {
   stats::setNames(lapply(dois, function(x) {
     path <- make_key(x, 'pdf')
     if (file.exists(path) && !cache_options_get()$overwrite) {
-      cat(paste0("path exists: ", path), sep="\n")
+      message(paste0("path exists: ", path))
       return(ft_object(path, x, 'pdf'))
     }
     url <- sprintf("http://arxiv.org/pdf/%s.pdf", x)
@@ -330,7 +330,7 @@ biorxiv_ft <- function(dois, type = "pdf", ...) {
   stats::setNames(lapply(dois, function(x) {
     path <- make_key(x, 'pdf')
     if (file.exists(path) && !cache_options_get()$overwrite) {
-      cat(paste0("path exists: ", path), sep="\n")
+      message(paste0("path exists: ", path))
       return(ft_object(path, x, 'pdf'))
     }
 
@@ -350,7 +350,7 @@ elsevier_ft <- function(dois, type, ...) {
   stats::setNames(lapply(dois, function(x) {
     path <- make_key(x, type)
     if (file.exists(path) && !cache_options_get()$overwrite) {
-      cat(paste0("path exists: ", path), sep="\n")
+      message(paste0("path exists: ", path))
       return(ft_object(path, x, type))
     }
     res <- tcat(rcrossref::cr_works(dois = x))
@@ -375,7 +375,7 @@ wiley_ft <- function(dois, type = "pdf", ...) {
   stats::setNames(lapply(dois, function(x) {
     path <- make_key(x, 'pdf')
     if (file.exists(path) && !cache_options_get()$overwrite) {
-      cat(paste0("path exists: ", path), sep="\n")
+      message(paste0("path exists: ", path))
       return(ft_object(path, x, 'pdf'))
     }
     res <- tcat(rcrossref::cr_works(dois = x))
@@ -400,7 +400,7 @@ scientificsocieties_ft <- function(dois, type = "pdf", ...) {
   stats::setNames(lapply(dois, function(x) {
     path <- make_key(x, 'pdf')
     if (file.exists(path) && !cache_options_get()$overwrite) {
-      cat(paste0("path exists: ", path), sep="\n")
+      message(paste0("path exists: ", path))
       return(ft_object(path, x, 'pdf'))
     }
 
@@ -415,7 +415,7 @@ informa_ft <- function(dois, type = "pdf", ...) {
   stats::setNames(lapply(dois, function(x) {
     path <- make_key(x, 'pdf')
     if (file.exists(path) && !cache_options_get()$overwrite) {
-      cat(paste0("path exists: ", path), sep="\n")
+      message(paste0("path exists: ", path))
       return(ft_object(path, x, 'pdf'))
     }
 
@@ -430,7 +430,7 @@ roysocchem_ft <- function(dois, type = "pdf", ...) {
   stats::setNames(lapply(dois, function(x) {
     path <- make_key(x, 'pdf')
     if (file.exists(path) && !cache_options_get()$overwrite) {
-      cat(paste0("path exists: ", path), sep="\n")
+      message(paste0("path exists: ", path))
       return(ft_object(path, x, 'pdf'))
     }
 
@@ -445,7 +445,7 @@ ieee_ft <- function(dois, type = "pdf", ...) {
   stats::setNames(lapply(dois, function(x) {
     path <- make_key(x, 'pdf')
     if (file.exists(path) && !cache_options_get()$overwrite) {
-      cat(paste0("path exists: ", path), sep="\n")
+      message(paste0("path exists: ", path))
       return(ft_object(path, x, 'pdf'))
     }
 
@@ -461,7 +461,7 @@ aaas_ft <- function(dois, type = "pdf", ...) {
   stats::setNames(lapply(dois, function(x) {
     path <- make_key(x, 'pdf')
     if (file.exists(path) && !cache_options_get()$overwrite) {
-      cat(paste0("path exists: ", path), sep="\n")
+      message(paste0("path exists: ", path))
       return(ft_object(path, x, 'pdf'))
     }
 
@@ -502,7 +502,7 @@ crossref_ft <- function(dois, type, ...) {
     # check if we already have it
     path <- make_key(x, type)
     if (file.exists(path) && !cache_options_get()$overwrite) {
-      cat(paste0("path exists: ", path), sep="\n")
+      message(paste0("path exists: ", path))
       return(ft_object(path, x, type))
     }
 
@@ -528,7 +528,7 @@ got_link_ft <- function(dois, type, url_pattern, ...) {
     url <- sprintf(pat, x)
     path <- make_key(x, type)
     if (file.exists(path) && !cache_options_get()$overwrite) {
-      cat(paste0("path exists: ", path), sep="\n")
+      message(paste0("path exists: ", path))
       return(ft_object(path, x, type))
     }
     get_ft(x, type, url, path, ...)

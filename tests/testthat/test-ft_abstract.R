@@ -1,7 +1,5 @@
 context("ft_abstract")
 
-ex <- function(str, pattern) regmatches(str, regexpr(pattern, str))
-
 test_that("ft_abstract basic functionality works - PLOS", {
   skip_on_cran()
   

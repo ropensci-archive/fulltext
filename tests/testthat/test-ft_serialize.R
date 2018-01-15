@@ -3,61 +3,42 @@ context("ft_serialize")
 test_that("ft_serialize returns...", {
   skip_on_cran()
 
-  dois <- c('10.1371/journal.pone.0087376','10.1371%2Fjournal.pone.0086169',
-  '10.1371/journal.pone.0102976','10.1371/journal.pone.0105225',
-  '10.1371/journal.pone.0102722','10.1371/journal.pone.0033693')
-  res <- ft_get(dois, from='plos')
+  dois <- c('10.7717/peerj.228', '10.7717/peerj.224', '10.7717/peerj.221')
+  res <- ft_get(dois)
 
   # From XML to JSON
-  tojson <- ft_serialize(res, to='json')
-  tojsonparsed <- jsonlite::fromJSON(tojson$plos$data$data$`10.1371/journal.pone.0087376`)
+  tojson <- ft_serialize(ft_collect(res), to='json')
+  tojsonparsed <- jsonlite::fromJSON(tojson$peerj$data$data$`10.7717/peerj.228`)
 
   # Parse raw xml to XMLInternalDocument class
-  toxml <- ft_serialize(res, to='xml')
-  toxmlparsed <- toxml$plos$data$data[[1]]
+  toxml <- ft_serialize(ft_collect(res), to='xml')
+  toxmlparsed <- toxml$peerj$data$data[[1]]
 
   # To a list
-  tolist <- ft_serialize(res, to='list')
-  tolistparsed <- tolist$plos$data$data[[1]]
-
-  # To various data stores on disk
-  ## To an .Rds file
-  tofile <- ft_serialize(res, to = 'file')
-  tofileloc <- attr(tofile, "location")
-
-  ## To local files using R.cache package
-  torcache <- ft_serialize(res, to = 'rcache')
-  torcacheloc <- attr(torcache, "location")
+  tolist <- ft_serialize(ft_collect(res), to='list')
+  tolistparsed <- tolist$peerj$data$data[[1]]
 
   # correct classes
   expect_is(tojson, "ft_parsed")
   expect_is(toxml, "ft_parsed")
   expect_is(tolist, "ft_parsed")
-  expect_is(tofile, "ft_parsed")
-  expect_is(torcache, "ft_parsed")
 
-  expect_is(tojson$plos, "list")
-  expect_is(tojson$plos$found, "integer")
-  expect_is(tojson$plos$dois, "character")
-  expect_is(tojson$plos$opts, "list")
-  expect_is(tojson$plos$data, "list")
-  expect_is(tojson$plos$data$data, "plosft")
-  expect_is(tojson$plos$data$data[[1]], "json")
+  expect_is(tojson$peerj, "list")
+  expect_is(tojson$peerj$found, "integer")
+  expect_is(tojson$peerj$dois, "character")
+  expect_is(tojson$peerj$opts, "list")
+  expect_is(tojson$peerj$data, "list")
+  expect_is(tojson$peerj$data$data[[1]], "json")
 
   expect_is(tojsonparsed, "list")
   expect_is(toxmlparsed, "xml_document")
   expect_is(tolistparsed, "list")
-  expect_is(tofileloc, "character")
-  expect_is(torcacheloc, "character")
-
-  expect_match(tofileloc, "fulltext_cache")
-  expect_match(torcacheloc, "Rcache")
 })
 
 test_that("ft_serialize fails well", {
   skip_on_cran()
 
-  res <- ft_get('10.1371/journal.pone.0087376', from='plos')
+  res <- sm(ft_get('10.7717/peerj.228'))
 
   # bad path given
   expect_error(ft_serialize(), "\"x\" is missing")

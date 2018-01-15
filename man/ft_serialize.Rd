@@ -13,7 +13,7 @@ ft_get_keys(x)
 \item{x}{Input object, output from a call to \code{ft_get}. Required.}
 
 \item{to}{(character) Format to serialize to. One of list,
-xml, json, ... Required. Output to xml returns object of
+xml, or json. Required. Output to xml returns object of
 class XMLInternalDocument.}
 
 \item{from}{(character) Format \code{x} is currently in. Function attempts
@@ -29,45 +29,24 @@ An object of class \code{ft_parsed}
 \description{
 \code{ft_serialize} helps you convert to various data formats. If
 your data is in unparsed XML (i.e., character class), you can convert to
-parsed XML. If in XML, you can convert to (ugly-ish) JSON, or a list. In
-addition, this function allows you to save to various places, including
-Rds files, cached via \code{R.cache}, or to Redis.
+parsed XML. If in XML, you can convert to (ugly-ish) JSON, or a list.
 }
 \examples{
 \dontrun{
-dois <- c('10.1371/journal.pone.0087376','10.1371\%2Fjournal.pone.0086169',
-'10.1371/journal.pone.0102976','10.1371/journal.pone.0105225',
-'10.1371/journal.pone.0102722','10.1371/journal.pone.0033693')
-res <- ft_get(dois, from='plos')
+res <- ft_get('10.7717/peerj.228')
 
 # if articles in xml format, parse the XML
-(out <- ft_serialize(res, to='xml'))
-out$plos$data$data[[1]] # the xml
+(out <- ft_serialize(ft_collect(res), to='xml'))
+out$peerj$data$data[[1]] # the xml
 
 # From XML to JSON
-(out <- ft_serialize(res, to='json'))
-out$plos$data$data$`10.1371/journal.pone.0087376` # the json
-jsonlite::fromJSON(out$plos$data$data$`10.1371/journal.pone.0087376`)
+(out <- ft_serialize(ft_collect(res), to='json'))
+out$peerj$data$data$`10.7717/peerj.228` # the json
+jsonlite::fromJSON(out$peerj$data$data$`10.7717/peerj.228`)
 
 # To a list
-out <- ft_serialize(res, to='list')
-out$plos$data$data[[4]]
-out$plos$data$data[[4]][[2]]$`article-meta`
-
-# To various data stores on disk
-## To an .Rds file
-ft_serialize(res, to='file')
-
-## To local files using R.cache package
-res_rcache <- ft_serialize(res, to='rcache')
-
-## To Redis
-res_redis <- ft_serialize(res, to='redis')
-
-# Chain together functions
-doi <- '10.1371/journal.pone.0086169'
-ft_get(doi, from='plos') \%>\%
-   ft_serialize(to='xml') \%>\%
-   ft_serialize(to='redis')
+out <- ft_serialize(ft_collect(res), to='list')
+out$peerj$data$data
+out$peerj$data$data[[1]]$body$sec$title
 }
 }

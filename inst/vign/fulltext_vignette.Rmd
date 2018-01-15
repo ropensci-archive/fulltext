@@ -103,7 +103,7 @@ res2$arxiv$data$data[[1]]$data
 
 We have a few functions to help you pull out certain parts of an article. For example, perhaps you want to get just the authors from your articles, or just the abstracts. 
 
-Here, we'll search for some PLOS articles, then get their full text, then extract various parts of each article with `chunks()`.
+Here, we'll search for some PLOS articles, then get their full text, then extract various parts of each article with `ft_chunks()`.
 
 ```{r}
 res <- ft_search(query = "ecology", from = "plos")
@@ -113,18 +113,18 @@ res <- ft_search(query = "ecology", from = "plos")
 Extract DOIs
 
 ```{r}
-x %>% chunks("doi")
+x %>% ft_chunks("doi")
 ```
 
 Extract DOIs and categories
 
 ```{r}
-x %>% chunks(c("doi","categories"))
+x %>% ft_chunks(c("doi","categories"))
 ```
 
-`tabularize` attempts to help you put the data that comes out of `chunks()` in to a `data.frame`, that we all know and love. 
+`ft_tabularize` attempts to help you put the data that comes out of `ft_chunks()` in to a `data.frame`, that we all know and love. 
 
 ```{r}
-x %>% chunks(c("doi", "history")) %>% tabularize()
+x %>% ft_chunks(c("doi", "history")) %>% ft_tabularize()
 ```
 

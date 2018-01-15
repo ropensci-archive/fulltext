@@ -3,52 +3,47 @@ context("ft_get")
 test_that("ft_get basic functionality works ...", {
   skip_on_cran()
 
-  aa <- ft_get('10.1371/journal.pone.0086169', from = 'plos')
+  aa <- sm(ft_get('10.7717/peerj.228'))
 
   # correct classes
   expect_is(aa, "ft_data")
-  expect_is(aa$plos, "list")
-  expect_is(aa$plos$found, "integer")
-  expect_is(aa$plos$dois, "character")
-  expect_is(aa$plos$data, "list")
-  expect_is(aa$plos$data$data, "plosft")
-  expect_null(aa$plos$data$backend)
-  expect_is(aa$plos$data$data[[1]], "character")
-
-  # correct dimensions
-  expect_equal(aa$plos$data$path, "session")
-  expect_equal(length(aa$plos$data$data), 1)
-  expect_equal(length(aa$plos$data$data[[1]]), 1)
+  expect_is(aa$peerj, "list")
+  expect_is(aa$peerj$found, "integer")
+  expect_is(aa$peerj$dois, "character")
+  expect_is(aa$peerj$data, "list")
+  expect_null(aa$peerj$data$data)
+  expect_equal(aa$peerj$data$backend, "ext")
+  expect_is(aa$peerj$data$path, "list")
 })
 
 test_that("ft_get works for all data providers", {
   skip_on_cran()
 
   ## PeerJ
-  bb <- ft_get('10.7717/peerj.228')
+  bb <- sm(ft_get('10.7717/peerj.228'))
   ## eLife
-  cc <- ft_get('10.7554/eLife.03032', from = "elife")
+  cc <- sm(ft_get('10.7554/eLife.03032', from = "elife"))
   ## BMC
-  #dd <- ft_get('10.1186/2049-2618-2-7', from = "bmc")
+  #dd <- sm(ft_get('10.1186/2049-2618-2-7', from = "bmc"))
   ## FrontiersIn
-  ee <- ft_get('10.3389/fphar.2014.00109')
+  ee <- sm(ft_get('10.3389/fphar.2014.00109'))
   ## Hindawi - via Entrez
-  ff <- ft_get('10.1155/2014/292109')
+  ff <- sm(ft_get('10.1155/2014/292109'))
   ## F1000Research - via Entrez
-  gg <- ft_get('10.12688/f1000research.6522.1')
+  gg <- sm(ft_get('10.12688/f1000research.6522.1'))
   ## Pensoft
   ## FIXME, used to work, no mas
-  #hh <- ft_get('10.3897/zookeys.499.8360', from = "pensoft")
+  #hh <- sm(ft_get('10.3897/zookeys.499.8360', from = "pensoft"))
   ## Copernicus - via Entrez
-  ## jj <- ft_get('10.5194/angeo-31-2157-2013')
+  ## jj <- sm(ft_get('10.5194/angeo-31-2157-2013'))
   ## arXiv
-  kk <- ft_get('cond-mat/9309029', from = "arxiv")
+  kk <- sm(ft_get('cond-mat/9309029', from = "arxiv"))
   ## bioRxiv
-  mm <- ft_get('10.1101/012476', from = "biorxiv")
+  mm <- sm(ft_get('10.1101/012476', from = "biorxiv"))
   ## Karger Publisher - via Entrez
-  nn <- ft_get('10.1159/000369331')
+  nn <- sm(ft_get('10.1159/000369331'))
   ## CogentOA Publisher - via Entrez
-  oo <- ft_get('10.1080/23311916.2014.938430')
+  oo <- sm(ft_get('10.1080/23311916.2014.938430'))
 
   expect_is(bb, "ft_data")
   expect_is(cc, "ft_data")

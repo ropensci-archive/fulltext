@@ -130,9 +130,9 @@ cache_options_set(cache = TRUE)
 cached on disk, not in R'm memory.
 
 Nothing changes from the normal workflow now that data is cached on disk - simply behave 
-normally as above. For example, `collect()` reads text from disk into memory (although 
+normally as above. For example, `ft_collect()` reads text from disk into memory (although 
 the printed object doesn't indicate it)
 
 ```{r}
-res %>% collect
+res %>% ft_collect
 ```
