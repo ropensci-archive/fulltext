@@ -40,23 +40,25 @@ test_that("ft_abstract basic functionality works - PLOS", {
 #   expect_is(aa$plos[[1]]$abstract, 'character')
 # })
 
-test_that("ft_abstract basic functionality works - Microsoft", {
-  skip_on_cran()
-  
-  key <- Sys.getenv("MICROSOFT_ACADEMIC_KEY")
-  res <- ft_search("Y=[2010, 2012)", from = "microsoft", 
-     maopts = list(key = key))
-  ids <- res$ma$data$Id
-  Sys.sleep(1)
-  aa <- ft_abstract(x = ids[1:2], from = "microsoft",
-    maopts = list(key = Sys.getenv('MICROSOFT_ACADEMIC_KEY')))
-  
-  expect_is(aa, "ft_abstract")
-  expect_named(aa, c('plos', 'scopus', 'ma', 'crossref'))
-  expect_is(aa$ma, "list")
-  expect_is(aa$ma[[1]], "list")
-  expect_named(aa$ma[[1]], c('id', 'abstract'))
-})
+
+## Undo comments when microdemic new ver up on cran
+# test_that("ft_abstract basic functionality works - Microsoft", {
+#   skip_on_cran()
+#   
+#   key <- Sys.getenv("MICROSOFT_ACADEMIC_KEY")
+#   res <- ft_search("Y=[2010, 2012)", from = "microsoft", 
+#      maopts = list(key = key))
+#   ids <- res$ma$data$Id
+#   Sys.sleep(1)
+#   aa <- ft_abstract(x = ids[1:2], from = "microsoft",
+#     maopts = list(key = Sys.getenv('MICROSOFT_ACADEMIC_KEY')))
+#   
+#   expect_is(aa, "ft_abstract")
+#   expect_named(aa, c('plos', 'scopus', 'ma', 'crossref'))
+#   expect_is(aa$ma, "list")
+#   expect_is(aa$ma[[1]], "list")
+#   expect_named(aa$ma[[1]], c('id', 'abstract'))
+# })
 
 test_that("ft_abstract basic functionality works - Crossref", {
   skip_on_cran()
