@@ -91,7 +91,7 @@ ft_search(query = 'ecology', from = 'crossref')
 #> Query:
 #>   [ecology] 
 #> Found:
-#>   [PLoS: 0; BMC: 0; Crossref: 144060; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
+#>   [PLoS: 0; BMC: 0; Crossref: 144153; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
 #> Returned:
 #>   [PLoS: 0; BMC: 0; Crossref: 10; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0]
 ```
@@ -105,7 +105,7 @@ ft_search(query = 'ecology', from = 'crossref')
 res1 <- ft_search(query = 'ecology', from = 'entrez', limit = 5)
 ft_links(res1)
 #> <fulltext links>
-#> [Found] 4 
+#> [Found] 5 
 #> [IDs] ID_29326987 ID_29319501 ID_29313491 ID_27758730 ID_27436048 ...
 ```
 
@@ -115,7 +115,7 @@ Or pass in DOIs directly
 ```r
 ft_links(res1$entrez$data$doi, from = "entrez")
 #> <fulltext links>
-#> [Found] 4 
+#> [Found] 5 
 #> [IDs] ID_29326987 ID_29319501 ID_29313491 ID_27758730 ID_27436048 ...
 ```
 
@@ -126,7 +126,6 @@ ft_links(res1$entrez$data$doi, from = "entrez")
 
 ```r
 ft_get('10.7717/peerj.228')
-#> path exists: /Users/sckott/Library/Caches/R/fulltext/10_7717_peerj_228.xml
 #> <fulltext text>
 #> [Docs] 1 
 #> [Source] ext - /Users/sckott/Library/Caches/R/fulltext 
@@ -138,8 +137,6 @@ ft_get('10.7717/peerj.228')
 
 ```r
 x <- ft_get(c('10.7554/eLife.03032', '10.7554/eLife.32763'), from = "elife")
-#> path exists: /Users/sckott/Library/Caches/R/fulltext/10_7554_eLife_03032.xml
-#> path exists: /Users/sckott/Library/Caches/R/fulltext/10_7554_eLife_32763.xml
 x %>% ft_collect() %>% ft_chunks("publisher") %>% ft_tabularize()
 #> $elife
 #>                          publisher
@@ -225,8 +222,6 @@ ft_extract(pdf)
 ```r
 cache_options_set(path = (td <- 'foobar'))
 res <- ft_get(c('10.7554/eLife.03032', '10.7554/eLife.32763'), type = "pdf")
-#> path exists: /Users/sckott/Library/Caches/R/foobar/10_7554_eLife_03032.pdf
-#> path exists: /Users/sckott/Library/Caches/R/foobar/10_7554_eLife_32763.pdf
 library(readtext)
 x <- readtext::readtext(file.path(cache_options_get()$path, "*.pdf"))
 ```
