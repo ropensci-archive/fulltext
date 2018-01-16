@@ -29,9 +29,7 @@ Simple call, pass in a DOI and say where you want to get data from (by default, 
 res <- ft_get('10.1371/journal.pone.0086169', from = 'plos')
 ```
 
-The article text and metadata is stored in the output object (though soon they'll be the 
-option to cache data on disk instead of in memory, but the interface will work the same 
-for examining the text and metadata)
+The article text and metadata is stored in the output object.
 
 The `res` object is a list, with slots for each of the data sources, b/c you can request 
 data from more than 1 data source.
@@ -84,7 +82,6 @@ One article
 
 ```{r}
 ft_get('10.7554/eLife.04300', from = 'elife')
-ft_get(c('10.7554/eLife.04300','10.7554/eLife.03032'), from = 'elife')
 ```
 
 Many articles
@@ -115,24 +112,31 @@ Get articles
 ft_get(res$entrez$data$doi[1:3], from = 'entrez')
 ```
 
-## Caching
+## Collect full text from file on disk
 
-To cache results or not. If `cache=TRUE`, raw XML, or other format that article is 
-in is written to disk, then pulled from disk when further manipulations are done on 
-the data.
+When using `ft_get()` you write the files to disk, and you have to pull text out of them as a 
+separate step.
 
 ```{r}
-cache_options_set(cache = TRUE)
 (res <- ft_get('10.1371/journal.pone.0086169', from = 'plos'))
 ```
 
-> Note how the [source] field has "rds - <path to file>" - indicating that the text is 
-cached on disk, not in R'm memory.
-
-Nothing changes from the normal workflow now that data is cached on disk - simply behave 
-normally as above. For example, `ft_collect()` reads text from disk into memory (although 
-the printed object doesn't indicate it)
+One way to do that is with `ft_collect()`. Before running `ft_collect()` the `data` slot is `NULL`.
 
 ```{r}
-res %>% ft_collect
+res$plos$data$data
 ```
+
+Run `ft_collect()`
+
+```{r}
+res <- res %>% ft_collect
+```
+
+After running `ft_collect()` the `data` slot has the text. If there's more than one article they are named
+by the identifier
+
+```{r}
+res$plos$data$data
+```
+

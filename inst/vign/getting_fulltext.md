@@ -24,9 +24,7 @@ Simple call, pass in a DOI and say where you want to get data from (by default, 
 res <- ft_get('10.1371/journal.pone.0086169', from = 'plos')
 ```
 
-The article text and metadata is stored in the output object (though soon they'll be the 
-option to cache data on disk instead of in memory, but the interface will work the same 
-for examining the text and metadata)
+The article text and metadata is stored in the output object.
 
 The `res` object is a list, with slots for each of the data sources, b/c you can request 
 data from more than 1 data source.
@@ -34,7 +32,8 @@ data from more than 1 data source.
 
 ```r
 names(res)
-#> [1] "plos"    "entrez"  "elife"   "pensoft" "arxiv"   "biorxiv"
+#> [1] "plos"     "entrez"   "elife"    "pensoft"  "arxiv"    "biorxiv" 
+#> [7] "elsevier" "wiley"
 ```
 
 Let's dig into the `plos` source object, which is another list, including metadata the 
@@ -51,21 +50,37 @@ res$plos
 #> 
 #> $data
 #> $data$backend
-#> NULL
+#> [1] "ext"
+#> 
+#> $data$cache_path
+#> [1] "/Users/sckott/Library/Caches/R/fulltext"
 #> 
 #> $data$path
-#> [1] "session"
+#> $data$path$`10.1371/journal.pone.0086169`
+#> $data$path$`10.1371/journal.pone.0086169`$path
+#> [1] "/Users/sckott/Library/Caches/R/fulltext/10_1371_journal_pone_0086169.xml"
+#> 
+#> $data$path$`10.1371/journal.pone.0086169`$id
+#> [1] "10.1371/journal.pone.0086169"
+#> 
+#> $data$path$`10.1371/journal.pone.0086169`$type
+#> [1] "xml"
+#> 
+#> $data$path$`10.1371/journal.pone.0086169`$error
+#> NULL
+#> 
+#> 
 #> 
 #> $data$data
-#> 1 full-text articles retrieved 
-#> Min. Length: 110717 - Max. Length: 110717 
-#> DOIs: 10.1371/journal.pone.0086169 ... 
+#> NULL
 #> 
-#> NOTE: extract xml strings like output['<doi>']
 #> 
 #> $opts
 #> $opts$doi
 #> [1] "10.1371/journal.pone.0086169"
+#> 
+#> $opts$type
+#> [1] "xml"
 ```
 
 Indexing to the `data` slot takes us to another list with metadata and the article
@@ -74,17 +89,29 @@ Indexing to the `data` slot takes us to another list with metadata and the artic
 ```r
 res$plos$data
 #> $backend
-#> NULL
+#> [1] "ext"
+#> 
+#> $cache_path
+#> [1] "/Users/sckott/Library/Caches/R/fulltext"
 #> 
 #> $path
-#> [1] "session"
+#> $path$`10.1371/journal.pone.0086169`
+#> $path$`10.1371/journal.pone.0086169`$path
+#> [1] "/Users/sckott/Library/Caches/R/fulltext/10_1371_journal_pone_0086169.xml"
+#> 
+#> $path$`10.1371/journal.pone.0086169`$id
+#> [1] "10.1371/journal.pone.0086169"
+#> 
+#> $path$`10.1371/journal.pone.0086169`$type
+#> [1] "xml"
+#> 
+#> $path$`10.1371/journal.pone.0086169`$error
+#> NULL
+#> 
+#> 
 #> 
 #> $data
-#> 1 full-text articles retrieved 
-#> Min. Length: 110717 - Max. Length: 110717 
-#> DOIs: 10.1371/journal.pone.0086169 ... 
-#> 
-#> NOTE: extract xml strings like output['<doi>']
+#> NULL
 ```
 
 Going down one more index gets us the data object, using the DOI searched to get the text. 
@@ -109,16 +136,16 @@ You can get a bunch of DOIs first, e.g., from PLOS using the `rplos` package
 library("rplos")
 (dois <- searchplos(q = "*:*", fl = 'id',
    fq = list('doc_type:full', "article_type:\"research article\""), limit = 5)$data$id)
-#> [1] "10.1371/journal.pone.0063114" "10.1371/journal.pone.0039479"
-#> [3] "10.1371/journal.pone.0003940" "10.1371/journal.pcbi.0030082"
-#> [5] "10.1371/journal.pone.0051856"
+#> [1] "10.1371/journal.pone.0044136" "10.1371/journal.pone.0155491"
+#> [3] "10.1371/journal.pone.0058100" "10.1371/journal.pone.0168627"
+#> [5] "10.1371/journal.pone.0184491"
 ft_get(dois, from = 'plos')
 #> <fulltext text>
 #> [Docs] 5 
-#> [Source] R session  
-#> [IDs] 10.1371/journal.pone.0063114 10.1371/journal.pone.0039479
-#>      10.1371/journal.pone.0003940 10.1371/journal.pcbi.0030082
-#>      10.1371/journal.pone.0051856 ...
+#> [Source] ext - /Users/sckott/Library/Caches/R/fulltext 
+#> [IDs] 10.1371/journal.pone.0044136 10.1371/journal.pone.0155491
+#>      10.1371/journal.pone.0058100 10.1371/journal.pone.0168627
+#>      10.1371/journal.pone.0184491 ...
 ```
 
 ## Different data sources
@@ -132,13 +159,8 @@ One article
 ft_get('10.7554/eLife.04300', from = 'elife')
 #> <fulltext text>
 #> [Docs] 1 
-#> [Source] R session  
+#> [Source] ext - /Users/sckott/Library/Caches/R/fulltext 
 #> [IDs] 10.7554/eLife.04300 ...
-ft_get(c('10.7554/eLife.04300','10.7554/eLife.03032'), from = 'elife')
-#> <fulltext text>
-#> [Docs] 2 
-#> [Source] R session  
-#> [IDs] 10.7554/eLife.04300 10.7554/eLife.03032 ...
 ```
 
 Many articles
@@ -148,7 +170,7 @@ Many articles
 ft_get(c('10.7554/eLife.04300','10.7554/eLife.03032'), from = 'elife')
 #> <fulltext text>
 #> [Docs] 2 
-#> [Source] R session  
+#> [Source] ext - /Users/sckott/Library/Caches/R/fulltext 
 #> [IDs] 10.7554/eLife.04300 10.7554/eLife.03032 ...
 ```
 
@@ -160,7 +182,7 @@ doi <- '10.3389/fphar.2014.00109'
 ft_get(doi, from = "entrez")
 #> <fulltext text>
 #> [Docs] 1 
-#> [Source] R session  
+#> [Source] ext - /Users/sckott/Library/Caches/R/fulltext 
 #> [IDs] 10.3389/fphar.2014.00109 ...
 ```
 
@@ -174,15 +196,15 @@ For example, search entrez, get some DOIs, then fetch some articles
 #> Query:
 #>   [ecology] 
 #> Found:
-#>   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 109655; arxiv: 0; biorxiv: 0; Europe PMC: 0] 
+#>   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 140275; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
 #> Returned:
-#>   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 10; arxiv: 0; biorxiv: 0; Europe PMC: 0]
+#>   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 10; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0]
 res$entrez$data$doi
-#>  [1] "10.1109/ICASSP.2016.7472887"   NA                             
-#>  [3] "10.1186/s12936-016-1386-3"     "10.1186/s13071-016-1688-x"    
-#>  [5] "10.7554/eLife.16415"           "10.1155/2016/6018686"         
-#>  [7] "10.1155/2016/3654093"          "10.1080/20477724.2016.1180775"
-#>  [9] "10.3389/fimmu.2016.00253"      "10.3389/fmicb.2016.01026"
+#>  [1] "10.1038/s41467-017-02421-3" "10.1038/s41467-017-02658-y"
+#>  [3] "10.1038/s41467-017-02573-2" "10.1038/s41467-017-02535-8"
+#>  [5] "10.7554/eLife.32486"        "10.7717/peerj.4241"        
+#>  [7] "10.7717/peerj.4219"         "10.1038/s41467-017-02271-z"
+#>  [9] "10.1038/s41467-017-02680-0" "10.1038/s41467-017-02504-1"
 ```
 
 Get articles
@@ -190,39 +212,53 @@ Get articles
 
 ```r
 ft_get(res$entrez$data$doi[1:3], from = 'entrez')
-#> Error: These are probably not DOIs:
-#> 
-#> NA
+#> <fulltext text>
+#> [Docs] 3 
+#> [Source] ext - /Users/sckott/Library/Caches/R/fulltext 
+#> [IDs] 10.1038/s41467-017-02421-3 10.1038/s41467-017-02658-y
+#>      10.1038/s41467-017-02573-2 ...
 ```
 
-## Caching
+## Collect full text from file on disk
 
-To cache results or not. If `cache=TRUE`, raw XML, or other format that article is 
-in is written to disk, then pulled from disk when further manipulations are done on 
-the data.
+When using `ft_get()` you write the files to disk, and you have to pull text out of them as a 
+separate step.
 
 
 ```r
-cache_options_set(cache = TRUE)
 (res <- ft_get('10.1371/journal.pone.0086169', from = 'plos'))
 #> <fulltext text>
 #> [Docs] 1 
-#> [Source] rds - /Users/sacmac/.fulltext 
+#> [Source] ext - /Users/sckott/Library/Caches/R/fulltext 
 #> [IDs] 10.1371/journal.pone.0086169 ...
 ```
 
-> Note how the [source] field has "rds - <path to file>" - indicating that the text is 
-cached on disk, not in R'm memory.
-
-Nothing changes from the normal workflow now that data is cached on disk - simply behave 
-normally as above. For example, `collect()` reads text from disk into memory (although 
-the printed object doesn't indicate it)
+One way to do that is with `ft_collect()`. Before running `ft_collect()` the `data` slot is `NULL`.
 
 
 ```r
-res %>% collect
-#> <fulltext text>
-#> [Docs] 1 
-#> [Source] rds - /Users/sacmac/.fulltext 
-#> [IDs] 10.1371/journal.pone.0086169 ...
+res$plos$data$data
+#> NULL
 ```
+
+Run `ft_collect()`
+
+
+```r
+res <- res %>% ft_collect
+```
+
+After running `ft_collect()` the `data` slot has the text. If there's more than one article they are named
+by the identifier
+
+
+```r
+res$plos$data$data
+#> $`10.1371/journal.pone.0086169`
+#> {xml_document}
+#> <article article-type="research-article" dtd-version="3.0" lang="en" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:xlink="http://www.w3.org/1999/xlink">
+#> [1] <front>\n  <journal-meta>\n    <journal-id journal-id-type="nlm-ta"> ...
+#> [2] <body>\n  <sec id="s1">\n    <title>Introduction</title>\n    <p>Sin ...
+#> [3] <back>\n  <ack>\n    <p>We thank Joan Silk, Julienne Rutherford, and ...
+```
+

@@ -9,6 +9,7 @@ _/ ____\_ __|  | |  |_/  |_  ____ ___  ____/  |_
                                 \/      \/
 ```
 
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 [![Build Status](https://api.travis-ci.org/ropensci/fulltext.svg)](https://travis-ci.org/ropensci/fulltext)
 [![Build status](https://ci.appveyor.com/api/projects/status/y487h3ec5wc2s20m/branch/master?svg=true)](https://ci.appveyor.com/project/sckott/fulltext/branch/master)
 [![codecov.io](https://codecov.io/github/ropensci/fulltext/coverage.svg?branch=master)](https://codecov.io/github/ropensci/fulltext?branch=master)
@@ -91,7 +92,7 @@ ft_search(query = 'ecology', from = 'crossref')
 #> Query:
 #>   [ecology] 
 #> Found:
-#>   [PLoS: 0; BMC: 0; Crossref: 144153; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
+#>   [PLoS: 0; BMC: 0; Crossref: 144283; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
 #> Returned:
 #>   [PLoS: 0; BMC: 0; Crossref: 10; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0]
 ```
@@ -106,7 +107,7 @@ res1 <- ft_search(query = 'ecology', from = 'entrez', limit = 5)
 ft_links(res1)
 #> <fulltext links>
 #> [Found] 5 
-#> [IDs] ID_29326987 ID_29319501 ID_29313491 ID_27758730 ID_27436048 ...
+#> [IDs] ID_29321529 ID_29321528 ID_29321519 ID_29321473 ID_29319501 ...
 ```
 
 Or pass in DOIs directly
@@ -116,7 +117,7 @@ Or pass in DOIs directly
 ft_links(res1$entrez$data$doi, from = "entrez")
 #> <fulltext links>
 #> [Found] 5 
-#> [IDs] ID_29326987 ID_29319501 ID_29313491 ID_27758730 ID_27436048 ...
+#> [IDs] ID_29321529 ID_29321528 ID_29321519 ID_29321473 ID_29319501 ...
 ```
 
 ## Get full text

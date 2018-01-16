@@ -55,19 +55,14 @@ Using the results from `ft_search()` we can grab full text of some articles
 Dig in to the PLOS data
 
 ```{r}
-out$plos
-```
-
-Dig in further to get to one of the articles in XML format
-
-```{r}
-library("xml2")
-xml2::read_xml(out$plos$data$data$`10.1371/journal.pone.0059813`)
+out$plos$data$path[[1]]
 ```
 
 ## Extract text from pdfs
 
-Ideally for text mining you have access to XML or other text based formats. However, sometimes you only have access to PDFs. In this case you want to extract text from PDFs. `fulltext` can help with that. 
+Ideally for text mining you have access to XML or other text based formats. However, 
+sometimes you only have access to PDFs. In this case you want to extract text 
+from PDFs. `fulltext` can help with that. 
 
 You can extract from any pdf from a file path, like:
 
@@ -76,34 +71,24 @@ path <- system.file("examples", "example1.pdf", package = "fulltext")
 ft_extract(path)
 ```
 
-Let's search for articles from arXiv, a preprint service. Here, get pdf from an article with ID `cond-mat/9309029`:
+Let's search for articles from arXiv, a preprint service. Here, get pdf from 
+an article with ID `cond-mat/9309029`:
 
 ```{r}
 res <- ft_get('cond-mat/9309029', from = "arxiv")
 res2 <- ft_extract(res)
-res2$arxiv$data
-```
-
-And a short snippet of the full text
-
-```{r eval=FALSE}
-res2$arxiv$data$data[[1]]$data
-#> "arXiv:cond-mat/9309029v8 26 Jan 1994, , FERMILAB-PUB-93/15-T March 1993, Revised:
-#> January 1994, The Thermodynamics and Economics of Waste, Dallas C. Kennedy, Research
-#> Associate, Fermi National Accelerator Laboratory, P.O. Box 500 MS106, Batavia, Illinois
-#> 60510 USA, Abstract, The increasingly relevant problem of natural resource use and
-#> waste production, disposal, and reuse is examined from several viewpoints: economic,
-#> technical, and thermodynamic. Alternative economies are studied, with emphasis on
-#> recycling of waste to close the natural resource cycle. The physical nature of human
-#> economies and constraints on recycling and energy efficiency are stated in terms 
-#> ..."
+# the first page
+res2$arxiv$data$data$`cond-mat/9309029`[1]
 ```
 
 ## Extract text chunks
 
-We have a few functions to help you pull out certain parts of an article. For example, perhaps you want to get just the authors from your articles, or just the abstracts. 
+We have a few functions to help you pull out certain parts of an article. 
+For example, perhaps you want to get just the authors from your articles, 
+or just the abstracts. 
 
-Here, we'll search for some PLOS articles, then get their full text, then extract various parts of each article with `ft_chunks()`.
+Here, we'll search for some PLOS articles, then get their full text, then
+extract various parts of each article with `ft_chunks()`.
 
 ```{r}
 res <- ft_search(query = "ecology", from = "plos")
@@ -113,18 +98,19 @@ res <- ft_search(query = "ecology", from = "plos")
 Extract DOIs
 
 ```{r}
-x %>% ft_chunks("doi")
+x %>% ft_collect() %>% ft_chunks("doi")
 ```
 
 Extract DOIs and categories
 
 ```{r}
-x %>% ft_chunks(c("doi","categories"))
+x %>% ft_collect() %>% ft_chunks(c("doi", "title"))
 ```
 
-`ft_tabularize` attempts to help you put the data that comes out of `ft_chunks()` in to a `data.frame`, that we all know and love. 
+`ft_tabularize` attempts to help you put the data that comes out of 
+`ft_chunks()` in to a `data.frame`, that we all know and love. 
 
 ```{r}
-x %>% ft_chunks(c("doi", "history")) %>% ft_tabularize()
+x %>% ft_collect() %>% ft_chunks(c("doi", "history")) %>% ft_tabularize()
 ```
 
