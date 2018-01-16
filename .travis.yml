@@ -3,6 +3,11 @@ sudo: false
 cache: packages
 dist: trusty
 
+r: 
+  - oldrel
+  - release
+  - devel
+
 r_github_packages:
   - jimhester/covr
 
