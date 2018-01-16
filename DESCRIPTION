@@ -31,7 +31,7 @@ Imports:
     rplos (>= 0.8.0),
     rcrossref (>= 0.8.0),
     crminer (>= 0.1.4),
-    microdemic (>= 0.1.0),
+    microdemic (>= 0.2.0),
     aRxiv,
     rentrez (>= 1.1.0),
     whisker,
