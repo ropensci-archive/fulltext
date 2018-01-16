@@ -46,7 +46,7 @@ plugin_get_links_crossref <- function(from, urls, opts = list(), type, ...) {
     } else {
       path <- make_key(names(out)[i], type)
       if (file.exists(path) && !cache_options_get()$overwrite) {
-        cat(paste0("path exists: ", path), sep="\n")
+        message(paste0("path exists: ", path))
         res[[ names(out)[i] ]] <- ft_object(path, names(out)[i], type)
       } else {
         cli <- crul::HttpClient$new(
@@ -118,7 +118,7 @@ plugin_get_links_plos <- function(from, urls, opts = list(), type, ...) {
   for (i in seq_along(out)) {
     path <- make_key(names(out)[i], type)
     if (file.exists(path) && !cache_options_get()$overwrite) {
-      cat(paste0("path exists: ", path), sep="\n")
+      message(paste0("path exists: ", path))
       artout[[ names(out)[i] ]]$path <- path
     } else {
       tmp <- tryCatch(get_article(out[[i]]$url, path), error = function(e) e)

@@ -46,7 +46,7 @@
 .unzip <- function(zip, dir, save.name, cache, si, list=FALSE){
     files <- utils::unzip(zip, list=TRUE)
     if(list){
-        cat("Files in ZIP:")
+        message("Files in ZIP:")
         print(files)
     }
     if(!si %in% files$Name)

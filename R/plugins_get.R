@@ -450,7 +450,7 @@ ieee_ft <- function(dois, type = "pdf", ...) {
     }
 
     lk <- tryCatch(crminer::crm_links(x), error = function(e) e, warning = function(w) w)
-    cat(lk[[1]][[1]], sep="\n")
+    # cat(lk[[1]][[1]], sep="\n")
     if (inherits(lk, c("error", "warning"))) return(ft_error(lk$message, x))
     get_ft(x = x, type = 'pdf', url = lk[[1]][[1]], path = path, ...)
   }), dois)
@@ -468,7 +468,7 @@ aaas_ft <- function(dois, type = "pdf", ...) {
     lk <- tcat(ftdoi_get(sprintf("api/doi/%s/", x)))
     if (inherits(lk, c("error", "warning"))) return(ft_error(lk$message, x))
     url <- jsonlite::fromJSON(lk$parse("UTF-8"))$links$pdf
-    cat(url, sep="\n")
+    # cat(url, sep="\n")
     get_ft(x = x, type = 'pdf', url = url, path = path, ...)
   }), dois)
 }
