@@ -60,11 +60,6 @@ cache_get <- function(key=NULL, backend=NULL, path=NULL, db=NULL) {
     backend <- match.arg(backend, choices = 'ext')
     key <- path.expand(key)
     switch(backend, ext = get_ext(key))
-           # rds = get_rds(key)
-           # rcache = get_rcache(key),
-           # redis = get_redis(key)
-           # sqlite = get_sqlite(key, db=db)
-    # )
   }
 }
 

@@ -58,6 +58,7 @@ get_text <- function(...){
 #'  - [tabularize]: Function name changed to [ft_tabularize()]
 #'  - [collect]: Function name changed to [ft_collect()]
 #'  - [get_text]: Function name changed to [ft_text()]
+#'  - `cache_clear` was never working anyway, and is now removed
 #' 
 #' @name fulltext-defunct
 NULL

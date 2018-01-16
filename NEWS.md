@@ -1,41 +1,76 @@
-fulltext 1.0.0
-==============
+fulltext 1.0
+============
+
+`fulltext` has undergone a re-organization, which includes a bump in the major version to `v1` to reinforce the large changes the package has undergone. Changes include:
+
+- Function name standardization with the `ft_` prefix. e,g, `chunks` is now `ft_chunks`
+- `ft_get` has undergone major re-organization - biggest of which may be that all full text XML/plain text/PDF goes to disk to simplify the user interface.
+- `storr` is now imported to manage mapping between real DOIs and file paths that include normalized DOIs - and aids in the function `ft_table()` for creating a data.frame of text results
+- Note that with the `ft_get()` overhaul, the only option is to write to disk. Before we attempted to provide many different options for saving XML and PDF data, but it was too complicated. This has implications for using the output of `ft_get()` - the output is only the paths to the files - use `ft_collect()`  to collect the text if you want to use `ft_chunks()` or other `fulltext` functions downstream.
 
 ### NEW FEATURES
 
-* xx (#xxx)
-* xx (#xxx)
-* xx (#xxx)
-* xx (#xxx)
-* xx (#xxx)
-* xx (#xxx)
-* xx (#xxx)
-* xx (#xxx)
-* xx (#xxx)
+* `chunks` changed to `ft_chunks` (#139)
+* `collect` changed to `ft_collect` (#139)
+* `tabularize` changed to `ft_tabularize` (#139)
+* `get_text` changed to `ft_text` (#139)
+* `ft_get()` gains new parameter `try_unknown` that attempts to try to find full text for a given DOI/ID even if we don't have code plugins specifically for that publisher. This includes trying to get a full text link from Crossref and the <https://ftdoi.org> API (#137)
+* Gains function `ft_table` that outputs a data.frame of all downloaded articles with DOIs, filenames, and the text of each article, similar to the `readtext` package (#134)
+* Gains function `ft_abstract` for fetching abstracts, including support for getting abstracts from Scopus, Microsoft Academic, Crossref, and PLOS (#98) (#115)
+* Microsoft Academic added as another data source both in `ft_abstract` and in `ft_search` via the `microdemic` package (#99) (#115)
+* `ft_get()` gains an S3 method for `ft_links` - that is, you can pass the output of `ft_links()` to `ft_get()` (#103)
+* `ft_get()` gains many new plugins, including for: Informa, Scientific Societies, Europe PMC, Elsevier, Wiley, xxx (#121) (#112) (#52) (#96) (#120) (#xxx)
+* Gains new functions to list available plugins for each of `ft_get()`/`ft_links()`/`ft_search()`: `ft_get_ls()`/`ft_links_ls()`/`ft_search_ls()` (#122)
+* `ft_chunks()` gains support for Elsevier XML (#116) (#118)
+* Scopus added as a new datasource in both `ft_search()` and `ft_abstract` (#95)
+* gains new object `ftxt_cache` for managing/listing details of cached files from `ft_get()`
+* `ft_search()` gains Scopus and Microsoft Academic options
+* `ft_serialize()` loses `file`, `rcache`, and `redis` options, retaining options for converting between list, JSON, and XML formats.
+* The package level manual file at `?fulltext-package` gains new sections on authentication and rate limiting
+* gains new manual file for how to interpret warnings when using `ft_get()`; see `?ft_get-warnings`
+
+### DEFUNCT
+
+With the re-focusing of the package these functions seemed out of scope, so have been removed:
+
+* `pdfx`, `pdfx_html`, and `pdfx_targz` are now defunct (#145)
+* `ft_extract_corpus` is now defunct
+
+The following functions have changed names. Usually I'd mark functions as deprecated in a version, then defunct in the next version, but since we're moving to `v1` here, it made sense to rip the bandade off and make the old function names defunct.
+
+* `chunks` is now defunct - function name changed to `ft_chunks`
+* `tabularize` is now defunct - function name changed to `ft_tabularize`
+* `collect` is now defunct - function name changed to `ft_collect`
+* `get_text` is now defunct - function name changed to `ft_text`
+
+Other defunct:
+
+* `cache_clear` was never working anyway, and is now removed.
+
+Along with the above changes and others the packages `R.cache`, `rredis`, `digest`, and `tm` have been removed from Imports
 
 ### MINOR IMPROVEMENTS
 
-* xx (#xxx)
-* xx (#xxx)
-* xx (#xxx)
-* xx (#xxx)
-* xx (#xxx)
-* xx (#xxx)
-* xx (#xxx)
-* xx (#xxx)
-* xx (#xxx)
+* Replaced `httr` with `crul` mostly throughtout the package (#104)
+* We are now using DOIs in file names written to disk from `ft_get()`. DOIs are normalized before using to create file paths (#138)
+* Output of `ft_get()` should now be correctly named lists after the publisher and the DOI/ID (#126)
+* Switched for eLife DOIs to attempt to get full text links from Crossref API instead of constructing by hand (#127)
+* Now using `hoardr` package for managing cached files (#124)
+* sending user agent string for this R pkg to the ftdoi.org API when calling it now (#141)
+* Documented option to include your email address with Crossref API queries to get in their "fast lane" (#123)
+* Documented how to get rate limit headers/information for Elsevier/Scopus requests (#109)
+* For text extraction from PDFs - only using `pdftools` now - done away with other options (#82)
+* `biorxiv_search` is now exported but the man file is hidden (using `roxygen2` directive `@internal`), so you can still get to the manual file doing `?biorxiv_search`
 
 ### BUG FIXES
 
-* xx (#xxx)
-* xx (#xxx)
-* xx (#xxx)
-* xx (#xxx)
-* xx (#xxx)
-* xx (#xxx)
-* xx (#xxx)
-* xx (#xxx)
-* xx (#xxx)
+* New internal PLOS API method instead of a function from `rplos` 
+because we need to write to disk instead of return parsed XML 
+output (#148)
+* `ft_get()` now appropriately using cached version of file if found (#130)
+* The `type` parameter in `ft_get()` was ignored previously, now definitely
+used. (#128)
+* Fix `biorxiv_search` (#97) (#113)
 
 
 fulltext 0.1.8

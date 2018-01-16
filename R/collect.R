@@ -5,12 +5,12 @@
 #' data and bring it up in the list for easier access
 #' 
 #' @export
-#' @param x Input. An object of class \code{ft_data}
+#' @param x Input. An object of class `ft_data`
 #' @param ... Further args, ignored.
 #' 
-#' @details Note that for xml or plain text the result of this call
-#' is actual text you can read. For pdf the result is raw bytes - 
-#' use [ft_extract()] to convert raw to text.
+#' @return an object of class `ft_data`, but the `data` slot should have
+#' character string of text from the XML/plain text/PDF file
+#' @details The result of this call is actual text you can read
 #' 
 #' @examples \dontrun{
 #' # Get some data, stash in rds file

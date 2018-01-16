@@ -22,7 +22,7 @@ Summary at <https://github.com/ropensci/fulltext/blob/master/revdep/README.md>
 
 --------
 
-This submission xxxx
+This submission overhauls quite a bit of the package, changing a lot of internals, changing function names, and making some functions defunct - thus a bump in major version to v1.0. 
 
 Thanks! 
 Scott Chamberlain
