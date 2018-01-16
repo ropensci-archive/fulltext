@@ -417,9 +417,9 @@ ft_get.ft <- function(x, from=NULL, type = "xml", try_unknown = TRUE, plosopts=l
     ))
   }
 
-  plos_out <- plugin_get_plos("plos", x$plos$data$id, plosopts, ...)
-  entrez_out <- plugin_get_entrez("entrez", x$entrez$data$doi,
-                                  entrezopts, ...)
+  plos_out <- plugin_get_plos(from, x$plos$data$id, plosopts, type, ...)
+  entrez_out <- plugin_get_entrez(from, x$entrez$data$doi,
+                                  entrezopts, type, ...)
   cr_out <- NULL
   if ("crossref" %in% from) {
     crl <- ft_links(x$crossref$data$doi, from = "crossref")
