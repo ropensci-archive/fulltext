@@ -5,21 +5,19 @@
   ],
   "@type": "SoftwareSourceCode",
   "identifier": "fulltext",
-  "description":
-    "Provides a single interface to many sources of full text\n    'scholarly' data, including 'Biomed Central', Public Library of\n    Science, 'Pubmed Central', 'eLife', 'F1000Research', 'PeerJ',\n    'Pensoft', 'Hindawi', 'arXiv' 'preprints', and more. Functionality\n    included for searching for articles, downloading full or partial\n    text, downloading supplementary materials, converting to various\n    data formats used in and outside of R.",
-  "name":
-    "fulltext: Full Text of 'Scholarly' Articles Across Many Data Sources",
-  "codeRepository": "https://github.com/ropensci/fulltext",
+  "description": "Provides a single interface to many sources of full text\n    'scholarly' data, including 'Biomed Central', Public Library of\n    Science, 'Pubmed Central', 'eLife', 'F1000Research', 'PeerJ',\n    'Pensoft', 'Hindawi', 'arXiv' 'preprints', and more. Functionality\n    included for searching for articles, downloading full or partial\n    text, downloading supplementary materials, converting to various\n    data formats used in and outside of R.",
+  "name": "fulltext: Full Text of 'Scholarly' Articles Across Many Data Sources",
+  "codeRepository": "https://github.com/ropensci/fulltext.git",
   "issueTracker": "https://github.com/ropensci/fulltext/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "0.1.9.9211",
+  "version": "1.0.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
-    "version": "3.4.2",
+    "version": "3.4.3",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 3.4.2 (2017-09-28)",
+  "runtimePlatform": "R version 3.4.3 Patched (2018-01-01 r74017)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
@@ -32,7 +30,7 @@
       "givenName": "Scott",
       "familyName": "Chamberlain",
       "email": "myrmecocystus@gmail.com",
-      "@id": "http://orcid.org/0000-0003-1444-9135"
+      "@id": "https://orcid.org/0000-0003-1444-9135"
     }
   ],
   "contributor": [
@@ -47,7 +45,7 @@
     "givenName": "Scott",
     "familyName": "Chamberlain",
     "email": "myrmecocystus@gmail.com",
-    "@id": "http://orcid.org/0000-0003-1444-9135"
+    "@id": "https://orcid.org/0000-0003-1444-9135"
   },
   "softwareSuggestions": [
     {
@@ -76,18 +74,15 @@
   "softwareRequirements": [
     {
       "@type": "SoftwareApplication",
-      "identifier": "methods",
-      "name": "methods"
-    },
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "utils",
-      "name": "utils"
-    },
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "stats",
-      "name": "stats"
+      "identifier": "crul",
+      "name": "crul",
+      "version": "0.4.0",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Central R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      }
     },
     {
       "@type": "SoftwareApplication",
@@ -208,50 +203,6 @@
     },
     {
       "@type": "SoftwareApplication",
-      "identifier": "tm",
-      "name": "tm",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Central R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      }
-    },
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "rredis",
-      "name": "rredis",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Central R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      }
-    },
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "R.cache",
-      "name": "R.cache",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Central R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      }
-    },
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "digest",
-      "name": "digest",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Central R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      }
-    },
-    {
-      "@type": "SoftwareApplication",
       "identifier": "whisker",
       "name": "whisker",
       "provider": {
@@ -271,22 +222,57 @@
         "name": "Central R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
       }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "hoardr",
+      "name": "hoardr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Central R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "pdftools",
+      "name": "pdftools",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Central R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "storr",
+      "name": "storr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Central R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "tibble",
+      "name": "tibble",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Central R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      }
     }
   ],
   "applicationCategory": "Literature",
   "isPartOf": "https://ropensci.org",
-  "keywords": [
-    "text-ming",
-    "literature",
-    "pdf",
-    "xml",
-    "publications",
-    "citations",
-    "full-text",
-    "TDM"
-  ],
+  "keywords": ["text-ming", "literature", "pdf", "xml", "publications", "citations", "full-text", "TDM"],
   "contIntegration": "https://travis-ci.org/ropensci/fulltext",
   "releaseNotes": "https://github.com/ropensci/fulltext/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/fulltext/blob/master/README.md",
-  "fileSize": "3764.966KB"
+  "fileSize": "3775.796KB"
 }
