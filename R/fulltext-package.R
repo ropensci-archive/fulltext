@@ -5,6 +5,10 @@
 #' support sources that require authentication on a case by case basis - that
 #' is, if more than just a few people will use it, and it's not too
 #' burdensome to include, then we can include that source.
+#' 
+#' @section Manual:
+#' See <https://ropensci.github.io/fulltext-book/> for a longer form manual for 
+#' using \pkg{fulltext}.
 #'
 #' @section What's included:
 #' We currently include support for search and full text retrieval for a variety

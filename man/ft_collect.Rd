@@ -20,15 +20,17 @@ ft_text(x, ...)
 
 \item{...}{Further args, ignored.}
 }
+\value{
+an object of class \code{ft_data}, but the \code{data} slot should have
+character string of text from the XML/plain text/PDF file
+}
 \description{
 \code{ft_collect} grabs full text data from a remote storage
 device. \code{ft_text} is a convenience function to grab the nested text
 data and bring it up in the list for easier access
 }
 \details{
-Note that for xml or plain text the result of this call
-is actual text you can read. For pdf the result is raw bytes -
-use \code{\link[=ft_extract]{ft_extract()}} to convert raw to text.
+The result of this call is actual text you can read
 }
 \examples{
 \dontrun{

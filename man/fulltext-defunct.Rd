@@ -14,5 +14,6 @@ package - and this function is more out of scope now.
 \item \link{tabularize}: Function name changed to \code{\link[=ft_tabularize]{ft_tabularize()}}
 \item \link{collect}: Function name changed to \code{\link[=ft_collect]{ft_collect()}}
 \item \link{get_text}: Function name changed to \code{\link[=ft_text]{ft_text()}}
+\item \code{cache_clear} was never working anyway, and is now removed
 }
 }
