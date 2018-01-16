@@ -170,7 +170,7 @@
       "@type": "SoftwareApplication",
       "identifier": "microdemic",
       "name": "microdemic",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -274,5 +274,6 @@
   "contIntegration": "https://travis-ci.org/ropensci/fulltext",
   "releaseNotes": "https://github.com/ropensci/fulltext/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/fulltext/blob/master/README.md",
-  "fileSize": "3775.796KB"
+  "fileSize": "3776.894KB",
+  "developmentStatus": "active"
 }
