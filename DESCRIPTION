@@ -6,7 +6,7 @@ Description: Provides a single interface to many sources of full text
     'Pensoft', 'Hindawi', 'arXiv' 'preprints', and more. Functionality
     included for searching for articles, downloading full or partial
     text, downloading supplementary materials, converting to various
-    data formats used in and outside of R.
+    data formats.
 Version: 1.0.0
 License: MIT + file LICENSE
 Authors@R: c(
