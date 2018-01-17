@@ -34,7 +34,7 @@ Sage | Y | N | N |... |
 Scielo | [Y][scielop] | [Y][scielox] | N | May only be some journals |
 ScienceOpen | [Y][sciopp] | [Y][sciopx] | N |... |
 SERSC | [Y][serscp] | N | N |... |
-Springer Open | [Y][springeroap] | [Y][springeroax] | N |... |
+Springer Open | Y | Y | N |... |
 
 ^1: NLM-DTD XML schema - http://dtd.nlm.nih.gov/
 ^2: Wiley and Elsevier do have a few open access journals each,
@@ -54,7 +54,6 @@ least for their open access journals.
 [bep]: http://benthamopen.com/contents/pdf/TONEUJ/TONEUJ-9-21.pdf
 [arxivp]: http://arxiv.org/pdf/1507.08559v1.pdf?
 [biorxivp]: http://biorxiv.org/content/biorxiv/early/2015/07/26/023259.full.pdf
-[springeroap]: http://www.jnanochem.com/content/pdf/2193-8865-3-79.pdf
 [degrutp]: http://www.degruyter.com/dg/viewarticle.fullcontentlink:pdfeventlink/$002fj$002fbiolet.2014.51.issue-2$002fbiolet-2015-0008$002fbiolet-2015-0008.pdf?format=INT&t:ac=j$002fbiolet.2014.51.issue-2$002fbiolet-2015-0008$002fbiolet-2015-0008.xml
 [mdpip]: http://www.mdpi.com/1999-4915/7/8/2817/pdf
 [serscp]: http://www.sersc.org/journals/IJEIC/vol6_Is3/2.pdf
@@ -72,7 +71,6 @@ least for their open access journals.
 [kx]: http://downloads.hindawi.com/journals/crid/2014/246965.pdf
 [coax]: http://cogentoa.tandfonline.com/doi/xml/10.1080/23311908.2014.986922
 [copx]: http://www.biogeosciences.net/11/7331/2014/bg-11-7331-2014.xml
-[springeroax]: http://www.jnanochem.com/content/download/xml/2193-8865-3-79.xml
 [mdpix]: http://www.mdpi.com/1999-4915/7/8/2817/xml
 [scielox]: http://www.scielo.br/scieloOrg/php/articleXML.php?pid=S1984-70332014000100004&lang=en
 [sciopx]: https://www.scienceopen.com/document/vid/35b1397c-0f4f-438c-98de-56d87439d520?4-1.ILinkListener-header-download~dropdown-xml~link

@@ -49,7 +49,7 @@ Data sources in `fulltext` include:
 
 * [Crossref](http://www.crossref.org/) - via the `rcrossref` package
 * [Public Library of Science (PLOS)](https://www.plos.org/) - via the `rplos` package
-* [Biomed Central](http://www.biomedcentral.com/)
+* Biomed Central
 * [arXiv](https://arxiv.org) - via the `aRxiv` package
 * [bioRxiv](http://biorxiv.org/) - via the `biorxivr` package
 * [PMC/Pubmed via Entrez](http://www.ncbi.nlm.nih.gov/) - via the `rentrez` package
