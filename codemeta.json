@@ -5,9 +5,9 @@
   ],
   "@type": "SoftwareSourceCode",
   "identifier": "fulltext",
-  "description": "Provides a single interface to many sources of full text\n    'scholarly' data, including 'Biomed Central', Public Library of\n    Science, 'Pubmed Central', 'eLife', 'F1000Research', 'PeerJ',\n    'Pensoft', 'Hindawi', 'arXiv' 'preprints', and more. Functionality\n    included for searching for articles, downloading full or partial\n    text, downloading supplementary materials, converting to various\n    data formats used in and outside of R.",
+  "description": "Provides a single interface to many sources of full text\n    'scholarly' data, including 'Biomed Central', Public Library of\n    Science, 'Pubmed Central', 'eLife', 'F1000Research', 'PeerJ',\n    'Pensoft', 'Hindawi', 'arXiv' 'preprints', and more. Functionality\n    included for searching for articles, downloading full or partial\n    text, downloading supplementary materials, converting to various\n    data formats.",
   "name": "fulltext: Full Text of 'Scholarly' Articles Across Many Data Sources",
-  "codeRepository": "https://github.com/ropensci/fulltext.git",
+  "codeRepository": "https://github.com/ropensci/fulltext",
   "issueTracker": "https://github.com/ropensci/fulltext/issues",
   "license": "https://spdx.org/licenses/MIT",
   "version": "1.0.0",
@@ -274,6 +274,6 @@
   "contIntegration": "https://travis-ci.org/ropensci/fulltext",
   "releaseNotes": "https://github.com/ropensci/fulltext/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/fulltext/blob/master/README.md",
-  "fileSize": "3776.894KB",
+  "fileSize": "3776.852KB",
   "developmentStatus": "active"
 }
