@@ -17,7 +17,8 @@ Authors@R: c(
     person("Will", "Pearse",
         role = "ctb")
     )
-URL: https://github.com/ropensci/fulltext
+URL: https://github.com/ropensci/fulltext/ (devel) 
+    https://ropensci.github.io/fulltext-book/ (user manual)
 BugReports: https://github.com/ropensci/fulltext/issues
 LazyLoad: yes
 VignetteBuilder: knitr
