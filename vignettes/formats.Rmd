@@ -15,7 +15,7 @@ Publisher | pdf | xml | epub | Notes |
 AIRCC | [Y][airccp] | N |  N |... |
 arXiv | [Y][arxivp] | N |  N |... |
 Bentham | [Y][bep] | N |  N |... |
-BiomedCentral | [Y][bp] | N | N |... |
+BiomedCentral | Y | N | N |... |
 bioRxiv | [Y][biorxivp] | N | N |... |
 CogentOA | [Y][coap] | [Y][coax] | N |... |
 Copernicus | [Y][copp] | [Y][copx] ^[1] | N |... |
@@ -46,8 +46,7 @@ least for their open access journals.
 [plp]: http://www.plosone.org/article/fetchObject.action?uri=info%3Adoi%2F10.1371%2Fjournal.pone.0107510&representation=PDF
 [peerjp]: https://peerj.com/articles/1142.pdf
 [pep]: http://zookeys.pensoft.net/lib/ajax_srv/article_elements_srv.php?action=download_pdf&item_id=4351
-[ep]: http://elifesciences.org/content/elife/2/e00471.full.pdf
-[bp]: http://download.springer.com/static/pdf/460/art%253A10.1186%252Fs40246-016-0095-x.pdf?originUrl=http%3A%2F%2Fhumgenomics.biomedcentral.com%2Farticle%2F10.1186%2Fs40246-016-0095-x&token2=exp=1486800088~acl=%2Fstatic%2Fpdf%2F460%2Fart%25253A10.1186%25252Fs40246-016-0095-x.pdf*~hmac=0e7ec37c796ce7fbdf96d39183eb3114e65b87a2a94e82011c581a101789368b
+[ep]: https://cdn.elifesciences.org/articles/31770/elife-31770-v1.pdf
 [hp]: http://downloads.hindawi.com/journals/crid/2014/246965.pdf
 [kp]: http://www.karger.com/Article/Pdf/370302
 [coap]: http://cogentoa.tandfonline.com/doi/pdf/10.1080/23311908.2014.986922
@@ -68,7 +67,7 @@ least for their open access journals.
 [plx]: http://www.plosone.org/article/fetchObjectAttachment.action?uri=info%3Adoi%2F10.1371%2Fjournal.pone.0107510&representation=XML
 [peerjx]: https://peerj.com/articles/1142.xml
 [pex]: http://zookeys.pensoft.net/lib/ajax_srv/article_elements_srv.php?action=download_xml&item_id=4351
-[ex]: http://elifesciences.org/content/3/e04165.source.xml
+[ex]: https://cdn.elifesciences.org/articles/31770/elife-31770-v1.xml
 [hx]: http://downloads.hindawi.com/journals/tswj/2014/649260.xml
 [kx]: http://downloads.hindawi.com/journals/crid/2014/246965.pdf
 [coax]: http://cogentoa.tandfonline.com/doi/xml/10.1080/23311908.2014.986922
