@@ -153,6 +153,7 @@ plugin_get_links <- plugin_get_generator("generic", got_link_ft)
 plugin_get_royalsocchem <- plugin_get_generator("royalsocchem", roysocchem_ft)
 plugin_get_ieee <- plugin_get_generator("ieee", ieee_ft)
 plugin_get_aaas <- plugin_get_generator("aaas", aaas_ft)
+plugin_get_pnas <- plugin_get_generator("pnas", pnas_ft)
 
 
 ## getters - could stand to make closure for the below as well, FIXME
@@ -406,6 +407,11 @@ scientificsocieties_ft <- function(dois, type = "pdf", ...) {
 
     lk <- tryCatch(crminer::crm_links(x), error = function(e) e, warning = function(w) w)
     if (inherits(lk, c("error", "warning"))) return(ft_error(lk$message, x))
+    if (is.null(lk) || length(lk) == 0) {
+      mssg <- "has no link available"
+      warning(x, " ", mssg, call. = FALSE)
+      return(ft_error(mssg, x))
+    }
     get_ft(x, 'pdf', lk[[1]][[1]], path, ...)
   }), dois)
 }
@@ -421,6 +427,11 @@ informa_ft <- function(dois, type = "pdf", ...) {
 
     lk <- tryCatch(crminer::crm_links(x), error = function(e) e, warning = function(w) w)
     if (inherits(lk, c("error", "warning"))) return(ft_error(lk$message, x))
+    if (is.null(lk) || length(lk) == 0) {
+      mssg <- "has no link available"
+      warning(x, " ", mssg, call. = FALSE)
+      return(ft_error(mssg, x))
+    }
     get_ft(x, 'pdf', lk[[1]][[1]], path, ...)
   }), dois)
 }
@@ -436,6 +447,11 @@ roysocchem_ft <- function(dois, type = "pdf", ...) {
 
     lk <- tryCatch(crminer::crm_links(x), error = function(e) e, warning = function(w) w)
     if (inherits(lk, c("error", "warning"))) return(ft_error(lk$message, x))
+    if (is.null(lk) || length(lk) == 0) {
+      mssg <- "has no link available"
+      warning(x, " ", mssg, call. = FALSE)
+      return(ft_error(mssg, x))
+    }
     get_ft(x, 'pdf', lk[[1]][[1]], path, ...)
   }), dois)
 }
@@ -450,8 +466,12 @@ ieee_ft <- function(dois, type = "pdf", ...) {
     }
 
     lk <- tryCatch(crminer::crm_links(x), error = function(e) e, warning = function(w) w)
-    # cat(lk[[1]][[1]], sep="\n")
     if (inherits(lk, c("error", "warning"))) return(ft_error(lk$message, x))
+    if (is.null(lk) || length(lk) == 0) {
+      mssg <- "has no link available"
+      warning(x, " ", mssg, call. = FALSE)
+      return(ft_error(mssg, x))
+    }
     get_ft(x = x, type = 'pdf', url = lk[[1]][[1]], path = path, ...)
   }), dois)
 }
@@ -468,7 +488,22 @@ aaas_ft <- function(dois, type = "pdf", ...) {
     lk <- tcat(ftdoi_get(sprintf("api/doi/%s/", x)))
     if (inherits(lk, c("error", "warning"))) return(ft_error(lk$message, x))
     url <- jsonlite::fromJSON(lk$parse("UTF-8"))$links$pdf
-    # cat(url, sep="\n")
+    get_ft(x = x, type = 'pdf', url = url, path = path, ...)
+  }), dois)
+}
+
+# type: only pdf (type parameter is ignored)
+pnas_ft <- function(dois, type = "pdf", ...) {
+  stats::setNames(lapply(dois, function(x) {
+    path <- make_key(x, 'pdf')
+    if (file.exists(path) && !cache_options_get()$overwrite) {
+      message(paste0("path exists: ", path))
+      return(ft_object(path, x, 'pdf'))
+    }
+
+    lk <- tcat(ftdoi_get(sprintf("api/doi/%s/", x)))
+    if (inherits(lk, c("error", "warning"))) return(ft_error(lk$message, x))
+    url <- jsonlite::fromJSON(lk$parse("UTF-8"))$links$pdf
     get_ft(x = x, type = 'pdf', url = url, path = path, ...)
   }), dois)
 }

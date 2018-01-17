@@ -585,7 +585,8 @@ publisher_plugin <- function(x) {
     `301` = plugin_get_informa,
     `292` = plugin_get_royalsocchem,
     `263` = plugin_get_ieee,
-    `221` = plugin_get_aaas
+    `221` = plugin_get_aaas,
+    `341` = plugin_get_pnas
   )
 }
 
@@ -611,6 +612,7 @@ get_pub_name <- function(x) {
          `292` = "royalsocchem",
          `263` = "ieee",
          `221` = "aaas",
+         `341` = "pnas",
          "crossref"
   )
 }
@@ -637,6 +639,7 @@ get_tm_name <- function(x) {
          `292` = "royalsocchem",
          `263` = "ieee",
          `221` = "aaas",
+         `341` = "pnas",
          "crossref"
   )
 }
