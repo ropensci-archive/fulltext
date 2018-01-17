@@ -26,7 +26,7 @@ test_that("ft_get_si returns...", {
   
 
   #Multiple downloads and ft_data are handled well
-  expect_true(all(file.exists(ft_get_si(c("10.1101/016386", "10.1111/ele.12437"), si=1))))
+  #expect_true(all(file.exists(ft_get_si(c("10.1101/016386", "10.1111/ele.12437"), si=1))))
   expect_true(all(file.exists(ft_get_si(c("10.1101/016386", "10.1111/ele.12437"), si=2:1))))
   expect_true(all(file.exists(ft_get_si(c("10.1101/016386", "10.1111/ele.12437"), si=1))))
   expect_true(file.exists(ft_get_si(ft_search("beyond the edge with edam"),1)))
