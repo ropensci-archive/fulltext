@@ -1,3 +1,15 @@
+fulltext 1.0.1
+==============
+
+### BUG FIXES
+
+* Fix bug in internal function `get_ext()` which parses either xml, pdf, or plain text from files on disk - it was failing on Linux maxchines due to a faulty regex (#151)
+
+### MINOR IMPROVEMENTS
+
+* Updated formats vignette, three publishers that used to provide XML no longer do (#150)
+
+
 fulltext 1.0
 ============
 
