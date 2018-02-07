@@ -65,7 +65,7 @@ cache_get <- function(key=NULL, backend=NULL, path=NULL, db=NULL) {
 
 get_ext <- function(x) {
   switch(
-    strextract(x, "\\..+"),
+    strextract(basename(x), "\\..+$"),
     '.xml' = xml2::read_xml(x),
     '.pdf' = pdftools::pdf_text(x),
     '.txt' = paste0(readLines(x), collapse = " ")

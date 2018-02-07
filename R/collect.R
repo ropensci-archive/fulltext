@@ -13,15 +13,13 @@
 #' @details The result of this call is actual text you can read
 #' 
 #' @examples \dontrun{
-#' # Get some data, stash in rds file
-#' cache_options_get()
-#' cache_options_set(cache=TRUE, backend="rds")
+#' # Get some data
 #' x <- ft_get('10.1371/journal.pone.0086169', from='plos')
 #' 
 #' # note that the data is not in the object, gives NULL
 #' x$plos$data$data
 #' 
-#' # Collect data from the rds file
+#' # Collect data from the .xml file
 #' y <- x %>% ft_collect()
 #' 
 #' # note how the data is now in the object
