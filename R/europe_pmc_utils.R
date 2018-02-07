@@ -27,6 +27,8 @@
 #' - core - returns full metadata for a given publication ID; including abstract, 
 #'  full text links, and MeSH terms.
 #' 
+#' @references https://europepmc.org/RestfulWebService
+#' 
 #' @examples \dontrun{
 #' # search
 #' eupmc_search(query = 'ecology')
@@ -93,7 +95,7 @@ eupmc_xml <- function(id, ...) {
 }
 
 # helpers
-eupmc_base <- function() "http://www.ebi.ac.uk/europepmc/webservices/rest/"
+eupmc_base <- function() "https://www.ebi.ac.uk/europepmc/webservices/rest/"
 
 ft_as_log <- function(x) {
   stopifnot(is.logical(x))

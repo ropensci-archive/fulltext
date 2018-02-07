@@ -24,7 +24,8 @@
 microsoft_search <- function(query, count = 10, offset = 0, orderby = NULL,
   atts = c("Id", "AA.AuN", "J.JN", "Ti", "Y", "E", "CC"), key = NULL, ...) {
 
-  out <- microdemic::ma_evaluate(query, count, offset, orderby, atts, key, ...)
+  out <- microdemic::ma_evaluate(query = query, count = count, offset = offset, 
+    orderby = orderby, atts = atts, key = key, ...)
   ee <- rbl(lapply(out$E, function(z) {
     dat <- jsonlite::fromJSON(z)
     dat <- dat[names(dat) %in% c('DN', 'VFN', 'DOI', 'D')]
@@ -39,7 +40,8 @@ microsoft_search <- function(query, count = 10, offset = 0, orderby = NULL,
 microsoft_links <- function(query, count = 10, offset = 0, orderby = NULL,
   atts = c("Id", "AA.AuN", "J.JN", "Ti", "Y", "E", "CC"), key = NULL, ...) {
 
-  out <- microdemic::ma_evaluate(query, count, offset, orderby, atts, key, ...)
+  out <- microdemic::ma_evaluate(query = query, count = count, offset = offset, 
+    orderby = orderby, atts = atts, key = key, ...)
   ee <- stats::setNames(lapply(out$E, function(z) {
     dat <- jsonlite::fromJSON(z)
     S <- dat$S

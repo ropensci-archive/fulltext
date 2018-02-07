@@ -71,4 +71,7 @@ head(eupmc_fields())
 eupmc_xml('PMC3257301')
 }
 }
+\references{
+https://europepmc.org/RestfulWebService
+}
 \keyword{internal}
