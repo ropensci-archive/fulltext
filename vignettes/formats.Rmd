@@ -17,7 +17,7 @@ arXiv | [Y][arxivp] | N |  N |... |
 Bentham | [Y][bep] | N |  N |... |
 BiomedCentral | Y | N | N |... |
 bioRxiv | [Y][biorxivp] | N | N |... |
-CogentOA | [Y][coap] | N | N |... |
+CogentOA | Y | N | N |... |
 Copernicus | [Y][copp] | [Y][copx] ^[1] | N |... |
 De Gruyter | [Y][degrutp] | N | N |... |
 Dovepress | [Y][dovep] | N | N |... |
@@ -25,7 +25,7 @@ eLife | [Y][ep] | [Y][ex] | N |... |
 FrontiersIn | Y | Y ^[1] | Y | ReadCube in browser |
 Hindawi | [Y][hp] | [Y][hx] | [Y][he] | Don't show XML link on page  |
 Karger | [Y][kp] | N | N |... |
-MDPI | [Y][mdpip] | [Y][mdpix] | N |... |
+MDPI | [Y][mdpip] | Y | N |... |
 Nature | [Y][naturep] | N | N |... |
 PeerJ | [Y][peerjp] | [Y][peerjx] | N |... |
 Pensoft | [Y][pep] | [Y][pex] | N |... |
@@ -48,7 +48,6 @@ least for their open access journals.
 [ep]: https://cdn.elifesciences.org/articles/31770/elife-31770-v1.pdf
 [hp]: http://downloads.hindawi.com/journals/crid/2014/246965.pdf
 [kp]: http://www.karger.com/Article/Pdf/370302
-[coap]: http://cogentoa.tandfonline.com/doi/pdf/10.1080/23311908.2014.986922
 [copp]: http://www.biogeosciences.net/11/7331/2014/bg-11-7331-2014.pdf
 [bep]: http://benthamopen.com/contents/pdf/TONEUJ/TONEUJ-9-21.pdf
 [arxivp]: http://arxiv.org/pdf/1507.08559v1.pdf?
@@ -68,7 +67,6 @@ least for their open access journals.
 [ex]: https://cdn.elifesciences.org/articles/31770/elife-31770-v1.xml
 [hx]: http://downloads.hindawi.com/journals/tswj/2014/649260.xml
 [copx]: http://www.biogeosciences.net/11/7331/2014/bg-11-7331-2014.xml
-[mdpix]: http://www.mdpi.com/1999-4915/7/8/2817/xml
 [scielox]: http://www.scielo.br/scieloOrg/php/articleXML.php?pid=S1984-70332014000100004&lang=en
 
 [he]: http://downloads.hindawi.com/journals/crid/2014/246965.epub
