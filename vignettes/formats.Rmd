@@ -6,7 +6,7 @@
 
 ## Information on article formats
 
-There are various formats articles are provided in, including pdf, plain text, xml, json, and more. The following is non-exhaustive table of formats provided by publisher or journal. Examples are included for each publisher if they support the format - click on the `Y` to get an example file.
+There are various formats in which articles are provided by publishers, including pdf, plain text, xml, json, and more. The following is non-exhaustive table of formats provided by publisher or journal. Examples are included for each publisher if they support the format - click on the `Y` to get an example file.
 
 > Note: many of these journals are also in PMC, where some formats are provided: PDF, ePub.
 
@@ -17,14 +17,14 @@ arXiv | [Y][arxivp] | N |  N |... |
 Bentham | [Y][bep] | N |  N |... |
 BiomedCentral | Y | N | N |... |
 bioRxiv | [Y][biorxivp] | N | N |... |
-CogentOA | [Y][coap] | [Y][coax] | N |... |
+CogentOA | [Y][coap] | N | N |... |
 Copernicus | [Y][copp] | [Y][copx] ^[1] | N |... |
 De Gruyter | [Y][degrutp] | N | N |... |
 Dovepress | [Y][dovep] | N | N |... |
 eLife | [Y][ep] | [Y][ex] | N |... |
 FrontiersIn | Y | Y ^[1] | Y | ReadCube in browser |
 Hindawi | [Y][hp] | [Y][hx] | [Y][he] | Don't show XML link on page  |
-Karger | [Y][kp] | [Y][kx] | N |... |
+Karger | [Y][kp] | N | N |... |
 MDPI | [Y][mdpip] | [Y][mdpix] | N |... |
 Nature | [Y][naturep] | N | N |... |
 PeerJ | [Y][peerjp] | [Y][peerjx] | N |... |
@@ -32,9 +32,8 @@ Pensoft | [Y][pep] | [Y][pex] | N |... |
 PLoS | [Y][plp] | [Y][plx] ^[1] | N |... |
 Sage | Y | N | N |... |
 Scielo | [Y][scielop] | [Y][scielox] | N | May only be some journals |
-ScienceOpen | [Y][sciopp] | [Y][sciopx] | N |... |
 SERSC | [Y][serscp] | N | N |... |
-Springer Open | Y | Y | N |... |
+Springer Open | Y | N | N |... |
 
 ^1: NLM-DTD XML schema - http://dtd.nlm.nih.gov/
 ^2: Wiley and Elsevier do have a few open access journals each,
@@ -61,18 +60,15 @@ least for their open access journals.
 [naturep]: http://www.nature.com/articles/srep12550.pdf
 [dovep]: http://www.dovepress.com/getfile.php?fileID=24696
 [scielop]: http://www.scielo.br/pdf/cbab/v14n1/04.pdf
-[sciopp]: https://www.scienceopen.com/document_file/1812366b-8712-46f8-b8ec-581d885c7ae5/PubMedCentral/1812366b-8712-46f8-b8ec-581d885c7ae5.pdf
+
 
 [plx]: http://www.plosone.org/article/fetchObjectAttachment.action?uri=info%3Adoi%2F10.1371%2Fjournal.pone.0107510&representation=XML
 [peerjx]: https://peerj.com/articles/1142.xml
 [pex]: http://zookeys.pensoft.net/lib/ajax_srv/article_elements_srv.php?action=download_xml&item_id=4351
 [ex]: https://cdn.elifesciences.org/articles/31770/elife-31770-v1.xml
 [hx]: http://downloads.hindawi.com/journals/tswj/2014/649260.xml
-[kx]: http://downloads.hindawi.com/journals/crid/2014/246965.pdf
-[coax]: http://cogentoa.tandfonline.com/doi/xml/10.1080/23311908.2014.986922
 [copx]: http://www.biogeosciences.net/11/7331/2014/bg-11-7331-2014.xml
 [mdpix]: http://www.mdpi.com/1999-4915/7/8/2817/xml
 [scielox]: http://www.scielo.br/scieloOrg/php/articleXML.php?pid=S1984-70332014000100004&lang=en
-[sciopx]: https://www.scienceopen.com/document/vid/35b1397c-0f4f-438c-98de-56d87439d520?4-1.ILinkListener-header-download~dropdown-xml~link
 
 [he]: http://downloads.hindawi.com/journals/crid/2014/246965.epub
