@@ -38,7 +38,7 @@ ft_browse <- function(x, what = "macrodocs", browse = TRUE) {
 }
 
 md <- function() "http://macrodocs.org/?doi="
-dx <- function() "http://dx.doi.org/"
+dx <- function() "https://doi.org/"
 
 get_doi <- function(x){
   tmp <- ft_compact(sapply(x, function(v){
@@ -101,7 +101,7 @@ template <-
             </h4>
           </div>
           <div id="collapseOne{{collapse}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne{{collapse}}">
-            <div class="panel-body"> <a href="http://dx.doi.org/{{doi}}" target="_blank" class="btn btn-info btn-xs" role="button"><i class="fa fa-link"></i></a> &nbsp;
+            <div class="panel-body"> <a href="https://doi.org/{{doi}}" target="_blank" class="btn btn-info btn-xs" role="button"><i class="fa fa-link"></i></a> &nbsp;
               {{target}}
             </div>
           </div>
