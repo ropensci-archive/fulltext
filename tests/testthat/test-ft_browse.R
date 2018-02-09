@@ -37,7 +37,7 @@ test_that("ft_browse returns...", {
   expect_match(aa, "eLife")
   expect_match(bb, "fphar")
   expect_match(cc, "eLife")
-  expect_equal(cc, "http://dx.doi.org/10.7554/eLife.04251")
+  expect_equal(cc, "https://doi.org/10.7554/eLife.04251")
   
   expect_match(xml_text(xml_children(xml_children(aa_txt)[[2]])[[1]]), "Macrodocs")
   

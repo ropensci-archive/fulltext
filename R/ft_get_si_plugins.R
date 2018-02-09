@@ -104,7 +104,7 @@ get_si_figshare <- function(doi, si, save.name=NA, dir=NA, cache=TRUE, ...){
     save.name <- .save.name(doi, save.name, si)
 
     #Find, download, and return
-    html <- read_html(httr::content(GET(paste0("http://dx.doi.org/", doi)), "text"))
+    html <- read_html(httr::content(GET(paste0("https://doi.org/", doi)), "text"))
     results <- fromJSON(xml_text(xml_find_first(html, "//script[@type=\"text/json\"]")))$article$files
     if (is.numeric(si)) {
       if (si > nrow(results)) {
@@ -193,7 +193,7 @@ get_si_biorxiv <- function(doi, si, save.name=NA, dir=NA, cache=TRUE, ...){
     save.name <- .save.name(doi, save.name, si)
 
     #Find, download, and return
-    url <- paste0(.url.redir(paste0("http://dx.doi.org/", doi)), ".figures-only")
+    url <- paste0(.url.redir(paste0("https://doi.org/", doi)), ".figures-only")
     file <- .grep.url(url, "/highwire/filestream/[a-z0-9A-Z\\./_-]*", si)
     return(.download(.url.redir(paste0("http://biorxiv.org",file)), dir, save.name, cache, ...))
 }
