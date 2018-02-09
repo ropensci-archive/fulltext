@@ -238,6 +238,7 @@ quanteda::corpus(x)
 
 * Scott Chamberlain <http://github.com/sckott>
 * Will Pearse <https://github.com/willpearse>
+* Katrin Leinweber <https://github.com/katrinleinweber>
 
 ## Meta
 
