@@ -3,10 +3,15 @@ sudo: false
 cache: packages
 dist: trusty
 
-r: 
-  - oldrel
-  - release
-  - devel
+matrix:
+  include:
+    - os: linux
+      r: oldrel
+    - os: linux
+      r: release
+      env: R_CODECOV=true
+    - os: linux
+      r: devel
 
 r_github_packages:
   - jimhester/covr
@@ -18,9 +23,6 @@ addons:
 
 after_success:
   - Rscript -e 'covr::codecov()'
-
-before_script:
-  - Rscript -e "install.packages('Rcampdf', repos = 'http://datacube.wu.ac.at/', type = 'source')"
 
 notifications:
   email:
