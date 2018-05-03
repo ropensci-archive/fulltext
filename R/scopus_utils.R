@@ -56,7 +56,10 @@ scopus_search_loop <- function(query = NULL, count = 25, type = "search",
     } else {
       out[[i]] <- res$`search-results`$entry
       links <- res$`search-results`$link
+      # next url to use
       url <- links[links$`@ref` == "next", '@href']
+      # and set args to an empty list()
+      args <- list()
       if (NROW(rbl(out)) >= min(c(count, tot))) end <- TRUE
     }
   }

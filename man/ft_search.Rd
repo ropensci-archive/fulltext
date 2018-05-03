@@ -23,23 +23,28 @@ entrez, arxiv, biorxiv, europmc, scopus, or ma}
 \item{start}{(integer) Record number to start at. Only used for
 'scopus' right now. default: 0}
 
-\item{plosopts}{(list) PLOS options. See \code{\link[rplos:searchplos]{rplos::searchplos()}}}
+\item{plosopts}{(list) PLOS options, a named list. See \code{\link[rplos:searchplos]{rplos::searchplos()}}}
 
-\item{bmcopts}{(list) BMC options. See \code{\link[=bmc_search]{bmc_search()}}}
+\item{bmcopts}{(list) BMC options, a named list. See \code{\link[=bmc_search]{bmc_search()}}}
 
-\item{crossrefopts}{(list) Crossref options. See \code{\link[rcrossref:cr_works]{rcrossref::cr_works()}}}
+\item{crossrefopts}{(list) Crossref options, a named list.
+See \code{\link[rcrossref:cr_works]{rcrossref::cr_works()}}}
 
-\item{entrezopts}{(list) Entrez options. See \code{\link[rentrez:entrez_search]{rentrez::entrez_search()}}}
+\item{entrezopts}{(list) Entrez options, a named list.
+See \code{\link[rentrez:entrez_search]{rentrez::entrez_search()}}}
 
-\item{arxivopts}{(list) arxiv options. See \code{\link[aRxiv:arxiv_search]{aRxiv::arxiv_search()}}}
+\item{arxivopts}{(list) arxiv options, a named list.
+See \code{\link[aRxiv:arxiv_search]{aRxiv::arxiv_search()}}}
 
-\item{biorxivopts}{(list) biorxiv options. See \code{\link[=biorxiv_search]{biorxiv_search()}}}
+\item{biorxivopts}{(list) biorxiv options, a named list.
+See \code{\link[=biorxiv_search]{biorxiv_search()}}}
 
-\item{euroopts}{(list) Euro PMC options. See \code{\link[=eupmc_search]{eupmc_search()}}}
+\item{euroopts}{(list) Euro PMC options, a named list. See \code{\link[=eupmc_search]{eupmc_search()}}}
 
-\item{scopusopts}{(list) Scopus options. See \code{\link[=scopus_search]{scopus_search()}}}
+\item{scopusopts}{(list) Scopus options, a named list.
+See \code{\link[=scopus_search]{scopus_search()}}}
 
-\item{maopts}{(list) Microsoft Academic options. See
+\item{maopts}{(list) Microsoft Academic options, a named list. See
 \code{\link[=microsoft_search]{microsoft_search()}}}
 
 \item{...}{ignored right now}
@@ -68,6 +73,10 @@ a named list.
 See \strong{Rate Limits} and \strong{Authentication} in
 \link{fulltext-package} for rate limiting and authentication information,
 respectively
+}
+\note{
+for all \code{*opts} parameters, ee the function linked to in
+the parameter definition for what you can pass to it.
 }
 \examples{
 # List publishers included

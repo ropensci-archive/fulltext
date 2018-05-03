@@ -19,17 +19,25 @@
 #' @param limit (integer) Number of records to return. default: 10
 #' @param start (integer) Record number to start at. Only used for 
 #' 'scopus' right now. default: 0
-#' @param plosopts (list) PLOS options. See [rplos::searchplos()]
-#' @param bmcopts (list) BMC options. See [bmc_search()]
-#' @param crossrefopts (list) Crossref options. See [rcrossref::cr_works()]
-#' @param entrezopts (list) Entrez options. See [rentrez::entrez_search()]
-#' @param arxivopts (list) arxiv options. See [aRxiv::arxiv_search()]
-#' @param biorxivopts (list) biorxiv options. See [biorxiv_search()]
-#' @param euroopts (list) Euro PMC options. See [eupmc_search()]
-#' @param scopusopts (list) Scopus options. See [scopus_search()]
-#' @param maopts (list) Microsoft Academic options. See 
+#' @param plosopts (list) PLOS options, a named list. See [rplos::searchplos()]
+#' @param bmcopts (list) BMC options, a named list. See [bmc_search()]
+#' @param crossrefopts (list) Crossref options, a named list. 
+#' See [rcrossref::cr_works()]
+#' @param entrezopts (list) Entrez options, a named list. 
+#' See [rentrez::entrez_search()]
+#' @param arxivopts (list) arxiv options, a named list. 
+#' See [aRxiv::arxiv_search()]
+#' @param biorxivopts (list) biorxiv options, a named list. 
+#' See [biorxiv_search()]
+#' @param euroopts (list) Euro PMC options, a named list. See [eupmc_search()]
+#' @param scopusopts (list) Scopus options, a named list. 
+#' See [scopus_search()]
+#' @param maopts (list) Microsoft Academic options, a named list. See 
 #' [microsoft_search()]
 #' @param ... ignored right now
+#' 
+#' @note for all `*opts` parameters, ee the function linked to in 
+#' the parameter definition for what you can pass to it. 
 #' 
 #' @details Each of `plosopts`, `scopusopts`, etc. expect 
 #' a named list.
