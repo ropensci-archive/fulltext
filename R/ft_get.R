@@ -586,7 +586,8 @@ publisher_plugin <- function(x) {
     `292` = plugin_get_royalsocchem,
     `263` = plugin_get_ieee,
     `221` = plugin_get_aaas,
-    `341` = plugin_get_pnas
+    `341` = plugin_get_pnas,
+    `345` = plugin_get_microbiology
   )
 }
 
@@ -613,6 +614,7 @@ get_pub_name <- function(x) {
          `263` = "ieee",
          `221` = "aaas",
          `341` = "pnas",
+         `345` = "microbiology",
          "crossref"
   )
 }
@@ -640,6 +642,7 @@ get_tm_name <- function(x) {
          `263` = "ieee",
          `221` = "aaas",
          `341` = "pnas",
+         `345` = "microbiology",
          "crossref"
   )
 }
@@ -649,7 +652,8 @@ get_publisher <- function(x) {
   # FIXME: at some point replace this with 
   #   mapping of Crossref member number to a unique short name
   pub <- gsub("/|\\.|-|:|;|\\(|\\)|<|>|\\s", "_",  tolower(z$data$publisher))
-  issn <- z$data$ISSN
+  names(z$data) <- tolower(names(z$data))
+  issn <- z$data$issn
   if (length(z) == 0) {
     NULL
   } else {
