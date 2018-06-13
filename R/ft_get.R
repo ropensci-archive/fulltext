@@ -587,7 +587,8 @@ publisher_plugin <- function(x) {
     `263` = plugin_get_ieee,
     `221` = plugin_get_aaas,
     `341` = plugin_get_pnas,
-    `345` = plugin_get_microbiology
+    `345` = plugin_get_microbiology,
+    `10` = plugin_get_jama
   )
 }
 
@@ -615,6 +616,7 @@ get_pub_name <- function(x) {
          `221` = "aaas",
          `341` = "pnas",
          `345` = "microbiology",
+         `10` = "jama",
          "crossref"
   )
 }
@@ -643,6 +645,7 @@ get_tm_name <- function(x) {
          `221` = "aaas",
          `341` = "pnas",
          `345` = "microbiology",
+         `10` = "jama",
          "crossref"
   )
 }
