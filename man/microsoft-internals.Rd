@@ -7,10 +7,12 @@
 \title{Microsoft Academic search}
 \usage{
 microsoft_search(query, count = 10, offset = 0, orderby = NULL,
-  atts = c("Id", "AA.AuN", "J.JN", "Ti", "Y", "E", "CC"), key = NULL, ...)
+  atts = c("Id", "AA.AuN", "J.JN", "Ti", "Y", "E", "CC"), key = NULL,
+  ...)
 
 microsoft_links(query, count = 10, offset = 0, orderby = NULL,
-  atts = c("Id", "AA.AuN", "J.JN", "Ti", "Y", "E", "CC"), key = NULL, ...)
+  atts = c("Id", "AA.AuN", "J.JN", "Ti", "Y", "E", "CC"), key = NULL,
+  ...)
 }
 \arguments{
 \item{query}{(character) query terms}

@@ -7,7 +7,8 @@
 \usage{
 ft_browse(x, what = "macrodocs", browse = TRUE)
 
-ft_browse_sections(x, what = "abstract", output = NULL, browse = TRUE)
+ft_browse_sections(x, what = "abstract", output = NULL,
+  browse = TRUE)
 }
 \arguments{
 \item{x}{An object of class \code{ft_data} - the output from a call to

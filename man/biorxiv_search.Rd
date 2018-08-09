@@ -4,7 +4,8 @@
 \alias{biorxiv_search}
 \title{Biorxiv search}
 \usage{
-biorxiv_search(query, limit = 10, date_from = NULL, date_to = NULL, ...)
+biorxiv_search(query, limit = 10, date_from = NULL, date_to = NULL,
+  ...)
 }
 \arguments{
 \item{query}{query terms}

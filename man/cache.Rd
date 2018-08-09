@@ -6,7 +6,8 @@
 \alias{cache_options_get}
 \title{Set or get cache options}
 \usage{
-cache_options_set(path = "fulltext", backend = "ext", overwrite = FALSE)
+cache_options_set(path = "fulltext", backend = "ext",
+  overwrite = FALSE)
 
 cache_options_get()
 }

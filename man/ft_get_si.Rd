@@ -4,10 +4,10 @@
 \alias{ft_get_si}
 \title{Download supplementary materials from journals}
 \usage{
-ft_get_si(x, si, from = c("auto", "plos", "wiley", "science", "proceedings",
-  "figshare", "esa_data_archives", "esa_archives", "biorxiv", "epmc"),
-  save.name = NA, dir = NA, cache = TRUE, vol = NA, issue = NA,
-  list = FALSE, timeout = 10, ...)
+ft_get_si(x, si, from = c("auto", "plos", "wiley", "science",
+  "proceedings", "figshare", "esa_data_archives", "esa_archives",
+  "biorxiv", "epmc"), save.name = NA, dir = NA, cache = TRUE,
+  vol = NA, issue = NA, list = FALSE, timeout = 10, ...)
 }
 \arguments{
 \item{x}{One of: vector of DOI(s) of article(s) (a
@@ -117,7 +117,7 @@ an \code{esa_data_archive} whose article code is E092-201-D1;
 \url{http://esapubs.org/Archive/ecol/E093/059/default.htm} is a
 \code{esa_archive} whose code is E093-059-D1.}
 \item{biorxiv}{Load from bioRxiv (e.g.,
-\url{http://biorxiv.org/content/early/2015/09/11/026575})} 
+\url{http://biorxiv.org/content/early/2015/09/11/026575})}
 \item{epmc}{Look up an article on the Europe PubMed Central, and
 then download the file using their supplementary materials API
 (\url{http://europepmc.org/restfulwebservice}). See comments above
