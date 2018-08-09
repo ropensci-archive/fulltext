@@ -60,6 +60,9 @@ We'd love your feedback. Let us know what you think in [the issue tracker](https
 
 Article full text formats by publisher:  [https://github.com/ropensci/fulltext/blob/master/vignettes/formats.Rmd](https://github.com/ropensci/fulltext/blob/master/vignettes/formats.Rmd)
 
+_Important Note_: Supplementary data from papers is being moved to the [suppdata][] package.
+Once `suppdata` is on CRAN, we'll deprecate the `ft_get_si` function here; after which point `suppdata` focuses on supplementary materials and `fulltext` focuses on the papers themselves.
+
 ## Installation
 
 Stable version from CRAN
@@ -93,7 +96,7 @@ ft_search(query = 'ecology', from = 'crossref')
 #> Query:
 #>   [ecology] 
 #> Found:
-#>   [PLoS: 0; BMC: 0; Crossref: 144283; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
+#>   [PLoS: 0; BMC: 0; Crossref: 152831; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
 #> Returned:
 #>   [PLoS: 0; BMC: 0; Crossref: 10; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0]
 ```
@@ -107,8 +110,8 @@ ft_search(query = 'ecology', from = 'crossref')
 res1 <- ft_search(query = 'ecology', from = 'entrez', limit = 5)
 ft_links(res1)
 #> <fulltext links>
-#> [Found] 5 
-#> [IDs] ID_29321529 ID_29321528 ID_29321519 ID_29321473 ID_29319501 ...
+#> [Found] 4 
+#> [IDs] ID_30082897 ID_30082725 ID_30082706 ID_30042191 ...
 ```
 
 Or pass in DOIs directly
@@ -117,8 +120,8 @@ Or pass in DOIs directly
 ```r
 ft_links(res1$entrez$data$doi, from = "entrez")
 #> <fulltext links>
-#> [Found] 5 
-#> [IDs] ID_29321529 ID_29321528 ID_29321519 ID_29321473 ID_29319501 ...
+#> [Found] 4 
+#> [IDs] ID_30082897 ID_30082725 ID_30082706 ID_30042191 ...
 ```
 
 ## Get full text
@@ -212,7 +215,7 @@ pdf <- system.file("examples", "example2.pdf", package = "fulltext")
 
 ```r
 ft_extract(pdf)
-#> <document>/Library/Frameworks/R.framework/Versions/3.4/Resources/library/fulltext/examples/example2.pdf
+#> <document>/Library/Frameworks/R.framework/Versions/3.5/Resources/library/fulltext/examples/example2.pdf
 #>   Title: pone.0107412 1..10
 #>   Producer: Acrobat Distiller 9.0.0 (Windows); modified using iText 5.0.3 (c) 1T3XT BVBA
 #>   Creation date: 2014-09-18
@@ -225,14 +228,17 @@ ft_extract(pdf)
 cache_options_set(path = (td <- 'foobar'))
 res <- ft_get(c('10.7554/eLife.03032', '10.7554/eLife.32763'), type = "pdf")
 library(readtext)
+#> Error in library(readtext): there is no package called 'readtext'
 x <- readtext::readtext(file.path(cache_options_get()$path, "*.pdf"))
+#> Error in loadNamespace(name): there is no package called 'readtext'
 ```
 
 
 ```r
 library(quanteda)
+#> Error in library(quanteda): there is no package called 'quanteda'
 quanteda::corpus(x)
-#> Corpus consisting of 2 documents and 1 docvar.
+#> Error in loadNamespace(name): there is no package called 'quanteda'
 ```
 
 ## Contributors
@@ -249,3 +255,5 @@ quanteda::corpus(x)
 * Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
 
 [![rofooter](https://ropensci.org/public_images/github_footer.png)](https://ropensci.org)
+
+[suppdata]: https://github.com/ropensci/suppdata
