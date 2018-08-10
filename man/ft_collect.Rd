@@ -5,7 +5,7 @@
 \alias{ft_text}
 \alias{ft_text.default}
 \alias{ft_text.ft_data}
-\title{Collect data from a remote source in fulltext}
+\title{Collect article text from local files}
 \usage{
 ft_collect(x, ...)
 
@@ -25,9 +25,10 @@ an object of class \code{ft_data}, but the \code{data} slot should have
 character string of text from the XML/plain text/PDF file
 }
 \description{
-\code{ft_collect} grabs full text data from a remote storage
-device. \code{ft_text} is a convenience function to grab the nested text
-data and bring it up in the list for easier access
+\code{ft_collect} grabs full text data from file paths in your
+\code{ft_data} object (result of call to \code{ft_get()}). \code{ft_text} is a
+convenience function to grab the nested text data and bring it up in
+the list for easier access
 }
 \details{
 The result of this call is actual text you can read

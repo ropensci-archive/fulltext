@@ -1,8 +1,9 @@
-#' @title Collect data from a remote source in fulltext
+#' @title Collect article text from local files
 #' 
-#' @description `ft_collect` grabs full text data from a remote storage 
-#' device. `ft_text` is a convenience function to grab the nested text 
-#' data and bring it up in the list for easier access
+#' @description `ft_collect` grabs full text data from file paths in your 
+#' `ft_data` object (result of call to `ft_get()`). `ft_text` is a 
+#' convenience function to grab the nested text data and bring it up in 
+#' the list for easier access
 #' 
 #' @export
 #' @param x Input. An object of class `ft_data`

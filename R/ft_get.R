@@ -1,11 +1,11 @@
-#' @title Get full text
+#' @title Download full text articles
 #'
 #' @description `ft_get` is a one stop shop to fetch full text of articles,
 #' either XML or PDFs. We have specific support for PLOS via the
 #' \pkg{rplos} package, Entrez via the \pkg{rentrez} package, and arXiv via the
 #' \pkg{aRxiv} package. For other publishers, we have helpers to `ft_get` to
-#' sort out links for full text based on user input. See `Details` for
-#' help on how to use this function.
+#' sort out links for full text based on user input. Articles are saved on 
+#' disk. See `Details` for help on how to use this function.
 #'
 #' @export
 #'

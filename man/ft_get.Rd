@@ -3,7 +3,7 @@
 \name{ft_get}
 \alias{ft_get}
 \alias{ft_get_ls}
-\title{Get full text}
+\title{Download full text articles}
 \usage{
 ft_get(x, from = NULL, type = "xml", try_unknown = TRUE,
   plosopts = list(), bmcopts = list(), entrezopts = list(),
@@ -82,8 +82,8 @@ but until then this is \code{NULL}
 either XML or PDFs. We have specific support for PLOS via the
 \pkg{rplos} package, Entrez via the \pkg{rentrez} package, and arXiv via the
 \pkg{aRxiv} package. For other publishers, we have helpers to \code{ft_get} to
-sort out links for full text based on user input. See \code{Details} for
-help on how to use this function.
+sort out links for full text based on user input. Articles are saved on
+disk. See \code{Details} for help on how to use this function.
 }
 \details{
 There are various ways to use \code{ft_get}:
