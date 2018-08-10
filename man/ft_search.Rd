@@ -73,6 +73,9 @@ a named list.
 See \strong{Rate Limits} and \strong{Authentication} in
 \link{fulltext-package} for rate limiting and authentication information,
 respectively
+
+See \url{https://dev.elsevier.com/tips/ScopusSearchTips.htm} for help/tips
+on searching with Scopus
 }
 \note{
 for all \code{*opts} parameters, ee the function linked to in

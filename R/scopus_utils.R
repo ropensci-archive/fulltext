@@ -16,8 +16,11 @@
 #' 5 days, then you have to wait 2 days for the clock to reset, than you'll 
 #' be able to make 20K again. 
 #' 
-#' See \url{https://dev.elsevier.com/api_key_settings.html} for rate 
+#' See <https://dev.elsevier.com/api_key_settings.html> for rate 
 #' limit information.
+#' 
+#' See <https://dev.elsevier.com/tips/ScopusSearchTips.htm> for help/tips
+#' on searching
 #' @examples \dontrun{
 #' res <- scopus_search(query = "ecology")
 #' res

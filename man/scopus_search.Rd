@@ -34,6 +34,9 @@ be able to make 20K again.
 
 See \url{https://dev.elsevier.com/api_key_settings.html} for rate
 limit information.
+
+See \url{https://dev.elsevier.com/tips/ScopusSearchTips.htm} for help/tips
+on searching
 }
 \examples{
 \dontrun{

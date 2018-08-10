@@ -45,6 +45,9 @@
 #' @details See **Rate Limits** and **Authentication** in 
 #' [fulltext-package] for rate limiting and authentication information,
 #' respectively
+#' 
+#' See <https://dev.elsevier.com/tips/ScopusSearchTips.htm> for help/tips
+#' on searching with Scopus
 #'
 #' @return An object of class `ft`, and objects of class `ft_ind`
 #' within each source. You can access each data source with `$`
