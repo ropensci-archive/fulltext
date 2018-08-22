@@ -58,7 +58,7 @@ within each source. You can access each data source with \code{$}
 across many publishers and repositories. We currently support search for
 PLOS via the  \pkg{rplos} package, Crossref via the \pkg{rcrossref}
 package, Entrez via the \pkg{rentrez} package, arXiv via the \pkg{aRxiv}
-package, and BMC, Biorxiv, EueroPMC, and Scopus via internal helper
+package, and BMC, Biorxiv, EuropePMC, and Scopus via internal helper
 functions in this package.
 
 Many publishers content is searchable via Crossref and Entrez - of course
