@@ -14,8 +14,8 @@
 #'
 #' @export
 #' @param query (character) Query terms
-#' @param from (character) Source to query, one of more of plos, bmc, crossref,
-#' entrez, arxiv, biorxiv, europmc, scopus, or ma
+#' @param from (character) Source to query, one or more of \code{"plos"}, \code{"bmc"}, \code{"crossref"},
+#' \code{"entrez"}, \code{"arxiv"}, \code{"biorxiv"}, \code{"europmc"}, \code{"scopus"}, or \code{"ma"}
 #' @param limit (integer) Number of records to return. default: 10
 #' @param start (integer) Record number to start at. Only used for 
 #' 'scopus' right now. default: 0
