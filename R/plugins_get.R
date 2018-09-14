@@ -96,6 +96,7 @@ plugin_get_generator <- function(srce, fun) {
     }
     
     # do request
+    ids <- na.omit(ids)
     callopts <- list(...)
     if (any(grepl(eval(srce), sources))) {
       if (!any(grepl("arxiv", sources))) check_dois(ids)
@@ -183,17 +184,46 @@ plos_wrapper <- function(dois, type, ...) {
 
 # Entrez - wrapper around rentrez::entrez_search/rentrez::entrez_fetch
 # type: only xml
-entrez_ft <- function(ids, type = "xml", ...){
+entrez_ft <- function(ids, type = "xml", ...) {
+  ids <- na.omit(ids)
   db <- "pmc"
-  res <- rentrez::entrez_search(db = "pmc",
-                                term = paste0(sprintf('%s[doi]', ids),
-                                              collapse = "|"))
+  if (length(ids) > 50) {
+    chunk_size <- 50
+    ids_chunked <- split(ids, ceiling(seq_along(ids)/chunk_size))
+    out <- list()
+    for (i in seq_along(ids_chunked)) {
+      out[[i]] <- rentrez::entrez_search(
+        db = db,
+        term = paste0(sprintf('%s[doi]', ids_chunked[[i]]), collapse = "|")
+      )
+    }
+    res <- list(ids = unlist(lapply(out, function(z) z$ids)))
+  } else {
+    res <- rentrez::entrez_search(
+      db = db,
+      term = paste0(sprintf('%s[doi]', ids), collapse = "|")
+    )
+  }
   
   if (length(res$ids) == 0) {
     db <- 'pubmed'
-    res <- rentrez::entrez_search(db = "pubmed",
-                                  term = paste0(sprintf('%s[doi]', ids),
-                                                collapse = "|"))
+    if (length(ids) > 50) {
+      chunk_size <- 50
+      ids_chunked <- split(ids, ceiling(seq_along(ids)/chunk_size))
+      out <- list()
+      for (i in seq_along(ids_chunked)) {
+        out[[i]] <- rentrez::entrez_search(
+          db = db,
+          term = paste0(sprintf('%s[doi]', ids_chunked[[i]]), collapse = "|")
+        )
+      }
+      res <- list(ids = unlist(lapply(out, function(z) z$ids)))
+    } else {
+      res <- rentrez::entrez_search(
+        db = db,
+        term = paste0(sprintf('%s[doi]', ids), collapse = "|")
+      )
+    }
   }
 
   if (length(res$ids) == 0) return(NULL)
@@ -207,7 +237,7 @@ entrez_ft <- function(ids, type = "xml", ...){
     invisible(rentrez::entrez_fetch(db = db, id = z, 
       rettype = "xml", config = httr::write_disk(path, cache_options_get()$overwrite)))
     ft_object(path, z, 'xml')
-  }), ids)
+  }), res$ids)
 }
 
 # type: xml only presumably
