@@ -15,8 +15,8 @@ ft_search_ls()
 \arguments{
 \item{query}{(character) Query terms}
 
-\item{from}{(character) Source to query, one of more of plos, bmc, crossref,
-entrez, arxiv, biorxiv, europmc, scopus, or ma}
+\item{from}{(character) Source to query, one or more of \code{"plos"}, \code{"bmc"}, \code{"crossref"},
+\code{"entrez"}, \code{"arxiv"}, \code{"biorxiv"}, \code{"europmc"}, \code{"scopus"}, or \code{"ma"}}
 
 \item{limit}{(integer) Number of records to return. default: 10}
 
@@ -61,7 +61,7 @@ package, Entrez via the \pkg{rentrez} package, arXiv via the \pkg{aRxiv}
 package, and BMC, Biorxiv, EuropePMC, and Scopus via internal helper
 functions in this package.
 
-Many publishers content is searchable via Crossref and Entrez - of course
+Many publishers' content is searchable via Crossref and Entrez - of course
 this doesn't mean that we can get full text for those articles. In the
 output objects of this function, we attempt to help by indicating what
 license is used for articles.
