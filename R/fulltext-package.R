@@ -114,6 +114,7 @@
 #' @importFrom microdemic ma_abstract ma_evaluate
 #' @importFrom storr storr_rds
 #' @importFrom tibble as_tibble
+#' @importFrom stats na.omit
 #' @name fulltext-package
 #' @aliases fulltext
 #' @docType package

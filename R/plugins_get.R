@@ -96,7 +96,7 @@ plugin_get_generator <- function(srce, fun) {
     }
     
     # do request
-    ids <- na.omit(ids)
+    ids <- stats::na.omit(ids)
     callopts <- list(...)
     if (any(grepl(eval(srce), sources))) {
       if (!any(grepl("arxiv", sources))) check_dois(ids)
@@ -185,7 +185,7 @@ plos_wrapper <- function(dois, type, ...) {
 # Entrez - wrapper around rentrez::entrez_search/rentrez::entrez_fetch
 # type: only xml
 entrez_ft <- function(ids, type = "xml", ...) {
-  ids <- na.omit(ids)
+  ids <- stats::na.omit(ids)
   db <- "pmc"
   if (length(ids) > 50) {
     chunk_size <- 50
