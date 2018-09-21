@@ -7,6 +7,9 @@
 #' @param start (integer/numeric) offset value, default: 0
 #' @param type (character) type of search, default: search
 #' @param search_type (character) search type, default: scopus
+#' @param facets (list) facets, see 
+#' https://dev.elsevier.com/tecdoc_api_facets.html for how to construct 
+#' facet queries
 #' @param key (character) api key. get a key at 
 #' <https://dev.elsevier.com/index.html>
 #' @param ... curl options passed on to [crul::HttpClient]
@@ -29,24 +32,45 @@
 #' 
 #' # looping through
 #' res <- scopus_search_loop(query = "ecology community elk cow")
+#' 
+#' # using facets
+#' ## scopus_search
+#' res <- scopus_search(query = "ecology", facets = "subjarea(count=5)")
+#' res
+#' res$`search-results`$link
+#' res$`search-results`$entry
+#' res$`search-results`$facet
+#' 
+#' ## more examples
+#' x <- scopus_search(query = "ecology", facets = "language(count=4)", count = 1)
+#' x$`search-results`$facet
+#' x <- scopus_search(query = "ecology", facets = "pubyear(count=3);doctype();language(count=4)")
+#' x$`search-results`$facet
+#' 
+#' ## scopus_search_loop
+#' res <- scopus_search_loop(query = "ecology", facets = "subjarea(count=5)", count = 200)
+#' res$found
+#' head(res$results)
+#' res$facets
 #' }
 scopus_search <- function(query = NULL, count = 25, start = 0, type = "search", 
-                          search_type = "scopus", key = NULL, ... ) {
+                          search_type = "scopus", facets = NULL, key = NULL, ...) {
   key <- check_key_scopus(key)
   if (count > 25) stop("'count' for Scopus must be 25 or less", call. = FALSE)
-  args <- ft_compact(list(query = query, count = count, start = start))
+  args <- ft_compact(list(query = query, count = count, start = start, 
+    facets = facets))
   scopus_get(file.path(scopus_base(), "search/scopus"), args, key, ...)
 }
 
 scopus_search_loop <- function(query = NULL, count = 25, type = "search", 
-                          search_type = "scopus", key = NULL, ... ) {
+                          search_type = "scopus", facets = NULL, key = NULL, ... ) {
   key <- check_key_scopus(key)
   lim <- if (count > 25) 25 else count
   #if (count > 25) stop("'count' for Scopus must be 25 or less", call. = FALSE)
-  args <- ft_compact(list(query = query, count = lim))
+  args <- ft_compact(list(query = query, count = lim, facets = facets))
   
   url <- file.path(scopus_base(), "search/scopus")
-  out <- list()
+  out <- outfacet <- list()
   end <- FALSE
   i <- 0
   while (!end) {
@@ -59,6 +83,7 @@ scopus_search_loop <- function(query = NULL, count = 25, type = "search",
     } else {
       out[[i]] <- res$`search-results`$entry
       links <- res$`search-results`$link
+      outfacet <- res$`search-results`$facet
       # next url to use
       url <- links[links$`@ref` == "next", '@href']
       # and set args to an empty list()
@@ -66,7 +91,7 @@ scopus_search_loop <- function(query = NULL, count = 25, type = "search",
       if (NROW(rbl(out)) >= min(c(count, tot))) end <- TRUE
     }
   }
-  list(results = rbl(out), found = tot)
+  list(results = rbl(out), facets = outfacet, found = tot)
 }
 
 scopus_abstract <- function(x, key, id_type = "doi", ...) {
@@ -105,7 +130,7 @@ check_key_scopus <- function(x) {
 scopus_error_handle <- function(x) {
   if (x$status_code > 201) {
     txt <- x$parse("UTF-8")
-    json <- jsonlite::fromJSON(x, flatten = TRUE)  
+    json <- jsonlite::fromJSON(txt, flatten = TRUE)  
     mssg <- json$`service-error`$status$statusText
     if (is.null(mssg)) x$raise_for_status()
     stop(mssg, call. = FALSE)

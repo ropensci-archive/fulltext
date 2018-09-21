@@ -5,7 +5,7 @@
 \title{Scopus search}
 \usage{
 scopus_search(query = NULL, count = 25, start = 0, type = "search",
-  search_type = "scopus", key = NULL, ...)
+  search_type = "scopus", facets = NULL, key = NULL, ...)
 }
 \arguments{
 \item{query}{(character) query terms, as a single character vector}
@@ -17,6 +17,10 @@ scopus_search(query = NULL, count = 25, start = 0, type = "search",
 \item{type}{(character) type of search, default: search}
 
 \item{search_type}{(character) search type, default: scopus}
+
+\item{facets}{(list) facets, see
+https://dev.elsevier.com/tecdoc_api_facets.html for how to construct
+facet queries}
 
 \item{key}{(character) api key. get a key at
 \url{https://dev.elsevier.com/index.html}}
@@ -47,6 +51,26 @@ res
 
 # looping through
 res <- scopus_search_loop(query = "ecology community elk cow")
+
+# using facets
+## scopus_search
+res <- scopus_search(query = "ecology", facets = "subjarea(count=5)")
+res
+res$`search-results`$link
+res$`search-results`$entry
+res$`search-results`$facet
+
+## more examples
+x <- scopus_search(query = "ecology", facets = "language(count=4)", count = 1)
+x$`search-results`$facet
+x <- scopus_search(query = "ecology", facets = "pubyear(count=3);doctype();language(count=4)")
+x$`search-results`$facet
+
+## scopus_search_loop
+res <- scopus_search_loop(query = "ecology", facets = "subjarea(count=5)", count = 200)
+res$found
+head(res$results)
+res$facets
 }
 }
 \keyword{internal}

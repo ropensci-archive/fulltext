@@ -104,6 +104,13 @@
 #'    limit = 100,
 #'    scopusopts = list(key = Sys.getenv('ELSEVIER_SCOPUS_KEY'))))
 #' res$scopus
+#' ## facets
+#' (res <- ft_search(query = 'ecology', from = 'scopus', 
+#'    scopusopts = list(
+#'      key = Sys.getenv('ELSEVIER_SCOPUS_KEY'), 
+#'      facets = "subjarea(count=5)"
+#'    ), limit = 5))
+#' res$scopus
 #'
 #' # PLOS, Crossref, and arxiv
 #' (res <- ft_search(query='ecology', from=c('plos','crossref','arxiv')))
