@@ -107,7 +107,7 @@
 #'    scopusopts = list(
 #'      key = Sys.getenv('ELSEVIER_SCOPUS_KEY'), 
 #'      facets = "subjarea(count=5)"
-#'    ), limit = 5))
+#'    ), limit = 100))
 #' res$scopus
 #'
 #' # PLOS, Crossref, and arxiv

@@ -13,7 +13,7 @@ ft_search(query, from = "plos", limit = 10, start = 0,
 ft_search_ls()
 }
 \arguments{
-\item{query}{(character) Query terms}
+\item{query}{(character) Query terms.}
 
 \item{from}{(character) Source to query, one or more of \code{"plos"}, \code{"bmc"}, \code{"crossref"},
 \code{"entrez"}, \code{"arxiv"}, \code{"biorxiv"}, \code{"europmc"}, \code{"scopus"}, or \code{"ma"}}
@@ -80,77 +80,4 @@ on searching with Scopus
 \note{
 for all \code{*opts} parameters, ee the function linked to in
 the parameter definition for what you can pass to it.
-}
-\examples{
-# List publishers included
-ft_search_ls()
-
-\dontrun{
-# Plos
-(res1 <- ft_search(query='ecology', from='plos'))
-res1$plos
-ft_search(query='climate change', from='plos', limit=500, 
-  plosopts=list(
-   fl=c('id','author','eissn','journal','counter_total_all',
-   'alm_twitterCount')))
-
-# Crossref
-(res2 <- ft_search(query='ecology', from='crossref'))
-res2$crossref
-
-# BioRxiv
-(res <- ft_search(query='owls', from='biorxiv'))
-res$biorxiv
-
-# Entrez
-(res <- ft_search(query='ecology', from='entrez'))
-res$entrez
-
-# arXiv
-(res <- ft_search(query='ecology', from='arxiv'))
-res$arxiv
-
-# BMC - can be very slow
-(res <- ft_search(query='ecology', from='bmc'))
-res$bmc
-
-# Europe PMC
-(res <- ft_search(query='ecology', from='europmc'))
-res$europmc
-
-# Scopus
-(res <- ft_search(query = 'ecology', from = 'scopus', limit = 100,
-   scopusopts = list(key = Sys.getenv('ELSEVIER_SCOPUS_KEY'))))
-res$scopus
-## pagination
-(res <- ft_search(query = 'ecology', from = 'scopus', 
-   scopusopts = list(key = Sys.getenv('ELSEVIER_SCOPUS_KEY')), limit = 5))
-(res <- ft_search(query = 'ecology', from = 'scopus', 
-   scopusopts = list(key = Sys.getenv('ELSEVIER_SCOPUS_KEY')), 
-   limit = 5, start = 5))
-## lots of results
-(res <- ft_search(query = "ecology community elk cow", from = 'scopus', 
-   limit = 100,
-   scopusopts = list(key = Sys.getenv('ELSEVIER_SCOPUS_KEY'))))
-res$scopus
-## facets
-(res <- ft_search(query = 'ecology', from = 'scopus', 
-   scopusopts = list(
-     key = Sys.getenv('ELSEVIER_SCOPUS_KEY'), 
-     facets = "subjarea(count=5)"
-   ), limit = 5))
-res$scopus
-
-# PLOS, Crossref, and arxiv
-(res <- ft_search(query='ecology', from=c('plos','crossref','arxiv')))
-res$plos
-res$arxiv
-res$crossref
-
-# Microsoft academic search
-key <- Sys.getenv("MICROSOFT_ACADEMIC_KEY")
-(res <- ft_search("Y='19'...", from = "microsoft", maopts = list(key = key)))
-res$ma
-res$ma$data$DOI
-}
 }
