@@ -136,11 +136,9 @@ plugin_search_scopus <- function(sources, query, limit, start, opts){
     opts$count <- limit
     opts$start <- start
     out <- do.call(scopus_search_loop, opts)
-    #df <- out$`search-results`$entry
     df <- out$results
     df$`@_fa` <- df$link <- NULL
     zz <- list(source = "scopus", 
-               #found = as.numeric(out$`search-results`$`opensearch:totalResults`), 
                found = out$found,
                data = df, 
                opts = opts)

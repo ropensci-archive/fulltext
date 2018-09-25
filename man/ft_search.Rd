@@ -15,8 +15,8 @@ ft_search_ls()
 \arguments{
 \item{query}{(character) Query terms}
 
-\item{from}{(character) Source to query, one of more of plos, bmc, crossref,
-entrez, arxiv, biorxiv, europmc, scopus, or ma}
+\item{from}{(character) Source to query, one or more of \code{"plos"}, \code{"bmc"}, \code{"crossref"},
+\code{"entrez"}, \code{"arxiv"}, \code{"biorxiv"}, \code{"europmc"}, \code{"scopus"}, or \code{"ma"}}
 
 \item{limit}{(integer) Number of records to return. default: 10}
 
@@ -61,7 +61,7 @@ package, Entrez via the \pkg{rentrez} package, arXiv via the \pkg{aRxiv}
 package, and BMC, Biorxiv, EuropePMC, and Scopus via internal helper
 functions in this package.
 
-Many publishers content is searchable via Crossref and Entrez - of course
+Many publishers' content is searchable via Crossref and Entrez - of course
 this doesn't mean that we can get full text for those articles. In the
 output objects of this function, we attempt to help by indicating what
 license is used for articles.
@@ -132,6 +132,13 @@ res$scopus
 (res <- ft_search(query = "ecology community elk cow", from = 'scopus', 
    limit = 100,
    scopusopts = list(key = Sys.getenv('ELSEVIER_SCOPUS_KEY'))))
+res$scopus
+## facets
+(res <- ft_search(query = 'ecology', from = 'scopus', 
+   scopusopts = list(
+     key = Sys.getenv('ELSEVIER_SCOPUS_KEY'), 
+     facets = "subjarea(count=5)"
+   ), limit = 5))
 res$scopus
 
 # PLOS, Crossref, and arxiv
