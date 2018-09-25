@@ -62,6 +62,8 @@ scopus_search <- function(query = NULL, count = 25, start = 0, type = "search",
   scopus_get(file.path(scopus_base(), "search/scopus"), args, key, ...)
 }
 
+
+#'@export 
 scopus_search_loop <- function(query = NULL, count = 25, type = "search", 
                           search_type = "scopus", facets = NULL, key = NULL, ... ) {
   key <- check_key_scopus(key)
@@ -94,12 +96,15 @@ scopus_search_loop <- function(query = NULL, count = 25, type = "search",
   list(results = rbl(out), facets = outfacet, found = tot)
 }
 
+#'@export
 scopus_abstract <- function(x, key, id_type = "doi", ...) {
   url <- file.path(scopus_base(), "abstract", id_type, x)
   json <- scopus_get(url, list(), key, ...)
   json$`abstracts-retrieval-response`$coredata$`dc:description`
 }
 
+
+#'@export
 scopus_get <- function(url, args, key, ...) {
   cli <- crul::HttpClient$new(
     url = url, 
@@ -112,7 +117,9 @@ scopus_get <- function(url, args, key, ...) {
   jsonlite::fromJSON(txt, flatten = TRUE)
 }
 
+
 scopus_base <- function() "https://api.elsevier.com/content"
+
 
 check_key_scopus <- function(x) {
   tmp <- if (is.null(x)) {
@@ -126,6 +133,7 @@ check_key_scopus <- function(x) {
   }
   return(tmp)
 }
+
 
 scopus_error_handle <- function(x) {
   if (x$status_code > 201) {
