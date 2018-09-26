@@ -63,7 +63,6 @@ scopus_search <- function(query = NULL, count = 25, start = 0, type = "search",
 }
 
 
-#'@export 
 scopus_search_loop <- function(query = NULL, count = 25, type = "search", 
                           search_type = "scopus", facets = NULL, key = NULL, ... ) {
   key <- check_key_scopus(key)
@@ -96,7 +95,6 @@ scopus_search_loop <- function(query = NULL, count = 25, type = "search",
   list(results = rbl(out), facets = outfacet, found = tot)
 }
 
-#'@export
 scopus_abstract <- function(x, key, id_type = "doi", ...) {
   url <- file.path(scopus_base(), "abstract", id_type, x)
   json <- scopus_get(url, list(), key, ...)
@@ -104,7 +102,6 @@ scopus_abstract <- function(x, key, id_type = "doi", ...) {
 }
 
 
-#'@export
 scopus_get <- function(url, args, key, ...) {
   cli <- crul::HttpClient$new(
     url = url, 
