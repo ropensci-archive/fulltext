@@ -141,6 +141,7 @@ plugin_search_scopus <- function(sources, query, limit, start, opts){
     zz <- list(source = "scopus", 
                found = out$found,
                data = df, 
+               facets = out$facets,
                opts = opts)
     structure(zz, class = "ft_ind", query = query)
   } else {
