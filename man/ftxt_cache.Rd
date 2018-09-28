@@ -38,5 +38,9 @@ ftxt_cache$details()
 }
 }
 \seealso{
-\link{cache}
+\link{cache}, \code{\link[=cache_file_info]{cache_file_info()}}
+
+Other caching-functions: \code{\link{cache_file_info}},
+  \code{\link{cache}}
 }
+\concept{caching-functions}

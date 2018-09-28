@@ -7,7 +7,8 @@
 #' @param backend (character) Only "ext" supported for now.
 #' @param overwrite (logical) overwrite cached file or not. Default: `FALSE`
 #' 
-#' @seealso [ftxt_cache]
+#' @seealso [ftxt_cache], [cache_file_info()]
+#' @family caching-functions
 #' 
 #' @section Managing cached files:
 #' The dafault cache directory is `paste0(rappdirs::user_cache_dir(), "/R/fulltext")`, 
