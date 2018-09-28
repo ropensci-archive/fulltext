@@ -7,7 +7,7 @@ Description: Provides a single interface to many sources of full text
     included for searching for articles, downloading full or partial
     text, downloading supplementary materials, converting to various
     data formats.
-Version: 1.0.1.9625
+Version: 1.0.1.9626
 License: MIT + file LICENSE
 Authors@R: c(
     person("Scott", "Chamberlain",

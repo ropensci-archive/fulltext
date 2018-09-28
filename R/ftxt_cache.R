@@ -3,7 +3,8 @@
 #' @export
 #' @name ftxt_cache
 #' 
-#' @seealso [cache]
+#' @seealso [cache], [cache_file_info()]
+#' @family caching-functions
 #' 
 #' @section Useful user functions for managing cached files:
 #' \itemize{
