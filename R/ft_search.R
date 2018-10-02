@@ -13,7 +13,7 @@
 #' license is used for articles.  
 #'
 #' @export
-#' @param query (character) Query terms
+#' @param query (character) Query terms. 
 #' @param from (character) Source to query, one or more of `"plos"`, `"bmc"`, `"crossref"`,
 #' `"entrez"`, `"arxiv"`, `"biorxiv"`, `"europmc"`, `"scopus"`, or `"ma"`
 #' @param limit (integer) Number of records to return. default: 10
@@ -90,18 +90,16 @@
 #' res$europmc
 #' 
 #' # Scopus
-#' (res <- ft_search(query = 'ecology', from = 'scopus', limit = 100,
-#'    scopusopts = list(key = Sys.getenv('ELSEVIER_SCOPUS_KEY'))))
-#' res$scopus
 #' ## pagination
-#' (res <- ft_search(query = 'ecology', from = 'scopus', 
-#'    scopusopts = list(key = Sys.getenv('ELSEVIER_SCOPUS_KEY')), limit = 5))
-#' (res <- ft_search(query = 'ecology', from = 'scopus', 
-#'    scopusopts = list(key = Sys.getenv('ELSEVIER_SCOPUS_KEY')), 
-#'    limit = 5, start = 5))
-#' ## lots of results
+#' If query fields are not specified the default search will use ALL fields
+#' including Article Title, Source Title, Abstract, Keywords, Authors, Affiliations, References etc
 #' (res <- ft_search(query = "ecology community elk cow", from = 'scopus', 
-#'    limit = 100,
+#'    limit = 100, scopusopts = list(key = Sys.getenv('ELSEVIER_SCOPUS_KEY'))))
+#' res$scopus
+#' This will return more results than if your search is limited to 
+#' fields (e.g. Title, Abstract, Keywords) that are traditionally searched for literature reviews
+#' If you wish to restrict your search to Title, Abstract and Keywords:
+#' (res <- ft_search(query = 'TITLE-ABS-KEY(ecology), from = 'scopus', limit = 100,
 #'    scopusopts = list(key = Sys.getenv('ELSEVIER_SCOPUS_KEY'))))
 #' res$scopus
 #' ## facets
@@ -109,7 +107,7 @@
 #'    scopusopts = list(
 #'      key = Sys.getenv('ELSEVIER_SCOPUS_KEY'), 
 #'      facets = "subjarea(count=5)"
-#'    ), limit = 5))
+#'    ), limit = 100))
 #' res$scopus
 #'
 #' # PLOS, Crossref, and arxiv
