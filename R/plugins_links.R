@@ -41,6 +41,7 @@ plugin_links_crossref <- function(sources, ids, opts, ...){
       rbind_fill(lapply(z, function(w) {
         data.frame(url = w[[1]], doi = attr(w, "doi"), type = attr(w, "type"),
                    member = attr(w, "member") %||% "", 
+                   intended_application = attr(w, "intended_application") %||% "",
                    stringsAsFactors = FALSE)
       }))
     })

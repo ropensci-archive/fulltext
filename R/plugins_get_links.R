@@ -15,8 +15,12 @@ plugin_get_links_crossref <- function(from, urls, opts = list(), type, ...) {
         member = unique(z$member)
       )
     } else if ("unspecified" %in% z$type) { 
+      tmp <- z[which(z$type == "unspecified"), "url"]
+      if (length(tmp) > 1) {
+        tmp <- z[which(z$type == "unspecified" && z$intended_application == "text-mining"), "url"]
+      }
       out[[ names(urls)[i] ]] <- list(
-        url = z[which(z$type == "unspecified"), "url"],
+        url = tmp,
         type = "unspecified",
         member = unique(z$member)
       )
