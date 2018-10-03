@@ -118,7 +118,6 @@ plugin_get_generator <- function(srce, fun) {
         return(list(found = NULL, dois = NULL, data = NULL, opts = opts))
       }
 
-      #attr(out, "format") <- type
       dat <- if (any(sources %in% c("arxiv", "biorxiv"))) {
         pprint_cache(out)
       } else {
