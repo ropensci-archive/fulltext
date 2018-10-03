@@ -33,7 +33,7 @@ Imports:
     jsonlite,
     rplos (>= 0.8.0),
     rcrossref (>= 0.8.0),
-    crminer (>= 0.1.4),
+    crminer (>= 0.1.6.9100),
     microdemic (>= 0.2.0),
     aRxiv,
     rentrez (>= 1.1.0),
@@ -48,6 +48,7 @@ Suggests:
     testthat,
     knitr
 RoxygenNote: 6.1.0
+Remotes: ropensci/crminer
 X-schema.org-applicationCategory: Literature 
 X-schema.org-keywords: text-ming, literature, pdf, xml, publications, citations, full-text, TDM
 X-schema.org-isPartOf: https://ropensci.org
