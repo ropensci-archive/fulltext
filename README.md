@@ -63,6 +63,7 @@ Article full text formats by publisher:  [https://github.com/ropensci/fulltext/b
 _Important Note_: Supplementary data from papers is being moved to the [suppdata][] package.
 Once `suppdata` is on CRAN, we'll deprecate the `ft_get_si` function here; after which point `suppdata` focuses on supplementary materials and `fulltext` focuses on the papers themselves.
 
+
 ## Installation
 
 Stable version from CRAN
@@ -96,7 +97,7 @@ ft_search(query = 'ecology', from = 'crossref')
 #> Query:
 #>   [ecology] 
 #> Found:
-#>   [PLoS: 0; BMC: 0; Crossref: 152831; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
+#>   [PLoS: 0; BMC: 0; Crossref: 154968; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
 #> Returned:
 #>   [PLoS: 0; BMC: 0; Crossref: 10; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0]
 ```
@@ -110,8 +111,8 @@ ft_search(query = 'ecology', from = 'crossref')
 res1 <- ft_search(query = 'ecology', from = 'entrez', limit = 5)
 ft_links(res1)
 #> <fulltext links>
-#> [Found] 4 
-#> [IDs] ID_30082897 ID_30082725 ID_30082706 ID_30042191 ...
+#> [Found] 3 
+#> [IDs] ID_30273121 ID_30201727 ID_30198842 ID_28667926 ...
 ```
 
 Or pass in DOIs directly
@@ -120,8 +121,8 @@ Or pass in DOIs directly
 ```r
 ft_links(res1$entrez$data$doi, from = "entrez")
 #> <fulltext links>
-#> [Found] 4 
-#> [IDs] ID_30082897 ID_30082725 ID_30082706 ID_30042191 ...
+#> [Found] 3 
+#> [IDs] ID_30273121 ID_30201727 ID_30198842 ID_28667926 ...
 ```
 
 ## Get full text
@@ -228,17 +229,14 @@ ft_extract(pdf)
 cache_options_set(path = (td <- 'foobar'))
 res <- ft_get(c('10.7554/eLife.03032', '10.7554/eLife.32763'), type = "pdf")
 library(readtext)
-#> Error in library(readtext): there is no package called 'readtext'
 x <- readtext::readtext(file.path(cache_options_get()$path, "*.pdf"))
-#> Error in loadNamespace(name): there is no package called 'readtext'
 ```
 
 
 ```r
 library(quanteda)
-#> Error in library(quanteda): there is no package called 'quanteda'
 quanteda::corpus(x)
-#> Error in loadNamespace(name): there is no package called 'quanteda'
+#> Corpus consisting of 2 documents and 0 docvars.
 ```
 
 ## Contributors
