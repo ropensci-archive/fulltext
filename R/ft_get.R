@@ -60,6 +60,7 @@
 #'     - `data`: if text extracted (see [ft_collect()]) the text will be here, 
 #'       but until then this is `NULL`
 #' - `opts`: the options given like article type, dois
+#' - `errors`: data.frame of errors, with two columns for article id and error
 #'
 #' @details There are various ways to use `ft_get`:
 #' \itemize{
@@ -152,6 +153,11 @@
 #' # If you just have DOIs and don't know the publisher
 #' ## PLOS
 #' ft_get('10.1371/journal.pone.0086169')
+#' 
+#' # Collect all errors from across papers
+#' #   similarly can combine from different publishers as well
+#' res <- ft_get(c('10.7554/eLife.03032', '10.7554/eLife.aaaa'), from = "elife")
+#' res$elife$errors
 #' 
 #' ## PeerJ
 #' ft_get('10.7717/peerj.228')

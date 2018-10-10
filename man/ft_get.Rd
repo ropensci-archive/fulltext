@@ -75,6 +75,7 @@ retrived this is \code{NULL}
 but until then this is \code{NULL}
 }
 \item \code{opts}: the options given like article type, dois
+\item \code{errors}: data.frame of errors, with two columns for article id and error
 }
 }
 \description{
@@ -193,6 +194,11 @@ ft_get_ls()
 # If you just have DOIs and don't know the publisher
 ## PLOS
 ft_get('10.1371/journal.pone.0086169')
+
+# Collect all errors from across papers
+#   similarly can combine from different publishers as well
+res <- ft_get(c('10.7554/eLife.03032', '10.7554/eLife.aaaa'), from = "elife")
+res$elife$errors
 
 ## PeerJ
 ft_get('10.7717/peerj.228')

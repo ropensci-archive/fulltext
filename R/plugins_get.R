@@ -23,7 +23,8 @@ make_key <- function(id, type) {
 }
 
 null_list <- function(opts) {
-  list(found = NULL, dois = NULL, data = NULL, opts = opts)
+  list(found = NULL, dois = NULL, data = NULL, opts = opts, 
+    errors = data.frame(NULL))
 }
 
 ft_object <- function(path, id, type) {
@@ -93,6 +94,15 @@ http_mssg <- function(x) {
 #   }   
 # }
 
+# x = dat
+error_df <- function(x) {
+  tmp <- lapply(x$path, "[[", "error")
+  data.frame(
+    id = names(tmp), 
+    error = unlist(Map(function(z) if (is.null(z)) NA_character_ else z, unname(tmp))), 
+    stringsAsFactors = FALSE)
+}
+
 ## plugin generator
 plugin_get_generator <- function(srce, fun) {
   function(sources, ids, opts, type, url_pattern = NULL, ...) {
@@ -119,9 +129,7 @@ plugin_get_generator <- function(srce, fun) {
       out <- do.call(fun, opts)
       
       # deals with case where no results
-      if (length(out) == 0) {
-        return(list(found = NULL, dois = NULL, data = NULL, opts = opts))
-      }
+      if (length(out) == 0) return(null_list(opts))
 
       dat <- if (any(sources %in% c("arxiv", "biorxiv"))) {
         pprint_cache(out)
@@ -129,7 +137,7 @@ plugin_get_generator <- function(srce, fun) {
         construct_paths(cache_options_get(), out, type)
       }
       list(found = length(ft_compact(lapply(out, "[[", "path"))), dois = names(out), 
-        data = dat, opts = opts)
+        data = dat, opts = opts, errors = error_df(dat))
     } else {
       null_list(opts)
     }
