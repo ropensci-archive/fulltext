@@ -10,6 +10,22 @@
 #' @param facets (list) facets, see 
 #' https://dev.elsevier.com/tecdoc_api_facets.html for how to construct 
 #' facet queries
+#' @param view the fields to return, see 
+#' https://dev.elsevier.com/guides/ScopusSearchViews.htm 
+#' @param date Represents the date range associated with the search, 
+#' with the lowest granularity being year. e.g. 2002-2007
+#' @param sort Represents the sort field name and order. A plus in front of 
+#' the sort field name indicates ascending order, a minus indicates 
+#' descending order. If sort order is not specified (i.e. no + or -) then 
+#' the order defaults to ascending (ASC). Up to three fields can be 
+#' specified, each delimited by a comma. The precedence is determined by 
+#' their order (i.e. first is primary, second is secondary, and 
+#' third is tertiary). . e.g., "overDate,-title"
+#' @param content filter specific categories of content that should be 
+#' searched/returned. one of: core, dummy, all (default)
+#' @param subj the subject area code associated with the content category 
+#' desired. Note that these subject code mapping vary based upon the 
+#' environment in which the request is executed. See Details for choices.
 #' @param key (character) api key. get a key at 
 #' <https://dev.elsevier.com/index.html>
 #' @param ... curl options passed on to [crul::HttpClient]
@@ -24,6 +40,37 @@
 #' 
 #' See <https://dev.elsevier.com/tips/ScopusSearchTips.htm> for help/tips
 #' on searching
+#' 
+#' @section subj choices include:
+#' 
+#' - AGRI: Agricultural and Biological Sciences
+#' - ARTS: Arts and Humanities
+#' - BIOC: Biochemistry, Genetics and Molecular Biology
+#' - BUSI: Business, Management and Accounting
+#' - CENG: Chemical Engineering
+#' - CHEM: Chemistry
+#' - COMP: Computer Science
+#' - DECI: Decision Sciences
+#' - DENT: Dentistry
+#' - EART: Earth and Planetary Sciences
+#' - ECON: Economics, Econometrics and Finance
+#' - ENER: Energy
+#' - ENGI: Engineering
+#' - ENVI: Environmental Science
+#' - HEAL: Health Professions
+#' - IMMU: Immunology and Microbiology
+#' - MATE: Materials Science
+#' - MATH: Mathematics
+#' - MEDI: Medicine
+#' - NEUR: Neuroscience
+#' - NURS: Nursing
+#' - PHAR: Pharmacology, Toxicology and Pharmaceutics
+#' - PHYS: Physics and Astronomy
+#' - PSYC: Psychology
+#' - SOCI: Social Sciences
+#' - VETE: Veterinary
+#' - MULT: Multidisciplinary
+#' 
 #' @examples \dontrun{
 #' res <- scopus_search(query = "ecology")
 #' res
@@ -52,22 +99,31 @@
 #' res$found
 #' head(res$results)
 #' res$facets
+#' 
+#' # sort
+#' x <- scopus_search(query = "ecology", sort = "-title")
 #' }
 scopus_search <- function(query = NULL, count = 25, start = 0, type = "search", 
-                          search_type = "scopus", facets = NULL, key = NULL, ...) {
+  search_type = "scopus", facets = NULL, view = NULL, date = NULL, 
+  sort = NULL, content = NULL, subj = NULL, key = NULL, ...) {
+
   key <- check_key_scopus(key)
   if (count > 25) stop("'count' for Scopus must be 25 or less", call. = FALSE)
   args <- ft_compact(list(query = query, count = count, start = start, 
-    facets = facets))
+    facets = facets, view = view, date = date, sort = sort, 
+    content = content, subj = subj))
   scopus_get(file.path(scopus_base(), "search/scopus"), args, key, ...)
 }
 
 scopus_search_loop <- function(query = NULL, count = 25, type = "search", 
-                          search_type = "scopus", facets = NULL, key = NULL, ... ) {
+  search_type = "scopus", facets = NULL, view = NULL, date = NULL, 
+  sort = NULL, content = NULL, subj = NULL, key = NULL, ... ) {
+
   key <- check_key_scopus(key)
   lim <- if (count > 25) 25 else count
   #if (count > 25) stop("'count' for Scopus must be 25 or less", call. = FALSE)
-  args <- ft_compact(list(query = query, count = lim, facets = facets))
+  args <- ft_compact(list(query = query, count = lim, facets = facets, 
+    view = view, date = date, sort = sort, content = content, subj = subj))
   
   url <- file.path(scopus_base(), "search/scopus")
   out <- outfacet <- list()
