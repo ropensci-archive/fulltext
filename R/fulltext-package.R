@@ -106,7 +106,6 @@
 #' @importFrom crul HttpClient
 #' @importFrom httr HEAD GET POST upload_file content_type content write_disk
 #' stop_for_status
-#' @importFrom whisker whisker.render
 #' @importFrom rentrez entrez_search entrez_fetch entrez_link entrez_summary
 #' @importFrom rplos searchplos plos_fulltext
 #' @importFrom rcrossref cr_works cr_ft_links

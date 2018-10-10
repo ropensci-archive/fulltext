@@ -3,7 +3,7 @@
 #' @rdname ft_extract_corpus-defunct
 #' @keywords internal
 ft_extract_corpus <- function(...){
-  .Defunct(msg = "function removed. see ?fulltext-defunct")
+  .Defunct(msg = "function removed. see ?`fulltext-defunct`")
 }
 
 #' This function is defunct.
@@ -11,7 +11,7 @@ ft_extract_corpus <- function(...){
 #' @rdname pdfx-defunct
 #' @keywords internal
 pdfx <- function(...){
-  .Defunct(msg = "function removed. see ?fulltext-defunct")
+  .Defunct(msg = "function removed. see ?`fulltext-defunct`")
 }
 
 #' This function is defunct.
@@ -46,6 +46,14 @@ get_text <- function(...){
   .Defunct(new = "ft_text", package = "fulltext", msg = "function name changed to ft_text")
 }
 
+#' This function is defunct.
+#' @export
+#' @rdname ft_browse_sections-defunct
+#' @keywords internal
+ft_browse_sections <- function(...) {
+  .Defunct(msg = "function removed. see ?`fulltext-defunct`")
+}
+
 
 #' Defunct functions in fulltext
 #'
@@ -59,6 +67,8 @@ get_text <- function(...){
 #'  - [collect]: Function name changed to [ft_collect()]
 #'  - [get_text]: Function name changed to [ft_text()]
 #'  - `cache_clear` was never working anyway, and is now removed
+#'  - [ft_browse_sections]: no sign that function used, and allows 
+#'  to remove a dependency
 #' 
 #' @name fulltext-defunct
 NULL

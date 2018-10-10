@@ -15,5 +15,7 @@ package - and this function is more out of scope now.
 \item \link{collect}: Function name changed to \code{\link[=ft_collect]{ft_collect()}}
 \item \link{get_text}: Function name changed to \code{\link[=ft_text]{ft_text()}}
 \item \code{cache_clear} was never working anyway, and is now removed
+\item \link{ft_browse_sections}: no sign that function used, and allows
+to remove a dependency
 }
 }
