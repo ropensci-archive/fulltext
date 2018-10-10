@@ -54,7 +54,9 @@ get_ft <- function(x, type, url, path, headers = list(), ...) {
   if (
     inherits(res, c("error", "warning")) ||  ## an error from tryCatch
     res$status_code > 201 || ## HTTP status code indicates an error
-    !grepl(type, res$response_headers[['content-type']]) ## content type does not match
+    !grepl(type, res$response_headers[['content-type']]) || ## content type does not match
+    inherits(tryCatch(xml2::read_xml(res$content), 
+      error=function(e) e), "error") ## invalid file, somehow gave 200 code
   ) {
     unlink(path)
     mssg <- if (inherits(res, c("error", "warning"))) {
@@ -71,7 +73,10 @@ get_ft <- function(x, type, url, path, headers = list(), ...) {
       # if all else fails just give a HTTP status code message back
       http_mssg(res)
     }
-    warning("you may not have access to ", x, " or an error occurred", call. = FALSE)
+    warning("you may not have access to ", x, 
+      "\n or an error occurred", 
+      "\n or the downloaded file was invalid", 
+      call. = FALSE)
     return(ft_error(mssg, x))
   }
   # if success return object
