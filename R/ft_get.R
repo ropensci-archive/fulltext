@@ -31,6 +31,8 @@
 #' @param crossrefopts Crossref options
 #' @param wileyopts Wiley options
 #' @param ... Further args passed on to [crul::HttpClient]
+#' 
+#' @seealso [as.ft_data()]
 #'
 #' @return An object of class `ft_data` (of type `S3`) with slots for
 #' each of the publishers. The returned object is split up by publishers because

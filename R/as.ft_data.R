@@ -8,6 +8,7 @@
 #' @param path cache path. if not given, we use the default
 #' cache path. Default: `NULL`
 #' @return an object of class `ft_data`
+#' @seealso [ft_get()]
 #' @examples
 #' x <- as.ft_data()
 #' # output lives underneath a special list index "cached" 

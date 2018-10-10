@@ -374,3 +374,6 @@ res <- ft_get('10.1037/10740-005', try_unknown = TRUE)
 res$crossref
 }
 }
+\seealso{
+\code{\link[=as.ft_data]{as.ft_data()}}
+}
