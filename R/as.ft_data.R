@@ -16,6 +16,7 @@
 #' 
 #' y <- x %>% ft_collect()
 #' y$cached$data$data
+#' y %>% ft_chunks(what="title") %>% ft_tabularize()
 #' x %>% ft_collect() %>% ft_text()
 as.ft_data <- function(path = NULL) {
   if (is.null(path)) path <- ftxt_cache$cache_path_get()

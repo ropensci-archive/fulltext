@@ -129,9 +129,24 @@ ft_chunks <- function(x, what='all') {
         warning("perhaps you need to run ft_collect()?")
       }
       out[[names(x[i])]] <-
-      lapply(x[[i]]$data$data, function(q){
-        qparsed <- if (inherits(q, "xml_document")) q else xml2::read_xml(q)
-        get_what(data = qparsed, what, names(x[i]))
+      lapply(x[[i]]$data$data, function(q) {
+        if (
+          inherits(q, "xml_document") || 
+          inherits(q, "character") && length(q) == 1
+        ) {
+          if (inherits(q, "xml_document")) qparsed <- q
+          if (inherits(q, "character")) {
+            qparsed <- tryCatch(xml2::read_xml(q), error = function(e) e)
+          }
+          if (inherits(qparsed, "error")) {
+            list()
+          } else {
+            get_what(data = qparsed, what, names(x[i]))
+          }
+        } else {
+          # otherwise skip
+          list()
+        }
       })
     }
   }

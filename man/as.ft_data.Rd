@@ -26,5 +26,6 @@ x$cached
 
 y <- x \%>\% ft_collect()
 y$cached$data$data
+y \%>\% ft_chunks(what="title") \%>\% ft_tabularize()
 x \%>\% ft_collect() \%>\% ft_text()
 }
