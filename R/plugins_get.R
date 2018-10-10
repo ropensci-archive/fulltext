@@ -56,7 +56,11 @@ get_ft <- function(x, type, url, path, headers = list(), ...) {
     inherits(res, c("error", "warning")) ||  ## an error from tryCatch
     res$status_code > 201 || ## HTTP status code indicates an error
     !grepl(type, res$response_headers[['content-type']]) || ## content type does not match
-    inherits(tryCatch(xml2::read_xml(res$content), 
+    inherits(
+      tryCatch(
+        switch(type, 
+          xml = xml2::read_xml(res$content), 
+          pdf = pdftools::pdf_info(res$content)), 
       error=function(e) e), "error") ## invalid file, somehow gave 200 code
   ) {
     unlink(path)

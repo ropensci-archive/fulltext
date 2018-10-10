@@ -68,3 +68,21 @@ test_that("ft_get fails well", {
   expect_error(ft_get('0086169', from = 'plos'), "These are probably not DOIs")
   expect_error(ft_get('0086169', from = 'stuff'), "'arg' should be one")
 })
+
+test_that("ft_get errors slot", {
+  skip_on_cran()
+
+  res <- suppressWarnings(
+    ft_get(c('10.7554/eLife.03032', '10.7554/eLife.aaaa', '10.3389/fphar.2024.00109'))
+  )
+
+  expect_named(res, c('elife', 'unknown'))
+
+  expect_is(res$elife$errors, "data.frame")
+  expect_true(is.na(res$elife$errors$error))
+  expect_is(res$unknown$errors, "data.frame")
+  expect_match(res$unknown$errors$error, "Resource not found")
+
+  expect_error(ft_get('0086169', from = 'plos'), "These are probably not DOIs")
+  expect_error(ft_get('0086169', from = 'stuff'), "'arg' should be one")
+})

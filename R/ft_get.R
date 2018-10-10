@@ -502,6 +502,7 @@ get_unknown <- function(x, type, try_unknown, ...) {
   df <- data.frame(pub = unlist(unname(pubs)), doi = names(pubs), 
     name = vapply(pubs, attr, '', 'publisher', USE.NAMES=FALSE),
     issn = vapply(pubs, attr, '', 'issn', USE.NAMES=FALSE),
+    error = vapply(pubs, attr, '', 'error', USE.NAMES=FALSE),
     stringsAsFactors = FALSE)
   dfsplit <- split(df, df$pub)
   out <- list()
@@ -543,8 +544,8 @@ get_unknown <- function(x, type, try_unknown, ...) {
         } else {
           fun <- plugin_get_crossref
           tm_nm <- 'crossref'
-          warning("no plugin for Crossref member ", names(dfsplit)[i], 
-            " yet", call. = FALSE)
+          warning("no plugin for Crossref member '", names(dfsplit)[i], 
+            "' yet", call. = FALSE)
         }
 
         pub_nm <- dfsplit[[i]]$name[1]
@@ -657,20 +658,30 @@ get_tm_name <- function(x) {
 }
 
 get_publisher <- function(x) {
-  z <- rcrossref::cr_works(x)
+  z <- tryCatch(rcrossref::cr_works(x), warning = function(w) w)
   # FIXME: at some point replace this with 
   #   mapping of Crossref member number to a unique short name
+  if (inherits(z, "warning")) return(unknown_id(z$message))
   pub <- gsub("/|\\.|-|:|;|\\(|\\)|<|>|\\s", "_",  tolower(z$data$publisher))
   names(z$data) <- tolower(names(z$data))
   issn <- z$data$issn
   if (length(z) == 0) {
-    NULL
+    return(unknown_id())
   } else {
     id <- as.character(strextract(z$data$member, "[0-9]+"))
     attr(id, "publisher") <- pub %||% ""
     attr(id, "issn") <- issn %||% ""
+    attr(id, "error") <- ""
     return(id)
   }
+}
+
+unknown_id <- function(mssg) {
+  id <- "unknown"
+  attr(id, "publisher") <- "unknown"
+  attr(id, "issn") <- "unknown"
+  attr(id, "error") <- mssg
+  return(id)
 }
 
 check_type <- function(x) {
