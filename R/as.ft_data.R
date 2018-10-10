@@ -45,7 +45,13 @@ to_ft_data <- function(x) {
   ))
 
   list(cached = 
-    list(found = length(dat), dois = names(dat$path), data = dat, opts = list())
+    list(
+      found = length(dat), 
+      dois = names(dat$path), 
+      data = dat, 
+      opts = list(),
+      error = data.frame(NULL)
+    )
   )
 }
 
