@@ -4,8 +4,6 @@
 #' @param x An object of class `ft_data` - the output from a call to 
 #' [ft_get()]
 #' @param what (character) One of macrodocs (default) or publisher
-#' @param output A file path, if not given, uses a temporary file, deleted up 
-#' on leaving the R session.
 #' @param browse (logical) Whether to browse (default) or not. If `FALSE`,
 #' return the url.
 #' @examples \dontrun{

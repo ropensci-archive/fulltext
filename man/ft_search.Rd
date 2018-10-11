@@ -81,6 +81,36 @@ on searching with Scopus
 for all \code{*opts} parameters, ee the function linked to in
 the parameter definition for what you can pass to it.
 }
+\section{Looping}{
+
+Note that we necessarily have to treat different sources/publishers
+differently internally in this function. Some we can search and get
+back as many results as desired automatically, while with others you'd
+have to manually iterate through to get all your results.
+Notes on different sources:
+\itemize{
+\item PLOS: \code{\link[rplos:searchplos]{rplos::searchplos()}} used and includes internal looping of
+requests
+\item BMC: using internal function \code{bmc_search} that does not
+loop, so you have to iterate through requests manually
+\item Crossref: \code{\link[rcrossref:cr_works]{rcrossref::cr_works()}} used, but does not include
+internal looping of requests, but the max limit for one request
+is relatively high at 1000
+\item Entrez: \code{\link[rentrez:entrez_search]{rentrez::entrez_search()}} used, but does not include
+internal looping of requests
+\item arXiv: \code{\link[aRxiv:arxiv_search]{aRxiv::arxiv_search()}} used and includes internal looping
+of requests
+\item BiorXiv: using internal function \code{biorxiv_search} that does not
+loop, so you have to iterate through requests manually
+\item Europe BMC: using internal function \code{eupmc_search} that does not
+loop, so you have to iterate through requests manually
+\item Scopus: using internal function \code{scopus_search_loop} that does
+include internal looping of requests
+\item Microsoft AR: using internal function \code{microsoft_search} that does not
+loop, so you have to iterate through requests manually
+}
+}
+
 \examples{
 # List publishers included
 ft_search_ls()

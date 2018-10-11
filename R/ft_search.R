@@ -48,6 +48,33 @@
 #' 
 #' See <https://dev.elsevier.com/tips/ScopusSearchTips.htm> for help/tips
 #' on searching with Scopus
+#' 
+#' @section Looping:
+#' Note that we necessarily have to treat different sources/publishers
+#' differently internally in this function. Some we can search and get
+#' back as many results as desired automatically, while with others you'd
+#' have to manually iterate through to get all your results. 
+#' Notes on different sources:
+#' 
+#' - PLOS: [rplos::searchplos()] used and includes internal looping of
+#' requests
+#' - BMC: using internal function `bmc_search` that does not 
+#' loop, so you have to iterate through requests manually
+#' - Crossref: [rcrossref::cr_works()] used, but does not include
+#' internal looping of requests, but the max limit for one request
+#' is relatively high at 1000 
+#' - Entrez: [rentrez::entrez_search()] used, but does not include
+#' internal looping of requests
+#' - arXiv: [aRxiv::arxiv_search()] used and includes internal looping
+#' of requests
+#' - BiorXiv: using internal function `biorxiv_search` that does not
+#' loop, so you have to iterate through requests manually
+#' - Europe BMC: using internal function `eupmc_search` that does not
+#' loop, so you have to iterate through requests manually
+#' - Scopus: using internal function `scopus_search_loop` that does
+#' include internal looping of requests 
+#' - Microsoft AR: using internal function `microsoft_search` that does not
+#' loop, so you have to iterate through requests manually
 #'
 #' @return An object of class `ft`, and objects of class `ft_ind`
 #' within each source. You can access each data source with `$`

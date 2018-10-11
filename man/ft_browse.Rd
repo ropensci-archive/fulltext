@@ -14,9 +14,6 @@ ft_browse(x, what = "macrodocs", browse = TRUE)
 
 \item{browse}{(logical) Whether to browse (default) or not. If \code{FALSE},
 return the url.}
-
-\item{output}{A file path, if not given, uses a temporary file, deleted up
-on leaving the R session.}
 }
 \description{
 Browse an article in your default browser
