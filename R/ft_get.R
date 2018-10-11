@@ -303,6 +303,12 @@
 #' 
 #' # PNAS
 #' ft_get('10.1073/pnas.1708584115', try_unknown = TRUE)
+#' 
+#' # American Society for Microbiology
+#' ft_get('10.1128/cvi.00178-17')
+#' 
+#' # American Society of Clinical Oncology
+#' ft_get('10.1200/JCO.18.00454')
 #'
 #' 
 #' # From ft_links output
@@ -326,11 +332,8 @@
 #' ress$plos$data$path$`10.1371/journal.pone.0059813`
 #' 
 #' ## No publisher plugin provided yet
-#' # ft_get('10.1037/10740-005')
+#' ft_get('10.1037/10740-005')
 #' ### but no link available for this DOI
-#' res <- ft_get('10.1037/10740-005', try_unknown = TRUE)
-#' res$crossref
-#' ### a link IS available for this DOI
 #' res <- ft_get('10.1037/10740-005', try_unknown = TRUE)
 #' res$crossref
 #' }
@@ -597,7 +600,9 @@ publisher_plugin <- function(x) {
     `221` = plugin_get_aaas,
     `341` = plugin_get_pnas,
     `345` = plugin_get_microbiology,
-    `10` = plugin_get_jama
+    `10` = plugin_get_jama,
+    `235` = plugin_get_amersocmicrobiol,
+    `233` = plugin_get_amersocclinoncol
   )
 }
 
@@ -626,6 +631,8 @@ get_pub_name <- function(x) {
          `341` = "pnas",
          `345` = "microbiology",
          `10` = "jama",
+         `235` = "amersocmicrobiol",
+         `233` = "amersocclinoncol",
          "crossref"
   )
 }
@@ -655,6 +662,8 @@ get_tm_name <- function(x) {
          `341` = "pnas",
          `345` = "microbiology",
          `10` = "jama",
+         `235` = "amersocmicrobiol",
+         `233` = "amersocclinoncol",
          "crossref"
   )
 }

@@ -343,6 +343,12 @@ ft_get('10.1063/1.4967823', try_unknown = TRUE)
 # PNAS
 ft_get('10.1073/pnas.1708584115', try_unknown = TRUE)
 
+# American Society for Microbiology
+ft_get('10.1128/cvi.00178-17')
+
+# American Society of Clinical Oncology
+ft_get('10.1200/JCO.18.00454')
+
 
 # From ft_links output
 ## Crossref
@@ -365,11 +371,8 @@ ress$plos$data
 ress$plos$data$path$`10.1371/journal.pone.0059813`
 
 ## No publisher plugin provided yet
-# ft_get('10.1037/10740-005')
+ft_get('10.1037/10740-005')
 ### but no link available for this DOI
-res <- ft_get('10.1037/10740-005', try_unknown = TRUE)
-res$crossref
-### a link IS available for this DOI
 res <- ft_get('10.1037/10740-005', try_unknown = TRUE)
 res$crossref
 }

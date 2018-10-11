@@ -173,6 +173,8 @@ plugin_get_aaas <- plugin_get_generator("aaas", aaas_ft)
 plugin_get_pnas <- plugin_get_generator("pnas", pnas_ft)
 plugin_get_microbiology <- plugin_get_generator("microbiology", microbiology_ft)
 plugin_get_jama <- plugin_get_generator("jama", jama_ft)
+plugin_get_amersocmicrobiol <- plugin_get_generator("amersocmicrobiol", amersocmicrobiol_ft)
+plugin_get_amersocclinoncol <- plugin_get_generator("amersocclinoncol", amersocclinoncol_ft)
 
 
 ## getters - could stand to make closure for the below as well, FIXME
@@ -589,6 +591,42 @@ jama_ft <- function(dois, type = "pdf", ...) {
     get_ft(x = x, type = 'pdf', url = url, path = path, ...)
   }), dois)
 }
+
+# type: only pdf (type parameter is ignored)
+amersocmicrobiol_ft <- function(dois, type = "pdf", ...) {
+  stats::setNames(lapply(dois, function(x) {
+    path <- make_key(x, 'pdf')
+    if (file.exists(path) && !cache_options_get()$overwrite) {
+      message(paste0("path exists: ", path))
+      return(ft_object(path, x, 'pdf'))
+    }
+
+    lk <- tcat(ftdoi_get(sprintf("api/doi/%s/", x)))
+    if (inherits(lk, c("error", "warning"))) return(ft_error(lk$message, x))
+    urls <- jsonlite::fromJSON(lk$parse("UTF-8"))$links
+    url <- urls[grep("pdf", urls$`content-type`), "url"]
+    get_ft(x = x, type = 'pdf', url = url, path = path, ...)
+  }), dois)
+}
+
+# type: only pdf (type parameter is ignored)
+amersocclinoncol_ft <- function(dois, type = "pdf", ...) {
+  stats::setNames(lapply(dois, function(x) {
+    path <- make_key(x, 'pdf')
+    if (file.exists(path) && !cache_options_get()$overwrite) {
+      message(paste0("path exists: ", path))
+      return(ft_object(path, x, 'pdf'))
+    }
+
+    lk <- tcat(ftdoi_get(sprintf("api/doi/%s/", x)))
+    if (inherits(lk, c("error", "warning"))) return(ft_error(lk$message, x))
+    urls <- jsonlite::fromJSON(lk$parse("UTF-8"))$links
+    url <- urls[grep("pdf", urls$`content-type`), "url"]
+    get_ft(x = x, type = 'pdf', url = url, path = path, ...)
+  }), dois)
+}
+
+
 
 # special Crossref plugin to try any DOI
 crossref_ft <- function(dois, type, ...) {
