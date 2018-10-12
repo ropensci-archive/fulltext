@@ -58,9 +58,9 @@ Data sources in `fulltext` include:
 available via Pubmed)
 * We __will__ add more, as publishers open up, and as we have time...See the [master list here](https://github.com/ropensci/fulltext/issues/4#issuecomment-52376743)
 
-Authorization: A number of publishers require authorization via API key, and some even more
-draconian authorization processes involving checking IP addresses. We are working on supporting
-all the various authorization things for different publishers, but of course all the OA content
+Authentication: A number of publishers require authentication via API key, and some even more
+draconian authentication processes involving checking IP addresses. We are working on supporting
+all the various authentication things for different publishers, but of course all the OA content
 is already easily available.
 
 We'd love your feedback. Let us know what you think in [the issue tracker](https://github.com/ropensci/fulltext/issues)

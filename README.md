@@ -51,9 +51,9 @@ Data sources in `fulltext` include:
 available via Pubmed)
 * We __will__ add more, as publishers open up, and as we have time...See the [master list here](https://github.com/ropensci/fulltext/issues/4#issuecomment-52376743)
 
-Authorization: A number of publishers require authorization via API key, and some even more
-draconian authorization processes involving checking IP addresses. We are working on supporting
-all the various authorization things for different publishers, but of course all the OA content
+Authentication: A number of publishers require authentication via API key, and some even more
+draconian authentication processes involving checking IP addresses. We are working on supporting
+all the various authentication things for different publishers, but of course all the OA content
 is already easily available.
 
 We'd love your feedback. Let us know what you think in [the issue tracker](https://github.com/ropensci/fulltext/issues)
@@ -97,7 +97,7 @@ ft_search(query = 'ecology', from = 'crossref')
 #> Query:
 #>   [ecology] 
 #> Found:
-#>   [PLoS: 0; BMC: 0; Crossref: 154968; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
+#>   [PLoS: 0; BMC: 0; Crossref: 155305; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
 #> Returned:
 #>   [PLoS: 0; BMC: 0; Crossref: 10; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0]
 ```
@@ -111,8 +111,8 @@ ft_search(query = 'ecology', from = 'crossref')
 res1 <- ft_search(query = 'ecology', from = 'entrez', limit = 5)
 ft_links(res1)
 #> <fulltext links>
-#> [Found] 3 
-#> [IDs] ID_30273121 ID_30201727 ID_30198842 ID_28667926 ...
+#> [Found] 2 
+#> [IDs] ID_30224487 ID_29325921 ...
 ```
 
 Or pass in DOIs directly
@@ -121,8 +121,8 @@ Or pass in DOIs directly
 ```r
 ft_links(res1$entrez$data$doi, from = "entrez")
 #> <fulltext links>
-#> [Found] 3 
-#> [IDs] ID_30273121 ID_30201727 ID_30198842 ID_28667926 ...
+#> [Found] 2 
+#> [IDs] ID_30224487 ID_29325921 ...
 ```
 
 ## Get full text

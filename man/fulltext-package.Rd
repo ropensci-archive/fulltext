@@ -113,8 +113,21 @@ for improved performance when you share your email address with them.
 To pass your email address to Crossref via this client, store it
 as an environment variable in \code{.Renviron} like \code{crossref_email = name@example.com}
 
-None needed for \strong{PLOS}, \strong{eLife}, \strong{arxiv}, \strong{biorxiv}, \strong{Euro PMC}, or
-\strong{Entrez} (though soon you will get better rate limtits with auth for Entrez)
+\strong{Entrez}: NCBI limits users to making only 3 requests per second. But, users
+who register for an API key are able to make up to ten requests per second.
+Getting a key is simple; register for a "my ncbi" account then click on a
+button in the account settings page. Once you have an API key, you can pass it
+as the argument \code{api_key} to \code{entrezopts} in both \code{\link[=ft_get]{ft_get()}} and \code{\link[=ft_search]{ft_search()}}.
+However, we advise you use environment variables instead as they are more secure.
+To do that you can set an environment variable for the current R session like
+\code{Sys.setenv(ENTREZ_KEY="yourkey")} OR better yet set it in your \code{.Renviron}
+or equivalent file with an entry like \code{ENTREZ_KEY=yourkey} so that it is
+used across R sessions.
+
+No authentication needed for \strong{PLOS}, \strong{eLife}, \strong{arxiv}, \strong{biorxiv},
+\strong{Euro PMC}
+
+Let us know if you run into trouble with authentication.
 }
 
 \section{Feedback}{
