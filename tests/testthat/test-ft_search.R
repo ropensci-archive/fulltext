@@ -72,18 +72,18 @@ test_that("ft_search works for larger requests", {
   expect_is(res_cr, "ft")
   expect_is(res_cr$crossref, "ft_ind")
   expect_equal(NROW(res_cr$crossref$data), 200)
-  
-  expect_error(ft_search(query = 'ecology', from = 'entrez', limit = 2000), 
-               "HTTP failure 414, the request is too large")
-  ## FIXME - add catches for plos, other sources
-  expect_error(ft_search(query = 'ecology', from = 'crossref', limit = 2000), 
-               "limit parameter must be 1000 or less")
 })
 
 
 test_that("ft_search fails well", {
   skip_on_cran()
   
+  expect_error(ft_search(query = 'ecology', from = 'entrez', limit = 2000), 
+               "HTTP failure 414, the request is too large")
+  ## FIXME - add catches for plos, other sources
+  expect_error(ft_search(query = 'ecology', from = 'crossref', limit = 2000), 
+               "limit parameter must be 1000 or less")
+
   # no query given
   expect_error(ft_search(from = 'plos'), "argument \"query\" is missing")
   # bad source
