@@ -602,7 +602,8 @@ publisher_plugin <- function(x) {
     `345` = plugin_get_microbiology,
     `10` = plugin_get_jama,
     `235` = plugin_get_amersocmicrobiol,
-    `233` = plugin_get_amersocclinoncol
+    `233` = plugin_get_amersocclinoncol,
+    `8215` = plugin_get_instinvestfil
   )
 }
 
@@ -633,6 +634,7 @@ get_pub_name <- function(x) {
          `10` = "jama",
          `235` = "amersocmicrobiol",
          `233` = "amersocclinoncol",
+         `8215` = "instinvestfil",
          "crossref"
   )
 }
@@ -664,6 +666,7 @@ get_tm_name <- function(x) {
          `10` = "jama",
          `235` = "amersocmicrobiol",
          `233` = "amersocclinoncol",
+         `8215` = "instinvestfil",
          "crossref"
   )
 }
