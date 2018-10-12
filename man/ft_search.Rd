@@ -21,7 +21,9 @@ ft_search_ls()
 \item{limit}{(integer) Number of records to return. default: 10}
 
 \item{start}{(integer) Record number to start at. Only used for
-'scopus' right now. default: 0}
+'scopus' right now. default: 0. Note that with some data sources we loop
+internally to get all the results you want with the \code{limit} parameter, so \code{start}
+in those cases will be ignored. See \strong{Looping} section below.}
 
 \item{plosopts}{(list) PLOS options, a named list. See \code{\link[rplos:searchplos]{rplos::searchplos()}}}
 
@@ -155,9 +157,6 @@ res$scopus
 ## pagination
 (res <- ft_search(query = 'ecology', from = 'scopus', 
    scopusopts = list(key = Sys.getenv('ELSEVIER_SCOPUS_KEY')), limit = 5))
-(res <- ft_search(query = 'ecology', from = 'scopus', 
-   scopusopts = list(key = Sys.getenv('ELSEVIER_SCOPUS_KEY')), 
-   limit = 5, start = 5))
 ## lots of results
 (res <- ft_search(query = "ecology community elk cow", from = 'scopus', 
    limit = 100,

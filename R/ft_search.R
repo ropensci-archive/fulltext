@@ -18,7 +18,9 @@
 #' `"entrez"`, `"arxiv"`, `"biorxiv"`, `"europmc"`, `"scopus"`, or `"ma"`
 #' @param limit (integer) Number of records to return. default: 10
 #' @param start (integer) Record number to start at. Only used for 
-#' 'scopus' right now. default: 0
+#' 'scopus' right now. default: 0. Note that with some data sources we loop 
+#' internally to get all the results you want with the `limit` parameter, so `start`
+#' in those cases will be ignored. See **Looping** section below.
 #' @param plosopts (list) PLOS options, a named list. See [rplos::searchplos()]
 #' @param bmcopts (list) BMC options, a named list. See [bmc_search()]
 #' @param crossrefopts (list) Crossref options, a named list. 
@@ -123,9 +125,6 @@
 #' ## pagination
 #' (res <- ft_search(query = 'ecology', from = 'scopus', 
 #'    scopusopts = list(key = Sys.getenv('ELSEVIER_SCOPUS_KEY')), limit = 5))
-#' (res <- ft_search(query = 'ecology', from = 'scopus', 
-#'    scopusopts = list(key = Sys.getenv('ELSEVIER_SCOPUS_KEY')), 
-#'    limit = 5, start = 5))
 #' ## lots of results
 #' (res <- ft_search(query = "ecology community elk cow", from = 'scopus', 
 #'    limit = 100,
