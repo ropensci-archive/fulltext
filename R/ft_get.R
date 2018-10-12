@@ -309,6 +309,12 @@
 #' 
 #' # American Society of Clinical Oncology
 #' ft_get('10.1200/JCO.18.00454')
+#' 
+#' # American Institute of Physics
+#' ft_get('10.1063/1.4895527')
+#' 
+#' # American Chemical Society
+#' ft_get(c('10.1021/la903074z', '10.1021/jp048806z'))
 #'
 #' 
 #' # From ft_links output
@@ -603,7 +609,8 @@ publisher_plugin <- function(x) {
     `10` = plugin_get_jama,
     `235` = plugin_get_amersocmicrobiol,
     `233` = plugin_get_amersocclinoncol,
-    `8215` = plugin_get_instinvestfil
+    `8215` = plugin_get_instinvestfil,
+    `317` = plugin_get_aip
   )
 }
 
@@ -635,6 +642,7 @@ get_pub_name <- function(x) {
          `235` = "amersocmicrobiol",
          `233` = "amersocclinoncol",
          `8215` = "instinvestfil",
+         `317` = "aip",
          "crossref"
   )
 }
@@ -667,6 +675,7 @@ get_tm_name <- function(x) {
          `235` = "amersocmicrobiol",
          `233` = "amersocclinoncol",
          `8215` = "instinvestfil",
+         `317` = "aip",
          "crossref"
   )
 }
