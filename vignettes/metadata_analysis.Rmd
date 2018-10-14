@@ -1,0 +1,182 @@
+---
+title: "Metadata analysis using fulltext"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Metadata analysis using fulltext}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+In this vignette, we are going to demonstrate how the `fulltext` package can be used for meta analysis. The package is currently integrated with the following data sources:
+
+* Plos
+* Crossref
+* BioRxiv
+* Entrez
+* arXiv
+* BMC
+* Europe PMC
+* Scopus
+
+Please get your own API keys for each of the different .
+
+I set up the functions so that you can put the key in your `.Renviron` file, which will be called on startup of R, and then you don't have to enter your API key for each run of a function. Add entries for an R session like
+
+```
+Sys.setenv(SCOPUS_API_KEY = "YOURKEYHERE")
+Sys.setenv(BMC_API_KEY = "YOURKEYHERE")
+Sys.setenv(MICROSOFT_API_KEY = "YOURKEYHERE")
+```
+
+Or set them across sessions by putting entries in your `.Renviron` file like
+
+```
+SCOPUS_API_KEY=<yourkey>
+BMC_API_KEY=<yourkey>
+MICROSOFT_API_KEY=<yourkey>
+```
+
+You can also pass in your key in a function call, but be careful not to expose your keys in code committed to public repositories. If you do pass in a function call, use e.g., `Sys.getenv("SCOPUS_API_KEY")`.
+
+## Install fulltext
+
+From CRAN
+
+```r
+install.packages("fulltext")
+```
+## Load fulltext
+
+
+```{r}
+library('fulltext')
+```
+
+## Search
+
+After registering for an API key from Scopus, use the command above to add the api key to the environment variable `SCOPUS_API_KEY`. The code below will search for papers on `air quality monitoring` on four different data sorces namely PloS, CrossRef, arXiv and Scopus.
+
+```{r search-articles,eval=TRUE,cache=TRUE}
+res <- ft_search(query='air quality monitoring', from=c('plos','crossref','arxiv','scopus'),crossrefopts = list(filter = c(has_abstract = TRUE)),scopusopts = list(key=Sys.getenv("SCOPUS_API_KEY")))
+```
+```{r result-search,eval=TRUE}
+res
+```
+
+The reason why different data sources were selected is because each one returns data differently.
+
+##arXiv
+### Abstract from arXiv
+
+The abstract is already contained in the results from arXiv. In the example below only the abstract from the first article is displayed.
+
+```{r abstract-from-arXiv}
+res$arxiv$data$abstract[1]
+```
+
+### Retrieve full-text of the articles found
+
+The data retrieved from arXiv contained missing DOI numbers for 2 of the articles.
+
+```{r retrieve-arXiv,warning=FALSE,error=FALSE}
+#retrieve the list of doi
+dois<-res$arxiv$data$doi
+dois
+#check that there are no missing doi
+#retrieve articles
+data <- ft_get(dois[dois != ''])
+data
+```
+Out of the 10 articles identified in the search only 7 were downloaded.
+
+##CrossRef
+
+### Abstract from CrossRef
+The initial data obtained from CrossRef did not contain articles with abstracts. A filter was added to the search parameters for CrossRef to only return articles with abstracts using `crossrefopts = list(filter = c(has_abstract = TRUE))`.
+
+```{r search-result-from-crossref}
+res$crossref
+
+```
+
+```{r abstract-from-arxiv}
+#retrieve the DOI of the articles
+dois<-res$crossref$data$doi
+#retrieve the abstractsbasedon the DOI of the article
+abs_crossref<-ft_abstract(x=dois,from = "crossref")
+#show the first abstract
+abs_crossref$crossref[1]
+```
+The data retrieved contins both the DOI number and the abstract for the article.
+
+### Retrieve full-text of the articles found on CrossRef
+
+The data retrieved from CrossRef contained missing DOI numbers for 2 of the articles.
+
+```{r retrieve-crossref,warning=FALSE}
+#retrieve the list of doi
+dois<-res$crossref$data$doi
+dois
+#check that there are no missing doi
+#retrieve articles
+data <- ft_get(dois[dois != ''])
+data
+```
+Only 6 of the the 10 articles were were downloaded.
+
+### Abstract from PloS
+```{r plos-result}
+res$plos
+```
+```{r abstract-from-plos}
+#retrieve the DOI of the articles
+dois<-res$plos$data$id[1]
+#retrieve the abstractsbasedon the DOI of the article
+abs_plos<-ft_abstract(x=dois[1],from = "plos")
+#show the first abstract
+abs_plos$plos[[1]]$abstract[1]
+```
+### Retrieve full-text of the articles found on PLoS
+
+The DOI number were presentfor all the articles retrieved from PLoS.
+
+```{r retrieve-plos,warning=FALSE}
+#retrieve the list of doi
+dois<-res$plos$data$id
+dois
+#check that there are no missing doi
+#retrieve articles
+data <- ft_get(dois[dois != ''])
+data
+```
+All 10 articles were available for download from PLoS data store.
+
+### Abstract from Scopus
+
+```{r scopus-result}
+res$scopus
+```
+```{r abstract-from-scopus}
+#retrieve the DOI of the articles
+dois<-res$scopus$data$`prism:doi`
+#retrieve the abstractsbasedon the DOI of the article
+abs_scopus<-ft_abstract(x=dois,from = "scopus",,scopusopts = list(key=Sys.getenv("SCOPUS_API_KEY")))
+#show the first abstract
+abs_scopus$scopus[1]
+```
+With Scopus it was not possible to retrieve the abstract.
+
+### Retrieve full-text of the articles found on Scopus
+
+All the DOI numbers were present in the result obtained from Scopus.
+
+```{r retrieve-scopus,warning=FALSE}
+#retrieve the list of doi
+dois<-res$scopus$data$`prism:doi`
+dois
+#check that there are no missing doi
+#retrieve articles
+data <- ft_get(dois[dois != ''])
+data
+```
+
+Out of the 10 articles found during the search only 9 articles were obtained in `xml` format.
