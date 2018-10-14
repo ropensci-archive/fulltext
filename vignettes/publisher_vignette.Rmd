@@ -1,0 +1,122 @@
+---
+title: "fulltext Vignette: Additional Publishers"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{fulltext Vignette: Additional Publishers}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+## About the package
+
+`fulltext` is an R package to search for articles, download those articles in full text if available, convert pdf format to plain text, and extract text chunks for vizualization/analysis.
+
+* Plos
+* Crossref
+* BioRxiv
+* Entrez
+* arXiv
+* BMC
+* Europe PMC
+* Scopus
+
+Please get your own API keys for each of the different .
+
+I set up the functions so that you can put the key in your `.Renviron` file, which will be called on startup of R, and then you don't have to enter your API key for each run of a function. Add entries for an R session like
+
+```
+Sys.setenv(SCOPUS_API_KEY = "YOURKEYHERE")
+Sys.setenv(BMC_API_KEY = "YOURKEYHERE")
+Sys.setenv(MICROSOFT_API_KEY = "YOURKEYHERE")
+```
+
+Or set them across sessions by putting entries in your `.Renviron` file like
+
+```
+SCOPUS_API_KEY=<yourkey>
+BMC_API_KEY=<yourkey>
+MICROSOFT_API_KEY=<yourkey>
+```
+
+You can also pass in your key in a function call, but be careful not to expose your keys in code committed to public repositories. If you do pass in a function call, use e.g., `Sys.getenv("SCOPUS_API_KEY")`.
+
+## Install fulltime
+
+From CRAN
+
+
+```r
+install.packages("fulltext")
+```
+
+Development version from GitHub
+
+
+```r
+install.packages("devtools")
+devtools::install_github("ropensci/fulltext")
+```
+
+## Load fulltext
+
+
+```{r}
+library('fulltext')
+```
+
+## Search on Scopus
+
+After registering for an API key from Scopus, use the commandabove to add the api key tothe environment variable `SCOPUS_API_KEY`. The code below will search for papers on `air quality monitoring` on Scopus.
+
+```{r,eval=FALSE}
+res1 <- ft_search(query = 'air quality monitoring', from = 'scopus',scopusopts = list(key=Sys.getenv("SCOPUS_API_KEY")))
+```
+
+```{r,eval=FALSE}
+res1$scopus
+Query: [air quality monitoring] 
+Records found, returned: [172256, 10] 
+ 
+                                                         prism:url         dc:identifier
+1  https://api.elsevier.com/content/abstract/scopus_id/85054195467 SCOPUS_ID:85054195467
+2  https://api.elsevier.com/content/abstract/scopus_id/85053839201 SCOPUS_ID:85053839201
+3  https://api.elsevier.com/content/abstract/scopus_id/85051920458 SCOPUS_ID:85051920458
+4  https://api.elsevier.com/content/abstract/scopus_id/85053052770 SCOPUS_ID:85053052770
+5  https://api.elsevier.com/content/abstract/scopus_id/85053790411 SCOPUS_ID:85053790411
+6  https://api.elsevier.com/content/abstract/scopus_id/85047169794 SCOPUS_ID:85047169794
+7  https://api.elsevier.com/content/abstract/scopus_id/85053799252 SCOPUS_ID:85053799252
+8  https://api.elsevier.com/content/abstract/scopus_id/85053340640 SCOPUS_ID:85053340640
+9  https://api.elsevier.com/content/abstract/scopus_id/85053788265 SCOPUS_ID:85053788265
+10 https://api.elsevier.com/content/abstract/scopus_id/85053815780 SCOPUS_ID:85053815780
+Variables not shown: eid (chr), dc:title (chr), dc:creator (chr), prism:publicationName
+     (chr), prism:issn (chr), prism:volume (chr), prism:pageRange (chr), prism:coverDate
+     (chr), prism:coverDisplayDate (chr), prism:doi (chr), pii (chr), citedby-count
+     (chr), affiliation (list), prism:aggregationType (chr), subtype (chr),
+     subtypeDescription (chr), source-id (chr), openaccess (chr), openaccessFlag (lgl),
+     prism:eIssn (chr), prism:issueIdentifier (chr), article-number (chr)
+```
+
+## Search using arXiv
+
+The code below will search for papers on `air quality monitoring` on arXiv repository. For arXiv, an api is not required.
+
+```{r,eval=FALSE}
+res_arXiv$arxiv
+Query: [air quality monitoring] 
+Records found, returned: [44988, 10] 
+License: [variable, but should be free to text-mine, see http://arxiv.org/help/license and http://arxiv.org/help/bulk_data] 
+                   id           submitted             updated
+1    hep-th/9110066v1 1991-10-24 19:33:53 1991-10-24 19:33:53
+2  cond-mat/9208006v1 1992-08-11 15:29:45 1992-08-11 15:29:45
+3  astro-ph/9208005v1 1992-08-25 06:45:03 1992-08-25 06:45:03
+4   hep-lat/9209009v1 1992-09-04 18:35:35 1992-09-04 18:35:35
+5    hep-ph/9209236v1 1992-09-15 14:58:00 1992-09-15 14:58:00
+6   hep-lat/9209022v1 1992-09-22 17:05:11 1992-09-22 17:05:11
+7  astro-ph/9211002v1 1992-11-04 12:59:22 1992-11-04 12:59:22
+8    hep-ph/9212312v2 1992-12-28 17:16:34 1993-02-01 16:45:39
+9    hep-ph/9301239v1 1993-01-14 09:47:00 1993-01-14 09:47:00
+10 astro-ph/9301008v1 1993-01-15 15:37:30 1993-01-15 15:37:30
+Variables not shown: title (chr), abstract (chr), authors (chr), affiliations (chr),
+     link_abstract (chr), link_pdf (chr), link_doi (chr), comment (chr), journal_ref
+     (chr), doi (chr), primary_category (chr), categories (chr)
+```
