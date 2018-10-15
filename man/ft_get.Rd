@@ -349,6 +349,12 @@ ft_get('10.1128/cvi.00178-17')
 # American Society of Clinical Oncology
 ft_get('10.1200/JCO.18.00454')
 
+# American Institute of Physics
+ft_get('10.1063/1.4895527')
+
+# American Chemical Society
+ft_get(c('10.1021/la903074z', '10.1021/jp048806z'))
+
 
 # From ft_links output
 ## Crossref
