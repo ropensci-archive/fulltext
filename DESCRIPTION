@@ -7,7 +7,7 @@ Description: Provides a single interface to many sources of full text
     included for searching for articles, downloading full or partial
     text, downloading supplementary materials, converting to various
     data formats.
-Version: 1.0.2.9215
+Version: 1.0.9.9100
 License: MIT + file LICENSE
 Authors@R: c(
     person("Scott", "Chamberlain",
@@ -33,7 +33,7 @@ Imports:
     jsonlite,
     rplos (>= 0.8.0),
     rcrossref (>= 0.8.0),
-    crminer (>= 0.1.6.9100),
+    crminer (>= 0.2.0),
     microdemic (>= 0.2.0),
     aRxiv,
     rentrez (>= 1.1.0),
@@ -47,7 +47,6 @@ Suggests:
     testthat,
     knitr
 RoxygenNote: 6.1.0
-Remotes: ropensci/crminer
 X-schema.org-applicationCategory: Literature 
 X-schema.org-keywords: text-ming, literature, pdf, xml, publications, citations, full-text, TDM
 X-schema.org-isPartOf: https://ropensci.org
