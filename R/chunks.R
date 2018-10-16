@@ -45,7 +45,7 @@
 #' (dois <- searchplos(q="*:*", fl='id',
 #'    fq=list('doc_type:full',"article_type:\"research article\""),
 #'      limit=5)$data$id)
-#' x <- ft_get(dois, from="plos")
+#' x <- ft_collect(ft_get(dois, from="plos"))
 #' x %>% ft_chunks("front")
 #' x %>% ft_chunks("body")
 #' x %>% ft_chunks("back")
@@ -118,6 +118,9 @@
 #' }
 
 ft_chunks <- function(x, what='all') {
+  .Deprecated('pub_chunks', "pubchunks", 
+    "'ft_chunks' will be removed in the next ver; see pubchunks::pub_chunks")
+
   is_ft_data(x)
   what <- match.arg(unlist(what), c("all", sections()), TRUE)
   out <- list()
@@ -403,6 +406,9 @@ history2date <- function(r){
 #' @export
 #' @rdname ft_chunks
 ft_tabularize <- function(x){
+  .Deprecated('pub_tabularize', "pubchunks", 
+    "'ft_tabularize' will be removed in the next ver; see pubchunks::pub_tabularize")
+
   # each publisher
   out <- lapply(x, function(a){
     # each article

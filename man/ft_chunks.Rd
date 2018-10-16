@@ -61,7 +61,7 @@ library("rplos")
 (dois <- searchplos(q="*:*", fl='id',
    fq=list('doc_type:full',"article_type:\\"research article\\""),
      limit=5)$data$id)
-x <- ft_get(dois, from="plos")
+x <- ft_collect(ft_get(dois, from="plos"))
 x \%>\% ft_chunks("front")
 x \%>\% ft_chunks("body")
 x \%>\% ft_chunks("back")
