@@ -115,15 +115,15 @@ scopus_search <- function(query = NULL, count = 25, start = 0, type = "search",
   scopus_get(file.path(scopus_base(), "search/scopus"), args, key, ...)
 }
 
-scopus_search_loop <- function(query = NULL, count = 25, type = "search", 
+scopus_search_loop <- function(query = NULL, count = 25, start = 0, type = "search", 
   search_type = "scopus", facets = NULL, view = NULL, date = NULL, 
   sort = NULL, content = NULL, subj = NULL, key = NULL, ... ) {
 
   key <- check_key_scopus(key)
   lim <- if (count > 25) 25 else count
-  #if (count > 25) stop("'count' for Scopus must be 25 or less", call. = FALSE)
-  args <- ft_compact(list(query = query, count = lim, facets = facets, 
-    view = view, date = date, sort = sort, content = content, subj = subj))
+  args <- ft_compact(list(query = query, count = lim, start = start, 
+    facets = facets, view = view, date = date, sort = sort, 
+    content = content, subj = subj))
   
   url <- file.path(scopus_base(), "search/scopus")
   out <- outfacet <- list()
