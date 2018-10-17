@@ -7,3 +7,6 @@ plosarticle.xml
 entrez.xml
 inst/ignore/elsevier_code.R
 notes.md
+revdep/checks.noindex/
+revdep/data.sqlite
+revdep/library.noindex/

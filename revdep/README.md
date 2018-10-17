@@ -1,35 +1,30 @@
-# Setup
+# Platform
 
-## Platform
-
-|setting  |value                                       |
+|field    |value                                       |
 |:--------|:-------------------------------------------|
-|version  |R version 3.4.3 Patched (2018-01-01 r74017) |
+|version  |R version 3.5.1 Patched (2018-08-12 r75119) |
+|os       |macOS High Sierra 10.13.6                   |
 |system   |x86_64, darwin15.6.0                        |
-|ui       |RStudio (1.1.408)                           |
+|ui       |X11                                         |
 |language |(EN)                                        |
 |collate  |en_US.UTF-8                                 |
-|tz       |America/Los_Angeles                         |
-|date     |2018-01-15                                  |
+|ctype    |en_US.UTF-8                                 |
+|tz       |US/Pacific                                  |
+|date     |2018-10-17                                  |
 
-## Packages
+# Dependencies
 
-|package    |*  |version    |date       |source                                  |
-|:----------|:--|:----------|:----------|:---------------------------------------|
-|fulltext   |   |0.9.9.9314 |2018-01-15 |local (ropensci/fulltext@NA)            |
-|microdemic |   |0.2.0      |2018-01-15 |local (ropenscilabs/microdemic@1a204cf) |
+|package    |old   |new        |Δ  |
+|:----------|:-----|:----------|:--|
+|fulltext   |1.0.1 |1.1.0      |*  |
+|microdemic |NA    |0.3.1.9100 |*  |
 
-# Check results
+# Revdeps
 
-1 packages
+## All (2)
 
-|package |version | errors| warnings| notes|
-|:-------|:-------|------:|--------:|-----:|
-|rotl    |3.0.3   |      0|        0|     0|
-
-## rotl (3.0.3)
-Maintainer: Francois Michonneau <francois.michonneau@gmail.com>  
-Bug reports: https://github.com/ropensci/rotl/issues
-
-0 errors | 0 warnings | 0 notes
+|package   |version |error |warning |note |
+|:---------|:-------|:-----|:-------|:----|
+|pubchunks |0.1.0   |      |        |     |
+|rotl      |3.0.5   |      |        |     |
 
