@@ -81,6 +81,11 @@ res$plos
 #> 
 #> $opts$type
 #> [1] "xml"
+#> 
+#> 
+#> $errors
+#>                             id error
+#> 1 10.1371/journal.pone.0086169  <NA>
 ```
 
 Indexing to the `data` slot takes us to another list with metadata and the article
@@ -183,7 +188,7 @@ ft_get(doi, from = "entrez")
 #> <fulltext text>
 #> [Docs] 1 
 #> [Source] ext - /Users/sckott/Library/Caches/R/fulltext 
-#> [IDs] 10.3389/fphar.2014.00109 ...
+#> [IDs] 4050532 ...
 ```
 
 ## Search using ft_search()
@@ -196,15 +201,15 @@ For example, search entrez, get some DOIs, then fetch some articles
 #> Query:
 #>   [ecology] 
 #> Found:
-#>   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 140275; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
+#>   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 157147; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
 #> Returned:
 #>   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 10; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0]
 res$entrez$data$doi
-#>  [1] "10.1038/s41467-017-02421-3" "10.1038/s41467-017-02658-y"
-#>  [3] "10.1038/s41467-017-02573-2" "10.1038/s41467-017-02535-8"
-#>  [5] "10.7554/eLife.32486"        "10.7717/peerj.4241"        
-#>  [7] "10.7717/peerj.4219"         "10.1038/s41467-017-02271-z"
-#>  [9] "10.1038/s41467-017-02680-0" "10.1038/s41467-017-02504-1"
+#>  [1] "10.1007/s00335-018-9736-9" "10.1007/s00265-010-1022-0"
+#>  [3] NA                          "10.1177/1178646918802289" 
+#>  [5] "10.3389/fpls.2018.01412"   "10.3389/fmicb.2018.02343" 
+#>  [7] "10.3389/fnana.2018.00079"  "10.3389/fpsyg.2018.01839" 
+#>  [9] "10.3390/vetsci5030081"     "10.3390/vetsci5030071"
 ```
 
 Get articles
@@ -213,10 +218,9 @@ Get articles
 ```r
 ft_get(res$entrez$data$doi[1:3], from = 'entrez')
 #> <fulltext text>
-#> [Docs] 3 
+#> [Docs] 2 
 #> [Source] ext - /Users/sckott/Library/Caches/R/fulltext 
-#> [IDs] 10.1038/s41467-017-02421-3 10.1038/s41467-017-02658-y
-#>      10.1038/s41467-017-02573-2 ...
+#> [IDs] 6191311 6191197 ...
 ```
 
 ## Collect full text from file on disk

@@ -34,7 +34,7 @@ Search for the term _ecology_ in PLOS journals.
 #> Query:
 #>   [ecology] 
 #> Found:
-#>   [PLoS: 41464; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
+#>   [PLoS: 45067; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
 #> Returned:
 #>   [PLoS: 10; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0]
 ```
@@ -45,7 +45,7 @@ Each publisher/search-engine has a slot with metadata and data
 ```r
 res1$plos
 #> Query: [ecology] 
-#> Records found, returned: [41464, 10] 
+#> Records found, returned: [45067, 10] 
 #> License: [CC-BY] 
 #>                              id
 #> 1  10.1371/journal.pone.0001248
@@ -107,7 +107,7 @@ You can extract from any pdf from a file path, like:
 ```r
 path <- system.file("examples", "example1.pdf", package = "fulltext")
 ft_extract(path)
-#> <document>/Library/Frameworks/R.framework/Versions/3.4/Resources/library/fulltext/examples/example1.pdf
+#> <document>/Library/Frameworks/R.framework/Versions/3.5/Resources/library/fulltext/examples/example1.pdf
 #>   Title: Suffering and mental health among older people living in nursing homes---a mixed-methods study
 #>   Producer: pdfTeX-1.40.10
 #>   Creation date: 2015-07-17
