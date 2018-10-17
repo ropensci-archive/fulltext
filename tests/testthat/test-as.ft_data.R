@@ -6,8 +6,11 @@ ftxt_cache$delete_all()
 test_that("as.ft_data works", {
   skip_on_cran()
 
+  dir <- file.path(tempdir(), "testing")
+  dir.create(dir)
+
   # with empty cache
-  aa <- as.ft_data()
+  aa <- as.ft_data(path = dir)
 
   expect_is(aa, "ft_data")
   expect_named(aa, "cached")
@@ -16,9 +19,11 @@ test_that("as.ft_data works", {
 
 
   # with non-empty cache
+  file <- system.file("examples/elife.xml", package = "fulltext")
+  writeLines(readLines(file), tempfile(tmpdir = dir, fileext = ".xml"))
   ## download a paper first
-  bb <- sm(ft_get('10.7717/peerj.228'))
-  aa <- as.ft_data()
+  # bb <- sm(ft_get('10.7717/peerj.228'))
+  aa <- as.ft_data(path = dir)
 
   expect_is(aa, "ft_data")
   expect_named(aa, "cached")
