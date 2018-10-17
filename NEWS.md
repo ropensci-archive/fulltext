@@ -1,3 +1,42 @@
+fulltext 1.1.0
+==============
+
+### NEW FEATURES
+
+* gains new function `cache_file_info()` to get information on possibly bad files in your cache - which you can use to remove files as you see fit (#142) (#174) thx @lucymerobinson for the push
+* gains new function `as.ft_data()` to create the same output as `ft_get()` returns, but instead pulls all files from your cache (#142) (#172) thanks @lucymerobinson
+* `ft_get()` gains new attribute of a data.frame in the `errors` slot with information on each article and what error we collected or `NA_character_` if none; should help with sorting out problems across all requests (#176)
+* scopus option in `ft_search()` gains support for facets; see `?scopus_search` (#170) thanks @lucymerobinson
+
+### BUG FIXES
+
+* fixed bug in `ft_search()` for microsoft academic plugin (#154)
+* fixed bug in `ft_search()` for scopus plugin - we weren't looping over requests correctly (#161)
+* fix bug in `ft_links()` - when result of `ft_search()` passed to `ft_links` with bad urls or with more than 1 then `ft_links` was failing; fix by filtering on `intended-application` field from Crossref via fix in dependency package `crminer` (#173)
+* additional check added in `ft_get()` to check for an invalid file that gave a 200 status code (so passes the status code check) (#175)
+* bring back support for `start` parameter in `ft_search()` for Scopus to offset what record a query starts at (#180)
+* fix to `ft_get()` for entrez data source to loop internally when more than 50 ids requested to avoid 414 http error (URI too long) (#167) thanks @t088
+
+### MINOR IMPROVEMENTS
+
+* change base url for EuropePMC to `https`
+* use `https` for all `doi.org` requests (#155) thanks @katrinleinweber 
+* better explanation of the may `opts` parameters in `ft_search()` (#161)
+* after many attempts, finally (I think) sorted out Microbiology Society for the `ft_get()` function (#163) thanks to @low-decarie
+* mention `suppdata` package in the README (#164)
+* clarify language in `ft_collect()` that we are saving files to disk locally only (#165)
+* fix typos (#166) (#168) thanks @maelle @AugustT
+* removed `whisker` package dependency (#156)
+* scopus gains support for more parameters; see `?scopus_search`  (#152)
+* updated docs with information on using NCBI Entrez API keys (#159)
+* plugin for publisher Instituto de Investigaciones Filologicas to `ft_get()` added (#117) thanks @andreifoldes 
+* clarified in `ft_search()` docs that for some sources we loop internally to get whatever number of records the user wants, while others we can not (#162)
+
+### DEPRECATED
+
+Continuing to focus the scope of this package the functions `ft_chunks()` and `ft_tabularize()` are now deprecated, and will be removed (defunct) in a future version of this package. See the new package <https://github.com/ropensci/pubchunks> for the same and better functionality. (#181)
+
+
 fulltext 1.0.1
 ==============
 
