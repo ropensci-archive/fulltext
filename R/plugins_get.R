@@ -63,16 +63,6 @@ get_ft <- function(x, type, url, path, headers = list(), ...) {
           pdf = pdftools::pdf_info(res$content)), 
       error=function(e) e), "error") ## invalid file, somehow gave 200 code
   ) {
-    # cat("unlinking ...\n")
-    # cat(url, sep = "\n")
-    # cat(paste0(class(res), collapse = ","), sep = "\n")
-    # cat(res$status_code, sep = "\n")
-    # cat(sprintf("type: %s, ctype: %s", type, res$response_headers[['content-type']]), sep = "\n")
-    # cat(class(tryCatch(
-    #     switch(type, 
-    #       xml = xml2::read_xml(res$content), 
-    #       pdf = pdftools::pdf_info(res$content)), 
-    #   error=function(e) e)), sep = "\n")
     unlink(path)
     mssg <- if (inherits(res, c("error", "warning"))) {
       # tryCatch message
@@ -101,12 +91,6 @@ http_mssg <- function(x) {
   b <- x$status_http()
   sprintf("(%s) %s", b$status_code, b$message)
 }
-# check_cached <- function(x, type, path) {
-#   if (file.exists(path) && !cache_options_get()$overwrite) {
-#     message(paste0("path exists: ", path))
-#     return(ft_object(path, x, type))
-#   }   
-# }
 
 # x = dat
 error_df <- function(x) {
