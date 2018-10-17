@@ -60,10 +60,11 @@ opts <- list(key = Sys.getenv('ELSEVIER_SCOPUS_KEY'))
   limit = 25))
 ## get abstract
 dois <- na.omit(res$scopus$data$`prism:doi`)
-out <- ft_abstract(x = dois[1], scopusopts = opts)
+out <- ft_abstract(x = dois[1], from = "scopus", scopusopts = opts)
 out
+out$scopus
 
-(out <- ft_abstract(x = dois[1:15], scopusopts = opts))
+(out <- ft_abstract(x = dois[1:5], from = "scopus", scopusopts = opts))
 
 # use scopus Ids
 (res <- ft_search(query = 'biology', from = 'scopus', scopusopts = opts, 

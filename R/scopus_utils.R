@@ -1,6 +1,6 @@
 #' Scopus search
 #' 
-#' @export
+#' @name scopus_search
 #' @keywords internal
 #' @param query (character) query terms, as a single character vector
 #' @param count (integer/numeric) results to return: default: 25
@@ -103,6 +103,8 @@
 #' # sort
 #' x <- scopus_search(query = "ecology", sort = "-title")
 #' }
+
+#' @export
 scopus_search <- function(query = NULL, count = 25, start = 0, type = "search", 
   search_type = "scopus", facets = NULL, view = NULL, date = NULL, 
   sort = NULL, content = NULL, subj = NULL, key = NULL, ...) {
@@ -115,6 +117,7 @@ scopus_search <- function(query = NULL, count = 25, start = 0, type = "search",
   scopus_get(file.path(scopus_base(), "search/scopus"), args, key, ...)
 }
 
+#' @export
 scopus_search_loop <- function(query = NULL, count = 25, start = 0, type = "search", 
   search_type = "scopus", facets = NULL, view = NULL, date = NULL, 
   sort = NULL, content = NULL, subj = NULL, key = NULL, ... ) {

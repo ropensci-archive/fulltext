@@ -215,13 +215,13 @@ respdf$elife
 
 elife_xml <- ft_get('10.7554/eLife.03032', from = "elife")
 library(magrittr)
-elife_xml \%<>\% collect()
+elife_xml \%<>\% ft_collect()
 elife_xml$elife
 ### pdf
 elife_pdf <- ft_get(c('10.7554/eLife.03032', '10.7554/eLife.32763'), 
   from = "elife", type = "pdf")
 elife_pdf$elife
-elife_pdf \%<>\% collect()
+elife_pdf \%<>\% ft_collect()
 elife_pdf \%>\% ft_extract()
 
 ## some BMC DOIs will work, but some may not, who knows
@@ -238,7 +238,7 @@ res
 res$hindawi
 res$hindawi$data$path
 res$hindawi$data$data
-res \%>\% collect() \%>\% .$hindawi
+res \%>\% ft_collect() \%>\% .$hindawi
 
 ## F1000Research - via Entrez
 x <- ft_get('10.12688/f1000research.6522.1')
@@ -249,8 +249,6 @@ res$f1000research
 
 ## Pensoft
 ft_get('10.3897/mycokeys.22.12528')
-### you'll need to specify the publisher for a DOI from a recent publication
-ft_get('10.3897/zookeys.515.9332', from = "pensoft")
 
 ## Copernicus
 out <- ft_get(c('10.5194/angeo-31-2157-2013', '10.5194/bg-12-4577-2015'))
@@ -278,6 +276,7 @@ ft_get(c('10.3390/nu3010063', '10.3390/nu7085279')) # not working, only getting 
 # Scientific Societies
 ## this is a paywall article, you may not have access or you may
 x <- ft_get("10.1094/PHYTO-04-17-0144-R")
+x$scientificsocieties
 
 # Informa
 x <- ft_get("10.1080/03088839.2014.926032")
@@ -378,7 +377,7 @@ ress$plos$data$path$`10.1371/journal.pone.0059813`
 
 ## No publisher plugin provided yet
 ft_get('10.1037/10740-005')
-### but no link available for this DOI
+### no link available for this DOI
 res <- ft_get('10.1037/10740-005', try_unknown = TRUE)
 res$crossref
 }
