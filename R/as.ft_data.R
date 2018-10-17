@@ -9,16 +9,29 @@
 #' cache path. Default: `NULL`
 #' @return an object of class `ft_data`
 #' @seealso [ft_get()]
+#' @details We use an internal store of identifiers to keep track of files.
+#' These identifiers are in the output of [ft_get()] and you can see them 
+#' in that output.  If a file does not have a matching entry in our index 
+#' of files (e.g., if you drop a file into the cache location as in the 
+#' example below), then we assign it an index based on the file path; we'd
+#' ideally use an article DOI or similar but we can not safely retrieve it
+#' with just a file path.
 #' @examples
-#' x <- as.ft_data()
+#' # put a file in the cache in case there aren't any
+#' dir <- file.path(tempdir(), "testing")
+#' dir.create(dir)
+#' file <- system.file("examples/elife.xml", package = "fulltext")
+#' writeLines(readLines(file), tempfile(tmpdir = dir, fileext = ".xml"))
+#' 
+#' # call as.ft_data
+#' x <- as.ft_data(path = dir)
+#' 
 #' # output lives underneath a special list index "cached" 
 #' #   representing already present files
 #' x$cached
 #' 
-#' y <- x %>% ft_collect()
-#' y$cached$data$data
-#' y %>% ft_chunks(what="title") %>% ft_tabularize()
-#' x %>% ft_collect() %>% ft_text()
+#' # collect chunks
+#' # x %>% ft_collect %>% ft_chunks(c("doi", "title"))
 as.ft_data <- function(path = NULL) {
   if (is.null(path)) path <- ftxt_cache$cache_path_get()
   if (!dir.exists(path)) stop("path does not exist")  
@@ -32,7 +45,11 @@ to_ft_data <- function(x) {
   if (length(x) == 0) return(list(cached = null_list(list())))
 
   id <- unname(vapply(x, function(w) {
-    fulltext_store$get(strsplit(basename(w), "\\.")[[1]][1])
+    res <- tryCatch(
+      fulltext_store$get(strsplit(basename(w), "\\.")[[1]][1]),
+      error = function(e) e
+    )
+    if (inherits(res, "error")) digest::digest(w, "sha1") else res
   }, ""))
 
   dat <- list(path = stats::setNames(
