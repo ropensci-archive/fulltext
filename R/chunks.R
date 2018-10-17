@@ -195,7 +195,8 @@ title <- function(b, from){
          elife = f1txt(b, "//title-group/article-title"),
          plos = f1txt(b, "//title-group/article-title"),
          entrez = f1txt(b, "//title-group/article-title"),
-         elsevier = f1txt(b, "//dc:title")
+         elsevier = f1txt(b, "//dc:title"),
+         f1txt(b, "//title-group/article-title")
   )
 }
 
@@ -204,7 +205,8 @@ doi <- function(b, from){
          elife = f1txt(b, "//article-id[@pub-id-type='doi']"),
          plos = f1txt(b, "//article-id[@pub-id-type='doi']"),
          entrez = f1txt(b, "//article-id[@pub-id-type='doi']"),
-         elsevier = f1txt(b, "//dc:identifier")
+         elsevier = f1txt(b, "//dc:identifier"),
+         f1txt(b, "//article-id[@pub-id-type='doi']")
   )
 }
 
@@ -213,7 +215,8 @@ categories <- function(b, from){
          elife = xml2::xml_text(xml_find_all(xml2::xml_find_all(b, "//article-categories")[[1]], "//subject")),
          plos = xml2::xml_text(xml_find_all(xml2::xml_find_all(b, "//article-categories")[[1]], "//subject")),
          entrez = xml2::xml_text(xml_find_all(xml2::xml_find_all(b, "//article-categories")[[1]], "//subject")),
-         elsevier = falltxt(b, "//dcterms:subject")
+         elsevier = falltxt(b, "//dcterms:subject"),
+         xml2::xml_text(xml_find_all(xml2::xml_find_all(b, "//article-categories")[[1]], "//subject"))
   )
 }
 
@@ -230,7 +233,8 @@ authors <- function(b, from){
     elife = get_auth(b),
     plos = get_auth(b),
     entrez = get_auth(b),
-    elsevier = falltxt(b, "//dc:creator")
+    elsevier = falltxt(b, "//dc:creator"),
+    get_auth(b)
   )
 }
 
@@ -252,7 +256,8 @@ body <- function(b, from){
     elsevier = {
       xml_ns_strip(b)
       falltxt(b, "//body")
-    }
+    },
+    xml_text(xml_find_all(b, "//body//p"))
   )
 }
 
@@ -262,7 +267,8 @@ abstract <- function(b, from){
     elife = xml_text(xml_find_all(xml_find_all(b, '//abstract[@hwp:id="abstract-1"]', ns = xml_ns(b))[[1]], "p")[1]),
     plos = falltxt(b, "//abstract"),
     entrez = falltxt(b, "//abstract"),
-    elsevier = f1txt(b, "//dc:description")
+    elsevier = f1txt(b, "//dc:description"),
+    falltxt(b, "//abstract")
   )
 }
 
@@ -305,7 +311,8 @@ publisher <- function(b, from){
     elife = falltxt(b, "//publisher"),
     plos = falltxt(b, "//publisher"),
     entrez = falltxt(b, "//publisher"),
-    elsevier = f1txt(b, "//prism:publisher")
+    elsevier = f1txt(b, "//prism:publisher"),
+    falltxt(b, "//publisher")
   )
 }
 
@@ -315,7 +322,8 @@ journal_meta <- function(b, from){
     elife = lapply(xml2::xml_children(xml2::xml_find_first(b, "//journal-meta")), xml_node_parse),
     plos = lapply(xml2::xml_children(xml2::xml_find_first(b, "//journal-meta")), xml_node_parse),
     entrez = lapply(xml2::xml_children(xml2::xml_find_first(b, "//journal-meta")), xml_node_parse),
-    elsevier = NULL
+    elsevier = NULL,
+    lapply(xml2::xml_children(xml2::xml_find_first(b, "//journal-meta")), xml_node_parse)
   )
 }
 
@@ -325,7 +333,8 @@ article_meta <- function(b, from){
     elife = lapply(xml2::xml_children(xml2::xml_find_first(b, "//article-meta")), xml_node_parse),
     plos = lapply(xml2::xml_children(xml2::xml_find_first(b, "//article-meta")), xml_node_parse),
     entrez = lapply(xml2::xml_children(xml2::xml_find_first(b, "//article-meta")), xml_node_parse),
-    elsevier = NULL
+    elsevier = NULL,
+    lapply(xml2::xml_children(xml2::xml_find_first(b, "//article-meta")), xml_node_parse)
   )
 }
 
@@ -334,7 +343,8 @@ acknowledgments <- function(b, from){
          elife = falltxt(b, "//ack/p"),
          plos = falltxt(b, "//ack/p"),
          entrez = falltxt(b, "//ack/p"),
-         elsevier = f1txt(b, "//ce:acknowledgment")
+         elsevier = f1txt(b, "//ce:acknowledgment"),
+         falltxt(b, "//ack/p")
   )
 }
 
@@ -349,7 +359,8 @@ permissions <- function(b, from){
               copyright_text = f1txt(tmp, "xocs:cp-license-lines"),
               copyright_notice = f1txt(tmp, "xocs:cp-notices")
             )
-         }
+         },
+         getperms(b)
   )
 }
 
@@ -366,7 +377,8 @@ front <- function(b, from){
          elife = get_forb(b, "//front"),
          plos = get_forb(b, "//front"),
          entrez = get_forb(b, "//front"),
-         elsevier = NULL
+         elsevier = NULL,
+         get_forb(b, "//front")
   )
 }
 
@@ -375,7 +387,8 @@ back <- function(b, from){
          elife = get_forb(b, "//back"),
          plos = get_forb(b, "//back"),
          entrez = get_forb(b, "//back"),
-         elsevier = NULL
+         elsevier = NULL,
+         get_forb(b, "//back")
   )
 }
 
@@ -391,7 +404,8 @@ history <- function(b, from){
          elife = history2date(b),
          plos = history2date(b),
          entrez = history2date(b),
-         elsevier = NULL
+         elsevier = NULL,
+         history2date(b)
   )
 }
 
