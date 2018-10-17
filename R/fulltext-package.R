@@ -127,6 +127,7 @@
 #' @importFrom storr storr_rds
 #' @importFrom tibble as_tibble
 #' @importFrom stats na.omit
+#' @importFrom digest digest
 #' @name fulltext-package
 #' @aliases fulltext
 #' @docType package
