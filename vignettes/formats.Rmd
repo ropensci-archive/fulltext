@@ -47,12 +47,12 @@ least for their open access journals.
 [pep]: http://zookeys.pensoft.net/lib/ajax_srv/article_elements_srv.php?action=download_pdf&item_id=4351
 [ep]: https://cdn.elifesciences.org/articles/31770/elife-31770-v1.pdf
 [hp]: http://downloads.hindawi.com/journals/crid/2014/246965.pdf
-[kp]: http://www.karger.com/Article/Pdf/370302
+[kp]: https://www.karger.com/Article/Pdf/370302
 [copp]: http://www.biogeosciences.net/11/7331/2014/bg-11-7331-2014.pdf
 [bep]: http://benthamopen.com/contents/pdf/TONEUJ/TONEUJ-9-21.pdf
 [arxivp]: http://arxiv.org/pdf/1507.08559v1.pdf?
 [biorxivp]: http://biorxiv.org/content/biorxiv/early/2015/07/26/023259.full.pdf
-[degrutp]: http://www.degruyter.com/dg/viewarticle.fullcontentlink:pdfeventlink/$002fj$002fbiolet.2014.51.issue-2$002fbiolet-2015-0008$002fbiolet-2015-0008.pdf?format=INT&t:ac=j$002fbiolet.2014.51.issue-2$002fbiolet-2015-0008$002fbiolet-2015-0008.xml
+[degrutp]: https://www.degruyter.com/downloadpdf/j/biolet.2014.51.issue-2/biolet-2015-0008/biolet-2015-0008.pdf
 [mdpip]: http://www.mdpi.com/1999-4915/7/8/2817/pdf
 [serscp]: http://www.sersc.org/journals/IJEIC/vol6_Is3/2.pdf
 [airccp]: http://airccse.org/journal/cnc/7115cnc04.pdf
