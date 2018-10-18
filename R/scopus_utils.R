@@ -118,6 +118,7 @@ scopus_search <- function(query = NULL, count = 25, start = 0, type = "search",
 }
 
 #' @export
+#' @rdname scopus_search
 scopus_search_loop <- function(query = NULL, count = 25, start = 0, type = "search", 
   search_type = "scopus", facets = NULL, view = NULL, date = NULL, 
   sort = NULL, content = NULL, subj = NULL, key = NULL, ... ) {
