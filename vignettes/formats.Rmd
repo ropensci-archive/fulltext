@@ -19,12 +19,12 @@ BiomedCentral | Y | N | N |... |
 bioRxiv | [Y][biorxivp] | N | N |... |
 CogentOA | Y | N | N |... |
 Copernicus | [Y][copp] | [Y][copx] ^[1] | N |... |
-De Gruyter | [Y][degrutp] | N | N |... |
+De Gruyter | Y | N | N |... |
 Dovepress | [Y][dovep] | N | N |... |
 eLife | [Y][ep] | [Y][ex] | N |... |
 FrontiersIn | Y | Y ^[1] | Y | ReadCube in browser |
 Hindawi | [Y][hp] | [Y][hx] | [Y][he] | Don't show XML link on page  |
-Karger | [Y][kp] | N | N |... |
+Karger | Y | N | N |... |
 MDPI | [Y][mdpip] | Y | N |... |
 Nature | [Y][naturep] | N | N |... |
 PeerJ | [Y][peerjp] | [Y][peerjx] | N |... |
