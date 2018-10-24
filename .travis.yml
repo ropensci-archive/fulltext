@@ -13,8 +13,8 @@ matrix:
     - os: linux
       r: devel
 
-r_github_packages:
-  - jimhester/covr
+r_binary_packages:
+  - covr
 
 addons:
   apt:
@@ -22,7 +22,7 @@ addons:
       - libpoppler-cpp-dev
 
 after_success:
-  - Rscript -e 'covr::codecov()'
+  - if [[ "${R_CODECOV}" ]]; then R -e 'covr::codecov()'; fi
 
 notifications:
   email:
