@@ -61,7 +61,8 @@ available via Pubmed)
 Authentication: A number of publishers require authentication via API key, and some even more
 draconian authentication processes involving checking IP addresses. We are working on supporting
 all the various authentication things for different publishers, but of course all the OA content
-is already easily available.
+is already easily available. See the **Authentication** section in `?fulltext-package` after 
+loading the package.
 
 We'd love your feedback. Let us know what you think in [the issue tracker](https://github.com/ropensci/fulltext/issues)
 

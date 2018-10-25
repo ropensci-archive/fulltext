@@ -16,13 +16,13 @@ ft_abstract_ls()
 \item{from}{Source to query. One or more of plos (default),
 scopus, microsoft, or crossref}
 
-\item{plosopts}{PLOS options}
+\item{plosopts}{PLOS options, a named list.}
 
-\item{scopusopts}{Scopus options}
+\item{scopusopts}{Scopus options, a named list.}
 
-\item{maopts}{Microsoft Academic options}
+\item{maopts}{Microsoft Academic options, a named list.}
 
-\item{crossrefopts}{Crossref options}
+\item{crossrefopts}{Crossref options, a named list.}
 
 \item{...}{curl options passed on to \code{\link[httr:GET]{httr::GET()}} or \link[crul:HttpClient]{crul::HttpClient}}
 }

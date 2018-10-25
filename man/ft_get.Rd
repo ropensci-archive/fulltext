@@ -30,20 +30,20 @@ ftdoi.org or at Crossref we skip with a warning. If found with ftdoi.org or
 Crossref we attempt to download. Only applicable in \code{character} and \code{list}
 S3 methods. Default: \code{TRUE}}
 
-\item{plosopts}{PLOS options. See \code{\link[rplos:plos_fulltext]{rplos::plos_fulltext()}}}
+\item{plosopts}{PLOS options, a named list. See \code{\link[rplos:plos_fulltext]{rplos::plos_fulltext()}}}
 
 \item{bmcopts}{BMC options. parameter DEPRECATED}
 
-\item{entrezopts}{Entrez options. See \code{\link[rentrez:entrez_search]{rentrez::entrez_search()}} and
-\code{\link[=entrez_fetch]{entrez_fetch()}}}
+\item{entrezopts}{Entrez options, a named list. See \code{\link[rentrez:entrez_search]{rentrez::entrez_search()}}
+and \code{\link[=entrez_fetch]{entrez_fetch()}}}
 
-\item{elifeopts}{eLife options}
+\item{elifeopts}{eLife options, a named list.}
 
-\item{elsevieropts}{Elsevier options}
+\item{elsevieropts}{Elsevier options, a named list.}
 
-\item{wileyopts}{Wiley options}
+\item{wileyopts}{Wiley options, a named list.}
 
-\item{crossrefopts}{Crossref options}
+\item{crossrefopts}{Crossref options, a named list.}
 
 \item{...}{Further args passed on to \link[crul:HttpClient]{crul::HttpClient}}
 }
@@ -106,11 +106,22 @@ DOI.
 Note that some publishers are available via Entrez, but often not recent
 articles, where "recent" may be a few months to a year or so. In that case,
 make sure to specify the publisher, or else you'll get back no data.
+}
+\section{Important Access Notes}{
 
 See \strong{Rate Limits} and \strong{Authentication} in
 \link{fulltext-package} for rate limiting and authentication information,
-respectively
+respectively.
+
+In particular, take note that when fetching full text from Wiley and
+Elsevier, the only way that's done (unless it's one of their OA papers)
+is through the Crossref TDM flow in which you need a Crossref TDM API
+key and your institution needs to have access to the exact journal you
+are trying to fetch a paper from. If your institution doesn't have
+access you may still get a result, but likely its only the abstract.
+See \strong{Authentication} in \link{fulltext-package} for details.
 }
+
 \section{Notes on the \code{type} parameter}{
 
 Type is sometimes ignored, sometimes used. For certain data sources,

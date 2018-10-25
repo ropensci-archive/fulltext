@@ -86,17 +86,22 @@ that will display these rate limits. See also \strong{Authentication}.
 
 \strong{BMC}: BMC is integrated into Springer Publishers now,
 and that API requires an API key.  Get your key by signing up at
-\url{https://dev.springer.com/}, then you'll get a key. Pass the key to a
+https://dev.springer.com/, then you'll get a key. Pass the key to a
 named parameter \code{key} to \code{bmcopts}. Or, save your key in your \code{.Renviron}
 file as \code{SPRINGER_KEY}, and we'll read it in for you, and you don't
 have to pass in anything.
 
-\strong{Scopus}: Scopus requires an API key to search their service. Go to
-\url{https://dev.elsevier.com/index.html}, register for an account,
-then when you're in your account, create an API key. Pass in as variable
-\code{key} to \code{scopusopts}, or store your key under the name
+\strong{Scopus}: Scopus requires two things: an API key and your institution must
+have access. For the API key, go to https://dev.elsevier.com/index.html,
+register for an account, then when you're in your account, create an API key.
+Pass in as variable \code{key} to \code{scopusopts}, or store your key under the name
 \code{ELSEVIER_SCOPUS_KEY} as an environment variable in \code{.Renviron}, and
-we'll read it in for you. See \link{Startup} for help.
+we'll read it in for you. See \link{Startup} for help. For the institution access
+go to a browser and see if you have access to the journal(s) you want.
+If you don't have access in a browser you probably won't have access via
+this package. If you aren't physically at your institution you will likely
+need to be on a VPN or similar so that your IP address is in the range
+that the two publishers are accepting for that institution.
 
 \strong{Microsoft}: Get a key by creating an Azure account at
 \url{https://www.microsoft.com/cognitive-services/en-us/subscriptions},
@@ -109,9 +114,35 @@ API key into \code{maopts} as a named element in a list like
 \strong{Crossref}: Crossref encourages requests with contact information
 (an email address) and will forward you to a dedicated API cluster
 for improved performance when you share your email address with them.
-\url{https://github.com/CrossRef/rest-api-doc#good-manners--more-reliable-service}
+https://github.com/CrossRef/rest-api-doc#good-manners--more-reliable-service
 To pass your email address to Crossref via this client, store it
-as an environment variable in \code{.Renviron} like \code{crossref_email = name@example.com}
+as an environment variable in \code{.Renviron} like
+\code{crossref_email = name@example.com}
+
+\strong{Crossref TDM}: TDM = "Text and Data Mining". This applies to the few
+publishers - Wiley and Elsevier - that are part of this program (TDM).
+When using \code{\link[=ft_get]{ft_get()}}, and you want to get papers from these two publishers,
+you'll need two things:
+(1) an API key for the Crossref TDM. Go to
+https://apps.crossref.org/clickthrough/researchers and you'll be asked to
+login with your ORCID. If you don't have an ORCID go to https://orcid.org/
+and get one. After logging in with your ORCID, click on the "API token"
+tag and grab your API key. Put your API key in \code{.Renviron} file or similar
+(e.g. \code{.zshrc} or \code{.bash_profile}, etc.) with the entry
+\code{CROSSREF_TDM=yourkey}. We'll look for the environment variable CROSSREF_TDM
+within this package. See http://tdmsupport.crossref.org/ for more
+information on the Crossref TDM program.
+(2) Your institution needs to have access to the journal you're requesting
+papers from. If you're not sure about this just go to a browser and see if you
+have access to the journal(s) you want. If you don't have access in a browser
+you probably won't have access via this package. If you aren't physically at
+your institution you will likely need to be on a VPN or similar so that
+your IP address is in the range that the two publishers are accepting for
+that institution. Also talk to your librarian if you aren't sure about
+access or have questions about it. In some cases, you may also need to request
+that Elsevier removes a "fence" for your institution - that is, your institution
+has access to XYZ journal(s), but they don't yet allow programmatic access.
+This has happened at least a few times that I know of.
 
 \strong{Entrez}: NCBI limits users to making only 3 requests per second. But, users
 who register for an API key are able to make up to ten requests per second.

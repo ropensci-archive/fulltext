@@ -4,10 +4,10 @@
 #' @param x (character) DOIs as a character vector
 #' @param from Source to query. One or more of plos (default), 
 #' scopus, microsoft, or crossref
-#' @param plosopts PLOS options
-#' @param scopusopts Scopus options
-#' @param maopts Microsoft Academic options
-#' @param crossrefopts Crossref options
+#' @param plosopts PLOS options, a named list.
+#' @param scopusopts Scopus options, a named list.
+#' @param maopts Microsoft Academic options, a named list.
+#' @param crossrefopts Crossref options, a named list.
 #' @param ... curl options passed on to [httr::GET()] or [crul::HttpClient]
 #' @return An object of class `ft_abstract`
 #' @details See **Rate Limits** and **Authentication** in 

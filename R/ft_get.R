@@ -22,14 +22,14 @@
 #' ftdoi.org or at Crossref we skip with a warning. If found with ftdoi.org or 
 #' Crossref we attempt to download. Only applicable in `character` and `list`
 #' S3 methods. Default: `TRUE`
-#' @param plosopts PLOS options. See [rplos::plos_fulltext()]
+#' @param plosopts PLOS options, a named list. See [rplos::plos_fulltext()]
 #' @param bmcopts BMC options. parameter DEPRECATED
-#' @param entrezopts Entrez options. See [rentrez::entrez_search()] and
-#' [entrez_fetch()]
-#' @param elifeopts eLife options
-#' @param elsevieropts Elsevier options
-#' @param crossrefopts Crossref options
-#' @param wileyopts Wiley options
+#' @param entrezopts Entrez options, a named list. See [rentrez::entrez_search()] 
+#' and [entrez_fetch()]
+#' @param elifeopts eLife options, a named list. 
+#' @param elsevieropts Elsevier options, a named list. 
+#' @param crossrefopts Crossref options, a named list. 
+#' @param wileyopts Wiley options, a named list. 
 #' @param ... Further args passed on to [crul::HttpClient]
 #' 
 #' @seealso [as.ft_data()]
@@ -84,9 +84,18 @@
 #' articles, where "recent" may be a few months to a year or so. In that case, 
 #' make sure to specify the publisher, or else you'll get back no data.
 #' 
+#' @section Important Access Notes:
 #' See **Rate Limits** and **Authentication** in 
 #' [fulltext-package] for rate limiting and authentication information,
-#' respectively
+#' respectively.
+#' 
+#' In particular, take note that when fetching full text from Wiley and 
+#' Elsevier, the only way that's done (unless it's one of their OA papers) 
+#' is through the Crossref TDM flow in which you need a Crossref TDM API 
+#' key and your institution needs to have access to the exact journal you 
+#' are trying to fetch a paper from. If your institution doesn't have 
+#' access you may still get a result, but likely its only the abstract.
+#' See **Authentication** in [fulltext-package] for details.
 #' 
 #' @section Notes on the `type` parameter:
 #' Type is sometimes ignored, sometimes used. For certain data sources, 

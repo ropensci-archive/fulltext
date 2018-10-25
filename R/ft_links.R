@@ -3,10 +3,10 @@
 #' @export
 #' @param x One of `ft`, `ft_ind`, or a character string of DOIs.
 #' @param from Source to query. Ignored when `ft_ind` class passed.
-#' @param plosopts PLOS options. See `?searchplos`
-#' @param bmcopts BMC options. See `?bmc_search`
-#' @param crossrefopts Crossref options. See `?cr_works`
-#' @param entrezopts Entrez options. See `?entrez_search`
+#' @param plosopts PLOS options, a named list. See `?searchplos`
+#' @param bmcopts BMC options, a named list. See `?bmc_search`
+#' @param crossrefopts Crossref options, a named list. See `?cr_works`
+#' @param entrezopts Entrez options, a named list. See `?entrez_search`
 #' @param ... ignored right now
 #'
 #' @return An object of class ft_links, with either a list or data.frame for 

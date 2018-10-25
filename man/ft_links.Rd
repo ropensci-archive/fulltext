@@ -15,13 +15,13 @@ ft_links_ls()
 
 \item{from}{Source to query. Ignored when \code{ft_ind} class passed.}
 
-\item{plosopts}{PLOS options. See \code{?searchplos}}
+\item{plosopts}{PLOS options, a named list. See \code{?searchplos}}
 
-\item{crossrefopts}{Crossref options. See \code{?cr_works}}
+\item{crossrefopts}{Crossref options, a named list. See \code{?cr_works}}
 
-\item{entrezopts}{Entrez options. See \code{?entrez_search}}
+\item{entrezopts}{Entrez options, a named list. See \code{?entrez_search}}
 
-\item{bmcopts}{BMC options. See \code{?bmc_search}}
+\item{bmcopts}{BMC options, a named list. See \code{?bmc_search}}
 
 \item{...}{ignored right now}
 }
