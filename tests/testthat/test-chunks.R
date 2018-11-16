@@ -1,5 +1,7 @@
 context("ft_chunks")
 
+sw <- function(x) suppressWarnings(x)
+
 # test_that("ft_chunks returns...", {
 #   skip_on_cran()
 # 
@@ -38,9 +40,9 @@ test_that("ft_chunks fails well", {
   res <- suppressMessages(ft_get('10.7554/elife.22170'))
 
   # bad path given
-  expect_error(ft_chunks(), "\"x\" is missing")
-  expect_error(ft_chunks('adfafsdf'), "Input to x must be of class ft_data")
-  expect_error(ft_chunks(5), "Input to x must be of class ft_data")
-  expect_error(ft_chunks(mtcars), "Input to x must be of class ft_data")
-  expect_error(ft_chunks(res, "nada"), "'arg' should be one of")
+  expect_error(sw(ft_chunks()), "\"x\" is missing")
+  expect_error(sw(ft_chunks('adfafsdf')), "Input to x must be of class ft_data")
+  expect_error(sw(ft_chunks(5)), "Input to x must be of class ft_data")
+  expect_error(sw(ft_chunks(mtcars)), "Input to x must be of class ft_data")
+  expect_error(sw(ft_chunks(res, "nada")), "'arg' should be one of")
 })
