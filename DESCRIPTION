@@ -7,7 +7,7 @@ Description: Provides a single interface to many sources of full text
     included for searching for articles, downloading full or partial
     text, downloading supplementary materials, converting to various
     data formats.
-Version: 1.1.0.9130
+Version: 1.1.0.9211
 License: MIT + file LICENSE
 Authors@R: c(
     person("Scott", "Chamberlain",
@@ -38,7 +38,7 @@ Imports:
     aRxiv,
     rentrez (>= 1.1.0),
     data.table,
-    hoardr,
+    hoardr (>= 0.5.0),
     pdftools,
     storr,
     tibble,
