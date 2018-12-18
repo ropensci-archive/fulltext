@@ -7,7 +7,7 @@
 \title{Set or get cache options}
 \usage{
 cache_options_set(path = "fulltext", backend = "ext",
-  overwrite = FALSE)
+  overwrite = FALSE, full_path = NULL)
 
 cache_options_get()
 }
@@ -18,6 +18,11 @@ See Details.}
 \item{backend}{(character) Only "ext" supported for now.}
 
 \item{overwrite}{(logical) overwrite cached file or not. Default: \code{FALSE}}
+
+\item{full_path}{(character) Full cache path. If given \code{path} is ignored.}
+}
+\value{
+both functions return the cache options in a named list
 }
 \description{
 Set or get cache options
@@ -26,6 +31,11 @@ Set or get cache options
 
 The dafault cache directory is \code{paste0(rappdirs::user_cache_dir(), "/R/fulltext")},
 but you can set your own path using \code{cache_path_set()}
+
+You can alternatively set the entire cache path with the \code{full_path}
+parameter.
+
+You can only pass \code{path} or \code{full_path} - but not both.
 
 \code{cache_delete} only accepts 1 file name, while
 \code{cache_delete_all} doesn't accept any names, but deletes all files.
@@ -37,6 +47,11 @@ type call
 \dontrun{
 cache_options_get()
 cache_options_set(path = "foobar")
+cache_options_get()
+
+# set full path
+path <- tempdir()
+cache_options_set(full_path = path)
 cache_options_get()
 }
 }

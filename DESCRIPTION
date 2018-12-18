@@ -44,10 +44,10 @@ Imports:
     tibble,
     digest
 Suggests:
-    roxygen2 (>= 6.1.0),
+    roxygen2 (>= 6.1.1),
     testthat,
     knitr
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
 X-schema.org-applicationCategory: Literature 
 X-schema.org-keywords: text-mining, literature, pdf, xml, publications, citations, full-text, TDM
 X-schema.org-isPartOf: https://ropensci.org
