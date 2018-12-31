@@ -92,7 +92,8 @@ plugin_search_europe_pmc <- function(sources, query, limit, start, opts){
     opts$query <- query
     out <- do.call(eupmc_search, opts)
     zz <- list(source = "europmc", found = out$hitCount, 
-               data = out$resultList$result, opts = opts)
+               data = out$resultList$result, opts = opts,
+               cursorMark = out$nextCursorMark)
     structure(zz, class = "ft_ind", query = query)
   } else {
     zz <- list(source = "europmc", found = NULL, data = NULL, opts = opts)

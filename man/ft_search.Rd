@@ -149,6 +149,9 @@ res$bmc
 # Europe PMC
 (res <- ft_search(query='ecology', from='europmc'))
 res$europmc
+## get the next batch of results, using the cursorMark result
+ft_search(query='ecology', from='europmc', 
+  euroopts = list(cursorMark = res$europmc$cursorMark))
 
 # Scopus
 (res <- ft_search(query = 'ecology', from = 'scopus', limit = 100,

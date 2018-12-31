@@ -7,33 +7,40 @@
 \alias{eupmc_xml}
 \title{Europe PMC utilities}
 \usage{
-eupmc_search(query, resulttype = NULL, synonym = FALSE,
-  per_page = 25, page = 1, ...)
+eupmc_search(query, resulttype = "lite", synonym = FALSE,
+  per_page = 25, cursorMark = "*", ...)
 
 eupmc_fields(...)
 
 eupmc_xml(id, ...)
 }
 \arguments{
-\item{query}{(character) Search terms. Required.}
+\item{query}{(character) Search terms. Required. See Details}
 
-\item{resulttype}{(character) The result type can either be idlist, core or lite.
-This parameter determines the fields returned by XML and JSON formats, but it has
-no effect on the DC format. See Details.}
+\item{resulttype}{(character) The result type can either be idlist,
+core or lite. This parameter determines the fields returned by XML and
+JSON formats, but it has no effect on the DC format. See Details.}
 
-\item{synonym}{(boolean) Synonym searches are not made by default (Default: \code{FALSE}),
-however queries can be expanded using MeSH terminology and the UniProt synonyms list.
-For example aspirin, a synonym would be acetylsalicylic acid;this could be included in
+\item{synonym}{(boolean) Synonym searches are not made by default
+(Default: \code{FALSE}), however queries can be expanded using MeSH
+terminology and the UniProt synonyms list.  For example aspirin, a synonym
+would be acetylsalicylic acid;this could be included in
 the search by setting the parameter value to \code{TRUE}}
 
-\item{per_page}{(integer) Number of records to return. Max: 1000. Default: 25}
+\item{per_page}{(integer) Number of records to return. Max: 1000.
+Default: 25}
 
-\item{page}{Page (integer) Page numbers start at 1. Default: 1}
+\item{cursorMark}{(character) cursor string, default: \code{*}}
 
 \item{...}{curl options passed on to \link[crul:HttpClient]{crul::HttpClient}}
 
-\item{id}{A single Europe PMC article identifier, begins with "PMC", followed by
-numbers, e.g.,  "PMC3257301"}
+\item{id}{A single Europe PMC article identifier, begins with "PMC",
+followed by numbers, e.g.,  "PMC3257301"}
+
+\item{sort}{(character) The default sort order is relevance. Specify the
+sort field and sort order. This parameter provides "asc" or "desc" order
+for every single-valued field: P_PDATE_D, AUTH_FIRST, CITED etc. For
+example sorting by CITED in ascending order: CITED asc}
 }
 \value{
 \code{eupmc_search} returns a list with results. \code{eupmc_fields} returns
@@ -42,16 +49,31 @@ a data.frame. \code{eupmc_xml} returns an object of class \code{xml_document}
 \description{
 Europe PMC utilities
 }
-\details{
-resulttype parameter options:
+\section{\code{query} parameter options}{
+
+\itemize{
+\item a keyword or combination of keywords (e.g. HPV virus).
+\item a phrase with enclosing speech marks (e.g. "human malaria").
+\item a fielded search (e.g. auth:stoehr). Available search fields are listed
+in the Appendix 1 of the Reference Guide or can be retrieved using the
+fields module of the API.
+\item a specific publication (e.g. ext_id:781840 src:med) Specify ext_id as the
+article identifier, and src as the source database. List of the data sources
+can be found on the help pages or in section 3 of the Reference Guide.
+}
+}
+
+\section{\code{resulttype} parameter options}{
+
 \itemize{
 \item idlist - returns a list of IDs and sources for the given search terms
-\item lite - returns key metadata for the given search terms; this is the default
-value if the parameter is unspecified.
-\item core - returns full metadata for a given publication ID; including abstract,
-full text links, and MeSH terms.
+\item lite - returns key metadata for the given search terms; this is the
+default value if the parameter is unspecified.
+\item core - returns full metadata for a given publication ID; including
+abstract, full text links, and MeSH terms.
 }
 }
+
 \examples{
 \dontrun{
 # search
@@ -65,7 +87,9 @@ eupmc_search(query = 'ext_id:781840 src:med')
 eupmc_search(query = 'ext_id:IND43783977 src:agr')
 
 # list indexed search fields
-head(eupmc_fields())
+x <- eupmc_fields()
+NROW(x)
+head(x)
 
 # get full text XML
 eupmc_xml('PMC3257301')
