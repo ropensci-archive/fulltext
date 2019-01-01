@@ -67,8 +67,8 @@ bmc_link <- function(dois) {
   xmlbase <- "http://%s/content/download/xml/%s.xml"
   pdfbase <- "http://%s/content/pdf/%s.pdf"
   lapply(dois, function(x) {
-    res <- httr::HEAD(paste0("https://doi.org/", x))
-    url <- httr::parse_url(res$all_headers[[1]]$headers$location)$hostname
+    res2 <- crul::HttpClient$new(paste0("https://doi.org/", x))$head()
+    url <- crul::url_parse(res2$response_headers_all[[1]]$location)$domain
     x <- strsplit(x, "/")[[1]][2]
     list(xml = sprintf(xmlbase, url, x), pdf = sprintf(pdfbase, url, x))
   })
