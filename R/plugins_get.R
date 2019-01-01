@@ -249,7 +249,7 @@ entrez_ft <- function(ids, type = "xml", ...) {
     }
     # have to keep this httr usage
     invisible(rentrez::entrez_fetch(db = db, id = z, 
-      rettype = "xml", config = httr::write_disk(path, cache_options_get()$overwrite)))
+      rettype = "xml", config = httr_write_disk(path, cache_options_get()$overwrite)))
     ft_object(path, z, 'xml')
   }), res$ids)
 }
@@ -267,7 +267,7 @@ bmc_ft <- function(dois, type = "xml", ...) {
     }
     # have to keep this httr usage
     invisible(rentrez::entrez_fetch(db = 'pubmed', id = z, 
-      rettype = "xml", config = httr::write_disk(path, cache_options_get()$overwrite)))
+      rettype = "xml", config = httr_write_disk(path, cache_options_get()$overwrite)))
     ft_object(path, z, 'xml')
   }), dois)
 }
@@ -351,13 +351,6 @@ copernicus_ft <- function(dois, type, ...) {
     get_ft(x, type, url, path, ...)
   }), dois)
 }
-
-# cogent_ft <- function(dois, ...) {
-#   lapply(dois, function(x) {
-#     url <- paste0("http://cogentoa.tandfonline.com/doi/xml/", x)
-#     httr::content(httr::GET(url, ...), as = "text", encoding = "UTF-8")
-#   })
-# }
 
 # type: only pdf (type parameter is ignored)
 arxiv_ft <- function(dois, type = "pdf", ...) {

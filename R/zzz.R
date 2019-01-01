@@ -197,3 +197,22 @@ rbl <- function(x) {
 
 `%||%` <- function(x, y) if (is.null(x)) y else x
 `%<|>%` <- function(x, y) if (length(x) == 0) y else x
+
+httr_write_disk <- function(path, overwrite) {
+  if (!overwrite && file.exists(path)) {
+    stop("Path exists and overwrite is FALSE", 
+      call. = FALSE)
+  }
+  structure(list(
+    method = NULL,
+    url = NULL,
+    headers = NULL,
+    fields = NULL,
+    options = NULL,
+    auth_token = NULL,
+    output = structure(list(
+      path = path,
+      file = NULL
+    ), class = c("write_disk", "write_function"))
+  ), classs = "request")
+}

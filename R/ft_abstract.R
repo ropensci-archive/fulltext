@@ -8,7 +8,7 @@
 #' @param scopusopts Scopus options, a named list.
 #' @param maopts Microsoft Academic options, a named list.
 #' @param crossrefopts Crossref options, a named list.
-#' @param ... curl options passed on to [httr::GET()] or [crul::HttpClient]
+#' @param ... curl options passed on to `httr::GET()` or [crul::HttpClient]
 #' @return An object of class `ft_abstract`
 #' @details See **Rate Limits** and **Authentication** in 
 #' [fulltext-package] for rate limiting and authentication information,

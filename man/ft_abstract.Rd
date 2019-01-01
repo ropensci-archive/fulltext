@@ -24,7 +24,7 @@ scopus, microsoft, or crossref}
 
 \item{crossrefopts}{Crossref options, a named list.}
 
-\item{...}{curl options passed on to \code{\link[httr:GET]{httr::GET()}} or \link[crul:HttpClient]{crul::HttpClient}}
+\item{...}{curl options passed on to \code{httr::GET()} or \link[crul:HttpClient]{crul::HttpClient}}
 }
 \value{
 An object of class \code{ft_abstract}

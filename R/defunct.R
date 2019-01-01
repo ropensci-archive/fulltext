@@ -54,6 +54,14 @@ ft_browse_sections <- function(...) {
   .Defunct(msg = "function removed. see ?`fulltext-defunct`")
 }
 
+#' This function is defunct.
+#' @export
+#' @rdname ft_get_si-defunct
+#' @keywords internal
+ft_get_si <- function(...) {
+  .Defunct(msg = "function removed. see package suppdata")
+}
+
 
 #' Defunct functions in fulltext
 #'
@@ -69,6 +77,7 @@ ft_browse_sections <- function(...) {
 #'  - `cache_clear` was never working anyway, and is now removed
 #'  - [ft_browse_sections]: no sign that function used, and allows 
 #'  to remove a dependency
+#'  - [ft_get_si]: moved to package `suppdata`
 #' 
 #' @name fulltext-defunct
 NULL

@@ -40,7 +40,7 @@ rOpenSci has a number of R packages to get either full text, metadata, or both f
 * Extract text from articles / convert formats - `ft_extract`
 * Collect bits of articles that you actually need - `ft_chunks`/`ft_tabularize`
 * Collect all texts into a data.frame - `ft_table`
-* Download supplementary materials from papers - `ft_get_si`
+* Download supplementary materials from papers - `ft_get_si` - see package [suppdata][]
 
 It's easy to go from the outputs of `ft_get` to text-mining packages such as 
 [tm](https://cran.r-project.org/package=tm) and 
