@@ -41,8 +41,7 @@ Imports:
     pdftools,
     storr,
     tibble,
-    digest,
-    httr
+    digest
 Suggests:
     roxygen2 (>= 6.1.1),
     testthat,
