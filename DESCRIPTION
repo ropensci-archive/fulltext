@@ -26,7 +26,7 @@ Language: en-US
 VignetteBuilder: knitr
 Roxygen: list(wrap = FALSE, markdown = TRUE)
 Imports:
-    crul (>= 0.6.2.9334),
+    crul (>= 0.7.0),
     magrittr,
     xml2 (>= 1.1.1),
     jsonlite,
@@ -47,7 +47,7 @@ Suggests:
     testthat,
     knitr
 RoxygenNote: 6.1.1
-Remotes: ropensci/crul@intermediate-headers
+Remotes: ropensci/crul
 X-schema.org-applicationCategory: Literature 
 X-schema.org-keywords: text-mining, literature, pdf, xml, publications, citations, full-text, TDM
 X-schema.org-isPartOf: https://ropensci.org
