@@ -57,6 +57,8 @@ plugin_links_crossref <- function(sources, ids, opts, ...){
 plugin_links_bmc <- function(sources, ids, opts, ...){
   if (any(grepl("bmc", sources))) {
     tmp <- stats::setNames(bmc_link(ids), ids)
+    # remove empty slots
+    tmp <- Filter(function(z) !all(vapply(z, class, "") == "NULL"), tmp)
     list(found = length(tmp), ids = names(tmp), data = tmp, opts = opts)
   } else {
     emptylist(opts)
@@ -68,6 +70,7 @@ bmc_link <- function(dois) {
   pdfbase <- "http://%s/content/pdf/%s.pdf"
   lapply(dois, function(x) {
     res2 <- crul::HttpClient$new(paste0("https://doi.org/", x))$head()
+    if (!res2$success()) return(list(xml = NULL, pdf = NULL))
     url <- crul::url_parse(res2$response_headers_all[[1]]$location)$domain
     x <- strsplit(x, "/")[[1]][2]
     list(xml = sprintf(xmlbase, url, x), pdf = sprintf(pdfbase, url, x))
