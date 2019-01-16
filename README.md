@@ -33,7 +33,6 @@ rOpenSci has a number of R packages to get either full text, metadata, or both f
 * Extract text from articles / convert formats - `ft_extract`
 * Collect bits of articles that you actually need - `ft_chunks`/`ft_tabularize`
 * Collect all texts into a data.frame - `ft_table`
-* Download supplementary materials from papers - `ft_get_si` - see package [suppdata][]
 
 It's easy to go from the outputs of `ft_get` to text-mining packages such as 
 [tm](https://cran.r-project.org/package=tm) and 
@@ -60,8 +59,7 @@ We'd love your feedback. Let us know what you think in [the issue tracker](https
 
 Article full text formats by publisher:  [https://github.com/ropensci/fulltext/blob/master/vignettes/formats.Rmd](https://github.com/ropensci/fulltext/blob/master/vignettes/formats.Rmd)
 
-_Important Note_: Supplementary data from papers is being moved to the [suppdata][] package.
-Once `suppdata` is on CRAN, we'll deprecate the `ft_get_si` function here; after which point `suppdata` focuses on supplementary materials and `fulltext` focuses on the papers themselves.
+_Important Note_: Supplementary data from papers has been moved to the [suppdata][] package.
 
 
 ## Installation
@@ -181,25 +179,6 @@ x %>%
 #>   permissions.copyright.holder permissions.free_to_read
 #> 1                   Zhao et al                     <NA>
 #> 2                 Mhatre et al
-```
-
-## Supplementary materials
-
-Grab supplementary materials for (re-)analysis of data
-
-`ft_get_si()` accepts article identifiers, and output from `ft_search()`, `ft_get()`
-
-
-```r
-catching.crabs <- read.csv(ft_get_si("10.6084/m9.figshare.979288", 2))
-head(catching.crabs)
-#>   trap.no. length.deployed no..crabs
-#> 1        1          10 sec         0
-#> 2        2          10 sec         0
-#> 3        3          10 sec         0
-#> 4        4          10 sec         0
-#> 5        5          10 sec         0
-#> 6        1           1 min         0
 ```
 
 ## Extract text from PDFs
