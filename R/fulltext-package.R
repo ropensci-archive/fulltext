@@ -25,9 +25,6 @@
 #' - extract text from pdfs - [ft_extract()]
 #' - serialize to different data formats - [ft_serialize()]
 #' - extract certain article sections (e.g., authors) - [ft_chunks()]
-#' - grab supplementary materials for (re-)analysis of data -
-#'  [ft_get_si()] accepts article identifiers, and output from
-#'  [ft_search()] and  [ft_get()]
 #'
 #' @section DOI delays:
 #' Beware that DOIs are not searchable via Crossref/Entrez immediately. The

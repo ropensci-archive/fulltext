@@ -7,7 +7,7 @@ Description: Provides a single interface to many sources of full text
     included for searching for articles, downloading full or partial
     text, downloading supplementary materials, converting to various
     data formats.
-Version: 1.1.0.9231
+Version: 1.1.0.9233
 License: MIT + file LICENSE
 Authors@R: c(
     person("Scott", "Chamberlain",
@@ -47,7 +47,6 @@ Suggests:
     testthat,
     knitr
 RoxygenNote: 6.1.1
-Remotes: ropensci/crul
 X-schema.org-applicationCategory: Literature 
 X-schema.org-keywords: text-mining, literature, pdf, xml, publications, citations, full-text, TDM
 X-schema.org-isPartOf: https://ropensci.org
