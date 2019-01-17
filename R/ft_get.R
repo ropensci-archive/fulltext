@@ -350,42 +350,63 @@
 #' ### no link available for this DOI
 #' res <- ft_get('10.1037/10740-005', try_unknown = TRUE)
 #' res$crossref
+#' 
+#' # Get a progress bar - off by default
+#' library(rplos)
+#' (dois <- searchplos(q="*:*", fl='id',
+#'    fq=list('doc_type:full',"article_type:\"research article\""), limit=5)$data$id)
+#' ## when articles not already downloaded you see the progress bar
+#' b <- ft_get(dois, from='plos', progress = TRUE)
+#' ## if articles already downloaded/cached, normally we through messages saying so
+#' b <- ft_get(dois, from='plos', progress = FALSE)
+#' ## but if a progress bar is requested, then the messages are suppressed
+#' b <- ft_get(dois, from='plos', progress = TRUE)
 #' }
 
-ft_get <- function(x, from = NULL, type = "xml", try_unknown = TRUE, plosopts = list(),
-                   bmcopts = list(), entrezopts = list(), elifeopts = list(),
-                   elsevieropts = list(), wileyopts = list(), 
-                   crossrefopts = list(), ...) {
+ft_get <- function(x, from = NULL, type = "xml", try_unknown = TRUE, 
+  plosopts = list(), bmcopts = list(), entrezopts = list(), 
+  elifeopts = list(), elsevieropts = list(), wileyopts = list(), 
+  crossrefopts = list(), progress = FALSE, ...) {
+
   UseMethod("ft_get")
 }
 
 #' @export
-ft_get.default <- function(x, from=NULL, type = "xml", try_unknown = TRUE, plosopts=list(),
-                           bmcopts=list(), entrezopts=list(), elifeopts=list(),
-                           elsevieropts = list(), wileyopts = list(), 
-                           crossrefopts = list(), ...){
+ft_get.default <- function(x, from=NULL, type = "xml", try_unknown = TRUE,
+  plosopts=list(), bmcopts=list(), entrezopts=list(), elifeopts=list(),
+  elsevieropts = list(), wileyopts = list(), crossrefopts = list(), 
+  progress = FALSE, ...) {
+
   stop("no 'ft_get' method for ", class(x), call. = FALSE)
 }
 
 #' @export
-ft_get.character <- function(x, from=NULL, type = "xml", try_unknown = TRUE, plosopts=list(),
-                             bmcopts = list(), entrezopts=list(),
-                             elifeopts=list(),
-                             elsevieropts = list(), wileyopts = list(), 
-                             crossrefopts = list(), ...) {
+ft_get.character <- function(x, from=NULL, type = "xml", try_unknown = TRUE, 
+  plosopts=list(), bmcopts = list(), entrezopts=list(), elifeopts=list(),
+  elsevieropts = list(), wileyopts = list(), crossrefopts = list(), 
+  progress = FALSE, ...) {
+
   check_type(type)
   check_cache()
   if (!is.null(from)) {
     from <- match.arg(from, c("plos", "entrez", "elife", "pensoft",
       "arxiv", "biorxiv", "elsevier", "wiley"))
-    plos_out <- plugin_get_plos(from, x, plosopts, type, ...)
-    entrez_out <- plugin_get_entrez(from, x, entrezopts, type, ...)
-    elife_out <- plugin_get_elife(from, x, elifeopts, type, ...)
-    pensoft_out <- plugin_get_pensoft(from, x, list(), type, ...)
-    arxiv_out <- plugin_get_arxiv(from, x, list(), type, ...)
-    biorxiv_out <- plugin_get_biorxiv(from, x, list(), type, ...)
-    els_out <- plugin_get_elsevier(from, x, elsevieropts, type, ...)
-    wiley_out <- plugin_get_wiley(from, x, wileyopts, type, ...)
+    plos_out <- plugin_get_plos(from, x, plosopts, type, 
+      progress = progress, ...)
+    entrez_out <- plugin_get_entrez(from, x, entrezopts, type, 
+      progress = progress, ...)
+    elife_out <- plugin_get_elife(from, x, elifeopts, type, 
+      progress = progress, ...)
+    pensoft_out <- plugin_get_pensoft(from, x, list(), type, 
+      progress = progress, ...)
+    arxiv_out <- plugin_get_arxiv(from, x, list(), type, 
+      progress = progress, ...)
+    biorxiv_out <- plugin_get_biorxiv(from, x, list(), type, 
+      progress = progress, ...)
+    els_out <- plugin_get_elsevier(from, x, elsevieropts, type, 
+      progress = progress, ...)
+    wiley_out <- plugin_get_wiley(from, x, wileyopts, type, 
+      progress = progress, ...)
     structure(list(plos = plos_out, entrez = entrez_out, elife = elife_out,
                    pensoft = pensoft_out, arxiv = arxiv_out,
                    biorxiv = biorxiv_out, elsevier = els_out, 
@@ -396,23 +417,32 @@ ft_get.character <- function(x, from=NULL, type = "xml", try_unknown = TRUE, plo
 }
 
 #' @export
-ft_get.list <- function(x, from=NULL, type = "xml", try_unknown = TRUE, plosopts=list(),
-                        bmcopts = list(), entrezopts=list(), elifeopts=list(),
-                        elsevieropts = list(), wileyopts = list(), 
-                        crossrefopts = list(), ...) {
+ft_get.list <- function(x, from=NULL, type = "xml", try_unknown = TRUE, 
+  plosopts=list(), bmcopts = list(), entrezopts=list(), elifeopts=list(), 
+  elsevieropts = list(), wileyopts = list(), crossrefopts = list(), 
+  progress = FALSE, ...) {
+
   check_type(type)
   check_cache()
   if (!is.null(from)) {
     from <- match.arg(from, c("plos", "entrez", "elife", "pensoft", 
       "arxiv", "biorxiv", "elsevier", "wiley"))
-    plos_out <- plugin_get_plos(from, x, plosopts, type, ...)
-    entrez_out <- plugin_get_entrez(from, x, entrezopts, type, ...)
-    elife_out <- plugin_get_elife(from, x, elifeopts, type, ...)
-    pensoft_out <- plugin_get_pensoft(from, x, list(), type, ...)
-    arxiv_out <- plugin_get_arxiv(from, x, list(), type, ...)
-    biorxiv_out <- plugin_get_biorxiv(from, x, list(), type, ...)
-    els_out <- plugin_get_elsevier(from, x, elsevieropts, type, ...)
-    wiley_out <- plugin_get_wiley(from, x, wileyopts, type, ...)
+    plos_out <- plugin_get_plos(from, x, plosopts, type, 
+      progress = progress, ...)
+    entrez_out <- plugin_get_entrez(from, x, entrezopts, type, 
+      progress = progress, ...)
+    elife_out <- plugin_get_elife(from, x, elifeopts, type, 
+      progress = progress, ...)
+    pensoft_out <- plugin_get_pensoft(from, x, list(), type, 
+      progress = progress, ...)
+    arxiv_out <- plugin_get_arxiv(from, x, list(), type, 
+      progress = progress, ...)
+    biorxiv_out <- plugin_get_biorxiv(from, x, list(), type, 
+      progress = progress, ...)
+    els_out <- plugin_get_elsevier(from, x, elsevieropts, type, 
+      progress = progress, ...)
+    wiley_out <- plugin_get_wiley(from, x, wileyopts, type, 
+      progress = progress, ...)
     structure(list(plos = plos_out, entrez = entrez_out, elife = elife_out,
                    pensoft = pensoft_out, arxiv = arxiv_out,
                    biorxiv = biorxiv_out, elsevier = els_out, 
@@ -423,10 +453,10 @@ ft_get.list <- function(x, from=NULL, type = "xml", try_unknown = TRUE, plosopts
 }
 
 #' @export
-ft_get.ft <- function(x, from=NULL, type = "xml", try_unknown = TRUE, plosopts=list(),
-                      bmcopts=list(), entrezopts=list(), elifeopts=list(),
-                      elsevieropts = list(), wileyopts = list(), 
-                      crossrefopts = list(), ...) {
+ft_get.ft <- function(x, from=NULL, type = "xml", try_unknown = TRUE, 
+  plosopts=list(), bmcopts=list(), entrezopts=list(), elifeopts=list(), 
+  elsevieropts = list(), wileyopts = list(), crossrefopts = list(), 
+  progress = FALSE, ...) {
 
   check_type(type)
   check_cache()
@@ -442,9 +472,10 @@ ft_get.ft <- function(x, from=NULL, type = "xml", try_unknown = TRUE, plosopts=l
     ))
   }
 
-  plos_out <- plugin_get_plos(from, x$plos$data$id, plosopts, type, ...)
-  entrez_out <- plugin_get_entrez(from, x$entrez$data$doi,
-                                  entrezopts, type, ...)
+  plos_out <- plugin_get_plos(from, x$plos$data$id, plosopts, type, 
+    progress = progress, ...)
+  entrez_out <- plugin_get_entrez(from, x$entrez$data$doi, 
+    entrezopts, type, progress = progress, ...)
   cr_out <- NULL
   if ("crossref" %in% from) {
     crl <- ft_links(x$crossref$data$doi, from = "crossref")
@@ -456,10 +487,10 @@ ft_get.ft <- function(x, from=NULL, type = "xml", try_unknown = TRUE, plosopts=l
 }
 
 #' @export
-ft_get.ft_links <- function(x, from=NULL, type = "xml", try_unknown = TRUE, plosopts=list(),
-                            bmcopts=list(), entrezopts=list(), elifeopts=list(),
-                            elsevieropts = list(), wileyopts = list(), 
-                            crossrefopts = list(), ...){
+ft_get.ft_links <- function(x, from=NULL, type = "xml", try_unknown = TRUE, 
+  plosopts=list(), bmcopts=list(), entrezopts=list(), elifeopts=list(),
+  elsevieropts = list(), wileyopts = list(), crossrefopts = list(), 
+  progress = FALSE, ...) {
 
   check_type(type)
   check_cache()
@@ -476,7 +507,8 @@ ft_get.ft_links <- function(x, from=NULL, type = "xml", try_unknown = TRUE, plos
 #' @export
 #' @rdname ft_get
 ft_get_ls <- function() {
-  nms <- ls(getNamespace("fulltext"), all.names = TRUE, pattern = "plugin_get_")
+  nms <- ls(getNamespace("fulltext"), all.names = TRUE, 
+    pattern = "plugin_get_")
   nms <- grep("_links|generator", nms, invert = TRUE, value = TRUE)
   gsub("plugin_get_", "", nms)
 }
@@ -494,7 +526,8 @@ print.ft_data <- function(x, ...) {
   totgot <- sum(unlist(pluck(x, "found")))
 
   cat(sprintf("[Docs] %s", totgot), "\n")
-  cat(sprintf("[Source] %s %s", print_backend(cache_options_get()$backend), expand_if(cache_options_get()$path)), "\n")
+  cat(sprintf("[Source] %s %s", print_backend(cache_options_get()$backend), 
+    expand_if(cache_options_get()$path)), "\n")
   cat(ft_wrap(sprintf("[IDs]\n %s ...", namesprint)), "\n")
 }
 

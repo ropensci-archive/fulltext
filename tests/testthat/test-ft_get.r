@@ -86,3 +86,27 @@ test_that("ft_get errors slot", {
   expect_error(ft_get('0086169', from = 'plos'), "These are probably not DOIs")
   expect_error(ft_get('0086169', from = 'stuff'), "'arg' should be one")
 })
+
+context("ft_get: progress bars")
+test_that("ft_get: entrez", {
+  skip_on_cran()
+
+  ftxt_cache$delete_all()
+
+  entrez_dois <- c('10.1186/2049-2618-2-7', '10.1186/2193-1801-3-7')
+  # 1st run, get progress bar
+  expect_output(
+    ft_get(entrez_dois, from = "entrez", progress = TRUE),
+    "==========="
+  )
+  # subsequent runs, also get progress bar
+  expect_output(
+    ft_get(entrez_dois, from = "entrez", progress = TRUE),
+    "==========="
+  )
+  # if progress=FALSE, no bar, but do get path exists messages
+  expect_message(
+    ft_get(entrez_dois, from = "entrez", progress = FALSE),
+    "path exists"
+  )
+})

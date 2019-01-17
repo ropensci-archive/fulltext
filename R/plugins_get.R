@@ -103,7 +103,9 @@ error_df <- function(x) {
 
 ## plugin generator
 plugin_get_generator <- function(srce, fun) {
-  function(sources, ids, opts, type, url_pattern = NULL, ...) {
+  function(sources, ids, opts, type, url_pattern = NULL, 
+    progress = FALSE, ...) {
+
     if (any(grepl("plos", sources))) {
       ids <- grep("annotation", ids, value = TRUE, invert = TRUE)
     }
@@ -123,6 +125,7 @@ plugin_get_generator <- function(srce, fun) {
 
       opts <- c(opts, callopts)
       opts$type <- type
+      opts$progress <- progress
       if (!is.null(url_pattern)) opts$url_pattern <- url_pattern
       out <- do.call(fun, opts)
       
@@ -172,14 +175,29 @@ plugin_get_amersocclinoncol <- plugin_get_generator("amersocclinoncol", amersocc
 plugin_get_instinvestfil <- plugin_get_generator("instinvestfil", instinvestfil_ft)
 plugin_get_aip <- plugin_get_generator("aip", aip_ft)
 
+# lapply replacement with progress bar: actual a for loop internally
+plapply <- function(x, FUN, type = NULL, progress = FALSE, ...) {
+  if (progress) {
+    pb <- utils::txtProgressBar(min = 0, max = length(x), 
+      initial = 0, style = 3)
+    on.exit(close(pb))
+  }
+  out <- vector(mode = "list", length = length(x))
+  for (i in seq_along(x)) {
+    if (progress) utils::setTxtProgressBar(pb, i)
+    out[[i]] <- FUN(x[[i]], type = type, progress = progress)
+  }
+  out <- stats::setNames(out, x)
+  return(out)
+}
 
 ## getters - could stand to make closure for the below as well, FIXME
 # plos - wrapper around rplos::plos_fulltext, via .plos_fulltext
-plos_wrapper <- function(dois, type, ...) {
-  stats::setNames(lapply(dois, function(x) {
+plos_wrapper <- function(dois, type, progress = FALSE, ...) {
+  plos_fun <- function(x, type, progress, ...) {
     path <- make_key(x, type)
     if (file.exists(path) && !cache_options_get()$overwrite) {
-      message(paste0("path exists: ", path))
+      if (!progress) message(paste0("path exists: ", path))
       return(ft_object(path, x, type))
     }
     tmp <- tryCatch(.plos_fulltext(x, disk = path, ...), 
@@ -192,13 +210,13 @@ plos_wrapper <- function(dois, type, ...) {
       return(ft_error(mssg, x))
     }
     return(ft_object(path, x, type))
-  }), dois)
+  }
+  plapply(dois, plos_fun, type, progress, ...)
 }
-
 
 # Entrez - wrapper around rentrez::entrez_search/rentrez::entrez_fetch
 # type: only xml
-entrez_ft <- function(ids, type = "xml", ...) {
+entrez_ft <- function(ids, type = "xml", progress = FALSE, ...) {
   ids <- stats::na.omit(ids)
   db <- "pmc"
   if (length(ids) > 50) {
@@ -241,17 +259,18 @@ entrez_ft <- function(ids, type = "xml", ...) {
   }
 
   if (length(res$ids) == 0) return(NULL)
-  stats::setNames(lapply(res$ids, function(z) {
+  ent_fun <- function(z, type, progress, ...) {
     path <- make_key(z, 'xml')
     if (file.exists(path) && !cache_options_get()$overwrite) {
-      message(paste0("path exists: ", path))
+      if (!progress) message(paste0("path exists: ", path))
       return(ft_object(path, z, 'xml'))
     }
     # have to keep this httr usage
     invisible(rentrez::entrez_fetch(db = db, id = z, 
       rettype = "xml", config = httr_write_disk(path, cache_options_get()$overwrite)))
     ft_object(path, z, 'xml')
-  }), res$ids)
+  }
+  plapply(res$ids, ent_fun, progress = progress, db = db, ...)
 }
 
 # type: xml only presumably
@@ -259,68 +278,83 @@ bmc_ft <- function(dois, type = "xml", ...) {
   res <- rentrez::entrez_search(
     db = "pubmed", term = paste0(sprintf('%s[doi]', dois), collapse = "|"))
   if (length(res$ids) == 0) return(NULL)
-  stats::setNames(lapply(res$ids, function(z) {
+  # stats::setNames(lapply(res$ids, function(z) {
+  #   path <- make_key(z, 'xml')
+  #   if (file.exists(path) && !cache_options_get()$overwrite) {
+  #     message(paste0("path exists: ", path))
+  #     return(ft_object(path, z, 'xml'))
+  #   }
+  #   # have to keep this httr usage
+  #   invisible(rentrez::entrez_fetch(db = 'pubmed', id = z, 
+  #     rettype = "xml", config = httr_write_disk(path, cache_options_get()$overwrite)))
+  #   ft_object(path, z, 'xml')
+  # }), dois) 
+  bmc_fun <- function(z, type, progress, ...) {
     path <- make_key(z, 'xml')
     if (file.exists(path) && !cache_options_get()$overwrite) {
-      message(paste0("path exists: ", path))
+      if (!progress) message(paste0("path exists: ", path))
       return(ft_object(path, z, 'xml'))
     }
     # have to keep this httr usage
     invisible(rentrez::entrez_fetch(db = 'pubmed', id = z, 
       rettype = "xml", config = httr_write_disk(path, cache_options_get()$overwrite)))
     ft_object(path, z, 'xml')
-  }), dois)
+  }
+  plapply(res$ids, type, bmc_fun, ...)
 }
 
 # type: xml and pdf
 elife_ft <- function(dois, type, ...) {
-  stats::setNames(lapply(dois, function(x) {
+  elife_fun <- function(x, type, progress, ...) {
     path <- make_key(x, type)
     if (file.exists(path) && !cache_options_get()$overwrite) {
-      message(paste0("path exists: ", path))
+      if (!progress) message(paste0("path exists: ", path))
       return(ft_object(path, x, type))
     }
     lk <- tcat(crminer::crm_links(x))
     lk <- tcat(Filter(function(x) grepl(paste0("\\.", type), x), lk)[[1]][[1]])
     if (inherits(lk, "error")) return(ft_error(lk$message, x))
     get_ft(x, type, lk, path, ...)
-  }), dois)
+  }
+  plapply(dois, elife_fun, type, progress, ...)
 }
 
 # type: xml and pdf
 peerj_ft <- function(dois, type, ...) {
-  stats::setNames(lapply(dois, function(x) {
+  peerj_fun <- function(x, type, progress, ...) {
     path <- make_key(x, type)
     if (file.exists(path) && !cache_options_get()$overwrite) {
-      message(paste0("path exists: ", path))
+      if (!progress) message(paste0("path exists: ", path))
       return(ft_object(path, x, type))
     }
     url <- sprintf("https://peerj.com/articles/%s.%s", 
       strextract(x, "[0-9]+$"), type)
     get_ft(x, type, url, path, ...)
-  }), dois)
+  }
+  plapply(dois, peerj_fun, type, progress, ...)
 }
 
 # type: xml and pdf
 frontiersin_ft <- function(dois, type, ...) {
-  stats::setNames(lapply(dois, function(x) {
+  fronteiersin_fun <- function(x, type, progress, ...) {
     path <- make_key(x, type)
     if (file.exists(path) && !cache_options_get()$overwrite) {
-      message(paste0("path exists: ", path))
+      if (!progress) message(paste0("path exists: ", path))
       return(ft_object(path, x, type))
     }
     url <- sprintf("https://www.frontiersin.org/articles/%s/%s", x, 
       if (type == "xml") "xml/nlm" else "pdf")
     get_ft(x, type, url, path, ...)
-  }), dois)
+  }
+  plapply(dois, fronteiersin_fun, type, progress, ...)
 }
 
 # type: xml and pdf
 pensoft_ft <- function(dois, type, ...) {
-  stats::setNames(lapply(dois, function(x) {
+  pensoft_fun <- function(x, type, progress, ...) {
     path <- make_key(x, type)
     if (file.exists(path) && !cache_options_get()$overwrite) {
-      message(paste0("path exists: ", path))
+      if (!progress) message(paste0("path exists: ", path))
       return(ft_object(path, x, type))
     }
     res <- tcat(crul::HttpClient$new(url = "https://ftdoi.org")$get(sprintf("api/doi/%s/", x)))
@@ -331,15 +365,16 @@ pensoft_ft <- function(dois, type, ...) {
     lks <- jsonlite::fromJSON(res$parse("UTF-8"))$links
     url <- grep(type, lks$url, value = TRUE)
     get_ft(x, type, url, path, ...)
-  }), dois)
+  }
+  plapply(dois, pensoft_fun, type, progress, ...)
 }
 
 # type: xml and pdf
 copernicus_ft <- function(dois, type, ...) {
-  stats::setNames(lapply(dois, function(x) {
+  copernicus_fun <- function(x, type, progress, ...) {
     path <- make_key(x, type)
     if (file.exists(path) && !cache_options_get()$overwrite) {
-      message(paste0("path exists: ", path))
+      if (!progress) message(paste0("path exists: ", path))
       return(ft_object(path, x, type))
     }
     res <- tcat(crul::HttpClient$new(url = paste0("https://doi.org/", x))$head())
@@ -349,28 +384,30 @@ copernicus_ft <- function(dois, type, ...) {
     }
     url <- paste0(res$url, sub("10.5194/", "", x), ".", type)
     get_ft(x, type, url, path, ...)
-  }), dois)
+  }
+  plapply(dois, copernicus_fun, type, progress, ...)
 }
 
 # type: only pdf (type parameter is ignored)
 arxiv_ft <- function(dois, type = "pdf", ...) {
-  stats::setNames(lapply(dois, function(x) {
+  arxiv_fun <- function(x, type, progress, ...) {
     path <- make_key(x, 'pdf')
     if (file.exists(path) && !cache_options_get()$overwrite) {
-      message(paste0("path exists: ", path))
+      if (!progress) message(paste0("path exists: ", path))
       return(ft_object(path, x, 'pdf'))
     }
     url <- sprintf("http://arxiv.org/pdf/%s.pdf", x)
     get_ft(x, 'pdf', url, path, ...)
-  }), dois)
+  }
+  plapply(dois, arxiv_fun, type, progress, ...)
 }
 
 # type: only pdf (type parameter is ignored)
 biorxiv_ft <- function(dois, type = "pdf", ...) {
-  stats::setNames(lapply(dois, function(x) {
+  biorxiv_fun <- function(x, type, progress, ...) {
     path <- make_key(x, 'pdf')
     if (file.exists(path) && !cache_options_get()$overwrite) {
-      message(paste0("path exists: ", path))
+      if (!progress) message(paste0("path exists: ", path))
       return(ft_object(path, x, 'pdf'))
     }
 
@@ -381,16 +418,17 @@ biorxiv_ft <- function(dois, type = "pdf", ...) {
     }
     url <- paste0(res$url, ".full.pdf")
     get_ft(x, 'pdf', url, path, ...)
-  }), dois)
+  }
+  plapply(dois, biorxiv_fun, type, progress, ...)
 }
 
 # type: plain and xml
 elsevier_ft <- function(dois, type, ...) {
   if (!type %in% c('plain', 'xml')) stop("'type' for Elsevier must be 'plain' or 'xml'")
-  stats::setNames(lapply(dois, function(x) {
+  elsevier_fun <- function(x, type, progress, ...) {
     path <- make_key(x, type)
     if (file.exists(path) && !cache_options_get()$overwrite) {
-      message(paste0("path exists: ", path))
+      if (!progress) message(paste0("path exists: ", path))
       return(ft_object(path, x, type))
     }
     res <- tcat(rcrossref::cr_works(dois = x))
@@ -407,15 +445,16 @@ elsevier_ft <- function(dois, type, ...) {
       Accept = paste0(switch(type, xml = "text/", plain = "text/"), type)
     )
     get_ft(x, type, url, path, header, ...)
-  }), dois)
+  }
+  plapply(dois, elsevier_fun, type, progress, ...)
 }
 
 # type: only pdf (type parameter is ignored)
 wiley_ft <- function(dois, type = "pdf", ...) {
-  stats::setNames(lapply(dois, function(x) {
+  wiley_fun <- function(x, type, progress, ...) {
     path <- make_key(x, 'pdf')
     if (file.exists(path) && !cache_options_get()$overwrite) {
-      message(paste0("path exists: ", path))
+      if (!progress) message(paste0("path exists: ", path))
       return(ft_object(path, x, 'pdf'))
     }
     res <- tcat(rcrossref::cr_works(dois = x))
@@ -432,19 +471,21 @@ wiley_ft <- function(dois, type = "pdf", ...) {
       Accept = "application/pdf"
     )
     get_ft(x, 'pdf', url, path, header, ...)
-  }), dois)
+  }
+  plapply(dois, wiley_fun, type, progress, ...)
 }
 
 # type: only pdf (type parameter is ignored)
 scientificsocieties_ft <- function(dois, type = "pdf", ...) {
-  stats::setNames(lapply(dois, function(x) {
+  scs_fun <- function(x, type, progress, ...) {
     path <- make_key(x, 'pdf')
     if (file.exists(path) && !cache_options_get()$overwrite) {
-      message(paste0("path exists: ", path))
+      if (!progress) message(paste0("path exists: ", path))
       return(ft_object(path, x, 'pdf'))
     }
 
-    lk <- tryCatch(crminer::crm_links(x), error = function(e) e, warning = function(w) w)
+    lk <- tryCatch(crminer::crm_links(x), error = function(e) e, 
+      warning = function(w) w)
     if (inherits(lk, c("error", "warning"))) return(ft_error(lk$message, x))
     if (is.null(lk) || length(lk) == 0) {
       mssg <- "has no link available"
@@ -452,15 +493,16 @@ scientificsocieties_ft <- function(dois, type = "pdf", ...) {
       return(ft_error(mssg, x))
     }
     get_ft(x, 'pdf', lk[[1]][[1]], path, ...)
-  }), dois)
+  }
+  plapply(dois, scs_fun, type, progress, ...)
 }
 
 # type: only pdf (type parameter is ignored)
 informa_ft <- function(dois, type = "pdf", ...) {
-  stats::setNames(lapply(dois, function(x) {
+  informa_fun <- function(x, type, progress, ...) {
     path <- make_key(x, 'pdf')
     if (file.exists(path) && !cache_options_get()$overwrite) {
-      message(paste0("path exists: ", path))
+      if (!progress) message(paste0("path exists: ", path))
       return(ft_object(path, x, 'pdf'))
     }
 
@@ -472,15 +514,16 @@ informa_ft <- function(dois, type = "pdf", ...) {
       return(ft_error(mssg, x))
     }
     get_ft(x, 'pdf', lk[[1]][[1]], path, ...)
-  }), dois)
+  }
+  plapply(dois, informa_fun, type, progress, ...)
 }
 
 # type: only pdf (type parameter is ignored)
 roysocchem_ft <- function(dois, type = "pdf", ...) {
-  stats::setNames(lapply(dois, function(x) {
+  roysocchem_fun <- function(x, type, progress, ...) {
     path <- make_key(x, 'pdf')
     if (file.exists(path) && !cache_options_get()$overwrite) {
-      message(paste0("path exists: ", path))
+      if (!progress) message(paste0("path exists: ", path))
       return(ft_object(path, x, 'pdf'))
     }
 
@@ -492,15 +535,16 @@ roysocchem_ft <- function(dois, type = "pdf", ...) {
       return(ft_error(mssg, x))
     }
     get_ft(x, 'pdf', lk[[1]][[1]], path, ...)
-  }), dois)
+  }
+  plapply(dois, roysocchem_fun, type, progress, ...)
 }
 
 # type: only pdf (type parameter is ignored)
 ieee_ft <- function(dois, type = "pdf", ...) {
-  stats::setNames(lapply(dois, function(x) {
+  ieee_fun <- function(x, type, progress, ...) {
     path <- make_key(x, 'pdf')
     if (file.exists(path) && !cache_options_get()$overwrite) {
-      message(paste0("path exists: ", path))
+      if (!progress) message(paste0("path exists: ", path))
       return(ft_object(path, x, 'pdf'))
     }
 
@@ -512,15 +556,16 @@ ieee_ft <- function(dois, type = "pdf", ...) {
       return(ft_error(mssg, x))
     }
     get_ft(x = x, type = 'pdf', url = lk[[1]][[1]], path = path, ...)
-  }), dois)
+  }
+  plapply(dois, ieee_fun, type, progress, ...)
 }
 
 # type: only pdf (type parameter is ignored)
 aaas_ft <- function(dois, type = "pdf", ...) {
-  stats::setNames(lapply(dois, function(x) {
+  aaas_fun <- function(x, type, progress, ...) {
     path <- make_key(x, 'pdf')
     if (file.exists(path) && !cache_options_get()$overwrite) {
-      message(paste0("path exists: ", path))
+      if (!progress) message(paste0("path exists: ", path))
       return(ft_object(path, x, 'pdf'))
     }
 
@@ -528,15 +573,16 @@ aaas_ft <- function(dois, type = "pdf", ...) {
     if (inherits(lk, c("error", "warning"))) return(ft_error(lk$message, x))
     url <- jsonlite::fromJSON(lk$parse("UTF-8"))$links$pdf
     get_ft(x = x, type = 'pdf', url = url, path = path, ...)
-  }), dois)
+  }
+  plapply(dois, aaas_fun, type, progress, ...)
 }
 
 # type: only pdf (type parameter is ignored)
 pnas_ft <- function(dois, type = "pdf", ...) {
-  stats::setNames(lapply(dois, function(x) {
+  pnas_fun <- function(x, type, progress, ...) {
     path <- make_key(x, 'pdf')
     if (file.exists(path) && !cache_options_get()$overwrite) {
-      message(paste0("path exists: ", path))
+      if (!progress) message(paste0("path exists: ", path))
       return(ft_object(path, x, 'pdf'))
     }
 
@@ -544,15 +590,16 @@ pnas_ft <- function(dois, type = "pdf", ...) {
     if (inherits(lk, c("error", "warning"))) return(ft_error(lk$message, x))
     url <- jsonlite::fromJSON(lk$parse("UTF-8"))$links$pdf
     get_ft(x = x, type = 'pdf', url = url, path = path, ...)
-  }), dois)
+  }
+  plapply(dois, pnas_fun, type, progress, ...)
 }
 
 # type: only pdf (type parameter is ignored)
 microbiology_ft <- function(dois, type = "pdf", ...) {
-  stats::setNames(lapply(dois, function(x) {
+  microbiology_fun <- function(x, type, progress, ...) {
     path <- make_key(x, 'pdf')
     if (file.exists(path) && !cache_options_get()$overwrite) {
-      message(paste0("path exists: ", path))
+      if (!progress) message(paste0("path exists: ", path))
       return(ft_object(path, x, 'pdf'))
     }
 
@@ -561,15 +608,16 @@ microbiology_ft <- function(dois, type = "pdf", ...) {
     urls <- jsonlite::fromJSON(lk$parse("UTF-8"))$links
     url <- urls[grep("pdf", urls$`content-type`), "url"]
     get_ft(x = x, type = 'pdf', url = url, path = path, ...)
-  }), dois)
+  }
+  plapply(dois, microbiology_fun, type, progress, ...)
 }
 
 # type: only pdf (type parameter is ignored)
 jama_ft <- function(dois, type = "pdf", ...) {
-  stats::setNames(lapply(dois, function(x) {
+  jama_fun <- function(x, type, progress, ...) {
     path <- make_key(x, 'pdf')
     if (file.exists(path) && !cache_options_get()$overwrite) {
-      message(paste0("path exists: ", path))
+      if (!progress) message(paste0("path exists: ", path))
       return(ft_object(path, x, 'pdf'))
     }
 
@@ -578,15 +626,16 @@ jama_ft <- function(dois, type = "pdf", ...) {
     urls <- jsonlite::fromJSON(lk$parse("UTF-8"))$links
     url <- urls[grep("pdf", urls$`content-type`), "url"]
     get_ft(x = x, type = 'pdf', url = url, path = path, ...)
-  }), dois)
+  }
+  plapply(dois, jama_fun, type, progress, ...)
 }
 
 # type: only pdf (type parameter is ignored)
 amersocmicrobiol_ft <- function(dois, type = "pdf", ...) {
-  stats::setNames(lapply(dois, function(x) {
+  amersocmicrobiol_fun <- function(x, type, progress, ...) {
     path <- make_key(x, 'pdf')
     if (file.exists(path) && !cache_options_get()$overwrite) {
-      message(paste0("path exists: ", path))
+      if (!progress) message(paste0("path exists: ", path))
       return(ft_object(path, x, 'pdf'))
     }
 
@@ -595,15 +644,16 @@ amersocmicrobiol_ft <- function(dois, type = "pdf", ...) {
     urls <- jsonlite::fromJSON(lk$parse("UTF-8"))$links
     url <- urls[grep("pdf", urls$`content-type`), "url"]
     get_ft(x = x, type = 'pdf', url = url, path = path, ...)
-  }), dois)
+  }
+  plapply(dois, amersocmicrobiol_fun, type, progress, ...)
 }
 
 # type: only pdf (type parameter is ignored)
 amersocclinoncol_ft <- function(dois, type = "pdf", ...) {
-  stats::setNames(lapply(dois, function(x) {
+  amersocclinoncol_fun <- function(x, type, progress, ...) {
     path <- make_key(x, 'pdf')
     if (file.exists(path) && !cache_options_get()$overwrite) {
-      message(paste0("path exists: ", path))
+      if (!progress) message(paste0("path exists: ", path))
       return(ft_object(path, x, 'pdf'))
     }
 
@@ -612,15 +662,16 @@ amersocclinoncol_ft <- function(dois, type = "pdf", ...) {
     urls <- jsonlite::fromJSON(lk$parse("UTF-8"))$links
     url <- urls[grep("pdf", urls$`content-type`), "url"]
     get_ft(x = x, type = 'pdf', url = url, path = path, ...)
-  }), dois)
+  }
+  plapply(dois, amersocclinoncol_fun, type, progress, ...)
 }
 
 # type: only pdf (type parameter is ignored)
 instinvestfil_ft <- function(dois, type = "pdf", ...) {
-  stats::setNames(lapply(dois, function(x) {
+  instinvestfil_fun <- function(x, type, progress, ...) {
     path <- make_key(x, 'pdf')
     if (file.exists(path) && !cache_options_get()$overwrite) {
-      message(paste0("path exists: ", path))
+      if (!progress) message(paste0("path exists: ", path))
       return(ft_object(path, x, 'pdf'))
     }
 
@@ -633,15 +684,16 @@ instinvestfil_ft <- function(dois, type = "pdf", ...) {
     }
     url = sub('view', 'download', lk[[1]][[1]])
     get_ft(x = x, type = 'pdf', url = url, path = path, ...)
-  }), dois)
+  }
+  plapply(dois, instinvestfil_fun, type, progress, ...)
 }
 
 # type: only pdf (type parameter is ignored)
 aip_ft <- function(dois, type = "pdf", ...) {
-  stats::setNames(lapply(dois, function(x) {
+  aip_fun <- function(x, type, progress, ...) {
     path <- make_key(x, 'pdf')
     if (file.exists(path) && !cache_options_get()$overwrite) {
-      message(paste0("path exists: ", path))
+      if (!progress) message(paste0("path exists: ", path))
       return(ft_object(path, x, 'pdf'))
     }
 
@@ -650,13 +702,14 @@ aip_ft <- function(dois, type = "pdf", ...) {
     urls <- jsonlite::fromJSON(lk$parse("UTF-8"))$links
     url <- urls[grep("pdf", urls$`content-type`), "url"]
     get_ft(x = x, type = 'pdf', url = url, path = path, ...)
-  }), dois)
+  }
+  plapply(dois, aip_fun, type, progress, ...)
 }
 
 
 # special Crossref plugin to try any DOI
 crossref_ft <- function(dois, type, ...) {
-  stats::setNames(lapply(dois, function(x) {
+  crossref_fun <- function(x, type, progress, ...) {
     lks <- tcat(crminer::crm_links(x))
     if (inherits(lks, c("error", "warning")) || inherits(lks, "warning")) {
       mssg <- lks$message
@@ -683,7 +736,7 @@ crossref_ft <- function(dois, type, ...) {
     # check if we already have it
     path <- make_key(x, type)
     if (file.exists(path) && !cache_options_get()$overwrite) {
-      message(paste0("path exists: ", path))
+      if (!progress) message(paste0("path exists: ", path))
       return(ft_object(path, x, type))
     }
 
@@ -692,12 +745,13 @@ crossref_ft <- function(dois, type, ...) {
 
     # fetch it
     get_ft(x, type, lk[[1]], path, ...)
-  }), dois)  
+  }
+  plapply(dois, crossref_fun, type, progress, ...)
 }
 
 # special plugin when link already in hand
 got_link_ft <- function(dois, type, url_pattern, ...) {
-  stats::setNames(lapply(dois, function(x) {
+  link_fun <- function(x, type, progress, ...) {
     # try for the type passed, if not found, try for another
     types <- c('xml', 'pdf')
     pat <- url_pattern[[type]]
@@ -709,9 +763,10 @@ got_link_ft <- function(dois, type, url_pattern, ...) {
     url <- sprintf(pat, x)
     path <- make_key(x, type)
     if (file.exists(path) && !cache_options_get()$overwrite) {
-      message(paste0("path exists: ", path))
+      if (!progress) message(paste0("path exists: ", path))
       return(ft_object(path, x, type))
     }
     get_ft(x, type, url, path, ...)
-  }), dois)
+  }
+  plapply(dois, link_fun, type, progress, ...)
 }
