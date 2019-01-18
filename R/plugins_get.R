@@ -470,7 +470,14 @@ wiley_ft <- function(dois, type = "pdf", ...) {
       `CR-Clickthrough-Client-Token` = Sys.getenv("CROSSREF_TDM"),
       Accept = "application/pdf"
     )
-    get_ft(x, 'pdf', url, path, header, ...)
+    res <- suppressWarnings(get_ft(x, 'pdf', url, path, header, ...))
+    # if failed try a different url
+    if (is.null(res$path)) {
+      url <- sub("full", "pdf", url)
+      res <- get_ft(x, 'pdf', url, path, header, ...)
+    }
+    # if the new url fails, oh well, we tried
+    res
   }
   plapply(dois, wiley_fun, type, progress, ...)
 }

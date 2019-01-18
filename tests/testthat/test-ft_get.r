@@ -1,5 +1,8 @@
 context("ft_get")
 
+# delete all files before testing 
+ftxt_cache$delete_all()
+
 test_that("ft_get basic functionality works ...", {
   skip_on_cran()
 
@@ -60,6 +63,21 @@ test_that("ft_get works for all data providers", {
   expect_is(mm, "ft_data")
   expect_is(nn, "ft_data")
   expect_is(oo, "ft_data")
+})
+
+# this DOI is for an OA article, but the URL we get from Crossref doesn't work
+# this one fails on the first try as it uses 
+# https://bsapubs.onlinelibrary.wiley.com/doi/full/10.3732/ajb.1700190 
+# on the first try, then runs again with 
+# https://bsapubs.onlinelibrary.wiley.com/doi/pdf/10.3732/ajb.1700190
+test_that("ft_get: wiley problems", {
+  skip_on_cran()
+
+  aa <- sm(ft_get(x = '10.3732/AJB.1700190'))
+
+  expect_is(aa, "ft_data")
+  expect_is(aa$wiley, "list")
+  expect_equal(aa$wiley$errors$error, NA_character_)
 })
 
 test_that("ft_get fails well", {
