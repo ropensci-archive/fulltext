@@ -30,6 +30,15 @@
 #' @param elsevieropts Elsevier options, a named list. 
 #' @param crossrefopts Crossref options, a named list. 
 #' @param wileyopts Wiley options, a named list. 
+#' @param progress (logical) whether to show progress bar or not. default: `FALSE`. if 
+#' `TRUE`, we use [utils::txtProgressBar()] and [utils::setTxtProgressBar]
+#' to create the progress bar; and each progress bar connection is closed 
+#' on function exit. A progress bar is run for each data source. 
+#' Works for all S3 methods except `ft_get.links`. When articles are not 
+#' already downloaded you see the progress bar. If articles are already 
+#' downloaded/cached, normally we throw messages saying so, but if a 
+#' progress bar is requested, then the messages are suppressed to 
+#' not interrupt the progress bar.
 #' @param ... Further args passed on to [crul::HttpClient]
 #' 
 #' @seealso [as.ft_data()]
@@ -387,6 +396,7 @@ ft_get.character <- function(x, from=NULL, type = "xml", try_unknown = TRUE,
   progress = FALSE, ...) {
 
   check_type(type)
+  assert(progress, "logical")
   check_cache()
   if (!is.null(from)) {
     from <- match.arg(from, c("plos", "entrez", "elife", "pensoft",
@@ -412,7 +422,7 @@ ft_get.character <- function(x, from=NULL, type = "xml", try_unknown = TRUE,
                    biorxiv = biorxiv_out, elsevier = els_out, 
                    wiley = wiley_out), class = "ft_data")
   } else {
-    get_unknown(x, type, try_unknown, ...)
+    get_unknown(x, type, try_unknown, progress, ...)
   }
 }
 
@@ -423,6 +433,7 @@ ft_get.list <- function(x, from=NULL, type = "xml", try_unknown = TRUE,
   progress = FALSE, ...) {
 
   check_type(type)
+  assert(progress, "logical")
   check_cache()
   if (!is.null(from)) {
     from <- match.arg(from, c("plos", "entrez", "elife", "pensoft", 
@@ -448,7 +459,7 @@ ft_get.list <- function(x, from=NULL, type = "xml", try_unknown = TRUE,
                    biorxiv = biorxiv_out, elsevier = els_out, 
                    wiley = wiley_out), class = "ft_data")
   } else {
-    get_unknown(x, type, try_unknown, ...)
+    get_unknown(x, type, try_unknown, progress, ...)
   }
 }
 
@@ -459,6 +470,7 @@ ft_get.ft <- function(x, from=NULL, type = "xml", try_unknown = TRUE,
   progress = FALSE, ...) {
 
   check_type(type)
+  assert(progress, "logical")
   check_cache()
   # warn on sources that aren't supported yet and will be skipped
   from <- names(x[sapply(x, function(v) !is.null(v$data))])
@@ -548,7 +560,7 @@ print_backend <- function(x) {
 
 
 # get unknown from DOIs where from=NULL ------------------
-get_unknown <- function(x, type, try_unknown, ...) {
+get_unknown <- function(x, type, try_unknown, progress = FALSE, ...) {
   pubs <- Filter(function(z) !is.null(z) && length(z) > 0, 
     stats::setNames(lapply(x, get_publisher), x))
   df <- data.frame(pub = unlist(unname(pubs)), doi = names(pubs), 
@@ -602,12 +614,13 @@ get_unknown <- function(x, type, try_unknown, ...) {
 
         pub_nm <- dfsplit[[i]]$name[1]
         out[[ pub_nm ]] <- fun(tm_nm, dfsplit[[i]]$doi, list(), type, 
-          url_pattern, ...)
+          url_pattern, progress = progress, ...)
       }
     } else {
       pub_nm <- get_pub_name(names(dfsplit)[i])
       tm_nm <- get_tm_name(names(dfsplit)[i])
-      out[[ pub_nm ]] <- fun(tm_nm, dfsplit[[i]]$doi, list(), type, url_pattern, ...)
+      out[[ pub_nm ]] <- fun(tm_nm, dfsplit[[i]]$doi, list(), type, 
+        url_pattern, progress = progress, ...)
     }
   }
   structure(out, class = "ft_data")

@@ -273,23 +273,12 @@ entrez_ft <- function(ids, type = "xml", progress = FALSE, ...) {
   plapply(res$ids, ent_fun, progress = progress, db = db, ...)
 }
 
-# type: xml only presumably
-bmc_ft <- function(dois, type = "xml", ...) {
+# type: xml only presumably?
+bmc_ft <- function(dois, type = "xml", progress = FALSE, ...) {
   res <- rentrez::entrez_search(
     db = "pubmed", term = paste0(sprintf('%s[doi]', dois), collapse = "|"))
   if (length(res$ids) == 0) return(NULL)
-  # stats::setNames(lapply(res$ids, function(z) {
-  #   path <- make_key(z, 'xml')
-  #   if (file.exists(path) && !cache_options_get()$overwrite) {
-  #     message(paste0("path exists: ", path))
-  #     return(ft_object(path, z, 'xml'))
-  #   }
-  #   # have to keep this httr usage
-  #   invisible(rentrez::entrez_fetch(db = 'pubmed', id = z, 
-  #     rettype = "xml", config = httr_write_disk(path, cache_options_get()$overwrite)))
-  #   ft_object(path, z, 'xml')
-  # }), dois) 
-  bmc_fun <- function(z, type, progress, ...) {
+  bmc_fun <- function(z, type, progress = FALSE, ...) {
     path <- make_key(z, 'xml')
     if (file.exists(path) && !cache_options_get()$overwrite) {
       if (!progress) message(paste0("path exists: ", path))
@@ -300,11 +289,11 @@ bmc_ft <- function(dois, type = "xml", ...) {
       rettype = "xml", config = httr_write_disk(path, cache_options_get()$overwrite)))
     ft_object(path, z, 'xml')
   }
-  plapply(res$ids, type, bmc_fun, ...)
+  plapply(res$ids, bmc_fun, type, progress, ...)
 }
 
 # type: xml and pdf
-elife_ft <- function(dois, type, ...) {
+elife_ft <- function(dois, type, progress = FALSE, ...) {
   elife_fun <- function(x, type, progress, ...) {
     path <- make_key(x, type)
     if (file.exists(path) && !cache_options_get()$overwrite) {
@@ -320,7 +309,7 @@ elife_ft <- function(dois, type, ...) {
 }
 
 # type: xml and pdf
-peerj_ft <- function(dois, type, ...) {
+peerj_ft <- function(dois, type, progress = FALSE, ...) {
   peerj_fun <- function(x, type, progress, ...) {
     path <- make_key(x, type)
     if (file.exists(path) && !cache_options_get()$overwrite) {
@@ -335,7 +324,7 @@ peerj_ft <- function(dois, type, ...) {
 }
 
 # type: xml and pdf
-frontiersin_ft <- function(dois, type, ...) {
+frontiersin_ft <- function(dois, type, progress = FALSE, ...) {
   fronteiersin_fun <- function(x, type, progress, ...) {
     path <- make_key(x, type)
     if (file.exists(path) && !cache_options_get()$overwrite) {
@@ -350,7 +339,7 @@ frontiersin_ft <- function(dois, type, ...) {
 }
 
 # type: xml and pdf
-pensoft_ft <- function(dois, type, ...) {
+pensoft_ft <- function(dois, type, progress = FALSE, ...) {
   pensoft_fun <- function(x, type, progress, ...) {
     path <- make_key(x, type)
     if (file.exists(path) && !cache_options_get()$overwrite) {
@@ -370,7 +359,7 @@ pensoft_ft <- function(dois, type, ...) {
 }
 
 # type: xml and pdf
-copernicus_ft <- function(dois, type, ...) {
+copernicus_ft <- function(dois, type, progress = FALSE, ...) {
   copernicus_fun <- function(x, type, progress, ...) {
     path <- make_key(x, type)
     if (file.exists(path) && !cache_options_get()$overwrite) {
@@ -389,7 +378,7 @@ copernicus_ft <- function(dois, type, ...) {
 }
 
 # type: only pdf (type parameter is ignored)
-arxiv_ft <- function(dois, type = "pdf", ...) {
+arxiv_ft <- function(dois, type = "pdf", progress = FALSE, ...) {
   arxiv_fun <- function(x, type, progress, ...) {
     path <- make_key(x, 'pdf')
     if (file.exists(path) && !cache_options_get()$overwrite) {
@@ -403,7 +392,7 @@ arxiv_ft <- function(dois, type = "pdf", ...) {
 }
 
 # type: only pdf (type parameter is ignored)
-biorxiv_ft <- function(dois, type = "pdf", ...) {
+biorxiv_ft <- function(dois, type = "pdf", progress = FALSE, ...) {
   biorxiv_fun <- function(x, type, progress, ...) {
     path <- make_key(x, 'pdf')
     if (file.exists(path) && !cache_options_get()$overwrite) {
@@ -423,7 +412,7 @@ biorxiv_ft <- function(dois, type = "pdf", ...) {
 }
 
 # type: plain and xml
-elsevier_ft <- function(dois, type, ...) {
+elsevier_ft <- function(dois, type, progress = FALSE, ...) {
   if (!type %in% c('plain', 'xml')) stop("'type' for Elsevier must be 'plain' or 'xml'")
   elsevier_fun <- function(x, type, progress, ...) {
     path <- make_key(x, type)
@@ -450,7 +439,7 @@ elsevier_ft <- function(dois, type, ...) {
 }
 
 # type: only pdf (type parameter is ignored)
-wiley_ft <- function(dois, type = "pdf", ...) {
+wiley_ft <- function(dois, type = "pdf", progress = FALSE, ...) {
   wiley_fun <- function(x, type, progress, ...) {
     path <- make_key(x, 'pdf')
     if (file.exists(path) && !cache_options_get()$overwrite) {
@@ -483,7 +472,7 @@ wiley_ft <- function(dois, type = "pdf", ...) {
 }
 
 # type: only pdf (type parameter is ignored)
-scientificsocieties_ft <- function(dois, type = "pdf", ...) {
+scientificsocieties_ft <- function(dois, type = "pdf", progress = FALSE, ...) {
   scs_fun <- function(x, type, progress, ...) {
     path <- make_key(x, 'pdf')
     if (file.exists(path) && !cache_options_get()$overwrite) {
@@ -505,7 +494,7 @@ scientificsocieties_ft <- function(dois, type = "pdf", ...) {
 }
 
 # type: only pdf (type parameter is ignored)
-informa_ft <- function(dois, type = "pdf", ...) {
+informa_ft <- function(dois, type = "pdf", progress = FALSE, ...) {
   informa_fun <- function(x, type, progress, ...) {
     path <- make_key(x, 'pdf')
     if (file.exists(path) && !cache_options_get()$overwrite) {
@@ -526,7 +515,7 @@ informa_ft <- function(dois, type = "pdf", ...) {
 }
 
 # type: only pdf (type parameter is ignored)
-roysocchem_ft <- function(dois, type = "pdf", ...) {
+roysocchem_ft <- function(dois, type = "pdf", progress = FALSE, ...) {
   roysocchem_fun <- function(x, type, progress, ...) {
     path <- make_key(x, 'pdf')
     if (file.exists(path) && !cache_options_get()$overwrite) {
@@ -547,7 +536,7 @@ roysocchem_ft <- function(dois, type = "pdf", ...) {
 }
 
 # type: only pdf (type parameter is ignored)
-ieee_ft <- function(dois, type = "pdf", ...) {
+ieee_ft <- function(dois, type = "pdf",progress = FALSE, ...) {
   ieee_fun <- function(x, type, progress, ...) {
     path <- make_key(x, 'pdf')
     if (file.exists(path) && !cache_options_get()$overwrite) {
@@ -568,7 +557,7 @@ ieee_ft <- function(dois, type = "pdf", ...) {
 }
 
 # type: only pdf (type parameter is ignored)
-aaas_ft <- function(dois, type = "pdf", ...) {
+aaas_ft <- function(dois, type = "pdf", progress = FALSE, ...) {
   aaas_fun <- function(x, type, progress, ...) {
     path <- make_key(x, 'pdf')
     if (file.exists(path) && !cache_options_get()$overwrite) {
@@ -585,7 +574,7 @@ aaas_ft <- function(dois, type = "pdf", ...) {
 }
 
 # type: only pdf (type parameter is ignored)
-pnas_ft <- function(dois, type = "pdf", ...) {
+pnas_ft <- function(dois, type = "pdf", progress = FALSE, ...) {
   pnas_fun <- function(x, type, progress, ...) {
     path <- make_key(x, 'pdf')
     if (file.exists(path) && !cache_options_get()$overwrite) {
@@ -602,7 +591,7 @@ pnas_ft <- function(dois, type = "pdf", ...) {
 }
 
 # type: only pdf (type parameter is ignored)
-microbiology_ft <- function(dois, type = "pdf", ...) {
+microbiology_ft <- function(dois, type = "pdf", progress = FALSE, ...) {
   microbiology_fun <- function(x, type, progress, ...) {
     path <- make_key(x, 'pdf')
     if (file.exists(path) && !cache_options_get()$overwrite) {
@@ -620,7 +609,7 @@ microbiology_ft <- function(dois, type = "pdf", ...) {
 }
 
 # type: only pdf (type parameter is ignored)
-jama_ft <- function(dois, type = "pdf", ...) {
+jama_ft <- function(dois, type = "pdf", progress = FALSE, ...) {
   jama_fun <- function(x, type, progress, ...) {
     path <- make_key(x, 'pdf')
     if (file.exists(path) && !cache_options_get()$overwrite) {
@@ -638,7 +627,7 @@ jama_ft <- function(dois, type = "pdf", ...) {
 }
 
 # type: only pdf (type parameter is ignored)
-amersocmicrobiol_ft <- function(dois, type = "pdf", ...) {
+amersocmicrobiol_ft <- function(dois, type = "pdf", progress = FALSE, ...) {
   amersocmicrobiol_fun <- function(x, type, progress, ...) {
     path <- make_key(x, 'pdf')
     if (file.exists(path) && !cache_options_get()$overwrite) {
@@ -656,7 +645,7 @@ amersocmicrobiol_ft <- function(dois, type = "pdf", ...) {
 }
 
 # type: only pdf (type parameter is ignored)
-amersocclinoncol_ft <- function(dois, type = "pdf", ...) {
+amersocclinoncol_ft <- function(dois, type = "pdf", progress = FALSE, ...) {
   amersocclinoncol_fun <- function(x, type, progress, ...) {
     path <- make_key(x, 'pdf')
     if (file.exists(path) && !cache_options_get()$overwrite) {
@@ -674,7 +663,7 @@ amersocclinoncol_ft <- function(dois, type = "pdf", ...) {
 }
 
 # type: only pdf (type parameter is ignored)
-instinvestfil_ft <- function(dois, type = "pdf", ...) {
+instinvestfil_ft <- function(dois, type = "pdf", progress = FALSE, ...) {
   instinvestfil_fun <- function(x, type, progress, ...) {
     path <- make_key(x, 'pdf')
     if (file.exists(path) && !cache_options_get()$overwrite) {
@@ -696,7 +685,7 @@ instinvestfil_ft <- function(dois, type = "pdf", ...) {
 }
 
 # type: only pdf (type parameter is ignored)
-aip_ft <- function(dois, type = "pdf", ...) {
+aip_ft <- function(dois, type = "pdf", progress = FALSE, ...) {
   aip_fun <- function(x, type, progress, ...) {
     path <- make_key(x, 'pdf')
     if (file.exists(path) && !cache_options_get()$overwrite) {
@@ -715,7 +704,7 @@ aip_ft <- function(dois, type = "pdf", ...) {
 
 
 # special Crossref plugin to try any DOI
-crossref_ft <- function(dois, type, ...) {
+crossref_ft <- function(dois, type, progress = FALSE, ...) {
   crossref_fun <- function(x, type, progress, ...) {
     lks <- tcat(crminer::crm_links(x))
     if (inherits(lks, c("error", "warning")) || inherits(lks, "warning")) {
@@ -757,7 +746,7 @@ crossref_ft <- function(dois, type, ...) {
 }
 
 # special plugin when link already in hand
-got_link_ft <- function(dois, type, url_pattern, ...) {
+got_link_ft <- function(dois, type, url_pattern, progress = FALSE, ...) {
   link_fun <- function(x, type, progress, ...) {
     # try for the type passed, if not found, try for another
     types <- c('xml', 'pdf')
