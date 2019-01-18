@@ -85,6 +85,8 @@ test_that("ft_get fails well", {
 
   expect_error(ft_get('0086169', from = 'plos'), "These are probably not DOIs")
   expect_error(ft_get('0086169', from = 'stuff'), "'arg' should be one")
+  expect_error(ft_get('0086169', progress = 5), 
+    "progress must be of class logical")
 })
 
 test_that("ft_get errors slot", {
@@ -103,4 +105,56 @@ test_that("ft_get errors slot", {
 
   expect_error(ft_get('0086169', from = 'plos'), "These are probably not DOIs")
   expect_error(ft_get('0086169', from = 'stuff'), "'arg' should be one")
+})
+
+context("ft_get: progress bars")
+test_that("ft_get: entrez", {
+  skip_on_cran()
+
+  ftxt_cache$delete_all()
+
+  entrez_dois <- c('10.1186/2049-2618-2-7', '10.1186/2193-1801-3-7')
+  # 1st run, get progress bar
+  expect_output(
+    ft_get(entrez_dois, from = "entrez", progress = TRUE),
+    "==========="
+  )
+  # subsequent runs, also get progress bar
+  expect_output(
+    ft_get(entrez_dois, from = "entrez", progress = TRUE),
+    "==========="
+  )
+  # if progress=FALSE, no bar, but do get path exists messages
+  expect_message(
+    ft_get(entrez_dois, from = "entrez", progress = FALSE),
+    "path exists"
+  )
+})
+
+test_that("ft_get: elife", {
+  skip_on_cran()
+
+  ftxt_cache$delete_all()
+
+  elife_dois <- c('10.7554/eLife.04300', '10.7554/eLife.03032')
+  # 1st run, get progress bar
+  expect_output(
+    ft_get(elife_dois, from='elife', progress = TRUE),
+    "==========="
+  )
+  # subsequent runs, also get progress bar
+  expect_output(
+    ft_get(elife_dois, from='elife', progress = TRUE),
+    "==========="
+  )
+  # if progress=FALSE, no bar, but do get path exists messages
+  expect_message(
+    ft_get(elife_dois, from='elife', progress = FALSE),
+    "path exists"
+  )
+  # same if goes through get_unknown path
+  expect_output(
+    ft_get(elife_dois, progress = TRUE),
+    "==========="
+  )
 })
