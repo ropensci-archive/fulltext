@@ -455,6 +455,13 @@ wiley_ft <- function(dois, type = "pdf", progress = FALSE, ...) {
       warning(x, " ", mssg, call. = FALSE)
       return(ft_error(mssg, x))
     }
+    # fix url if highwire url detected
+    # AFAIK AJB is the only journal with this problem where they used to be at
+    # Highwire, then moved to Wiley - the highwire links do not work, all 
+    # throw 403
+    if (grepl("highwire", url)) {
+      url <- paste0("https://onlinelibrary.wiley.com/doi/pdf/", x)
+    }
     header <- list(
       `CR-Clickthrough-Client-Token` = Sys.getenv("CROSSREF_TDM"),
       Accept = "application/pdf"
