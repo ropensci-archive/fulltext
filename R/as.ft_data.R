@@ -25,7 +25,6 @@
 #' 
 #' # call as.ft_data
 #' x <- as.ft_data(path = dir)
-#' x <- as.ft_data()
 #' 
 #' # output lives underneath a special list index "cached" 
 #' #   representing already present files
