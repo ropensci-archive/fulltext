@@ -18,5 +18,7 @@ package - and this function is more out of scope now.
 \item \link{ft_browse_sections}: no sign that function used, and allows
 to remove a dependency
 \item \link{ft_get_si}: moved to package \code{suppdata}
+\item \link{ft_chunks}: moved to package \code{pubchunks}
+\item \link{ft_tabularize}: moved to package \code{pubchunks}
 }
 }

@@ -35,7 +35,7 @@ The following are tasks/use cases supported:
 \item get abstracts - \code{\link[=ft_abstract]{ft_abstract()}}
 \item extract text from pdfs - \code{\link[=ft_extract]{ft_extract()}}
 \item serialize to different data formats - \code{\link[=ft_serialize]{ft_serialize()}}
-\item extract certain article sections (e.g., authors) - \code{\link[=ft_chunks]{ft_chunks()}}
+\item extract certain article sections (e.g., authors) - moved to \pkg{pubchunks}
 }
 }
 

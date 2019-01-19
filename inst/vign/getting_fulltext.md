@@ -82,6 +82,9 @@ res$plos
 #> $opts$type
 #> [1] "xml"
 #> 
+#> $opts$progress
+#> [1] FALSE
+#> 
 #> 
 #> $errors
 #>                             id error
@@ -119,17 +122,36 @@ res$plos$data
 #> NULL
 ```
 
-Going down one more index gets us the data object, using the DOI searched to get the text. 
-However, since we're dealing with full text, this is a bit messy (just a snippet here)
+Going down one more index gets us the data object. There is no actual text as we have to 
+collect it from the file on disk. See `ft_collect()` to get the text.
 
 
 ```r
-res$plos$data$data$`10.1371/journal.pone.0086169`
-#> [1] "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE article\n  
-#> PUBLIC \"-//NLM//DTD Journal Publishing DTD v3.0 20080202//EN\"
-#> \"http://dtd.nlm.nih.gov/publishing/3.0/journalpublishing3.dtd\">\n<article
-#> xmlns:mml=\"http://www.w3.org/1998/Math/MathML\" xmlns:xlink=\"
-...
+res$plos$data
+#> $backend
+#> [1] "ext"
+#> 
+#> $cache_path
+#> [1] "/Users/sckott/Library/Caches/R/fulltext"
+#> 
+#> $path
+#> $path$`10.1371/journal.pone.0086169`
+#> $path$`10.1371/journal.pone.0086169`$path
+#> [1] "/Users/sckott/Library/Caches/R/fulltext/10_1371_journal_pone_0086169.xml"
+#> 
+#> $path$`10.1371/journal.pone.0086169`$id
+#> [1] "10.1371/journal.pone.0086169"
+#> 
+#> $path$`10.1371/journal.pone.0086169`$type
+#> [1] "xml"
+#> 
+#> $path$`10.1371/journal.pone.0086169`$error
+#> NULL
+#> 
+#> 
+#> 
+#> $data
+#> NULL
 ```
 
 ## Fetching many articles
@@ -201,15 +223,15 @@ For example, search entrez, get some DOIs, then fetch some articles
 #> Query:
 #>   [ecology] 
 #> Found:
-#>   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 157147; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
+#>   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 163225; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
 #> Returned:
 #>   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 10; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0]
 res$entrez$data$doi
-#>  [1] "10.1007/s00335-018-9736-9" "10.1007/s00265-010-1022-0"
-#>  [3] NA                          "10.1177/1178646918802289" 
-#>  [5] "10.3389/fpls.2018.01412"   "10.3389/fmicb.2018.02343" 
-#>  [7] "10.3389/fnana.2018.00079"  "10.3389/fpsyg.2018.01839" 
-#>  [9] "10.3390/vetsci5030081"     "10.3390/vetsci5030071"
+#>  [1] "10.7717/peerj.6263"         "10.7717/peerj.6219"        
+#>  [3] "10.7717/peerj.6193"         "10.7717/peerj.6233"        
+#>  [5] "10.7717/peerj.6255"         "10.1038/s41598-018-36133-5"
+#>  [7] "10.1038/s41598-018-37331-x" "10.7717/peerj.6252"        
+#>  [9] "10.1038/s41467-018-08237-z" "10.1038/s41598-018-36493-y"
 ```
 
 Get articles
@@ -218,9 +240,9 @@ Get articles
 ```r
 ft_get(res$entrez$data$doi[1:3], from = 'entrez')
 #> <fulltext text>
-#> [Docs] 2 
+#> [Docs] 3 
 #> [Source] ext - /Users/sckott/Library/Caches/R/fulltext 
-#> [IDs] 6191311 6191197 ...
+#> [IDs] 6336014 6336013 6336012 ...
 ```
 
 ## Collect full text from file on disk

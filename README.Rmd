@@ -38,8 +38,13 @@ rOpenSci has a number of R packages to get either full text, metadata, or both f
 * Fetch articles - `ft_get`
 * Get links for full text articles (xml, pdf) - `ft_links`
 * Extract text from articles / convert formats - `ft_extract`
-* Collect bits of articles that you actually need - `ft_chunks`/`ft_tabularize`
 * Collect all texts into a data.frame - `ft_table`
+
+Previously supported use cases, extracted out to other packages:
+
+* Collect bits of articles that you actually need - moved to package [pubchunks][]
+* Supplementary data from papers has been moved to the [suppdata][] package
+
 
 It's easy to go from the outputs of `ft_get` to text-mining packages such as 
 [tm](https://cran.r-project.org/package=tm) and 
@@ -66,8 +71,6 @@ loading the package.
 We'd love your feedback. Let us know what you think in [the issue tracker](https://github.com/ropensci/fulltext/issues)
 
 Article full text formats by publisher:  [https://github.com/ropensci/fulltext/blob/master/vignettes/formats.Rmd](https://github.com/ropensci/fulltext/blob/master/vignettes/formats.Rmd)
-
-_Important Note_: Supplementary data from papers has been moved to the [suppdata][] package.
 
 
 ## Installation
@@ -103,7 +106,7 @@ ft_search(query = 'ecology', from = 'crossref')
 `ft_links()` - get links for articles (xml and pdf).
 
 ```{r}
-res1 <- ft_search(query = 'ecology', from = 'entrez', limit = 5)
+res1 <- ft_search(query = 'biology', from = 'entrez', limit = 5)
 ft_links(res1)
 ```
 
@@ -124,26 +127,25 @@ ft_get('10.7717/peerj.228')
 ## Extract chunks
 
 ```{r}
+library(pubchunks)
 x <- ft_get(c('10.7554/eLife.03032', '10.7554/eLife.32763'), from = "elife")
-x %>% ft_collect() %>% ft_chunks("publisher") %>% ft_tabularize()
+x %>% ft_collect() %>% pub_chunks("publisher") %>% pub_tabularize()
 ```
 
 Get multiple fields at once
 
 ```{r}
-x %>% ft_collect() %>% ft_chunks(c("doi","publisher")) %>% ft_tabularize()
+x %>% ft_collect() %>% pub_chunks(c("doi","publisher")) %>% pub_tabularize()
 ```
 
-Use `dplyr` to data munge
+Pull out the data.frame's
 
 ```{r}
-library("dplyr")
 x %>%
   ft_collect() %>% 
-  ft_chunks(c("doi", "publisher", "permissions")) %>%
-  ft_tabularize() %>%
-  .$elife %>%
-  select(-permissions.license, -permissions.license_url)
+  pub_chunks(c("doi", "publisher", "author")) %>%
+  pub_tabularize() %>%
+  .$elife
 ```
 
 ## Extract text from PDFs
@@ -190,3 +192,4 @@ quanteda::corpus(x)
 [![rofooter](https://ropensci.org/public_images/github_footer.png)](https://ropensci.org)
 
 [suppdata]: https://github.com/ropensci/suppdata
+[pubchunks]: https://github.com/ropensci/pubchunks

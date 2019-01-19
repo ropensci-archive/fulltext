@@ -24,7 +24,7 @@
 #' - get abstracts - [ft_abstract()]
 #' - extract text from pdfs - [ft_extract()]
 #' - serialize to different data formats - [ft_serialize()]
-#' - extract certain article sections (e.g., authors) - [ft_chunks()]
+#' - extract certain article sections (e.g., authors) - moved to \pkg{pubchunks}
 #'
 #' @section DOI delays:
 #' Beware that DOIs are not searchable via Crossref/Entrez immediately. The

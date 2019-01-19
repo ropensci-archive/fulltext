@@ -36,13 +36,18 @@ writeLines(readLines(file), tempfile(tmpdir = dir, fileext = ".xml"))
 
 # call as.ft_data
 x <- as.ft_data(path = dir)
+x <- as.ft_data()
 
 # output lives underneath a special list index "cached" 
 #   representing already present files
 x$cached
 
 # collect chunks
-# x \%>\% ft_collect \%>\% ft_chunks(c("doi", "title"))
+if (requireNamespace("pubchunks")) {
+  library(pubchunks)
+  res <- ft_collect(x)
+  pub_chunks(res, c("doi", "title")) \%>\% pub_tabularize()
+}
 }
 \seealso{
 \code{\link[=ft_get]{ft_get()}}

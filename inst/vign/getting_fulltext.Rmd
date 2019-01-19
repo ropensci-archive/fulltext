@@ -51,16 +51,11 @@ Indexing to the `data` slot takes us to another list with metadata and the artic
 res$plos$data
 ```
 
-Going down one more index gets us the data object, using the DOI searched to get the text. 
-However, since we're dealing with full text, this is a bit messy (just a snippet here)
+Going down one more index gets us the data object. There is no actual text as we have to 
+collect it from the file on disk. See `ft_collect()` to get the text.
 
-```{r eval=FALSE}
-res$plos$data$data$`10.1371/journal.pone.0086169`
-#> [1] "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE article\n  
-#> PUBLIC \"-//NLM//DTD Journal Publishing DTD v3.0 20080202//EN\"
-#> \"http://dtd.nlm.nih.gov/publishing/3.0/journalpublishing3.dtd\">\n<article
-#> xmlns:mml=\"http://www.w3.org/1998/Math/MathML\" xmlns:xlink=\"
-...
+```{r}
+res$plos$data
 ```
 
 ## Fetching many articles

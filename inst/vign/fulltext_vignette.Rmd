@@ -83,34 +83,33 @@ res2$arxiv$data$data$`cond-mat/9309029`[1]
 
 ## Extract text chunks
 
+Requires the pubchunks library.
+
 We have a few functions to help you pull out certain parts of an article. 
 For example, perhaps you want to get just the authors from your articles, 
 or just the abstracts. 
 
 Here, we'll search for some PLOS articles, then get their full text, then
-extract various parts of each article with `ft_chunks()`.
+extract various parts of each article with `pub_chunks()`.
 
 ```{r}
+if (requireNamespace("pubchunks")) {
+library(pubchunks)
+
+# Search
 res <- ft_search(query = "ecology", from = "plos")
 (x <- ft_get(res))
+
+# Extract DOIs
+x %>% ft_collect() %>% pub_chunks("doi")
+
+# Extract DOIs and categories
+x %>% ft_collect() %>% pub_chunks(c("doi", "title"))
+
+
+# `pub_tabularize` attempts to help you put the data that comes out of 
+# `pub_chunks()` in to a `data.frame`, that we all know and love. 
+x %>% ft_collect() %>% pub_chunks(c("doi", "history")) %>% pub_tabularize()
+
+}
 ```
-
-Extract DOIs
-
-```{r}
-x %>% ft_collect() %>% ft_chunks("doi")
-```
-
-Extract DOIs and categories
-
-```{r}
-x %>% ft_collect() %>% ft_chunks(c("doi", "title"))
-```
-
-`ft_tabularize` attempts to help you put the data that comes out of 
-`ft_chunks()` in to a `data.frame`, that we all know and love. 
-
-```{r}
-x %>% ft_collect() %>% ft_chunks(c("doi", "history")) %>% ft_tabularize()
-```
-

@@ -25,13 +25,18 @@
 #' 
 #' # call as.ft_data
 #' x <- as.ft_data(path = dir)
+#' x <- as.ft_data()
 #' 
 #' # output lives underneath a special list index "cached" 
 #' #   representing already present files
 #' x$cached
 #' 
 #' # collect chunks
-#' # x %>% ft_collect %>% ft_chunks(c("doi", "title"))
+#' if (requireNamespace("pubchunks")) {
+#'   library(pubchunks)
+#'   res <- ft_collect(x)
+#'   pub_chunks(res, c("doi", "title")) %>% pub_tabularize()
+#' }
 as.ft_data <- function(path = NULL) {
   if (is.null(path)) path <- ftxt_cache$cache_path_get()
   if (!dir.exists(path)) stop("path does not exist")  

@@ -34,7 +34,7 @@ Search for the term _ecology_ in PLOS journals.
 #> Query:
 #>   [ecology] 
 #> Found:
-#>   [PLoS: 45067; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
+#>   [PLoS: 46354; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
 #> Returned:
 #>   [PLoS: 10; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0]
 ```
@@ -45,7 +45,7 @@ Each publisher/search-engine has a slot with metadata and data
 ```r
 res1$plos
 #> Query: [ecology] 
-#> Records found, returned: [45067, 10] 
+#> Records found, returned: [46354, 10] 
 #> License: [CC-BY] 
 #>                              id
 #> 1  10.1371/journal.pone.0001248
@@ -127,186 +127,94 @@ res2$arxiv$data$data$`cond-mat/9309029`[1]
 
 ## Extract text chunks
 
+Requires the pubchunks library.
+
 We have a few functions to help you pull out certain parts of an article. 
 For example, perhaps you want to get just the authors from your articles, 
 or just the abstracts. 
 
 Here, we'll search for some PLOS articles, then get their full text, then
-extract various parts of each article with `ft_chunks()`.
+extract various parts of each article with `pub_chunks()`.
 
 
 ```r
+if (requireNamespace("pubchunks")) {
+library(pubchunks)
+
+# Search
 res <- ft_search(query = "ecology", from = "plos")
 (x <- ft_get(res))
-#> <fulltext text>
-#> [Docs] 10 
-#> [Source] ext - /Users/sckott/Library/Caches/R/fulltext 
-#> [IDs] 10.1371/journal.pone.0001248 10.1371/journal.pone.0059813
-#>      10.1371/journal.pone.0155019 10.1371/journal.pone.0080763
-#>      10.1371/journal.pone.0150648 10.1371/journal.pcbi.1003594
-#>      10.1371/journal.pone.0102437 10.1371/journal.pone.0175014
-#>      10.1371/journal.pone.0166559 10.1371/journal.pone.0054689 ...
-```
 
-Extract DOIs
+# Extract DOIs
+x %>% ft_collect() %>% pub_chunks("doi")
+
+# Extract DOIs and categories
+x %>% ft_collect() %>% pub_chunks(c("doi", "title"))
 
 
-```r
-x %>% ft_collect() %>% ft_chunks("doi")
+# `pub_tabularize` attempts to help you put the data that comes out of 
+# `pub_chunks()` in to a `data.frame`, that we all know and love. 
+x %>% ft_collect() %>% pub_chunks(c("doi", "history")) %>% pub_tabularize()
+
+}
 #> $plos
 #> $plos$`10.1371/journal.pone.0001248`
-#> $plos$`10.1371/journal.pone.0001248`$doi
-#> [1] "10.1371/journal.pone.0001248"
-#> 
-#> 
-#> $plos$`10.1371/journal.pone.0059813`
-#> $plos$`10.1371/journal.pone.0059813`$doi
-#> [1] "10.1371/journal.pone.0059813"
-#> 
-#> 
-#> $plos$`10.1371/journal.pone.0155019`
-#> $plos$`10.1371/journal.pone.0155019`$doi
-#> [1] "10.1371/journal.pone.0155019"
-#> 
-#> 
-#> $plos$`10.1371/journal.pone.0080763`
-#> $plos$`10.1371/journal.pone.0080763`$doi
-#> [1] "10.1371/journal.pone.0080763"
-#> 
-#> 
-#> $plos$`10.1371/journal.pone.0150648`
-#> $plos$`10.1371/journal.pone.0150648`$doi
-#> [1] "10.1371/journal.pone.0150648"
-#> 
-#> 
-#> $plos$`10.1371/journal.pcbi.1003594`
-#> $plos$`10.1371/journal.pcbi.1003594`$doi
-#> [1] "10.1371/journal.pcbi.1003594"
-#> 
-#> 
-#> $plos$`10.1371/journal.pone.0102437`
-#> $plos$`10.1371/journal.pone.0102437`$doi
-#> [1] "10.1371/journal.pone.0102437"
-#> 
-#> 
-#> $plos$`10.1371/journal.pone.0175014`
-#> $plos$`10.1371/journal.pone.0175014`$doi
-#> [1] "10.1371/journal.pone.0175014"
-#> 
-#> 
-#> $plos$`10.1371/journal.pone.0166559`
-#> $plos$`10.1371/journal.pone.0166559`$doi
-#> [1] "10.1371/journal.pone.0166559"
-#> 
-#> 
-#> $plos$`10.1371/journal.pone.0054689`
-#> $plos$`10.1371/journal.pone.0054689`$doi
-#> [1] "10.1371/journal.pone.0054689"
-```
-
-Extract DOIs and categories
-
-
-```r
-x %>% ft_collect() %>% ft_chunks(c("doi", "title"))
-#> $plos
-#> $plos$`10.1371/journal.pone.0001248`
-#> $plos$`10.1371/journal.pone.0001248`$doi
-#> [1] "10.1371/journal.pone.0001248"
-#> 
-#> $plos$`10.1371/journal.pone.0001248`$title
-#> [1] "A Tale of Four Stories: Soil Ecology, Theory, Evolution and the Publication System"
-#> 
+#>                            doi history.received history.accepted
+#> 1 10.1371/journal.pone.0001248       2007-07-02       2007-11-06
+#>   .publisher
+#> 1       plos
 #> 
 #> $plos$`10.1371/journal.pone.0059813`
-#> $plos$`10.1371/journal.pone.0059813`$doi
-#> [1] "10.1371/journal.pone.0059813"
-#> 
-#> $plos$`10.1371/journal.pone.0059813`$title
-#> [1] "Trends in Ecological Research during the Last Three Decades – A Systematic Review"
-#> 
+#>                            doi history.received history.accepted
+#> 1 10.1371/journal.pone.0059813       2012-09-16       2013-02-19
+#>   .publisher
+#> 1       plos
 #> 
 #> $plos$`10.1371/journal.pone.0155019`
-#> $plos$`10.1371/journal.pone.0155019`$doi
-#> [1] "10.1371/journal.pone.0155019"
-#> 
-#> $plos$`10.1371/journal.pone.0155019`$title
-#> [1] "Focusing Conservation Efforts on Ecosystem Service Supply May Increase Vulnerability of Socio-Ecological Systems"
-#> 
+#>                            doi history.received history.accepted
+#> 1 10.1371/journal.pone.0155019       2015-09-22       2016-04-22
+#>   .publisher
+#> 1       plos
 #> 
 #> $plos$`10.1371/journal.pone.0080763`
-#> $plos$`10.1371/journal.pone.0080763`$doi
-#> [1] "10.1371/journal.pone.0080763"
-#> 
-#> $plos$`10.1371/journal.pone.0080763`$title
-#> [1] "Disproportional Representation of Primates in the Ecological Literature"
-#> 
+#>                            doi history.received history.accepted
+#> 1 10.1371/journal.pone.0080763       2013-08-15       2013-10-16
+#>   .publisher
+#> 1       plos
 #> 
 #> $plos$`10.1371/journal.pone.0150648`
-#> $plos$`10.1371/journal.pone.0150648`$doi
-#> [1] "10.1371/journal.pone.0150648"
-#> 
-#> $plos$`10.1371/journal.pone.0150648`$title
-#> [1] "Quantifying Ecological Literacy in an Adult Western Community: The Development and Application of a New Assessment Tool and Community Standard"
-#> 
+#>                            doi history.received history.accepted
+#> 1 10.1371/journal.pone.0150648       2015-09-19       2016-02-16
+#>   .publisher
+#> 1       plos
 #> 
 #> $plos$`10.1371/journal.pcbi.1003594`
-#> $plos$`10.1371/journal.pcbi.1003594`$doi
-#> [1] "10.1371/journal.pcbi.1003594"
-#> 
-#> $plos$`10.1371/journal.pcbi.1003594`$title
-#> [1] "Ecological Consistency of SSU rRNA-Based Operational Taxonomic Units at a Global Scale"
-#> 
+#>                            doi history.received history.accepted
+#> 1 10.1371/journal.pcbi.1003594       2014-01-09       2014-03-14
+#>   .publisher
+#> 1       plos
 #> 
 #> $plos$`10.1371/journal.pone.0102437`
-#> $plos$`10.1371/journal.pone.0102437`$doi
-#> [1] "10.1371/journal.pone.0102437"
-#> 
-#> $plos$`10.1371/journal.pone.0102437`$title
-#> [1] "Combining Aesthetic with Ecological Values for Landscape Sustainability"
-#> 
+#>                            doi history.received history.accepted
+#> 1 10.1371/journal.pone.0102437       2013-11-27       2014-06-19
+#>   .publisher
+#> 1       plos
 #> 
 #> $plos$`10.1371/journal.pone.0175014`
-#> $plos$`10.1371/journal.pone.0175014`$doi
-#> [1] "10.1371/journal.pone.0175014"
-#> 
-#> $plos$`10.1371/journal.pone.0175014`$title
-#> [1] "75 years of dryland science: Trends and gaps in arid ecology literature"
-#> 
+#>                            doi history.received history.accepted
+#> 1 10.1371/journal.pone.0175014       2016-09-23       2017-03-20
+#>   .publisher
+#> 1       plos
 #> 
 #> $plos$`10.1371/journal.pone.0166559`
-#> $plos$`10.1371/journal.pone.0166559`$doi
-#> [1] "10.1371/journal.pone.0166559"
-#> 
-#> $plos$`10.1371/journal.pone.0166559`$title
-#> [1] "Eliciting and Representing High-Level Knowledge Requirements to Discover Ecological Knowledge in Flower-Visiting Data"
-#> 
+#>                            doi history.received history.accepted
+#> 1 10.1371/journal.pone.0166559       2016-06-05       2016-10-30
+#>   .publisher
+#> 1       plos
 #> 
 #> $plos$`10.1371/journal.pone.0054689`
-#> $plos$`10.1371/journal.pone.0054689`$doi
-#> [1] "10.1371/journal.pone.0054689"
-#> 
-#> $plos$`10.1371/journal.pone.0054689`$title
-#> [1] "Representation of Ecological Systems within the Protected Areas Network of the Continental United States"
+#>                            doi history.received history.accepted
+#> 1 10.1371/journal.pone.0054689       2012-03-22       2012-12-17
+#>   .publisher
+#> 1       plos
 ```
-
-`ft_tabularize` attempts to help you put the data that comes out of 
-`ft_chunks()` in to a `data.frame`, that we all know and love. 
-
-
-```r
-x %>% ft_collect() %>% ft_chunks(c("doi", "history")) %>% ft_tabularize()
-#> $plos
-#>                             doi history.received history.accepted
-#> 1  10.1371/journal.pone.0001248       2007-07-02       2007-11-06
-#> 2  10.1371/journal.pone.0059813       2012-09-16       2013-02-19
-#> 3  10.1371/journal.pone.0155019       2015-09-22       2016-04-22
-#> 4  10.1371/journal.pone.0080763       2013-08-15       2013-10-16
-#> 5  10.1371/journal.pone.0150648       2015-09-19       2016-02-16
-#> 6  10.1371/journal.pcbi.1003594       2014-01-09       2014-03-14
-#> 7  10.1371/journal.pone.0102437       2013-11-27       2014-06-19
-#> 8  10.1371/journal.pone.0175014       2016-09-23       2017-03-20
-#> 9  10.1371/journal.pone.0166559       2016-06-05       2016-10-30
-#> 10 10.1371/journal.pone.0054689       2012-03-22       2012-12-17
-```
-
