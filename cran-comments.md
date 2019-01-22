@@ -24,5 +24,7 @@ Summary at <https://github.com/ropensci/fulltext/blob/master/revdep/README.md>
 
 This version includes new parameters in a few functions, a number of defunct function, some small improvements, and bug fixes.
 
+There ares a three failures on R-devel with _R_CHECK_LENGTH_1_LOGIC2_=TRUE in the package test suite that track down to a problem with the xml2 package `parse_options(options, xml_parse_options())`. I've notified the xml2 maintainer of this problem https://github.com/r-lib/xml2/issues/238
+
 Thanks! 
 Scott Chamberlain

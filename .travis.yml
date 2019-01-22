@@ -12,7 +12,7 @@ matrix:
       env: R_CODECOV=true
     - os: linux
       r: devel
-      env: _R_CHECK_LENGTH_1_LOGIC2_=TRUE
+      # env: _R_CHECK_LENGTH_1_LOGIC2_=TRUE
 
 r_binary_packages:
   - covr
