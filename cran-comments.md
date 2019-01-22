@@ -1,7 +1,7 @@
 ## Test environments
 
-* local OS X install, R 3.5.1 patched
-* ubuntu 14.04 (on travis-ci), R 3.5.1
+* local OS X install, R 3.5.2 patched
+* ubuntu 14.04 (on travis-ci), R 3.5.2
 * win-builder (devel and release)
 
 ## R CMD check results
@@ -11,7 +11,7 @@
 License components with restrictions and base license permitting such:
      MIT + file LICENSE
    File 'LICENSE':
-     YEAR: 2018
+     YEAR: 2019
      COPYRIGHT HOLDER: Scott Chamberlain
 
 ## Reverse dependencies
@@ -22,7 +22,7 @@ Summary at <https://github.com/ropensci/fulltext/blob/master/revdep/README.md>
 
 --------
 
-This version includes two new functions, and many bug fixes.
+This version includes new parameters in a few functions, a number of defunct function, some small improvements, and bug fixes.
 
 Thanks! 
 Scott Chamberlain

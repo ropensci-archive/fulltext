@@ -1,3 +1,27 @@
+fulltext 1.2.0
+==============
+
+### NEW FEATURES
+
+* `ft_get()` gains a `progress` parameter, `TRUE` printing a progress bar and `FALSE` not. By default we do not print a progress bar to be consistent with the behavior of previous versions (#140) (#190)
+* `cache_options_set()` gains new parameter `full_path` to set the entire path to the cache, use like `cache_options_set(full_path = yourpath)` (#185) thanks @bomeara for the feature request
+
+### DEFUNCT
+
+* `ft_chunks()` and `ft_tabularize()` were deprecated in the previous version, and are now defunct. See the new package <https://github.com/ropensci/pubchunks> for the same (and improved) functionality (#146) (#181)
+* `ft_get_si()` is defunct. It's been pulled out into a new package <https://github.com/ropensci/suppdata>  (#186) (#188)
+
+### BUG FIXES
+
+* Fix to `eupmc_search()` internal function. At some piont Europe PMC changed the way they do paging, what parameters are used, etc. Fixed now. See examples for how to do paging; uses a cursor model instead of a rows/offset model  (#184) thanks @jshleap for the report
+* two hopefully fixes for Wiley URLs: a) try a 2nd url pattern if the first fails in general for Wiley links; and b) if highwire links found, replace with a url pattern that should work (#189) thanks @bomeara for the report
+
+### NEW IMPROVEMENTS
+
+* remaining `httr` code removed, now using `crul` for all HTTP requests (#187)
+* filled out `Scopus` and `Crossref TDM` parts in the Authentication section of the package level manual file `?fulltext-package`; and add more details on authentication in the `?ft_get` manual file  (#182) (#183)
+
+
 fulltext 1.1.0
 ==============
 
