@@ -57,6 +57,7 @@ test_that("ft_search works with scopus", {
 
 test_that("ft_search works for larger requests", {
   skip_on_cran()
+  skip_on_travis()
   
   res_entrez <- ft_search(query = 'ecology', from = 'entrez', limit = 200)
   expect_is(res_entrez, "ft")
