@@ -20,7 +20,7 @@
 #' # put a file in the cache in case there aren't any
 #' dir <- file.path(tempdir(), "testing")
 #' dir.create(dir)
-#' file <- system.file("examples/elife.xml", package = "fulltext")
+#' file <- system.file("examples", "elife.xml", package = "fulltext")
 #' writeLines(readLines(file), tempfile(tmpdir = dir, fileext = ".xml"))
 #' 
 #' # call as.ft_data
@@ -30,11 +30,13 @@
 #' #   representing already present files
 #' x$cached
 #' 
+#' \dontrun{
 #' # collect chunks
 #' if (requireNamespace("pubchunks")) {
 #'   library(pubchunks)
 #'   res <- ft_collect(x)
 #'   pub_chunks(res, c("doi", "title")) %>% pub_tabularize()
+#' }
 #' }
 as.ft_data <- function(path = NULL) {
   if (is.null(path)) path <- ftxt_cache$cache_path_get()

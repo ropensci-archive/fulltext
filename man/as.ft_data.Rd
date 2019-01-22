@@ -31,7 +31,7 @@ with just a file path.
 # put a file in the cache in case there aren't any
 dir <- file.path(tempdir(), "testing")
 dir.create(dir)
-file <- system.file("examples/elife.xml", package = "fulltext")
+file <- system.file("examples", "elife.xml", package = "fulltext")
 writeLines(readLines(file), tempfile(tmpdir = dir, fileext = ".xml"))
 
 # call as.ft_data
@@ -41,11 +41,13 @@ x <- as.ft_data(path = dir)
 #   representing already present files
 x$cached
 
+\dontrun{
 # collect chunks
 if (requireNamespace("pubchunks")) {
   library(pubchunks)
   res <- ft_collect(x)
   pub_chunks(res, c("doi", "title")) \%>\% pub_tabularize()
+}
 }
 }
 \seealso{
