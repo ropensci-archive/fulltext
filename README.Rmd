@@ -156,9 +156,6 @@ Locally, using code adapted from the package `tm`, and two pdf to text parsing b
 
 ```{r}
 pdf <- system.file("examples", "example2.pdf", package = "fulltext")
-```
-
-```{r}
 ft_extract(pdf)
 ```
 

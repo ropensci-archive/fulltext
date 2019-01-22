@@ -99,7 +99,7 @@ ft_search(query = 'ecology', from = 'crossref')
 #> Query:
 #>   [ecology] 
 #> Found:
-#>   [PLoS: 0; BMC: 0; Crossref: 157744; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
+#>   [PLoS: 0; BMC: 0; Crossref: 157839; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
 #> Returned:
 #>   [PLoS: 0; BMC: 0; Crossref: 10; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0]
 ```
@@ -114,7 +114,7 @@ res1 <- ft_search(query = 'biology', from = 'entrez', limit = 5)
 ft_links(res1)
 #> <fulltext links>
 #> [Found] 5 
-#> [IDs] ID_30399408 ID_27328841 ID_25964185 ID_24526358 ID_19003989 ...
+#> [IDs] ID_30253098 ID_28731711 ID_28097372 ID_27582426 ID_22243231 ...
 ```
 
 Or pass in DOIs directly
@@ -124,7 +124,7 @@ Or pass in DOIs directly
 ft_links(res1$entrez$data$doi, from = "entrez")
 #> <fulltext links>
 #> [Found] 5 
-#> [IDs] ID_30399408 ID_27328841 ID_25964185 ID_24526358 ID_19003989 ...
+#> [IDs] ID_30253098 ID_28731711 ID_28097372 ID_27582426 ID_22243231 ...
 ```
 
 ## Get full text
@@ -213,10 +213,6 @@ Locally, using code adapted from the package `tm`, and two pdf to text parsing b
 
 ```r
 pdf <- system.file("examples", "example2.pdf", package = "fulltext")
-```
-
-
-```r
 ft_extract(pdf)
 #> <document>/Library/Frameworks/R.framework/Versions/3.5/Resources/library/fulltext/examples/example2.pdf
 #>   Title: pone.0107412 1..10
