@@ -223,15 +223,15 @@ For example, search entrez, get some DOIs, then fetch some articles
 #> Query:
 #>   [ecology] 
 #> Found:
-#>   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 163225; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
+#>   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 163320; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
 #> Returned:
 #>   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 10; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0]
 res$entrez$data$doi
-#>  [1] "10.7717/peerj.6263"         "10.7717/peerj.6219"        
-#>  [3] "10.7717/peerj.6193"         "10.7717/peerj.6233"        
-#>  [5] "10.7717/peerj.6255"         "10.1038/s41598-018-36133-5"
-#>  [7] "10.1038/s41598-018-37331-x" "10.7717/peerj.6252"        
-#>  [9] "10.1038/s41467-018-08237-z" "10.1038/s41598-018-36493-y"
+#>  [1] "10.1155/2018/8930374"       "10.1155/2018/4519094"      
+#>  [3] "10.1038/s41467-018-08039-3" "10.1038/s41467-018-08232-4"
+#>  [5] "10.1038/s41467-018-08188-5" "10.1038/s41598-018-36133-5"
+#>  [7] "10.1038/s41598-018-37331-x" "10.1038/sdata.2018.309"    
+#>  [9] "10.1038/sdata.2018.299"     "10.1038/s41467-018-08237-z"
 ```
 
 Get articles
@@ -242,7 +242,7 @@ ft_get(res$entrez$data$doi[1:3], from = 'entrez')
 #> <fulltext text>
 #> [Docs] 3 
 #> [Source] ext - /Users/sckott/Library/Caches/R/fulltext 
-#> [IDs] 6336014 6336013 6336012 ...
+#> [IDs] 6313974 6312606 6335468 ...
 ```
 
 ## Collect full text from file on disk
