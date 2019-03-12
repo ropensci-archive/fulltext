@@ -561,8 +561,9 @@ print_backend <- function(x) {
 
 # get unknown from DOIs where from=NULL ------------------
 get_unknown <- function(x, type, try_unknown, progress = FALSE, ...) {
-  pubs <- Filter(function(z) !is.null(z) && length(z) > 0, 
-    stats::setNames(lapply(x, get_publisher), x))
+  # pubs <- Filter(function(z) !is.null(z) && length(z) > 0, 
+  #   stats::setNames(lapply(x, get_publisher, verbose = TRUE), x))
+  pubs <- get_publisher2(x)
   df <- data.frame(pub = unlist(unname(pubs)), doi = names(pubs), 
     name = vapply(pubs, attr, '', 'publisher', USE.NAMES=FALSE),
     issn = vapply(pubs, attr, '', 'issn', USE.NAMES=FALSE),
@@ -734,8 +735,8 @@ get_tm_name <- function(x) {
   )
 }
 
-get_publisher <- function(x) {
-  z <- tryCatch(rcrossref::cr_works(x), warning = function(w) w)
+get_publisher <- function(x, ...) {
+  z <- tryCatch(rcrossref::cr_works(x, ...), warning = function(w) w)
   # FIXME: at some point replace this with 
   #   mapping of Crossref member number to a unique short name
   if (inherits(z, "warning")) return(unknown_id(z$message))
@@ -743,7 +744,7 @@ get_publisher <- function(x) {
   names(z$data) <- tolower(names(z$data))
   issn <- z$data$issn
   if (length(z) == 0) {
-    return(unknown_id())
+    return(unknown_id(""))
   } else {
     id <- as.character(strextract(z$data$member, "[0-9]+"))
     attr(id, "publisher") <- pub %||% ""
@@ -751,6 +752,86 @@ get_publisher <- function(x) {
     attr(id, "error") <- ""
     return(id)
   }
+}
+
+fat_cat_search_one <- function(dois, fields, size) {
+  search_string <- make_doi_str(dois)
+  cn <- crul::HttpClient$new("https://search.fatcat.wiki", opts = list(verbose = TRUE))
+  query <- list(q = search_string, `_source` = paste0(fields, collapse = ","), 
+    size = size)
+  res <- cn$get("fatcat_release/_search", query = query)
+  res$raise_for_status()
+  out <- jsonlite::fromJSON(res$parse("UTF-8"), flatten = TRUE)$hits$hits
+  # if no data returned, make an empty data.frame
+  if (length(out) == 0) {
+    out <- data.frame(doi=NA_character_, container_issnl=NA_character_,
+      container_name=NA_character_, publisher=NA_character_,
+      stringsAsFactors=FALSE)
+  }
+  names(out) <- gsub("_source\\.", "", names(out))
+  df <- out[, fields]
+  df$message <- rep(NA_character_, NROW(df))
+  # add rows for DOIs not found
+  not_found <- dois[!dois %in% out$doi]
+  if (length(not_found) > 0) {
+    for (i in not_found) df <- rbind(df, c(i, "", "", "", "not found")) 
+  }
+  return(df)
+}
+
+make_doi_str <- function(x) {
+  sprintf("doi:(\"%s\")", paste0(x, collapse = "\" OR \""))
+}
+
+fat_cat_search <- function(dois, ...) {
+  flds <- c('doi', 'container_issnl', 'container_name', 'publisher')
+  
+  if (length(dois) > 50) {
+    chunk_size <- 50
+    ids_chunked <- split(dois, ceiling(seq_along(dois)/chunk_size))
+    out <- list()
+    for (i in seq_along(ids_chunked)) {
+      out[[i]] <- fat_cat_search_one(ids_chunked[[i]], flds,
+        length(ids_chunked[[i]]))
+    }
+    res <- rbl(out)
+  } else {
+    res <- fat_cat_search_one(dois, flds, length(dois))
+  }
+  if (NROW(res) == 0) return(list())
+  # apply(res[, c("doi", "container_issnl")], 1, as.list)
+  apply(res, 1, as.list)
+}
+
+get_publisher2 <- function(x, ...) {
+  # crossref member ids, and publisher names
+  pref <- strextract(x, "[0-9]{2}\\.[0-9]+")
+  names(x) <- pref
+  pref_uniq <- unique(pref)
+  mems <- lapply(pref_uniq, function(z) {
+    tmp <- rcrossref::cr_prefixes(z)$data
+    list(
+      prefix = z,
+      member = basename(tmp$member),
+      name = gsub("/|\\.|-|:|;|\\(|\\)|<|>|\\s", "_",  tolower(tmp$name)))
+  })
+  
+  # issn's
+  fc_res <- fat_cat_search(x)
+  
+  # put together
+  out <- list()
+  for (i in seq_along(x)) {
+    prefix <- strextract(x[i], "[0-9]{2}\\.[0-9]+")
+    mm <- mems[[which(prefix == vapply(mems, "[[", "", "prefix"))]]
+    id <- mm$member
+    fcm <- fc_res[[which(x[[i]] == vapply(fc_res, "[[", "", "doi"))]]
+    attr(id, "publisher") <- mm$name %||% ""
+    attr(id, "issn") <- fcm$container_issnl %||% ""
+    attr(id, "error") <- fcm$message
+    out[[ x[[i]] ]] <- id
+  }
+  return(out)
 }
 
 unknown_id <- function(mssg) {
