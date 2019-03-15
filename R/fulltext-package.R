@@ -81,6 +81,20 @@
 #' this package. If you aren't physically at your institution you will likely 
 #' need to be on a VPN or similar so that your IP address is in the range 
 #' that the two publishers are accepting for that institution.
+#' 
+#' **ScienceDirect**: Elsevier ScienceDirect requires two things: an API key 
+#' and your institution must have access. For the API key, 
+#' go to https://dev.elsevier.com/index.html, 
+#' register for an account, then when you're in your account, create an API key 
+#' that is allowed to access the TDM API (must accept their TDM policy). 
+#' Pass in as variable `key` to `sciencedirectopts`, or store your key under the name 
+#' `ELSEVIER_TDM_KEY` as an environment variable in `.Renviron`, and 
+#' we'll read it in for you. See [Startup] for help. For the institution access
+#' go to a browser and see if you have access to the journal(s) you want. 
+#' If you don't have access in a browser you probably won't have access via 
+#' this package. If you aren't physically at your institution you will likely 
+#' need to be on a VPN or similar so that your IP address is in the range 
+#' that the publisher is accepting for that institution.
 #'  
 #' **Microsoft**: Get a key by creating an Azure account at 
 #' <https://www.microsoft.com/cognitive-services/en-us/subscriptions>, 
@@ -159,5 +173,6 @@
 #' @docType package
 #' @author Scott Chamberlain <myrmecocystus@@gmail.com>
 #' @author Will Pearse
+#' @author Helge Knüttel
 #' @keywords package
 NULL
