@@ -464,7 +464,17 @@ sciencedirect_ft <- function(dois, type, progress = FALSE, ...) {
     )
     res <- tcat(http$head())
     if (inherits(res, c("error", "warning")) || !res$success()) {
-      mssg <- if (inherits(res, c("error", "warning"))) res$message else http_mssg(res)
+      if (inherits(res, c("error", "warning"))) {
+        mssg <- res$message 
+      } else {
+        # Elsevier gives an extra message in case of errors
+        if (is.null(res$response_headers$`x-els-status`)) {
+          elsevier_status <- ""
+        } else {
+          elsevier_status <- paste(":", res$response_headers$`x-els-status`)
+        }
+        mssg <- paste0(http_mssg(res), elsevier_status)
+      }
       return(ft_error(mssg, x))
     }
     
