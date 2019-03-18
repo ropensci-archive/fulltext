@@ -9,6 +9,11 @@ matrix:
       r: oldrel
     - os: linux
       r: release
+      before_cache: Rscript -e 'remotes::install_cran("pkgdown");remotes::install_github("ropenscilabs/rotemplate")'
+      deploy:
+        provider: script
+        script: Rscript -e 'pkgdown::deploy_site_github()'
+        skip_cleanup: true
       env: R_CODECOV=true
     - os: linux
       r: devel
