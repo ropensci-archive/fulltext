@@ -39,7 +39,7 @@
 #' downloaded/cached, normally we throw messages saying so, but if a 
 #' progress bar is requested, then the messages are suppressed to 
 #' not interrupt the progress bar.
-#' @param ... Further args passed on to [crul::HttpClient]
+#' @param ... curl options passed on to [crul::HttpClient], see examples below
 #' 
 #' @seealso [as.ft_data()]
 #'
@@ -370,6 +370,10 @@
 #' b <- ft_get(dois, from='plos', progress = FALSE)
 #' ## but if a progress bar is requested, then the messages are suppressed
 #' b <- ft_get(dois, from='plos', progress = TRUE)
+#' 
+#' # curl options
+#' ft_get("10.1371/journal.pcbi.1002487", from = "plos", verbose = TRUE)
+#' ft_get('10.3897/mycokeys.22.12528', from = "pensoft", verbose = TRUE)
 #' }
 
 ft_get <- function(x, from = NULL, type = "xml", try_unknown = TRUE, 

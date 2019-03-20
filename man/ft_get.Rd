@@ -55,7 +55,7 @@ downloaded/cached, normally we throw messages saying so, but if a
 progress bar is requested, then the messages are suppressed to
 not interrupt the progress bar.}
 
-\item{...}{Further args passed on to \link[crul:HttpClient]{crul::HttpClient}}
+\item{...}{curl options passed on to \link[crul:HttpClient]{crul::HttpClient}, see examples below}
 }
 \value{
 An object of class \code{ft_data} (of type \code{S3}) with slots for
@@ -412,6 +412,10 @@ b <- ft_get(dois, from='plos', progress = TRUE)
 b <- ft_get(dois, from='plos', progress = FALSE)
 ## but if a progress bar is requested, then the messages are suppressed
 b <- ft_get(dois, from='plos', progress = TRUE)
+
+# curl options
+ft_get("10.1371/journal.pcbi.1002487", from = "plos", verbose = TRUE)
+ft_get('10.3897/mycokeys.22.12528', from = "pensoft", verbose = TRUE)
 }
 }
 \seealso{

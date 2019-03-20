@@ -27,8 +27,8 @@
 
 .plos_fulltext <- function(doi, disk, ...){
   url <- .full_text_urls(doi)
-  cli <- crul::HttpClient$new(url = url)
-  out <- cli$get(disk = disk, ...)
+  cli <- crul::HttpClient$new(url = url, opts = list(...))
+  out <- cli$get(disk = disk)
   out$raise_for_status()
   if (!out$response_headers$`content-type` %in% c('application/xml', 
                                                   'text/xml')) {

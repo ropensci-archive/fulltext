@@ -23,7 +23,8 @@ ft_links_ls()
 
 \item{bmcopts}{BMC options, a named list. See \code{?bmc_search}}
 
-\item{...}{ignored right now}
+\item{...}{curl options passed on to \link[crul:HttpClient]{crul::HttpClient} (plos, bmc,
+crossref) or \code{httr::GET()} (entrez), see examples below}
 }
 \value{
 An object of class ft_links, with either a list or data.frame for
@@ -154,5 +155,9 @@ res$bmc
 res <- ft_links(c('10.7554/eLife.03032', '10.7717/peerj.228'))
 res$elife
 res$peerj
+
+
+# curl options
+ft_links("10.2458/v17i1.21696", from = "crossref", verbose = TRUE)
 }
 }

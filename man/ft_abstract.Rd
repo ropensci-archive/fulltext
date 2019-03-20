@@ -24,7 +24,8 @@ scopus, microsoft, or crossref}
 
 \item{crossrefopts}{Crossref options, a named list.}
 
-\item{...}{curl options passed on to \code{httr::GET()} or \link[crul:HttpClient]{crul::HttpClient}}
+\item{...}{curl options passed on to \link[crul:HttpClient]{crul::HttpClient}, see
+examples below}
 }
 \value{
 An object of class \code{ft_abstract}
@@ -44,7 +45,7 @@ ft_abstract_ls()
 \dontrun{
 # PLOS
 ## search
-(res <- ft_search(query = 'biology', from = 'plos', limit = 25, 
+(res <- ft_search(query = 'biology', from = 'plos', limit = 25,
    plosopts = list(fq = list('doc_type:full', '-article_type:correction',
                   '-article_type:viewpoints'))))
 ## get abstracts
@@ -56,21 +57,21 @@ out$plos
 opts <- list(key = Sys.getenv('ELSEVIER_SCOPUS_KEY'))
 
 ## search
-(res <- ft_search(query = 'biology', from = 'scopus', scopusopts = opts, 
+(res <- ft_search(query = 'biology', from = 'scopus', scopusopts = opts,
   limit = 25))
 ## get abstract
 dois <- na.omit(res$scopus$data$`prism:doi`)
-out <- ft_abstract(x = dois[1], from = "scopus", scopusopts = opts)
+out <- ft_abstract(x = dois[1:3], from = "scopus", scopusopts = opts)
 out
 out$scopus
 
 (out <- ft_abstract(x = dois[1:5], from = "scopus", scopusopts = opts))
 
 # use scopus Ids
-(res <- ft_search(query = 'biology', from = 'scopus', scopusopts = opts, 
+(res <- ft_search(query = 'biology', from = 'scopus', scopusopts = opts,
   limit = 50))
 ids <- fulltext:::strextract(res$scopus$data$`dc:identifier`, "[0-9]+")
-(out <- ft_abstract(x = ids[1:4], from = 'scopus', 
+(out <- ft_abstract(x = ids[1:4], from = 'scopus',
   scopusopts = list(
     key = Sys.getenv('ELSEVIER_SCOPUS_KEY'),
     id_type = "scopus_id"
@@ -79,7 +80,7 @@ ids <- fulltext:::strextract(res$scopus$data$`dc:identifier`, "[0-9]+")
 
 # Microsoft
 key <- Sys.getenv("MICROSOFT_ACADEMIC_KEY")
-(res <- ft_search("Y=[2010, 2012)", from = "microsoft", 
+(res <- ft_search("Y=[2010, 2012)", from = "microsoft",
   maopts = list(key = key)))
 ids <- res$ma$data$Id
 (out <- ft_abstract(x = ids, from = "microsoft",
@@ -91,10 +92,14 @@ out$ma
 cat(unlist(lapply(out$ma, "[[", "abstract")), sep = "\\n\\n")
 
 # Crossref
-(res <- ft_search("ecology", from = "crossref", 
+(res <- ft_search("ecology", from = "crossref",
   crossrefopts = list(filter = c(has_abstract = TRUE))))
 ids <- res$crossref$data$doi
 (out <- ft_abstract(x = ids, from = "crossref"))
 out$crossref
+
+# curl options
+ft_abstract("10.2458/v17i1.21696", from = "crossref", verbose = TRUE)
+ft_abstract("10.1371/journal.pcbi.1002487", from = "plos", verbose = TRUE)
 }
 }

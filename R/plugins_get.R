@@ -39,12 +39,15 @@ tcat <- function(...) {
   tryCatch(..., error = function(e) e, warning = function(w) w)
 }
 
+# asdfafd_env <- new.env()
+
 get_ft <- function(x, type, url, path, headers = list(), ...) {
   cli <- crul::HttpClient$new(
     url = url, 
-    opts = c(list(followlocation = 1, ...)),
+    opts = c(list(followlocation = 1), ...),
     headers = headers
   )
+  # asdfafd_env$obj <<- cli
   #cat(paste0("within get_ft: ", cli$url), sep="\n")
   res <- tryCatch(cli$get(disk = path), 
     error = function(e) e, 
@@ -185,7 +188,7 @@ plapply <- function(x, FUN, type = NULL, progress = FALSE, ...) {
   out <- vector(mode = "list", length = length(x))
   for (i in seq_along(x)) {
     if (progress) utils::setTxtProgressBar(pb, i)
-    out[[i]] <- FUN(x[[i]], type = type, progress = progress)
+    out[[i]] <- FUN(x[[i]], type = type, progress = progress, ...)
   }
   out <- stats::setNames(out, x)
   return(out)
@@ -259,15 +262,18 @@ entrez_ft <- function(ids, type = "xml", progress = FALSE, ...) {
   }
 
   if (length(res$ids) == 0) return(NULL)
-  ent_fun <- function(z, type, progress, ...) {
+  ent_fun <- function(z, progress, db, ...) {
     path <- make_key(z, 'xml')
     if (file.exists(path) && !cache_options_get()$overwrite) {
       if (!progress) message(paste0("path exists: ", path))
       return(ft_object(path, z, 'xml'))
     }
     # have to keep this httr usage
-    invisible(rentrez::entrez_fetch(db = db, id = z, 
-      rettype = "xml", config = httr_write_disk(path, cache_options_get()$overwrite)))
+    invisible(
+      rentrez::entrez_fetch(db = db, id = z, rettype = "xml", 
+        config = c(httr_write_disk(path, cache_options_get()$overwrite), ...)
+      )
+    )
     ft_object(path, z, 'xml')
   }
   plapply(res$ids, ent_fun, progress = progress, db = db, ...)
@@ -303,7 +309,7 @@ elife_ft <- function(dois, type, progress = FALSE, ...) {
     lk <- tcat(crminer::crm_links(x))
     lk <- tcat(Filter(function(x) grepl(paste0("\\.", type), x), lk)[[1]][[1]])
     if (inherits(lk, "error")) return(ft_error(lk$message, x))
-    get_ft(x, type, lk, path, ...)
+    get_ft(x, type, lk, path, list(), ...)
   }
   plapply(dois, elife_fun, type, progress, ...)
 }
@@ -399,13 +405,9 @@ biorxiv_ft <- function(dois, type = "pdf", progress = FALSE, ...) {
       if (!progress) message(paste0("path exists: ", path))
       return(ft_object(path, x, 'pdf'))
     }
-
-    res <- tcat(crul::HttpClient$new(url = paste0("https://doi.org/", x))$head())
-    if (inherits(res, c("error", "warning")) || !res$success()) {
-      mssg <- if (inherits(res, c("error", "warning"))) res$message else http_mssg(res)
-      return(ft_error(mssg, x))
-    }
-    url <- paste0(res$url, ".full.pdf")
+    lk <- tcat(ftdoi_get(sprintf("api/doi/%s/", x)))
+    if (inherits(lk, c("error", "warning"))) return(ft_error(lk$message, x))
+    url <- jsonlite::fromJSON(lk$parse("UTF-8"))$links$pdf
     get_ft(x, 'pdf', url, path, ...)
   }
   plapply(dois, biorxiv_fun, type, progress, ...)
@@ -449,7 +451,12 @@ wiley_ft <- function(dois, type = "pdf", progress = FALSE, ...) {
     res <- tcat(rcrossref::cr_works(dois = x))
     if (inherits(res, c("error", "warning"))) return(ft_error(res$message, x))
     res <- res$data$link[[1]]
-    url <- res[res$content.type == "unspecified", "URL"][[1]]
+    url <- res[res$content.type == "unspecified" & 
+      res$intended.application == "text-mining", "URL"][[1]]
+    if (length(url) == 0) {
+      url <- res[res$content.type == "unspecified" & 
+        res$intended.application == "similarity-checking", "URL"][[1]]
+    }
     if (is.null(url)) {
       mssg <- "has no link available"
       warning(x, " ", mssg, call. = FALSE)
@@ -459,7 +466,7 @@ wiley_ft <- function(dois, type = "pdf", progress = FALSE, ...) {
     # AFAIK AJB is the only journal with this problem where they used to be at
     # Highwire, then moved to Wiley - the highwire links do not work, all 
     # throw 403
-    if (grepl("highwire", url)) {
+    if (any(grepl("highwire", url))) {
       url <- paste0("https://onlinelibrary.wiley.com/doi/pdf/", x)
     }
     header <- list(
