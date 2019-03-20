@@ -161,6 +161,15 @@ assert <- function(x, y) {
   }
 }
 
+assert_from <- function(x, options) {
+  if (!is.null(x)) {
+    if (!x %in% options) {
+      stop("'", deparse(substitute(x)), "' not in set: ",
+          paste0(options, collapse = ", "), call. = FALSE)
+    }
+  }
+}
+
 strextract <- function(str, pattern) regmatches(str, regexpr(pattern, str))
 strtrim <- function(str) gsub("^\\s+|\\s+$", "", str)
 

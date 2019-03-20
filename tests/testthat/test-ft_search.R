@@ -96,3 +96,49 @@ test_that("ft_search fails well", {
   expect_error(biorxiv_search("asdfasdfasdfasfasfd"), 
                "no results found in Biorxiv")
 })
+
+test_that("ft_search curl options work", {
+  skip_on_cran()
+  
+  # plos
+  expect_error(
+    ft_search(query='ecology', from='plos', timeout_ms = 1),
+    "time")
+
+  # bmc
+  expect_error(
+    ft_search(query='ecology', from='bmc', timeout_ms = 1),
+    "time")
+
+  # crossref
+  expect_error(
+    ft_search(query='ecology', from='crossref', timeout_ms = 1),
+    "time")
+
+  # entrez - dont include, httr not in suggests
+  # expect_error(
+  #   ft_search(query='ecology', from='entrez', config = httr::timeout(0.1)),
+  #   "time")
+
+  # biorxiv
+  expect_error(
+    ft_search(query='ecology', from='biorxiv', timeout_ms = 1),
+    "time")
+
+  # europe pmc
+  expect_error(
+    ft_search(query='ecology', from='europmc', timeout_ms = 1),
+    "time")
+
+  # scopus
+  expect_error(
+    ft_search(query='ecology', from='scopus', timeout_ms = 1),
+    "time")
+
+  # microsoft academic
+  expect_error(
+    ft_search("Y='19'...", from='microsoft',
+      maopts = list(key = Sys.getenv("MICROSOFT_ACADEMIC_KEY")),
+      timeout_ms = 1),
+    "time")
+})

@@ -49,7 +49,9 @@ See \code{\link[=scopus_search]{scopus_search()}}}
 \item{maopts}{(list) Microsoft Academic options, a named list. See
 \code{\link[=microsoft_search]{microsoft_search()}}}
 
-\item{...}{ignored right now}
+\item{...}{curl options passed on to \link[crul:HttpClient]{crul::HttpClient}, see
+examples below. curl options are ignored for: arxiv (however, you
+can wrap your call to arxiv in \code{httr::with_config})}
 }
 \value{
 An object of class \code{ft}, and objects of class \code{ft_ind}
@@ -184,5 +186,16 @@ key <- Sys.getenv("MICROSOFT_ACADEMIC_KEY")
 (res <- ft_search("Y='19'...", from = "microsoft", maopts = list(key = key)))
 res$ma
 res$ma$data$DOI
+
+# curl options
+ft_search(query='ecology', from='plos', verbose = TRUE)
+ft_search(query='ecology', from='bmc', verbose = TRUE)
+ft_search(query='ecology', from='crossref', verbose = TRUE)
+ft_search(query='ecology', from='biorxiv', verbose = TRUE)
+ft_search(query='ecology', from='europmc', verbose = TRUE)
+ft_search(query='ecology', from='scopus', verbose = TRUE)
+ma_key <- Sys.getenv("MICROSOFT_ACADEMIC_KEY")
+ft_search("Y='19'...", from='microsoft', maopts = list(key = ma_key),
+  verbose = TRUE)
 }
 }
