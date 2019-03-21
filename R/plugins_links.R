@@ -11,7 +11,11 @@ plugin_links_entrez <- function(sources, ids, opts, ...){
     out <- lapply(res$linkouts, function(z) {
       rbind_fill(lapply(z, function(w) {
         w <- unclass(w)
-        df <- data.frame(w, stringsAsFactors = FALSE)
+        tmp <- Map(function(a) {
+          a[vapply(a, class, "") == "NULL"] <- NA_character_
+          a
+        }, w)
+        df <- data.frame(tmp, stringsAsFactors = FALSE)
         stats::setNames(df, tolower(names(df)))
       }))
     })
