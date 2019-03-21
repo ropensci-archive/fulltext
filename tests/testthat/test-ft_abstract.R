@@ -15,6 +15,7 @@ test_that("ft_abstract basic functionality works - PLOS", {
   expect_is(aa$plos[[1]], "list")
   expect_named(aa$plos[[1]], c('doi', 'abstract'))
   expect_is(aa$plos[[1]]$abstract, 'character')
+  expect_equal(length(vapply(aa$plos, "[[", "", "abstract")), 5)
 })
 
 # FIXME: just test stuff that don't need IP address for

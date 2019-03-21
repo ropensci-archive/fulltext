@@ -1,6 +1,6 @@
 ##### utils
 plos_abstract <- function(x, ...) {
-  rplos::searchplos(q = paste0("doi:", x), fl = "abstract", ...)$data[[1]]
+  rplos::searchplos(q = paste0("id:", x), fl = "abstract", ...)$data[[1]]
 }
 empty_abstracts <- function(fun) function(x) lapply(x, fun)
 empty_dois <- empty_abstracts(function(z) list(doi = z, abstract = ""))
