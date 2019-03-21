@@ -27,7 +27,11 @@
 #' @param entrezopts Entrez options, a named list. See [rentrez::entrez_search()] 
 #' and [entrez_fetch()]
 #' @param elifeopts eLife options, a named list. 
-#' @param elsevieropts Elsevier options, a named list. 
+#' @param elsevieropts Elsevier options, a named list. Use `retain_non_ft=TRUE`
+#' to retain files that do not actuall have full text but likely only have an 
+#' abstract. By default we set `retain_non_ft=FALSE` so that if we detect 
+#' that you only got an abstract back, we delete it and report an error 
+#' that you likely don't have access.
 #' @param crossrefopts Crossref options, a named list. 
 #' @param wileyopts Wiley options, a named list. 
 #' @param progress (logical) whether to show progress bar or not. default: `FALSE`. if 
@@ -306,7 +310,16 @@
 #'
 #' # elsevier, ugh
 #' ## set an environment variable like Sys.setenv(CROSSREF_TDM = "your key")
+#' ### an open access article
 #' ft_get(x = "10.1016/j.trac.2016.01.027", from = "elsevier")
+#' ### non open access article
+#' #### If you don't have access, by default you get abstract only, and we 
+#' ##### treat it as an error as we assume you want full text
+#' ft_get(x = "10.1016/j.trac.2016.05.027", from = "elsevier")
+#' #### If you want to retain whatever Elsevier gives you
+#' ##### set "retain_non_ft = TRUE"
+#' ft_get(x = "10.1016/j.trac.2016.05.027", from = "elsevier", 
+#'   elsevieropts = list(retain_non_ft = TRUE))
 #'
 #' # wiley, ugh
 #' ## Wiley has only PDF, so type parameter doesn't do anything

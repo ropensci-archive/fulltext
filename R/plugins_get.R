@@ -39,15 +39,20 @@ tcat <- function(...) {
   tryCatch(..., error = function(e) e, warning = function(w) w)
 }
 
-# asdfafd_env <- new.env()
+check_file <- function(w) {
+  if (!file.exists(w)) return(FALSE)
+  if (!grepl("\\.xml", w)) return(FALSE)
+  xml <- xml2::read_xml(w)
+  length(xml2::xml_find_all(xml, "//ce:*")) == 0
+}
 
 get_ft <- function(x, type, url, path, headers = list(), ...) {
+  els_retain_non_ft <- as.logical(Sys.getenv("ELSEVIER_RETAIN_NON_FT", FALSE))
   cli <- crul::HttpClient$new(
     url = url, 
     opts = c(list(followlocation = 1), ...),
     headers = headers
   )
-  # asdfafd_env$obj <<- cli
   #cat(paste0("within get_ft: ", cli$url), sep="\n")
   res <- tryCatch(cli$get(disk = path), 
     error = function(e) e, 
@@ -64,8 +69,14 @@ get_ft <- function(x, type, url, path, headers = list(), ...) {
         switch(type, 
           xml = xml2::read_xml(res$content), 
           pdf = pdftools::pdf_info(res$content)), 
-      error=function(e) e), "error") ## invalid file, somehow gave 200 code
+      error=function(e) e), "error") || ## invalid file, somehow gave 200 code
+    (
+      grepl("elsevier", res$url, ignore.case = TRUE) && 
+      check_file(path) &&
+      !els_retain_non_ft
+    ) ## got Elsevier abstract, but that's it
   ) {
+    is_elsevier <- (grepl("elsevier", res$url, ignore.case = TRUE) && check_file(path))
     unlink(path)
     mssg <- if (inherits(res, c("error", "warning"))) {
       # tryCatch message
@@ -77,6 +88,8 @@ get_ft <- function(x, type, url, path, headers = list(), ...) {
       # content type mismatch
       ct <- res$response_headers[['content-type']]
       sprintf("type was supposed to be `%s`, but was `%s`", type, ct)
+    } else if (is_elsevier) {
+      sprintf("elsevier: got abstract only; likely do not have access")
     } else {
       # if all else fails just give a HTTP status code message back
       http_mssg(res)
@@ -414,7 +427,8 @@ biorxiv_ft <- function(dois, type = "pdf", progress = FALSE, ...) {
 }
 
 # type: plain and xml
-elsevier_ft <- function(dois, type, progress = FALSE, ...) {
+elsevier_ft <- function(dois, type, progress = FALSE, retain_non_ft = FALSE, ...) {
+  assert(retain_non_ft, "logical")
   if (!type %in% c('plain', 'xml')) stop("'type' for Elsevier must be 'plain' or 'xml'")
   elsevier_fun <- function(x, type, progress, ...) {
     path <- make_key(x, type)
@@ -437,6 +451,8 @@ elsevier_ft <- function(dois, type, progress = FALSE, ...) {
     )
     get_ft(x, type, url, path, header, ...)
   }
+  Sys.setenv(ELSEVIER_RETAIN_NON_FT = retain_non_ft)
+  on.exit(Sys.unsetenv("ELSEVIER_RETAIN_NON_FT"), add = TRUE)
   plapply(dois, elsevier_fun, type, progress, ...)
 }
 
