@@ -40,10 +40,15 @@ tcat <- function(...) {
 }
 
 check_file <- function(w) {
-  if (!file.exists(w)) return(FALSE)
-  if (!grepl("\\.xml", w)) return(FALSE)
-  xml <- xml2::read_xml(w)
-  length(xml2::xml_find_all(xml, "//ce:*")) == 0
+  if (!file.exists(w)) return(FALSE) # doesn't exist
+  if (!grepl("\\.xml", w)) return(FALSE) # not an xml file
+  if (length(readLines(w)) == 0) return(FALSE) # nothing in the file
+  xml <- tryCatch(xml2::read_xml(w), error = function(e) e)
+  if (inherits(xml, c("error", "warning"))) return(FALSE) # unknown read errors
+  tried <- tryCatch(xml2::xml_find_all(xml, "//ce:*"), 
+    error = function(e) e, warning = function(w) w)
+  if (inherits(tried, c("error", "warning"))) return(FALSE) # xpath errors
+  length(tried) == 0
 }
 
 get_ft <- function(x, type, url, path, headers = list(), ...) {
@@ -60,6 +65,12 @@ get_ft <- function(x, type, url, path, headers = list(), ...) {
   #cat(class(res)[1L], sep = "\n")
 
   # if an error cleanup by deleting the file
+  ## do elsevier check first
+  elsevier_check <- (
+    grepl("elsevier", res$url, ignore.case = TRUE) && 
+    check_file(path) &&
+    !els_retain_non_ft
+  )
   if (
     inherits(res, c("error", "warning")) ||  ## an error from tryCatch
     res$status_code > 201 || ## HTTP status code indicates an error
@@ -70,13 +81,8 @@ get_ft <- function(x, type, url, path, headers = list(), ...) {
           xml = xml2::read_xml(res$content), 
           pdf = pdftools::pdf_info(res$content)), 
       error=function(e) e), "error") || ## invalid file, somehow gave 200 code
-    (
-      grepl("elsevier", res$url, ignore.case = TRUE) && 
-      check_file(path) &&
-      !els_retain_non_ft
-    ) ## got Elsevier abstract, but that's it
+    elsevier_check ## got Elsevier abstract, but that's it
   ) {
-    is_elsevier <- (grepl("elsevier", res$url, ignore.case = TRUE) && check_file(path))
     unlink(path)
     mssg <- if (inherits(res, c("error", "warning"))) {
       # tryCatch message
@@ -88,7 +94,7 @@ get_ft <- function(x, type, url, path, headers = list(), ...) {
       # content type mismatch
       ct <- res$response_headers[['content-type']]
       sprintf("type was supposed to be `%s`, but was `%s`", type, ct)
-    } else if (is_elsevier) {
+    } else if (elsevier_check) {
       sprintf("elsevier: got abstract only; likely do not have access")
     } else {
       # if all else fails just give a HTTP status code message back
