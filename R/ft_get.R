@@ -78,20 +78,20 @@
 #' - `errors`: data.frame of errors, with two columns for article id and error
 #'
 #' @details There are various ways to use `ft_get`:
-#' \itemize{
-#'  \item Pass in only DOIs - leave `from` parameter `NULL`. This route will
-#'  first query Crossref API for the publisher of the DOI, then we'll use the appropriate
-#'  method to fetch full text from the publisher. If a publisher is not found for the DOI,
-#'  then we'll throw back a message telling you a publisher was not found.
-#'  \item Pass in DOIs (or other pub IDs) and use the `from` parameter. This route
-#'  means we don't have to make an extra API call to Crossref (thus, this route is faster)
-#'  to determine the publisher for each DOI. We go straight to getting full text based on
-#'  the publisher.
-#'  \item Use [ft_search()] to search for articles. Then pass that output to
-#'  this function, which will use info in that object. This behaves the same as the previous
-#'  option in that each DOI has publisher info so we know how to get full text for each
-#'  DOI.
-#' }
+#' 
+#' - Pass in only DOIs - leave `from` parameter `NULL`. This route will
+#' first query Crossref API for the publisher of the DOI, then we'll use
+#' the appropriate method to fetch full text from the publisher. If a publisher
+#' is not found for the DOI, then we'll throw back a message telling you a
+#' publisher was not found.
+#' - Pass in DOIs (or other pub IDs) and use the `from` parameter. This route
+#' means we don't have to make an extra API call to Crossref (thus, this route
+#' is faster) to determine the publisher for each DOI. We go straight to
+#' getting full text based on the publisher.
+#' - Use [ft_search()] to search for articles. Then pass that output to
+#'  this function, which will use info in that object. This behaves the same
+#' as the previous option in that each DOI has publisher info so we know how to
+#' get full text for each DOI.
 #'
 #' Note that some publishers are available via Entrez, but often not recent 
 #' articles, where "recent" may be a few months to a year or so. In that case, 
