@@ -382,8 +382,8 @@
 #' }
 
 ft_get <- function(x, from = NULL, type = "xml", try_unknown = TRUE, 
-  plosopts = list(), bmcopts = list(), entrezopts = list(), 
-  elifeopts = list(), elsevieropts = list(), wileyopts = list(), 
+  plosopts = list(), bmcopts = list(), entrezopts = list(), elifeopts = list(),
+  elsevieropts = list(), sciencedirectopts = list(), wileyopts = list(), 
   crossrefopts = list(), progress = FALSE, ...) {
 
   UseMethod("ft_get")
@@ -392,7 +392,7 @@ ft_get <- function(x, from = NULL, type = "xml", try_unknown = TRUE,
 #' @export
 ft_get.default <- function(x, from=NULL, type = "xml", try_unknown = TRUE,
   plosopts=list(), bmcopts=list(), entrezopts=list(), elifeopts=list(),
-  elsevieropts = list(), wileyopts = list(), crossrefopts = list(), 
+  elsevieropts = list(), sciencedirectopts = list(), wileyopts = list(), crossrefopts = list(), 
   progress = FALSE, ...) {
 
   stop("no 'ft_get' method for ", class(x), call. = FALSE)
