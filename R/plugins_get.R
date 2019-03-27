@@ -456,11 +456,12 @@ sciencedirect_ft <- function(dois, type, progress = FALSE, ...) {
     )
     
     # We specifically ask for the full text. Thus, we get an error if not available
-    # instead of silently just an abstract.
+    # instead of silently just an abstract or some other metadata.
     url <- paste0("https://api.elsevier.com/content/article/doi/", x, "?view=FULL")
     http <- crul::HttpClient$new(
       url = url,
-      headers = header
+      headers = header,
+      opts = list(...)
     )
     res <- tcat(http$head())
     if (inherits(res, c("error", "warning")) || !res$success()) {
