@@ -7,7 +7,8 @@
 \usage{
 ft_get(x, from = NULL, type = "xml", try_unknown = TRUE,
   plosopts = list(), bmcopts = list(), entrezopts = list(),
-  elifeopts = list(), elsevieropts = list(), wileyopts = list(),
+  elifeopts = list(), elsevieropts = list(),
+  sciencedirectopts = list(), wileyopts = list(),
   crossrefopts = list(), progress = FALSE, ...)
 
 ft_get_ls()
@@ -19,10 +20,10 @@ returned from \code{\link[=ft_search]{ft_search()}}}
 
 \item{from}{Source to query. Optional.}
 
-\item{type}{(character) one of xml (default), pdf, or plain (Elsevier only).
+\item{type}{(character) one of xml (default), pdf, or plain (Elsevier and ScienceDirect only).
 We choose to go with xml as the default as it has structure that a machine
 can reason about, but you are of course free to try to get xml, pdf, or plain
-(in the case of Elsevier).}
+(in the case of Elsevier and ScienceDirect).}
 
 \item{try_unknown}{(logical) if publisher plugin not already known, we try to
 fetch full text link either from ftdoi.org or from Crossref. If not found at
@@ -40,6 +41,8 @@ and \code{\link[=entrez_fetch]{entrez_fetch()}}}
 \item{elifeopts}{eLife options, a named list.}
 
 \item{elsevieropts}{Elsevier options, a named list.}
+
+\item{sciencedirectopts}{Elsevier ScienceDirect options, a named list.}
 
 \item{wileyopts}{Wiley options, a named list.}
 
@@ -129,6 +132,9 @@ is through the Crossref TDM flow in which you need a Crossref TDM API
 key and your institution needs to have access to the exact journal you
 are trying to fetch a paper from. If your institution doesn't have
 access you may still get a result, but likely its only the abstract.
+Pretty much the same is true when fetching from ScienceDirect directly.
+You need to have an Elsevier API key
+that is valid for their TDM/article API.
 See \strong{Authentication} in \link{fulltext-package} for details.
 }
 
@@ -144,6 +150,7 @@ they only accept one type. By data source/publisher:
 \item arXiv: only pdf
 \item BiorXiv: only pdf
 \item Elsevier: xml and plain
+\item Elsevier ScienceDirect: xml and plain
 \item Wiley: only pdf
 \item Peerj: pdf and xml
 \item Informa: only pdf
@@ -349,6 +356,10 @@ ft_get(res)
 # elsevier, ugh
 ## set an environment variable like Sys.setenv(CROSSREF_TDM = "your key")
 ft_get(x = "10.1016/j.trac.2016.01.027", from = "elsevier")
+
+# sciencedirect
+## set an environment variable like Sys.setenv(ELSEVIER_TDM_KEY = "your key")
+ft_get(x = "10.1016/S0140-6736(13)62329-6", from = "sciencedirect")
 
 # wiley, ugh
 ## Wiley has only PDF, so type parameter doesn't do anything
