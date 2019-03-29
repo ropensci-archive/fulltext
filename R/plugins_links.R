@@ -2,15 +2,20 @@
 plugin_links_entrez <- function(sources, ids, opts, ...){
   if (any(grepl("entrez", sources))) {
     allids <- paste(paste0(ids, "[doi]"), collapse = " OR ")
-    tmp <- rentrez::entrez_search(db = "pubmed", term = allids)
+    tmp <- rentrez::entrez_search(db = "pubmed", term = allids, config = c(...))
     if (length(tmp$ids) == length(ids)) {
       message("Only ", length(tmp$ids), " found for Entrez, proceeding...")
     }
-    res <- rentrez::entrez_link(dbfrom = "pubmed", db = "", cmd = "llinks", id = tmp$ids)
+    res <- rentrez::entrez_link(dbfrom = "pubmed", db = "", cmd = "llinks",
+      id = tmp$ids, config = c(...))
     out <- lapply(res$linkouts, function(z) {
       rbind_fill(lapply(z, function(w) {
         w <- unclass(w)
-        df <- data.frame(w, stringsAsFactors = FALSE)
+        tmp <- Map(function(a) {
+          a[vapply(a, class, "") == "NULL"] <- NA_character_
+          a
+        }, w)
+        df <- data.frame(tmp, stringsAsFactors = FALSE)
         stats::setNames(df, tolower(names(df)))
       }))
     })
@@ -20,6 +25,7 @@ plugin_links_entrez <- function(sources, ids, opts, ...){
   }
 }
 
+# ellipsis ignored, no http requests
 plugin_links_plos <- function(sources, ids, opts, ...){
   if (any(grepl("plos", sources))) {
     ids <- grep("annotation", ids, value = TRUE, invert = TRUE)
@@ -36,27 +42,28 @@ plugin_links_crossref <- function(sources, ids, opts, ...){
     safe_crm_links <- function(x, type = "xml", ...) {
       tryCatch(crminer::crm_links(x, type, ...), error = function(e) NULL)
     }
-    tmp <- ft_compact(lapply(ids, safe_crm_links, type = "all"))
+    tmp <- ft_compact(lapply(ids, function(z) safe_crm_links(z, type = "all", ...)))
     out <- lapply(tmp, function(z) {
       rbind_fill(lapply(z, function(w) {
         data.frame(url = w[[1]], doi = attr(w, "doi"), type = attr(w, "type"),
-                   member = attr(w, "member") %||% "", 
+                   member = attr(w, "member") %||% "",
                    intended_application = attr(w, "intended_application") %||% "",
                    stringsAsFactors = FALSE)
       }))
     })
     out <- ft_compact(out)
     out <- stats::setNames(out, sapply(out, function(x) x$doi[1]))
-    list(found = length(ft_compact(out)), ids = names(out), 
+    list(found = length(ft_compact(out)), ids = names(out),
          data = out, opts = opts)
   } else {
     emptylist(opts)
   }
 }
 
+# ellipsis ignored, no http requests
 plugin_links_bmc <- function(sources, ids, opts, ...){
   if (any(grepl("bmc", sources))) {
-    tmp <- stats::setNames(bmc_link(ids), ids)
+    tmp <- stats::setNames(bmc_link(ids, ...), ids)
     # remove empty slots
     tmp <- Filter(function(z) !all(vapply(z, class, "") == "NULL"), tmp)
     list(found = length(tmp), ids = names(tmp), data = tmp, opts = opts)
@@ -65,11 +72,12 @@ plugin_links_bmc <- function(sources, ids, opts, ...){
   }
 }
 
-bmc_link <- function(dois) {
+bmc_link <- function(dois, ...) {
   xmlbase <- "http://%s/content/download/xml/%s.xml"
   pdfbase <- "http://%s/content/pdf/%s.pdf"
   lapply(dois, function(x) {
-    res2 <- crul::HttpClient$new(paste0("https://doi.org/", x))$head()
+    res2 <- crul::HttpClient$new(paste0("https://doi.org/", x),
+      opts = list(...))$head()
     if (!res2$success()) return(list(xml = NULL, pdf = NULL))
     url <- crul::url_parse(res2$response_headers_all[[1]]$location)$domain
     x <- strsplit(x, "/")[[1]][2]
@@ -153,7 +161,7 @@ copernicus_link <- function(dois) {
   stats::setNames(lapply(dois, function(x) {
     x <- strsplit(x, "/")[[1]][2]
     pcs <- strsplit(x, "-")[[1]]
-    list(xml = sprintf(xmlbase, pcs[2], pcs[3], pcs[4], x), 
+    list(xml = sprintf(xmlbase, pcs[2], pcs[3], pcs[4], x),
          pdf = sprintf(pdfbase, pcs[2], pcs[3], pcs[4], x))
   }), dois)
 }

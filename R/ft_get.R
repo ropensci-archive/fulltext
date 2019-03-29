@@ -27,7 +27,11 @@
 #' @param entrezopts Entrez options, a named list. See [rentrez::entrez_search()] 
 #' and [entrez_fetch()]
 #' @param elifeopts eLife options, a named list. 
-#' @param elsevieropts Elsevier options, a named list. 
+#' @param elsevieropts Elsevier options, a named list. Use `retain_non_ft=TRUE`
+#' to retain files that do not actuall have full text but likely only have an 
+#' abstract. By default we set `retain_non_ft=FALSE` so that if we detect 
+#' that you only got an abstract back, we delete it and report an error 
+#' that you likely don't have access.
 #' @param sciencedirectopts Elsevier ScienceDirect options, a named list. 
 #' @param crossrefopts Crossref options, a named list. 
 #' @param wileyopts Wiley options, a named list. 
@@ -40,7 +44,7 @@
 #' downloaded/cached, normally we throw messages saying so, but if a 
 #' progress bar is requested, then the messages are suppressed to 
 #' not interrupt the progress bar.
-#' @param ... Further args passed on to [crul::HttpClient]
+#' @param ... curl options passed on to [crul::HttpClient], see examples below
 #' 
 #' @seealso [as.ft_data()]
 #'
@@ -75,20 +79,20 @@
 #' - `errors`: data.frame of errors, with two columns for article id and error
 #'
 #' @details There are various ways to use `ft_get`:
-#' \itemize{
-#'  \item Pass in only DOIs - leave `from` parameter `NULL`. This route will
-#'  first query Crossref API for the publisher of the DOI, then we'll use the appropriate
-#'  method to fetch full text from the publisher. If a publisher is not found for the DOI,
-#'  then we'll throw back a message telling you a publisher was not found.
-#'  \item Pass in DOIs (or other pub IDs) and use the `from` parameter. This route
-#'  means we don't have to make an extra API call to Crossref (thus, this route is faster)
-#'  to determine the publisher for each DOI. We go straight to getting full text based on
-#'  the publisher.
-#'  \item Use [ft_search()] to search for articles. Then pass that output to
-#'  this function, which will use info in that object. This behaves the same as the previous
-#'  option in that each DOI has publisher info so we know how to get full text for each
-#'  DOI.
-#' }
+#' 
+#' - Pass in only DOIs - leave `from` parameter `NULL`. This route will
+#' first query Crossref API for the publisher of the DOI, then we'll use
+#' the appropriate method to fetch full text from the publisher. If a publisher
+#' is not found for the DOI, then we'll throw back a message telling you a
+#' publisher was not found.
+#' - Pass in DOIs (or other pub IDs) and use the `from` parameter. This route
+#' means we don't have to make an extra API call to Crossref (thus, this route
+#' is faster) to determine the publisher for each DOI. We go straight to
+#' getting full text based on the publisher.
+#' - Use [ft_search()] to search for articles. Then pass that output to
+#'  this function, which will use info in that object. This behaves the same
+#' as the previous option in that each DOI has publisher info so we know how to
+#' get full text for each DOI.
 #'
 #' Note that some publishers are available via Entrez, but often not recent 
 #' articles, where "recent" may be a few months to a year or so. In that case, 
@@ -311,7 +315,16 @@
 #'
 #' # elsevier, ugh
 #' ## set an environment variable like Sys.setenv(CROSSREF_TDM = "your key")
+#' ### an open access article
 #' ft_get(x = "10.1016/j.trac.2016.01.027", from = "elsevier")
+#' ### non open access article
+#' #### If you don't have access, by default you get abstract only, and we 
+#' ##### treat it as an error as we assume you want full text
+#' ft_get(x = "10.1016/j.trac.2016.05.027", from = "elsevier")
+#' #### If you want to retain whatever Elsevier gives you
+#' ##### set "retain_non_ft = TRUE"
+#' ft_get(x = "10.1016/j.trac.2016.05.027", from = "elsevier", 
+#'   elsevieropts = list(retain_non_ft = TRUE))
 #'
 #' # sciencedirect
 #' ## set an environment variable like Sys.setenv(ELSEVIER_TDM_KEY = "your key")
@@ -379,6 +392,10 @@
 #' b <- ft_get(dois, from='plos', progress = FALSE)
 #' ## but if a progress bar is requested, then the messages are suppressed
 #' b <- ft_get(dois, from='plos', progress = TRUE)
+#' 
+#' # curl options
+#' ft_get("10.1371/journal.pcbi.1002487", from = "plos", verbose = TRUE)
+#' ft_get('10.3897/mycokeys.22.12528', from = "pensoft", verbose = TRUE)
 #' }
 
 ft_get <- function(x, from = NULL, type = "xml", try_unknown = TRUE, 
@@ -576,8 +593,9 @@ print_backend <- function(x) {
 
 # get unknown from DOIs where from=NULL ------------------
 get_unknown <- function(x, type, try_unknown, progress = FALSE, ...) {
-  pubs <- Filter(function(z) !is.null(z) && length(z) > 0, 
-    stats::setNames(lapply(x, get_publisher), x))
+  # pubs <- Filter(function(z) !is.null(z) && length(z) > 0, 
+  #   stats::setNames(lapply(x, get_publisher, verbose = TRUE), x))
+  pubs <- get_publisher2(x)
   df <- data.frame(pub = unlist(unname(pubs)), doi = names(pubs), 
     name = vapply(pubs, attr, '', 'publisher', USE.NAMES=FALSE),
     issn = vapply(pubs, attr, '', 'issn', USE.NAMES=FALSE),
@@ -749,8 +767,8 @@ get_tm_name <- function(x) {
   )
 }
 
-get_publisher <- function(x) {
-  z <- tryCatch(rcrossref::cr_works(x), warning = function(w) w)
+get_publisher <- function(x, ...) {
+  z <- tryCatch(rcrossref::cr_works(x, ...), warning = function(w) w)
   # FIXME: at some point replace this with 
   #   mapping of Crossref member number to a unique short name
   if (inherits(z, "warning")) return(unknown_id(z$message))
@@ -758,7 +776,7 @@ get_publisher <- function(x) {
   names(z$data) <- tolower(names(z$data))
   issn <- z$data$issn
   if (length(z) == 0) {
-    return(unknown_id())
+    return(unknown_id(""))
   } else {
     id <- as.character(strextract(z$data$member, "[0-9]+"))
     attr(id, "publisher") <- pub %||% ""
@@ -766,6 +784,86 @@ get_publisher <- function(x) {
     attr(id, "error") <- ""
     return(id)
   }
+}
+
+fat_cat_search_one <- function(dois, fields, size) {
+  search_string <- make_doi_str(dois)
+  cn <- crul::HttpClient$new("https://search.fatcat.wiki")
+  query <- list(q = search_string, `_source` = paste0(fields, collapse = ","), 
+    size = size)
+  res <- cn$get("fatcat_release/_search", query = query)
+  res$raise_for_status()
+  out <- jsonlite::fromJSON(res$parse("UTF-8"), flatten = TRUE)$hits$hits
+  # if no data returned, make an empty data.frame
+  if (length(out) == 0) {
+    out <- data.frame(doi=NA_character_, container_issnl=NA_character_,
+      container_name=NA_character_, publisher=NA_character_,
+      stringsAsFactors=FALSE)
+  }
+  names(out) <- gsub("_source\\.", "", names(out))
+  df <- out[, fields]
+  df$message <- rep(NA_character_, NROW(df))
+  # add rows for DOIs not found
+  not_found <- dois[!dois %in% out$doi]
+  if (length(not_found) > 0) {
+    for (i in not_found) df <- rbind(df, c(i, "", "", "", "not found")) 
+  }
+  return(df)
+}
+
+make_doi_str <- function(x) {
+  sprintf("doi:(\"%s\")", paste0(x, collapse = "\" OR \""))
+}
+
+fat_cat_search <- function(dois, ...) {
+  flds <- c('doi', 'container_issnl', 'container_name', 'publisher')
+  
+  if (length(dois) > 50) {
+    chunk_size <- 50
+    ids_chunked <- split(dois, ceiling(seq_along(dois)/chunk_size))
+    out <- list()
+    for (i in seq_along(ids_chunked)) {
+      out[[i]] <- fat_cat_search_one(ids_chunked[[i]], flds,
+        length(ids_chunked[[i]]))
+    }
+    res <- rbl(out)
+  } else {
+    res <- fat_cat_search_one(dois, flds, length(dois))
+  }
+  if (NROW(res) == 0) return(list())
+  # apply(res[, c("doi", "container_issnl")], 1, as.list)
+  apply(res, 1, as.list)
+}
+
+get_publisher2 <- function(x, ...) {
+  # crossref member ids, and publisher names
+  pref <- strextract(x, "[0-9]{2}\\.[0-9]+")
+  names(x) <- pref
+  pref_uniq <- unique(pref)
+  mems <- lapply(pref_uniq, function(z) {
+    tmp <- rcrossref::cr_prefixes(z)$data
+    list(
+      prefix = z,
+      member = basename(tmp$member),
+      name = gsub("/|\\.|-|:|;|\\(|\\)|<|>|\\s", "_",  tolower(tmp$name)))
+  })
+  
+  # issn's
+  fc_res <- fat_cat_search(x)
+  
+  # put together
+  out <- list()
+  for (i in seq_along(x)) {
+    prefix <- strextract(x[i], "[0-9]{2}\\.[0-9]+")
+    mm <- mems[[which(prefix == vapply(mems, "[[", "", "prefix"))]]
+    id <- mm$member
+    fcm <- fc_res[[which(x[[i]] == vapply(fc_res, "[[", "", "doi"))]]
+    attr(id, "publisher") <- mm$name %||% ""
+    attr(id, "issn") <- fcm$container_issnl %||% ""
+    attr(id, "error") <- fcm$message
+    out[[ x[[i]] ]] <- id
+  }
+  return(out)
 }
 
 unknown_id <- function(mssg) {

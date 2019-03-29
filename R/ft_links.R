@@ -7,7 +7,8 @@
 #' @param bmcopts BMC options, a named list. See `?bmc_search`
 #' @param crossrefopts Crossref options, a named list. See `?cr_works`
 #' @param entrezopts Entrez options, a named list. See `?entrez_search`
-#' @param ... ignored right now
+#' @param ... curl options passed on to [crul::HttpClient] (plos, bmc,
+#' crossref) or `httr::GET()` (entrez), see examples below
 #'
 #' @return An object of class ft_links, with either a list or data.frame for 
 #' each DOI, with links for XML and PDF links (typically). 
@@ -133,6 +134,10 @@
 #' res <- ft_links(c('10.7554/eLife.03032', '10.7717/peerj.228'))
 #' res$elife
 #' res$peerj
+#' 
+#' 
+#' # curl options
+#' ft_links("10.2458/v17i1.21696", from = "crossref", verbose = TRUE)
 #' }
 ft_links <- function(x, from = NULL, plosopts = list(), crossrefopts = list(),
                     entrezopts = list(), bmcopts = list(), ...) {
@@ -147,11 +152,12 @@ ft_links.ft <- function(x, from = NULL,
                         bmcopts = list(),
                         ...) {
   
+  assert_from(from, c("plos", "bmc", "crossref", "entrez"))
   from <- names(x[sapply(x, function(v) !is.null(v$data))])
-  plos_out <- plugin_links_plos(from, x$plos$data$id, plosopts)
-  bmc_out <- plugin_links_bmc(from, x$bmc$data$doi, bmcopts)
-  cr_out <- plugin_links_crossref(from, x$crossref$data$doi, crossrefopts)
-  en_out <- plugin_links_entrez(from, x$entrez$data$doi, entrezopts)
+  plos_out <- plugin_links_plos(from, x$plos$data$id, plosopts, ...)
+  bmc_out <- plugin_links_bmc(from, x$bmc$data$doi, bmcopts, ...)
+  cr_out <- plugin_links_crossref(from, x$crossref$data$doi, crossrefopts, ...)
+  en_out <- plugin_links_entrez(from, x$entrez$data$doi, entrezopts, ...)
   res <- list(plos = plos_out, crossref = cr_out, entrez = en_out, bmc = bmc_out)
   structure(Filter(function(x) !is.null(x$data), res), class = "ft_links")
 }
@@ -164,11 +170,12 @@ ft_links.ft_ind <- function(x, from = NULL,
                         bmcopts = list(),
                         ...) {
   
+  assert_from(from, c("plos", "bmc", "crossref", "entrez"))
   from <- x$source
-  plos_out <- plugin_links_plos(from, x$data$id, plosopts)
-  bmc_out <- plugin_links_bmc(from, x$data$doi, bmcopts)
-  cr_out <- plugin_links_crossref(from, x$data$doi, crossrefopts)
-  en_out <- plugin_links_entrez(from, x$data$doi, entrezopts)
+  plos_out <- plugin_links_plos(from, x$data$id, plosopts, ...)
+  bmc_out <- plugin_links_bmc(from, x$data$doi, bmcopts, ...)
+  cr_out <- plugin_links_crossref(from, x$data$doi, crossrefopts, ...)
+  en_out <- plugin_links_entrez(from, x$data$doi, entrezopts, ...)
   res <- list(plos = plos_out, crossref = cr_out, entrez = en_out, bmc = bmc_out)
   structure(Filter(function(x) !is.null(x$data), res), class = "ft_links")
 }
@@ -181,11 +188,12 @@ ft_links.character <- function(x, from = NULL,
                         bmcopts = list(),
                         ...) {
   
+  assert_from(from, c("plos", "bmc", "crossref", "entrez"))
   if (!is.null(from)) {
-    plos_out <- plugin_links_plos(from, x, plosopts)
-    bmc_out <- plugin_links_bmc(from, x, bmcopts)
-    cr_out <- plugin_links_crossref(from, x, crossrefopts)
-    en_out <- plugin_links_entrez(from, x, entrezopts)
+    plos_out <- plugin_links_plos(from, x, plosopts, ...)
+    bmc_out <- plugin_links_bmc(from, x, bmcopts, ...)
+    cr_out <- plugin_links_crossref(from, x, crossrefopts, ...)
+    en_out <- plugin_links_entrez(from, x, entrezopts, ...)
     # arx_out <- plugin_links_arxiv(from, x, arxivopts)
     # bio_out <- plugin_links_biorxiv(from, x, biorxivopts)
     

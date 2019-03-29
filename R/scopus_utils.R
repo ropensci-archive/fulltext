@@ -114,7 +114,7 @@ scopus_search <- function(query = NULL, count = 25, start = 0, type = "search",
   args <- ft_compact(list(query = query, count = count, start = start, 
     facets = facets, view = view, date = date, sort = sort, 
     content = content, subj = subj))
-  scopus_get(file.path(scopus_base(), "search/scopus"), args, key, ...)
+  scopus_get(file.path(scopus_base(), "search/scopus"), args, key, list(), ...)
 }
 
 #' @export
@@ -135,7 +135,7 @@ scopus_search_loop <- function(query = NULL, count = 25, start = 0, type = "sear
   i <- 0
   while (!end) {
     i <- i + 1
-    res <- scopus_get(url, args, key, ...)
+    res <- scopus_get(url, args, key, list(), ...)
     tot <- as.numeric(res$`search-results`$`opensearch:totalResults`)
     if (tot < 1) {
       end <- TRUE
@@ -154,17 +154,17 @@ scopus_search_loop <- function(query = NULL, count = 25, start = 0, type = "sear
   list(results = rbl(out), facets = outfacet, found = tot)
 }
 
-scopus_abstract <- function(x, key, id_type = "doi", ...) {
+scopus_abstract <- function(x, key, id_type = "doi", curlopts = list()) {
   url <- file.path(scopus_base(), "abstract", id_type, x)
-  json <- scopus_get(url, list(), key, ...)
+  json <- scopus_get(url, list(), key, curlopts)
   json$`abstracts-retrieval-response`$coredata$`dc:description`
 }
 
-scopus_get <- function(url, args, key, ...) {
+scopus_get <- function(url, args, key, curlopts, ...) {
   cli <- crul::HttpClient$new(
     url = url, 
     headers = list(`X-ELS-APIKey` = key),
-    opts = list(...)
+    opts = c(curlopts, list(...))
   )
   res <- cli$get(query = args)
   scopus_error_handle(res)

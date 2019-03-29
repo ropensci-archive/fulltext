@@ -36,7 +36,9 @@
 #' See [scopus_search()]
 #' @param maopts (list) Microsoft Academic options, a named list. See 
 #' [microsoft_search()]
-#' @param ... ignored right now
+#' @param ... curl options passed on to [crul::HttpClient], see
+#' examples below. curl options are ignored for: arxiv (however, you
+#' can wrap your call to arxiv in `httr::with_config`)
 #' 
 #' @note for all `*opts` parameters, ee the function linked to in 
 #' the parameter definition for what you can pass to it. 
@@ -152,6 +154,17 @@
 #' (res <- ft_search("Y='19'...", from = "microsoft", maopts = list(key = key)))
 #' res$ma
 #' res$ma$data$DOI
+#' 
+#' # curl options
+#' ft_search(query='ecology', from='plos', verbose = TRUE)
+#' ft_search(query='ecology', from='bmc', verbose = TRUE)
+#' ft_search(query='ecology', from='crossref', verbose = TRUE)
+#' ft_search(query='ecology', from='biorxiv', verbose = TRUE)
+#' ft_search(query='ecology', from='europmc', verbose = TRUE)
+#' ft_search(query='ecology', from='scopus', verbose = TRUE)
+#' ma_key <- Sys.getenv("MICROSOFT_ACADEMIC_KEY")
+#' ft_search("Y='19'...", from='microsoft', maopts = list(key = ma_key),
+#'   verbose = TRUE)
 #' }
 
 ft_search <- function(query, from = 'plos', limit = 10, start = 0,
@@ -170,15 +183,15 @@ ft_search <- function(query, from = 'plos', limit = 10, start = 0,
                     c("plos", "bmc", "crossref", "entrez", "arxiv", 
                       "biorxiv", "europmc", "scopus", "microsoft"), 
                     several.ok = TRUE)
-  plos_out <- plugin_search_plos(from, query, limit, start, plosopts)
-  bmc_out <- plugin_search_bmc(from, query, limit, start, bmcopts)
-  cr_out <- plugin_search_crossref(from, query, limit, start, crossrefopts)
-  en_out <- plugin_search_entrez(from, query, limit, start, entrezopts)
-  arx_out <- plugin_search_arxiv(from, query, limit, start, arxivopts)
-  bio_out <- plugin_search_biorxivr(from, query, limit, start, biorxivopts)
-  euro_out <- plugin_search_europe_pmc(from, query, limit, start, euroopts)
-  scopus_out <- plugin_search_scopus(from, query, limit, start, scopusopts)
-  ma_out <- plugin_search_ma(from, query, limit, start, maopts)
+  plos_out <- plugin_search_plos(from, query, limit, start, plosopts, ...)
+  bmc_out <- plugin_search_bmc(from, query, limit, start, bmcopts, ...)
+  cr_out <- plugin_search_crossref(from, query, limit, start, crossrefopts, ...)
+  en_out <- plugin_search_entrez(from, query, limit, start, entrezopts, ...)
+  arx_out <- plugin_search_arxiv(from, query, limit, start, arxivopts, ...)
+  bio_out <- plugin_search_biorxivr(from, query, limit, start, biorxivopts, ...)
+  euro_out <- plugin_search_europe_pmc(from, query, limit, start, euroopts, ...)
+  scopus_out <- plugin_search_scopus(from, query, limit, start, scopusopts, ...)
+  ma_out <- plugin_search_ma(from, query, limit, start, maopts, ...)
 
   res <- list(plos = plos_out, bmc = bmc_out, crossref = cr_out,
               entrez = en_out, arxiv = arx_out, biorxiv = bio_out, 

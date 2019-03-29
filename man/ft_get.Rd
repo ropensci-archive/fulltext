@@ -40,7 +40,11 @@ and \code{\link[=entrez_fetch]{entrez_fetch()}}}
 
 \item{elifeopts}{eLife options, a named list.}
 
-\item{elsevieropts}{Elsevier options, a named list.}
+\item{elsevieropts}{Elsevier options, a named list. Use \code{retain_non_ft=TRUE}
+to retain files that do not actuall have full text but likely only have an
+abstract. By default we set \code{retain_non_ft=FALSE} so that if we detect
+that you only got an abstract back, we delete it and report an error
+that you likely don't have access.}
 
 \item{sciencedirectopts}{Elsevier ScienceDirect options, a named list.}
 
@@ -58,7 +62,7 @@ downloaded/cached, normally we throw messages saying so, but if a
 progress bar is requested, then the messages are suppressed to
 not interrupt the progress bar.}
 
-\item{...}{Further args passed on to \link[crul:HttpClient]{crul::HttpClient}}
+\item{...}{curl options passed on to \link[crul:HttpClient]{crul::HttpClient}, see examples below}
 }
 \value{
 An object of class \code{ft_data} (of type \code{S3}) with slots for
@@ -103,17 +107,18 @@ disk. See \code{Details} for help on how to use this function.
 There are various ways to use \code{ft_get}:
 \itemize{
 \item Pass in only DOIs - leave \code{from} parameter \code{NULL}. This route will
-first query Crossref API for the publisher of the DOI, then we'll use the appropriate
-method to fetch full text from the publisher. If a publisher is not found for the DOI,
-then we'll throw back a message telling you a publisher was not found.
+first query Crossref API for the publisher of the DOI, then we'll use
+the appropriate method to fetch full text from the publisher. If a publisher
+is not found for the DOI, then we'll throw back a message telling you a
+publisher was not found.
 \item Pass in DOIs (or other pub IDs) and use the \code{from} parameter. This route
-means we don't have to make an extra API call to Crossref (thus, this route is faster)
-to determine the publisher for each DOI. We go straight to getting full text based on
-the publisher.
+means we don't have to make an extra API call to Crossref (thus, this route
+is faster) to determine the publisher for each DOI. We go straight to
+getting full text based on the publisher.
 \item Use \code{\link[=ft_search]{ft_search()}} to search for articles. Then pass that output to
-this function, which will use info in that object. This behaves the same as the previous
-option in that each DOI has publisher info so we know how to get full text for each
-DOI.
+this function, which will use info in that object. This behaves the same
+as the previous option in that each DOI has publisher info so we know how to
+get full text for each DOI.
 }
 
 Note that some publishers are available via Entrez, but often not recent
@@ -355,7 +360,16 @@ ft_get(res)
 
 # elsevier, ugh
 ## set an environment variable like Sys.setenv(CROSSREF_TDM = "your key")
+### an open access article
 ft_get(x = "10.1016/j.trac.2016.01.027", from = "elsevier")
+### non open access article
+#### If you don't have access, by default you get abstract only, and we 
+##### treat it as an error as we assume you want full text
+ft_get(x = "10.1016/j.trac.2016.05.027", from = "elsevier")
+#### If you want to retain whatever Elsevier gives you
+##### set "retain_non_ft = TRUE"
+ft_get(x = "10.1016/j.trac.2016.05.027", from = "elsevier", 
+  elsevieropts = list(retain_non_ft = TRUE))
 
 # sciencedirect
 ## set an environment variable like Sys.setenv(ELSEVIER_TDM_KEY = "your key")
@@ -423,6 +437,10 @@ b <- ft_get(dois, from='plos', progress = TRUE)
 b <- ft_get(dois, from='plos', progress = FALSE)
 ## but if a progress bar is requested, then the messages are suppressed
 b <- ft_get(dois, from='plos', progress = TRUE)
+
+# curl options
+ft_get("10.1371/journal.pcbi.1002487", from = "plos", verbose = TRUE)
+ft_get('10.3897/mycokeys.22.12528', from = "pensoft", verbose = TRUE)
 }
 }
 \seealso{

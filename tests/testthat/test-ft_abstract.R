@@ -15,6 +15,7 @@ test_that("ft_abstract basic functionality works - PLOS", {
   expect_is(aa$plos[[1]], "list")
   expect_named(aa$plos[[1]], c('doi', 'abstract'))
   expect_is(aa$plos[[1]]$abstract, 'character')
+  expect_equal(length(vapply(aa$plos, "[[", "", "abstract")), 5)
 })
 
 # FIXME: just test stuff that don't need IP address for
@@ -82,4 +83,30 @@ test_that("ft_abstract fails well", {
   expect_error(ft_abstract(), "\"x\" is missing")
   expect_error(ft_abstract("Asdfadfd", from = "Asdfadfs"), 
                "'arg' should be one of")
+})
+
+test_that("ft_abstract curl options work", {
+  skip_on_cran()
+  
+  # plos
+  expect_error(
+    ft_abstract("10.1371/journal.pone.0034368", from = "plos", timeout_ms=1),
+    "time")
+
+  # scopus
+  expect_error(
+    ft_abstract("10.1007/978-3-030-13273-6_1", from = "scopus", timeout_ms = 1,
+      scopusopts = list(key = Sys.getenv('ELSEVIER_SCOPUS_KEY'))),
+    "time")
+
+  # microsoft
+  expect_error(
+    ft_abstract(2153635508, from = "microsoft", timeout_ms = 1,
+      maopts = list(key = Sys.getenv('MICROSOFT_ACADEMIC_KEY'))),
+    "time")
+
+  # crossref
+  expect_error(
+    ft_abstract("10.5194/we-13-95-2013", from = "crossref", timeout_ms = 1),
+    "time")
 })

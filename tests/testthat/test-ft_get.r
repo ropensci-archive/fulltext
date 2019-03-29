@@ -1,6 +1,6 @@
 context("ft_get")
 
-# delete all files before testing 
+# delete all files before testing
 ftxt_cache$delete_all()
 
 test_that("ft_get basic functionality works ...", {
@@ -65,15 +65,27 @@ test_that("ft_get works for all data providers", {
   expect_is(oo, "ft_data")
 })
 
+# THIS IS NO LONGER THE CASE, BELOW TEST IN ITS PLACE NOW
 # this DOI is for an OA article, but the URL we get from Crossref doesn't work
-# this one fails on the first try as it uses 
-# https://bsapubs.onlinelibrary.wiley.com/doi/full/10.3732/ajb.1700190 
-# on the first try, then runs again with 
+# this one fails on the first try as it uses
+# https://bsapubs.onlinelibrary.wiley.com/doi/full/10.3732/ajb.1700190
+# on the first try, then runs again with
 # https://bsapubs.onlinelibrary.wiley.com/doi/pdf/10.3732/ajb.1700190
-test_that("ft_get: wiley problems", {
+# test_that("ft_get: wiley problems", {
+#   skip_on_cran()
+
+#   aa <- sw(sm(ft_get(x = '10.3732/AJB.1700190', from = "wiley")))
+
+#   expect_is(aa, "ft_data")
+#   expect_is(aa$wiley, "list")
+#   expect_equal(aa$wiley$errors$error, NA_character_)
+# })
+
+test_that("ft_get: ajb via wiley", {
   skip_on_cran()
 
-  aa <- sm(ft_get(x = '10.3732/AJB.1700190'))
+  # american j botany eg
+  aa <- sw(sm(ft_get(x = '10.3732/AJB.1700190', from = "wiley")))
 
   expect_is(aa, "ft_data")
   expect_is(aa$wiley, "list")
@@ -85,7 +97,7 @@ test_that("ft_get fails well", {
 
   expect_error(ft_get('0086169', from = 'plos'), "These are probably not DOIs")
   expect_error(ft_get('0086169', from = 'stuff'), "'arg' should be one")
-  expect_error(ft_get('0086169', progress = 5), 
+  expect_error(ft_get('0086169', progress = 5),
     "progress must be of class logical")
 })
 
@@ -96,12 +108,14 @@ test_that("ft_get errors slot", {
     ft_get(c('10.7554/eLife.03032', '10.7554/eLife.aaaa', '10.3389/fphar.2024.00109'))
   )
 
-  expect_named(res, c('elife', 'unknown'))
+  expect_named(res, c('frontiersin', 'elife'))
 
   expect_is(res$elife$errors, "data.frame")
-  expect_true(is.na(res$elife$errors$error))
-  expect_is(res$unknown$errors, "data.frame")
-  expect_match(res$unknown$errors$error, "Resource not found")
+  expect_true(is.na(res$elife$errors$error[1]))
+  expect_match(res$elife$errors$error[2], "out of bounds")
+
+  expect_is(res$frontiersin$errors, "data.frame")
+  expect_match(res$frontiersin$errors$error, "was supposed to be")
 
   expect_error(ft_get('0086169', from = 'plos'), "These are probably not DOIs")
   expect_error(ft_get('0086169', from = 'stuff'), "'arg' should be one")
@@ -158,3 +172,51 @@ test_that("ft_get: elife", {
     "==========="
   )
 })
+
+# cleanup before running curl options checks
+ftxt_cache$delete_all()
+
+test_that("ft_get curl options work", {
+  skip_on_cran()
+
+  # plos
+  out_plos <- sw(ft_get("10.1371/journal.pone.0001248", from = "plos",
+      timeout_ms = 1))
+  expect_match(out_plos$plos$errors$error, "was not found")
+
+  # entrez - NOT QUITE WORKING YET
+  # out_entrez <- ft_get('10.1186/2193-1801-3-7', from = "entrez",
+  #   config = httr::timeout(0.1))
+  # expect_is(out_entrez$plos$errors$error, "was not found")
+
+  # elife
+  out_elife <- sw(ft_get('10.7554/eLife.03032', from = "elife",
+    timeout_ms = 1))
+  expect_match(out_elife$elife$errors$error, "time")
+
+  # pensoft
+  out_pensoft <- sw(ft_get('10.3897/mycokeys.22.12528', from = "pensoft",
+    timeout_ms = 1))
+  expect_match(out_pensoft$pensoft$errors$error, "time")
+
+  # arxiv
+  out_arxiv <- sw(ft_get('cond-mat/9309029', from = "arxiv", timeout_ms = 1))
+  expect_match(out_arxiv$arxiv$errors$error, "time")
+
+  # biorxiv
+  out_biorxiv <- sw(ft_get('10.1101/012476', from = "biorxiv", timeout_ms = 1))
+  expect_match(out_biorxiv$biorxiv$errors$error, "time")
+
+  # elsevier
+  out_elsevier <- sw(ft_get("10.1016/j.trac.2016.01.027", from = "elsevier",
+    timeout_ms = 1))
+  expect_match(out_elsevier$elsevier$errors$error, "time")
+
+  # wiley
+  out_wiley <- sw(ft_get("10.1006/asle.2001.0035", from = "wiley",
+    timeout_ms = 1))
+  expect_match(out_wiley$wiley$errors$error, "time")
+})
+
+# cleanup - delete all files
+ftxt_cache$delete_all()

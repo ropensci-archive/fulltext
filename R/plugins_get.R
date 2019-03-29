@@ -39,10 +39,23 @@ tcat <- function(...) {
   tryCatch(..., error = function(e) e, warning = function(w) w)
 }
 
+check_file <- function(w) {
+  if (!file.exists(w)) return(FALSE) # doesn't exist
+  if (!grepl("\\.xml", w)) return(FALSE) # not an xml file
+  if (length(readLines(w)) == 0) return(FALSE) # nothing in the file
+  xml <- tryCatch(xml2::read_xml(w), error = function(e) e)
+  if (inherits(xml, c("error", "warning"))) return(FALSE) # unknown read errors
+  tried <- tryCatch(xml2::xml_find_all(xml, "//ce:*"), 
+    error = function(e) e, warning = function(w) w)
+  if (inherits(tried, c("error", "warning"))) return(FALSE) # xpath errors
+  length(tried) == 0
+}
+
 get_ft <- function(x, type, url, path, headers = list(), ...) {
+  els_retain_non_ft <- as.logical(Sys.getenv("ELSEVIER_RETAIN_NON_FT", FALSE))
   cli <- crul::HttpClient$new(
     url = url, 
-    opts = c(list(followlocation = 1, ...)),
+    opts = c(list(followlocation = 1), ...),
     headers = headers
   )
   #cat(paste0("within get_ft: ", cli$url), sep="\n")
@@ -52,6 +65,12 @@ get_ft <- function(x, type, url, path, headers = list(), ...) {
   #cat(class(res)[1L], sep = "\n")
 
   # if an error cleanup by deleting the file
+  ## do elsevier check first
+  elsevier_check <- (
+    grepl("elsevier", res$url, ignore.case = TRUE) && 
+    check_file(path) &&
+    !els_retain_non_ft
+  )
   if (
     inherits(res, c("error", "warning")) ||  ## an error from tryCatch
     res$status_code > 201 || ## HTTP status code indicates an error
@@ -61,7 +80,8 @@ get_ft <- function(x, type, url, path, headers = list(), ...) {
         switch(type, 
           xml = xml2::read_xml(res$content), 
           pdf = pdftools::pdf_info(res$content)), 
-      error=function(e) e), "error") ## invalid file, somehow gave 200 code
+      error=function(e) e), "error") || ## invalid file, somehow gave 200 code
+    elsevier_check ## got Elsevier abstract, but that's it
   ) {
     unlink(path)
     mssg <- if (inherits(res, c("error", "warning"))) {
@@ -74,6 +94,8 @@ get_ft <- function(x, type, url, path, headers = list(), ...) {
       # content type mismatch
       ct <- res$response_headers[['content-type']]
       sprintf("type was supposed to be `%s`, but was `%s`", type, ct)
+    } else if (elsevier_check) {
+      sprintf("elsevier: got abstract only; likely do not have access")
     } else {
       # if all else fails just give a HTTP status code message back
       http_mssg(res)
@@ -186,7 +208,7 @@ plapply <- function(x, FUN, type = NULL, progress = FALSE, ...) {
   out <- vector(mode = "list", length = length(x))
   for (i in seq_along(x)) {
     if (progress) utils::setTxtProgressBar(pb, i)
-    out[[i]] <- FUN(x[[i]], type = type, progress = progress)
+    out[[i]] <- FUN(x[[i]], type = type, progress = progress, ...)
   }
   out <- stats::setNames(out, x)
   return(out)
@@ -260,15 +282,18 @@ entrez_ft <- function(ids, type = "xml", progress = FALSE, ...) {
   }
 
   if (length(res$ids) == 0) return(NULL)
-  ent_fun <- function(z, type, progress, ...) {
+  ent_fun <- function(z, progress, db, ...) {
     path <- make_key(z, 'xml')
     if (file.exists(path) && !cache_options_get()$overwrite) {
       if (!progress) message(paste0("path exists: ", path))
       return(ft_object(path, z, 'xml'))
     }
     # have to keep this httr usage
-    invisible(rentrez::entrez_fetch(db = db, id = z, 
-      rettype = "xml", config = httr_write_disk(path, cache_options_get()$overwrite)))
+    invisible(
+      rentrez::entrez_fetch(db = db, id = z, rettype = "xml", 
+        config = c(httr_write_disk(path, cache_options_get()$overwrite), ...)
+      )
+    )
     ft_object(path, z, 'xml')
   }
   plapply(res$ids, ent_fun, progress = progress, db = db, ...)
@@ -304,7 +329,7 @@ elife_ft <- function(dois, type, progress = FALSE, ...) {
     lk <- tcat(crminer::crm_links(x))
     lk <- tcat(Filter(function(x) grepl(paste0("\\.", type), x), lk)[[1]][[1]])
     if (inherits(lk, "error")) return(ft_error(lk$message, x))
-    get_ft(x, type, lk, path, ...)
+    get_ft(x, type, lk, path, list(), ...)
   }
   plapply(dois, elife_fun, type, progress, ...)
 }
@@ -400,20 +425,17 @@ biorxiv_ft <- function(dois, type = "pdf", progress = FALSE, ...) {
       if (!progress) message(paste0("path exists: ", path))
       return(ft_object(path, x, 'pdf'))
     }
-
-    res <- tcat(crul::HttpClient$new(url = paste0("https://doi.org/", x))$head())
-    if (inherits(res, c("error", "warning")) || !res$success()) {
-      mssg <- if (inherits(res, c("error", "warning"))) res$message else http_mssg(res)
-      return(ft_error(mssg, x))
-    }
-    url <- paste0(res$url, ".full.pdf")
+    lk <- tcat(ftdoi_get(sprintf("api/doi/%s/", x)))
+    if (inherits(lk, c("error", "warning"))) return(ft_error(lk$message, x))
+    url <- jsonlite::fromJSON(lk$parse("UTF-8"))$links$pdf
     get_ft(x, 'pdf', url, path, ...)
   }
   plapply(dois, biorxiv_fun, type, progress, ...)
 }
 
 # type: plain and xml
-elsevier_ft <- function(dois, type, progress = FALSE, ...) {
+elsevier_ft <- function(dois, type, progress = FALSE, retain_non_ft = FALSE, ...) {
+  assert(retain_non_ft, "logical")
   if (!type %in% c('plain', 'xml')) stop("'type' for Elsevier must be 'plain' or 'xml'")
   elsevier_fun <- function(x, type, progress, ...) {
     path <- make_key(x, type)
@@ -436,6 +458,8 @@ elsevier_ft <- function(dois, type, progress = FALSE, ...) {
     )
     get_ft(x, type, url, path, header, ...)
   }
+  Sys.setenv(ELSEVIER_RETAIN_NON_FT = retain_non_ft)
+  on.exit(Sys.unsetenv("ELSEVIER_RETAIN_NON_FT"), add = TRUE)
   plapply(dois, elsevier_fun, type, progress, ...)
 }
 
@@ -495,7 +519,12 @@ wiley_ft <- function(dois, type = "pdf", progress = FALSE, ...) {
     res <- tcat(rcrossref::cr_works(dois = x))
     if (inherits(res, c("error", "warning"))) return(ft_error(res$message, x))
     res <- res$data$link[[1]]
-    url <- res[res$content.type == "unspecified", "URL"][[1]]
+    url <- res[res$content.type == "unspecified" & 
+      res$intended.application == "text-mining", "URL"][[1]]
+    if (length(url) == 0) {
+      url <- res[res$content.type == "unspecified" & 
+        res$intended.application == "similarity-checking", "URL"][[1]]
+    }
     if (is.null(url)) {
       mssg <- "has no link available"
       warning(x, " ", mssg, call. = FALSE)
@@ -505,7 +534,7 @@ wiley_ft <- function(dois, type = "pdf", progress = FALSE, ...) {
     # AFAIK AJB is the only journal with this problem where they used to be at
     # Highwire, then moved to Wiley - the highwire links do not work, all 
     # throw 403
-    if (grepl("highwire", url)) {
+    if (any(grepl("highwire", url))) {
       url <- paste0("https://onlinelibrary.wiley.com/doi/pdf/", x)
     }
     header <- list(
