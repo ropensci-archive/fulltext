@@ -13,10 +13,10 @@
 #' character strings, or a character vector, OR an object of class `ft`, as
 #' returned from [ft_search()]
 #' @param from Source to query. Optional.
-#' @param type (character) one of xml (default), pdf, or plain (Elsevier only).
+#' @param type (character) one of xml (default), pdf, or plain (Elsevier and ScienceDirect only).
 #' We choose to go with xml as the default as it has structure that a machine 
 #' can reason about, but you are of course free to try to get xml, pdf, or plain
-#' (in the case of Elsevier).
+#' (in the case of Elsevier and ScienceDirect).
 #' @param try_unknown (logical) if publisher plugin not already known, we try to 
 #' fetch full text link either from ftdoi.org or from Crossref. If not found at
 #' ftdoi.org or at Crossref we skip with a warning. If found with ftdoi.org or 
@@ -32,6 +32,7 @@
 #' abstract. By default we set `retain_non_ft=FALSE` so that if we detect 
 #' that you only got an abstract back, we delete it and report an error 
 #' that you likely don't have access.
+#' @param sciencedirectopts Elsevier ScienceDirect options, a named list. 
 #' @param crossrefopts Crossref options, a named list. 
 #' @param wileyopts Wiley options, a named list. 
 #' @param progress (logical) whether to show progress bar or not. default: `FALSE`. if 
@@ -108,6 +109,9 @@
 #' key and your institution needs to have access to the exact journal you 
 #' are trying to fetch a paper from. If your institution doesn't have 
 #' access you may still get a result, but likely its only the abstract.
+#' Pretty much the same is true when fetching from ScienceDirect directly. 
+#' You need to have an Elsevier API key  
+#' that is valid for their TDM/article API.
 #' See **Authentication** in [fulltext-package] for details.
 #' 
 #' @section Notes on the `type` parameter:
@@ -121,6 +125,7 @@
 #' - arXiv: only pdf
 #' - BiorXiv: only pdf
 #' - Elsevier: xml and plain
+#' - Elsevier ScienceDirect: xml and plain
 #' - Wiley: only pdf
 #' - Peerj: pdf and xml
 #' - Informa: only pdf
@@ -321,6 +326,10 @@
 #' ft_get(x = "10.1016/j.trac.2016.05.027", from = "elsevier", 
 #'   elsevieropts = list(retain_non_ft = TRUE))
 #'
+#' # sciencedirect
+#' ## set an environment variable like Sys.setenv(ELSEVIER_TDM_KEY = "your key")
+#' ft_get(x = "10.1016/S0140-6736(13)62329-6", from = "sciencedirect")
+#'
 #' # wiley, ugh
 #' ## Wiley has only PDF, so type parameter doesn't do anything
 #' ft_get(x = "10.1006/asle.2001.0035", from = "wiley")
@@ -390,8 +399,8 @@
 #' }
 
 ft_get <- function(x, from = NULL, type = "xml", try_unknown = TRUE, 
-  plosopts = list(), bmcopts = list(), entrezopts = list(), 
-  elifeopts = list(), elsevieropts = list(), wileyopts = list(), 
+  plosopts = list(), bmcopts = list(), entrezopts = list(), elifeopts = list(),
+  elsevieropts = list(), sciencedirectopts = list(), wileyopts = list(), 
   crossrefopts = list(), progress = FALSE, ...) {
 
   UseMethod("ft_get")
@@ -400,7 +409,7 @@ ft_get <- function(x, from = NULL, type = "xml", try_unknown = TRUE,
 #' @export
 ft_get.default <- function(x, from=NULL, type = "xml", try_unknown = TRUE,
   plosopts=list(), bmcopts=list(), entrezopts=list(), elifeopts=list(),
-  elsevieropts = list(), wileyopts = list(), crossrefopts = list(), 
+  elsevieropts = list(), sciencedirectopts = list(), wileyopts = list(), crossrefopts = list(), 
   progress = FALSE, ...) {
 
   stop("no 'ft_get' method for ", class(x), call. = FALSE)
@@ -409,7 +418,7 @@ ft_get.default <- function(x, from=NULL, type = "xml", try_unknown = TRUE,
 #' @export
 ft_get.character <- function(x, from=NULL, type = "xml", try_unknown = TRUE, 
   plosopts=list(), bmcopts = list(), entrezopts=list(), elifeopts=list(),
-  elsevieropts = list(), wileyopts = list(), crossrefopts = list(), 
+  elsevieropts = list(), sciencedirectopts = list(), wileyopts = list(), crossrefopts = list(), 
   progress = FALSE, ...) {
 
   check_type(type)
@@ -417,7 +426,7 @@ ft_get.character <- function(x, from=NULL, type = "xml", try_unknown = TRUE,
   check_cache()
   if (!is.null(from)) {
     from <- match.arg(from, c("plos", "entrez", "elife", "pensoft",
-      "arxiv", "biorxiv", "elsevier", "wiley"))
+      "arxiv", "biorxiv", "elsevier", "sciencedirect", "wiley"))
     plos_out <- plugin_get_plos(from, x, plosopts, type, 
       progress = progress, ...)
     entrez_out <- plugin_get_entrez(from, x, entrezopts, type, 
@@ -432,11 +441,14 @@ ft_get.character <- function(x, from=NULL, type = "xml", try_unknown = TRUE,
       progress = progress, ...)
     els_out <- plugin_get_elsevier(from, x, elsevieropts, type, 
       progress = progress, ...)
+    sciencedirect_out <- plugin_get_sciencedirect(from, x, sciencedirectopts, type, 
+      progress = progress, ...)
     wiley_out <- plugin_get_wiley(from, x, wileyopts, type, 
       progress = progress, ...)
     structure(list(plos = plos_out, entrez = entrez_out, elife = elife_out,
                    pensoft = pensoft_out, arxiv = arxiv_out,
                    biorxiv = biorxiv_out, elsevier = els_out, 
+                   sciencedirect = sciencedirect_out,
                    wiley = wiley_out), class = "ft_data")
   } else {
     get_unknown(x, type, try_unknown, progress, ...)
@@ -446,7 +458,7 @@ ft_get.character <- function(x, from=NULL, type = "xml", try_unknown = TRUE,
 #' @export
 ft_get.list <- function(x, from=NULL, type = "xml", try_unknown = TRUE, 
   plosopts=list(), bmcopts = list(), entrezopts=list(), elifeopts=list(), 
-  elsevieropts = list(), wileyopts = list(), crossrefopts = list(), 
+  elsevieropts = list(), sciencedirectopts = list(), wileyopts = list(), crossrefopts = list(), 
   progress = FALSE, ...) {
 
   check_type(type)
@@ -454,7 +466,7 @@ ft_get.list <- function(x, from=NULL, type = "xml", try_unknown = TRUE,
   check_cache()
   if (!is.null(from)) {
     from <- match.arg(from, c("plos", "entrez", "elife", "pensoft", 
-      "arxiv", "biorxiv", "elsevier", "wiley"))
+      "arxiv", "biorxiv", "elsevier", "sciencedirect", "wiley"))
     plos_out <- plugin_get_plos(from, x, plosopts, type, 
       progress = progress, ...)
     entrez_out <- plugin_get_entrez(from, x, entrezopts, type, 
@@ -469,11 +481,14 @@ ft_get.list <- function(x, from=NULL, type = "xml", try_unknown = TRUE,
       progress = progress, ...)
     els_out <- plugin_get_elsevier(from, x, elsevieropts, type, 
       progress = progress, ...)
+    sciencedirect_out <- plugin_get_sciencedirect(from, x, sciencedirectopts, type, 
+      progress = progress, ...)
     wiley_out <- plugin_get_wiley(from, x, wileyopts, type, 
       progress = progress, ...)
     structure(list(plos = plos_out, entrez = entrez_out, elife = elife_out,
                    pensoft = pensoft_out, arxiv = arxiv_out,
                    biorxiv = biorxiv_out, elsevier = els_out, 
+                   sciencedirect = sciencedirect_out,
                    wiley = wiley_out), class = "ft_data")
   } else {
     get_unknown(x, type, try_unknown, progress, ...)
@@ -483,7 +498,7 @@ ft_get.list <- function(x, from=NULL, type = "xml", try_unknown = TRUE,
 #' @export
 ft_get.ft <- function(x, from=NULL, type = "xml", try_unknown = TRUE, 
   plosopts=list(), bmcopts=list(), entrezopts=list(), elifeopts=list(), 
-  elsevieropts = list(), wileyopts = list(), crossrefopts = list(), 
+  elsevieropts = list(), sciencedirectopts = list(), wileyopts = list(), crossrefopts = list(), 
   progress = FALSE, ...) {
 
   check_type(type)
@@ -493,7 +508,7 @@ ft_get.ft <- function(x, from=NULL, type = "xml", try_unknown = TRUE,
   from <- names(x[sapply(x, function(v) !is.null(v$data))])
   not_supported <- c("elife", "pensoft", "bmc", "arxiv",
                      "biorxiv", "europmc", "scopus", 
-                     "microsoft", "wiley")
+                     "microsoft", "sciencedirect", "wiley")
   if (any(from %in% not_supported)) {
     message(sprintf(
       "the following not supported and will be skipped:\n  %s",
@@ -518,7 +533,7 @@ ft_get.ft <- function(x, from=NULL, type = "xml", try_unknown = TRUE,
 #' @export
 ft_get.ft_links <- function(x, from=NULL, type = "xml", try_unknown = TRUE, 
   plosopts=list(), bmcopts=list(), entrezopts=list(), elifeopts=list(),
-  elsevieropts = list(), wileyopts = list(), crossrefopts = list(), 
+  elsevieropts = list(), sciencedirectopts = list(), wileyopts = list(), crossrefopts = list(), 
   progress = FALSE, ...) {
 
   check_type(type)

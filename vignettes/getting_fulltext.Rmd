@@ -32,8 +32,8 @@ data from more than 1 data source.
 
 ```r
 names(res)
-#> [1] "plos"     "entrez"   "elife"    "pensoft"  "arxiv"    "biorxiv" 
-#> [7] "elsevier" "wiley"
+#> [1] "plos"          "entrez"        "elife"         "pensoft"       "arxiv"        
+#> [6] "biorxiv"       "elsevier"      "sciencedirect" "wiley"  
 ```
 
 Let's dig into the `plos` source object, which is another list, including metadata the 

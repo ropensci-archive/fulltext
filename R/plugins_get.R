@@ -181,6 +181,7 @@ plugin_get_entrez <- plugin_get_generator("entrez", entrez_ft)
 plugin_get_biorxiv <- plugin_get_generator("biorxiv", biorxiv_ft)
 plugin_get_arxiv <- plugin_get_generator("arxiv", arxiv_ft)
 plugin_get_elsevier <- plugin_get_generator("elsevier", elsevier_ft)
+plugin_get_sciencedirect <- plugin_get_generator("sciencedirect", sciencedirect_ft)
 plugin_get_wiley <- plugin_get_generator("wiley", wiley_ft)
 plugin_get_scientificsocieties <- plugin_get_generator("scientificsocieties", scientificsocieties_ft)
 plugin_get_informa <- plugin_get_generator("informa", informa_ft)
@@ -460,6 +461,51 @@ elsevier_ft <- function(dois, type, progress = FALSE, retain_non_ft = FALSE, ...
   Sys.setenv(ELSEVIER_RETAIN_NON_FT = retain_non_ft)
   on.exit(Sys.unsetenv("ELSEVIER_RETAIN_NON_FT"), add = TRUE)
   plapply(dois, elsevier_fun, type, progress, ...)
+}
+
+# type: plain and xml
+sciencedirect_ft <- function(dois, type, progress = FALSE, ...) {
+  if (!type %in% c('plain', 'xml')) stop("'type' for ScienceDirect must be 'plain' or 'xml'")
+  sciencedirect_fun <- function(x, type, progress, ...) {
+    path <- make_key(x, type)
+    if (file.exists(path) && !cache_options_get()$overwrite) {
+      if (!progress) message(paste0("path exists: ", path))
+      return(ft_object(path, x, type))
+    }
+    
+    # See https://dev.elsevier.com/tecdoc_text_mining.html
+    header <- list(
+      `X-ELS-APIKey` = Sys.getenv("ELSEVIER_TDM_KEY"),
+      Accept = paste0(switch(type, xml = "text/", plain = "text/"), type)
+    )
+    
+    # We specifically ask for the full text. Thus, we get an error if not available
+    # instead of silently just an abstract or some other metadata.
+    url <- paste0("https://api.elsevier.com/content/article/doi/", x, "?view=FULL")
+    http <- crul::HttpClient$new(
+      url = url,
+      headers = header,
+      opts = list(...)
+    )
+    res <- tcat(http$head())
+    if (inherits(res, c("error", "warning")) || !res$success()) {
+      if (inherits(res, c("error", "warning"))) {
+        mssg <- res$message 
+      } else {
+        # Elsevier gives an extra message in case of errors
+        if (is.null(res$response_headers$`x-els-status`)) {
+          elsevier_status <- ""
+        } else {
+          elsevier_status <- paste(":", res$response_headers$`x-els-status`)
+        }
+        mssg <- paste0(http_mssg(res), elsevier_status)
+      }
+      return(ft_error(mssg, x))
+    }
+    
+    get_ft(x, type, url, path, header, ...)
+  }
+  plapply(dois, sciencedirect_fun, type, progress, ...)
 }
 
 # type: only pdf (type parameter is ignored)
