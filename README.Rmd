@@ -52,12 +52,12 @@ It's easy to go from the outputs of `ft_get` to text-mining packages such as
 
 Data sources in `fulltext` include:
 
-* [Crossref](http://www.crossref.org/) - via the `rcrossref` package
+* [Crossref](https://www.crossref.org/) - via the `rcrossref` package
 * [Public Library of Science (PLOS)](https://www.plos.org/) - via the `rplos` package
 * Biomed Central
 * [arXiv](https://arxiv.org) - via the `aRxiv` package
-* [bioRxiv](http://biorxiv.org/) - via the `biorxivr` package
-* [PMC/Pubmed via Entrez](http://www.ncbi.nlm.nih.gov/) - via the `rentrez` package
+* [bioRxiv](https://biorxiv.org/) - via the `biorxivr` package
+* [PMC/Pubmed via Entrez](https://www.ncbi.nlm.nih.gov/) - via the `rentrez` package
 * Many more are supported via the above sources (e.g., _Royal Society Open Science_ is
 available via Pubmed)
 * We __will__ add more, as publishers open up, and as we have time...See the [master list here](https://github.com/ropensci/fulltext/issues/4#issuecomment-52376743)
@@ -184,9 +184,11 @@ quanteda::corpus(x)
 * Please [report any issues or bugs](https://github.com/ropensci/fulltext/issues).
 * License: MIT
 * Get citation information for `fulltext`: `citation(package = 'fulltext')`
-* Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
+* Please note that this project is released with a [Contributor Code of Conduct][coc].
+By participating in this project you agree to abide by its terms.
 
 [![rofooter](https://ropensci.org/public_images/github_footer.png)](https://ropensci.org)
 
 [suppdata]: https://github.com/ropensci/suppdata
 [pubchunks]: https://github.com/ropensci/pubchunks
+[coc]: https://github.com/ropensci/fulltext/blob/master/CODE_OF_CONDUCT.md
