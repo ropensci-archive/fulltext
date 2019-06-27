@@ -28,7 +28,7 @@
 #' and [entrez_fetch()]
 #' @param elifeopts eLife options, a named list. 
 #' @param elsevieropts Elsevier options, a named list. Use `retain_non_ft=TRUE`
-#' to retain files that do not actuall have full text but likely only have an 
+#' to retain files that do not actually have full text but likely only have an 
 #' abstract. By default we set `retain_non_ft=FALSE` so that if we detect 
 #' that you only got an abstract back, we delete it and report an error 
 #' that you likely don't have access.
