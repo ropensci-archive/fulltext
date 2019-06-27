@@ -14,8 +14,8 @@ burdensome to include, then we can include that source.
 }
 \section{Manual}{
 
-See \url{https://ropensci.github.io/fulltext-book/} for a longer form manual for
-using \pkg{fulltext}.
+See \url{https://ropenscilabs.github.io/fulltext-book/} for a longer form
+manual for using \pkg{fulltext}.
 }
 
 \section{What's included}{

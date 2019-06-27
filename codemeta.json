@@ -10,14 +10,14 @@
   "codeRepository": "https://github.com/ropensci/fulltext/",
   "issueTracker": "https://github.com/ropensci/fulltext/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "1.2.0",
+  "version": "1.2.0.9500",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
-    "version": "3.5.2",
+    "version": "3.6.0",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 3.5.2 Patched (2018-12-31 r75943)",
+  "runtimePlatform": "R version 3.6.0 Patched (2019-04-30 r76446)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
@@ -301,7 +301,10 @@
   "contIntegration": "https://travis-ci.org/ropensci/fulltext",
   "releaseNotes": "https://github.com/ropensci/fulltext/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/fulltext/blob/master/README.md",
-  "fileSize": "959.844KB",
+  "fileSize": "964.455KB",
   "developmentStatus": "active",
-  "relatedLink": "https://ropensci.github.io/fulltext-book/"
+  "relatedLink": ["https://ropensci.github.io/fulltext-book/", "https://ropenscilabs.github.io/fulltext-book/"],
+  "contributor": {},
+  "copyrightHolder": {},
+  "funder": {}
 }

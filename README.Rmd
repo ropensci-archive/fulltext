@@ -26,7 +26,7 @@ _/ ____\_ __|  | |  |_/  |_  ____ ___  ____/  |_
 
 __Get full text articles from lots of places__
 
-Checkout the [fulltext manual](https://ropensci.github.io/fulltext-book/) to get started.
+Checkout the [fulltext manual](https://ropenscilabs.github.io/fulltext-book/) to get started.
 
 -----
 

@@ -7,8 +7,8 @@
 #' burdensome to include, then we can include that source.
 #' 
 #' @section Manual:
-#' See <https://ropensci.github.io/fulltext-book/> for a longer form manual for 
-#' using \pkg{fulltext}.
+#' See <https://ropenscilabs.github.io/fulltext-book/> for a longer form
+#' manual for using \pkg{fulltext}.
 #'
 #' @section What's included:
 #' We currently include support for search and full text retrieval for a variety

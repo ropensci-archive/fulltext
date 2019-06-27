@@ -19,7 +19,7 @@ _/ ____\_ __|  | |  |_/  |_  ____ ___  ____/  |_
 
 __Get full text articles from lots of places__
 
-Checkout the [fulltext manual](https://ropensci.github.io/fulltext-book/) to get started.
+Checkout the [fulltext manual](https://ropenscilabs.github.io/fulltext-book/) to get started.
 
 -----
 
@@ -99,7 +99,7 @@ ft_search(query = 'ecology', from = 'crossref')
 #> Query:
 #>   [ecology] 
 #> Found:
-#>   [PLoS: 0; BMC: 0; Crossref: 157839; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
+#>   [PLoS: 0; BMC: 0; Crossref: 193453; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
 #> Returned:
 #>   [PLoS: 0; BMC: 0; Crossref: 10; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0]
 ```
@@ -113,8 +113,8 @@ ft_search(query = 'ecology', from = 'crossref')
 res1 <- ft_search(query = 'biology', from = 'entrez', limit = 5)
 ft_links(res1)
 #> <fulltext links>
-#> [Found] 5 
-#> [IDs] ID_30253098 ID_28731711 ID_28097372 ID_27582426 ID_22243231 ...
+#> [Found] 3 
+#> [IDs] ID_31091453 ID_28140597 ID_24657234 ...
 ```
 
 Or pass in DOIs directly
@@ -123,8 +123,8 @@ Or pass in DOIs directly
 ```r
 ft_links(res1$entrez$data$doi, from = "entrez")
 #> <fulltext links>
-#> [Found] 5 
-#> [IDs] ID_30253098 ID_28731711 ID_28097372 ID_27582426 ID_22243231 ...
+#> [Found] 3 
+#> [IDs] ID_31091453 ID_28140597 ID_24657234 ...
 ```
 
 ## Get full text
@@ -214,7 +214,7 @@ Locally, using code adapted from the package `tm`, and two pdf to text parsing b
 ```r
 pdf <- system.file("examples", "example2.pdf", package = "fulltext")
 ft_extract(pdf)
-#> <document>/Library/Frameworks/R.framework/Versions/3.5/Resources/library/fulltext/examples/example2.pdf
+#> <document>/Library/Frameworks/R.framework/Versions/3.6/Resources/library/fulltext/examples/example2.pdf
 #>   Title: pone.0107412 1..10
 #>   Producer: Acrobat Distiller 9.0.0 (Windows); modified using iText 5.0.3 (c) 1T3XT BVBA
 #>   Creation date: 2014-09-18
