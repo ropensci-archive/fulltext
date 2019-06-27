@@ -10,11 +10,11 @@
 
 ## Reverse dependencies
 
-* I have run R CMD check on the 2 downstream dependencies. No errors were found. Summary at <https://github.com/ropensci/fulltext/blob/master/revdep/README.md>
+* I have run R CMD check on the 3 downstream dependencies. No errors were found. Summary at <https://github.com/ropensci/fulltext/blob/master/revdep/README.md>
 
 --------
 
-This version includes xxxx
+This version includes primarily performance and behavior improvements to the function ft_get(); as well as a few bug fixes to other functions. 
 
 Thanks! 
 Scott Chamberlain

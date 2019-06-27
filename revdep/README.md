@@ -2,28 +2,21 @@
 
 |field    |value                                       |
 |:--------|:-------------------------------------------|
-|version  |R version 3.5.2 Patched (2018-12-31 r75943) |
-|os       |macOS Mojave 10.14.2                        |
+|version  |R version 3.6.0 Patched (2019-04-30 r76446) |
+|os       |macOS Mojave 10.14.5                        |
 |system   |x86_64, darwin15.6.0                        |
 |ui       |X11                                         |
 |language |(EN)                                        |
 |collate  |en_US.UTF-8                                 |
 |ctype    |en_US.UTF-8                                 |
 |tz       |US/Pacific                                  |
-|date     |2019-01-21                                  |
+|date     |2019-06-27                                  |
 
 # Dependencies
 
-|package  |old   |new |Δ  |
-|:--------|:-----|:---|:--|
-|fulltext |1.1.0 |NA  |*  |
+|package  |old   |new   |Δ  |
+|:--------|:-----|:-----|:--|
+|fulltext |1.2.0 |1.3.0 |*  |
 
 # Revdeps
-
-## All (2)
-
-|package   |version |error |warning |note |
-|:---------|:-------|:-----|:-------|:----|
-|pubchunks |0.2.0   |      |        |     |
-|rotl      |3.0.6   |      |        |     |
 
