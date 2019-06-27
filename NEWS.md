@@ -1,3 +1,23 @@
+fulltext 1.3.0
+==============
+
+### NEW FEATURES
+
+* `ft_get()` gains new data source: ScienceDirect (#196) thanks @knh11545
+* performance improvement to `ft_get()`: when using internal fxn `get_unknown`(when publisher is not initially knowsn) we run another internal fxn `get_publisher` which is slow cause can only throw one DOI per request to Crossref API; We now use the FatCat (https://fatcat.wiki/) API (https://guide.fatcat.wiki/http_api.html) to do more efficient publisher lookup (#192) (#201)
+
+### MINOR IMPROVEMENTS
+
+* curl options can be passed into most functions now (#199)
+* change to `ft_get()` when using Elsevier: we now by default detect if the downloaded file is abstact only and treat that as you dont have access - you can toggle this within `elsevieropts` - see `?ft_get` for help (#200)
+* fix link for fulltext manual, ropensci->ropenscilabs (#204)
+
+### BUG FIXES
+
+* fix to `ft_abstract()`: when using plos, we were passing on identifiers to the wrong Solr parameter passed to PLOS Solr API (#202) thanks @mrweiler !
+* fix to `ft_links()` with data from Entrez was failing when NULLs were encountered (#203)
+
+
 fulltext 1.2.0
 ==============
 
@@ -16,7 +36,7 @@ fulltext 1.2.0
 * Fix to `eupmc_search()` internal function. At some piont Europe PMC changed the way they do paging, what parameters are used, etc. Fixed now. See examples for how to do paging; uses a cursor model instead of a rows/offset model  (#184) thanks @jshleap for the report
 * two hopefully fixes for Wiley URLs: a) try a 2nd url pattern if the first fails in general for Wiley links; and b) if highwire links found, replace with a url pattern that should work (#189) thanks @bomeara for the report
 
-### NEW IMPROVEMENTS
+### MINOR IMPROVEMENTS
 
 * remaining `httr` code removed, now using `crul` for all HTTP requests (#187)
 * filled out `Scopus` and `Crossref TDM` parts in the Authentication section of the package level manual file `?fulltext-package`; and add more details on authentication in the `?ft_get` manual file  (#182) (#183)
