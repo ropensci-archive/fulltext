@@ -301,7 +301,7 @@
   "contIntegration": "https://travis-ci.org/ropensci/fulltext",
   "releaseNotes": "https://github.com/ropensci/fulltext/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/fulltext/blob/master/README.md",
-  "fileSize": "964.852KB",
+  "fileSize": "964.859KB",
   "developmentStatus": "active",
   "relatedLink": [
     "https://ropensci.github.io/fulltext-book/",
