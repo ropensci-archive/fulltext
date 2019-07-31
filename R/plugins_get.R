@@ -223,7 +223,7 @@ plos_wrapper <- function(dois, type, progress = FALSE, ...) {
       if (!progress) message(paste0("path exists: ", path))
       return(ft_object(path, x, type))
     }
-    tmp <- tryCatch(.plos_fulltext(x, disk = path, ...), 
+    tmp <- tryCatch(.plos_fulltext(x, disk = path, type = type, ...), 
       error = function(e) e, 
       warning = function(w) w)
     if (inherits(tmp, c("error", "warning"))) {

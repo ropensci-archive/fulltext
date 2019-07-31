@@ -65,6 +65,23 @@ test_that("ft_get works for all data providers", {
   expect_is(oo, "ft_data")
 })
 
+
+test_that("ft_get works for pdf for plos provider", {
+  skip_on_cran()
+
+  ## PLOS
+  aa <- sm(ft_get('10.1371/journal.pone.0086169', type = "pdf"))
+
+  expect_is(aa, "ft_data")
+  expect_is(aa$plos, "list")
+  expect_match(aa$plos$data$path[[1]]$path, "pdf")
+  expect_match(aa$plos$data$path[[1]]$type, "pdf")
+  expect_is(pdftools::pdf_text(aa$plos$data$path[[1]]$path),
+    "character")
+})
+
+
+
 # THIS IS NO LONGER THE CASE, BELOW TEST IN ITS PLACE NOW
 # this DOI is for an OA article, but the URL we get from Crossref doesn't work
 # this one fails on the first try as it uses

@@ -1,4 +1,4 @@
-.full_text_urls <- function(doi) {
+.full_text_urls <- function(doi, type) {
   makeurl <- function(x) {
     if (grepl("annotation", x)) {
       NA_character_
@@ -14,25 +14,32 @@
                         pntd = 'plosntds',
                         pctr = 'plosclinicaltrials')
       if ("plosclinicaltrials" == journal) {
-        ub <- 'http://journals.plos.org/plosclinicaltrials/article/asset?id=%s.XML'
+        ub <- 'https://journals.plos.org/plosclinicaltrials/article/asset?id=%s.XML'
         sprintf(ub, x)
       } else {
-        ub <- 'http://journals.plos.org/%s/article/file?id=%s&type=manuscript'
-        sprintf(ub, journal, x)
+        ub <- 'https://journals.plos.org/%s/article/file?id=%s&type=%s'
+        sprintf(ub, journal, x, switch(type, xml="manuscript", pdf="printable"))
       }
     }
   }
   vapply(doi, makeurl, "", USE.NAMES = FALSE)
 }
 
-.plos_fulltext <- function(doi, disk, ...){
-  url <- .full_text_urls(doi)
+xml_ctypes <- c('application/xml', 'text/xml')
+pdf_ctypes <- 'application/pdf'
+
+.plos_fulltext <- function(doi, disk, type, ...){
+  url <- .full_text_urls(doi, type)
   cli <- crul::HttpClient$new(url = url, opts = list(...))
   out <- cli$get(disk = disk)
   out$raise_for_status()
-  if (!out$response_headers$`content-type` %in% c('application/xml', 
-                                                  'text/xml')) {
-    stop('content-type not one of "application/xml" or "text/xml"', 
+  if (
+    !out$response_headers$`content-type` %in%
+    switch(type, xml=xml_ctypes, pdf=pdf_ctypes)
+  ) {
+    stop(paste0('content-type not one of ',
+      paste0(switch(type, xml=xml_ctypes, pdf=pdf_ctypes),
+        collapse = " or ")),
          call. = FALSE)
   }
   return(out$content)
