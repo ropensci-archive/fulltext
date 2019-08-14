@@ -227,7 +227,7 @@ test_that("ft_get curl options work", {
   # elsevier
   out_elsevier <- sw(ft_get("10.1016/j.trac.2016.01.027", from = "elsevier",
     timeout_ms = 1))
-  expect_match(out_elsevier$elsevier$errors$error, "time")
+  expect_match(out_elsevier$elsevier$errors$error, "Time")
 
   # wiley
   out_wiley <- sw(ft_get("10.1006/asle.2001.0035", from = "wiley",

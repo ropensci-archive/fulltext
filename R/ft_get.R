@@ -225,7 +225,6 @@
 #' res
 #' res$hindawi
 #' res$hindawi$data$path
-#' res$hindawi$data$data
 #' res %>% ft_collect() %>% .$hindawi
 #' 
 #' ## F1000Research - via Entrez
@@ -292,12 +291,12 @@
 #'
 #' # Hindawi Journals
 #' ft_get(c('10.1155/2014/292109','10.1155/2014/162024','10.1155/2014/249309'), from='entrez')
-#' res <- ft_search(query='ecology', from='crossref', limit=50,
+#' res <- ft_search(query='ecology', from='crossref', limit=20,
 #'                  crossrefopts = list(filter=list(has_full_text = TRUE,
 #'                                                  member=98,
 #'                                                  type='journal-article')))
 #'
-#' out <- ft_get(res$crossref$data$DOI[1:20], from='entrez')
+#' out <- ft_get(res$crossref$data$doi[1:3])
 #'
 #' # Frontiers Publisher - Frontiers in Aging Nueroscience
 #' res <- ft_get("10.3389/fnagi.2014.00130", from='entrez')
@@ -380,7 +379,7 @@
 #' ft_get('10.1037/10740-005')
 #' ### no link available for this DOI
 #' res <- ft_get('10.1037/10740-005', try_unknown = TRUE)
-#' res$crossref
+#' res[[1]]
 #' 
 #' # Get a progress bar - off by default
 #' library(rplos)
@@ -767,6 +766,7 @@ get_tm_name <- function(x) {
   )
 }
 
+# FIXME: pretty sure this isn't used anymore, delete if so
 get_publisher <- function(x, ...) {
   z <- tryCatch(rcrossref::cr_works(x, ...), warning = function(w) w)
   # FIXME: at some point replace this with 
@@ -801,6 +801,9 @@ fat_cat_search_one <- function(dois, fields, size) {
       stringsAsFactors=FALSE)
   }
   names(out) <- gsub("_source\\.", "", names(out))
+  # strip out fields not contained in the result
+  fields <- fields[fields %in% names(out)]
+  # get just columns in fields
   df <- out[, fields]
   df$message <- rep(NA_character_, NROW(df))
   # add rows for DOIs not found
@@ -808,6 +811,9 @@ fat_cat_search_one <- function(dois, fields, size) {
   if (length(not_found) > 0) {
     for (i in not_found) df <- rbind(df, c(i, "", "", "", "not found")) 
   }
+  # remove rows with all NA
+  df <- df[apply(df, 1, function(x) !all(is.na(x))), ]
+  row.names(df) <- NULL
   return(df)
 }
 
@@ -831,7 +837,6 @@ fat_cat_search <- function(dois, ...) {
     res <- fat_cat_search_one(dois, flds, length(dois))
   }
   if (NROW(res) == 0) return(list())
-  # apply(res[, c("doi", "container_issnl")], 1, as.list)
   apply(res, 1, as.list)
 }
 

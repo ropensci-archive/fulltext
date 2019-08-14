@@ -270,7 +270,6 @@ res <- ft_get(c('10.1155/2014/292109','10.1155/2014/162024', '10.1155/2014/24930
 res
 res$hindawi
 res$hindawi$data$path
-res$hindawi$data$data
 res \%>\% ft_collect() \%>\% .$hindawi
 
 ## F1000Research - via Entrez
@@ -337,12 +336,12 @@ ft_get(doi, from="entrez")
 
 # Hindawi Journals
 ft_get(c('10.1155/2014/292109','10.1155/2014/162024','10.1155/2014/249309'), from='entrez')
-res <- ft_search(query='ecology', from='crossref', limit=50,
+res <- ft_search(query='ecology', from='crossref', limit=20,
                  crossrefopts = list(filter=list(has_full_text = TRUE,
                                                  member=98,
                                                  type='journal-article')))
 
-out <- ft_get(res$crossref$data$DOI[1:20], from='entrez')
+out <- ft_get(res$crossref$data$doi[1:3])
 
 # Frontiers Publisher - Frontiers in Aging Nueroscience
 res <- ft_get("10.3389/fnagi.2014.00130", from='entrez')
@@ -425,7 +424,7 @@ ress$plos$data$path$`10.1371/journal.pone.0059813`
 ft_get('10.1037/10740-005')
 ### no link available for this DOI
 res <- ft_get('10.1037/10740-005', try_unknown = TRUE)
-res$crossref
+res[[1]]
 
 # Get a progress bar - off by default
 library(rplos)
