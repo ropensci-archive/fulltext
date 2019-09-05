@@ -14,7 +14,7 @@ Authors@R: person("Scott", "Chamberlain",
     email = "myrmecocystus@gmail.com",
     comment = c(ORCID = "0000-0003-1444-9135"))
 URL: https://docs.ropensci.org/fulltext (website)
-    https://github.com/ropensci/fulltext/ (devel) 
+    https://github.com/ropensci/fulltext/ (devel)
     https://ropenscilabs.github.io/fulltext-book/ (user manual)
 BugReports: https://github.com/ropensci/fulltext/issues
 LazyLoad: yes
@@ -45,6 +45,6 @@ Suggests:
     knitr,
     pubchunks
 RoxygenNote: 6.1.1
-X-schema.org-applicationCategory: Literature 
+X-schema.org-applicationCategory: Literature
 X-schema.org-keywords: text-mining, literature, pdf, xml, publications, citations, full-text, TDM
 X-schema.org-isPartOf: https://ropensci.org
