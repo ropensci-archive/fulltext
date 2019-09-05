@@ -705,7 +705,7 @@ get_pub_name <- function(x) {
          `4374` = "elife",
          `340` = "plos",
          `4443` = "peerj",
-         # `297` = "bmc",
+         `297` = "springer",
          `1965` = "frontiersin",
          `98` = "hindawi",
          `4950` = "f1000research",
@@ -729,6 +729,10 @@ get_pub_name <- function(x) {
          `233` = "amersocclinoncol",
          `8215` = "instinvestfil",
          `317` = "aip",
+         `179` = "sage",
+         `2997` = "koreanacper",
+         `175` = "rsoc",
+         `1822` = "cdc",
          "crossref"
   )
 }
@@ -738,7 +742,7 @@ get_tm_name <- function(x) {
          `4374` = "elife",
          `340` = "plos",
          `4443` = "peerj",
-         # `297` = "bmc",
+         `297` = "springer",
          `1965` = "frontiersin",
          `98` = "crossref",
          `4950` = "entrez",

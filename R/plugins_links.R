@@ -73,15 +73,13 @@ plugin_links_bmc <- function(sources, ids, opts, ...){
 }
 
 bmc_link <- function(dois, ...) {
-  xmlbase <- "http://%s/content/download/xml/%s.xml"
-  pdfbase <- "http://%s/content/pdf/%s.pdf"
+  pdfbase <- "https://%s/track/pdf/%s"
   lapply(dois, function(x) {
     res2 <- crul::HttpClient$new(paste0("https://doi.org/", x),
       opts = list(...))$head()
-    if (!res2$success()) return(list(xml = NULL, pdf = NULL))
+    if (!res2$success()) return(list(pdf = NULL))
     url <- crul::url_parse(res2$response_headers_all[[1]]$location)$domain
-    x <- strsplit(x, "/")[[1]][2]
-    list(xml = sprintf(xmlbase, url, x), pdf = sprintf(pdfbase, url, x))
+    list(pdf = sprintf(pdfbase, url, x))
   })
 }
 
@@ -180,6 +178,56 @@ cogent_link <- function(dois) {
   pdfbase <- "http://cogentoa.tandfonline.com/doi/pdf/"
   stats::setNames(lapply(dois, function(x) {
     list(xml = paste0(xmlbase, x), pdf = paste0(pdfbase, x))
+  }), dois)
+}
+
+plugin_links_rsoc <- function(sources, ids, opts, ...) {
+  if (any(grepl("rsoc", sources))) {
+    tmp <- rsoc_link(ids)
+    list(found = length(tmp), ids = names(tmp), data = tmp, opts = opts)
+  } else {
+    emptylist(opts)
+  }
+}
+
+rsoc_link <- function(dois) {
+  pdfbase <- "https://royalsocietypublishing.org/doi/pdf/"
+  stats::setNames(lapply(dois, function(x) {
+    list(pdf = paste0(pdfbase, x))
+  }), dois)
+}
+
+plugin_links_rsoc <- function(sources, ids, opts, ...) {
+  if (any(grepl("rsoc", sources))) {
+    tmp <- rsoc_link(ids)
+    list(found = length(tmp), ids = names(tmp), data = tmp, opts = opts)
+  } else {
+    emptylist(opts)
+  }
+}
+
+rsoc_link <- function(dois) {
+  pdfbase <- "https://royalsocietypublishing.org/doi/pdf/"
+  stats::setNames(lapply(dois, function(x) {
+    list(pdf = paste0(pdfbase, x))
+  }), dois)
+}
+
+plugin_links_cdc <- function(sources, ids, opts, ...) {
+  if (any(grepl("cdc", sources))) {
+    tmp <- cdc_link(ids)
+    list(found = length(tmp), ids = names(tmp), data = tmp, opts = opts)
+  } else {
+    emptylist(opts)
+  }
+}
+
+cdc_link <- function(dois) {
+  stats::setNames(lapply(dois, function(x) {
+    tt <- tcat(ftdoi_get(sprintf("api/doi/%s/", x)))
+    if (inherits(tt, c("error", "warning"))) return(list(pdf = NA_character_))
+    if (!tt$success()) return(list(pdf = NA_character_))  
+    list(pdf = jsonlite::fromJSON(tt$parse("UTF-8"))$links$pdf)
   }), dois)
 }
 

@@ -231,26 +231,73 @@ get_unknown_links <- function(x, ...) {
   for (i in seq_along(dfsplit)) {
     fun <- publisher_plugin_links(names(dfsplit)[i])
     pub_nm <- get_pub_name(names(dfsplit)[i])
-    tm_nm <- get_tm_name(names(dfsplit)[i])
-    out[[ pub_nm ]] <- fun(tm_nm, dfsplit[[i]]$doi, list(), ...)
+    tm_nm <- get_tm_name_links(names(dfsplit)[i])
+    if (inherits(fun, "function")) {
+      out[[ pub_nm ]] <- fun(tm_nm, dfsplit[[i]]$doi, list(), ...)
+    } else {
+      out[[ pub_nm ]] <- emptylist()
+    }
   }
   structure(out, class = "ft_links")
 }
 
 publisher_plugin_links <- function(x) {
   switch(x, 
-         `4374` = plugin_links_elife,
-         `340` = plugin_links_plos,
-         `4443` = plugin_links_peerj,
-         `1965` = plugin_links_frontiersin,
-         `98` = plugin_links_entrez,
-         `4950` = plugin_links_entrez,
-         `2258` = plugin_links_entrez,
-         `3145` = plugin_links_copernicus,
-         # `246` = plugin_links_biorxiv,
-         `127` = plugin_links_entrez,
-         `301` = plugin_links_cogent,
-         `1968` = plugin_links_entrez,
-         `297` = plugin_links_bmc
+    `4374` = plugin_links_elife,
+    `340` = plugin_links_plos,
+    `4443` = plugin_links_peerj,
+    `1965` = plugin_links_frontiersin,
+    `98` = plugin_links_crossref,
+    `4950` = plugin_links_entrez,
+    `2258` = plugin_links_entrez,
+    `3145` = plugin_links_copernicus,
+    `127` = plugin_links_entrez,
+    `301` = plugin_links_cogent,
+    `1968` = plugin_links_entrez,
+    # `297` = plugin_links_bmc,
+    `297` = plugin_links_crossref,
+    `179` = plugin_links_crossref,
+    `311` = plugin_links_crossref,
+    `78` = plugin_links_crossref,
+    `2997` = plugin_links_crossref,
+    `175` = plugin_links_rsoc,
+    `1822` = plugin_links_cdc,
+    warning("Crossref member ", x,
+      " not supported yet; open an issue https://github.com/ropensci/fulltext/issues")
+  )
+}
+
+get_tm_name_links <- function(x) {
+  switch(x,
+    `4374` = "elife",
+    `340` = "plos",
+    `4443` = "peerj",
+    `1965` = "frontiersin",
+    `98` = "crossref",
+    `4950` = "entrez",
+    `2258` = "pensoft",
+    `3145` = "copernicus",
+    `246` = "biorxiv",
+    `127` = "entrez",
+    `1968` = "entrez",
+    `78` = "crossref",
+    `311` = "crossref",
+    `1665` = "scientificsocieties",
+    `301` = "informa",
+    `292` = "royalsocchem",
+    `263` = "ieee",
+    `221` = "aaas",
+    `341` = "pnas",
+    `345` = "microbiology",
+    `10` = "jama",
+    `235` = "amersocmicrobiol",
+    `233` = "amersocclinoncol",
+    `8215` = "instinvestfil",
+    `317` = "aip",
+    `297` = "crossref",
+    `2997` = "crossref",
+    `175` = "rsoc",
+    `1822` = "cdc",
+    "crossref"
   )
 }
