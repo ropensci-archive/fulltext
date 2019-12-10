@@ -13,24 +13,14 @@ test_that("ft_browse returns...", {
   bb <- ft_browse(y, browse = FALSE)
   bb_txt <- xml2::read_html(paste0(readLines(bb), collapse = ""))
   
-  cc <- ft_browse(x, "publisher", FALSE)
-
-  # correct classes
   expect_is(aa, "character")
   expect_is(bb, "character")
-  expect_is(cc, "character")
   
   expect_is(aa_txt, "xml_document")
   expect_is(bb_txt, "xml_document")
   
   expect_match(aa, "eLife")
   expect_match(bb, "fphar")
-  expect_match(cc, "eLife")
-  expect_equal(cc, "https://doi.org/10.7554/eLife.04251")
-  
-  expect_match(xml_text(xml_children(xml_children(aa_txt)[[2]])[[1]]), "Macrodocs")
-  
-  expect_match(xml_text(xml_children(xml_children(bb_txt)[[2]])[[1]]), "Macrodocs")
 })
 
 test_that("ft_browse fails well", {
