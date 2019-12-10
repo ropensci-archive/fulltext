@@ -519,11 +519,24 @@ wiley_ft <- function(dois, type = "pdf", progress = FALSE, ...) {
     res <- tcat(rcrossref::cr_works(dois = x))
     if (inherits(res, c("error", "warning"))) return(ft_error(res$message, x))
     res <- res$data$link[[1]]
-    url <- res[res$content.type == "unspecified" & 
-      res$intended.application == "text-mining", "URL"][[1]]
+    
+    url <- res[res$content.type == "application/pdf" & 
+      res$intended.application == "text-mining" &
+      grepl("api", res$URL), "URL"][[1]]
+    if (length(url) == 0) {
+      url <- res[res$content.type == "unspecified" & 
+        res$intended.application == "text-mining", "URL"][[1]]
+    }
     if (length(url) == 0) {
       url <- res[res$content.type == "unspecified" & 
         res$intended.application == "similarity-checking", "URL"][[1]]
+    }
+    # try manually creating the url
+    if (!is.null(url)) {
+      if (!grepl("api.wiley.com", url)) {
+        url <- paste0("https://api.wiley.com/onlinelibrary/tdm/v1/articles/",
+          sub("/", "%2F", x))
+      }
     }
     if (is.null(url)) {
       mssg <- "has no link available"
