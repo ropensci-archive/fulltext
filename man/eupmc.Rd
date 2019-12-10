@@ -7,8 +7,14 @@
 \alias{eupmc_xml}
 \title{Europe PMC utilities}
 \usage{
-eupmc_search(query, resulttype = "lite", synonym = FALSE,
-  per_page = 25, cursorMark = "*", ...)
+eupmc_search(
+  query,
+  resulttype = "lite",
+  synonym = FALSE,
+  per_page = 25,
+  cursorMark = "*",
+  ...
+)
 
 eupmc_fields(...)
 

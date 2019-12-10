@@ -96,7 +96,7 @@ fulltext 1.0.1
 fulltext 1.0
 ============
 
-Check out the [fulltext manual](https://ropenscilabs.github.io/fulltext-book/) for detailed documentation.
+Check out the [fulltext manual](https://books.ropensci.org/fulltext/) for detailed documentation.
 
 `fulltext` has undergone a re-organization, which includes a bump in the major version to `v1` to reinforce the large changes the package has undergone. Changes include:
 

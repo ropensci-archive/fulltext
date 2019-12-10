@@ -5,8 +5,15 @@
 \alias{ft_abstract_ls}
 \title{Get abstracts}
 \usage{
-ft_abstract(x, from = "plos", plosopts = list(), scopusopts = list(),
-  maopts = list(), crossrefopts = list(), ...)
+ft_abstract(
+  x,
+  from = "plos",
+  plosopts = list(),
+  scopusopts = list(),
+  maopts = list(),
+  crossrefopts = list(),
+  ...
+)
 
 ft_abstract_ls()
 }
@@ -89,7 +96,7 @@ ids <- res$ma$data$Id
   )
 ))
 out$ma
-cat(unlist(lapply(out$ma, "[[", "abstract")), sep = "\\n\\n")
+cat(unlist(lapply(out$ma, "[[", "abstract")), sep = "\n\n")
 
 # Crossref
 (res <- ft_search("ecology", from = "crossref",

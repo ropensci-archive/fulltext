@@ -5,14 +5,37 @@
 \alias{scopus_search_loop}
 \title{Scopus search}
 \usage{
-scopus_search(query = NULL, count = 25, start = 0, type = "search",
-  search_type = "scopus", facets = NULL, view = NULL, date = NULL,
-  sort = NULL, content = NULL, subj = NULL, key = NULL, ...)
+scopus_search(
+  query = NULL,
+  count = 25,
+  start = 0,
+  type = "search",
+  search_type = "scopus",
+  facets = NULL,
+  view = NULL,
+  date = NULL,
+  sort = NULL,
+  content = NULL,
+  subj = NULL,
+  key = NULL,
+  ...
+)
 
-scopus_search_loop(query = NULL, count = 25, start = 0,
-  type = "search", search_type = "scopus", facets = NULL,
-  view = NULL, date = NULL, sort = NULL, content = NULL,
-  subj = NULL, key = NULL, ...)
+scopus_search_loop(
+  query = NULL,
+  count = 25,
+  start = 0,
+  type = "search",
+  search_type = "scopus",
+  facets = NULL,
+  view = NULL,
+  date = NULL,
+  sort = NULL,
+  content = NULL,
+  subj = NULL,
+  key = NULL,
+  ...
+)
 }
 \arguments{
 \item{query}{(character) query terms, as a single character vector}

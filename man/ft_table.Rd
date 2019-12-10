@@ -4,8 +4,7 @@
 \alias{ft_table}
 \title{Collect metadata and text into a data.frame}
 \usage{
-ft_table(path = NULL, type = NULL, encoding = NULL,
-  xml_extract_text = TRUE)
+ft_table(path = NULL, type = NULL, encoding = NULL, xml_extract_text = TRUE)
 }
 \arguments{
 \item{path}{a directory path, must exist}

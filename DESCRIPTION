@@ -15,13 +15,13 @@ Authors@R: person("Scott", "Chamberlain",
     comment = c(ORCID = "0000-0003-1444-9135"))
 URL: https://docs.ropensci.org/fulltext (website)
     https://github.com/ropensci/fulltext/ (devel)
-    https://ropenscilabs.github.io/fulltext-book/ (user manual)
+    https://books.ropensci.org/fulltext/ (user manual)
 BugReports: https://github.com/ropensci/fulltext/issues
 LazyLoad: yes
 Encoding: UTF-8
 Language: en-US
 VignetteBuilder: knitr
-Roxygen: list(wrap = FALSE, markdown = TRUE)
+Roxygen: list(markdown = TRUE)
 Imports:
     crul (>= 0.7.0),
     magrittr,
@@ -40,11 +40,11 @@ Imports:
     tibble,
     digest
 Suggests:
-    roxygen2 (>= 6.1.1),
+    roxygen2 (>= 7.0.2),
     testthat,
     knitr,
     pubchunks
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
 X-schema.org-applicationCategory: Literature
 X-schema.org-keywords: text-mining, literature, pdf, xml, publications, citations, full-text, TDM
 X-schema.org-isPartOf: https://ropensci.org

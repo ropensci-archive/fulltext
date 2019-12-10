@@ -19,7 +19,7 @@ _/ ____\_ __|  | |  |_/  |_  ____ ___  ____/  |_
 
 __Get full text articles from lots of places__
 
-Checkout the [fulltext manual](https://ropenscilabs.github.io/fulltext-book/) to get started.
+Checkout the [fulltext manual](https://books.ropensci.org/fulltext/) to get started.
 
 -----
 
@@ -99,7 +99,7 @@ ft_search(query = 'ecology', from = 'crossref')
 #> Query:
 #>   [ecology] 
 #> Found:
-#>   [PLoS: 0; BMC: 0; Crossref: 193485; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
+#>   [PLoS: 0; BMC: 0; Crossref: 200919; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
 #> Returned:
 #>   [PLoS: 0; BMC: 0; Crossref: 10; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0]
 ```
@@ -113,8 +113,8 @@ ft_search(query = 'ecology', from = 'crossref')
 res1 <- ft_search(query = 'biology', from = 'entrez', limit = 5)
 ft_links(res1)
 #> <fulltext links>
-#> [Found] 3 
-#> [IDs] ID_31091453 ID_28140597 ID_24657234 ...
+#> [Found] 4 
+#> [IDs] ID_31167059 ID_31118290 ID_22393938 ID_11673890 ...
 ```
 
 Or pass in DOIs directly
@@ -123,8 +123,8 @@ Or pass in DOIs directly
 ```r
 ft_links(res1$entrez$data$doi, from = "entrez")
 #> <fulltext links>
-#> [Found] 3 
-#> [IDs] ID_31091453 ID_28140597 ID_24657234 ...
+#> [Found] 4 
+#> [IDs] ID_31167059 ID_31118290 ID_22393938 ID_11673890 ...
 ```
 
 ## Get full text
@@ -184,24 +184,24 @@ x %>%
 #> $`10.7554/eLife.03032`
 #>                   doi                        publisher authors.given_names
 #> 1 10.7554/eLife.03032 eLife Sciences Publications, Ltd                  Ya
-#>   authors.surname authors.given_names.1 authors.surname.1
-#> 1            Zhao                 Jimin               Lin
-#>   authors.given_names.2 authors.surname.2 authors.given_names.3
-#> 1               Beiying                Xu                  Sida
-#>   authors.surname.3 authors.given_names.4 authors.surname.4
-#> 1                Hu                   Xue             Zhang
-#>   authors.given_names.5 authors.surname.5 .publisher
-#> 1                Ligang                Wu      elife
+#>   authors.surname authors.given_names.1 authors.surname.1 authors.given_names.2
+#> 1            Zhao                 Jimin               Lin               Beiying
+#>   authors.surname.2 authors.given_names.3 authors.surname.3
+#> 1                Xu                  Sida                Hu
+#>   authors.given_names.4 authors.surname.4 authors.given_names.5
+#> 1                   Xue             Zhang                Ligang
+#>   authors.surname.5 .publisher
+#> 1                Wu      elife
 #> 
 #> $`10.7554/eLife.32763`
 #>                   doi                        publisher authors.given_names
 #> 1 10.7554/eLife.32763 eLife Sciences Publications, Ltd             Natasha
-#>   authors.surname authors.given_names.1 authors.surname.1
-#> 1          Mhatre                Robert            Malkin
-#>   authors.given_names.2 authors.surname.2 authors.given_names.3
-#> 1                Rittik               Deb                Rohini
-#>   authors.surname.3 authors.given_names.4 authors.surname.4 .publisher
-#> 1      Balakrishnan                Daniel            Robert      elife
+#>   authors.surname authors.given_names.1 authors.surname.1 authors.given_names.2
+#> 1          Mhatre                Robert            Malkin                Rittik
+#>   authors.surname.2 authors.given_names.3 authors.surname.3
+#> 1               Deb                Rohini      Balakrishnan
+#>   authors.given_names.4 authors.surname.4 .publisher
+#> 1                Daniel            Robert      elife
 ```
 
 ## Extract text from PDFs

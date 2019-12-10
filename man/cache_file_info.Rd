@@ -34,7 +34,8 @@ res <- cache_file_info()
 # invisible(lapply(res$xml_abstract_only, unlink))
 }
 \seealso{
-Other caching-functions: \code{\link{cache}},
-  \code{\link{ftxt_cache}}
+Other caching-functions: 
+\code{\link{cache}},
+\code{\link{ftxt_cache}}
 }
 \concept{caching-functions}

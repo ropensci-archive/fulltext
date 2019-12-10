@@ -5,11 +5,22 @@
 \alias{ft_get_ls}
 \title{Download full text articles}
 \usage{
-ft_get(x, from = NULL, type = "xml", try_unknown = TRUE,
-  plosopts = list(), bmcopts = list(), entrezopts = list(),
-  elifeopts = list(), elsevieropts = list(),
-  sciencedirectopts = list(), wileyopts = list(),
-  crossrefopts = list(), progress = FALSE, ...)
+ft_get(
+  x,
+  from = NULL,
+  type = "xml",
+  try_unknown = TRUE,
+  plosopts = list(),
+  bmcopts = list(),
+  entrezopts = list(),
+  elifeopts = list(),
+  elsevieropts = list(),
+  sciencedirectopts = list(),
+  wileyopts = list(),
+  crossrefopts = list(),
+  progress = FALSE,
+  ...
+)
 
 ft_get_ls()
 }
@@ -319,7 +330,7 @@ ft_get('10.1080/23311916.2014.938430')
 
 library(rplos)
 (dois <- searchplos(q="*:*", fl='id',
-   fq=list('doc_type:full',"article_type:\\"research article\\""), limit=5)$data$id)
+   fq=list('doc_type:full',"article_type:\"research article\""), limit=5)$data$id)
 ft_get(dois, from='plos')
 ft_get(c('10.7717/peerj.228','10.7717/peerj.234'), from='entrez')
 
@@ -429,7 +440,7 @@ res[[1]]
 # Get a progress bar - off by default
 library(rplos)
 (dois <- searchplos(q="*:*", fl='id',
-   fq=list('doc_type:full',"article_type:\\"research article\\""), limit=5)$data$id)
+   fq=list('doc_type:full',"article_type:\"research article\""), limit=5)$data$id)
 ## when articles not already downloaded you see the progress bar
 b <- ft_get(dois, from='plos', progress = TRUE)
 ## if articles already downloaded/cached, normally we through messages saying so

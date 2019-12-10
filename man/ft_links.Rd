@@ -5,8 +5,15 @@
 \alias{ft_links_ls}
 \title{Get full text links}
 \usage{
-ft_links(x, from = NULL, plosopts = list(), crossrefopts = list(),
-  entrezopts = list(), bmcopts = list(), ...)
+ft_links(
+  x,
+  from = NULL,
+  plosopts = list(),
+  crossrefopts = list(),
+  entrezopts = list(),
+  bmcopts = list(),
+  ...
+)
 
 ft_links_ls()
 }

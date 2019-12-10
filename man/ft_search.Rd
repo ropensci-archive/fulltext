@@ -5,10 +5,22 @@
 \alias{ft_search_ls}
 \title{Search for full text}
 \usage{
-ft_search(query, from = "plos", limit = 10, start = 0,
-  plosopts = list(), bmcopts = list(), crossrefopts = list(),
-  entrezopts = list(), arxivopts = list(), biorxivopts = list(),
-  euroopts = list(), scopusopts = list(), maopts = list(), ...)
+ft_search(
+  query,
+  from = "plos",
+  limit = 10,
+  start = 0,
+  plosopts = list(),
+  bmcopts = list(),
+  crossrefopts = list(),
+  entrezopts = list(),
+  arxivopts = list(),
+  biorxivopts = list(),
+  euroopts = list(),
+  scopusopts = list(),
+  maopts = list(),
+  ...
+)
 
 ft_search_ls()
 }
@@ -82,7 +94,7 @@ See \url{https://dev.elsevier.com/tips/ScopusSearchTips.htm} for help/tips
 on searching with Scopus
 }
 \note{
-for all \code{*opts} parameters, ee the function linked to in
+for all \verb{*opts} parameters, ee the function linked to in
 the parameter definition for what you can pass to it.
 }
 \section{Looping}{
