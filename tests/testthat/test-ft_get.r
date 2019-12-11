@@ -225,25 +225,25 @@ test_that("ft_get curl options work", {
   # pensoft
   out_pensoft <- sw(ft_get('10.3897/mycokeys.22.12528', from = "pensoft",
     timeout_ms = 1))
-  expect_match(out_pensoft$pensoft$errors$error, "time")
+  expect_match(out_pensoft$pensoft$errors$error, "[Tt]ime")
 
   # arxiv
   out_arxiv <- sw(ft_get('cond-mat/9309029', from = "arxiv", timeout_ms = 1))
-  expect_match(out_arxiv$arxiv$errors$error, "time")
+  expect_match(out_arxiv$arxiv$errors$error, "[Tt]ime")
 
   # biorxiv
   out_biorxiv <- sw(ft_get('10.1101/012476', from = "biorxiv", timeout_ms = 1))
-  expect_match(out_biorxiv$biorxiv$errors$error, "time")
+  expect_match(out_biorxiv$biorxiv$errors$error, "[Tt]ime")
 
   # elsevier
   out_elsevier <- sw(ft_get("10.1016/j.trac.2016.01.027", from = "elsevier",
     timeout_ms = 1))
-  expect_match(out_elsevier$elsevier$errors$error, "Time")
+  expect_match(out_elsevier$elsevier$errors$error, "[Tt]ime")
 
   # wiley
   out_wiley <- sw(ft_get("10.1006/asle.2001.0035", from = "wiley",
     timeout_ms = 1))
-  expect_match(out_wiley$wiley$errors$error, "time")
+  expect_match(out_wiley$wiley$errors$error, "[Tt]ime")
 })
 
 # cleanup - delete all files

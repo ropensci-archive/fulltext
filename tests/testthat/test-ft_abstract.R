@@ -91,22 +91,22 @@ test_that("ft_abstract curl options work", {
   # plos
   expect_error(
     ft_abstract("10.1371/journal.pone.0034368", from = "plos", timeout_ms=1),
-    "time")
+    "[Tt]ime")
 
   # scopus
   expect_error(
     ft_abstract("10.1007/978-3-030-13273-6_1", from = "scopus", timeout_ms = 1,
       scopusopts = list(key = Sys.getenv('ELSEVIER_SCOPUS_KEY'))),
-    "time")
+    "[Tt]ime")
 
   # microsoft
   expect_error(
     ft_abstract(2153635508, from = "microsoft", timeout_ms = 1,
       maopts = list(key = Sys.getenv('MICROSOFT_ACADEMIC_KEY'))),
-    "time")
+    "[Tt]ime")
 
   # crossref
   expect_error(
     ft_abstract("10.5194/we-13-95-2013", from = "crossref", timeout_ms = 1),
-    "time")
+    "[Tt]ime")
 })

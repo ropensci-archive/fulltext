@@ -19,7 +19,7 @@ test_that("ft_links curl options work", {
   # bmc
   expect_error(
     ft_links("10.1007/978-3-642-40455-9_52-1", from = "bmc", timeout_ms = 1),
-    "time")
+    "[Tt]ime")
 
   # crossref - curl timeout caught by tryCatch, returns nothing
   expect_equal(
