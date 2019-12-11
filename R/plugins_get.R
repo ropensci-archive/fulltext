@@ -14,6 +14,13 @@ construct_paths <- function(co, x, type){
   }
 }
 
+type_in <- function(type, types, name) {
+  if (!type %in% types) {
+    stop(sprintf("'type' for %s must be %s", name,
+      paste0(sprintf("'%s'", types), collapse=", ")))
+  }
+}
+
 pprint_cache <- function(x) list(backend = NULL, path = x, data = NULL)
 
 make_key <- function(id, type) {
@@ -320,6 +327,7 @@ bmc_ft <- function(dois, type = "xml", progress = FALSE, ...) {
 
 # type: xml and pdf
 elife_ft <- function(dois, type, progress = FALSE, ...) {
+  type_in(type, c('pdf', 'xml'), "elife")
   elife_fun <- function(x, type, progress, ...) {
     path <- make_key(x, type)
     if (file.exists(path) && !cache_options_get()$overwrite) {
@@ -336,6 +344,7 @@ elife_ft <- function(dois, type, progress = FALSE, ...) {
 
 # type: xml and pdf
 peerj_ft <- function(dois, type, progress = FALSE, ...) {
+  type_in(type, c('pdf', 'xml'), "peerj")
   peerj_fun <- function(x, type, progress, ...) {
     path <- make_key(x, type)
     if (file.exists(path) && !cache_options_get()$overwrite) {
@@ -351,6 +360,7 @@ peerj_ft <- function(dois, type, progress = FALSE, ...) {
 
 # type: xml and pdf
 frontiersin_ft <- function(dois, type, progress = FALSE, ...) {
+  type_in(type, c('pdf', 'xml'), "frontiersin")
   fronteiersin_fun <- function(x, type, progress, ...) {
     path <- make_key(x, type)
     if (file.exists(path) && !cache_options_get()$overwrite) {
@@ -366,6 +376,7 @@ frontiersin_ft <- function(dois, type, progress = FALSE, ...) {
 
 # type: xml and pdf
 pensoft_ft <- function(dois, type, progress = FALSE, ...) {
+  type_in(type, c('pdf', 'xml'), "pensoft")
   pensoft_fun <- function(x, type, progress, ...) {
     path <- make_key(x, type)
     if (file.exists(path) && !cache_options_get()$overwrite) {
@@ -386,6 +397,7 @@ pensoft_ft <- function(dois, type, progress = FALSE, ...) {
 
 # type: xml and pdf
 copernicus_ft <- function(dois, type, progress = FALSE, ...) {
+  type_in(type, c('pdf', 'xml'), "copernicus")
   copernicus_fun <- function(x, type, progress, ...) {
     path <- make_key(x, type)
     if (file.exists(path) && !cache_options_get()$overwrite) {
@@ -436,7 +448,7 @@ biorxiv_ft <- function(dois, type = "pdf", progress = FALSE, ...) {
 # type: plain and xml
 elsevier_ft <- function(dois, type, progress = FALSE, retain_non_ft = FALSE, ...) {
   assert(retain_non_ft, "logical")
-  if (!type %in% c('plain', 'xml')) stop("'type' for Elsevier must be 'plain' or 'xml'")
+  type_in(type, c('plain', 'xml'), "elsevier")
   elsevier_fun <- function(x, type, progress, ...) {
     path <- make_key(x, type)
     if (file.exists(path) && !cache_options_get()$overwrite) {
@@ -465,7 +477,7 @@ elsevier_ft <- function(dois, type, progress = FALSE, retain_non_ft = FALSE, ...
 
 # type: plain and xml
 sciencedirect_ft <- function(dois, type, progress = FALSE, ...) {
-  if (!type %in% c('plain', 'xml')) stop("'type' for ScienceDirect must be 'plain' or 'xml'")
+  type_in(type, c('plain', 'xml'), "sciencedirect")
   sciencedirect_fun <- function(x, type, progress, ...) {
     path <- make_key(x, type)
     if (file.exists(path) && !cache_options_get()$overwrite) {
@@ -510,7 +522,7 @@ sciencedirect_ft <- function(dois, type, progress = FALSE, ...) {
 
 # type: pdf and xml
 wiley_ft <- function(dois, type, progress = FALSE, ...) {
-  if (!type %in% c('pdf', 'xml')) stop("'type' for wiley must be 'pdf' or 'xml'")
+  type_in(type, c('pdf', 'xml'), "wiley")
   wiley_fun <- function(x, type, progress, ...) {
     path <- make_key(x, type)
     if (file.exists(path) && !cache_options_get()$overwrite) {

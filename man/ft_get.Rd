@@ -167,7 +167,7 @@ they only accept one type. By data source/publisher:
 \item BiorXiv: only pdf
 \item Elsevier: xml and plain
 \item Elsevier ScienceDirect: xml and plain
-\item Wiley: only pdf
+\item Wiley: pdf and xml
 \item Peerj: pdf and xml
 \item Informa: only pdf
 \item FrontiersIn: pdf and xml
@@ -386,7 +386,6 @@ ft_get(x = "10.1016/j.trac.2016.05.027", from = "elsevier",
 ft_get(x = "10.1016/S0140-6736(13)62329-6", from = "sciencedirect")
 
 # wiley, ugh
-## Wiley has only PDF, so type parameter doesn't do anything
 ft_get(x = "10.1006/asle.2001.0035", from = "wiley", type = "pdf")
 ## xml
 ft_get(x = "10.1111/evo.13812", from = "wiley")

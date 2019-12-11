@@ -28,7 +28,9 @@ test_that("ft_search returns...", {
   expect_is(aa$plos$data, "data.frame")
   expect_is(aa$plos$data$id, "character")
   
-  expect_named(bb$plos$data, c("id", "alm_twitterCount", "counter_total_all", "journal", "eissn", "author"))
+  expect_equal(
+    sort(names(bb$plos$data)),
+    sort(c("id", "alm_twitterCount", "counter_total_all", "journal", "eissn", "author")))
   
   expect_is(cc$crossref$data, "data.frame")
   expect_true(cc$crossref$opts$filter[[1]])

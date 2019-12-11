@@ -116,6 +116,17 @@ test_that("ft_get fails well", {
   expect_error(ft_get('0086169', from = 'stuff'), "'arg' should be one")
   expect_error(ft_get('0086169', progress = 5),
     "progress must be of class logical")
+
+  # hits check_type fxn
+  expect_error(ft_get('10.7554/eLife.03032', type = "foobar"),
+    "parameter must be")
+
+  # hits check_type fxn
+  expect_error(ft_get('10.7554/eLife.03032', type = "plain"),
+    "'type' for elife must be")
+  expect_error(
+    ft_get("10.1016/j.trac.2016.01.027", from = "elsevier", type = "pdf"),
+    "'type' for elsevier must be")
 })
 
 test_that("ft_get errors slot", {
