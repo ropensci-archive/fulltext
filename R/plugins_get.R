@@ -508,60 +508,27 @@ sciencedirect_ft <- function(dois, type, progress = FALSE, ...) {
   plapply(dois, sciencedirect_fun, type, progress, ...)
 }
 
-# type: only pdf (type parameter is ignored)
-wiley_ft <- function(dois, type = "pdf", progress = FALSE, ...) {
+# type: pdf and xml
+wiley_ft <- function(dois, type, progress = FALSE, ...) {
+  if (!type %in% c('pdf', 'xml')) stop("'type' for wiley must be 'pdf' or 'xml'")
   wiley_fun <- function(x, type, progress, ...) {
-    path <- make_key(x, 'pdf')
+    path <- make_key(x, type)
     if (file.exists(path) && !cache_options_get()$overwrite) {
       if (!progress) message(paste0("path exists: ", path))
-      return(ft_object(path, x, 'pdf'))
+      return(ft_object(path, x, type))
     }
-    res <- tcat(rcrossref::cr_works(dois = x))
-    if (inherits(res, c("error", "warning"))) return(ft_error(res$message, x))
-    res <- res$data$link[[1]]
-    
-    url <- res[res$content.type == "application/pdf" & 
-      res$intended.application == "text-mining" &
-      grepl("api", res$URL), "URL"][[1]]
-    if (length(url) == 0) {
-      url <- res[res$content.type == "unspecified" & 
-        res$intended.application == "text-mining", "URL"][[1]]
-    }
-    if (length(url) == 0) {
-      url <- res[res$content.type == "unspecified" & 
-        res$intended.application == "similarity-checking", "URL"][[1]]
-    }
-    # try manually creating the url
-    if (!is.null(url)) {
-      if (!grepl("api.wiley.com", url)) {
-        url <- paste0("https://api.wiley.com/onlinelibrary/tdm/v1/articles/",
-          sub("/", "%2F", x))
-      }
-    }
-    if (is.null(url)) {
-      mssg <- "has no link available"
-      warning(x, " ", mssg, call. = FALSE)
-      return(ft_error(mssg, x))
-    }
-    # fix url if highwire url detected
-    # AFAIK AJB is the only journal with this problem where they used to be at
-    # Highwire, then moved to Wiley - the highwire links do not work, all 
-    # throw 403
-    if (any(grepl("highwire", url))) {
-      url <- paste0("https://onlinelibrary.wiley.com/doi/pdf/", x)
+    if (type == "pdf") {
+      url <- paste0("https://api.wiley.com/onlinelibrary/tdm/v1/articles/",
+        sub("/", "%2F", x))
+    } else {
+      url <- paste0("https://onlinelibrary.wiley.com/doi/full-xml/",
+        sub("/", "%2F", x))
     }
     header <- list(
       `CR-Clickthrough-Client-Token` = Sys.getenv("CROSSREF_TDM"),
-      Accept = "application/pdf"
+      Accept = paste0(switch(type, xml = "application/", pdf = "application/"), type)
     )
-    res <- suppressWarnings(get_ft(x, 'pdf', url, path, header, ...))
-    # if failed try a different url
-    if (is.null(res$path)) {
-      url <- sub("full", "pdf", url)
-      res <- get_ft(x, 'pdf', url, path, header, ...)
-    }
-    # if the new url fails, oh well, we tried
-    res
+    suppressWarnings(get_ft(x, type, url, path, header, ...))
   }
   plapply(dois, wiley_fun, type, progress, ...)
 }
