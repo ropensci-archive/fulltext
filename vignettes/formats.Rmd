@@ -32,7 +32,7 @@ Pensoft | [Y][pep] | [Y][pex] | N |... |
 PLoS | [Y][plp] | [Y][plx] ^[1] | N |... |
 Sage | Y | N | N |... |
 Scielo | [Y][scielop] | [Y][scielox] | N | May only be some journals |
-SERSC | [Y][serscp] | N | N |... |
+SERSC | Y | N | N |... |
 Springer Open | Y | N | N |... |
 
 ^1: NLM-DTD XML schema - http://dtd.nlm.nih.gov/
@@ -54,7 +54,6 @@ least for their open access journals.
 [biorxivp]: http://biorxiv.org/content/biorxiv/early/2015/07/26/023259.full.pdf
 [degrutp]: https://www.degruyter.com/downloadpdf/j/biolet.2014.51.issue-2/biolet-2015-0008/biolet-2015-0008.pdf
 [mdpip]: http://www.mdpi.com/1999-4915/7/8/2817/pdf
-[serscp]: http://www.sersc.org/journals/IJEIC/vol6_Is3/2.pdf
 [airccp]: http://airccse.org/journal/cnc/7115cnc04.pdf
 [naturep]: http://www.nature.com/articles/srep12550.pdf
 [dovep]: http://www.dovepress.com/getfile.php?fileID=24696
