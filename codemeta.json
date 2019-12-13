@@ -10,14 +10,14 @@
   "codeRepository": "https://github.com/ropensci/fulltext/",
   "issueTracker": "https://github.com/ropensci/fulltext/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
-    "version": "3.6.0",
+    "version": "3.6.2",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 3.6.0 Patched (2019-04-30 r76446)",
+  "runtimePlatform": "R version 3.6.2 Patched (2019-12-12 r77564)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
@@ -47,7 +47,7 @@
       "@type": "SoftwareApplication",
       "identifier": "roxygen2",
       "name": "roxygen2",
-      "version": ">= 6.1.1",
+      "version": ">= 7.0.2",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -298,14 +298,16 @@
   "applicationCategory": "Literature",
   "isPartOf": "https://ropensci.org",
   "keywords": ["text-mining", "literature", "pdf", "xml", "publications", "citations", "full-text", "TDM", "text-ming", "metadata", "open-access", "extract-text", "crossref", "rstats", "r", "r-package"],
-  "contIntegration": "https://travis-ci.org/ropensci/fulltext",
+  "contIntegration": ["https://travis-ci.org/ropensci/fulltext", "https://codecov.io/github/ropensci/fulltext?branch=master"],
   "releaseNotes": "https://github.com/ropensci/fulltext/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/fulltext/blob/master/README.md",
-  "fileSize": "964.859KB",
-  "developmentStatus": "active",
+  "fileSize": "966.6KB",
+  "developmentStatus": "http://www.repostatus.org/#active",
   "relatedLink": [
     "https://ropensci.github.io/fulltext-book/",
-    "https://ropenscilabs.github.io/fulltext-book/"
+    "https://ropenscilabs.github.io/fulltext-book/",
+    "https://docs.ropensci.org/fulltext",
+    "https://books.ropensci.org/fulltext/"
   ],
   "contributor": {},
   "copyrightHolder": {},

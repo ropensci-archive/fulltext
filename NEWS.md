@@ -1,3 +1,24 @@
+fulltext 1.4.0
+==============
+
+### NEW FEATURES
+
+* `ft_get()` gains a new publisher plugin: Cambridge. its not available in the `from` parameter, but if you pass in a Cambridge DOI, a plugin now exists to attempt to get the pdf (xml not provided) (#195)
+
+### MINOR IMPROVEMENTS
+
+* Wiley now provides xml (in addition to pdf) for at least some articles. So `ft_get()` for Wiley now supports `type="xml"` in addition to `type="pdf"` (#209)
+* reduce duplicated code in `ft_get` plugins for checking `type` parameter (#210)
+* changed Wiley plugin for `ft_get()`: using different URLs for attempting to fetch articles, those with base url `api.wiley.com` instead of `onlinelibrary.wiley.com` (#191)
+
+### BUG FIXES
+
+* `ft_get()` wasn't allowing `type="pdf"` for PLOS data source; now allowed in addition to xml; also plos requests for articles now using http instead of http (#205) thanks @clbti for the report
+* fix to internal fxn `fat_cat_search_one()` used inside of `ft_get()`: fixed data.frame subsetting error due to sometimes missing columns (#206)
+* fix to `ft_links()`: was erroring when publisher not supported yet; now gives back no data (#207)
+* `ft_browse()` was failing when `what="macrodocs"` selected; macrodocs.org is now dead; `what` parameter now defunct  (#208)
+
+
 fulltext 1.3.0
 ==============
 
