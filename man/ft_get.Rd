@@ -25,29 +25,29 @@ ft_get(
 ft_get_ls()
 }
 \arguments{
-\item{x}{Either identifiers for papers, either DOIs (or other ids) as a list of
-character strings, or a character vector, OR an object of class \code{ft}, as
-returned from \code{\link[=ft_search]{ft_search()}}}
+\item{x}{Either identifiers for papers, either DOIs (or other ids) as a
+list of character strings, or a character vector, OR an object of class \code{ft},
+as returned from \code{\link[=ft_search]{ft_search()}}}
 
 \item{from}{Source to query. Optional.}
 
-\item{type}{(character) one of xml (default), pdf, or plain (Elsevier and ScienceDirect only).
-We choose to go with xml as the default as it has structure that a machine
-can reason about, but you are of course free to try to get xml, pdf, or plain
-(in the case of Elsevier and ScienceDirect).}
+\item{type}{(character) one of xml (default), pdf, or plain (Elsevier
+and ScienceDirect only). We choose to go with xml as the default as it has
+structure that a machine can reason about, but you are of course free to try
+to get xml, pdf, or plain (in the case of Elsevier and ScienceDirect).}
 
-\item{try_unknown}{(logical) if publisher plugin not already known, we try to
-fetch full text link either from ftdoi.org or from Crossref. If not found at
-ftdoi.org or at Crossref we skip with a warning. If found with ftdoi.org or
-Crossref we attempt to download. Only applicable in \code{character} and \code{list}
-S3 methods. Default: \code{TRUE}}
+\item{try_unknown}{(logical) if publisher plugin not already known, we try
+to fetch full text link either from ftdoi.org or from Crossref. If not
+found at ftdoi.org or at Crossref we skip with a warning. If found with
+ftdoi.org or Crossref we attempt to download. Only applicable in
+\code{character} and \code{list} S3 methods. Default: \code{TRUE}}
 
 \item{plosopts}{PLOS options, a named list. See \code{\link[rplos:plos_fulltext]{rplos::plos_fulltext()}}}
 
 \item{bmcopts}{BMC options. parameter DEPRECATED}
 
-\item{entrezopts}{Entrez options, a named list. See \code{\link[rentrez:entrez_search]{rentrez::entrez_search()}}
-and \code{\link[=entrez_fetch]{entrez_fetch()}}}
+\item{entrezopts}{Entrez options, a named list. See
+\code{\link[rentrez:entrez_search]{rentrez::entrez_search()}} and \code{\link[=entrez_fetch]{entrez_fetch()}}}
 
 \item{elifeopts}{eLife options, a named list.}
 
@@ -63,8 +63,9 @@ that you likely don't have access.}
 
 \item{crossrefopts}{Crossref options, a named list.}
 
-\item{progress}{(logical) whether to show progress bar or not. default: \code{FALSE}. if
-\code{TRUE}, we use \code{\link[utils:txtProgressBar]{utils::txtProgressBar()}} and \link[utils:setTxtProgressBar]{utils::setTxtProgressBar}
+\item{progress}{(logical) whether to show progress bar or not.
+default: \code{FALSE}. if \code{TRUE}, we use \code{\link[utils:txtProgressBar]{utils::txtProgressBar()}} and
+\link[utils:setTxtProgressBar]{utils::setTxtProgressBar}
 to create the progress bar; and each progress bar connection is closed
 on function exit. A progress bar is run for each data source.
 Works for all S3 methods except \code{ft_get.links}. When articles are not
@@ -77,12 +78,13 @@ not interrupt the progress bar.}
 }
 \value{
 An object of class \code{ft_data} (of type \code{S3}) with slots for
-each of the publishers. The returned object is split up by publishers because
-the full text format is the same within publisher - which should facilitate
-text mining downstream as different steps may be needed for each publisher's
-content.
+each of the publishers. The returned object is split up by publishers
+because the full text format is the same within publisher - which should
+facilitate text mining downstream as different steps may be needed for
+each publisher's content.
 
-Note that we have a print method for \code{ft_data} so you see something like this:\preformatted{<fulltext text>
+Note that we have a print method for \code{ft_data} so you see something
+like this:\preformatted{<fulltext text>
 [Docs] 4
 [Source] ext - /Users/foobar/Library/Caches/R/fulltext
 [IDs] 10.2307/1592482 10.2307/1119209 10.1037/11755-024 ...
@@ -252,9 +254,10 @@ ft_get('10.7717/peerj.228', type = "pdf")
 ## eLife
 ### xml
 ft_get('10.7554/eLife.03032')
-res <- ft_get(c('10.7554/eLife.03032', '10.7554/eLife.32763'), from = "elife")
+res <- ft_get(c('10.7554/eLife.03032', '10.7554/eLife.32763'),
+from = "elife")
 res$elife
-respdf <- ft_get(c('10.7554/eLife.03032', '10.7554/eLife.32763'), 
+respdf <- ft_get(c('10.7554/eLife.03032', '10.7554/eLife.32763'),
   from = "elife", type = "pdf")
 respdf$elife
 
@@ -263,7 +266,7 @@ library(magrittr)
 elife_xml \%<>\% ft_collect()
 elife_xml$elife
 ### pdf
-elife_pdf <- ft_get(c('10.7554/eLife.03032', '10.7554/eLife.32763'), 
+elife_pdf <- ft_get(c('10.7554/eLife.03032', '10.7554/eLife.32763'),
   from = "elife", type = "pdf")
 elife_pdf$elife
 elife_pdf \%<>\% ft_collect()
@@ -278,7 +281,8 @@ res
 res$frontiersin
 
 ## Hindawi - via Entrez
-res <- ft_get(c('10.1155/2014/292109','10.1155/2014/162024', '10.1155/2014/249309'))
+res <- ft_get(c('10.1155/2014/292109','10.1155/2014/162024',
+'10.1155/2014/249309'))
 res
 res$hindawi
 res$hindawi$data$path
@@ -315,7 +319,7 @@ x$karger
 (x <- ft_get('10.3390/nu3010063'))
 x$mdpi
 ft_get('10.3390/nu7085279')
-ft_get(c('10.3390/nu3010063', '10.3390/nu7085279')) # not working, only getting 1
+ft_get(c('10.3390/nu3010063', '10.3390/nu7085279'))
 
 # Scientific Societies
 ## this is a paywall article, you may not have access or you may
@@ -331,7 +335,8 @@ ft_get('10.1080/23311916.2014.938430')
 
 library(rplos)
 (dois <- searchplos(q="*:*", fl='id',
-   fq=list('doc_type:full',"article_type:\"research article\""), limit=5)$data$id)
+   fq=list('doc_type:full',"article_type:\"research article\""),
+   limit=5)$data$id)
 ft_get(dois, from='plos')
 ft_get(c('10.7717/peerj.228','10.7717/peerj.234'), from='entrez')
 
@@ -347,7 +352,8 @@ doi <- '10.3389/fphar.2014.00109'
 ft_get(doi, from="entrez")
 
 # Hindawi Journals
-ft_get(c('10.1155/2014/292109','10.1155/2014/162024','10.1155/2014/249309'), from='entrez')
+ft_get(c('10.1155/2014/292109','10.1155/2014/162024','10.1155/2014/249309'),
+from='entrez')
 res <- ft_search(query='ecology', from='crossref', limit=20,
                  crossrefopts = list(filter=list(has_full_text = TRUE,
                                                  member=98,
@@ -374,12 +380,12 @@ ft_get(res)
 ### an open access article
 ft_get(x = "10.1016/j.trac.2016.01.027", from = "elsevier")
 ### non open access article
-#### If you don't have access, by default you get abstract only, and we 
+#### If you don't have access, by default you get abstract only, and we
 ##### treat it as an error as we assume you want full text
 ft_get(x = "10.1016/j.trac.2016.05.027", from = "elsevier")
 #### If you want to retain whatever Elsevier gives you
 ##### set "retain_non_ft = TRUE"
-ft_get(x = "10.1016/j.trac.2016.05.027", from = "elsevier", 
+ft_get(x = "10.1016/j.trac.2016.05.027", from = "elsevier",
   elsevieropts = list(retain_non_ft = TRUE))
 
 # sciencedirect
@@ -455,10 +461,12 @@ res[[1]]
 # Get a progress bar - off by default
 library(rplos)
 (dois <- searchplos(q="*:*", fl='id',
-   fq=list('doc_type:full',"article_type:\"research article\""), limit=5)$data$id)
+   fq=list('doc_type:full',"article_type:\"research article\""),
+   limit=5)$data$id)
 ## when articles not already downloaded you see the progress bar
 b <- ft_get(dois, from='plos', progress = TRUE)
-## if articles already downloaded/cached, normally we through messages saying so
+## if articles already downloaded/cached, normally we through messages
+## saying so
 b <- ft_get(dois, from='plos', progress = FALSE)
 ## but if a progress bar is requested, then the messages are suppressed
 b <- ft_get(dois, from='plos', progress = TRUE)
