@@ -46,6 +46,14 @@ ft_table <- function(path = NULL, type = NULL, encoding = NULL, xml_extract_text
 }
 
 # helpers ---------------
+check_read <- function(z, path) {
+  if (inherits(z, "error")) {
+    warning(path, " malformed, could not read", call. = FALSE)
+    return(TRUE)
+  }
+  return(FALSE)
+}
+
 reader <- function(x, encoding, xml_extract_text) {
   # switch reader based on file extension
   switch(
@@ -57,13 +65,17 @@ reader <- function(x, encoding, xml_extract_text) {
 }
 
 pdf_reader <- function(x) {
-  txt <- paste0(pdftools::pdf_text(x), collapse = "\n")
+  tp <- tryCatch(pdftools::pdf_text(x), error = function(e) e)
+  if (check_read(tp, x)) return(character(1))
+  txt <- paste0(tp, collapse = "\n")
   Encoding(txt) <- "UTF-8"
   return(txt)
 }
 
 xml_reader <- function(x, encoding) {
-  xml2::xml_text(xml2::read_xml(x, encoding = encoding))
+  tp <- tryCatch(xml2::read_xml(x, encoding = encoding), error = function(e) e)
+  if (check_read(tp, x)) return(character(1))
+  xml2::xml_text(tp)
 }
 
 txt_reader <- function(x) {

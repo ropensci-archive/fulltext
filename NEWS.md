@@ -17,6 +17,7 @@ fulltext 1.4.0
 * fix to internal fxn `fat_cat_search_one()` used inside of `ft_get()`: fixed data.frame subsetting error due to sometimes missing columns (#206)
 * fix to `ft_links()`: was erroring when publisher not supported yet; now gives back no data (#207)
 * `ft_browse()` was failing when `what="macrodocs"` selected; macrodocs.org is now dead; `what` parameter now defunct  (#208)
+* fix `ft_table()` - was failing on reading malformed files (e.g., an xml file with pdf content inside)  (#211)
 
 
 fulltext 1.3.0
