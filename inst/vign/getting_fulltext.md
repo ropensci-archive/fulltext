@@ -32,8 +32,7 @@ data from more than 1 data source.
 
 ```r
 names(res)
-#> [1] "plos"     "entrez"   "elife"    "pensoft"  "arxiv"    "biorxiv" 
-#> [7] "elsevier" "wiley"
+#> [1] "plos"          "entrez"        "elife"         "pensoft"       "arxiv"         "biorxiv"       "elsevier"      "sciencedirect" "wiley"
 ```
 
 Let's dig into the `plos` source object, which is another list, including metadata the 
@@ -163,16 +162,12 @@ You can get a bunch of DOIs first, e.g., from PLOS using the `rplos` package
 library("rplos")
 (dois <- searchplos(q = "*:*", fl = 'id',
    fq = list('doc_type:full', "article_type:\"research article\""), limit = 5)$data$id)
-#> [1] "10.1371/journal.pone.0044136" "10.1371/journal.pone.0155491"
-#> [3] "10.1371/journal.pone.0058100" "10.1371/journal.pone.0168627"
-#> [5] "10.1371/journal.pone.0184491"
+#> [1] "10.1371/journal.pone.0020843" "10.1371/journal.pone.0022257" "10.1371/journal.pone.0023139" "10.1371/journal.pone.0023138" "10.1371/journal.pone.0023119"
 ft_get(dois, from = 'plos')
 #> <fulltext text>
 #> [Docs] 5 
 #> [Source] ext - /Users/sckott/Library/Caches/R/fulltext 
-#> [IDs] 10.1371/journal.pone.0044136 10.1371/journal.pone.0155491
-#>      10.1371/journal.pone.0058100 10.1371/journal.pone.0168627
-#>      10.1371/journal.pone.0184491 ...
+#> [IDs] 10.1371/journal.pone.0020843 10.1371/journal.pone.0022257 10.1371/journal.pone.0023139 10.1371/journal.pone.0023138 10.1371/journal.pone.0023119 ...
 ```
 
 ## Different data sources
@@ -223,15 +218,12 @@ For example, search entrez, get some DOIs, then fetch some articles
 #> Query:
 #>   [ecology] 
 #> Found:
-#>   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 163320; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
+#>   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 185437; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
 #> Returned:
 #>   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 10; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0]
 res$entrez$data$doi
-#>  [1] "10.1155/2018/8930374"       "10.1155/2018/4519094"      
-#>  [3] "10.1038/s41467-018-08039-3" "10.1038/s41467-018-08232-4"
-#>  [5] "10.1038/s41467-018-08188-5" "10.1038/s41598-018-36133-5"
-#>  [7] "10.1038/s41598-018-37331-x" "10.1038/sdata.2018.309"    
-#>  [9] "10.1038/sdata.2018.299"     "10.1038/s41467-018-08237-z"
+#>  [1] "10.3748/wjg.v25.i45.6579"    "10.1038/s41467-019-13800-3"  "10.7554/eLife.49826"         "10.5365/wpsar.2018.9.5.005"  "10.1038/s41598-019-55147-1" 
+#>  [6] "10.1038/s41598-019-54857-w"  "10.1038/s41598-019-55028-7"  "10.1038/s41598-019-55204-9"  "10.5423/PPJ.OA.05.2019.0129" "10.5423/PPJ.NT.08.2019.0216"
 ```
 
 Get articles
@@ -242,7 +234,7 @@ ft_get(res$entrez$data$doi[1:3], from = 'entrez')
 #> <fulltext text>
 #> [Docs] 3 
 #> [Source] ext - /Users/sckott/Library/Caches/R/fulltext 
-#> [IDs] 6313974 6312606 6335468 ...
+#> [IDs] 6906207 6904573 6904214 ...
 ```
 
 ## Collect full text from file on disk
@@ -283,8 +275,8 @@ res$plos$data$data
 #> $`10.1371/journal.pone.0086169`
 #> {xml_document}
 #> <article article-type="research-article" dtd-version="3.0" lang="en" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:xlink="http://www.w3.org/1999/xlink">
-#> [1] <front>\n  <journal-meta>\n    <journal-id journal-id-type="nlm-ta"> ...
-#> [2] <body>\n  <sec id="s1">\n    <title>Introduction</title>\n    <p>Sin ...
-#> [3] <back>\n  <ack>\n    <p>We thank Joan Silk, Julienne Rutherford, and ...
+#> [1] <front>\n  <journal-meta>\n    <journal-id journal-id-type="nlm-ta">PLoS ONE</journal-id>\n    <journal-id journal-id-type="publisher-id">plos</journal-id>\n    <journal-id j ...
+#> [2] <body>\n  <sec id="s1">\n    <title>Introduction</title>\n    <p>Since the 1970s, biologists have directed substantial research effort to understanding adaptive sex-biased al ...
+#> [3] <back>\n  <ack>\n    <p>We thank Joan Silk, Julienne Rutherford, and two anonymous reviewers for their comments on earlier drafts of the manuscript.</p>\n  </ack>\n  <ref-lis ...
 ```
 

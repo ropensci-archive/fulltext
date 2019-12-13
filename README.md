@@ -10,12 +10,11 @@ _/ ____\_ __|  | |  |_/  |_  ____ ___  ____/  |_
 ```
 
 [![cran checks](https://cranchecks.info/badges/worst/fulltext)](https://cranchecks.info/pkgs/fulltext)
-[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Build Status](https://api.travis-ci.org/ropensci/fulltext.svg)](https://travis-ci.org/ropensci/fulltext)
-<!-- [![Build status](https://ci.appveyor.com/api/projects/status/y487h3ec5wc2s20m/branch/master?svg=true)](https://ci.appveyor.com/project/sckott/fulltext/branch/master) -->
 [![codecov.io](https://codecov.io/github/ropensci/fulltext/coverage.svg?branch=master)](https://codecov.io/github/ropensci/fulltext?branch=master)
-[![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/fulltext)](https://github.com/metacran/cranlogs.app)
-[![cran version](http://www.r-pkg.org/badges/version/fulltext)](https://cran.r-project.org/package=fulltext)
+[![rstudio mirror downloads](https://cranlogs.r-pkg.org/badges/fulltext)](https://github.com/metacran/cranlogs.app)
+[![cran version](https://www.r-pkg.org/badges/version/fulltext)](https://cran.r-project.org/package=fulltext)
 
 __Get full text articles from lots of places__
 
@@ -99,7 +98,7 @@ ft_search(query = 'ecology', from = 'crossref')
 #> Query:
 #>   [ecology] 
 #> Found:
-#>   [PLoS: 0; BMC: 0; Crossref: 200919; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
+#>   [PLoS: 0; BMC: 0; Crossref: 201140; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
 #> Returned:
 #>   [PLoS: 0; BMC: 0; Crossref: 10; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0]
 ```
@@ -113,8 +112,8 @@ ft_search(query = 'ecology', from = 'crossref')
 res1 <- ft_search(query = 'biology', from = 'entrez', limit = 5)
 ft_links(res1)
 #> <fulltext links>
-#> [Found] 4 
-#> [IDs] ID_31167059 ID_31118290 ID_22393938 ID_11673890 ...
+#> [Found] 5 
+#> [IDs] ID_31472450 ID_30692680 ID_30656621 ID_29887338 ID_28674916 ...
 ```
 
 Or pass in DOIs directly
@@ -123,8 +122,8 @@ Or pass in DOIs directly
 ```r
 ft_links(res1$entrez$data$doi, from = "entrez")
 #> <fulltext links>
-#> [Found] 4 
-#> [IDs] ID_31167059 ID_31118290 ID_22393938 ID_11673890 ...
+#> [Found] 5 
+#> [IDs] ID_31472450 ID_30692680 ID_30656621 ID_29887338 ID_28674916 ...
 ```
 
 ## Get full text
@@ -250,7 +249,7 @@ quanteda::corpus(x)
 
 ## Contributors
 
-* Scott Chamberlain <http://github.com/sckott>
+* Scott Chamberlain <https://github.com/sckott>
 * Will Pearse <https://github.com/willpearse>
 * Katrin Leinweber <https://github.com/katrinleinweber>
 

@@ -34,7 +34,7 @@ Search for the term _ecology_ in PLOS journals.
 #> Query:
 #>   [ecology] 
 #> Found:
-#>   [PLoS: 46354; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
+#>   [PLoS: 50330; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
 #> Returned:
 #>   [PLoS: 10; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0]
 ```
@@ -45,19 +45,19 @@ Each publisher/search-engine has a slot with metadata and data
 ```r
 res1$plos
 #> Query: [ecology] 
-#> Records found, returned: [46354, 10] 
+#> Records found, returned: [50330, 10] 
 #> License: [CC-BY] 
 #>                              id
 #> 1  10.1371/journal.pone.0001248
 #> 2  10.1371/journal.pone.0059813
-#> 3  10.1371/journal.pone.0155019
-#> 4  10.1371/journal.pone.0080763
-#> 5  10.1371/journal.pone.0150648
-#> 6  10.1371/journal.pcbi.1003594
-#> 7  10.1371/journal.pone.0102437
-#> 8  10.1371/journal.pone.0175014
-#> 9  10.1371/journal.pone.0166559
-#> 10 10.1371/journal.pone.0054689
+#> 3  10.1371/journal.pone.0080763
+#> 4  10.1371/journal.pone.0220747
+#> 5  10.1371/journal.pone.0155019
+#> 6  10.1371/journal.pone.0175014
+#> 7  10.1371/journal.pone.0150648
+#> 8  10.1371/journal.pone.0208370
+#> 9  10.1371/journal.pcbi.1003594
+#> 10 10.1371/journal.pone.0102437
 ```
 
 ## Get full text
@@ -70,11 +70,8 @@ Using the results from `ft_search()` we can grab full text of some articles
 #> <fulltext text>
 #> [Docs] 10 
 #> [Source] ext - /Users/sckott/Library/Caches/R/fulltext 
-#> [IDs] 10.1371/journal.pone.0001248 10.1371/journal.pone.0059813
-#>      10.1371/journal.pone.0155019 10.1371/journal.pone.0080763
-#>      10.1371/journal.pone.0150648 10.1371/journal.pcbi.1003594
-#>      10.1371/journal.pone.0102437 10.1371/journal.pone.0175014
-#>      10.1371/journal.pone.0166559 10.1371/journal.pone.0054689 ...
+#> [IDs] 10.1371/journal.pone.0001248 10.1371/journal.pone.0059813 10.1371/journal.pone.0080763 10.1371/journal.pone.0220747 10.1371/journal.pone.0155019 10.1371/journal.pone.0175014
+#>      10.1371/journal.pone.0150648 10.1371/journal.pone.0208370 10.1371/journal.pcbi.1003594 10.1371/journal.pone.0102437 ...
 ```
 
 Dig in to the PLOS data
@@ -107,7 +104,7 @@ You can extract from any pdf from a file path, like:
 ```r
 path <- system.file("examples", "example1.pdf", package = "fulltext")
 ft_extract(path)
-#> <document>/Library/Frameworks/R.framework/Versions/3.5/Resources/library/fulltext/examples/example1.pdf
+#> <document>/Library/Frameworks/R.framework/Versions/3.6/Resources/library/fulltext/examples/example1.pdf
 #>   Title: Suffering and mental health among older people living in nursing homes---a mixed-methods study
 #>   Producer: pdfTeX-1.40.10
 #>   Creation date: 2015-07-17
@@ -159,62 +156,42 @@ x %>% ft_collect() %>% pub_chunks(c("doi", "history")) %>% pub_tabularize()
 }
 #> $plos
 #> $plos$`10.1371/journal.pone.0001248`
-#>                            doi history.received history.accepted
-#> 1 10.1371/journal.pone.0001248       2007-07-02       2007-11-06
-#>   .publisher
-#> 1       plos
+#>                            doi history.received history.accepted .publisher
+#> 1 10.1371/journal.pone.0001248       2007-07-02       2007-11-06       plos
 #> 
 #> $plos$`10.1371/journal.pone.0059813`
-#>                            doi history.received history.accepted
-#> 1 10.1371/journal.pone.0059813       2012-09-16       2013-02-19
-#>   .publisher
-#> 1       plos
-#> 
-#> $plos$`10.1371/journal.pone.0155019`
-#>                            doi history.received history.accepted
-#> 1 10.1371/journal.pone.0155019       2015-09-22       2016-04-22
-#>   .publisher
-#> 1       plos
+#>                            doi history.received history.accepted .publisher
+#> 1 10.1371/journal.pone.0059813       2012-09-16       2013-02-19       plos
 #> 
 #> $plos$`10.1371/journal.pone.0080763`
-#>                            doi history.received history.accepted
-#> 1 10.1371/journal.pone.0080763       2013-08-15       2013-10-16
-#>   .publisher
-#> 1       plos
+#>                            doi history.received history.accepted .publisher
+#> 1 10.1371/journal.pone.0080763       2013-08-15       2013-10-16       plos
 #> 
-#> $plos$`10.1371/journal.pone.0150648`
-#>                            doi history.received history.accepted
-#> 1 10.1371/journal.pone.0150648       2015-09-19       2016-02-16
-#>   .publisher
-#> 1       plos
+#> $plos$`10.1371/journal.pone.0220747`
+#>                            doi history.received history.accepted .publisher
+#> 1 10.1371/journal.pone.0220747       2019-04-17       2019-07-21       plos
 #> 
-#> $plos$`10.1371/journal.pcbi.1003594`
-#>                            doi history.received history.accepted
-#> 1 10.1371/journal.pcbi.1003594       2014-01-09       2014-03-14
-#>   .publisher
-#> 1       plos
-#> 
-#> $plos$`10.1371/journal.pone.0102437`
-#>                            doi history.received history.accepted
-#> 1 10.1371/journal.pone.0102437       2013-11-27       2014-06-19
-#>   .publisher
-#> 1       plos
+#> $plos$`10.1371/journal.pone.0155019`
+#>                            doi history.received history.accepted .publisher
+#> 1 10.1371/journal.pone.0155019       2015-09-22       2016-04-22       plos
 #> 
 #> $plos$`10.1371/journal.pone.0175014`
-#>                            doi history.received history.accepted
-#> 1 10.1371/journal.pone.0175014       2016-09-23       2017-03-20
-#>   .publisher
-#> 1       plos
+#>                            doi history.received history.accepted .publisher
+#> 1 10.1371/journal.pone.0175014       2016-09-23       2017-03-20       plos
 #> 
-#> $plos$`10.1371/journal.pone.0166559`
-#>                            doi history.received history.accepted
-#> 1 10.1371/journal.pone.0166559       2016-06-05       2016-10-30
-#>   .publisher
-#> 1       plos
+#> $plos$`10.1371/journal.pone.0150648`
+#>                            doi history.received history.accepted .publisher
+#> 1 10.1371/journal.pone.0150648       2015-09-19       2016-02-16       plos
 #> 
-#> $plos$`10.1371/journal.pone.0054689`
-#>                            doi history.received history.accepted
-#> 1 10.1371/journal.pone.0054689       2012-03-22       2012-12-17
-#>   .publisher
-#> 1       plos
+#> $plos$`10.1371/journal.pone.0208370`
+#>                            doi history.received history.accepted .publisher
+#> 1 10.1371/journal.pone.0208370       2018-11-13       2019-01-15       plos
+#> 
+#> $plos$`10.1371/journal.pcbi.1003594`
+#>                            doi history.received history.accepted .publisher
+#> 1 10.1371/journal.pcbi.1003594       2014-01-09       2014-03-14       plos
+#> 
+#> $plos$`10.1371/journal.pone.0102437`
+#>                            doi history.received history.accepted .publisher
+#> 1 10.1371/journal.pone.0102437       2013-11-27       2014-06-19       plos
 ```
