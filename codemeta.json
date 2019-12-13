@@ -301,8 +301,8 @@
   "contIntegration": ["https://travis-ci.org/ropensci/fulltext", "https://codecov.io/github/ropensci/fulltext?branch=master"],
   "releaseNotes": "https://github.com/ropensci/fulltext/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/fulltext/blob/master/README.md",
-  "fileSize": "966.6KB",
-  "developmentStatus": "http://www.repostatus.org/#active",
+  "fileSize": "966.852KB",
+  "developmentStatus": "https://www.repostatus.org/#active",
   "relatedLink": [
     "https://ropensci.github.io/fulltext-book/",
     "https://ropenscilabs.github.io/fulltext-book/",
