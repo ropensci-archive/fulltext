@@ -204,6 +204,7 @@ plugin_get_amersocmicrobiol <- plugin_get_generator("amersocmicrobiol", amersocm
 plugin_get_amersocclinoncol <- plugin_get_generator("amersocclinoncol", amersocclinoncol_ft)
 plugin_get_instinvestfil <- plugin_get_generator("instinvestfil", instinvestfil_ft)
 plugin_get_aip <- plugin_get_generator("aip", aip_ft)
+plugin_get_cambridge <- plugin_get_generator("cambridge", cambridge_ft)
 
 # lapply replacement with progress bar: actual a for loop internally
 plapply <- function(x, FUN, type = NULL, progress = FALSE, ...) {
@@ -776,6 +777,31 @@ aip_ft <- function(dois, type = "pdf", progress = FALSE, ...) {
   plapply(dois, aip_fun, type, progress, ...)
 }
 
+# type: only pdf (type parameter is ignored)
+cambridge_ft <- function(dois, type = "pdf", progress = FALSE, ...) {
+  cambridge_fun <- function(x, type, progress, ...) {
+    path <- make_key(x, 'pdf')
+    if (file.exists(path) && !cache_options_get()$overwrite) {
+      if (!progress) message(paste0("path exists: ", path))
+      return(ft_object(path, x, 'pdf'))
+    }
+    res <- tcat(crul::HttpClient$new(url = paste0("https://doi.org/", x),
+      opts=list(followlocation=1))$get())
+    if (inherits(res, c("error", "warning")) || !res$success()) {
+      mssg <- if (inherits(res, c("error", "warning"))) res$message else http_mssg(res)
+      return(ft_error(mssg, x))
+    }
+    html <- xml2::read_html(res$parse("UTF-8"))
+    node <- xml2::xml_find_first(html, "//meta[@name=\"citation_pdf_url\"]")
+    url <- xml2::xml_attr(node, "content")
+    if (all(is.na(url))) {
+      mssg <- "no pdf link found or you may not have access to the article"
+      return(ft_error(mssg, x))
+    }
+    get_ft(x = x, type = 'pdf', url = url, path = path, ...)
+  }
+  plapply(dois, cambridge_fun, type, progress, ...)
+}
 
 # special Crossref plugin to try any DOI
 crossref_ft <- function(dois, type, progress = FALSE, ...) {

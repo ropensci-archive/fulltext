@@ -173,6 +173,7 @@ they only accept one type. By data source/publisher:
 \item FrontiersIn: pdf and xml
 \item Copernicus: pdf and xml
 \item Scientific Societies: only pdf
+\item Cambridge: only pdf
 \item Crossref: depends on the publisher
 \item other data sources/publishers: there are too many to cover here - will
 try to make a helper in the future for what is covered by different
@@ -434,6 +435,16 @@ ress$plos
 ress$plos$dois
 ress$plos$data
 ress$plos$data$path$`10.1371/journal.pone.0059813`
+
+## Cambridge
+x <- ft_get("10.1017/s0922156598230305")
+x$cambridge
+z <- ft_get("10.1017/jmo.2019.20")
+z$cambridge
+w <- ft_get("10.1017/jmo.2019.20")
+w$cambridge
+m <- ft_get("10.1017/S0266467419000270")
+m$cambridge
 
 ## No publisher plugin provided yet
 ft_get('10.1037/10740-005')

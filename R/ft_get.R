@@ -132,6 +132,7 @@
 #' - FrontiersIn: pdf and xml
 #' - Copernicus: pdf and xml
 #' - Scientific Societies: only pdf
+#' - Cambridge: only pdf
 #' - Crossref: depends on the publisher
 #' - other data sources/publishers: there are too many to cover here - will 
 #' try to make a helper in the future for what is covered by different 
@@ -378,6 +379,16 @@
 #' ress$plos$dois
 #' ress$plos$data
 #' ress$plos$data$path$`10.1371/journal.pone.0059813`
+#' 
+#' ## Cambridge
+#' x <- ft_get("10.1017/s0922156598230305")
+#' x$cambridge
+#' z <- ft_get("10.1017/jmo.2019.20")
+#' z$cambridge
+#' w <- ft_get("10.1017/jmo.2019.20")
+#' w$cambridge
+#' m <- ft_get("10.1017/S0266467419000270")
+#' m$cambridge
 #' 
 #' ## No publisher plugin provided yet
 #' ft_get('10.1037/10740-005')
@@ -700,7 +711,8 @@ publisher_plugin <- function(x) {
     `235` = plugin_get_amersocmicrobiol,
     `233` = plugin_get_amersocclinoncol,
     `8215` = plugin_get_instinvestfil,
-    `317` = plugin_get_aip
+    `317` = plugin_get_aip,
+    `56` = plugin_get_cambridge
   )
 }
 
@@ -737,6 +749,7 @@ get_pub_name <- function(x) {
          `2997` = "koreanacper",
          `175` = "rsoc",
          `1822` = "cdc",
+         `56` = "cambridge",
          "crossref"
   )
 }
@@ -770,6 +783,7 @@ get_tm_name <- function(x) {
          `233` = "amersocclinoncol",
          `8215` = "instinvestfil",
          `317` = "aip",
+         `56` = "cambridge",
          "crossref"
   )
 }
