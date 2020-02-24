@@ -7,14 +7,8 @@ knitr::opts_chunk$set(
 )
 ```
 
-```
-  _____     .__  .__   __                   __
-_/ ____\_ __|  | |  |_/  |_  ____ ___  ____/  |_
-\   __\  |  \  | |  |\   __\/ __ \\  \/  /\   __\
- |  | |  |  /  |_|  |_|  | \  ___/ >    <  |  |
- |__| |____/|____/____/__|  \___  >__/\_ \ |__|
-                                \/      \/
-```
+fulltext
+========
 
 [![cran checks](https://cranchecks.info/badges/worst/fulltext)](https://cranchecks.info/pkgs/fulltext)
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
