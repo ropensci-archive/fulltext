@@ -1,5 +1,5 @@
 flds <- c('doi', 'container_issnl', 'container_name', 'publisher')
-dois1 <- c('10.7554/eLife.03032', '10.7554/eLife.32763') # not found
+dois1 <- c('10.7554/eLife.030326', '10.7554/eLife.327636') # not found
 dois2 <- c('10.7717/peerj.228','10.7717/peerj.234') # found
 
 test_that("fat_cat_search_one", {

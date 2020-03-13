@@ -838,7 +838,8 @@ fat_cat_search_one <- function(dois, fields, size) {
   df <- out[, fields]
   df$message <- rep(NA_character_, NROW(df))
   # add rows for DOIs not found
-  not_found <- dois[!dois %in% out$doi]
+  doisstl <- tolower(sort(dois))
+  not_found <- doisstl[!doisstl %in% tolower(sort(out$doi))]
   if (length(not_found) > 0) {
     for (i in not_found) df <- rbind(df, c(i, "", "", "", "not found"))
   }
@@ -893,7 +894,7 @@ get_publisher2 <- function(x, ...) {
     prefix <- strextract(x[i], "[0-9]{2}\\.[0-9]+")
     mm <- mems[[which(prefix == vapply(mems, "[[", "", "prefix"))]]
     id <- mm$member
-    fcm <- fc_res[[which(x[[i]] == vapply(fc_res, "[[", "", "doi"))]]
+    fcm <- fc_res[[which(tolower(x[[i]]) == tolower(vapply(fc_res, "[[", "", "doi")))]]
     attr(id, "publisher") <- mm$name %||% ""
     attr(id, "issn") <- fcm$container_issnl %||% ""
     attr(id, "error") <- fcm$message
