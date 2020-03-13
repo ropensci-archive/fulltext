@@ -1,5 +1,5 @@
 #' Scopus search
-#' 
+#'
 #' @name scopus_search
 #' @keywords internal
 #' @param query (character) query terms, as a single character vector
@@ -7,42 +7,42 @@
 #' @param start (integer/numeric) offset value, default: 0
 #' @param type (character) type of search, default: search
 #' @param search_type (character) search type, default: scopus
-#' @param facets (list) facets, see 
-#' https://dev.elsevier.com/tecdoc_api_facets.html for how to construct 
+#' @param facets (list) facets, see
+#' https://dev.elsevier.com/tecdoc_api_facets.html for how to construct
 #' facet queries
-#' @param view the fields to return, see 
-#' https://dev.elsevier.com/guides/ScopusSearchViews.htm 
-#' @param date Represents the date range associated with the search, 
+#' @param view the fields to return, see
+#' https://dev.elsevier.com/guides/ScopusSearchViews.htm
+#' @param date Represents the date range associated with the search,
 #' with the lowest granularity being year. e.g. 2002-2007
-#' @param sort Represents the sort field name and order. A plus in front of 
-#' the sort field name indicates ascending order, a minus indicates 
-#' descending order. If sort order is not specified (i.e. no + or -) then 
-#' the order defaults to ascending (ASC). Up to three fields can be 
-#' specified, each delimited by a comma. The precedence is determined by 
-#' their order (i.e. first is primary, second is secondary, and 
+#' @param sort Represents the sort field name and order. A plus in front of
+#' the sort field name indicates ascending order, a minus indicates
+#' descending order. If sort order is not specified (i.e. no + or -) then
+#' the order defaults to ascending (ASC). Up to three fields can be
+#' specified, each delimited by a comma. The precedence is determined by
+#' their order (i.e. first is primary, second is secondary, and
 #' third is tertiary). . e.g., "overDate,-title"
-#' @param content filter specific categories of content that should be 
+#' @param content filter specific categories of content that should be
 #' searched/returned. one of: core, dummy, all (default)
-#' @param subj the subject area code associated with the content category 
-#' desired. Note that these subject code mapping vary based upon the 
+#' @param subj the subject area code associated with the content category
+#' desired. Note that these subject code mapping vary based upon the
 #' environment in which the request is executed. See Details for choices.
-#' @param key (character) api key. get a key at 
+#' @param key (character) api key. get a key at
 #' <https://dev.elsevier.com/index.html>
 #' @param ... curl options passed on to [crul::HttpClient]
-#' 
+#'
 #' @details Rate limits for search are 20,000 per every 7 days. You likely
 #' won't make that many requests in 7 days, but if you do e.g., make 20K in
-#' 5 days, then you have to wait 2 days for the clock to reset, than you'll 
-#' be able to make 20K again. 
-#' 
-#' See <https://dev.elsevier.com/api_key_settings.html> for rate 
+#' 5 days, then you have to wait 2 days for the clock to reset, than you'll
+#' be able to make 20K again.
+#'
+#' See <https://dev.elsevier.com/api_key_settings.html> for rate
 #' limit information.
-#' 
+#'
 #' See <https://dev.elsevier.com/tips/ScopusSearchTips.htm> for help/tips
 #' on searching
-#' 
+#'
 #' @section subj choices include:
-#' 
+#'
 #' - AGRI: Agricultural and Biological Sciences
 #' - ARTS: Arts and Humanities
 #' - BIOC: Biochemistry, Genetics and Molecular Biology
@@ -70,16 +70,16 @@
 #' - SOCI: Social Sciences
 #' - VETE: Veterinary
 #' - MULT: Multidisciplinary
-#' 
+#'
 #' @examples \dontrun{
 #' res <- scopus_search(query = "ecology")
 #' res
-#' 
+#'
 #' #scopus_search(query = x, type = "abstract")
-#' 
+#'
 #' # looping through
 #' res <- scopus_search_loop(query = "ecology community elk cow")
-#' 
+#'
 #' # using facets
 #' ## scopus_search
 #' res <- scopus_search(query = "ecology", facets = "subjarea(count=5)")
@@ -87,48 +87,53 @@
 #' res$`search-results`$link
 #' res$`search-results`$entry
 #' res$`search-results`$facet
-#' 
+#'
 #' ## more examples
-#' x <- scopus_search(query = "ecology", facets = "language(count=4)", count = 1)
+#' x <- scopus_search(query = "ecology", facets = "language(count=4)",
+#'   count = 1)
 #' x$`search-results`$facet
-#' x <- scopus_search(query = "ecology", facets = "pubyear(count=3);doctype();language(count=4)")
+#' x <- scopus_search(query = "ecology",
+#'   facets = "pubyear(count=3);doctype();language(count=4)")
 #' x$`search-results`$facet
-#' 
+#'
 #' ## scopus_search_loop
-#' res <- scopus_search_loop(query = "ecology", facets = "subjarea(count=5)", count = 200)
+#' res <- scopus_search_loop(query = "ecology", facets = "subjarea(count=5)",
+#'   count = 200)
 #' res$found
 #' head(res$results)
+#' NROW(res$results)
 #' res$facets
-#' 
+#'
 #' # sort
 #' x <- scopus_search(query = "ecology", sort = "-title")
 #' }
 
 #' @export
-scopus_search <- function(query = NULL, count = 25, start = 0, type = "search", 
-  search_type = "scopus", facets = NULL, view = NULL, date = NULL, 
+scopus_search <- function(query = NULL, count = 25, start = 0, type = "search",
+  search_type = "scopus", facets = NULL, view = NULL, date = NULL,
   sort = NULL, content = NULL, subj = NULL, key = NULL, ...) {
 
   key <- check_key_scopus(key)
   if (count > 25) stop("'count' for Scopus must be 25 or less", call. = FALSE)
-  args <- ft_compact(list(query = query, count = count, start = start, 
-    facets = facets, view = view, date = date, sort = sort, 
+  args <- ft_compact(list(query = query, count = count, start = start,
+    facets = facets, view = view, date = date, sort = sort,
     content = content, subj = subj))
-  scopus_get(file.path(scopus_base(), "search/scopus"), args, key, list(), ...)
+  scopus_get(file.path(scopus_base(), "search/scopus"), args, key,
+    list(), ...)
 }
 
 #' @export
 #' @rdname scopus_search
-scopus_search_loop <- function(query = NULL, count = 25, start = 0, type = "search", 
-  search_type = "scopus", facets = NULL, view = NULL, date = NULL, 
-  sort = NULL, content = NULL, subj = NULL, key = NULL, ... ) {
+scopus_search_loop <- function(query = NULL, count = 25, start = 0,
+  type = "search", search_type = "scopus", facets = NULL, view = NULL,
+  date = NULL, sort = NULL, content = NULL, subj = NULL, key = NULL, ... ) {
 
   key <- check_key_scopus(key)
   lim <- if (count > 25) 25 else count
-  args <- ft_compact(list(query = query, count = lim, start = start, 
-    facets = facets, view = view, date = date, sort = sort, 
+  args <- ft_compact(list(query = query, count = lim, start = start,
+    facets = facets, view = view, date = date, sort = sort,
     content = content, subj = subj))
-  
+
   url <- file.path(scopus_base(), "search/scopus")
   out <- outfacet <- list()
   end <- FALSE
@@ -162,7 +167,7 @@ scopus_abstract <- function(x, key, id_type = "doi", curlopts = list()) {
 
 scopus_get <- function(url, args, key, curlopts, ...) {
   cli <- crul::HttpClient$new(
-    url = url, 
+    url = url,
     headers = list(`X-ELS-APIKey` = key),
     opts = c(curlopts, list(...))
   )
@@ -190,13 +195,13 @@ check_key_scopus <- function(x) {
 scopus_error_handle <- function(x) {
   if (x$status_code > 201) {
     txt <- x$parse("UTF-8")
-    json <- jsonlite::fromJSON(txt, flatten = TRUE)  
+    json <- jsonlite::fromJSON(txt, flatten = TRUE)
     mssg <- json$`service-error`$status$statusText
     if (is.null(mssg)) x$raise_for_status()
     stop(mssg, call. = FALSE)
   }
   if ('www-authenticate' %in% names(x$response_headers)) {
-    warning(sprintf("  for %s ", x), x$response_headers$`www-authenticate`, 
+    warning(sprintf("  for %s ", x), x$response_headers$`www-authenticate`,
       call. = FALSE)
-  } 
+  }
 }
