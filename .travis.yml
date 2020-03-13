@@ -1,9 +1,9 @@
 language: r
-sudo: false
 cache: packages
 dist: trusty
+os: linux
 
-matrix:
+jobs:
   include:
     - os: linux
       r: release
@@ -27,5 +27,3 @@ notifications:
   email:
     on_success: change
     on_failure: change
-  slack:
-    secure: iUbodhwdTWY/Lu+u0THafzSCMB+5im7XCYEAoIxNB61KSD0i99e+reqKXy2c5Rh8XS4KqlhOZ7FN0ivJ9T0DU1sIN27cyIZJHwDL3sY2tKsPlrxATM07+WVuVhvHVeF8JGktbI/mHspoI1OSzAoPZsj7LUdWyDIGYNGwYNXqt04=
