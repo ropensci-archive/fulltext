@@ -721,7 +721,8 @@ publisher_plugin <- function(x) {
     `233` = plugin_get_amersocclinoncol,
     `8215` = plugin_get_instinvestfil,
     `317` = plugin_get_aip,
-    `56` = plugin_get_cambridge
+    `56` = plugin_get_cambridge,
+    `237` = plugin_get_cob
   )
 }
 
@@ -759,6 +760,7 @@ get_pub_name <- function(x) {
          `175` = "rsoc",
          `1822` = "cdc",
          `56` = "cambridge",
+         `237` = "cob",
          "crossref"
   )
 }
@@ -793,6 +795,7 @@ get_tm_name <- function(x) {
          `8215` = "instinvestfil",
          `317` = "aip",
          `56` = "cambridge",
+         `237` = "cob",
          "crossref"
   )
 }

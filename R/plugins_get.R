@@ -205,6 +205,7 @@ plugin_get_amersocclinoncol <- plugin_get_generator("amersocclinoncol", amersocc
 plugin_get_instinvestfil <- plugin_get_generator("instinvestfil", instinvestfil_ft)
 plugin_get_aip <- plugin_get_generator("aip", aip_ft)
 plugin_get_cambridge <- plugin_get_generator("cambridge", cambridge_ft)
+plugin_get_cob <- plugin_get_generator("cob", cob_ft)
 
 # lapply replacement with progress bar: actual a for loop internally
 plapply <- function(x, FUN, type = NULL, progress = FALSE, ...) {
@@ -449,7 +450,7 @@ biorxiv_ft <- function(dois, type = "pdf", progress = FALSE, ...) {
 # type: plain and xml
 elsevier_ft <- function(dois, type, progress = FALSE, retain_non_ft = FALSE, ...) {
   assert(retain_non_ft, "logical")
-  type_in(type, c('plain', 'xml'), "elsevier")
+  type_in(type, c('plain', 'xml', 'pdf'), "elsevier")
   elsevier_fun <- function(x, type, progress, ...) {
     path <- make_key(x, type)
     if (file.exists(path) && !cache_options_get()$overwrite) {
@@ -801,6 +802,24 @@ cambridge_ft <- function(dois, type = "pdf", progress = FALSE, ...) {
     get_ft(x = x, type = 'pdf', url = url, path = path, ...)
   }
   plapply(dois, cambridge_fun, type, progress, ...)
+}
+
+# company_of_biologists
+# type: only pdf (type parameter is ignored)
+cob_ft <- function(dois, type = "pdf", progress = FALSE, ...) {
+  cob_fun <- function(x, type, progress, ...) {
+    path <- make_key(x, 'pdf')
+    if (file.exists(path) && !cache_options_get()$overwrite) {
+      if (!progress) message(paste0("path exists: ", path))
+      return(ft_object(path, x, 'pdf'))
+    }
+    lk <- tcat(ftdoi_get(sprintf("api/doi/%s/", x)))
+    if (inherits(lk, c("error", "warning"))) return(ft_error(lk$message, x))
+    urls <- jsonlite::fromJSON(lk$parse("UTF-8"))$links
+    url <- urls[grep("pdf", urls$`content-type`), "url"]
+    get_ft(x = x, type = 'pdf', url = url, path = path, ...)
+  }
+  plapply(dois, cob_fun, type, progress, ...)
 }
 
 # special Crossref plugin to try any DOI
