@@ -238,6 +238,10 @@ See \link{ft_get-warnings} for more information on what warnings mean.
 ft_get_ls()
 
 \dontrun{
+# set up caching first
+cache_options_set(full_path = file.path(tempdir(), "fulltext_store"))
+ft_init()
+
 # If you just have DOIs and don't know the publisher
 ## PLOS
 ft_get('10.1371/journal.pone.0086169')

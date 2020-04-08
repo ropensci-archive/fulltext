@@ -39,6 +39,7 @@
 #' }
 #' }
 as.ft_data <- function(path = NULL) {
+  check_fulltext_store()
   if (is.null(path)) path <- ftxt_cache$cache_path_get()
   if (!dir.exists(path)) stop("path does not exist")  
   paths <- list.files(path, full.names = TRUE)

@@ -15,10 +15,13 @@ test_that("cache_options_get - onload conditions", {
   expect_false(aa$overwrite)
 
   # default path contains 'fulltext' in it
-  expect_match(aa$path, 'R/fulltext')
+  expect_match(aa$path, 'fulltext')
 
   # identical to what set returns
-  expect_identical(cache_options_set(), aa)
+  cos <- cache_options_set()
+  cos$path <- NULL
+  aa$path <- NULL
+  expect_identical(cos, aa)
 })
 
 context("cache_options_set")

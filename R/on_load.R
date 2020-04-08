@@ -1,5 +1,5 @@
 ftxt_cache <- NULL # nocov start
-fulltext_store <- NULL
+# fulltext_store <- NULL
 
 .onLoad <- function(libname, pkgname){
   x <- hoardr::hoard()
@@ -10,7 +10,13 @@ fulltext_store <- NULL
   cache_options_set()
 
   # create storr fulltext_store
-  fulltext_store <<- storr::storr_rds(
-    paste0(cache_options_get()$path, "_storr"), 
-    mangle_key = TRUE)
+  # fulltext_store <<- storr::storr_rds(
+  #   paste0(cache_options_get()$path, "_storr"), 
+  #   mangle_key = TRUE)
+
+  # use storr if found
+  stpath <- paste0(cache_options_get()$path, "_storr")
+  if (dir.exists(stpath)) {
+    fulltext_store <<- storr::storr_rds(stpath, mangle_key = TRUE)
+  }
 } # nocov end

@@ -182,6 +182,10 @@
 #' ft_get_ls()
 #'
 #' \dontrun{
+#' # set up caching first
+#' cache_options_set(full_path = file.path(tempdir(), "fulltext_store"))
+#' ft_init()
+#' 
 #' # If you just have DOIs and don't know the publisher
 #' ## PLOS
 #' ft_get('10.1371/journal.pone.0086169')
@@ -443,6 +447,7 @@ ft_get.character <- function(x, from=NULL, type = "xml", try_unknown = TRUE,
   elsevieropts = list(), sciencedirectopts = list(), wileyopts = list(),
   crossrefopts = list(), progress = FALSE, ...) {
 
+  check_fulltext_store()
   check_type(type)
   assert(progress, "logical")
   check_cache()
@@ -483,6 +488,7 @@ ft_get.list <- function(x, from=NULL, type = "xml", try_unknown = TRUE,
   elsevieropts = list(), sciencedirectopts = list(), wileyopts = list(),
   crossrefopts = list(), progress = FALSE, ...) {
 
+  check_fulltext_store()
   check_type(type)
   assert(progress, "logical")
   check_cache()
@@ -523,6 +529,7 @@ ft_get.ft <- function(x, from=NULL, type = "xml", try_unknown = TRUE,
   elsevieropts = list(), sciencedirectopts = list(), wileyopts = list(),
   crossrefopts = list(), progress = FALSE, ...) {
 
+  check_fulltext_store()
   check_type(type)
   assert(progress, "logical")
   check_cache()
@@ -558,6 +565,7 @@ ft_get.ft_links <- function(x, from=NULL, type = "xml", try_unknown = TRUE,
   elsevieropts = list(), sciencedirectopts = list(), wileyopts = list(),
   crossrefopts = list(), progress = FALSE, ...) {
 
+  check_fulltext_store()
   check_type(type)
   check_cache()
   if (is.null(cache_options_get()$cache)) cache_options_set(FALSE)
