@@ -17,6 +17,6 @@ ftxt_cache <- NULL # nocov start
   # use storr if found
   stpath <- paste0(cache_options_get()$path, "_storr")
   if (dir.exists(stpath)) {
-    fulltext_store <<- storr::storr_rds(stpath, mangle_key = TRUE)
+    ft$storr <<- storr::storr_rds(stpath, mangle_key = TRUE)
   }
 } # nocov end

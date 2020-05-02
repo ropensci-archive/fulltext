@@ -53,7 +53,7 @@ to_ft_data <- function(x) {
 
   id <- unname(vapply(x, function(w) {
     res <- tryCatch(
-      fulltext_store$get(strsplit(basename(w), "\\.")[[1]][1]),
+      ft$storr$get(strsplit(basename(w), "\\.")[[1]][1]),
       error = function(e) e
     )
     if (inherits(res, "error")) digest::digest(w, "sha1") else res

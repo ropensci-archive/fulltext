@@ -1,4 +1,4 @@
-fulltext_store <- new.env()
+ft <- new.env()
 
 #' Setup article caching
 #' @export
@@ -19,13 +19,13 @@ ft_init <- function() {
   }
   tmp <- storr::storr_rds(paste0(path, "_storr"),
     mangle_key = TRUE)
-  fulltext_store <<- tmp
+  ft$storr <- tmp
   invisible(tmp)
 }
 
 check_fulltext_store <- function() {
   nf <- function() stop("run ft_init() first", call. = FALSE)
-  if (!exists("fulltext_store")) nf()
-  if (length(fulltext_store) == 0) nf()
-  if (!dir.exists(fulltext_store$driver$path)) ft_init()
+  if (!exists("ft")) nf()
+  if (length(ft$storr) == 0) nf()
+  if (!dir.exists(ft$storr$driver$path)) ft_init()
 }
