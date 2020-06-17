@@ -1,3 +1,5 @@
+
+
 fulltext
 ========
 
@@ -42,6 +44,7 @@ Data sources in `fulltext` include:
 * [arXiv](https://arxiv.org) - via the `aRxiv` package
 * [bioRxiv](https://biorxiv.org/) - via the `biorxivr` package
 * [PMC/Pubmed via Entrez](https://www.ncbi.nlm.nih.gov/) - via the `rentrez` package
+* Scopus (https://www.scopus.com/) - internal tooling
 * Many more are supported via the above sources (e.g., _Royal Society Open Science_ is
 available via Pubmed)
 * We __will__ add more, as publishers open up, and as we have time...See the [master list here](https://github.com/ropensci/fulltext/issues/4#issuecomment-52376743)
@@ -70,7 +73,7 @@ Development version from GitHub
 
 
 ```r
-devtools::install_github("ropensci/fulltext")
+remotes::install_github("ropensci/fulltext")
 ```
 
 Load library
@@ -90,7 +93,7 @@ ft_search(query = 'ecology', from = 'crossref')
 #> Query:
 #>   [ecology] 
 #> Found:
-#>   [PLoS: 0; BMC: 0; Crossref: 201140; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
+#>   [PLoS: 0; BMC: 0; Crossref: 207039; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
 #> Returned:
 #>   [PLoS: 0; BMC: 0; Crossref: 10; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0]
 ```
@@ -105,7 +108,7 @@ res1 <- ft_search(query = 'biology', from = 'entrez', limit = 5)
 ft_links(res1)
 #> <fulltext links>
 #> [Found] 5 
-#> [IDs] ID_31472450 ID_30692680 ID_30656621 ID_29887338 ID_28674916 ...
+#> [IDs] ID_32413789 ID_31553912 ID_30554963 ID_27578439 ID_23681635 ...
 ```
 
 Or pass in DOIs directly
@@ -115,7 +118,7 @@ Or pass in DOIs directly
 ft_links(res1$entrez$data$doi, from = "entrez")
 #> <fulltext links>
 #> [Found] 5 
-#> [IDs] ID_31472450 ID_30692680 ID_30656621 ID_29887338 ID_28674916 ...
+#> [IDs] ID_32413789 ID_31553912 ID_30554963 ID_27578439 ID_23681635 ...
 ```
 
 ## Get full text
@@ -205,7 +208,7 @@ Locally, using code adapted from the package `tm`, and two pdf to text parsing b
 ```r
 pdf <- system.file("examples", "example2.pdf", package = "fulltext")
 ft_extract(pdf)
-#> <document>/Library/Frameworks/R.framework/Versions/3.6/Resources/library/fulltext/examples/example2.pdf
+#> <document>/Library/Frameworks/R.framework/Versions/4.0/Resources/library/fulltext/examples/example2.pdf
 #>   Title: pone.0107412 1..10
 #>   Producer: Acrobat Distiller 9.0.0 (Windows); modified using iText 5.0.3 (c) 1T3XT BVBA
 #>   Creation date: 2014-09-18
@@ -236,7 +239,12 @@ x <- readtext::readtext(file.path(cache_options_get()$path, "*.pdf"))
 ```r
 library(quanteda)
 quanteda::corpus(x)
-#> Corpus consisting of 2 documents and 0 docvars.
+#> Corpus consisting of 2 documents.
+#> 10_7554_eLife_03032.pdf :
+#> "                                                            ..."
+#> 
+#> 10_7554_eLife_32763.pdf :
+#> "                                                            ..."
 ```
 
 ## Contributors
