@@ -20,8 +20,8 @@ class XMLInternalDocument.}
 to use metadata provided, or guess from data itself. Optional.
 CURRENTLY IGNORED.}
 
-\item{...}{Further args passed on to \code{\link[xml2:read_xml]{xml2::read_xml()}} or
-\code{\link[jsonlite:toJSON]{jsonlite::toJSON()}}}
+\item{...}{Further args passed on to \code{xml2::read_xml()} or
+\code{jsonlite::toJSON()}}
 }
 \value{
 An object of class \code{ft_parsed}

@@ -64,8 +64,8 @@ that you likely don't have access.}
 \item{crossrefopts}{Crossref options, a named list.}
 
 \item{progress}{(logical) whether to show progress bar or not.
-default: \code{FALSE}. if \code{TRUE}, we use \code{\link[utils:txtProgressBar]{utils::txtProgressBar()}} and
-\link[utils:setTxtProgressBar]{utils::setTxtProgressBar}
+default: \code{FALSE}. if \code{TRUE}, we use \code{utils::txtProgressBar()} and
+\code{utils::setTxtProgressBar()}
 to create the progress bar; and each progress bar connection is closed
 on function exit. A progress bar is run for each data source.
 Works for all S3 methods except \code{ft_get.links}. When articles are not

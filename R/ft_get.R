@@ -36,8 +36,8 @@
 #' @param crossrefopts Crossref options, a named list.
 #' @param wileyopts Wiley options, a named list.
 #' @param progress (logical) whether to show progress bar or not.
-#' default: `FALSE`. if `TRUE`, we use [utils::txtProgressBar()] and
-#' [utils::setTxtProgressBar]
+#' default: `FALSE`. if `TRUE`, we use `utils::txtProgressBar()` and
+#' `utils::setTxtProgressBar()`
 #' to create the progress bar; and each progress bar connection is closed
 #' on function exit. A progress bar is run for each data source.
 #' Works for all S3 methods except `ft_get.links`. When articles are not

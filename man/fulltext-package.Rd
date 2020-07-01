@@ -97,8 +97,20 @@ we'll read it in for you. See \link{Startup} for help. For the institution acces
 go to a browser and see if you have access to the journal(s) you want.
 If you don't have access in a browser you probably won't have access via
 this package. If you aren't physically at your institution you will likely
-need to be on a VPN or similar so that your IP address is in the range
+need to be on a VPN or similar and eventually require correct proxy settings,
+so that your IP address is in the range
 that the two publishers are accepting for that institution.
+It might be, that the API access seems to work even while
+in the wrong IP range or have wrong proxy settings,
+but you are not able to see the abstracts, they will be empty.
+By using the currect curl options into the calls to ft_search or ft_abstracts even
+the most complex proxy including authentication should work. As an example:
+opts=list(key="your-scopus-key")
+ft_abstract(x = dois, from = "scopus",
+scopusopts = opts,
+proxyport=your-proxy-port,
+proxyuserpwd="your-proxy-username:your-proxy-password",  # often the same as your windows login
+proxyauth=8)  # ntlm - authentication
 
 \strong{ScienceDirect}: Elsevier ScienceDirect requires two things: an API key
 and your institution must have access. For the API key,

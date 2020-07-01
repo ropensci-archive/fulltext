@@ -5,11 +5,11 @@
 #' @return list, with three elements:
 #' 
 #' - xml_not_valid: xml files that could not be read in with 
-#' [xml2::read_xml()]
+#' `xml2::read_xml()`
 #' - xml_abstract_only: xml files that only have abstracts. 
 #' you can of choose to retain these if you like
 #' - pdf_not_valid: pdf files that could not be read in with 
-#' [pdftools::pdf_info()]
+#' `pdftools::pdf_info()`
 #' 
 #' @details This function only identifies possibly bad files. 
 #' You have to remove/delete them yourself. See example for 

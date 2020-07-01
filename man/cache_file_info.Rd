@@ -10,11 +10,11 @@ cache_file_info()
 list, with three elements:
 \itemize{
 \item xml_not_valid: xml files that could not be read in with
-\code{\link[xml2:read_xml]{xml2::read_xml()}}
+\code{xml2::read_xml()}
 \item xml_abstract_only: xml files that only have abstracts.
 you can of choose to retain these if you like
 \item pdf_not_valid: pdf files that could not be read in with
-\code{\link[pdftools:pdf_info]{pdftools::pdf_info()}}
+\code{pdftools::pdf_info()}
 }
 }
 \description{

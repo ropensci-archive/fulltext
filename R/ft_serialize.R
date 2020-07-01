@@ -12,8 +12,8 @@
 #' @param from (character) Format `x` is currently in. Function attempts 
 #' to use metadata provided, or guess from data itself. Optional. 
 #' CURRENTLY IGNORED.
-#' @param ... Further args passed on to [xml2::read_xml()] or
-#' [jsonlite::toJSON()]
+#' @param ... Further args passed on to `xml2::read_xml()` or
+#' `jsonlite::toJSON()`
 #' @return An object of class `ft_parsed`
 #' @examples \dontrun{
 #' res <- ft_get('10.7717/peerj.228')
