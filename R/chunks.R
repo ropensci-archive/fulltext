@@ -2,7 +2,7 @@
 #' @export
 #' @rdname ft_chunks-defunct
 #' @keywords internal
-ft_chunks <- function(...) {
+ft_chunks <- function(...) { # nocov start
   .Defunct('pub_chunks', "pubchunks", "use pubchunks::pub_chunks")
 }
 
@@ -12,4 +12,4 @@ ft_chunks <- function(...) {
 #' @keywords internal
 ft_tabularize <- function(...) {
   .Defunct('pub_tabularize', "pubchunks", "use pubchunks::pub_tabularize")
-}
+} # nocov end

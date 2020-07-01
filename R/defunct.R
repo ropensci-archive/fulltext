@@ -2,7 +2,7 @@
 #' @export
 #' @rdname ft_extract_corpus-defunct
 #' @keywords internal
-ft_extract_corpus <- function(...){
+ft_extract_corpus <- function(...){  # nocov start
   .Defunct(msg = "function removed. see ?`fulltext-defunct`")
 }
 
@@ -60,7 +60,7 @@ ft_browse_sections <- function(...) {
 #' @keywords internal
 ft_get_si <- function(...) {
   .Defunct(msg = "function removed. see package suppdata")
-}
+}  # nocov end
 
 
 #' Defunct functions in fulltext
