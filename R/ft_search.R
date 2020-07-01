@@ -136,12 +136,13 @@
 #'    scopusopts = list(key = Sys.getenv('ELSEVIER_SCOPUS_KEY'))))
 #' res$scopus
 #' ## facets
-#' (res <- ft_search(query = 'ecology', from = 'scopus', 
-#'    scopusopts = list(
-#'      key = Sys.getenv('ELSEVIER_SCOPUS_KEY'), 
-#'      facets = "subjarea(count=5)"
-#'    ), limit = 5))
-#' res$scopus
+#' ## FIXME: apparently I don't have access to facets anymore
+#' # (res <- ft_search(query = 'ecology', from = 'scopus', 
+#' #   scopusopts = list(
+#' #     key = Sys.getenv('ELSEVIER_SCOPUS_KEY'), 
+#' #     facets = "subjarea(count=5)"
+#' #   ), limit = 5))
+#' # res$scopus
 #'
 #' # PLOS, Crossref, and arxiv
 #' (res <- ft_search(query='ecology', from=c('plos','crossref','arxiv')))
@@ -249,11 +250,7 @@ print.ft_ind <- function(x, ..., n = 10) {
   cat(sprintf("Query: [%s]", attr(x, "query")), "\n")
   cat(sprintf("Records found, returned: [%s, %s]", found, rows), "\n")
   cat(sprintf("License: [%s]", x$license$type), "\n")
-  print_if(x$data, n = n)
+  print(tibble::as_tibble(x$data))
 }
 
 null_len <- function(x) if (is.null(x)) 0 else x
-
-print_if <- function(x, n) {
-  if (!is.null(x)) ft_trunc_mat(x, n)
-}
