@@ -1,3 +1,22 @@
+fulltext 1.5.0
+==============
+
+### NEW FEATURES
+
+* `ft_abstract()` gains new data source option: Semantic Scholar. Uses async http requests. Beware of rate limits. See 'Rate limits' in `?fulltext-package` (#218)
+
+### MINOR IMPROVEMENTS
+
+* using vcr for some tests (#212)
+* improved documentation on proxy settings for Scopus data source added to the 'Authentication' section of the package level manual file, see `?fulltext-package` (#220) thanks @behrica
+* for `ft_get()` added new plugin helper for publisher Company of Biologists; and a fix in the Company of Biologists metadata returned from the ftdoi.org API (#216)
+* cleaned out old code for brief data.frame printing, use tibble instead
+
+### BUG FIXES
+
+* `from` parameter in `ft_get()` for specifying what data source to use should have been accepting more than 1 value, but was only accepting 1 value. Now `from` accepts 1 or more values (#222)
+
+
 fulltext 1.4.0
 ==============
 

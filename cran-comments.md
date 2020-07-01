@@ -1,7 +1,7 @@
 ## Test environments
 
-* local OS X install, R 3.6.2 patched
-* ubuntu 14.04 (on travis-ci), R 3.6.2
+* local OS X install, R 4.0.2
+* ubuntu 16.04 (on travis-ci), R 4.0.2
 * win-builder (devel and release)
 
 ## R CMD check results
@@ -14,7 +14,7 @@
 
 --------
 
-This version includes a new publisher plugin for fetching articles, and many bug fixes. 
+This version adds a new data sources and makes a number of improvements. 
 
 Thanks! 
 Scott Chamberlain
