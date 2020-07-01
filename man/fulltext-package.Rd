@@ -110,12 +110,15 @@ in the wrong IP range or have wrong proxy settings,
 but you are not able to see the abstracts, they will be empty.
 By using the currect curl options into the calls to ft_search or ft_abstracts even
 the most complex proxy including authentication should work. As an example:
-opts=list(key="your-scopus-key")
-ft_abstract(x = dois, from = "scopus",
-scopusopts = opts,
-proxyport=your-proxy-port,
-proxyuserpwd="your-proxy-username:your-proxy-password",  # often the same as your windows login
-proxyauth=8)  # ntlm - authentication
+
+\preformatted{
+opts <- list(key="your-scopus-key")
+ft_abstract(x = dois, from = "scopus", scopusopts = opts,
+  proxy="proxy-ip-address",
+  proxyport=your-proxy-port,
+  proxyuserpwd="username:password", # often the same as your windows login
+  proxyauth=8) # ntlm - authentication
+}
 
 \strong{ScienceDirect}: Elsevier ScienceDirect requires two things: an API key
 and your institution must have access. For the API key,
