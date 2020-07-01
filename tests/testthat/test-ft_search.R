@@ -63,7 +63,7 @@ test_that("ft_search works with scopus", {
 
 test_that("ft_search works for larger requests", {
   skip_on_cran()
-  skip_on_travis()
+  skip_on_ci()
   
   vcr::use_cassette("ft_search_entrez", {
     res_entrez <- ft_search(query = 'ecology', from = 'entrez', limit = 200)
