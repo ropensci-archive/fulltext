@@ -20,6 +20,8 @@ jobs:
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       CRAN: ${{ matrix.config.cran }}
+      ELSEVIER_SCOPUS_KEY: ${{ secrets.ELSEVIER_SCOPUS_KEY }}
+      SPRINGER_KEY: ${{ secrets.SPRINGER_KEY }}
 
     steps:
       - uses: actions/checkout@v2
