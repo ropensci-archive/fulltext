@@ -48,6 +48,7 @@ Suggests:
     roxygen2 (>= 7.1.0),
     testthat,
     knitr,
+    rmarkdown,
     pubchunks,
     vcr
 RoxygenNote: 7.1.0
