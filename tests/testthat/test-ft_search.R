@@ -81,8 +81,7 @@ test_that("ft_search works for larger requests", {
 test_that("ft_search fails well", {
   skip_on_cran()
   
-  expect_error(ft_search(query = 'ecology', from = 'entrez', limit = 2000), 
-               "HTTP failure 414, the request is too large")
+  expect_error(ft_search(query = 'ecology', from = 'entrez', limit = 2000))
   ## FIXME - add catches for plos, other sources
   expect_error(ft_search(query = 'ecology', from = 'crossref', limit = 2000), 
                "limit parameter must be 1000 or less")
