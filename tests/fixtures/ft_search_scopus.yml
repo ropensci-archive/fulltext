@@ -1,0 +1,147 @@
+http_interactions:
+- request:
+    method: get
+    uri: https://api.elsevier.com/content/search/scopus?query=ecology&count=10&start=0
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      User-Agent: libcurl/7.64.1 r-curl/4.3 crul/0.9.2.92
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      X-ELS-APIKey: <<scopus-key>>
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      allow: GET
+      content-encoding: gzip
+      content-type: application/json;charset=UTF-8
+      date: Wed, 01 Jul 2020 18:16:08 GMT
+      server: Apache-Coyote/1.1
+      vary: Origin
+      x-els-apikey: <<scopus-key>>
+      x-els-reqid: 4ea57a54-1a4b-4c00-a911-ef36daf6392b
+      x-els-resourceversion: default
+      x-els-status: OK
+      x-els-transid: 7d9c2e46-5549-49f7-afd6-1f6e3ee0ffe3
+      x-ratelimit-limit: '20000'
+      x-ratelimit-remaining: '19880'
+      x-ratelimit-reset: '1594210657000'
+      content-length: '2876'
+      connection: keep-alive
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"search-results":{"opensearch:totalResults":"2843502","opensearch:startIndex":"0","opensearch:itemsPerPage":"10","opensearch:Query":{"@role":
+        "request", "@searchTerms": "ecology", "@startPage": "0"},"link": [{"@_fa":
+        "true", "@ref": "self", "@href": "https://api.elsevier.com/content/search/scopus?start=0&count=10&query=ecology",
+        "@type": "application/json"},{"@_fa": "true", "@ref": "first", "@href": "https://api.elsevier.com/content/search/scopus?start=0&count=10&query=ecology",
+        "@type": "application/json"},{"@_fa": "true", "@ref": "next", "@href": "https://api.elsevier.com/content/search/scopus?start=10&count=10&query=ecology",
+        "@type": "application/json"},{"@_fa": "true", "@ref": "last", "@href": "https://api.elsevier.com/content/search/scopus?start=4990&count=10&query=ecology",
+        "@type": "application/json"}],"entry": [{"@_fa": "true", "link": [{"@_fa":
+        "true", "@ref": "self", "@href": "https://api.elsevier.com/content/abstract/scopus_id/85086306798"},{"@_fa":
+        "true", "@ref": "author-affiliation", "@href": "https://api.elsevier.com/content/abstract/scopus_id/85086306798?field=author,affiliation"},{"@_fa":
+        "true", "@ref": "scopus", "@href": "https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=85086306798&origin=inward"},{"@_fa":
+        "true", "@ref": "scopus-citedby", "@href": "https://www.scopus.com/inward/citedby.uri?partnerID=HzOxMe3b&scp=85086306798&origin=inward"}],"prism:url":"https://api.elsevier.com/content/abstract/scopus_id/85086306798","dc:identifier":"SCOPUS_ID:85086306798","eid":"2-s2.0-85086306798","dc:title":"Automatic
+        multi-class classification of tiny and faint printing defects based on semantic
+        segmentation","dc:creator":"Tsuji T.","prism:publicationName":"Smart Innovation,
+        Systems and Technologies","prism:issn":"21903018","prism:eIssn":"21903026","prism:isbn":
+        [{"@_fa": "true", "$" :"9789811557835"}],"prism:volume":"189","prism:pageRange":"101-113","prism:coverDate":"2021-01-01","prism:coverDisplayDate":"2021","prism:doi":"10.1007/978-981-15-5784-2_9","citedby-count":"0","affiliation":
+        [{"@_fa": "true", "affilname":"University of Tsukuba","affiliation-city":"Tsukuba","affiliation-country":"Japan"}],"prism:aggregationType":"Book
+        Series","subtype":"cp","subtypeDescription":"Conference Paper","source-id":"21100204111","openaccess":"0","openaccessFlag":false},{"@_fa":
+        "true", "link": [{"@_fa": "true", "@ref": "self", "@href": "https://api.elsevier.com/content/abstract/scopus_id/85086630869"},{"@_fa":
+        "true", "@ref": "author-affiliation", "@href": "https://api.elsevier.com/content/abstract/scopus_id/85086630869?field=author,affiliation"},{"@_fa":
+        "true", "@ref": "scopus", "@href": "https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=85086630869&origin=inward"},{"@_fa":
+        "true", "@ref": "scopus-citedby", "@href": "https://www.scopus.com/inward/citedby.uri?partnerID=HzOxMe3b&scp=85086630869&origin=inward"},{"@_fa":
+        "true", "@ref": "full-text", "@href": "https://api.elsevier.com/content/article/eid/1-s2.0-S1001074220302527"}],"prism:url":"https://api.elsevier.com/content/abstract/scopus_id/85086630869","dc:identifier":"SCOPUS_ID:85086630869","eid":"2-s2.0-85086630869","dc:title":"Alteration
+        of dominant cyanobacteria in different bloom periods caused by abiotic factors
+        and species interactions","dc:creator":"Zhang Z.","prism:publicationName":"Journal
+        of Environmental Sciences (China)","prism:issn":"10010742","prism:eIssn":"18787320","prism:volume":"99","prism:pageRange":"1-9","prism:coverDate":"2021-01-01","prism:coverDisplayDate":"January
+        2021","prism:doi":"10.1016/j.jes.2020.06.001","pii":"S1001074220302527","citedby-count":"0","affiliation":
+        [{"@_fa": "true", "affilname":"Zhejiang University of Technology","affiliation-city":"Hangzhou","affiliation-country":"China"}],"prism:aggregationType":"Journal","subtype":"ar","subtypeDescription":"Article","source-id":"23393","openaccess":"1","openaccessFlag":true},{"@_fa":
+        "true", "link": [{"@_fa": "true", "@ref": "self", "@href": "https://api.elsevier.com/content/abstract/scopus_id/85086828041"},{"@_fa":
+        "true", "@ref": "author-affiliation", "@href": "https://api.elsevier.com/content/abstract/scopus_id/85086828041?field=author,affiliation"},{"@_fa":
+        "true", "@ref": "scopus", "@href": "https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=85086828041&origin=inward"},{"@_fa":
+        "true", "@ref": "scopus-citedby", "@href": "https://www.scopus.com/inward/citedby.uri?partnerID=HzOxMe3b&scp=85086828041&origin=inward"},{"@_fa":
+        "true", "@ref": "full-text", "@href": "https://api.elsevier.com/content/article/eid/1-s2.0-S1001074220301935"}],"prism:url":"https://api.elsevier.com/content/abstract/scopus_id/85086828041","dc:identifier":"SCOPUS_ID:85086828041","eid":"2-s2.0-85086828041","dc:title":"Estimation
+        of aerosol optical depth in relation to meteorological parameters over eastern
+        and western routes of China Pakistan economic corridor","dc:creator":"Khalid
+        B.","prism:publicationName":"Journal of Environmental Sciences (China)","prism:issn":"10010742","prism:eIssn":"18787320","prism:volume":"99","prism:pageRange":"28-39","prism:coverDate":"2021-01-01","prism:coverDisplayDate":"January
+        2021","prism:doi":"10.1016/j.jes.2020.04.045","pii":"S1001074220301935","citedby-count":"0","affiliation":
+        [{"@_fa": "true", "affilname":"International Islamic University Islamabad","affiliation-city":"Islamabad","affiliation-country":"Pakistan"},{"@_fa":
+        "true", "affilname":"Abdus Salam International Centre for Theoretical Physics","affiliation-city":"Trieste","affiliation-country":"Italy"},{"@_fa":
+        "true", "affilname":"Institute of Geographical Sciences and Natural Resources
+        Research Chinese Academy of Sciences","affiliation-city":"Beijing","affiliation-country":"China"},{"@_fa":
+        "true", "affilname":"University of Chinese Academy of Sciences","affiliation-city":"Beijing","affiliation-country":"China"}],"prism:aggregationType":"Journal","subtype":"ar","subtypeDescription":"Article","source-id":"23393","openaccess":"0","openaccessFlag":false},{"@_fa":
+        "true", "link": [{"@_fa": "true", "@ref": "self", "@href": "https://api.elsevier.com/content/abstract/scopus_id/85086700243"},{"@_fa":
+        "true", "@ref": "author-affiliation", "@href": "https://api.elsevier.com/content/abstract/scopus_id/85086700243?field=author,affiliation"},{"@_fa":
+        "true", "@ref": "scopus", "@href": "https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=85086700243&origin=inward"},{"@_fa":
+        "true", "@ref": "scopus-citedby", "@href": "https://www.scopus.com/inward/citedby.uri?partnerID=HzOxMe3b&scp=85086700243&origin=inward"},{"@_fa":
+        "true", "@ref": "full-text", "@href": "https://api.elsevier.com/content/article/eid/1-s2.0-S0925527320302012"}],"prism:url":"https://api.elsevier.com/content/abstract/scopus_id/85086700243","dc:identifier":"SCOPUS_ID:85086700243","eid":"2-s2.0-85086700243","dc:title":"Blockchain
+        technology and the sustainable supply chain: Theoretically exploring adoption
+        barriers","dc:creator":"Kouhizadeh M.","prism:publicationName":"International
+        Journal of Production Economics","prism:issn":"09255273","prism:volume":"231","prism:pageRange":null,"prism:coverDate":"2021-01-01","prism:coverDisplayDate":"January
+        2021","prism:doi":"10.1016/j.ijpe.2020.107831","pii":"S0925527320302012","citedby-count":"0","affiliation":
+        [{"@_fa": "true", "affilname":"Foisie Business School","affiliation-city":"Worcester","affiliation-country":"United
+        States"}],"prism:aggregationType":"Journal","subtype":"ar","subtypeDescription":"Article","article-number":"107831","source-id":"19165","openaccess":"0","openaccessFlag":false},{"@_fa":
+        "true", "link": [{"@_fa": "true", "@ref": "self", "@href": "https://api.elsevier.com/content/abstract/scopus_id/85071993839"},{"@_fa":
+        "true", "@ref": "author-affiliation", "@href": "https://api.elsevier.com/content/abstract/scopus_id/85071993839?field=author,affiliation"},{"@_fa":
+        "true", "@ref": "scopus", "@href": "https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=85071993839&origin=inward"},{"@_fa":
+        "true", "@ref": "scopus-citedby", "@href": "https://www.scopus.com/inward/citedby.uri?partnerID=HzOxMe3b&scp=85071993839&origin=inward"}],"prism:url":"https://api.elsevier.com/content/abstract/scopus_id/85071993839","dc:identifier":"SCOPUS_ID:85071993839","eid":"2-s2.0-85071993839","dc:title":"The
+        teacher–student relationship and adolescents’ sense of school belonging","dc:creator":"Ibrahim
+        A.","prism:publicationName":"International Journal of Adolescence and Youth","prism:issn":"02673843","prism:volume":"25","prism:issueIdentifier":"1","prism:pageRange":"382-395","prism:coverDate":"2020-12-31","prism:coverDisplayDate":"31
+        December 2020","prism:doi":"10.1080/02673843.2019.1660998","citedby-count":"0","affiliation":
+        [{"@_fa": "true", "affilname":"United Arab Emirates University","affiliation-city":"Al
+        Ain","affiliation-country":"United Arab Emirates"}],"prism:aggregationType":"Journal","subtype":"ar","subtypeDescription":"Article","source-id":"25201","openaccess":"1","openaccessFlag":true},{"@_fa":
+        "true", "link": [{"@_fa": "true", "@ref": "self", "@href": "https://api.elsevier.com/content/abstract/scopus_id/85071312391"},{"@_fa":
+        "true", "@ref": "author-affiliation", "@href": "https://api.elsevier.com/content/abstract/scopus_id/85071312391?field=author,affiliation"},{"@_fa":
+        "true", "@ref": "scopus", "@href": "https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=85071312391&origin=inward"},{"@_fa":
+        "true", "@ref": "scopus-citedby", "@href": "https://www.scopus.com/inward/citedby.uri?partnerID=HzOxMe3b&scp=85071312391&origin=inward"}],"prism:url":"https://api.elsevier.com/content/abstract/scopus_id/85071312391","dc:identifier":"SCOPUS_ID:85071312391","eid":"2-s2.0-85071312391","dc:title":"Are
+        millennial students better equipped to overcome choice bias?","dc:creator":"Etgar
+        R.","prism:publicationName":"International Journal of Adolescence and Youth","prism:issn":"02673843","prism:volume":"25","prism:issueIdentifier":"1","prism:pageRange":"373-381","prism:coverDate":"2020-12-31","prism:coverDisplayDate":"31
+        December 2020","prism:doi":"10.1080/02673843.2019.1657026","citedby-count":"0","affiliation":
+        [{"@_fa": "true", "affilname":"Ruppin Academic Center","affiliation-city":"Emek
+        Hefer","affiliation-country":"Israel"}],"prism:aggregationType":"Journal","subtype":"ar","subtypeDescription":"Article","source-id":"25201","openaccess":"1","openaccessFlag":true},{"@_fa":
+        "true", "link": [{"@_fa": "true", "@ref": "self", "@href": "https://api.elsevier.com/content/abstract/scopus_id/85081889595"},{"@_fa":
+        "true", "@ref": "author-affiliation", "@href": "https://api.elsevier.com/content/abstract/scopus_id/85081889595?field=author,affiliation"},{"@_fa":
+        "true", "@ref": "scopus", "@href": "https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=85081889595&origin=inward"},{"@_fa":
+        "true", "@ref": "scopus-citedby", "@href": "https://www.scopus.com/inward/citedby.uri?partnerID=HzOxMe3b&scp=85081889595&origin=inward"}],"prism:url":"https://api.elsevier.com/content/abstract/scopus_id/85081889595","dc:identifier":"SCOPUS_ID:85081889595","eid":"2-s2.0-85081889595","dc:title":"Recognizing
+        hotspots in Brief Eclectic Psychotherapy for PTSD by text and audio mining","dc:creator":"Wiegersma
+        S.","prism:publicationName":"European Journal of Psychotraumatology","prism:issn":"20008198","prism:eIssn":"20008066","prism:volume":"11","prism:issueIdentifier":"1","prism:pageRange":null,"prism:coverDate":"2020-12-31","prism:coverDisplayDate":"31
+        December 2020","prism:doi":"10.1080/20008198.2020.1726672","citedby-count":"0","affiliation":
+        [{"@_fa": "true", "affilname":"University of Twente","affiliation-city":"Enschede","affiliation-country":"Netherlands"}],"prism:aggregationType":"Journal","subtype":"ar","subtypeDescription":"Article","article-number":"1726672","source-id":"21100394256","openaccess":"1","openaccessFlag":true},{"@_fa":
+        "true", "link": [{"@_fa": "true", "@ref": "self", "@href": "https://api.elsevier.com/content/abstract/scopus_id/85079056049"},{"@_fa":
+        "true", "@ref": "author-affiliation", "@href": "https://api.elsevier.com/content/abstract/scopus_id/85079056049?field=author,affiliation"},{"@_fa":
+        "true", "@ref": "scopus", "@href": "https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=85079056049&origin=inward"},{"@_fa":
+        "true", "@ref": "scopus-citedby", "@href": "https://www.scopus.com/inward/citedby.uri?partnerID=HzOxMe3b&scp=85079056049&origin=inward"}],"prism:url":"https://api.elsevier.com/content/abstract/scopus_id/85079056049","dc:identifier":"SCOPUS_ID:85079056049","eid":"2-s2.0-85079056049","dc:title":"Long-term
+        trends in seasonality of mortality in urban Madagascar: the role of the epidemiological
+        transition","dc:creator":"Schlüter B.S.","prism:publicationName":"Global Health
+        Action","prism:eIssn":"16549880","prism:volume":"13","prism:issueIdentifier":"1","prism:pageRange":null,"prism:coverDate":"2020-12-31","prism:coverDisplayDate":"31
+        December 2020","prism:doi":"10.1080/16549716.2020.1717411","citedby-count":"0","affiliation":
+        [{"@_fa": "true", "affilname":"Université Catholique de Louvain","affiliation-city":"Louvain-la-Neuve","affiliation-country":"Belgium"}],"pubmed-id":"32027239","prism:aggregationType":"Journal","subtype":"ar","subtypeDescription":"Article","article-number":"1717411","source-id":"17500154705","openaccess":"1","openaccessFlag":true},{"@_fa":
+        "true", "link": [{"@_fa": "true", "@ref": "self", "@href": "https://api.elsevier.com/content/abstract/scopus_id/85081344130"},{"@_fa":
+        "true", "@ref": "author-affiliation", "@href": "https://api.elsevier.com/content/abstract/scopus_id/85081344130?field=author,affiliation"},{"@_fa":
+        "true", "@ref": "scopus", "@href": "https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=85081344130&origin=inward"},{"@_fa":
+        "true", "@ref": "scopus-citedby", "@href": "https://www.scopus.com/inward/citedby.uri?partnerID=HzOxMe3b&scp=85081344130&origin=inward"}],"prism:url":"https://api.elsevier.com/content/abstract/scopus_id/85081344130","dc:identifier":"SCOPUS_ID:85081344130","eid":"2-s2.0-85081344130","dc:title":"Ecological
+        risk assessment of soil cadmium in China’s coastal economic development zone:
+        a meta-analysis","dc:creator":"Sun M.","prism:publicationName":"Ecosystem
+        Health and Sustainability","prism:issn":"20964129","prism:eIssn":"23328878","prism:volume":"6","prism:issueIdentifier":"1","prism:pageRange":null,"prism:coverDate":"2020-12-16","prism:coverDisplayDate":"16
+        December 2020","prism:doi":"10.1080/20964129.2020.1733921","citedby-count":"0","affiliation":
+        [{"@_fa": "true", "affilname":"Institute of Geographical Sciences and Natural
+        Resources Research Chinese Academy of Sciences","affiliation-city":"Beijing","affiliation-country":"China"}],"prism:aggregationType":"Journal","subtype":"ar","subtypeDescription":"Article","article-number":"1733921","source-id":"21100908527","openaccess":"1","openaccessFlag":true},{"@_fa":
+        "true", "link": [{"@_fa": "true", "@ref": "self", "@href": "https://api.elsevier.com/content/abstract/scopus_id/85079462070"},{"@_fa":
+        "true", "@ref": "author-affiliation", "@href": "https://api.elsevier.com/content/abstract/scopus_id/85079462070?field=author,affiliation"},{"@_fa":
+        "true", "@ref": "scopus", "@href": "https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=85079462070&origin=inward"},{"@_fa":
+        "true", "@ref": "scopus-citedby", "@href": "https://www.scopus.com/inward/citedby.uri?partnerID=HzOxMe3b&scp=85079462070&origin=inward"}],"prism:url":"https://api.elsevier.com/content/abstract/scopus_id/85079462070","dc:identifier":"SCOPUS_ID:85079462070","eid":"2-s2.0-85079462070","dc:title":"Harnessing
+        perennial and indeterminant growth habits for ratoon cotton (Gossypium spp.)
+        cropping","dc:creator":"Zhang X.","prism:publicationName":"Ecosystem Health
+        and Sustainability","prism:issn":"20964129","prism:eIssn":"23328878","prism:volume":"6","prism:issueIdentifier":"1","prism:pageRange":null,"prism:coverDate":"2020-12-16","prism:coverDisplayDate":"16
+        December 2020","prism:doi":"10.1080/20964129.2020.1715264","citedby-count":"0","affiliation":
+        [{"@_fa": "true", "affilname":"Henan Institute of Science and Technology","affiliation-city":"Xinxiang","affiliation-country":"China"},{"@_fa":
+        "true", "affilname":"Henan Normal University","affiliation-city":"Xinxiang","affiliation-country":"China"}],"prism:aggregationType":"Journal","subtype":"re","subtypeDescription":"Review","article-number":"1715264","source-id":"21100908527","openaccess":"1","openaccessFlag":true}]}}'
+  recorded_at: 2020-07-01 18:16:09 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.6.2

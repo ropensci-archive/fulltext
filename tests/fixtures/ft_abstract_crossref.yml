@@ -1,0 +1,883 @@
+http_interactions:
+- request:
+    method: get
+    uri: https://api.crossref.org/works?query=ecology&filter=has-license%3Atrue%2Chas-abstract%3Atrue&offset=0&rows=10
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: r-curl/4.3 crul/0.9.2.92 rOpenSci(rcrossref/1.0.0.92) (mailto:<<crossref-email>>)
+      X-USER-AGENT: r-curl/4.3 crul/0.9.2.92 rOpenSci(rcrossref/1.0.0.92) (mailto:<<crossref-email>>)
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      content-type: application/json;charset=UTF-8
+      vary: Accept
+      access-control-allow-origin: '*'
+      access-control-allow-headers: X-Requested-With
+      content-length: '55558'
+      server: http-kit
+      date: Wed, 01 Jul 2020 17:56:14 GMT
+      x-rate-limit-limit: '50'
+      x-rate-limit-interval: 1s
+      connection: close
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"status":"ok","message-type":"work-list","message-version":"1.0.0","message":{"facets":{},"total-results":7496,"items":[{"indexed":{"date-parts":[[2020,3,29]],"date-time":"2020-03-29T22:49:59Z","timestamp":1585522199754},"reference-count":0,"publisher":"University
+        of Arizona","issue":"1","license":[{"URL":"http:\/\/creativecommons.org\/licenses\/by\/4.0","start":{"date-parts":[[2015,12,1]],"date-time":"2015-12-01T00:00:00Z","timestamp":1448928000000},"delay-in-days":0,"content-version":"unspecified"}],"content-domain":{"domain":[],"crossmark-restriction":false},"short-container-title":["JPE"],"abstract":"<jats:p>Political
+        ecologists have long acknowledged the links between knowledge and power. Recently
+        there has also been a growing interest in detailed studies about knowledge
+        production within critical political ecology. This article is a study of the
+        use of photographs in scientific articles on dryland ecology, and investigates
+        the functions of photographs. Contrary to the straightforward manner in which
+        they are presented, photographs are not value-free documentary proofs of ''how
+        things are.'' Rather, photographs constitute arguments in their own right.
+        Using photographic and textual theory, this study analyzes two articles that
+        include photographs of fence-line contrasts between two different management
+        regimes. Contrasting areas divided by a fence-line is a methodology that demonstrates
+        how management differences lead to differences in vegetation. In a Southern
+        African context, however, differences across a fence tend to encompass deep
+        racial and economic divides, and the fence-line photos risk encompassing these
+        differences. This article argues that the fence-line contrast photographs
+        in this study function as models that order the causal links between vegetation
+        dynamics, land tenure and land management. These models correspond closely
+        to equilibrium models in range ecology, and the fence-line photographs thus
+        contribute to a degradation narrative that has been influential for land reform
+        policies in Southern Africa, and that feeds into land use policies that favor
+        private land ownership in communal areas.Keywords: Critical political ecology,
+        fence-line photography, scientific models, rangeland ecology, Southern Africa<\/jats:p>","DOI":"10.2458\/v22i1.21112","type":"journal-article","created":{"date-parts":[[2018,2,9]],"date-time":"2018-02-09T17:42:19Z","timestamp":1518198139000},"page":"339","source":"Crossref","is-referenced-by-count":3,"title":["An
+        ecology of difference: fence-line contrast photographs as scientific models
+        in ecology"],"prefix":"10.2458","volume":"22","author":[{"given":"Eirin","family":"Hongslo","sequence":"first","affiliation":[]}],"member":"1290","published-online":{"date-parts":[[2015,12,1]]},"container-title":["Journal
+        of Political Ecology"],"link":[{"URL":"https:\/\/journals.uair.arizona.edu\/index.php\/JPE\/article\/viewFile\/21112\/20700","content-type":"application\/pdf","content-version":"vor","intended-application":"text-mining"},{"URL":"https:\/\/journals.uair.arizona.edu\/index.php\/JPE\/article\/viewFile\/21112\/20700","content-type":"unspecified","content-version":"vor","intended-application":"similarity-checking"}],"deposited":{"date-parts":[[2018,6,27]],"date-time":"2018-06-27T18:12:48Z","timestamp":1530123168000},"score":9.175411,"issued":{"date-parts":[[2015,12,1]]},"references-count":0,"journal-issue":{"published-online":{"date-parts":[[2015,12,1]]},"issue":"1"},"URL":"http:\/\/dx.doi.org\/10.2458\/v22i1.21112","ISSN":["1073-0451"],"issn-type":[{"value":"1073-0451","type":"electronic"}]},{"indexed":{"date-parts":[[2020,4,10]],"date-time":"2020-04-10T18:05:11Z","timestamp":1586541911208},"reference-count":0,"publisher":"University
+        of Arizona","issue":"1","license":[{"URL":"http:\/\/creativecommons.org\/licenses\/by\/4.0","start":{"date-parts":[[1994,12,1]],"date-time":"1994-12-01T00:00:00Z","timestamp":786240000000},"delay-in-days":0,"content-version":"unspecified"}],"content-domain":{"domain":[],"crossmark-restriction":false},"short-container-title":["JPE"],"abstract":"<jats:p>Abstract<\/jats:p>","DOI":"10.2458\/v1i1.21154","type":"journal-article","created":{"date-parts":[[2018,2,6]],"date-time":"2018-02-06T18:38:16Z","timestamp":1517942296000},"page":"1","source":"Crossref","is-referenced-by-count":102,"title":["Political
+        Ecology"],"prefix":"10.2458","volume":"1","author":[{"given":"James B.","family":"Greenberg","sequence":"first","affiliation":[]},{"given":"Thomas
+        K.","family":"Park","sequence":"additional","affiliation":[]}],"member":"1290","published-online":{"date-parts":[[1994,12,1]]},"container-title":["Journal
+        of Political Ecology"],"link":[{"URL":"https:\/\/journals.uair.arizona.edu\/index.php\/JPE\/article\/viewFile\/21154\/20742","content-type":"application\/pdf","content-version":"vor","intended-application":"text-mining"},{"URL":"https:\/\/journals.uair.arizona.edu\/index.php\/JPE\/article\/viewFile\/21154\/20742","content-type":"unspecified","content-version":"vor","intended-application":"similarity-checking"}],"deposited":{"date-parts":[[2018,6,27]],"date-time":"2018-06-27T18:13:13Z","timestamp":1530123193000},"score":8.689936,"issued":{"date-parts":[[1994,12,1]]},"references-count":0,"journal-issue":{"published-online":{"date-parts":[[1994,12,1]]},"issue":"1"},"URL":"http:\/\/dx.doi.org\/10.2458\/v1i1.21154","ISSN":["1073-0451"],"issn-type":[{"value":"1073-0451","type":"electronic"}],"subject":["Political
+        Science and International Relations","Ecology","Geography, Planning and Development"]},{"indexed":{"date-parts":[[2020,3,24]],"date-time":"2020-03-24T17:54:52Z","timestamp":1585072492460},"reference-count":0,"publisher":"University
+        of Arizona","issue":"1","license":[{"URL":"http:\/\/creativecommons.org\/licenses\/by\/4.0","start":{"date-parts":[[2018,11,26]],"date-time":"2018-11-26T00:00:00Z","timestamp":1543190400000},"delay-in-days":0,"content-version":"unspecified"}],"content-domain":{"domain":[],"crossmark-restriction":false},"short-container-title":["JPE"],"abstract":"<jats:p>Food
+        waste is the loss of perfectly edible food products. It is a wide-ranging
+        phenomenon: a substantial part of agricultural production is never consumed.
+        The prevalent, most widespread paradigm regarding this phenomenon holds that
+        it is due to inadequate logistics and technology, or to poor management of
+        food on the part of end users. However, an analysis from a political ecology
+        standpoint allows a different interpretation: the root of the problem lies
+        in the hegemonic agrofood system and the unequal power relationships between
+        the actors in the agrofood chain.Key words: Food waste, agriculture, agrofood
+        system, supermarkets, political ecology<\/jats:p>","DOI":"10.2458\/v25i1.23119","type":"journal-article","created":{"date-parts":[[2019,1,18]],"date-time":"2019-01-18T21:32:33Z","timestamp":1547847153000},"page":"587","source":"Crossref","is-referenced-by-count":0,"title":["Food
+        waste: a political ecology approach"],"prefix":"10.2458","volume":"25","author":[{"ORCID":"http:\/\/orcid.org\/0000-0002-0947-614X","authenticated-orcid":false,"given":"Jordi","family":"Gasc\u00f3n","sequence":"first","affiliation":[]}],"member":"1290","published-online":{"date-parts":[[2018,11,26]]},"container-title":["Journal
+        of Political Ecology"],"link":[{"URL":"https:\/\/journals.uair.arizona.edu\/index.php\/JPE\/article\/viewFile\/23119\/21847","content-type":"application\/pdf","content-version":"vor","intended-application":"text-mining"},{"URL":"https:\/\/journals.uair.arizona.edu\/index.php\/JPE\/article\/viewFile\/23119\/21847","content-type":"unspecified","content-version":"vor","intended-application":"similarity-checking"}],"deposited":{"date-parts":[[2019,1,18]],"date-time":"2019-01-18T21:36:26Z","timestamp":1547847386000},"score":8.689936,"issued":{"date-parts":[[2018,11,26]]},"references-count":0,"journal-issue":{"published-online":{"date-parts":[[2018,1,3]]},"issue":"1"},"URL":"http:\/\/dx.doi.org\/10.2458\/v25i1.23119","ISSN":["1073-0451"],"issn-type":[{"value":"1073-0451","type":"electronic"}],"subject":["Political
+        Science and International Relations","Ecology","Geography, Planning and Development"]},{"indexed":{"date-parts":[[2020,3,27]],"date-time":"2020-03-27T21:38:31Z","timestamp":1585345111911},"reference-count":0,"publisher":"University
+        of Arizona","issue":"1","license":[{"URL":"http:\/\/creativecommons.org\/licenses\/by\/4.0","start":{"date-parts":[[2019,9,21]],"date-time":"2019-09-21T00:00:00Z","timestamp":1569024000000},"delay-in-days":0,"content-version":"unspecified"}],"content-domain":{"domain":[],"crossmark-restriction":false},"short-container-title":["JPE"],"abstract":"<jats:p>Transdisciplinary
+        research (TDR) is widely regarded as a promising, and even essential, means
+        of addressing complex sustainability problems, whilst delivering beneficial
+        outcomes for scientists and the non-academic actors with whom they engage.
+        Premised on the ''ecological modernisation'' of Europe, regional funding for
+        TDR under Framework Programmes such as FP7 and more recently Horizon 2020
+        have sought to support academic engagement with a wide range of research stakeholders
+        through calls for transdisciplinary research \u00a0in order to better address
+        Europe''s \"grand societal challenges\" (EC 2013). This article, based on
+        doctoral research, consists of an ex-post study of three European Union funded
+        transdisciplinary projects (CREPE, EJOLT and GAP2) implemented under the Seventh
+        Framework''s (2007-2013) Science in Society program. Its focus is on how issues
+        of power and governance permeate TDR projects, giving rise to tensions, challenges
+        and ultimately struggles over the very meaning of official projects and their
+        outcomes, despite the most egalitarian of intentions and underlying principles
+        of mutual benefit. These tensions, this article argues, should be understood
+        not merely as cultural, methodological or cognitive challenges, but as essentially
+        political conflicts that manifest and flow across multiple scales. In light
+        of these inherent challenges, the article argues that TDR is always conducted
+        on a terrain of political ecology, and concludes by making recommendations
+        for potential collaborators, as well as for European research policy makers,
+        with the objective of enabling participants and funders alike to realise the
+        transformative potential of this promising mode of research.Keywords: Political
+        ecology of transdisciplinary research, power, governance, Science in Society,
+        European research agenda, agro-ecology, environmental justice, fisheries\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0<\/jats:p>","DOI":"10.2458\/v26i1.23245","type":"journal-article","created":{"date-parts":[[2019,9,22]],"date-time":"2019-09-22T21:45:54Z","timestamp":1569188754000},"page":"500-528","source":"Crossref","is-referenced-by-count":0,"title":["A
+        political ecology of transdisciplinary research"],"prefix":"10.2458","volume":"26","author":[{"given":"Hali","family":"Healy","sequence":"first","affiliation":[]}],"member":"1290","published-online":{"date-parts":[[2019,9,21]]},"container-title":["Journal
+        of Political Ecology"],"link":[{"URL":"https:\/\/journals.uair.arizona.edu\/index.php\/JPE\/article\/viewFile\/23245\/22269","content-type":"application\/pdf","content-version":"vor","intended-application":"text-mining"},{"URL":"https:\/\/journals.uair.arizona.edu\/index.php\/JPE\/article\/viewFile\/23245\/22269","content-type":"unspecified","content-version":"vor","intended-application":"similarity-checking"}],"deposited":{"date-parts":[[2019,9,22]],"date-time":"2019-09-22T21:45:54Z","timestamp":1569188754000},"score":8.689936,"issued":{"date-parts":[[2019,9,21]]},"references-count":0,"journal-issue":{"published-online":{"date-parts":[[2019,1,4]]},"issue":"1"},"URL":"http:\/\/dx.doi.org\/10.2458\/v26i1.23245","ISSN":["1073-0451"],"issn-type":[{"value":"1073-0451","type":"electronic"}],"subject":["Political
+        Science and International Relations","Ecology","Geography, Planning and Development"]},{"indexed":{"date-parts":[[2020,3,29]],"date-time":"2020-03-29T22:49:54Z","timestamp":1585522194683},"reference-count":0,"publisher":"University
+        of Arizona","issue":"1","license":[{"URL":"http:\/\/creativecommons.org\/licenses\/by\/4.0","start":{"date-parts":[[2010,12,1]],"date-time":"2010-12-01T00:00:00Z","timestamp":1291161600000},"delay-in-days":0,"content-version":"unspecified"}],"content-domain":{"domain":[],"crossmark-restriction":false},"short-container-title":["JPE"],"abstract":"<jats:p>Political
+        ecology has expanded in multiple new directions since Piers Blaikie''s explanation
+        of the manifestations of political economy and ecology in the \"problem\"
+        of soil erosion in the 1980s. In this article, I try to extend political ecology
+        to engage with ethnic studies literature on coloniality, and indigenous perspectives
+        on intergenerational trauma and healing. Drawing on historic and contemporary
+        examples of Maidu governance and resource development in the Maidu homeland,
+        California, USA, I extend the concept of intergenerational trauma in Native
+        American communities from the individual and ethnic group levels to include
+        the community''s relationship with the land, and the concept of itself as
+        a sovereign civic, governing body. I place specific manifestations of trauma,
+        de-colonizing, and healing, as exemplified by Maidu natural resource activism,
+        in dialogue with political ecology approaches to better understand the relationships
+        between historically colonized people, governance, and land. I argue that
+        the relationships between people and resources that political ecology focuses
+        on cannot be adequately understood in historically colonized communities dealing
+        with neo-colonial resource and political policies, without attention to perspectives
+        on coloniality\/de-coloniality, and trauma\/healing. These perspectives come
+        from both survivors of colonialism, and from ethnic studies and indigeneity
+        scholars.Key words: political ecology, coloniality, Maidu, trauma, healing,
+        Native American<\/jats:p>","DOI":"10.2458\/v17i1.21696","type":"journal-article","created":{"date-parts":[[2018,2,9]],"date-time":"2018-02-09T17:31:46Z","timestamp":1518197506000},"page":"1","source":"Crossref","is-referenced-by-count":6,"title":["A
+        Political Ecology of Healing"],"prefix":"10.2458","volume":"17","author":[{"given":"Elisabeth","family":"Middleton","sequence":"first","affiliation":[]}],"member":"1290","published-online":{"date-parts":[[2010,12,1]]},"container-title":["Journal
+        of Political Ecology"],"link":[{"URL":"https:\/\/journals.uair.arizona.edu\/index.php\/JPE\/article\/viewFile\/21696\/21248","content-type":"application\/pdf","content-version":"vor","intended-application":"text-mining"},{"URL":"https:\/\/journals.uair.arizona.edu\/index.php\/JPE\/article\/viewFile\/21696\/21248","content-type":"unspecified","content-version":"vor","intended-application":"similarity-checking"}],"deposited":{"date-parts":[[2018,6,27]],"date-time":"2018-06-27T18:15:49Z","timestamp":1530123349000},"score":8.689936,"issued":{"date-parts":[[2010,12,1]]},"references-count":0,"journal-issue":{"published-online":{"date-parts":[[2010,12,1]]},"issue":"1"},"URL":"http:\/\/dx.doi.org\/10.2458\/v17i1.21696","ISSN":["1073-0451"],"issn-type":[{"value":"1073-0451","type":"electronic"}]},{"indexed":{"date-parts":[[2020,6,4]],"date-time":"2020-06-04T15:34:24Z","timestamp":1591284864498},"reference-count":0,"publisher":"Bilingual
+        Publishing Co.","issue":"2","license":[{"URL":"https:\/\/creativecommons.org\/licenses\/by-nc\/4.0","start":{"date-parts":[[2020,4,30]],"date-time":"2020-04-30T00:00:00Z","timestamp":1588204800000},"delay-in-days":0,"content-version":"unspecified"}],"content-domain":{"domain":[],"crossmark-restriction":false},"short-container-title":["RE"],"abstract":"<jats:p>The
+        pursuit of the liberation of all mankind and the comprehensive development
+        of human freedom is the theme of all marxist theories.Marx in the criticism
+        of classical political economics \"abstract\", to the whole history of the
+        definition of \"general\", found the abstract \"general\" of the people behind
+        the objective existence and state of development, so as to clearly indicate
+        the relationship between man and nature of human development has experienced
+        on the basis of the nature of the dependence on one stage, gradually from
+        natural objects depends on the stage and with the natural fusion of freedom
+        comprehensive stage, and the concrete connotation of man''s free overall and
+        implementation path.<\/jats:p>","DOI":"10.30564\/re.v2i2.1812","type":"journal-article","created":{"date-parts":[[2020,5,1]],"date-time":"2020-05-01T00:51:34Z","timestamp":1588294294000},"source":"Crossref","is-referenced-by-count":0,"title":["Human
+        development from the perspective of ecology"],"prefix":"10.30564","volume":"2","author":[{"given":"Guiying","family":"Zhao","sequence":"first","affiliation":[]}],"member":"12007","published-online":{"date-parts":[[2020,4,30]]},"container-title":["Research
+        in Ecology"],"link":[{"URL":"https:\/\/www.bilpublishing.com\/index.php\/re\/article\/viewFile\/1812\/1405","content-type":"application\/pdf","content-version":"vor","intended-application":"text-mining"},{"URL":"https:\/\/www.bilpublishing.com\/index.php\/re\/article\/viewFile\/1812\/1405","content-type":"unspecified","content-version":"vor","intended-application":"similarity-checking"}],"deposited":{"date-parts":[[2020,5,1]],"date-time":"2020-05-01T00:51:37Z","timestamp":1588294297000},"score":8.689936,"issued":{"date-parts":[[2020,4,30]]},"references-count":0,"journal-issue":{"published-online":{"date-parts":[[2020,4,30]]},"issue":"2"},"URL":"http:\/\/dx.doi.org\/10.30564\/re.v2i2.1812","ISSN":["2661-3379"],"issn-type":[{"value":"2661-3379","type":"electronic"}]},{"indexed":{"date-parts":[[2020,2,19]],"date-time":"2020-02-19T19:04:09Z","timestamp":1582139049808},"reference-count":148,"publisher":"Hindawi
+        Limited","license":[{"URL":"http:\/\/creativecommons.org\/licenses\/by\/3.0\/","start":{"date-parts":[[2011,1,1]],"date-time":"2011-01-01T00:00:00Z","timestamp":1293840000000},"delay-in-days":0,"content-version":"unspecified"}],"funder":[{"DOI":"10.13039\/100008327","name":"Berry
+        College","doi-asserted-by":"publisher","award":[]}],"content-domain":{"domain":[],"crossmark-restriction":false},"short-container-title":["International
+        Journal of Ecology"],"published-print":{"date-parts":[[2011]]},"abstract":"<jats:p>Functional
+        relationships involving species richness may be unimodal, monotonically increasing,
+        monotonically decreasing, bimodal, multimodal, U-shaped, or with no discernable
+        pattern. The unimodal relationships are the most interesting because they
+        suggest dynamic, nonequilibrium community processes. For that reason, they
+        are also contentious. In this paper, we provide a wide-ranging review of the
+        literature on unimodal (humpbacked) species richness-relationships. Though
+        not as widespread as previously thought, unimodal patterns of species richness
+        are often associated with disturbance, predation and herbivory, productivity,
+        spatial heterogeneity, environmental gradients, time, and latitude. These
+        unimodal patterns are contingent on organism and environment; we examine unimodal
+        species richness-curves involving plants, invertebrates, vertebrates, plankton,
+        and microbes in marine, lacustrine, and terrestrial habitats. A goal of future
+        research is to understand the contingent patterns and the complex, interacting
+        processes that generate them.<\/jats:p>","DOI":"10.1155\/2011\/868426","type":"journal-article","created":{"date-parts":[[2011,8,24]],"date-time":"2011-08-24T19:00:52Z","timestamp":1314212452000},"page":"1-15","source":"Crossref","is-referenced-by-count":28,"title":["The
+        Humpbacked Species Richness-Curve: A Contingent Rule for Community Ecology"],"prefix":"10.1155","volume":"2011","author":[{"given":"John
+        H.","family":"Graham","sequence":"first","affiliation":[{"name":"Department
+        of Biology, Berry College, Mount Berry, GA 30149, USA"}]},{"given":"Jeffrey
+        J.","family":"Duda","sequence":"additional","affiliation":[{"name":"Western
+        Fisheries Research Center, U.S. Geological Survey, Seattle, WA 98115, USA"}]}],"member":"98","reference":[{"key":"1","volume":"97","first-page":"357","year":"1963","journal-title":"American
+        Naturalist","DOI":"10.1086\/282286","doi-asserted-by":"crossref"},{"key":"2","volume":"84","issue":"2","first-page":"177","year":"1999","journal-title":"Oikos","DOI":"10.2307\/3546712","doi-asserted-by":"crossref"},{"key":"3","DOI":"10.1038\/429813a","doi-asserted-by":"publisher"},{"key":"4","DOI":"10.1007\/s12080-007-0002-0","doi-asserted-by":"publisher"},{"key":"5","volume":"93","first-page":"145","year":"1959","journal-title":"American
+        Naturalist","DOI":"10.1086\/282070","doi-asserted-by":"crossref"},{"key":"6","volume":"76","issue":"7","first-page":"2019","year":"1995","journal-title":"Ecology","DOI":"10.2307\/1941677","doi-asserted-by":"crossref"},{"key":"7","DOI":"10.1890\/08-0968.1","doi-asserted-by":"publisher"},{"key":"8","DOI":"10.1890\/10-0155.1","doi-asserted-by":"publisher"},{"key":"9","DOI":"10.1890\/09-1029.1","doi-asserted-by":"publisher"},{"key":"10","volume":"82","issue":"12","first-page":"3479","year":"2001","journal-title":"Ecology"},{"key":"11","volume":"85","issue":"2","first-page":"359","year":"2004","journal-title":"Ecology","DOI":"10.1890\/03-0266","doi-asserted-by":"crossref"},{"key":"12","volume":"4","issue":"8","first-page":"1097","year":"2002","journal-title":"Evolutionary
+        Ecology Research"},{"key":"13","DOI":"10.1086\/303150","doi-asserted-by":"publisher"},{"key":"14","year":"1994"},{"key":"15","volume":"1","first-page":"151","year":"1973","journal-title":"Journal
+        of Environmental Management"},{"key":"16","year":"1973"},{"key":"17","first-page":"196","year":"1975","volume-title":"Markovian
+        properties of forest succession"},{"key":"18","volume":"199","issue":"4335","first-page":"1302","year":"1978","journal-title":"Science","DOI":"10.1126\/science.199.4335.1302","doi-asserted-by":"crossref"},{"key":"19","volume":"32","first-page":"663","year":"1994","journal-title":"Journal
+        of Mathematical Biology","DOI":"10.1007\/BF00163021","doi-asserted-by":"crossref"},{"key":"20","DOI":"10.1146\/annurev.ecolsys.31.1.343","doi-asserted-by":"publisher"},{"key":"21","DOI":"10.1111\/j.1461-0248.2009.01329.x","doi-asserted-by":"publisher"},{"key":"22","DOI":"10.1038\/293564a0","doi-asserted-by":"publisher"},{"key":"23","volume":"75","issue":"8","first-page":"2204","year":"1994","journal-title":"Ecology","DOI":"10.2307\/1940877","doi-asserted-by":"crossref"},{"key":"24","volume":"21","issue":"1","first-page":"103","year":"1997","journal-title":"New
+        Zealand Journal of Ecology"},{"key":"25","volume":"53","issue":"1","first-page":"139","year":"1988","journal-title":"Oikos","DOI":"10.2307\/3565674","doi-asserted-by":"crossref"},{"key":"26","volume":"136","issue":"3","first-page":"485","year":"2000","journal-title":"Marine
+        Biology","DOI":"10.1007\/s002270050708","doi-asserted-by":"crossref"},{"key":"27","DOI":"10.1002\/1522-2632(200008)85:4<379::AID-IROH379>3.0.CO;2-X","doi-asserted-by":"publisher"},{"key":"28","DOI":"10.1034\/j.1600-0706.2003.12421.x","doi-asserted-by":"publisher"},{"key":"29","volume":"42","first-page":"594","year":"1961","journal-title":"Ecology","DOI":"10.2307\/1932254","doi-asserted-by":"crossref"},{"key":"30","year":"1984"},{"key":"31","year":"1999"},{"key":"32","DOI":"10.1016\/j.ecolind.2008.10.003","doi-asserted-by":"publisher"},{"key":"33","volume":"7","issue":"3","first-page":"429","year":"2008","journal-title":"Southeastern
+        Naturalist","DOI":"10.1656\/1528-7092-7.3.429","doi-asserted-by":"crossref"},{"key":"35","volume":"100","first-page":"65","year":"1966","journal-title":"American
+        Naturalist","DOI":"10.1086\/282400","doi-asserted-by":"crossref"},{"key":"36","volume":"14","first-page":"710","year":"1969","journal-title":"Limnology
+        and Oceanography","DOI":"10.4319\/lo.1969.14.5.0710","doi-asserted-by":"crossref"},{"key":"37","volume":"112","first-page":"23","year":"1978","journal-title":"American
+        Naturalist","DOI":"10.1086\/283250","doi-asserted-by":"crossref"},{"key":"38","volume":"12","first-page":"405","year":"1981","journal-title":"Annual
+        Review of Ecology and Systematics","DOI":"10.1146\/annurev.es.12.110181.002201","doi-asserted-by":"crossref"},{"key":"39","first-page":"52","year":"1993","volume-title":"How
+        are diversity and productivity related"},{"key":"40","volume":"82","issue":"9","first-page":"2381","year":"2001","journal-title":"Ecology","DOI":"10.1890\/0012-9658(2001)082[2381:WITORB]2.0.CO;2","doi-asserted-by":"crossref"},{"key":"41","DOI":"10.1146\/annurev.ecolsys.30.1.257","doi-asserted-by":"publisher"},{"key":"42","DOI":"10.1007\/BF00048034","doi-asserted-by":"publisher"},{"key":"43","DOI":"10.1890\/09-1650.1","doi-asserted-by":"publisher"},{"key":"44","DOI":"10.1038\/379718a0","doi-asserted-by":"publisher"},{"key":"45","DOI":"10.1038\/nature01785","doi-asserted-by":"publisher"},{"key":"46","DOI":"10.1111\/j.1574-6941.2007.00381.x","doi-asserted-by":"publisher"},{"key":"47","volume":"75","issue":"1","first-page":"3","year":"2005","journal-title":"Ecological
+        Monographs","DOI":"10.1890\/04-0922","doi-asserted-by":"crossref"},{"key":"48","DOI":"10.1073\/pnas.0708328105","doi-asserted-by":"publisher"},{"key":"49","DOI":"10.1007\/s004420050180","doi-asserted-by":"publisher"},{"key":"50","DOI":"10.1890\/09-1291.1","doi-asserted-by":"publisher"},{"key":"51","DOI":"10.1086\/518950","doi-asserted-by":"publisher"},{"key":"52","DOI":"10.1890\/08-1038.1","doi-asserted-by":"publisher"},{"key":"53","year":"1971"},{"key":"54","volume":"122","issue":"6","first-page":"1043","year":"1993","journal-title":"Transactions
+        of the American Fisheries Society","DOI":"10.1577\/1548-8659(1993)122<1043:SDOFIN>2.3.CO;2","doi-asserted-by":"crossref"},{"key":"55","first-page":"137","year":"1966","volume-title":"Nutritional
+        aspects of algal productivity in marl lakes with particular reference to enrichment
+        bioassays and their interpretation"},{"key":"56","DOI":"10.1046\/j.1365-2656.2003.00741.x","doi-asserted-by":"publisher"},{"key":"57","volume":"18","issue":"2","first-page":"200","year":"1995","journal-title":"Ecography","DOI":"10.1111\/j.1600-0587.1995.tb00341.x","doi-asserted-by":"crossref"},{"key":"58","DOI":"10.1046\/j.1472-4642.2001.00097.x","doi-asserted-by":"publisher"},{"key":"59","DOI":"10.1658\/1100-9233(2006)017[0037:EOAATO]2.0.CO;2","doi-asserted-by":"publisher"},{"key":"60","DOI":"10.1111\/j.1466-8238.2006.00281.x","doi-asserted-by":"publisher"},{"key":"61","DOI":"10.1034\/j.1600-0587.2002.250104.x","doi-asserted-by":"publisher"},{"key":"62","DOI":"10.1111\/j.1466-8238.2007.00316.x","doi-asserted-by":"publisher"},{"key":"63","volume":"31","issue":"2","first-page":"307","year":"2004","journal-title":"Journal
+        of Biogeography","DOI":"10.1046\/j.0305-0270.2003.00988.x","doi-asserted-by":"crossref"},{"key":"64","volume":"31","issue":"1","first-page":"19","year":"2004","journal-title":"Journal
+        of Biogeography","DOI":"10.1046\/j.0305-0270.2003.00992.x","doi-asserted-by":"crossref"},{"key":"65","volume":"163","issue":"3","first-page":"E1","year":"2004","journal-title":"The
+        American Naturalist","DOI":"10.1086\/382056","doi-asserted-by":"crossref"},{"key":"66","volume":"5","first-page":"25","year":"1974","journal-title":"Annual
+        Review of Ecology and Systematics","DOI":"10.1146\/annurev.es.05.110174.000325","doi-asserted-by":"crossref"},{"key":"67","volume":"55","first-page":"1075","year":"1974","journal-title":"Ecology","DOI":"10.2307\/1940357","doi-asserted-by":"crossref"},{"key":"68","volume":"68","issue":"1","first-page":"12","year":"1987","journal-title":"Ecology","DOI":"10.2307\/1938801","doi-asserted-by":"crossref"},{"key":"69","volume":"51","issue":"3","first-page":"957","year":"1982","journal-title":"Journal
+        of Animal Ecology","DOI":"10.2307\/4016","doi-asserted-by":"crossref"},{"key":"70","volume":"34","first-page":"273","year":"2003","journal-title":"Annual
+        Review of Ecology, Evolution, and Systematics","DOI":"10.1146\/annurev.ecolsys.34.012103.144032","doi-asserted-by":"crossref"},{"key":"71","volume":"62","first-page":"532","year":"1981","journal-title":"Ecology","DOI":"10.2307\/1937717","doi-asserted-by":"crossref"},{"key":"72","DOI":"10.1046\/j.1365-2656.1998.00198.x","doi-asserted-by":"publisher"},{"key":"73","volume":"73","issue":"6","first-page":"1943","year":"1992","journal-title":"Ecology","DOI":"10.2307\/1941447","doi-asserted-by":"crossref"},{"key":"74","DOI":"10.1007\/s10021-007-9055-6","doi-asserted-by":"publisher"},{"key":"75","DOI":"10.1111\/j.1461-0248.2004.00608.x","doi-asserted-by":"publisher"},{"key":"76","volume":"21","first-page":"213","year":"1972","journal-title":"Taxon","DOI":"10.2307\/1218190","doi-asserted-by":"crossref"},{"key":"77","DOI":"10.1111\/j.1600-0587.2009.05880.x","doi-asserted-by":"publisher"},{"key":"78","DOI":"10.1111\/j.1600-0587.2009.06148.x","doi-asserted-by":"publisher"},{"key":"79","volume":"85","issue":"1","first-page":"107","year":"2004","journal-title":"Ecology","DOI":"10.1890\/03-3010","doi-asserted-by":"crossref"},{"key":"80","DOI":"10.1371\/journal.pbio.0050272","doi-asserted-by":"publisher"},{"key":"81","volume":"33","issue":"1","first-page":"63","year":"2010","journal-title":"Animal
+        Biodiversity and Conservation"},{"key":"82","DOI":"10.1111\/j.1461-0248.2004.00701.x","doi-asserted-by":"publisher"},{"key":"83","volume":"2","issue":"6","first-page":"791","year":"2000","journal-title":"Evolutionary
+        Ecology Research"},{"key":"84","volume":"84","issue":"2","first-page":"293","year":"1996","journal-title":"Journal
+        of Ecology","DOI":"10.2307\/2261364","doi-asserted-by":"crossref"},{"key":"85","DOI":"10.1038\/416427a","doi-asserted-by":"publisher"},{"key":"86","volume":"85","issue":"10","first-page":"2701","year":"2004","journal-title":"Ecology","DOI":"10.1890\/03-0561","doi-asserted-by":"crossref"},{"key":"87","year":"1995"},{"key":"88","volume":"60","first-page":"1225","year":"1979","journal-title":"Ecology","DOI":"10.2307\/1936969","doi-asserted-by":"crossref"},{"key":"89","DOI":"10.1007\/BF00317561","doi-asserted-by":"publisher"},{"key":"90","volume":"12","issue":"3-4","first-page":"127","year":"1993","journal-title":"Coral
+        Reefs","DOI":"10.1007\/BF00334471","doi-asserted-by":"crossref"},{"key":"91","volume":"67","issue":"4","first-page":"461","year":"1997","journal-title":"Ecological
+        Monographs","DOI":"10.1890\/0012-9615(1997)067[0461:AYSOCA]2.0.CO;2","doi-asserted-by":"crossref"},{"key":"92","DOI":"10.1038\/269471a0","doi-asserted-by":"publisher"},{"key":"93","DOI":"10.1111\/j.0030-1299.2005.13962.x","doi-asserted-by":"publisher"},{"key":"94","volume":"8","issue":"8","first-page":"275","year":"1993","journal-title":"Trends
+        in Ecology and Evolution","DOI":"10.1016\/0169-5347(93)90254-M","doi-asserted-by":"crossref"},{"key":"95","DOI":"10.1007\/BF00031698","doi-asserted-by":"publisher"},{"key":"96","DOI":"10.3354\/meps308037","doi-asserted-by":"publisher"},{"key":"97","DOI":"10.1098\/rspb.2000.1384","doi-asserted-by":"publisher"},{"key":"98","volume":"113","first-page":"81","year":"1979","journal-title":"American
+        Naturalist","DOI":"10.1086\/283366","doi-asserted-by":"crossref"},{"key":"99","DOI":"10.1038\/nature00830","doi-asserted-by":"publisher"},{"key":"100","DOI":"10.1890\/06-0976","doi-asserted-by":"publisher"},{"key":"101","DOI":"10.1073\/pnas.0404300101","doi-asserted-by":"publisher"},{"key":"102","DOI":"10.1038\/nature02685","doi-asserted-by":"publisher"},{"key":"103","DOI":"10.1890\/05-0910","doi-asserted-by":"publisher"},{"key":"104","volume":"95","first-page":"137","year":"1961","journal-title":"American
+        Naturalist","DOI":"10.1086\/282171","doi-asserted-by":"crossref"},{"key":"105","DOI":"10.1038\/nature02593","doi-asserted-by":"publisher"},{"key":"106","volume":"81","issue":"10","first-page":"2662","year":"2000","journal-title":"Ecology","DOI":"10.1890\/0012-9658(2000)081[2662:TRILCB]2.0.CO;2","doi-asserted-by":"crossref"},{"key":"107","volume":"7","issue":"3","first-page":"667","year":"1993","journal-title":"Conservation
+        Biology","DOI":"10.1046\/j.1523-1739.1993.07030667.x","doi-asserted-by":"crossref"},{"key":"108","year":"1967"},{"key":"109","DOI":"10.1007\/BF00005423","doi-asserted-by":"publisher"},{"key":"110","volume":"31","issue":"1","first-page":"79","year":"2004","journal-title":"Journal
+        of Biogeography","DOI":"10.1046\/j.0305-0270.2003.00994.x","doi-asserted-by":"crossref"},{"key":"111","first-page":"13","year":"1993","volume-title":"The
+        maintenance of species richness in plant communities"},{"key":"112","DOI":"10.1890\/0012-9658(2006)87[1234:TIOPOT]2.0.CO;2","doi-asserted-by":"publisher"},{"key":"113","DOI":"10.1890\/06-0997","doi-asserted-by":"publisher"},{"key":"114","volume":"61","issue":"2","first-page":"250","year":"1991","journal-title":"Oikos","DOI":"10.2307\/3545343","doi-asserted-by":"crossref"},{"key":"115","year":"1990"},{"key":"116","DOI":"10.1098\/rsbl.2010.0103","doi-asserted-by":"publisher"},{"key":"117","DOI":"10.1086\/285419","doi-asserted-by":"publisher"},{"key":"118","volume":"10","issue":"1","first-page":"31","year":"1985","journal-title":"Austral
+        Ecology","DOI":"10.1111\/j.1442-9993.1985.tb00861.x","doi-asserted-by":"crossref"},{"key":"119","volume":"14","issue":"1","first-page":"31","year":"1991","journal-title":"Holarctic
+        Ecology"},{"key":"121","DOI":"10.1086\/286204","doi-asserted-by":"publisher"},{"key":"122","DOI":"10.1086\/320866","doi-asserted-by":"publisher"},{"key":"123","DOI":"10.1111\/j.1461-0248.2010.01548.x","doi-asserted-by":"publisher"},{"key":"124","DOI":"10.1126\/science.1129237","doi-asserted-by":"publisher"},{"key":"125","DOI":"10.1007\/s00442-010-1607-3","doi-asserted-by":"publisher"},{"key":"126","volume":"16","issue":"4","first-page":"491","year":"1991","journal-title":"Ecological
+        Entomology","DOI":"10.1111\/j.1365-2311.1991.tb00241.x","doi-asserted-by":"crossref"},{"key":"127","DOI":"10.1007\/s004420050063","doi-asserted-by":"publisher"},{"key":"128","DOI":"10.1007\/BF02227169","doi-asserted-by":"publisher"},{"key":"129","volume":"27","first-page":"9","year":"1993","journal-title":"Tiscia"},{"key":"130","DOI":"10.1046\/j.1523-1739.1999.98504.x","doi-asserted-by":"publisher"},{"key":"131","volume":"24","issue":"5","first-page":"547","year":"2001","journal-title":"Ecography","DOI":"10.1034\/j.1600-0587.2001.d01-210.x","doi-asserted-by":"crossref"},{"key":"132","volume":"33","issue":"6","first-page":"1281","year":"1996","journal-title":"Journal
+        of Applied Ecology","DOI":"10.2307\/2404770","doi-asserted-by":"crossref"},{"key":"133","volume":"4","issue":"1","first-page":"37","year":"1993","journal-title":"Journal
+        of Vegetation Science","DOI":"10.2307\/3235732","doi-asserted-by":"crossref"},{"key":"134","DOI":"10.1016\/S0304-3800(02)00190-4","doi-asserted-by":"publisher"},{"key":"135","volume":"74","first-page":"829","year":"1979","journal-title":"Journal
+        of the American Statistical Association","DOI":"10.1080\/01621459.1979.10481038","doi-asserted-by":"crossref"},{"key":"136","volume":"4","issue":"30","first-page":"1","year":"2004","journal-title":"Journal
+        of Insect Science","DOI":"10.1673\/031.004.3001","doi-asserted-by":"crossref"},{"key":"137","volume":"125","issue":"1","first-page":"1","year":"1985","journal-title":"American
+        Naturalist","DOI":"10.1086\/284325","doi-asserted-by":"crossref"},{"key":"138","DOI":"10.1046\/j.1420-9101.2002.00379.x","doi-asserted-by":"publisher"},{"key":"139","DOI":"10.1111\/j.1466-8238.2007.00337.x","doi-asserted-by":"publisher"},{"key":"140","DOI":"10.1146\/annurev.ecolsys.33.010802.150448","doi-asserted-by":"publisher"},{"key":"141","volume":"35","issue":"4","first-page":"523","year":"1998","journal-title":"Journal
+        of Applied Ecology","DOI":"10.1046\/j.1365-2664.1998.3540523.x","doi-asserted-by":"crossref"},{"key":"142","volume":"129","issue":"1\u20133","first-page":"301","year":"1995","journal-title":"Marine
+        Ecology Progress Series"},{"key":"143","volume":"35","issue":"4","first-page":"532","year":"1998","journal-title":"Journal
+        of Applied Ecology","DOI":"10.1046\/j.1365-2664.1998.3540532.x","doi-asserted-by":"crossref"},{"key":"144","volume":"50","issue":"3","first-page":"978","year":"2005","journal-title":"Limnology
+        and Oceanography","DOI":"10.4319\/lo.2005.50.3.0978","doi-asserted-by":"crossref"},{"key":"145","DOI":"10.1086\/303354","doi-asserted-by":"publisher"},{"key":"146","volume":"94","first-page":"421","year":"1960","journal-title":"American
+        Naturalist","DOI":"10.1086\/282146","doi-asserted-by":"crossref"},{"key":"147","volume":"118","first-page":"240","year":"1981","journal-title":"American
+        Naturalist","DOI":"10.1086\/283817","doi-asserted-by":"crossref"},{"key":"148","DOI":"10.1890\/07-1628.1","doi-asserted-by":"publisher"},{"key":"149","DOI":"10.1890\/09-0671.1","doi-asserted-by":"publisher"},{"key":"150","DOI":"10.1111\/j.1461-0248.2004.00600.x","doi-asserted-by":"publisher"}],"container-title":["International
+        Journal of Ecology"],"language":"en","link":[{"URL":"http:\/\/downloads.hindawi.com\/journals\/ijecol\/2011\/868426.pdf","content-type":"application\/pdf","content-version":"vor","intended-application":"text-mining"},{"URL":"http:\/\/downloads.hindawi.com\/journals\/ijecol\/2011\/868426.xml","content-type":"application\/xml","content-version":"vor","intended-application":"text-mining"},{"URL":"http:\/\/downloads.hindawi.com\/journals\/ijecol\/2011\/868426.pdf","content-type":"unspecified","content-version":"vor","intended-application":"similarity-checking"}],"deposited":{"date-parts":[[2017,6,20]],"date-time":"2017-06-20T05:07:52Z","timestamp":1497935272000},"score":8.488214,"issued":{"date-parts":[[2011]]},"references-count":148,"alternative-id":["868426","868426"],"URL":"http:\/\/dx.doi.org\/10.1155\/2011\/868426","relation":{"cites":[]},"ISSN":["1687-9708","1687-9716"],"issn-type":[{"value":"1687-9708","type":"print"},{"value":"1687-9716","type":"electronic"}]},{"indexed":{"date-parts":[[2020,3,26]],"date-time":"2020-03-26T05:44:05Z","timestamp":1585201445086},"reference-count":70,"publisher":"Hindawi
+        Limited","license":[{"URL":"http:\/\/creativecommons.org\/licenses\/by\/3.0\/","start":{"date-parts":[[2012,1,1]],"date-time":"2012-01-01T00:00:00Z","timestamp":1325376000000},"delay-in-days":0,"content-version":"unspecified"}],"content-domain":{"domain":[],"crossmark-restriction":false},"short-container-title":["International
+        Journal of Ecology"],"published-print":{"date-parts":[[2012]]},"abstract":"<jats:p>The
+        general diversity pattern of the Caribbean anole radiation has been described
+        in detail; however, the actual mechanisms at the origin of their diversification
+        remain controversial. In particular, the role of ecological speciation, and
+        the relative importance of divergence in allopatry and in parapatry, is debated.
+        We describe the genetic structure of anole populations across lineage contact
+        zones and ecotones to investigate the effect of allopatric divergence, natural
+        selection, and the combination of both factors on population differentiation.
+        Allopatric divergence had no significant impact on differentiation across
+        the lineage boundary, while a clear bimodality in genetic and morphological
+        characters was observed across an ecotone within a single lineage. Critically,
+        the strongest differentiation was observed when allopatry and ecology act
+        together, leading to a sharp reduction in gene flow between two lineages inhabiting
+        different habitats. We suggest that, for Caribbean anoles to reach full speciation,
+        a synergistic combination of several historical and ecological factors may
+        be requisite.<\/jats:p>","DOI":"10.1155\/2012\/273413","type":"journal-article","created":{"date-parts":[[2012,2,8]],"date-time":"2012-02-08T21:01:18Z","timestamp":1328734878000},"page":"1-10","source":"Crossref","is-referenced-by-count":7,"title":["Synergy
+        between Allopatry and Ecology in Population Differentiation and Speciation"],"prefix":"10.1155","volume":"2012","author":[{"given":"Yann","family":"Surget-Groba","sequence":"first","affiliation":[{"name":"School
+        of Biological Sciences, Bangor University, Bangor LL57 2UW, UK"},{"name":"Department
+        of Ecology and Evolutionary Biology, University of California Santa Cruz,
+        Santa Cruz, CA 95064, USA"}]},{"given":"Helena","family":"Johansson","sequence":"additional","affiliation":[{"name":"School
+        of Biological Sciences, Bangor University, Bangor LL57 2UW, UK"},{"name":"Department
+        of Biosciences, University of Helsinki, P.O. Box 65, 00014 Helsinki, Finland"}]},{"given":"Roger
+        S.","family":"Thorpe","sequence":"additional","affiliation":[{"name":"School
+        of Biological Sciences, Bangor University, Bangor LL57 2UW, UK"},{"name":"School
+        of Biological Sciences, College of Natural Sciences, Bangor University, Deiniol
+        Road, Bangor, Gwynedd LL57 2UW, UK"}]}],"member":"98","reference":[{"key":"1","DOI":"10.1086\/650369","doi-asserted-by":"publisher"},{"key":"2","year":"1942"},{"key":"3","year":"1963"},{"key":"4","volume":"103","issue":"3","first-page":"557","year":"1983","journal-title":"Genetics"},{"key":"5","volume":"1","first-page":"263","year":"1947","journal-title":"Evolution","DOI":"10.2307\/2405327","doi-asserted-by":"crossref"},{"key":"6","DOI":"10.1016\/S0169-5347(01)02160-7","doi-asserted-by":"publisher"},{"key":"7","DOI":"10.1098\/rspb.2010.1215","doi-asserted-by":"publisher"},{"key":"8","year":"2004"},{"key":"9","DOI":"10.1111\/j.1461-0248.2004.00715.x","doi-asserted-by":"publisher"},{"key":"10","DOI":"10.1098\/rspb.1995.0093","doi-asserted-by":"publisher"},{"key":"11","volume":"35","first-page":"124","year":"1981","journal-title":"Evolution","DOI":"10.2307\/2407946","doi-asserted-by":"crossref"},{"key":"12","DOI":"10.1016\/j.tree.2011.04.005","doi-asserted-by":"publisher"},{"key":"13","year":"2009"},{"key":"14","DOI":"10.1038\/35048558","doi-asserted-by":"publisher"},{"key":"15","DOI":"10.1073\/pnas.1007606107","doi-asserted-by":"publisher"},{"key":"16","year":"1989"},{"key":"17","DOI":"10.1046\/j.1365-294X.2003.01704.x","doi-asserted-by":"publisher"},{"key":"18","DOI":"10.1371\/journal.pgen.1000929","doi-asserted-by":"publisher"},{"key":"19","DOI":"10.1016\/j.ympev.2003.12.008","doi-asserted-by":"publisher"},{"key":"20","DOI":"10.1111\/j.1365-294X.2007.03686.x","doi-asserted-by":"publisher"},{"key":"21","volume":"351","issue":"1341","first-page":"815","year":"1996","journal-title":"Philosophical
+        Transactions of the Royal Society B: Biological Sciences","DOI":"10.1098\/rstb.1996.0076","doi-asserted-by":"crossref"},{"key":"22","DOI":"10.1098\/rstb.2008.0077","doi-asserted-by":"publisher"},{"key":"23","DOI":"10.1080\/10635150290069986","doi-asserted-by":"publisher"},{"key":"24","DOI":"10.1111\/j.1095-8312.2008.01147.x","doi-asserted-by":"publisher"},{"key":"25","DOI":"10.1111\/j.1365-294X.2010.04616.x","doi-asserted-by":"publisher"},{"key":"26","DOI":"10.1002\/jez.10073","doi-asserted-by":"publisher"},{"key":"27","volume":"57","issue":"10","first-page":"2383","year":"2003","journal-title":"Evolution","DOI":"10.1111\/j.0014-3820.2003.tb00250.x","doi-asserted-by":"crossref"},{"key":"28","DOI":"10.1111\/j.1365-294X.2005.02550.x","doi-asserted-by":"publisher"},{"key":"29","DOI":"10.1038\/nature02807","doi-asserted-by":"publisher"},{"key":"30","DOI":"10.1111\/j.1365-2699.2007.01718.x","doi-asserted-by":"publisher"},{"key":"31","DOI":"10.1098\/rspb.2004.2819","doi-asserted-by":"publisher"},{"key":"32","DOI":"10.1046\/j.1365-294X.2002.01564.x","doi-asserted-by":"publisher"},{"key":"33","DOI":"10.1111\/j.1365-294X.2011.05267.x","doi-asserted-by":"publisher"},{"key":"34","DOI":"10.1111\/j.1471-8286.2006.01382.x","doi-asserted-by":"publisher"},{"key":"35","DOI":"10.1023\/A:1019928801124","doi-asserted-by":"publisher"},{"key":"36","DOI":"10.1111\/j.1755-0998.2008.02206.x","doi-asserted-by":"publisher"},{"key":"37","volume":"155","issue":"2","first-page":"945","year":"2000","journal-title":"Genetics"},{"key":"38","DOI":"10.1111\/j.1365-294X.2005.02553.x","doi-asserted-by":"publisher"},{"key":"39","DOI":"10.1554\/05-631.1","doi-asserted-by":"publisher"},{"key":"40","volume":"86","first-page":"485","year":"1995","journal-title":"Journal
+        of Heredity","DOI":"10.1093\/oxfordjournals.jhered.a111627","doi-asserted-by":"crossref"},{"key":"41","DOI":"10.1534\/genetics.106.059451","doi-asserted-by":"publisher"},{"key":"42","volume":"7","issue":"1","first-page":"75","year":"1997","journal-title":"Statistics
+        and Computing","DOI":"10.1023\/A:1018513530268","doi-asserted-by":"crossref"},{"key":"43","year":"2011"},{"key":"44","DOI":"10.1111\/j.1558-5646.2009.00779.x","doi-asserted-by":"publisher"},{"key":"45","DOI":"10.1186\/1471-2156-11-94","doi-asserted-by":"publisher"},{"key":"46","DOI":"10.1111\/j.1365-294X.2008.03979.x","doi-asserted-by":"publisher"},{"key":"47","DOI":"10.1093\/bioinformatics\/btn129","doi-asserted-by":"publisher"},{"key":"48","year":"2002"},{"key":"49","DOI":"10.1111\/j.1095-8649.2009.02419.x","doi-asserted-by":"publisher"},{"key":"50","DOI":"10.1016\/j.tree.2008.10.011","doi-asserted-by":"publisher"},{"key":"51","DOI":"10.1038\/353347a0","doi-asserted-by":"publisher"},{"key":"52","DOI":"10.1086\/379794","doi-asserted-by":"publisher"},{"key":"53","DOI":"10.1086\/428408","doi-asserted-by":"publisher"},{"key":"54","DOI":"10.1007\/s10682-006-0007-y","doi-asserted-by":"publisher"},{"key":"55","DOI":"10.1111\/j.1420-9101.2008.01627.x","doi-asserted-by":"publisher"},{"key":"56","DOI":"10.1111\/j.1365-294X.2010.04641.x","doi-asserted-by":"publisher"},{"key":"57","volume":"52","issue":"6","first-page":"1744","year":"1998","journal-title":"Evolution","DOI":"10.2307\/2411347","doi-asserted-by":"crossref"},{"key":"58","DOI":"10.1098\/rspb.2005.3387","doi-asserted-by":"publisher"},{"key":"59","DOI":"10.1111\/j.1558-5646.2007.00171.x","doi-asserted-by":"publisher"},{"key":"60","DOI":"10.1111\/j.1365-2435.2007.01240.x","doi-asserted-by":"publisher"},{"key":"61","DOI":"10.1111\/j.1365-294X.2005.02794.x","doi-asserted-by":"publisher"},{"key":"62","DOI":"10.1111\/j.1365-294X.2007.03529.x","doi-asserted-by":"publisher"},{"key":"63","DOI":"10.1111\/j.1365-294X.2004.02330.x","doi-asserted-by":"publisher"},{"key":"64","DOI":"10.1038\/nature04566","doi-asserted-by":"publisher"},{"key":"65","DOI":"10.1038\/nature04325","doi-asserted-by":"publisher"},{"key":"66","DOI":"10.1073\/pnas.1106085108","doi-asserted-by":"publisher"},{"key":"67","DOI":"10.1111\/j.1558-5646.2010.01190.x","doi-asserted-by":"publisher"},{"key":"68","DOI":"10.1111\/j.1095-8312.2008.01091.x","doi-asserted-by":"publisher"},{"key":"69","DOI":"10.1371\/journal.pone.0015659","doi-asserted-by":"publisher"},{"key":"70","DOI":"10.1111\/j.1365-2699.2010.02283.x","doi-asserted-by":"publisher"}],"container-title":["International
+        Journal of Ecology"],"language":"en","link":[{"URL":"http:\/\/downloads.hindawi.com\/journals\/ijecol\/2012\/273413.pdf","content-type":"application\/pdf","content-version":"vor","intended-application":"text-mining"},{"URL":"http:\/\/downloads.hindawi.com\/journals\/ijecol\/2012\/273413.xml","content-type":"application\/xml","content-version":"vor","intended-application":"text-mining"},{"URL":"http:\/\/downloads.hindawi.com\/journals\/ijecol\/2012\/273413.pdf","content-type":"unspecified","content-version":"vor","intended-application":"similarity-checking"}],"deposited":{"date-parts":[[2017,6,20]],"date-time":"2017-06-20T13:58:02Z","timestamp":1497967082000},"score":8.488214,"issued":{"date-parts":[[2012]]},"references-count":70,"alternative-id":["273413","273413"],"URL":"http:\/\/dx.doi.org\/10.1155\/2012\/273413","relation":{"cites":[]},"ISSN":["1687-9708","1687-9716"],"issn-type":[{"value":"1687-9708","type":"print"},{"value":"1687-9716","type":"electronic"}]},{"indexed":{"date-parts":[[2020,3,24]],"date-time":"2020-03-24T18:54:44Z","timestamp":1585076084791},"reference-count":0,"publisher":"Walter
+        de Gruyter GmbH","issue":"1-2","license":[{"URL":"http:\/\/creativecommons.org\/licenses\/by-nc-nd\/3.0","start":{"date-parts":[[2018,12,1]],"date-time":"2018-12-01T00:00:00Z","timestamp":1543622400000},"delay-in-days":0,"content-version":"unspecified"}],"content-domain":{"domain":[],"crossmark-restriction":false},"published-print":{"date-parts":[[2018,12,1]]},"abstract":"<jats:title>Abstract<\/jats:title>\n<jats:p>The
+        Earth has existed for more than four billion years and has sustained life
+        for three billion. Human beings have existed for just 200,000 years, yet our
+        impact on the planet is so great that scientists around the world are calling
+        for our period in the Earth\u2019s history to be named \u2018the Anthropocene\u2019
+        - the age of humans. The changes we are now making have exacted a heavy toll
+        on the natural world around us, and now threaten the planet\u2019s ability
+        to provide for us all. Problems of Ecology and Society in the new geological
+        era as the Anthropocene - \u2018the age of humans\u2019 - are overviewed.
+        The name is widely recognized as a useful classification of the period in
+        which human activity has created and continues to generate deep and lasting
+        effects on the Earth and its living systems. Examples of the interrelated
+        effects of exponential population growth and massively expanding consumption
+        of natural resources called Great Acceleration are given. Updated \u2018planetary
+        dashboard\u2019 of environmental, economic and social indicators charts the
+        trajectory of the Anthropocene are briefly summarized.<\/jats:p>","DOI":"10.1515\/cdem-2018-0001","type":"journal-article","created":{"date-parts":[[2019,1,28]],"date-time":"2019-01-28T04:31:27Z","timestamp":1548649887000},"page":"7-29","source":"Crossref","is-referenced-by-count":0,"title":["Ecology
+        and Society. Impacted Ecosystems. Part I"],"prefix":"10.1515","volume":"23","author":[{"given":"Marina","family":"Frontasyeva","sequence":"first","affiliation":[]},{"given":"Alexander","family":"Kamnev","sequence":"additional","affiliation":[]}],"member":"374","container-title":["Chemistry-Didactics-Ecology-Metrology"],"link":[{"URL":"http:\/\/content.sciendo.com\/view\/journals\/cdem\/23\/1-2\/article-p7.xml","content-type":"text\/html","content-version":"vor","intended-application":"text-mining"}],"deposited":{"date-parts":[[2019,2,7]],"date-time":"2019-02-07T04:36:24Z","timestamp":1549514184000},"score":8.126377,"issued":{"date-parts":[[2018,12,1]]},"references-count":0,"journal-issue":{"issue":"1-2"},"URL":"http:\/\/dx.doi.org\/10.1515\/cdem-2018-0001","ISSN":["2084-4506"],"issn-type":[{"value":"2084-4506","type":"electronic"}]},{"indexed":{"date-parts":[[2020,3,29]],"date-time":"2020-03-29T03:46:36Z","timestamp":1585453596691},"reference-count":15,"publisher":"Cambridge
+        University Press (CUP)","issue":"3","license":[{"URL":"https:\/\/www.cambridge.org\/core\/terms","start":{"date-parts":[[2013,5,9]],"date-time":"2013-05-09T00:00:00Z","timestamp":1368057600000},"delay-in-days":0,"content-version":"unspecified"}],"content-domain":{"domain":[],"crossmark-restriction":false},"short-container-title":["Envir.
+        Conserv."],"published-print":{"date-parts":[[2013,9]]},"abstract":"<jats:title>SUMMARY<\/jats:title><jats:p>Environmental
+        damage during warfare is generally accepted as an unavoidable form of collateral
+        damage. Military operations should be included in discussions of environmental
+        conservation. The subdiscipline warfare ecology was recently proposed to integrate
+        such discussion. However, environmental damage may also be caused by peacetime
+        military operations, and, in such cases, relevant stakeholders may not realize
+        that warfare ecology has relevance for peacetime environmental disaster. This
+        comment proposes that the epithet warfare ecology does little to attract the
+        participation of the groups affected by military operations, however the term
+        \u2018military ecology\u2019 would also patently include peacetime military
+        activities and may thus enhance engagement. Military ecology embraces all
+        environmental conservation issues related to military activity during peacetime,
+        preparation for war, warfare and post-war restoration operations. The established
+        term warfare ecology could be subsumed within military ecology, by accurately
+        constricting its application to ecological issues directly tied to armed conflict.<\/jats:p>","DOI":"10.1017\/s0376892913000179","type":"journal-article","created":{"date-parts":[[2013,5,9]],"date-time":"2013-05-09T09:13:36Z","timestamp":1368090816000},"page":"207-208","source":"Crossref","is-referenced-by-count":5,"title":["Military
+        ecology more fitting than warfare ecology"],"prefix":"10.1017","volume":"40","author":[{"given":"THOMAS
+        E.","family":"MARLER","sequence":"first","affiliation":[]}],"member":"56","published-online":{"date-parts":[[2013,5,9]]},"reference":[{"key":"S0376892913000179_ref6","DOI":"10.1641\/B580809","doi-asserted-by":"publisher"},{"key":"S0376892913000179_ref10","DOI":"10.1016\/j.biocon.2008.06.014","doi-asserted-by":"publisher"},{"key":"S0376892913000179_ref2","DOI":"10.1111\/j.1467-7709.2008.00714.x","doi-asserted-by":"publisher"},{"key":"S0376892913000179_ref16","first-page":"335","article-title":"Salisbury
+        plain training area: the British steppes","volume":"13","author":"Toynton","year":"2002","journal-title":"British
+        Wildlife"},{"key":"S0376892913000179_ref4","author":"Galgano","year":"2010","volume-title":"Modern
+        Military Geography"},{"key":"S0376892913000179_ref9","DOI":"10.1080\/03906701.2011.581807","doi-asserted-by":"publisher"},{"key":"S0376892913000179_ref7","first-page":"1198","article-title":"Military
+        threats to terrestrial resources not restricted to wartime: a case study from
+        Guam","volume":"5","author":"Marler","year":"2011","journal-title":"Journal
+        of Environmental Science and Engineering"},{"key":"S0376892913000179_ref5","DOI":"10.1111\/j.1523-1739.2008.00914.x","doi-asserted-by":"publisher"},{"key":"S0376892913000179_ref14","DOI":"10.1371\/journal.pone.0043446","doi-asserted-by":"publisher"},{"key":"S0376892913000179_ref12","first-page":"46","article-title":"Origin
+        and population growth of the brown tree snake, Boiga irregularis, on Guam","volume":"46","author":"Rodda","year":"1992","journal-title":"Pacific
+        Science"},{"key":"S0376892913000179_ref15","DOI":"10.1111\/j.1744-7429.2009.00559.x","doi-asserted-by":"publisher"},{"key":"S0376892913000179_ref3","DOI":"10.1038\/415023a","doi-asserted-by":"publisher"},{"key":"S0376892913000179_ref8","DOI":"10.4161\/cib.18889","doi-asserted-by":"publisher"},{"key":"S0376892913000179_ref11","DOI":"10.1890\/1051-0761(2003)013[0432:MTEOTA]2.0.CO;2","doi-asserted-by":"publisher"},{"key":"S0376892913000179_ref1","DOI":"10.1038\/476371a","doi-asserted-by":"publisher"}],"container-title":["Environmental
+        Conservation"],"language":"en","link":[{"URL":"https:\/\/www.cambridge.org\/core\/services\/aop-cambridge-core\/content\/view\/S0376892913000179","content-type":"unspecified","content-version":"vor","intended-application":"similarity-checking"}],"deposited":{"date-parts":[[2019,4,23]],"date-time":"2019-04-23T20:17:22Z","timestamp":1556050642000},"score":8.126377,"issued":{"date-parts":[[2013,5,9]]},"references-count":15,"journal-issue":{"published-print":{"date-parts":[[2013,9]]},"issue":"3"},"alternative-id":["S0376892913000179"],"URL":"http:\/\/dx.doi.org\/10.1017\/s0376892913000179","relation":{"cites":[]},"ISSN":["0376-8929","1469-4387"],"issn-type":[{"value":"0376-8929","type":"print"},{"value":"1469-4387","type":"electronic"}]}],"items-per-page":10,"query":{"start-index":0,"search-terms":"ecology"}}}'
+  recorded_at: 2020-07-01 17:56:21 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.6.2
+- request:
+    method: get
+    uri: https://api.crossref.org/works/10.2458/v22i1.21112
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: r-curl/4.3 crul/0.9.2.92 rOpenSci(rcrossref/1.0.0.92) (mailto:<<crossref-email>>)
+      X-USER-AGENT: r-curl/4.3 crul/0.9.2.92 rOpenSci(rcrossref/1.0.0.92) (mailto:<<crossref-email>>)
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      content-type: application/json;charset=UTF-8
+      vary: Accept
+      access-control-allow-origin: '*'
+      access-control-allow-headers: X-Requested-With
+      content-length: '3611'
+      server: http-kit
+      date: Wed, 01 Jul 2020 17:56:15 GMT
+      x-rate-limit-limit: '50'
+      x-rate-limit-interval: 1s
+      connection: close
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"status":"ok","message-type":"work","message-version":"1.0.0","message":{"indexed":{"date-parts":[[2020,3,29]],"date-time":"2020-03-29T22:49:59Z","timestamp":1585522199754},"reference-count":0,"publisher":"University
+        of Arizona","issue":"1","license":[{"URL":"http:\/\/creativecommons.org\/licenses\/by\/4.0","start":{"date-parts":[[2015,12,1]],"date-time":"2015-12-01T00:00:00Z","timestamp":1448928000000},"delay-in-days":0,"content-version":"unspecified"}],"content-domain":{"domain":[],"crossmark-restriction":false},"short-container-title":["JPE"],"abstract":"<jats:p>Political
+        ecologists have long acknowledged the links between knowledge and power. Recently
+        there has also been a growing interest in detailed studies about knowledge
+        production within critical political ecology. This article is a study of the
+        use of photographs in scientific articles on dryland ecology, and investigates
+        the functions of photographs. Contrary to the straightforward manner in which
+        they are presented, photographs are not value-free documentary proofs of ''how
+        things are.'' Rather, photographs constitute arguments in their own right.
+        Using photographic and textual theory, this study analyzes two articles that
+        include photographs of fence-line contrasts between two different management
+        regimes. Contrasting areas divided by a fence-line is a methodology that demonstrates
+        how management differences lead to differences in vegetation. In a Southern
+        African context, however, differences across a fence tend to encompass deep
+        racial and economic divides, and the fence-line photos risk encompassing these
+        differences. This article argues that the fence-line contrast photographs
+        in this study function as models that order the causal links between vegetation
+        dynamics, land tenure and land management. These models correspond closely
+        to equilibrium models in range ecology, and the fence-line photographs thus
+        contribute to a degradation narrative that has been influential for land reform
+        policies in Southern Africa, and that feeds into land use policies that favor
+        private land ownership in communal areas.Keywords: Critical political ecology,
+        fence-line photography, scientific models, rangeland ecology, Southern Africa<\/jats:p>","DOI":"10.2458\/v22i1.21112","type":"journal-article","created":{"date-parts":[[2018,2,9]],"date-time":"2018-02-09T17:42:19Z","timestamp":1518198139000},"page":"339","source":"Crossref","is-referenced-by-count":3,"title":["An
+        ecology of difference: fence-line contrast photographs as scientific models
+        in ecology"],"prefix":"10.2458","volume":"22","author":[{"given":"Eirin","family":"Hongslo","sequence":"first","affiliation":[]}],"member":"1290","published-online":{"date-parts":[[2015,12,1]]},"container-title":["Journal
+        of Political Ecology"],"original-title":[],"link":[{"URL":"https:\/\/journals.uair.arizona.edu\/index.php\/JPE\/article\/viewFile\/21112\/20700","content-type":"application\/pdf","content-version":"vor","intended-application":"text-mining"},{"URL":"https:\/\/journals.uair.arizona.edu\/index.php\/JPE\/article\/viewFile\/21112\/20700","content-type":"unspecified","content-version":"vor","intended-application":"similarity-checking"}],"deposited":{"date-parts":[[2018,6,27]],"date-time":"2018-06-27T18:12:48Z","timestamp":1530123168000},"score":1.0,"subtitle":[],"short-title":[],"issued":{"date-parts":[[2015,12,1]]},"references-count":0,"journal-issue":{"published-online":{"date-parts":[[2015,12,1]]},"issue":"1"},"URL":"http:\/\/dx.doi.org\/10.2458\/v22i1.21112","relation":{},"ISSN":["1073-0451"],"issn-type":[{"value":"1073-0451","type":"electronic"}]}}'
+  recorded_at: 2020-07-01 17:56:21 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.6.2
+- request:
+    method: get
+    uri: https://api.crossref.org/works/10.2458/v1i1.21154
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: r-curl/4.3 crul/0.9.2.92 rOpenSci(rcrossref/1.0.0.92) (mailto:<<crossref-email>>)
+      X-USER-AGENT: r-curl/4.3 crul/0.9.2.92 rOpenSci(rcrossref/1.0.0.92) (mailto:<<crossref-email>>)
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      content-type: application/json;charset=UTF-8
+      vary: Accept
+      access-control-allow-origin: '*'
+      access-control-allow-headers: X-Requested-With
+      content-length: '2092'
+      server: http-kit
+      date: Wed, 01 Jul 2020 17:56:16 GMT
+      x-rate-limit-limit: '50'
+      x-rate-limit-interval: 1s
+      connection: close
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"status":"ok","message-type":"work","message-version":"1.0.0","message":{"indexed":{"date-parts":[[2020,4,10]],"date-time":"2020-04-10T18:05:11Z","timestamp":1586541911208},"reference-count":0,"publisher":"University
+        of Arizona","issue":"1","license":[{"URL":"http:\/\/creativecommons.org\/licenses\/by\/4.0","start":{"date-parts":[[1994,12,1]],"date-time":"1994-12-01T00:00:00Z","timestamp":786240000000},"delay-in-days":0,"content-version":"unspecified"}],"content-domain":{"domain":[],"crossmark-restriction":false},"short-container-title":["JPE"],"abstract":"<jats:p>Abstract<\/jats:p>","DOI":"10.2458\/v1i1.21154","type":"journal-article","created":{"date-parts":[[2018,2,6]],"date-time":"2018-02-06T18:38:16Z","timestamp":1517942296000},"page":"1","source":"Crossref","is-referenced-by-count":102,"title":["Political
+        Ecology"],"prefix":"10.2458","volume":"1","author":[{"given":"James B.","family":"Greenberg","sequence":"first","affiliation":[]},{"given":"Thomas
+        K.","family":"Park","sequence":"additional","affiliation":[]}],"member":"1290","published-online":{"date-parts":[[1994,12,1]]},"container-title":["Journal
+        of Political Ecology"],"original-title":[],"link":[{"URL":"https:\/\/journals.uair.arizona.edu\/index.php\/JPE\/article\/viewFile\/21154\/20742","content-type":"application\/pdf","content-version":"vor","intended-application":"text-mining"},{"URL":"https:\/\/journals.uair.arizona.edu\/index.php\/JPE\/article\/viewFile\/21154\/20742","content-type":"unspecified","content-version":"vor","intended-application":"similarity-checking"}],"deposited":{"date-parts":[[2018,6,27]],"date-time":"2018-06-27T18:13:13Z","timestamp":1530123193000},"score":1.0,"subtitle":[],"short-title":[],"issued":{"date-parts":[[1994,12,1]]},"references-count":0,"journal-issue":{"published-online":{"date-parts":[[1994,12,1]]},"issue":"1"},"URL":"http:\/\/dx.doi.org\/10.2458\/v1i1.21154","relation":{},"ISSN":["1073-0451"],"issn-type":[{"value":"1073-0451","type":"electronic"}],"subject":["Political
+        Science and International Relations","Ecology","Geography, Planning and Development"]}}'
+  recorded_at: 2020-07-01 17:56:21 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.6.2
+- request:
+    method: get
+    uri: https://api.crossref.org/works/10.2458/v25i1.23119
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: r-curl/4.3 crul/0.9.2.92 rOpenSci(rcrossref/1.0.0.92) (mailto:<<crossref-email>>)
+      X-USER-AGENT: r-curl/4.3 crul/0.9.2.92 rOpenSci(rcrossref/1.0.0.92) (mailto:<<crossref-email>>)
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      content-type: application/json;charset=UTF-8
+      vary: Accept
+      access-control-allow-origin: '*'
+      access-control-allow-headers: X-Requested-With
+      content-length: '2766'
+      server: http-kit
+      date: Wed, 01 Jul 2020 17:56:17 GMT
+      x-rate-limit-limit: '50'
+      x-rate-limit-interval: 1s
+      connection: close
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"status":"ok","message-type":"work","message-version":"1.0.0","message":{"indexed":{"date-parts":[[2020,3,24]],"date-time":"2020-03-24T17:54:52Z","timestamp":1585072492460},"reference-count":0,"publisher":"University
+        of Arizona","issue":"1","license":[{"URL":"http:\/\/creativecommons.org\/licenses\/by\/4.0","start":{"date-parts":[[2018,11,26]],"date-time":"2018-11-26T00:00:00Z","timestamp":1543190400000},"delay-in-days":0,"content-version":"unspecified"}],"content-domain":{"domain":[],"crossmark-restriction":false},"short-container-title":["JPE"],"abstract":"<jats:p>Food
+        waste is the loss of perfectly edible food products. It is a wide-ranging
+        phenomenon: a substantial part of agricultural production is never consumed.
+        The prevalent, most widespread paradigm regarding this phenomenon holds that
+        it is due to inadequate logistics and technology, or to poor management of
+        food on the part of end users. However, an analysis from a political ecology
+        standpoint allows a different interpretation: the root of the problem lies
+        in the hegemonic agrofood system and the unequal power relationships between
+        the actors in the agrofood chain.Key words: Food waste, agriculture, agrofood
+        system, supermarkets, political ecology<\/jats:p>","DOI":"10.2458\/v25i1.23119","type":"journal-article","created":{"date-parts":[[2019,1,18]],"date-time":"2019-01-18T21:32:33Z","timestamp":1547847153000},"page":"587","source":"Crossref","is-referenced-by-count":0,"title":["Food
+        waste: a political ecology approach"],"prefix":"10.2458","volume":"25","author":[{"ORCID":"http:\/\/orcid.org\/0000-0002-0947-614X","authenticated-orcid":false,"given":"Jordi","family":"Gasc\u00f3n","sequence":"first","affiliation":[]}],"member":"1290","published-online":{"date-parts":[[2018,11,26]]},"container-title":["Journal
+        of Political Ecology"],"original-title":[],"link":[{"URL":"https:\/\/journals.uair.arizona.edu\/index.php\/JPE\/article\/viewFile\/23119\/21847","content-type":"application\/pdf","content-version":"vor","intended-application":"text-mining"},{"URL":"https:\/\/journals.uair.arizona.edu\/index.php\/JPE\/article\/viewFile\/23119\/21847","content-type":"unspecified","content-version":"vor","intended-application":"similarity-checking"}],"deposited":{"date-parts":[[2019,1,18]],"date-time":"2019-01-18T21:36:26Z","timestamp":1547847386000},"score":1.0,"subtitle":[],"short-title":[],"issued":{"date-parts":[[2018,11,26]]},"references-count":0,"journal-issue":{"published-online":{"date-parts":[[2018,1,3]]},"issue":"1"},"URL":"http:\/\/dx.doi.org\/10.2458\/v25i1.23119","relation":{},"ISSN":["1073-0451"],"issn-type":[{"value":"1073-0451","type":"electronic"}],"subject":["Political
+        Science and International Relations","Ecology","Geography, Planning and Development"]}}'
+  recorded_at: 2020-07-01 17:56:21 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.6.2
+- request:
+    method: get
+    uri: https://api.crossref.org/works/10.2458/v26i1.23245
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: r-curl/4.3 crul/0.9.2.92 rOpenSci(rcrossref/1.0.0.92) (mailto:<<crossref-email>>)
+      X-USER-AGENT: r-curl/4.3 crul/0.9.2.92 rOpenSci(rcrossref/1.0.0.92) (mailto:<<crossref-email>>)
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      content-type: application/json;charset=UTF-8
+      vary: Accept
+      access-control-allow-origin: '*'
+      access-control-allow-headers: X-Requested-With
+      content-length: '3980'
+      server: http-kit
+      date: Wed, 01 Jul 2020 17:56:17 GMT
+      x-rate-limit-limit: '50'
+      x-rate-limit-interval: 1s
+      connection: close
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"status":"ok","message-type":"work","message-version":"1.0.0","message":{"indexed":{"date-parts":[[2020,3,27]],"date-time":"2020-03-27T21:38:31Z","timestamp":1585345111911},"reference-count":0,"publisher":"University
+        of Arizona","issue":"1","license":[{"URL":"http:\/\/creativecommons.org\/licenses\/by\/4.0","start":{"date-parts":[[2019,9,21]],"date-time":"2019-09-21T00:00:00Z","timestamp":1569024000000},"delay-in-days":0,"content-version":"unspecified"}],"content-domain":{"domain":[],"crossmark-restriction":false},"short-container-title":["JPE"],"abstract":"<jats:p>Transdisciplinary
+        research (TDR) is widely regarded as a promising, and even essential, means
+        of addressing complex sustainability problems, whilst delivering beneficial
+        outcomes for scientists and the non-academic actors with whom they engage.
+        Premised on the ''ecological modernisation'' of Europe, regional funding for
+        TDR under Framework Programmes such as FP7 and more recently Horizon 2020
+        have sought to support academic engagement with a wide range of research stakeholders
+        through calls for transdisciplinary research \u00a0in order to better address
+        Europe''s \"grand societal challenges\" (EC 2013). This article, based on
+        doctoral research, consists of an ex-post study of three European Union funded
+        transdisciplinary projects (CREPE, EJOLT and GAP2) implemented under the Seventh
+        Framework''s (2007-2013) Science in Society program. Its focus is on how issues
+        of power and governance permeate TDR projects, giving rise to tensions, challenges
+        and ultimately struggles over the very meaning of official projects and their
+        outcomes, despite the most egalitarian of intentions and underlying principles
+        of mutual benefit. These tensions, this article argues, should be understood
+        not merely as cultural, methodological or cognitive challenges, but as essentially
+        political conflicts that manifest and flow across multiple scales. In light
+        of these inherent challenges, the article argues that TDR is always conducted
+        on a terrain of political ecology, and concludes by making recommendations
+        for potential collaborators, as well as for European research policy makers,
+        with the objective of enabling participants and funders alike to realise the
+        transformative potential of this promising mode of research.Keywords: Political
+        ecology of transdisciplinary research, power, governance, Science in Society,
+        European research agenda, agro-ecology, environmental justice, fisheries\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0<\/jats:p>","DOI":"10.2458\/v26i1.23245","type":"journal-article","created":{"date-parts":[[2019,9,22]],"date-time":"2019-09-22T21:45:54Z","timestamp":1569188754000},"page":"500-528","source":"Crossref","is-referenced-by-count":0,"title":["A
+        political ecology of transdisciplinary research"],"prefix":"10.2458","volume":"26","author":[{"given":"Hali","family":"Healy","sequence":"first","affiliation":[]}],"member":"1290","published-online":{"date-parts":[[2019,9,21]]},"container-title":["Journal
+        of Political Ecology"],"original-title":[],"link":[{"URL":"https:\/\/journals.uair.arizona.edu\/index.php\/JPE\/article\/viewFile\/23245\/22269","content-type":"application\/pdf","content-version":"vor","intended-application":"text-mining"},{"URL":"https:\/\/journals.uair.arizona.edu\/index.php\/JPE\/article\/viewFile\/23245\/22269","content-type":"unspecified","content-version":"vor","intended-application":"similarity-checking"}],"deposited":{"date-parts":[[2019,9,22]],"date-time":"2019-09-22T21:45:54Z","timestamp":1569188754000},"score":1.0,"subtitle":[],"short-title":[],"issued":{"date-parts":[[2019,9,21]]},"references-count":0,"journal-issue":{"published-online":{"date-parts":[[2019,1,4]]},"issue":"1"},"URL":"http:\/\/dx.doi.org\/10.2458\/v26i1.23245","relation":{},"ISSN":["1073-0451"],"issn-type":[{"value":"1073-0451","type":"electronic"}],"subject":["Political
+        Science and International Relations","Ecology","Geography, Planning and Development"]}}'
+  recorded_at: 2020-07-01 17:56:21 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.6.2
+- request:
+    method: get
+    uri: https://api.crossref.org/works/10.2458/v17i1.21696
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: r-curl/4.3 crul/0.9.2.92 rOpenSci(rcrossref/1.0.0.92) (mailto:<<crossref-email>>)
+      X-USER-AGENT: r-curl/4.3 crul/0.9.2.92 rOpenSci(rcrossref/1.0.0.92) (mailto:<<crossref-email>>)
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      content-type: application/json;charset=UTF-8
+      vary: Accept
+      access-control-allow-origin: '*'
+      access-control-allow-headers: X-Requested-With
+      content-length: '3429'
+      server: http-kit
+      date: Wed, 01 Jul 2020 17:56:18 GMT
+      x-rate-limit-limit: '50'
+      x-rate-limit-interval: 1s
+      connection: close
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"status":"ok","message-type":"work","message-version":"1.0.0","message":{"indexed":{"date-parts":[[2020,3,29]],"date-time":"2020-03-29T22:49:54Z","timestamp":1585522194683},"reference-count":0,"publisher":"University
+        of Arizona","issue":"1","license":[{"URL":"http:\/\/creativecommons.org\/licenses\/by\/4.0","start":{"date-parts":[[2010,12,1]],"date-time":"2010-12-01T00:00:00Z","timestamp":1291161600000},"delay-in-days":0,"content-version":"unspecified"}],"content-domain":{"domain":[],"crossmark-restriction":false},"short-container-title":["JPE"],"abstract":"<jats:p>Political
+        ecology has expanded in multiple new directions since Piers Blaikie''s explanation
+        of the manifestations of political economy and ecology in the \"problem\"
+        of soil erosion in the 1980s. In this article, I try to extend political ecology
+        to engage with ethnic studies literature on coloniality, and indigenous perspectives
+        on intergenerational trauma and healing. Drawing on historic and contemporary
+        examples of Maidu governance and resource development in the Maidu homeland,
+        California, USA, I extend the concept of intergenerational trauma in Native
+        American communities from the individual and ethnic group levels to include
+        the community''s relationship with the land, and the concept of itself as
+        a sovereign civic, governing body. I place specific manifestations of trauma,
+        de-colonizing, and healing, as exemplified by Maidu natural resource activism,
+        in dialogue with political ecology approaches to better understand the relationships
+        between historically colonized people, governance, and land. I argue that
+        the relationships between people and resources that political ecology focuses
+        on cannot be adequately understood in historically colonized communities dealing
+        with neo-colonial resource and political policies, without attention to perspectives
+        on coloniality\/de-coloniality, and trauma\/healing. These perspectives come
+        from both survivors of colonialism, and from ethnic studies and indigeneity
+        scholars.Key words: political ecology, coloniality, Maidu, trauma, healing,
+        Native American<\/jats:p>","DOI":"10.2458\/v17i1.21696","type":"journal-article","created":{"date-parts":[[2018,2,9]],"date-time":"2018-02-09T17:31:46Z","timestamp":1518197506000},"page":"1","source":"Crossref","is-referenced-by-count":6,"title":["A
+        Political Ecology of Healing"],"prefix":"10.2458","volume":"17","author":[{"given":"Elisabeth","family":"Middleton","sequence":"first","affiliation":[]}],"member":"1290","published-online":{"date-parts":[[2010,12,1]]},"container-title":["Journal
+        of Political Ecology"],"original-title":[],"link":[{"URL":"https:\/\/journals.uair.arizona.edu\/index.php\/JPE\/article\/viewFile\/21696\/21248","content-type":"application\/pdf","content-version":"vor","intended-application":"text-mining"},{"URL":"https:\/\/journals.uair.arizona.edu\/index.php\/JPE\/article\/viewFile\/21696\/21248","content-type":"unspecified","content-version":"vor","intended-application":"similarity-checking"}],"deposited":{"date-parts":[[2018,6,27]],"date-time":"2018-06-27T18:15:49Z","timestamp":1530123349000},"score":1.0,"subtitle":[],"short-title":[],"issued":{"date-parts":[[2010,12,1]]},"references-count":0,"journal-issue":{"published-online":{"date-parts":[[2010,12,1]]},"issue":"1"},"URL":"http:\/\/dx.doi.org\/10.2458\/v17i1.21696","relation":{},"ISSN":["1073-0451"],"issn-type":[{"value":"1073-0451","type":"electronic"}]}}'
+  recorded_at: 2020-07-01 17:56:21 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.6.2
+- request:
+    method: get
+    uri: https://api.crossref.org/works/10.30564/re.v2i2.1812
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: r-curl/4.3 crul/0.9.2.92 rOpenSci(rcrossref/1.0.0.92) (mailto:<<crossref-email>>)
+      X-USER-AGENT: r-curl/4.3 crul/0.9.2.92 rOpenSci(rcrossref/1.0.0.92) (mailto:<<crossref-email>>)
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      content-type: application/json;charset=UTF-8
+      vary: Accept
+      access-control-allow-origin: '*'
+      access-control-allow-headers: X-Requested-With
+      content-length: '2608'
+      server: http-kit
+      date: Wed, 01 Jul 2020 17:56:18 GMT
+      x-rate-limit-limit: '50'
+      x-rate-limit-interval: 1s
+      connection: close
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"status":"ok","message-type":"work","message-version":"1.0.0","message":{"indexed":{"date-parts":[[2020,6,4]],"date-time":"2020-06-04T15:34:24Z","timestamp":1591284864498},"reference-count":0,"publisher":"Bilingual
+        Publishing Co.","issue":"2","license":[{"URL":"https:\/\/creativecommons.org\/licenses\/by-nc\/4.0","start":{"date-parts":[[2020,4,30]],"date-time":"2020-04-30T00:00:00Z","timestamp":1588204800000},"delay-in-days":0,"content-version":"unspecified"}],"content-domain":{"domain":[],"crossmark-restriction":false},"short-container-title":["RE"],"abstract":"<jats:p>The
+        pursuit of the liberation of all mankind and the comprehensive development
+        of human freedom is the theme of all marxist theories.Marx in the criticism
+        of classical political economics \"abstract\", to the whole history of the
+        definition of \"general\", found the abstract \"general\" of the people behind
+        the objective existence and state of development, so as to clearly indicate
+        the relationship between man and nature of human development has experienced
+        on the basis of the nature of the dependence on one stage, gradually from
+        natural objects depends on the stage and with the natural fusion of freedom
+        comprehensive stage, and the concrete connotation of man''s free overall and
+        implementation path.<\/jats:p>","DOI":"10.30564\/re.v2i2.1812","type":"journal-article","created":{"date-parts":[[2020,5,1]],"date-time":"2020-05-01T00:51:34Z","timestamp":1588294294000},"source":"Crossref","is-referenced-by-count":0,"title":["Human
+        development from the perspective of ecology"],"prefix":"10.30564","volume":"2","author":[{"given":"Guiying","family":"Zhao","sequence":"first","affiliation":[]}],"member":"12007","published-online":{"date-parts":[[2020,4,30]]},"container-title":["Research
+        in Ecology"],"original-title":[],"link":[{"URL":"https:\/\/www.bilpublishing.com\/index.php\/re\/article\/viewFile\/1812\/1405","content-type":"application\/pdf","content-version":"vor","intended-application":"text-mining"},{"URL":"https:\/\/www.bilpublishing.com\/index.php\/re\/article\/viewFile\/1812\/1405","content-type":"unspecified","content-version":"vor","intended-application":"similarity-checking"}],"deposited":{"date-parts":[[2020,5,1]],"date-time":"2020-05-01T00:51:37Z","timestamp":1588294297000},"score":1.0,"subtitle":[],"short-title":[],"issued":{"date-parts":[[2020,4,30]]},"references-count":0,"journal-issue":{"published-online":{"date-parts":[[2020,4,30]]},"issue":"2"},"URL":"http:\/\/dx.doi.org\/10.30564\/re.v2i2.1812","relation":{},"ISSN":["2661-3379"],"issn-type":[{"value":"2661-3379","type":"electronic"}]}}'
+  recorded_at: 2020-07-01 17:56:21 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.6.2
+- request:
+    method: get
+    uri: https://api.crossref.org/works/10.1155/2011/868426
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: r-curl/4.3 crul/0.9.2.92 rOpenSci(rcrossref/1.0.0.92) (mailto:<<crossref-email>>)
+      X-USER-AGENT: r-curl/4.3 crul/0.9.2.92 rOpenSci(rcrossref/1.0.0.92) (mailto:<<crossref-email>>)
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      content-type: application/json;charset=UTF-8
+      vary: Accept
+      access-control-allow-origin: '*'
+      access-control-allow-headers: X-Requested-With
+      content-length: '20334'
+      server: http-kit
+      date: Wed, 01 Jul 2020 17:56:19 GMT
+      x-rate-limit-limit: '50'
+      x-rate-limit-interval: 1s
+      connection: close
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"status":"ok","message-type":"work","message-version":"1.0.0","message":{"indexed":{"date-parts":[[2020,2,19]],"date-time":"2020-02-19T19:04:09Z","timestamp":1582139049808},"reference-count":148,"publisher":"Hindawi
+        Limited","license":[{"URL":"http:\/\/creativecommons.org\/licenses\/by\/3.0\/","start":{"date-parts":[[2011,1,1]],"date-time":"2011-01-01T00:00:00Z","timestamp":1293840000000},"delay-in-days":0,"content-version":"unspecified"}],"funder":[{"DOI":"10.13039\/100008327","name":"Berry
+        College","doi-asserted-by":"publisher","award":[]}],"content-domain":{"domain":[],"crossmark-restriction":false},"short-container-title":["International
+        Journal of Ecology"],"published-print":{"date-parts":[[2011]]},"abstract":"<jats:p>Functional
+        relationships involving species richness may be unimodal, monotonically increasing,
+        monotonically decreasing, bimodal, multimodal, U-shaped, or with no discernable
+        pattern. The unimodal relationships are the most interesting because they
+        suggest dynamic, nonequilibrium community processes. For that reason, they
+        are also contentious. In this paper, we provide a wide-ranging review of the
+        literature on unimodal (humpbacked) species richness-relationships. Though
+        not as widespread as previously thought, unimodal patterns of species richness
+        are often associated with disturbance, predation and herbivory, productivity,
+        spatial heterogeneity, environmental gradients, time, and latitude. These
+        unimodal patterns are contingent on organism and environment; we examine unimodal
+        species richness-curves involving plants, invertebrates, vertebrates, plankton,
+        and microbes in marine, lacustrine, and terrestrial habitats. A goal of future
+        research is to understand the contingent patterns and the complex, interacting
+        processes that generate them.<\/jats:p>","DOI":"10.1155\/2011\/868426","type":"journal-article","created":{"date-parts":[[2011,8,24]],"date-time":"2011-08-24T19:00:52Z","timestamp":1314212452000},"page":"1-15","source":"Crossref","is-referenced-by-count":28,"title":["The
+        Humpbacked Species Richness-Curve: A Contingent Rule for Community Ecology"],"prefix":"10.1155","volume":"2011","author":[{"given":"John
+        H.","family":"Graham","sequence":"first","affiliation":[{"name":"Department
+        of Biology, Berry College, Mount Berry, GA 30149, USA"}]},{"given":"Jeffrey
+        J.","family":"Duda","sequence":"additional","affiliation":[{"name":"Western
+        Fisheries Research Center, U.S. Geological Survey, Seattle, WA 98115, USA"}]}],"member":"98","reference":[{"key":"1","volume":"97","first-page":"357","year":"1963","journal-title":"American
+        Naturalist","DOI":"10.1086\/282286","doi-asserted-by":"crossref"},{"key":"2","volume":"84","issue":"2","first-page":"177","year":"1999","journal-title":"Oikos","DOI":"10.2307\/3546712","doi-asserted-by":"crossref"},{"key":"3","DOI":"10.1038\/429813a","doi-asserted-by":"publisher"},{"key":"4","DOI":"10.1007\/s12080-007-0002-0","doi-asserted-by":"publisher"},{"key":"5","volume":"93","first-page":"145","year":"1959","journal-title":"American
+        Naturalist","DOI":"10.1086\/282070","doi-asserted-by":"crossref"},{"key":"6","volume":"76","issue":"7","first-page":"2019","year":"1995","journal-title":"Ecology","DOI":"10.2307\/1941677","doi-asserted-by":"crossref"},{"key":"7","DOI":"10.1890\/08-0968.1","doi-asserted-by":"publisher"},{"key":"8","DOI":"10.1890\/10-0155.1","doi-asserted-by":"publisher"},{"key":"9","DOI":"10.1890\/09-1029.1","doi-asserted-by":"publisher"},{"key":"10","volume":"82","issue":"12","first-page":"3479","year":"2001","journal-title":"Ecology"},{"key":"11","volume":"85","issue":"2","first-page":"359","year":"2004","journal-title":"Ecology","DOI":"10.1890\/03-0266","doi-asserted-by":"crossref"},{"key":"12","volume":"4","issue":"8","first-page":"1097","year":"2002","journal-title":"Evolutionary
+        Ecology Research"},{"key":"13","DOI":"10.1086\/303150","doi-asserted-by":"publisher"},{"key":"14","year":"1994"},{"key":"15","volume":"1","first-page":"151","year":"1973","journal-title":"Journal
+        of Environmental Management"},{"key":"16","year":"1973"},{"key":"17","first-page":"196","year":"1975","volume-title":"Markovian
+        properties of forest succession"},{"key":"18","volume":"199","issue":"4335","first-page":"1302","year":"1978","journal-title":"Science","DOI":"10.1126\/science.199.4335.1302","doi-asserted-by":"crossref"},{"key":"19","volume":"32","first-page":"663","year":"1994","journal-title":"Journal
+        of Mathematical Biology","DOI":"10.1007\/BF00163021","doi-asserted-by":"crossref"},{"key":"20","DOI":"10.1146\/annurev.ecolsys.31.1.343","doi-asserted-by":"publisher"},{"key":"21","DOI":"10.1111\/j.1461-0248.2009.01329.x","doi-asserted-by":"publisher"},{"key":"22","DOI":"10.1038\/293564a0","doi-asserted-by":"publisher"},{"key":"23","volume":"75","issue":"8","first-page":"2204","year":"1994","journal-title":"Ecology","DOI":"10.2307\/1940877","doi-asserted-by":"crossref"},{"key":"24","volume":"21","issue":"1","first-page":"103","year":"1997","journal-title":"New
+        Zealand Journal of Ecology"},{"key":"25","volume":"53","issue":"1","first-page":"139","year":"1988","journal-title":"Oikos","DOI":"10.2307\/3565674","doi-asserted-by":"crossref"},{"key":"26","volume":"136","issue":"3","first-page":"485","year":"2000","journal-title":"Marine
+        Biology","DOI":"10.1007\/s002270050708","doi-asserted-by":"crossref"},{"key":"27","DOI":"10.1002\/1522-2632(200008)85:4<379::AID-IROH379>3.0.CO;2-X","doi-asserted-by":"publisher"},{"key":"28","DOI":"10.1034\/j.1600-0706.2003.12421.x","doi-asserted-by":"publisher"},{"key":"29","volume":"42","first-page":"594","year":"1961","journal-title":"Ecology","DOI":"10.2307\/1932254","doi-asserted-by":"crossref"},{"key":"30","year":"1984"},{"key":"31","year":"1999"},{"key":"32","DOI":"10.1016\/j.ecolind.2008.10.003","doi-asserted-by":"publisher"},{"key":"33","volume":"7","issue":"3","first-page":"429","year":"2008","journal-title":"Southeastern
+        Naturalist","DOI":"10.1656\/1528-7092-7.3.429","doi-asserted-by":"crossref"},{"key":"35","volume":"100","first-page":"65","year":"1966","journal-title":"American
+        Naturalist","DOI":"10.1086\/282400","doi-asserted-by":"crossref"},{"key":"36","volume":"14","first-page":"710","year":"1969","journal-title":"Limnology
+        and Oceanography","DOI":"10.4319\/lo.1969.14.5.0710","doi-asserted-by":"crossref"},{"key":"37","volume":"112","first-page":"23","year":"1978","journal-title":"American
+        Naturalist","DOI":"10.1086\/283250","doi-asserted-by":"crossref"},{"key":"38","volume":"12","first-page":"405","year":"1981","journal-title":"Annual
+        Review of Ecology and Systematics","DOI":"10.1146\/annurev.es.12.110181.002201","doi-asserted-by":"crossref"},{"key":"39","first-page":"52","year":"1993","volume-title":"How
+        are diversity and productivity related"},{"key":"40","volume":"82","issue":"9","first-page":"2381","year":"2001","journal-title":"Ecology","DOI":"10.1890\/0012-9658(2001)082[2381:WITORB]2.0.CO;2","doi-asserted-by":"crossref"},{"key":"41","DOI":"10.1146\/annurev.ecolsys.30.1.257","doi-asserted-by":"publisher"},{"key":"42","DOI":"10.1007\/BF00048034","doi-asserted-by":"publisher"},{"key":"43","DOI":"10.1890\/09-1650.1","doi-asserted-by":"publisher"},{"key":"44","DOI":"10.1038\/379718a0","doi-asserted-by":"publisher"},{"key":"45","DOI":"10.1038\/nature01785","doi-asserted-by":"publisher"},{"key":"46","DOI":"10.1111\/j.1574-6941.2007.00381.x","doi-asserted-by":"publisher"},{"key":"47","volume":"75","issue":"1","first-page":"3","year":"2005","journal-title":"Ecological
+        Monographs","DOI":"10.1890\/04-0922","doi-asserted-by":"crossref"},{"key":"48","DOI":"10.1073\/pnas.0708328105","doi-asserted-by":"publisher"},{"key":"49","DOI":"10.1007\/s004420050180","doi-asserted-by":"publisher"},{"key":"50","DOI":"10.1890\/09-1291.1","doi-asserted-by":"publisher"},{"key":"51","DOI":"10.1086\/518950","doi-asserted-by":"publisher"},{"key":"52","DOI":"10.1890\/08-1038.1","doi-asserted-by":"publisher"},{"key":"53","year":"1971"},{"key":"54","volume":"122","issue":"6","first-page":"1043","year":"1993","journal-title":"Transactions
+        of the American Fisheries Society","DOI":"10.1577\/1548-8659(1993)122<1043:SDOFIN>2.3.CO;2","doi-asserted-by":"crossref"},{"key":"55","first-page":"137","year":"1966","volume-title":"Nutritional
+        aspects of algal productivity in marl lakes with particular reference to enrichment
+        bioassays and their interpretation"},{"key":"56","DOI":"10.1046\/j.1365-2656.2003.00741.x","doi-asserted-by":"publisher"},{"key":"57","volume":"18","issue":"2","first-page":"200","year":"1995","journal-title":"Ecography","DOI":"10.1111\/j.1600-0587.1995.tb00341.x","doi-asserted-by":"crossref"},{"key":"58","DOI":"10.1046\/j.1472-4642.2001.00097.x","doi-asserted-by":"publisher"},{"key":"59","DOI":"10.1658\/1100-9233(2006)017[0037:EOAATO]2.0.CO;2","doi-asserted-by":"publisher"},{"key":"60","DOI":"10.1111\/j.1466-8238.2006.00281.x","doi-asserted-by":"publisher"},{"key":"61","DOI":"10.1034\/j.1600-0587.2002.250104.x","doi-asserted-by":"publisher"},{"key":"62","DOI":"10.1111\/j.1466-8238.2007.00316.x","doi-asserted-by":"publisher"},{"key":"63","volume":"31","issue":"2","first-page":"307","year":"2004","journal-title":"Journal
+        of Biogeography","DOI":"10.1046\/j.0305-0270.2003.00988.x","doi-asserted-by":"crossref"},{"key":"64","volume":"31","issue":"1","first-page":"19","year":"2004","journal-title":"Journal
+        of Biogeography","DOI":"10.1046\/j.0305-0270.2003.00992.x","doi-asserted-by":"crossref"},{"key":"65","volume":"163","issue":"3","first-page":"E1","year":"2004","journal-title":"The
+        American Naturalist","DOI":"10.1086\/382056","doi-asserted-by":"crossref"},{"key":"66","volume":"5","first-page":"25","year":"1974","journal-title":"Annual
+        Review of Ecology and Systematics","DOI":"10.1146\/annurev.es.05.110174.000325","doi-asserted-by":"crossref"},{"key":"67","volume":"55","first-page":"1075","year":"1974","journal-title":"Ecology","DOI":"10.2307\/1940357","doi-asserted-by":"crossref"},{"key":"68","volume":"68","issue":"1","first-page":"12","year":"1987","journal-title":"Ecology","DOI":"10.2307\/1938801","doi-asserted-by":"crossref"},{"key":"69","volume":"51","issue":"3","first-page":"957","year":"1982","journal-title":"Journal
+        of Animal Ecology","DOI":"10.2307\/4016","doi-asserted-by":"crossref"},{"key":"70","volume":"34","first-page":"273","year":"2003","journal-title":"Annual
+        Review of Ecology, Evolution, and Systematics","DOI":"10.1146\/annurev.ecolsys.34.012103.144032","doi-asserted-by":"crossref"},{"key":"71","volume":"62","first-page":"532","year":"1981","journal-title":"Ecology","DOI":"10.2307\/1937717","doi-asserted-by":"crossref"},{"key":"72","DOI":"10.1046\/j.1365-2656.1998.00198.x","doi-asserted-by":"publisher"},{"key":"73","volume":"73","issue":"6","first-page":"1943","year":"1992","journal-title":"Ecology","DOI":"10.2307\/1941447","doi-asserted-by":"crossref"},{"key":"74","DOI":"10.1007\/s10021-007-9055-6","doi-asserted-by":"publisher"},{"key":"75","DOI":"10.1111\/j.1461-0248.2004.00608.x","doi-asserted-by":"publisher"},{"key":"76","volume":"21","first-page":"213","year":"1972","journal-title":"Taxon","DOI":"10.2307\/1218190","doi-asserted-by":"crossref"},{"key":"77","DOI":"10.1111\/j.1600-0587.2009.05880.x","doi-asserted-by":"publisher"},{"key":"78","DOI":"10.1111\/j.1600-0587.2009.06148.x","doi-asserted-by":"publisher"},{"key":"79","volume":"85","issue":"1","first-page":"107","year":"2004","journal-title":"Ecology","DOI":"10.1890\/03-3010","doi-asserted-by":"crossref"},{"key":"80","DOI":"10.1371\/journal.pbio.0050272","doi-asserted-by":"publisher"},{"key":"81","volume":"33","issue":"1","first-page":"63","year":"2010","journal-title":"Animal
+        Biodiversity and Conservation"},{"key":"82","DOI":"10.1111\/j.1461-0248.2004.00701.x","doi-asserted-by":"publisher"},{"key":"83","volume":"2","issue":"6","first-page":"791","year":"2000","journal-title":"Evolutionary
+        Ecology Research"},{"key":"84","volume":"84","issue":"2","first-page":"293","year":"1996","journal-title":"Journal
+        of Ecology","DOI":"10.2307\/2261364","doi-asserted-by":"crossref"},{"key":"85","DOI":"10.1038\/416427a","doi-asserted-by":"publisher"},{"key":"86","volume":"85","issue":"10","first-page":"2701","year":"2004","journal-title":"Ecology","DOI":"10.1890\/03-0561","doi-asserted-by":"crossref"},{"key":"87","year":"1995"},{"key":"88","volume":"60","first-page":"1225","year":"1979","journal-title":"Ecology","DOI":"10.2307\/1936969","doi-asserted-by":"crossref"},{"key":"89","DOI":"10.1007\/BF00317561","doi-asserted-by":"publisher"},{"key":"90","volume":"12","issue":"3-4","first-page":"127","year":"1993","journal-title":"Coral
+        Reefs","DOI":"10.1007\/BF00334471","doi-asserted-by":"crossref"},{"key":"91","volume":"67","issue":"4","first-page":"461","year":"1997","journal-title":"Ecological
+        Monographs","DOI":"10.1890\/0012-9615(1997)067[0461:AYSOCA]2.0.CO;2","doi-asserted-by":"crossref"},{"key":"92","DOI":"10.1038\/269471a0","doi-asserted-by":"publisher"},{"key":"93","DOI":"10.1111\/j.0030-1299.2005.13962.x","doi-asserted-by":"publisher"},{"key":"94","volume":"8","issue":"8","first-page":"275","year":"1993","journal-title":"Trends
+        in Ecology and Evolution","DOI":"10.1016\/0169-5347(93)90254-M","doi-asserted-by":"crossref"},{"key":"95","DOI":"10.1007\/BF00031698","doi-asserted-by":"publisher"},{"key":"96","DOI":"10.3354\/meps308037","doi-asserted-by":"publisher"},{"key":"97","DOI":"10.1098\/rspb.2000.1384","doi-asserted-by":"publisher"},{"key":"98","volume":"113","first-page":"81","year":"1979","journal-title":"American
+        Naturalist","DOI":"10.1086\/283366","doi-asserted-by":"crossref"},{"key":"99","DOI":"10.1038\/nature00830","doi-asserted-by":"publisher"},{"key":"100","DOI":"10.1890\/06-0976","doi-asserted-by":"publisher"},{"key":"101","DOI":"10.1073\/pnas.0404300101","doi-asserted-by":"publisher"},{"key":"102","DOI":"10.1038\/nature02685","doi-asserted-by":"publisher"},{"key":"103","DOI":"10.1890\/05-0910","doi-asserted-by":"publisher"},{"key":"104","volume":"95","first-page":"137","year":"1961","journal-title":"American
+        Naturalist","DOI":"10.1086\/282171","doi-asserted-by":"crossref"},{"key":"105","DOI":"10.1038\/nature02593","doi-asserted-by":"publisher"},{"key":"106","volume":"81","issue":"10","first-page":"2662","year":"2000","journal-title":"Ecology","DOI":"10.1890\/0012-9658(2000)081[2662:TRILCB]2.0.CO;2","doi-asserted-by":"crossref"},{"key":"107","volume":"7","issue":"3","first-page":"667","year":"1993","journal-title":"Conservation
+        Biology","DOI":"10.1046\/j.1523-1739.1993.07030667.x","doi-asserted-by":"crossref"},{"key":"108","year":"1967"},{"key":"109","DOI":"10.1007\/BF00005423","doi-asserted-by":"publisher"},{"key":"110","volume":"31","issue":"1","first-page":"79","year":"2004","journal-title":"Journal
+        of Biogeography","DOI":"10.1046\/j.0305-0270.2003.00994.x","doi-asserted-by":"crossref"},{"key":"111","first-page":"13","year":"1993","volume-title":"The
+        maintenance of species richness in plant communities"},{"key":"112","DOI":"10.1890\/0012-9658(2006)87[1234:TIOPOT]2.0.CO;2","doi-asserted-by":"publisher"},{"key":"113","DOI":"10.1890\/06-0997","doi-asserted-by":"publisher"},{"key":"114","volume":"61","issue":"2","first-page":"250","year":"1991","journal-title":"Oikos","DOI":"10.2307\/3545343","doi-asserted-by":"crossref"},{"key":"115","year":"1990"},{"key":"116","DOI":"10.1098\/rsbl.2010.0103","doi-asserted-by":"publisher"},{"key":"117","DOI":"10.1086\/285419","doi-asserted-by":"publisher"},{"key":"118","volume":"10","issue":"1","first-page":"31","year":"1985","journal-title":"Austral
+        Ecology","DOI":"10.1111\/j.1442-9993.1985.tb00861.x","doi-asserted-by":"crossref"},{"key":"119","volume":"14","issue":"1","first-page":"31","year":"1991","journal-title":"Holarctic
+        Ecology"},{"key":"121","DOI":"10.1086\/286204","doi-asserted-by":"publisher"},{"key":"122","DOI":"10.1086\/320866","doi-asserted-by":"publisher"},{"key":"123","DOI":"10.1111\/j.1461-0248.2010.01548.x","doi-asserted-by":"publisher"},{"key":"124","DOI":"10.1126\/science.1129237","doi-asserted-by":"publisher"},{"key":"125","DOI":"10.1007\/s00442-010-1607-3","doi-asserted-by":"publisher"},{"key":"126","volume":"16","issue":"4","first-page":"491","year":"1991","journal-title":"Ecological
+        Entomology","DOI":"10.1111\/j.1365-2311.1991.tb00241.x","doi-asserted-by":"crossref"},{"key":"127","DOI":"10.1007\/s004420050063","doi-asserted-by":"publisher"},{"key":"128","DOI":"10.1007\/BF02227169","doi-asserted-by":"publisher"},{"key":"129","volume":"27","first-page":"9","year":"1993","journal-title":"Tiscia"},{"key":"130","DOI":"10.1046\/j.1523-1739.1999.98504.x","doi-asserted-by":"publisher"},{"key":"131","volume":"24","issue":"5","first-page":"547","year":"2001","journal-title":"Ecography","DOI":"10.1034\/j.1600-0587.2001.d01-210.x","doi-asserted-by":"crossref"},{"key":"132","volume":"33","issue":"6","first-page":"1281","year":"1996","journal-title":"Journal
+        of Applied Ecology","DOI":"10.2307\/2404770","doi-asserted-by":"crossref"},{"key":"133","volume":"4","issue":"1","first-page":"37","year":"1993","journal-title":"Journal
+        of Vegetation Science","DOI":"10.2307\/3235732","doi-asserted-by":"crossref"},{"key":"134","DOI":"10.1016\/S0304-3800(02)00190-4","doi-asserted-by":"publisher"},{"key":"135","volume":"74","first-page":"829","year":"1979","journal-title":"Journal
+        of the American Statistical Association","DOI":"10.1080\/01621459.1979.10481038","doi-asserted-by":"crossref"},{"key":"136","volume":"4","issue":"30","first-page":"1","year":"2004","journal-title":"Journal
+        of Insect Science","DOI":"10.1673\/031.004.3001","doi-asserted-by":"crossref"},{"key":"137","volume":"125","issue":"1","first-page":"1","year":"1985","journal-title":"American
+        Naturalist","DOI":"10.1086\/284325","doi-asserted-by":"crossref"},{"key":"138","DOI":"10.1046\/j.1420-9101.2002.00379.x","doi-asserted-by":"publisher"},{"key":"139","DOI":"10.1111\/j.1466-8238.2007.00337.x","doi-asserted-by":"publisher"},{"key":"140","DOI":"10.1146\/annurev.ecolsys.33.010802.150448","doi-asserted-by":"publisher"},{"key":"141","volume":"35","issue":"4","first-page":"523","year":"1998","journal-title":"Journal
+        of Applied Ecology","DOI":"10.1046\/j.1365-2664.1998.3540523.x","doi-asserted-by":"crossref"},{"key":"142","volume":"129","issue":"1\u20133","first-page":"301","year":"1995","journal-title":"Marine
+        Ecology Progress Series"},{"key":"143","volume":"35","issue":"4","first-page":"532","year":"1998","journal-title":"Journal
+        of Applied Ecology","DOI":"10.1046\/j.1365-2664.1998.3540532.x","doi-asserted-by":"crossref"},{"key":"144","volume":"50","issue":"3","first-page":"978","year":"2005","journal-title":"Limnology
+        and Oceanography","DOI":"10.4319\/lo.2005.50.3.0978","doi-asserted-by":"crossref"},{"key":"145","DOI":"10.1086\/303354","doi-asserted-by":"publisher"},{"key":"146","volume":"94","first-page":"421","year":"1960","journal-title":"American
+        Naturalist","DOI":"10.1086\/282146","doi-asserted-by":"crossref"},{"key":"147","volume":"118","first-page":"240","year":"1981","journal-title":"American
+        Naturalist","DOI":"10.1086\/283817","doi-asserted-by":"crossref"},{"key":"148","DOI":"10.1890\/07-1628.1","doi-asserted-by":"publisher"},{"key":"149","DOI":"10.1890\/09-0671.1","doi-asserted-by":"publisher"},{"key":"150","DOI":"10.1111\/j.1461-0248.2004.00600.x","doi-asserted-by":"publisher"}],"container-title":["International
+        Journal of Ecology"],"original-title":[],"language":"en","link":[{"URL":"http:\/\/downloads.hindawi.com\/journals\/ijecol\/2011\/868426.pdf","content-type":"application\/pdf","content-version":"vor","intended-application":"text-mining"},{"URL":"http:\/\/downloads.hindawi.com\/journals\/ijecol\/2011\/868426.xml","content-type":"application\/xml","content-version":"vor","intended-application":"text-mining"},{"URL":"http:\/\/downloads.hindawi.com\/journals\/ijecol\/2011\/868426.pdf","content-type":"unspecified","content-version":"vor","intended-application":"similarity-checking"}],"deposited":{"date-parts":[[2017,6,20]],"date-time":"2017-06-20T05:07:52Z","timestamp":1497935272000},"score":1.0,"subtitle":[],"short-title":[],"issued":{"date-parts":[[2011]]},"references-count":148,"alternative-id":["868426","868426"],"URL":"http:\/\/dx.doi.org\/10.1155\/2011\/868426","relation":{"cites":[]},"ISSN":["1687-9708","1687-9716"],"issn-type":[{"value":"1687-9708","type":"print"},{"value":"1687-9716","type":"electronic"}]}}'
+  recorded_at: 2020-07-01 17:56:21 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.6.2
+- request:
+    method: get
+    uri: https://api.crossref.org/works/10.1155/2012/273413
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: r-curl/4.3 crul/0.9.2.92 rOpenSci(rcrossref/1.0.0.92) (mailto:<<crossref-email>>)
+      X-USER-AGENT: r-curl/4.3 crul/0.9.2.92 rOpenSci(rcrossref/1.0.0.92) (mailto:<<crossref-email>>)
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      content-type: application/json;charset=UTF-8
+      vary: Accept
+      access-control-allow-origin: '*'
+      access-control-allow-headers: X-Requested-With
+      content-length: '9895'
+      server: http-kit
+      date: Wed, 01 Jul 2020 17:56:20 GMT
+      x-rate-limit-limit: '50'
+      x-rate-limit-interval: 1s
+      connection: close
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"status":"ok","message-type":"work","message-version":"1.0.0","message":{"indexed":{"date-parts":[[2020,3,26]],"date-time":"2020-03-26T05:44:05Z","timestamp":1585201445086},"reference-count":70,"publisher":"Hindawi
+        Limited","license":[{"URL":"http:\/\/creativecommons.org\/licenses\/by\/3.0\/","start":{"date-parts":[[2012,1,1]],"date-time":"2012-01-01T00:00:00Z","timestamp":1325376000000},"delay-in-days":0,"content-version":"unspecified"}],"content-domain":{"domain":[],"crossmark-restriction":false},"short-container-title":["International
+        Journal of Ecology"],"published-print":{"date-parts":[[2012]]},"abstract":"<jats:p>The
+        general diversity pattern of the Caribbean anole radiation has been described
+        in detail; however, the actual mechanisms at the origin of their diversification
+        remain controversial. In particular, the role of ecological speciation, and
+        the relative importance of divergence in allopatry and in parapatry, is debated.
+        We describe the genetic structure of anole populations across lineage contact
+        zones and ecotones to investigate the effect of allopatric divergence, natural
+        selection, and the combination of both factors on population differentiation.
+        Allopatric divergence had no significant impact on differentiation across
+        the lineage boundary, while a clear bimodality in genetic and morphological
+        characters was observed across an ecotone within a single lineage. Critically,
+        the strongest differentiation was observed when allopatry and ecology act
+        together, leading to a sharp reduction in gene flow between two lineages inhabiting
+        different habitats. We suggest that, for Caribbean anoles to reach full speciation,
+        a synergistic combination of several historical and ecological factors may
+        be requisite.<\/jats:p>","DOI":"10.1155\/2012\/273413","type":"journal-article","created":{"date-parts":[[2012,2,8]],"date-time":"2012-02-08T21:01:18Z","timestamp":1328734878000},"page":"1-10","source":"Crossref","is-referenced-by-count":7,"title":["Synergy
+        between Allopatry and Ecology in Population Differentiation and Speciation"],"prefix":"10.1155","volume":"2012","author":[{"given":"Yann","family":"Surget-Groba","sequence":"first","affiliation":[{"name":"School
+        of Biological Sciences, Bangor University, Bangor LL57 2UW, UK"},{"name":"Department
+        of Ecology and Evolutionary Biology, University of California Santa Cruz,
+        Santa Cruz, CA 95064, USA"}]},{"given":"Helena","family":"Johansson","sequence":"additional","affiliation":[{"name":"School
+        of Biological Sciences, Bangor University, Bangor LL57 2UW, UK"},{"name":"Department
+        of Biosciences, University of Helsinki, P.O. Box 65, 00014 Helsinki, Finland"}]},{"given":"Roger
+        S.","family":"Thorpe","sequence":"additional","affiliation":[{"name":"School
+        of Biological Sciences, Bangor University, Bangor LL57 2UW, UK"},{"name":"School
+        of Biological Sciences, College of Natural Sciences, Bangor University, Deiniol
+        Road, Bangor, Gwynedd LL57 2UW, UK"}]}],"member":"98","reference":[{"key":"1","DOI":"10.1086\/650369","doi-asserted-by":"publisher"},{"key":"2","year":"1942"},{"key":"3","year":"1963"},{"key":"4","volume":"103","issue":"3","first-page":"557","year":"1983","journal-title":"Genetics"},{"key":"5","volume":"1","first-page":"263","year":"1947","journal-title":"Evolution","DOI":"10.2307\/2405327","doi-asserted-by":"crossref"},{"key":"6","DOI":"10.1016\/S0169-5347(01)02160-7","doi-asserted-by":"publisher"},{"key":"7","DOI":"10.1098\/rspb.2010.1215","doi-asserted-by":"publisher"},{"key":"8","year":"2004"},{"key":"9","DOI":"10.1111\/j.1461-0248.2004.00715.x","doi-asserted-by":"publisher"},{"key":"10","DOI":"10.1098\/rspb.1995.0093","doi-asserted-by":"publisher"},{"key":"11","volume":"35","first-page":"124","year":"1981","journal-title":"Evolution","DOI":"10.2307\/2407946","doi-asserted-by":"crossref"},{"key":"12","DOI":"10.1016\/j.tree.2011.04.005","doi-asserted-by":"publisher"},{"key":"13","year":"2009"},{"key":"14","DOI":"10.1038\/35048558","doi-asserted-by":"publisher"},{"key":"15","DOI":"10.1073\/pnas.1007606107","doi-asserted-by":"publisher"},{"key":"16","year":"1989"},{"key":"17","DOI":"10.1046\/j.1365-294X.2003.01704.x","doi-asserted-by":"publisher"},{"key":"18","DOI":"10.1371\/journal.pgen.1000929","doi-asserted-by":"publisher"},{"key":"19","DOI":"10.1016\/j.ympev.2003.12.008","doi-asserted-by":"publisher"},{"key":"20","DOI":"10.1111\/j.1365-294X.2007.03686.x","doi-asserted-by":"publisher"},{"key":"21","volume":"351","issue":"1341","first-page":"815","year":"1996","journal-title":"Philosophical
+        Transactions of the Royal Society B: Biological Sciences","DOI":"10.1098\/rstb.1996.0076","doi-asserted-by":"crossref"},{"key":"22","DOI":"10.1098\/rstb.2008.0077","doi-asserted-by":"publisher"},{"key":"23","DOI":"10.1080\/10635150290069986","doi-asserted-by":"publisher"},{"key":"24","DOI":"10.1111\/j.1095-8312.2008.01147.x","doi-asserted-by":"publisher"},{"key":"25","DOI":"10.1111\/j.1365-294X.2010.04616.x","doi-asserted-by":"publisher"},{"key":"26","DOI":"10.1002\/jez.10073","doi-asserted-by":"publisher"},{"key":"27","volume":"57","issue":"10","first-page":"2383","year":"2003","journal-title":"Evolution","DOI":"10.1111\/j.0014-3820.2003.tb00250.x","doi-asserted-by":"crossref"},{"key":"28","DOI":"10.1111\/j.1365-294X.2005.02550.x","doi-asserted-by":"publisher"},{"key":"29","DOI":"10.1038\/nature02807","doi-asserted-by":"publisher"},{"key":"30","DOI":"10.1111\/j.1365-2699.2007.01718.x","doi-asserted-by":"publisher"},{"key":"31","DOI":"10.1098\/rspb.2004.2819","doi-asserted-by":"publisher"},{"key":"32","DOI":"10.1046\/j.1365-294X.2002.01564.x","doi-asserted-by":"publisher"},{"key":"33","DOI":"10.1111\/j.1365-294X.2011.05267.x","doi-asserted-by":"publisher"},{"key":"34","DOI":"10.1111\/j.1471-8286.2006.01382.x","doi-asserted-by":"publisher"},{"key":"35","DOI":"10.1023\/A:1019928801124","doi-asserted-by":"publisher"},{"key":"36","DOI":"10.1111\/j.1755-0998.2008.02206.x","doi-asserted-by":"publisher"},{"key":"37","volume":"155","issue":"2","first-page":"945","year":"2000","journal-title":"Genetics"},{"key":"38","DOI":"10.1111\/j.1365-294X.2005.02553.x","doi-asserted-by":"publisher"},{"key":"39","DOI":"10.1554\/05-631.1","doi-asserted-by":"publisher"},{"key":"40","volume":"86","first-page":"485","year":"1995","journal-title":"Journal
+        of Heredity","DOI":"10.1093\/oxfordjournals.jhered.a111627","doi-asserted-by":"crossref"},{"key":"41","DOI":"10.1534\/genetics.106.059451","doi-asserted-by":"publisher"},{"key":"42","volume":"7","issue":"1","first-page":"75","year":"1997","journal-title":"Statistics
+        and Computing","DOI":"10.1023\/A:1018513530268","doi-asserted-by":"crossref"},{"key":"43","year":"2011"},{"key":"44","DOI":"10.1111\/j.1558-5646.2009.00779.x","doi-asserted-by":"publisher"},{"key":"45","DOI":"10.1186\/1471-2156-11-94","doi-asserted-by":"publisher"},{"key":"46","DOI":"10.1111\/j.1365-294X.2008.03979.x","doi-asserted-by":"publisher"},{"key":"47","DOI":"10.1093\/bioinformatics\/btn129","doi-asserted-by":"publisher"},{"key":"48","year":"2002"},{"key":"49","DOI":"10.1111\/j.1095-8649.2009.02419.x","doi-asserted-by":"publisher"},{"key":"50","DOI":"10.1016\/j.tree.2008.10.011","doi-asserted-by":"publisher"},{"key":"51","DOI":"10.1038\/353347a0","doi-asserted-by":"publisher"},{"key":"52","DOI":"10.1086\/379794","doi-asserted-by":"publisher"},{"key":"53","DOI":"10.1086\/428408","doi-asserted-by":"publisher"},{"key":"54","DOI":"10.1007\/s10682-006-0007-y","doi-asserted-by":"publisher"},{"key":"55","DOI":"10.1111\/j.1420-9101.2008.01627.x","doi-asserted-by":"publisher"},{"key":"56","DOI":"10.1111\/j.1365-294X.2010.04641.x","doi-asserted-by":"publisher"},{"key":"57","volume":"52","issue":"6","first-page":"1744","year":"1998","journal-title":"Evolution","DOI":"10.2307\/2411347","doi-asserted-by":"crossref"},{"key":"58","DOI":"10.1098\/rspb.2005.3387","doi-asserted-by":"publisher"},{"key":"59","DOI":"10.1111\/j.1558-5646.2007.00171.x","doi-asserted-by":"publisher"},{"key":"60","DOI":"10.1111\/j.1365-2435.2007.01240.x","doi-asserted-by":"publisher"},{"key":"61","DOI":"10.1111\/j.1365-294X.2005.02794.x","doi-asserted-by":"publisher"},{"key":"62","DOI":"10.1111\/j.1365-294X.2007.03529.x","doi-asserted-by":"publisher"},{"key":"63","DOI":"10.1111\/j.1365-294X.2004.02330.x","doi-asserted-by":"publisher"},{"key":"64","DOI":"10.1038\/nature04566","doi-asserted-by":"publisher"},{"key":"65","DOI":"10.1038\/nature04325","doi-asserted-by":"publisher"},{"key":"66","DOI":"10.1073\/pnas.1106085108","doi-asserted-by":"publisher"},{"key":"67","DOI":"10.1111\/j.1558-5646.2010.01190.x","doi-asserted-by":"publisher"},{"key":"68","DOI":"10.1111\/j.1095-8312.2008.01091.x","doi-asserted-by":"publisher"},{"key":"69","DOI":"10.1371\/journal.pone.0015659","doi-asserted-by":"publisher"},{"key":"70","DOI":"10.1111\/j.1365-2699.2010.02283.x","doi-asserted-by":"publisher"}],"container-title":["International
+        Journal of Ecology"],"original-title":[],"language":"en","link":[{"URL":"http:\/\/downloads.hindawi.com\/journals\/ijecol\/2012\/273413.pdf","content-type":"application\/pdf","content-version":"vor","intended-application":"text-mining"},{"URL":"http:\/\/downloads.hindawi.com\/journals\/ijecol\/2012\/273413.xml","content-type":"application\/xml","content-version":"vor","intended-application":"text-mining"},{"URL":"http:\/\/downloads.hindawi.com\/journals\/ijecol\/2012\/273413.pdf","content-type":"unspecified","content-version":"vor","intended-application":"similarity-checking"}],"deposited":{"date-parts":[[2017,6,20]],"date-time":"2017-06-20T13:58:02Z","timestamp":1497967082000},"score":1.0,"subtitle":[],"short-title":[],"issued":{"date-parts":[[2012]]},"references-count":70,"alternative-id":["273413","273413"],"URL":"http:\/\/dx.doi.org\/10.1155\/2012\/273413","relation":{"cites":[]},"ISSN":["1687-9708","1687-9716"],"issn-type":[{"value":"1687-9708","type":"print"},{"value":"1687-9716","type":"electronic"}]}}'
+  recorded_at: 2020-07-01 17:56:21 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.6.2
+- request:
+    method: get
+    uri: https://api.crossref.org/works/10.1515/cdem-2018-0001
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: r-curl/4.3 crul/0.9.2.92 rOpenSci(rcrossref/1.0.0.92) (mailto:<<crossref-email>>)
+      X-USER-AGENT: r-curl/4.3 crul/0.9.2.92 rOpenSci(rcrossref/1.0.0.92) (mailto:<<crossref-email>>)
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      content-type: application/json;charset=UTF-8
+      vary: Accept
+      access-control-allow-origin: '*'
+      access-control-allow-headers: X-Requested-With
+      content-length: '2946'
+      server: http-kit
+      date: Wed, 01 Jul 2020 17:56:21 GMT
+      x-rate-limit-limit: '50'
+      x-rate-limit-interval: 1s
+      connection: close
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"status":"ok","message-type":"work","message-version":"1.0.0","message":{"indexed":{"date-parts":[[2020,3,24]],"date-time":"2020-03-24T18:54:44Z","timestamp":1585076084791},"reference-count":0,"publisher":"Walter
+        de Gruyter GmbH","issue":"1-2","license":[{"URL":"http:\/\/creativecommons.org\/licenses\/by-nc-nd\/3.0","start":{"date-parts":[[2018,12,1]],"date-time":"2018-12-01T00:00:00Z","timestamp":1543622400000},"delay-in-days":0,"content-version":"unspecified"}],"content-domain":{"domain":[],"crossmark-restriction":false},"short-container-title":[],"published-print":{"date-parts":[[2018,12,1]]},"abstract":"<jats:title>Abstract<\/jats:title>\n<jats:p>The
+        Earth has existed for more than four billion years and has sustained life
+        for three billion. Human beings have existed for just 200,000 years, yet our
+        impact on the planet is so great that scientists around the world are calling
+        for our period in the Earth\u2019s history to be named \u2018the Anthropocene\u2019
+        - the age of humans. The changes we are now making have exacted a heavy toll
+        on the natural world around us, and now threaten the planet\u2019s ability
+        to provide for us all. Problems of Ecology and Society in the new geological
+        era as the Anthropocene - \u2018the age of humans\u2019 - are overviewed.
+        The name is widely recognized as a useful classification of the period in
+        which human activity has created and continues to generate deep and lasting
+        effects on the Earth and its living systems. Examples of the interrelated
+        effects of exponential population growth and massively expanding consumption
+        of natural resources called Great Acceleration are given. Updated \u2018planetary
+        dashboard\u2019 of environmental, economic and social indicators charts the
+        trajectory of the Anthropocene are briefly summarized.<\/jats:p>","DOI":"10.1515\/cdem-2018-0001","type":"journal-article","created":{"date-parts":[[2019,1,28]],"date-time":"2019-01-28T04:31:27Z","timestamp":1548649887000},"page":"7-29","source":"Crossref","is-referenced-by-count":0,"title":["Ecology
+        and Society. Impacted Ecosystems. Part I"],"prefix":"10.1515","volume":"23","author":[{"given":"Marina","family":"Frontasyeva","sequence":"first","affiliation":[]},{"given":"Alexander","family":"Kamnev","sequence":"additional","affiliation":[]}],"member":"374","container-title":["Chemistry-Didactics-Ecology-Metrology"],"original-title":[],"link":[{"URL":"http:\/\/content.sciendo.com\/view\/journals\/cdem\/23\/1-2\/article-p7.xml","content-type":"text\/html","content-version":"vor","intended-application":"text-mining"}],"deposited":{"date-parts":[[2019,2,7]],"date-time":"2019-02-07T04:36:24Z","timestamp":1549514184000},"score":1.0,"subtitle":[],"short-title":[],"issued":{"date-parts":[[2018,12,1]]},"references-count":0,"journal-issue":{"issue":"1-2"},"URL":"http:\/\/dx.doi.org\/10.1515\/cdem-2018-0001","relation":{},"ISSN":["2084-4506"],"issn-type":[{"value":"2084-4506","type":"electronic"}]}}'
+  recorded_at: 2020-07-01 17:56:21 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.6.2
+- request:
+    method: get
+    uri: https://api.crossref.org/works/10.1017/s0376892913000179
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: r-curl/4.3 crul/0.9.2.92 rOpenSci(rcrossref/1.0.0.92) (mailto:<<crossref-email>>)
+      X-USER-AGENT: r-curl/4.3 crul/0.9.2.92 rOpenSci(rcrossref/1.0.0.92) (mailto:<<crossref-email>>)
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      content-type: application/json;charset=UTF-8
+      vary: Accept
+      access-control-allow-origin: '*'
+      access-control-allow-headers: X-Requested-With
+      content-length: '5018'
+      server: http-kit
+      date: Wed, 01 Jul 2020 17:56:21 GMT
+      x-rate-limit-limit: '50'
+      x-rate-limit-interval: 1s
+      connection: close
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"status":"ok","message-type":"work","message-version":"1.0.0","message":{"indexed":{"date-parts":[[2020,3,29]],"date-time":"2020-03-29T03:46:36Z","timestamp":1585453596691},"reference-count":15,"publisher":"Cambridge
+        University Press (CUP)","issue":"3","license":[{"URL":"https:\/\/www.cambridge.org\/core\/terms","start":{"date-parts":[[2013,5,9]],"date-time":"2013-05-09T00:00:00Z","timestamp":1368057600000},"delay-in-days":0,"content-version":"unspecified"}],"content-domain":{"domain":[],"crossmark-restriction":false},"short-container-title":["Envir.
+        Conserv."],"published-print":{"date-parts":[[2013,9]]},"abstract":"<jats:title>SUMMARY<\/jats:title><jats:p>Environmental
+        damage during warfare is generally accepted as an unavoidable form of collateral
+        damage. Military operations should be included in discussions of environmental
+        conservation. The subdiscipline warfare ecology was recently proposed to integrate
+        such discussion. However, environmental damage may also be caused by peacetime
+        military operations, and, in such cases, relevant stakeholders may not realize
+        that warfare ecology has relevance for peacetime environmental disaster. This
+        comment proposes that the epithet warfare ecology does little to attract the
+        participation of the groups affected by military operations, however the term
+        \u2018military ecology\u2019 would also patently include peacetime military
+        activities and may thus enhance engagement. Military ecology embraces all
+        environmental conservation issues related to military activity during peacetime,
+        preparation for war, warfare and post-war restoration operations. The established
+        term warfare ecology could be subsumed within military ecology, by accurately
+        constricting its application to ecological issues directly tied to armed conflict.<\/jats:p>","DOI":"10.1017\/s0376892913000179","type":"journal-article","created":{"date-parts":[[2013,5,9]],"date-time":"2013-05-09T09:13:36Z","timestamp":1368090816000},"page":"207-208","source":"Crossref","is-referenced-by-count":5,"title":["Military
+        ecology more fitting than warfare ecology"],"prefix":"10.1017","volume":"40","author":[{"given":"THOMAS
+        E.","family":"MARLER","sequence":"first","affiliation":[]}],"member":"56","published-online":{"date-parts":[[2013,5,9]]},"reference":[{"key":"S0376892913000179_ref6","DOI":"10.1641\/B580809","doi-asserted-by":"publisher"},{"key":"S0376892913000179_ref10","DOI":"10.1016\/j.biocon.2008.06.014","doi-asserted-by":"publisher"},{"key":"S0376892913000179_ref2","DOI":"10.1111\/j.1467-7709.2008.00714.x","doi-asserted-by":"publisher"},{"key":"S0376892913000179_ref16","first-page":"335","article-title":"Salisbury
+        plain training area: the British steppes","volume":"13","author":"Toynton","year":"2002","journal-title":"British
+        Wildlife"},{"key":"S0376892913000179_ref4","author":"Galgano","year":"2010","volume-title":"Modern
+        Military Geography"},{"key":"S0376892913000179_ref9","DOI":"10.1080\/03906701.2011.581807","doi-asserted-by":"publisher"},{"key":"S0376892913000179_ref7","first-page":"1198","article-title":"Military
+        threats to terrestrial resources not restricted to wartime: a case study from
+        Guam","volume":"5","author":"Marler","year":"2011","journal-title":"Journal
+        of Environmental Science and Engineering"},{"key":"S0376892913000179_ref5","DOI":"10.1111\/j.1523-1739.2008.00914.x","doi-asserted-by":"publisher"},{"key":"S0376892913000179_ref14","DOI":"10.1371\/journal.pone.0043446","doi-asserted-by":"publisher"},{"key":"S0376892913000179_ref12","first-page":"46","article-title":"Origin
+        and population growth of the brown tree snake, Boiga irregularis, on Guam","volume":"46","author":"Rodda","year":"1992","journal-title":"Pacific
+        Science"},{"key":"S0376892913000179_ref15","DOI":"10.1111\/j.1744-7429.2009.00559.x","doi-asserted-by":"publisher"},{"key":"S0376892913000179_ref3","DOI":"10.1038\/415023a","doi-asserted-by":"publisher"},{"key":"S0376892913000179_ref8","DOI":"10.4161\/cib.18889","doi-asserted-by":"publisher"},{"key":"S0376892913000179_ref11","DOI":"10.1890\/1051-0761(2003)013[0432:MTEOTA]2.0.CO;2","doi-asserted-by":"publisher"},{"key":"S0376892913000179_ref1","DOI":"10.1038\/476371a","doi-asserted-by":"publisher"}],"container-title":["Environmental
+        Conservation"],"original-title":[],"language":"en","link":[{"URL":"https:\/\/www.cambridge.org\/core\/services\/aop-cambridge-core\/content\/view\/S0376892913000179","content-type":"unspecified","content-version":"vor","intended-application":"similarity-checking"}],"deposited":{"date-parts":[[2019,4,23]],"date-time":"2019-04-23T20:17:22Z","timestamp":1556050642000},"score":1.0,"subtitle":[],"short-title":[],"issued":{"date-parts":[[2013,5,9]]},"references-count":15,"journal-issue":{"published-print":{"date-parts":[[2013,9]]},"issue":"3"},"alternative-id":["S0376892913000179"],"URL":"http:\/\/dx.doi.org\/10.1017\/s0376892913000179","relation":{"cites":[]},"ISSN":["0376-8929","1469-4387"],"issn-type":[{"value":"0376-8929","type":"print"},{"value":"1469-4387","type":"electronic"}]}}'
+  recorded_at: 2020-07-01 17:56:21 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.6.2

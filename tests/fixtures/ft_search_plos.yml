@@ -1,0 +1,467 @@
+http_interactions:
+- request:
+    method: get
+    uri: http://api.plos.org/search?q=ecology&fl=id&rows=0&wt=json
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      User-Agent: libcurl/7.64.1 r-curl/4.3 crul/0.9.2.92
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      server: nginx/1.14.1
+      date: Wed, 01 Jul 2020 18:16:12 GMT
+      content-type: application/json;charset=utf-8
+      content-length: '58'
+      connection: keep-alive
+      last-modified: Wed, 01 Jul 2020 17:53:09 GMT
+      etag: '"ZTczYzQwMDAwMDAwMDAwMFNvbHI="'
+    body:
+      encoding: UTF-8
+      file: no
+      string: |
+        {
+          "response":{"numFound":52809,"start":0,"docs":[]
+          }}
+  recorded_at: 2020-07-01 18:16:12 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.6.2
+- request:
+    method: get
+    uri: http://api.plos.org/search?q=ecology&fl=id&start=0&rows=200&wt=json
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      User-Agent: libcurl/7.64.1 r-curl/4.3 crul/0.9.2.92
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      server: nginx/1.14.1
+      date: Wed, 01 Jul 2020 18:16:12 GMT
+      content-type: application/json;charset=utf-8
+      content-length: '10857'
+      connection: keep-alive
+      last-modified: Wed, 01 Jul 2020 17:53:09 GMT
+      etag: '"YzRiYzQwMDAwMDAwMDAwMFNvbHI="'
+    body:
+      encoding: UTF-8
+      file: no
+      string: |
+        {
+          "response":{"numFound":52809,"start":0,"docs":[
+              {
+                "id":"10.1371/journal.pone.0001248"},
+              {
+                "id":"10.1371/journal.pone.0059813"},
+              {
+                "id":"10.1371/journal.pone.0080763"},
+              {
+                "id":"10.1371/journal.pone.0220747"},
+              {
+                "id":"10.1371/journal.pone.0155019"},
+              {
+                "id":"10.1371/journal.pone.0175014"},
+              {
+                "id":"10.1371/journal.pone.0150648"},
+              {
+                "id":"10.1371/journal.pone.0208370"},
+              {
+                "id":"10.1371/journal.pcbi.1003594"},
+              {
+                "id":"10.1371/journal.pone.0102437"},
+              {
+                "id":"10.1371/journal.pcbi.1007787"},
+              {
+                "id":"10.1371/journal.pone.0166559"},
+              {
+                "id":"10.1371/journal.pone.0074321"},
+              {
+                "id":"10.1371/journal.pone.0017342"},
+              {
+                "id":"10.1371/journal.pone.0054689"},
+              {
+                "id":"10.1371/journal.pone.0171883"},
+              {
+                "id":"10.1371/journal.pone.0228426"},
+              {
+                "id":"10.1371/journal.pone.0175201"},
+              {
+                "id":"10.1371/journal.pone.0131732"},
+              {
+                "id":"10.1371/journal.pbio.0060300"},
+              {
+                "id":"10.1371/journal.pone.0220320"},
+              {
+                "id":"10.1371/journal.pbio.1002559"},
+              {
+                "id":"10.1371/journal.pone.0228625"},
+              {
+                "id":"10.1371/journal.pone.0175942"},
+              {
+                "id":"10.1371/journal.pone.0150932"},
+              {
+                "id":"10.1371/journal.pone.0071164"},
+              {
+                "id":"10.1371/journal.pone.0059644"},
+              {
+                "id":"10.1371/journal.pone.0192569"},
+              {
+                "id":"10.1371/journal.pone.0118282"},
+              {
+                "id":"10.1371/journal.pone.0200303"},
+              {
+                "id":"10.1371/journal.pone.0173812"},
+              {
+                "id":"10.1371/journal.pbio.2002965"},
+              {
+                "id":"10.1371/journal.pone.0195115"},
+              {
+                "id":"10.1371/journal.pone.0142331"},
+              {
+                "id":"10.1371/journal.pone.0202902"},
+              {
+                "id":"10.1371/journal.pone.0174141"},
+              {
+                "id":"10.1371/journal.pone.0053139"},
+              {
+                "id":"10.1371/journal.pone.0119922"},
+              {
+                "id":"10.1371/journal.pone.0111996"},
+              {
+                "id":"10.1371/journal.pbio.2005628"},
+              {
+                "id":"10.1371/journal.pone.0055629"},
+              {
+                "id":"10.1371/journal.pone.0114979"},
+              {
+                "id":"10.1371/journal.pone.0057786"},
+              {
+                "id":"10.1371/journal.pone.0012553"},
+              {
+                "id":"10.1371/journal.pone.0203611"},
+              {
+                "id":"10.1371/journal.pone.0165178"},
+              {
+                "id":"10.1371/journal.pone.0013382"},
+              {
+                "id":"10.1371/journal.pone.0196121"},
+              {
+                "id":"10.1371/journal.pone.0072451"},
+              {
+                "id":"10.1371/journal.pone.0213011"},
+              {
+                "id":"10.1371/journal.pone.0130315"},
+              {
+                "id":"10.1371/journal.pone.0150956"},
+              {
+                "id":"10.1371/journal.pone.0196066"},
+              {
+                "id":"10.1371/journal.pone.0089314"},
+              {
+                "id":"10.1371/journal.pone.0181825"},
+              {
+                "id":"10.1371/journal.pone.0226993"},
+              {
+                "id":"10.1371/journal.pone.0198277"},
+              {
+                "id":"10.1371/journal.pone.0153977"},
+              {
+                "id":"10.1371/journal.pone.0190470"},
+              {
+                "id":"10.1371/journal.pone.0234960"},
+              {
+                "id":"10.1371/journal.pone.0085105"},
+              {
+                "id":"10.1371/journal.pbio.1001248"},
+              {
+                "id":"10.1371/journal.pone.0186170"},
+              {
+                "id":"10.1371/journal.pcbi.1005139"},
+              {
+                "id":"10.1371/journal.pone.0197877"},
+              {
+                "id":"10.1371/journal.pone.0134384"},
+              {
+                "id":"10.1371/journal.pcbi.0010018"},
+              {
+                "id":"10.1371/journal.pone.0003979"},
+              {
+                "id":"10.1371/journal.pone.0061257"},
+              {
+                "id":"10.1371/journal.pcbi.1005988"},
+              {
+                "id":"10.1371/journal.pone.0219447"},
+              {
+                "id":"10.1371/journal.pone.0095053"},
+              {
+                "id":"10.1371/journal.pone.0156340"},
+              {
+                "id":"10.1371/journal.pone.0027523"},
+              {
+                "id":"10.1371/journal.pcbi.1007076"},
+              {
+                "id":"10.1371/journal.pone.0224625"},
+              {
+                "id":"10.1371/journal.pone.0184057"},
+              {
+                "id":"10.1371/journal.pone.0157929"},
+              {
+                "id":"10.1371/journal.pone.0206711"},
+              {
+                "id":"10.1371/journal.pone.0199126"},
+              {
+                "id":"10.1371/journal.pone.0112850"},
+              {
+                "id":"10.1371/journal.pone.0006731"},
+              {
+                "id":"10.1371/journal.pone.0222207"},
+              {
+                "id":"10.1371/journal.pone.0192819"},
+              {
+                "id":"10.1371/journal.pone.0207678"},
+              {
+                "id":"10.1371/journal.pone.0147017"},
+              {
+                "id":"10.1371/journal.pone.0159572"},
+              {
+                "id":"10.1371/journal.pone.0152335"},
+              {
+                "id":"10.1371/journal.pone.0211445"},
+              {
+                "id":"10.1371/journal.pone.0123237"},
+              {
+                "id":"10.1371/journal.pone.0178235"},
+              {
+                "id":"10.1371/journal.pone.0164934"},
+              {
+                "id":"10.1371/journal.pone.0192019"},
+              {
+                "id":"10.1371/journal.pcbi.1007269"},
+              {
+                "id":"10.1371/journal.pbio.1002323"},
+              {
+                "id":"10.1371/journal.pone.0065848"},
+              {
+                "id":"10.1371/journal.pone.0194710"},
+              {
+                "id":"10.1371/journal.pone.0176952"},
+              {
+                "id":"10.1371/journal.pone.0033257"},
+              {
+                "id":"10.1371/journal.pgen.1005860"},
+              {
+                "id":"10.1371/journal.pone.0188300"},
+              {
+                "id":"10.1371/journal.pone.0225683"},
+              {
+                "id":"10.1371/journal.pone.0036196"},
+              {
+                "id":"10.1371/journal.pone.0113648"},
+              {
+                "id":"10.1371/journal.pone.0208463"},
+              {
+                "id":"10.1371/journal.pone.0074708"},
+              {
+                "id":"10.1371/journal.pone.0036290"},
+              {
+                "id":"10.1371/journal.pone.0106512"},
+              {
+                "id":"10.1371/journal.pone.0137880"},
+              {
+                "id":"10.1371/journal.pone.0182200"},
+              {
+                "id":"10.1371/journal.pone.0175931"},
+              {
+                "id":"10.1371/journal.pone.0061349"},
+              {
+                "id":"10.1371/journal.pone.0208523"},
+              {
+                "id":"10.1371/journal.pone.0063071"},
+              {
+                "id":"10.1371/journal.pbio.1001700"},
+              {
+                "id":"10.1371/journal.pone.0195760"},
+              {
+                "id":"10.1371/journal.pntd.0004689"},
+              {
+                "id":"10.1371/journal.pone.0215691"},
+              {
+                "id":"10.1371/journal.pone.0091881"},
+              {
+                "id":"10.1371/journal.pbio.2003446"},
+              {
+                "id":"10.1371/journal.pone.0124954"},
+              {
+                "id":"10.1371/journal.ppat.1005780"},
+              {
+                "id":"10.1371/journal.pone.0019762"},
+              {
+                "id":"10.1371/journal.pone.0167128"},
+              {
+                "id":"10.1371/journal.pone.0218741"},
+              {
+                "id":"10.1371/journal.pone.0172781"},
+              {
+                "id":"10.1371/journal.pone.0000563"},
+              {
+                "id":"10.1371/journal.pone.0173443"},
+              {
+                "id":"10.1371/journal.pone.0106073"},
+              {
+                "id":"10.1371/journal.pone.0161082"},
+              {
+                "id":"10.1371/journal.pone.0192481"},
+              {
+                "id":"10.1371/journal.pone.0017645"},
+              {
+                "id":"10.1371/journal.pone.0020239"},
+              {
+                "id":"10.1371/journal.pgen.1007046"},
+              {
+                "id":"10.1371/journal.pone.0168890"},
+              {
+                "id":"10.1371/journal.pcbi.1007168"},
+              {
+                "id":"10.1371/journal.pone.0193822"},
+              {
+                "id":"10.1371/journal.pone.0176828"},
+              {
+                "id":"10.1371/journal.pone.0110552"},
+              {
+                "id":"10.1371/journal.pone.0223661"},
+              {
+                "id":"10.1371/journal.pone.0057019"},
+              {
+                "id":"10.1371/journal.pone.0055100"},
+              {
+                "id":"10.1371/journal.pone.0214902"},
+              {
+                "id":"10.1371/journal.pone.0057087"},
+              {
+                "id":"10.1371/journal.pone.0104026"},
+              {
+                "id":"10.1371/journal.pcbi.1002928"},
+              {
+                "id":"10.1371/journal.pcbi.1006793"},
+              {
+                "id":"10.1371/journal.pone.0059356"},
+              {
+                "id":"10.1371/journal.pone.0162989"},
+              {
+                "id":"10.1371/journal.pone.0147098"},
+              {
+                "id":"10.1371/journal.pone.0068927"},
+              {
+                "id":"10.1371/journal.pone.0156425"},
+              {
+                "id":"10.1371/journal.pone.0165042"},
+              {
+                "id":"10.1371/journal.pone.0183964"},
+              {
+                "id":"10.1371/journal.pone.0182259"},
+              {
+                "id":"10.1371/journal.pbio.2006735"},
+              {
+                "id":"10.1371/journal.pone.0190506"},
+              {
+                "id":"10.1371/journal.pone.0021936"},
+              {
+                "id":"10.1371/journal.pone.0011073"},
+              {
+                "id":"10.1371/journal.pone.0169428"},
+              {
+                "id":"10.1371/journal.pone.0204787"},
+              {
+                "id":"10.1371/journal.pone.0087804"},
+              {
+                "id":"10.1371/journal.pone.0209483"},
+              {
+                "id":"10.1371/journal.pone.0150111"},
+              {
+                "id":"10.1371/journal.pone.0013913"},
+              {
+                "id":"10.1371/journal.pone.0185884"},
+              {
+                "id":"10.1371/journal.pone.0092097"},
+              {
+                "id":"10.1371/journal.pone.0170137"},
+              {
+                "id":"10.1371/journal.pone.0183152"},
+              {
+                "id":"10.1371/journal.pbio.1002527"},
+              {
+                "id":"10.1371/journal.pone.0222069"},
+              {
+                "id":"10.1371/journal.pone.0091414"},
+              {
+                "id":"10.1371/journal.pone.0163566"},
+              {
+                "id":"10.1371/journal.pone.0222714"},
+              {
+                "id":"10.1371/journal.pbio.3000183"},
+              {
+                "id":"10.1371/journal.pbio.0020072"},
+              {
+                "id":"10.1371/journal.pone.0160693"},
+              {
+                "id":"10.1371/journal.pone.0155989"},
+              {
+                "id":"10.1371/journal.pone.0112385"},
+              {
+                "id":"10.1371/journal.pone.0089245"},
+              {
+                "id":"10.1371/journal.pone.0046761"},
+              {
+                "id":"10.1371/journal.pone.0196898"},
+              {
+                "id":"10.1371/journal.pone.0146053"},
+              {
+                "id":"10.1371/journal.pone.0110968"},
+              {
+                "id":"10.1371/journal.pbio.2006686"},
+              {
+                "id":"10.1371/journal.pone.0194006"},
+              {
+                "id":"10.1371/journal.pone.0173361"},
+              {
+                "id":"10.1371/journal.pone.0036695"},
+              {
+                "id":"10.1371/journal.pone.0174543"},
+              {
+                "id":"10.1371/journal.pone.0199152"},
+              {
+                "id":"10.1371/journal.ppat.1005843"},
+              {
+                "id":"10.1371/journal.pntd.0004949"},
+              {
+                "id":"10.1371/journal.pone.0049024"},
+              {
+                "id":"10.1371/journal.pone.0021885"},
+              {
+                "id":"10.1371/journal.pone.0175203"},
+              {
+                "id":"10.1371/journal.pone.0069174"},
+              {
+                "id":"10.1371/journal.pone.0059900"},
+              {
+                "id":"10.1371/journal.pone.0020782"},
+              {
+                "id":"10.1371/journal.pone.0204609"},
+              {
+                "id":"10.1371/journal.pone.0072525"}]
+          }}
+  recorded_at: 2020-07-01 18:16:12 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.6.2

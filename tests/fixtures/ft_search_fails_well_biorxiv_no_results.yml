@@ -1,0 +1,653 @@
+http_interactions:
+- request:
+    method: get
+    uri: https://www.biorxiv.org/search/asdfasdfasdfasfasfd%20numresults:30
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      User-Agent: libcurl/7.64.1 r-curl/4.3 crul/0.9.2.92
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      age: '0'
+      cache-control: no-cache, must-revalidate
+      cf-cache-status: DYNAMIC
+      cf-railgun: 4f965bc3d6 0.48 0.707835 0030 e6be
+      cf-ray: 5ac228c3dd29f585-SEA
+      cf-request-id: 03ad37ce670000f58530b10200000001
+      content-encoding: gzip
+      content-language: en
+      content-type: text/html; charset=utf-8
+      date: Wed, 01 Jul 2020 18:23:38 GMT
+      expect-ct: max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      expires: Sun, 19 Nov 1978 05:00:00 GMT
+      link: <https://www.biorxiv.org/search/asdfasdfasdfasfasfd%20numresults%3A30>;
+        rel="canonical",<https://www.biorxiv.org/search/asdfasdfasdfasfasfd%20numresults%3A30>;
+        rel="shortlink"
+      server: cloudflare
+      set-cookie:
+      - __cfduid=d32fe7cd3c5f35b81fc3281085516f8a31593627817; expires=Fri, 31-Jul-20
+        18:23:37 GMT; path=/; domain=.biorxiv.org; HttpOnly; SameSite=Lax
+      - SSESS1dd6867f1a1b90340f573dcdef3076bc=5yExMtswZtU1SaUHUttUUnhLFahsOq0RW-OrTpW1Gy0;
+        expires=Fri, 24-Jul-2020 21:56:57 GMT; path=/; domain=.biorxiv.org; secure;
+        HttpOnly
+      - SESS1dd6867f1a1b90340f573dcdef3076bc=deleted; expires=Thu, 01-Jan-1970 00:00:01
+        GMT; path=/; domain=.biorxiv.org; httponly
+      status: 'HTTP/2 200 '
+      vary: Accept-Encoding
+      via: 1.1 varnish
+      x-content-type-options: nosniff
+      x-drupal-cache: MISS
+      x-frame-options: SAMEORIGIN
+      x-generator: Drupal 7 (http://drupal.org)
+      x-highwire-sitecode: biorxiv
+      x-highwire-smart-code: biorxiv_production
+      x-varnish: '126344280'
+      x-varnish-cache: ''
+      x-varnish-ttl: ''
+    body:
+      encoding: UTF-8
+      file: no
+      string: "<!DOCTYPE html>\n<html lang=\"en\" dir=\"ltr\" \n  xmlns=\"http://www.w3.org/1999/xhtml\"\n
+        \ xmlns:mml=\"http://www.w3.org/1998/Math/MathML\">\n  <head prefix=\"og:
+        http://ogp.me/ns# article: http://ogp.me/ns/article# book: http://ogp.me/ns/book#\"
+        >\n    <!--[if IE]><![endif]-->\n<meta http-equiv=\"Content-Type\" content=\"text/html;
+        charset=utf-8\" />\n<link rel=\"dns-prefetch\" href=\"//stats.g.doubleclick.net\"
+        />\n<link rel=\"dns-prefetch\" href=\"//d33xdlntwy0kbs.cloudfront.net\" />\n<link
+        rel=\"dns-prefetch\" href=\"//www.google-analytics.com\" />\n<meta name=\"viewport\"
+        content=\"width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1,
+        user-scalable=yes\" />\n<link rel=\"shortcut icon\" href=\"https://www.biorxiv.org/sites/default/files/images/favicon.ico\"
+        type=\"image/vnd.microsoft.icon\" />\n<meta name=\"description\" content=\"bioRxiv
+        - the preprint server for biology, operated by Cold Spring Harbor Laboratory,
+        a research and educational institution\" />\n<meta name=\"generator\" content=\"Drupal
+        7 (http://drupal.org)\" />\n<link rel=\"canonical\" href=\"https://www.biorxiv.org/search/asdfasdfasdfasfasfd%20numresults%3A30\"
+        />\n<link rel=\"shortlink\" href=\"https://www.biorxiv.org/search/asdfasdfasdfasfasfd%20numresults%3A30\"
+        />\n    <title>Search Results | bioRxiv</title>  \n    <link type=\"text/css\"
+        rel=\"stylesheet\" href=\"https://www.biorxiv.org/sites/default/files/advagg_css/css__q1jfIfL8-NmYQwIYZiQJkXRvxUhw39T6nMKFZH7cllk__6eR-HG068hreGXGvZigV_cQG10gMcVih32c6FYJBqbE__2Vk8Jq1CvyoD5Whg-2H8wW3EiWCafsCg4v9uYgZf94Q.css\"
+        media=\"all\" />\n<link type=\"text/css\" rel=\"stylesheet\" href=\"https://www.biorxiv.org/sites/all/modules/highwire/highwire/highwire.style.highwire.css?qcoew7\"
+        media=\"all\" />\n<link type=\"text/css\" rel=\"stylesheet\" href=\"https://www.biorxiv.org/sites/default/files/advagg_css/css__T2P134Rgsot7gxBGGcj4_r5CWWPW74URR8Mm862EyyA__Npyf2LzhlzCEt8-fkO2QhQ1kGD3HfhfGiAt6B_wlX08__2Vk8Jq1CvyoD5Whg-2H8wW3EiWCafsCg4v9uYgZf94Q.css\"
+        media=\"all\" />\n<style type=\"text/css\" media=\"all\">\n/* <![CDATA[ */\n#sliding-popup.sliding-popup-bottom,#sliding-popup.sliding-popup-bottom
+        .eu-cookie-withdraw-banner,.eu-cookie-withdraw-tab{background:gray}#sliding-popup.sliding-popup-bottom.eu-cookie-withdraw-wrapper{background:transparent}#sliding-popup
+        .popup-content #popup-text h1,#sliding-popup .popup-content #popup-text h2,#sliding-popup
+        .popup-content #popup-text h3,#sliding-popup .popup-content #popup-text p,.eu-cookie-compliance-secondary-button,.eu-cookie-withdraw-tab{color:#fff
+        !important}.eu-cookie-withdraw-tab{border-color:#fff}.eu-cookie-compliance-more-button{color:#fff
+        !important}\n/* ]]> */\n</style>\n\n<!--[if lte IE 7]>\n<link type=\"text/css\"
+        rel=\"stylesheet\" href=\"https://www.biorxiv.org/sites/default/files/advagg_css/css__ElJr3PIJEvw3qLXc1cnYiLj2G4KgDPSXFOfm6Phf8hw__JdWGm15cDWjsK6KrFlQVXQix9YgNeYysf22XZHj-Y-c__2Vk8Jq1CvyoD5Whg-2H8wW3EiWCafsCg4v9uYgZf94Q.css\"
+        media=\"all\" />\n<![endif]-->\n<link type=\"text/css\" rel=\"stylesheet\"
+        href=\"https://www.biorxiv.org/sites/default/files/advagg_css/css__B6tGdsQSt1vT8d8j-19-oS4FKJe83RrSNBkjPs9jfos__6VkE5WcQmmQpSVTQx-xS2-zn_nlwFlDm-EN1HLJNjrA__2Vk8Jq1CvyoD5Whg-2H8wW3EiWCafsCg4v9uYgZf94Q.css\"
+        media=\"all\" />\n<link type=\"text/css\" rel=\"stylesheet\" href=\"https://www.biorxiv.org/sites/default/files/advagg_css/css__tmyo_zgjHrRqy5b5Fd_qcTyA9SqmW1cOcmXgvISuyaw__F3sVKlGyHKCaAPI_WdiHD7l_-05B6b9bLdUwzi1me90__2Vk8Jq1CvyoD5Whg-2H8wW3EiWCafsCg4v9uYgZf94Q.css\"
+        media=\"all\" />\n\n<!--[if (lt IE 9)&(!IEMobile)]>\n<link type=\"text/css\"
+        rel=\"stylesheet\" href=\"https://www.biorxiv.org/sites/default/files/advagg_css/css__XH6bpcI0f2dImc-p674DLCZtWBGb-QwxJK1YexVGtno__vUceGprdo5nIhV6DH93X7fI3r8RcTJbChbas9TQXeW4__2Vk8Jq1CvyoD5Whg-2H8wW3EiWCafsCg4v9uYgZf94Q.css\"
+        media=\"all\" />\n<![endif]-->\n\n<!--[if gte IE 9]><!-->\n<link type=\"text/css\"
+        rel=\"stylesheet\" href=\"https://www.biorxiv.org/sites/default/files/advagg_css/css__2WBMox6sOrN42ss5lCnH7WWVRdFdJCxtTKnQJYRwTE4__yqNvNYLvMpjy3ffuJrjjm9uW2i-Me1c23KLYuWHaqio__2Vk8Jq1CvyoD5Whg-2H8wW3EiWCafsCg4v9uYgZf94Q.css\"
+        media=\"all\" />\n<!--<![endif]-->\n<link type=\"text/css\" rel=\"stylesheet\"
+        href=\"https://www.biorxiv.org/sites/default/files/advagg_css/css__8ynXvEJUSfwVx0GXVivCBvJLv1LQPEZZtncZ20veiKM__f_9pwrTE8mmshoJRfurwkQ36QonD_Jiwbop2sscnkrE__2Vk8Jq1CvyoD5Whg-2H8wW3EiWCafsCg4v9uYgZf94Q.css\"
+        media=\"all\" />\n<link type=\"text/css\" rel=\"stylesheet\" href=\"https://d33xdlntwy0kbs.cloudfront.net/cshl_custom.css\"
+        media=\"all\" />\n    <script type=\"text/javascript\">\n<!--//--><![CDATA[//><!--\n/*!\n
+        * yepnope1.5.4\n * (c) WTFPL, GPLv2\n */\n(function(a,b,c){function d(a){return\"[object
+        Function]\"==o.call(a)}function e(a){return\"string\"==typeof a}function f(){}function
+        g(a){return!a||\"loaded\"==a||\"complete\"==a||\"uninitialized\"==a}function
+        h(){var a=p.shift();q=1,a?a.t?m(function(){(\"c\"==a.t?B.injectCss:B.injectJs)(a.s,0,a.a,a.x,a.e,1)},0):(a(),h()):q=0}function
+        i(a,c,d,e,f,i,j){function k(b){if(!o&&g(l.readyState)&&(u.r=o=1,!q&&h(),l.onload=l.onreadystatechange=null,b)){\"img\"!=a&&m(function(){t.removeChild(l)},50);for(var
+        d in y[c])y[c].hasOwnProperty(d)&&y[c][d].onload()}}var j=j||B.errorTimeout,l=b.createElement(a),o=0,r=0,u={t:d,s:c,e:f,a:i,x:j};1===y[c]&&(r=1,y[c]=[]),\"object\"==a?l.data=c:(l.src=c,l.type=a),l.width=l.height=\"0\",l.onerror=l.onload=l.onreadystatechange=function(){k.call(this,r)},p.splice(e,0,u),\"img\"!=a&&(r||2===y[c]?(t.insertBefore(l,s?null:n),m(k,j)):y[c].push(l))}function
+        j(a,b,c,d,f){return q=0,b=b||\"j\",e(a)?i(\"c\"==b?v:u,a,b,this.i++,c,d,f):(p.splice(this.i++,0,a),1==p.length&&h()),this}function
+        k(){var a=B;return a.loader={load:j,i:0},a}var l=b.documentElement,m=a.setTimeout,n=b.getElementsByTagName(\"script\")[0],o={}.toString,p=[],q=0,r=\"MozAppearance\"in
+        l.style,s=r&&!!b.createRange().compareNode,t=s?l:n.parentNode,l=a.opera&&\"[object
+        Opera]\"==o.call(a.opera),l=!!b.attachEvent&&!l,u=r?\"object\":l?\"script\":\"img\",v=l?\"script\":u,w=Array.isArray||function(a){return\"[object
+        Array]\"==o.call(a)},x=[],y={},z={timeout:function(a,b){return b.length&&(a.timeout=b[0]),a}},A,B;B=function(a){function
+        b(a){var a=a.split(\"!\"),b=x.length,c=a.pop(),d=a.length,c={url:c,origUrl:c,prefixes:a},e,f,g;for(f=0;f<d;f++)g=a[f].split(\"=\"),(e=z[g.shift()])&&(c=e(c,g));for(f=0;f<b;f++)c=x[f](c);return
+        c}function g(a,e,f,g,h){var i=b(a),j=i.autoCallback;i.url.split(\".\").pop().split(\"?\").shift(),i.bypass||(e&&(e=d(e)?e:e[a]||e[g]||e[a.split(\"/\").pop().split(\"?\")[0]]),i.instead?i.instead(a,e,f,g,h):(y[i.url]?i.noexec=!0:y[i.url]=1,f.load(i.url,i.forceCSS||!i.forceJS&&\"css\"==i.url.split(\".\").pop().split(\"?\").shift()?\"c\":c,i.noexec,i.attrs,i.timeout),(d(e)||d(j))&&f.load(function(){k(),e&&e(i.origUrl,h,g),j&&j(i.origUrl,h,g),y[i.url]=2})))}function
+        h(a,b){function c(a,c){if(a){if(e(a))c||(j=function(){var a=[].slice.call(arguments);k.apply(this,a),l()}),g(a,j,b,0,h);else
+        if(Object(a)===a)for(n in m=function(){var b=0,c;for(c in a)a.hasOwnProperty(c)&&b++;return
+        b}(),a)a.hasOwnProperty(n)&&(!c&&!--m&&(d(j)?j=function(){var a=[].slice.call(arguments);k.apply(this,a),l()}:j[n]=function(a){return
+        function(){var b=[].slice.call(arguments);a&&a.apply(this,b),l()}}(k[n])),g(a[n],j,b,n,h))}else!c&&l()}var
+        h=!!a.test,i=a.load||a.both,j=a.callback||f,k=j,l=a.complete||f,m,n;c(h?a.yep:a.nope,!!i),i&&c(i)}var
+        i,j,l=this.yepnope.loader;if(e(a))g(a,0,l,0);else if(w(a))for(i=0;i<a.length;i++)j=a[i],e(j)?g(j,0,l,0):w(j)?B(j):Object(j)===j&&h(j,l);else
+        Object(a)===a&&h(a,l)},B.addPrefix=function(a,b){z[a]=b},B.addFilter=function(a){x.push(a)},B.errorTimeout=1e4,null==b.readyState&&b.addEventListener&&(b.readyState=\"loading\",b.addEventListener(\"DOMContentLoaded\",A=function(){b.removeEventListener(\"DOMContentLoaded\",A,0),b.readyState=\"complete\"},0)),a.yepnope=k(),a.yepnope.executeStack=h,a.yepnope.injectJs=function(a,c,d,e,i,j){var
+        k=b.createElement(\"script\"),l,o,e=e||B.errorTimeout;k.src=a;for(o in d)k.setAttribute(o,d[o]);c=j?h:c||f,k.onreadystatechange=k.onload=function(){!l&&g(k.readyState)&&(l=1,c(),k.onload=k.onreadystatechange=null)},m(function(){l||(l=1,c(1))},e),i?k.onload():n.parentNode.insertBefore(k,n)},a.yepnope.injectCss=function(a,c,d,e,g,i){var
+        e=b.createElement(\"link\"),j,c=i?h:c||f;e.href=a,e.rel=\"stylesheet\",e.type=\"text/css\";for(j
+        in d)e.setAttribute(j,d[j]);g||(n.parentNode.insertBefore(e,n),m(c,0))}})(this,document);\n\n//--><!]]>\n</script>\n<script
+        type=\"text/javascript\" src=\"https://www.biorxiv.org/sites/all/libraries/modernizr/modernizr.min.js?qcoew7\"></script>\n<script
+        type=\"text/javascript\">\n<!--//--><![CDATA[//><!--\nyepnope({\n  test: Modernizr.matchmedia,\n
+        \ nope: '/sites/all/libraries/media-match/media.match.min.js'\n});\n//--><!]]>\n</script>\n<script
+        type=\"text/javascript\" src=\"https://www.biorxiv.org/sites/default/files/advagg_js/js__yOhrJUBmMpN-jsuQlJYmS8ovkQU6I6KInr295HrSTb0__c--zHhbuOWmkdWkJYXiNWDmkpDRPesmbBjGlQcyqBOY__2Vk8Jq1CvyoD5Whg-2H8wW3EiWCafsCg4v9uYgZf94Q.js\"></script>\n<script
+        type=\"text/javascript\">\n<!--//--><![CDATA[//><!--\nvar _prum=[['id', '52e95df3abe53d2e33000000'],
+        ['mark', 'firstbyte',\n      (new Date()).getTime()]]; (function() {\n      var
+        s=document.getElementsByTagName('script')[0],\n      p=document.createElement('script');\n
+        \     p.async='async'; p.src='//rum-static.pingdom.net/prum.min.js';s.parentNode.insertBefore(p,s);})();\n//--><!]]>\n</script>\n<script
+        type=\"text/javascript\" src=\"https://www.biorxiv.org/sites/default/files/advagg_js/js__dioWZdkZ5DJ0dfTqTsZRAHiGLlLuJoabg9VyZCEqGn4__JbOvqvpFnOTkVG2lj8k48UUlmucZsXyD0I8FARNagqU__2Vk8Jq1CvyoD5Whg-2H8wW3EiWCafsCg4v9uYgZf94Q.js\"></script>\n<script
+        type=\"text/javascript\">\n<!--//--><![CDATA[//><!--\n(function(i,s,o,g,r,a,m){i[\"GoogleAnalyticsObject\"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new
+        Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,\"script\",\"//www.google-analytics.com/analytics.js\",\"ga\");ga(\"create\",
+        \"UA-45638026-1\", {\"cookieDomain\":\"auto\"});ga(\"set\", \"page\", location.pathname
+        + location.search + location.hash);ga(\"send\", \"pageview\");ga('create',
+        'UA-189672-38', 'auto', {'name': 'hwTracker'});\r\nga('set', 'anonymizeIp',
+        true);\nga('hwTracker.send', 'pageview');\n//--><!]]>\n</script>\n<script
+        type=\"text/javascript\" src=\"https://www.biorxiv.org/sites/default/files/advagg_js/js__3IkZVk0yWjBeun_Z3_usxoNjwSWRrZ3Tg8HH_CVSmlk__t5cc6bWAOf7iTgS-Ohair1gd-_P86-jGYmTCh-6Nxqw__2Vk8Jq1CvyoD5Whg-2H8wW3EiWCafsCg4v9uYgZf94Q.js\"></script>\n<script
+        type=\"text/javascript\">\n<!--//--><![CDATA[//><!--\njQuery.extend(Drupal.settings,{\"basePath\":\"\\/\",\"pathPrefix\":\"\",\"ajaxPageState\":{\"theme\":\"jcore_1\",\"theme_token\":\"46cPv6BTlaxVvXN67FBXQUEeGbSCN1KIl1x3W3of2LU\",\"jquery_version\":\"1.8\",\"css\":{\"modules\\/system\\/system.base.css\":1,\"modules\\/system\\/system.menus.css\":1,\"modules\\/system\\/system.messages.css\":1,\"modules\\/system\\/system.theme.css\":1,\"sites\\/all\\/libraries\\/chosen\\/chosen.css\":1,\"sites\\/all\\/modules\\/contrib\\/chosen\\/css\\/chosen-drupal.css\":1,\"misc\\/ui\\/jquery.ui.core.css\":1,\"misc\\/ui\\/jquery.ui.theme.css\":1,\"misc\\/ui\\/jquery.ui.datepicker.css\":1,\"sites\\/all\\/modules\\/contrib\\/date\\/date_popup\\/themes\\/jquery.timeentry.css\":1,\"modules\\/comment\\/comment.css\":1,\"sites\\/all\\/modules\\/contrib\\/date\\/date_api\\/date.css\":1,\"sites\\/all\\/modules\\/contrib\\/date\\/date_popup\\/themes\\/datepicker.1.7.css\":1,\"modules\\/field\\/theme\\/field.css\":1,\"sites\\/all\\/modules\\/highwire\\/highwire\\/highwire_draw\\/css\\/highwire-draw.css\":1,\"sites\\/all\\/modules\\/highwire\\/highwire\\/highwire_folders\\/highwire_folders.css\":1,\"sites\\/all\\/modules\\/highwire\\/highwire\\/highwire_responsive\\/css\\/highwire-responsive.css\":1,\"sites\\/all\\/modules\\/highwire\\/highwire\\/highwire_saved_searches\\/highwire_saved_searches.css\":1,\"sites\\/all\\/modules\\/highwire\\/highwire\\/highwire_user\\/highwire_user.css\":1,\"modules\\/node\\/node.css\":1,\"modules\\/search\\/search.css\":1,\"modules\\/user\\/user.css\":1,\"modules\\/forum\\/forum.css\":1,\"sites\\/all\\/modules\\/contrib\\/views\\/css\\/views.css\":1,\"sites\\/all\\/modules\\/contrib\\/ckeditor\\/css\\/ckeditor.css\":1,\"sites\\/all\\/modules\\/contrib\\/colorbox\\/styles\\/default\\/colorbox_style.css\":1,\"sites\\/all\\/modules\\/contrib\\/ctools\\/css\\/ctools.css\":1,\"sites\\/all\\/modules\\/highwire\\/highwire\\/highwire.style.highwire.css\":1,\"sites\\/all\\/modules\\/highwire\\/highwire\\/css\\/nlm-elements.css\":1,\"sites\\/all\\/modules\\/contrib\\/panels\\/css\\/panels.css\":1,\"sites\\/default\\/modules\\/biorxiv\\/css\\/biorxiv.css\":1,\"sites\\/all\\/modules\\/highwire\\/highwire\\/highwire_search\\/highwire_search.css\":1,\"sites\\/all\\/modules\\/highwire\\/highwire\\/highwire_search\\/css\\/highwire_search_results_tool.css\":1,\"sites\\/all\\/modules\\/highwire\\/highwire\\/highwire_save_citation\\/css\\/highwire_save_citation.css\":1,\"sites\\/all\\/modules\\/contrib\\/panels\\/plugins\\/layouts\\/flexible\\/flexible.css\":1,\"sites\\/all\\/modules\\/highwire\\/highwire\\/highwire_collection\\/css\\/highwire_subject_collection.css\":1,\"sites\\/all\\/modules\\/highwire\\/highwire\\/css\\/highwire.highwire-list-expand.css\":1,\"public:\\/\\/ctools\\/css\\/bab59090150caf0c64e27afa1b36eef1.css\":1,\"sites\\/all\\/modules\\/highwire\\/highwire\\/highwire_search\\/plugins\\/content_types\\/css\\/highwire_search_facets.css\":1,\"sites\\/all\\/modules\\/contrib\\/panels\\/plugins\\/layouts\\/onecol\\/onecol.css\":1,\"sites\\/all\\/modules\\/contrib\\/eu_cookie_compliance\\/css\\/eu_cookie_compliance.css\":1,\"sites\\/all\\/modules\\/highwire\\/highwire\\/highwire_theme_tools\\/css\\/font-hwicons.css\":1,\"sites\\/all\\/modules\\/highwire\\/highwire\\/highwire_theme_tools\\/css\\/font-hwicons-glyphs.css\":1,\"0\":1,\"sites\\/all\\/themes\\/highwire\\/jcore_1\\/eu_cookie_compliance.css\":1,\"sites\\/all\\/themes\\/highwire\\/jcore_1\\/css\\/font-awesome-ie7.css\":1,\"sites\\/all\\/themes\\/contrib\\/omega\\/alpha\\/css\\/alpha-reset.css\":1,\"sites\\/all\\/themes\\/contrib\\/omega\\/alpha\\/css\\/alpha-mobile.css\":1,\"sites\\/all\\/themes\\/contrib\\/omega\\/alpha\\/css\\/alpha-alpha.css\":1,\"sites\\/all\\/themes\\/contrib\\/omega\\/omega\\/css\\/formalize.css\":1,\"sites\\/all\\/themes\\/contrib\\/omega\\/omega\\/css\\/omega-text.css\":1,\"sites\\/all\\/themes\\/contrib\\/omega\\/omega\\/css\\/omega-branding.css\":1,\"sites\\/all\\/themes\\/contrib\\/omega\\/omega\\/css\\/omega-menu.css\":1,\"sites\\/all\\/themes\\/contrib\\/omega\\/omega\\/css\\/omega-forms.css\":1,\"sites\\/all\\/modules\\/highwire\\/highwire\\/css\\/highwire-forms.css\":1,\"sites\\/all\\/themes\\/highwire\\/jcore_1\\/css\\/mobile-reset.css\":1,\"sites\\/all\\/themes\\/highwire\\/jcore_1\\/css\\/font-awesome.css\":1,\"sites\\/all\\/themes\\/highwire\\/jcore_1\\/css\\/forms.css\":1,\"sites\\/all\\/themes\\/highwire\\/jcore_1\\/css\\/global.css\":1,\"sites\\/all\\/themes\\/highwire\\/jcore_1\\/css\\/jquery-ui-elements.css\":1,\"sites\\/all\\/themes\\/highwire\\/jcore_1\\/css\\/text.css\":1,\"sites\\/all\\/themes\\/highwire\\/jcore_1\\/css\\/colors.css.less\":1,\"ie::normal::sites\\/all\\/themes\\/highwire\\/jcore_1\\/css\\/jcore-1-jcore-default.css\":1,\"ie::normal::sites\\/all\\/themes\\/highwire\\/jcore_1\\/css\\/jcore-1-jcore-default-normal.css\":1,\"ie::normal::sites\\/all\\/themes\\/highwire\\/jcore_1\\/css\\/grid\\/jcore_default\\/normal\\/jcore-default-normal-30.css\":1,\"narrow::sites\\/all\\/themes\\/highwire\\/jcore_1\\/css\\/jcore-1-jcore-default.css\":1,\"narrow::sites\\/all\\/themes\\/highwire\\/jcore_1\\/css\\/jcore-1-jcore-default-narrow.css\":1,\"sites\\/all\\/themes\\/highwire\\/jcore_1\\/css\\/grid\\/jcore_default\\/narrow\\/jcore-default-narrow-30.css\":1,\"normal::sites\\/all\\/themes\\/highwire\\/jcore_1\\/css\\/jcore-1-jcore-default.css\":1,\"normal::sites\\/all\\/themes\\/highwire\\/jcore_1\\/css\\/jcore-1-jcore-default-normal.css\":1,\"sites\\/all\\/themes\\/highwire\\/jcore_1\\/css\\/grid\\/jcore_default\\/normal\\/jcore-default-normal-30.css\":1,\"wide::sites\\/all\\/themes\\/highwire\\/jcore_1\\/css\\/jcore-1-jcore-default.css\":1,\"wide::sites\\/all\\/themes\\/highwire\\/jcore_1\\/css\\/jcore-1-jcore-default-wide.css\":1,\"sites\\/all\\/themes\\/highwire\\/jcore_1\\/css\\/grid\\/jcore_default\\/wide\\/jcore-default-wide-30.css\":1,\"sites\\/default\\/modules\\/jnl_biorxiv_styles\\/css\\/biorxiv-styles.css.less\":1,\"https:\\/\\/d33xdlntwy0kbs.cloudfront.net\\/cshl_custom.css\":1},\"js\":{\"sites\\/all\\/libraries\\/enquire.js\\/enquire.min.js\":1,\"http:\\/\\/d33xdlntwy0kbs.cloudfront.net\\/cshl_custom.js\":1,\"sites\\/all\\/modules\\/contrib\\/eu_cookie_compliance\\/js\\/eu_cookie_compliance.js\":1,\"sites\\/default\\/modules\\/jnl_biorxiv_styles\\/js\\/adv-search-collection-toggle.js\":1,\"sites\\/all\\/libraries\\/modernizr\\/modernizr.min.js\":1,\"sites\\/all\\/modules\\/contrib\\/jquery_update\\/replace\\/jquery\\/1.8\\/jquery.min.js\":1,\"misc\\/jquery-extend-3.4.0.js\":1,\"misc\\/jquery.once.js\":1,\"misc\\/drupal.js\":1,\"sites\\/all\\/modules\\/contrib\\/jquery_update\\/replace\\/ui\\/ui\\/minified\\/jquery.ui.core.min.js\":1,\"sites\\/all\\/modules\\/contrib\\/eu_cookie_compliance\\/js\\/jquery.cookie-1.4.1.min.js\":1,\"sites\\/all\\/modules\\/contrib\\/jquery_update\\/replace\\/misc\\/jquery.form.min.js\":1,\"sites\\/all\\/modules\\/contrib\\/jquery_update\\/replace\\/ui\\/ui\\/minified\\/jquery.ui.datepicker.min.js\":1,\"modules\\/locale\\/locale.datepicker.js\":1,\"sites\\/all\\/modules\\/contrib\\/date\\/date_popup\\/jquery.timeentry.pack.js\":1,\"misc\\/form.js\":1,\"misc\\/ajax.js\":1,\"sites\\/all\\/modules\\/contrib\\/jquery_update\\/js\\/jquery_update.js\":1,\"sites\\/all\\/libraries\\/chosen\\/chosen.jquery.min.js\":1,\"sites\\/all\\/modules\\/highwire\\/highwire\\/js\\/highwire.equal-heights.js\":1,\"sites\\/all\\/modules\\/highwire\\/highwire\\/js\\/highwire.panels-ajax-tab.js\":1,\"sites\\/default\\/modules\\/jnl_biorxiv_styles\\/js\\/biorxiv-scripts.js\":1,\"sites\\/all\\/libraries\\/colorbox\\/jquery.colorbox-min.js\":1,\"sites\\/all\\/modules\\/contrib\\/colorbox\\/js\\/colorbox.js\":1,\"sites\\/all\\/modules\\/contrib\\/colorbox\\/styles\\/default\\/colorbox_style.js\":1,\"sites\\/all\\/modules\\/highwire\\/highwire\\/highwire_log\\/highwire_log.js\":1,\"sites\\/all\\/modules\\/highwire\\/highwire\\/highwire_nps_survey\\/js\\/nps_survey.js\":1,\"sites\\/all\\/modules\\/highwire\\/highwire\\/highwire_user\\/js\\/highwire_user_meta.js\":1,\"sites\\/all\\/modules\\/contrib\\/panels\\/js\\/panels.js\":1,\"sites\\/all\\/modules\\/highwire\\/highwire\\/highwire_search\\/js\\/highwire_search_results_tool.js\":1,\"misc\\/progress.js\":1,\"sites\\/all\\/modules\\/contrib\\/date\\/date_popup\\/date_popup.js\":1,\"sites\\/all\\/modules\\/highwire\\/highwire\\/js\\/highwire.date-field.js\":1,\"misc\\/collapse.js\":1,\"sites\\/all\\/modules\\/highwire\\/highwire\\/js\\/highwire.highwire-list-expand.js\":1,\"sites\\/all\\/modules\\/highwire\\/highwire\\/highwire_search\\/plugins\\/content_types\\/js\\/highwire_search_facets.js\":1,\"sites\\/all\\/modules\\/contrib\\/google_analytics\\/googleanalytics.js\":1,\"sites\\/all\\/modules\\/contrib\\/chosen\\/chosen.js\":1,\"sites\\/all\\/modules\\/highwire\\/highwire\\/highwire_save_citation\\/js\\/highwire_save_citation.js\":1,\"sites\\/all\\/themes\\/highwire\\/jcore_1\\/js\\/theme-scripts.js\":1,\"sites\\/all\\/themes\\/contrib\\/omega\\/omega\\/js\\/jquery.formalize.js\":1,\"sites\\/all\\/themes\\/contrib\\/omega\\/omega\\/js\\/omega-mediaqueries.js\":1,\"sites\\/all\\/themes\\/contrib\\/omega\\/omega\\/js\\/omega-equalheights.js\":1,\"sites\\/all\\/modules\\/highwire\\/highwire\\/highwire_responsive\\/js\\/highwire-mediaqueries.js\":1}},\"colorbox\":{\"opacity\":\"0.85\",\"current\":\"{current}
+        of {total}\",\"previous\":\"\\u00ab Prev\",\"next\":\"Next \\u00bb\",\"close\":\"Close\",\"maxWidth\":\"98%\",\"maxHeight\":\"98%\",\"fixed\":true,\"mobiledetect\":true,\"mobiledevicewidth\":\"480px\"},\"jcarousel\":{\"ajaxPath\":\"\\/jcarousel\\/ajax\\/views\"},\"chosen\":{\"selector\":\"select:visible\",\"minimum_single\":20,\"minimum_multiple\":20,\"minimum_width\":250,\"options\":{\"disable_search\":false,\"disable_search_threshold\":0,\"search_contains\":false,\"placeholder_text_multiple\":\"Choose
+        some options\",\"placeholder_text_single\":\"Choose an option\",\"no_results_text\":\"No
+        results match\",\"inherit_select_classes\":true}},\"ajax\":{\"edit-numresults\":{\"callback\":\"highwire_search_result_change_on_numresults\",\"event\":\"change\",\"url\":\"\\/system\\/ajax\",\"submit\":{\"_triggering_element_name\":\"numresults\"}},\"edit-sort\":{\"callback\":\"highwire_search_result_change_on_numresults\",\"event\":\"change\",\"url\":\"\\/system\\/ajax\",\"submit\":{\"_triggering_element_name\":\"sort\"}}},\"urlIsAjaxTrusted\":{\"\\/system\\/ajax\":true,\"\\/search\\/asdfasdfasdfasfasfd%20numresults:30\":true},\"jquery\":{\"ui\":{\"datepicker\":{\"isRTL\":false,\"firstDay\":0}}},\"datePopup\":{\"edit-limit-from-datepicker-popup-0\":{\"func\":\"datepicker\",\"settings\":{\"changeMonth\":true,\"changeYear\":true,\"autoPopUp\":\"focus\",\"closeAtTop\":false,\"speed\":\"immediate\",\"firstDay\":0,\"dateFormat\":\"yy-mm-dd\",\"yearRange\":\"-50:+3\",\"fromTo\":false,\"defaultDate\":\"0y\"}},\"edit-limit-to-datepicker-popup-0\":{\"func\":\"datepicker\",\"settings\":{\"changeMonth\":true,\"changeYear\":true,\"autoPopUp\":\"focus\",\"closeAtTop\":false,\"speed\":\"immediate\",\"firstDay\":0,\"dateFormat\":\"yy-mm-dd\",\"yearRange\":\"-50:+3\",\"fromTo\":false,\"defaultDate\":\"0y\"}}},\"highwire_list_expand\":{\"is_collapsed\":\"1\"},\"highwireResponsive\":{\"enquire_enabled\":1,\"breakpoints_configured\":1,\"breakpoints\":{\"zero\":\"all
+        and (min-width: 0px)\",\"xsmall\":\"all and (min-width: 380px)\",\"narrow\":\"all
+        and (min-width: 768px) and (min-device-width: 768px), (max-device-width: 800px)
+        and (min-width: 768px) and (orientation:landscape)\",\"normal\":\"all and
+        (min-width: 980px) and (min-device-width: 980px), all and (max-device-width:
+        1024px) and (min-width: 1024px) and (orientation:landscape)\",\"wide\":\"all
+        and (min-width: 1220px)\"}},\"eu_cookie_compliance\":{\"popup_enabled\":1,\"popup_agreed_enabled\":0,\"popup_hide_agreed\":0,\"popup_clicking_confirmation\":1,\"popup_scrolling_confirmation\":false,\"popup_html_info\":\"\\u003Cdiv\\u003E\\n
+        \ \\u003Cdiv class =\\u0022popup-content info\\u0022\\u003E\\n    \\u003Cdiv
+        id=\\u0022popup-text\\u0022\\u003E\\n      \\u003Cp\\u003EWe use cookies on
+        this site to enhance your user experience. By clicking any link on this page
+        you are giving your consent for us to set cookies.\\u003C\\/p\\u003E\\n    \\u003C\\/div\\u003E\\n
+        \   \\u003Cdiv id=\\u0022popup-buttons\\u0022\\u003E\\n      \\u003Cbutton
+        type=\\u0022button\\u0022 class=\\u0022agree-button eu-cookie-compliance-default-button\\u0022\\u003EContinue\\u003C\\/button\\u003E\\n
+        \                   \\u003Cbutton type=\\u0022button\\u0022 class=\\u0022find-more-button
+        eu-cookie-compliance-more-button\\u0022\\u003EFind out more\\u003C\\/button\\u003E\\n
+        \         \\u003C\\/div\\u003E\\n  \\u003C\\/div\\u003E\\n\\u003C\\/div\\u003E\",\"use_mobile_message\":false,\"mobile_popup_html_info\":\"\\u003Cdiv\\u003E\\n
+        \ \\u003Cdiv class =\\u0022popup-content info\\u0022\\u003E\\n    \\u003Cdiv
+        id=\\u0022popup-text\\u0022\\u003E\\n          \\u003C\\/div\\u003E\\n    \\u003Cdiv
+        id=\\u0022popup-buttons\\u0022\\u003E\\n      \\u003Cbutton type=\\u0022button\\u0022
+        class=\\u0022agree-button eu-cookie-compliance-default-button\\u0022\\u003EContinue\\u003C\\/button\\u003E\\n
+        \                   \\u003Cbutton type=\\u0022button\\u0022 class=\\u0022find-more-button
+        eu-cookie-compliance-more-button\\u0022\\u003EFind out more\\u003C\\/button\\u003E\\n
+        \         \\u003C\\/div\\u003E\\n  \\u003C\\/div\\u003E\\n\\u003C\\/div\\u003E\\n\",\"mobile_breakpoint\":\"768\",\"popup_html_agreed\":\"\\u003Cdiv\\u003E\\n
+        \ \\u003Cdiv class=\\u0022popup-content agreed\\u0022\\u003E\\n    \\u003Cdiv
+        id=\\u0022popup-text\\u0022\\u003E\\n      \\u003Ch2\\u003EThank you for accepting
+        cookies\\u003C\\/h2\\u003E\\u003Cp\\u003EYou can now hide this message or
+        find out more about cookies.\\u003C\\/p\\u003E    \\u003C\\/div\\u003E\\n
+        \   \\u003Cdiv id=\\u0022popup-buttons\\u0022\\u003E\\n      \\u003Cbutton
+        type=\\u0022button\\u0022 class=\\u0022hide-popup-button eu-cookie-compliance-hide-button\\u0022\\u003EHide\\u003C\\/button\\u003E\\n
+        \             \\u003Cbutton type=\\u0022button\\u0022 class=\\u0022find-more-button
+        eu-cookie-compliance-more-button-thank-you\\u0022 \\u003EMore info\\u003C\\/button\\u003E\\n
+        \         \\u003C\\/div\\u003E\\n  \\u003C\\/div\\u003E\\n\\u003C\\/div\\u003E\",\"popup_use_bare_css\":false,\"popup_height\":\"auto\",\"popup_width\":\"100%\",\"popup_delay\":1000,\"popup_link\":\"\\/help\\/cookie-policy\",\"popup_link_new_window\":1,\"popup_position\":null,\"popup_language\":\"en\",\"store_consent\":false,\"better_support_for_screen_readers\":0,\"reload_page\":0,\"domain\":\"\",\"popup_eu_only_js\":0,\"cookie_lifetime\":\"365\",\"cookie_session\":false,\"disagree_do_not_show_popup\":0,\"method\":\"default\",\"whitelisted_cookies\":\"\",\"withdraw_markup\":\"\\u003Cbutton
+        type=\\u0022button\\u0022 class=\\u0022eu-cookie-withdraw-tab\\u0022\\u003EPrivacy
+        settings\\u003C\\/button\\u003E\\n\\u003Cdiv class=\\u0022eu-cookie-withdraw-banner\\u0022\\u003E\\n
+        \ \\u003Cdiv class=\\u0022popup-content info\\u0022\\u003E\\n    \\u003Cdiv
+        id=\\u0022popup-text\\u0022\\u003E\\n      \\u003Cp\\u003E\\u0026lt;h2\\u0026gt;We
+        use cookies on this site to enhance your user experience\\u0026lt;\\/h2\\u0026gt;\\u0026lt;p\\u0026gt;You
+        have given your consent for us to set cookies.\\u0026lt;\\/p\\u0026gt;\\u003C\\/p\\u003E\\n
+        \   \\u003C\\/div\\u003E\\n    \\u003Cdiv id=\\u0022popup-buttons\\u0022\\u003E\\n
+        \     \\u003Cbutton type=\\u0022button\\u0022 class=\\u0022eu-cookie-withdraw-button\\u0022\\u003EWithdraw
+        consent\\u003C\\/button\\u003E\\n    \\u003C\\/div\\u003E\\n  \\u003C\\/div\\u003E\\n\\u003C\\/div\\u003E\\n\",\"withdraw_enabled\":false},\"googleanalytics\":{\"trackOutbound\":1,\"trackMailto\":1,\"trackDownload\":1,\"trackDownloadExtensions\":\"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip\",\"trackColorbox\":1,\"trackUrlFragments\":1},\"jnl_biorxiv_styles\":{\"defaultJCode\":\"biorxiv\"},\"omega\":{\"layouts\":{\"primary\":\"normal\",\"order\":[\"narrow\",\"normal\",\"wide\"],\"queries\":{\"narrow\":\"all
+        and (min-width: 768px) and (min-device-width: 768px), (max-device-width: 800px)
+        and (min-width: 768px) and (orientation:landscape)\",\"normal\":\"all and
+        (min-width: 980px) and (min-device-width: 980px), all and (max-device-width:
+        1024px) and (min-width: 1024px) and (orientation:landscape)\",\"wide\":\"all
+        and (min-width: 1220px)\"}}}});\n//--><!]]>\n</script>\n    <!--[if lt IE
+        9]><script src=\"http://html5shiv.googlecode.com/svn/trunk/html5.js\"></script><![endif]-->\n
+        \ </head>\n  <body class=\"html not-front not-logged-in page-search page-search-asdfasdfasdfasfasfd-numresults30
+        context-search hw-default-jcode-biorxiv\">\n<!-- Google Tag Manager -->\n<noscript><iframe
+        src=\"//www.googletagmanager.com/ns.html?id=GTM-M677548\" height=\"0\" width=\"0\"
+        style=\"display:none;visibility:hidden\"></iframe></noscript>\n<script type=\"text/javascript\">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new
+        Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0];var j=d.createElement(s);var
+        dl=l!='dataLayer'?'&l='+l:'';j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;j.type='text/javascript';j.async=true;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-M677548');</script>\n<!--
+        End Google Tag Manager -->\n    <div id=\"skip-link\">\n      <a href=\"#main-content\"
+        class=\"element-invisible element-focusable\">Skip to main content</a>\n    </div>\n
+        \       <div class=\"page clearfix page-box-shadows footer-borders panels-page
+        panels-layout-jcore_2col\" id=\"page\">\n      <header id=\"section-header\"
+        class=\"section section-header\">\n    \n  <div id=\"zone-branding\" class=\"zone
+        zone-branding clearfix print-display-block container-30\">\n    <div class=\"grid-15
+        prefix-1 region region-branding print-display-block\" id=\"region-branding\">\n
+        \ <div class=\"region-inner region-branding-inner\">\n        <div class=\"branding-data
+        clearfix\">\n            <div class=\"logo-img\">\n        <a href=\"/\" rel=\"home\"
+        class=\"\" data-icon-position=\"\" data-hide-link-title=\"0\"><img alt=\"bioRxiv\"
+        src=\"https://www.biorxiv.org/sites/default/files/bioRxiv_article.jpg\" /></a>
+        \     </div>\n                </div>\n          </div>\n</div><div class=\"grid-11
+        suffix-1 region region-branding-second print-hidden\" id=\"region-branding-second\">\n
+        \ <div class=\"region-inner region-branding-second-inner\">\n    <div class=\"block
+        block-system block-menu block-main-menu block-system-main-menu odd block-without-title\"
+        id=\"block-system-main-menu\">\n  <div class=\"block-inner clearfix\">\n                \n
+        \   <div class=\"content clearfix\">\n      <nav class=\"menubar-nav\"><ul
+        class=\"menu\" role=\"menu\"><li class=\"first leaf\" role=\"menuitem\"><a
+        href=\"/\" title=\"\" class=\"\" data-icon-position=\"\" data-hide-link-title=\"0\">Home</a></li>\n<li
+        class=\"leaf\" role=\"menuitem\"><a href=\"/about-biorxiv\" class=\"\" data-icon-position=\"\"
+        data-hide-link-title=\"0\">About</a></li>\n<li class=\"leaf\" role=\"menuitem\"><a
+        href=\"/submit-a-manuscript\" class=\"\" data-icon-position=\"\" data-hide-link-title=\"0\">Submit</a></li>\n<li
+        class=\"last leaf\" role=\"menuitem\"><a href=\"/content/alertsrss\" title=\"\"
+        class=\"\" data-icon-position=\"\" data-hide-link-title=\"0\">ALERTS / RSS</a></li>\n</ul></nav>
+        \   </div>\n  </div>\n</div><div class=\"block block-panels-mini block-biorxiv-search-box
+        block-panels-mini-biorxiv-search-box even block-without-title\" id=\"block-panels-mini-biorxiv-search-box\">\n
+        \ <div class=\"block-inner clearfix\">\n                \n    <div class=\"content
+        clearfix\">\n      <div class=\"panel-display panel-1col clearfix\" id=\"mini-panel-biorxiv_search_box\">\n
+        \ <div class=\"panel-panel panel-col\">\n    <div><div class=\"panel-pane
+        pane-highwire-seach-quicksearch\" >\n  \n      \n  \n  <div class=\"pane-content\">\n
+        \   <form class=\"highwire-quicksearch button-style-mini button-style-mini\"
+        action=\"/search/asdfasdfasdfasfasfd%20numresults:30\" method=\"post\" id=\"highwire-search-quicksearch-form-0\"
+        accept-charset=\"UTF-8\"><div><div class=\"form-item form-item-label-invisible
+        form-type-textfield form-item-keywords\">\n  <label class=\"element-invisible\"
+        for=\"edit-keywords--2\">Search for this keyword </label>\n <input placeholder=\"Search\"
+        type=\"text\" id=\"edit-keywords--2\" name=\"keywords\" value=\"\" size=\"60\"
+        maxlength=\"128\" class=\"form-text\" />\n</div>\n<div class=\"button-wrapper
+        button-mini\"><i class=\"icon-search\"></i><input data-icon-only=\"1\" data-font-icon=\"icon-search\"
+        data-icon-position=\"after\" type=\"submit\" id=\"edit-submit--3\" name=\"op\"
+        value=\"Search\" class=\"form-submit\" /></div><input type=\"hidden\" name=\"form_build_id\"
+        value=\"form-iLaKxQKX4v6CNG1zEMVI8CMkwYpkukO1m5fW6f4Qnog\" />\n<input type=\"hidden\"
+        name=\"form_id\" value=\"highwire_search_quicksearch_form_0\" />\n</div></form>
+        \ </div>\n\n  \n  </div>\n<div class=\"panel-separator\"></div><div class=\"panel-pane
+        pane-custom pane-1 advanced-search-link\" >\n  \n      \n  \n  <div class=\"pane-content\">\n
+        \   <a href=\"/search\">Advanced Search</a>  </div>\n\n  \n  </div>\n</div>\n
+        \ </div>\n</div>\n    </div>\n  </div>\n</div>  </div>\n</div>  </div>\n  \n
+        \ <div id=\"zone-header\" class=\"zone zone-header clearfix container-30\">\n
+        \ \t      </div>\n</header>    \n      <section id=\"section-content\" class=\"section
+        section-content\">\n    \n  <div id=\"zone-content\" class=\"zone zone-content
+        clearfix container-30\">    \n        \n    <div class=\"grid-28 suffix-1
+        prefix-1 region region-content\" id=\"region-content\">\n  <div class=\"region-inner
+        region-content-inner\">\n    <a id=\"main-content\"></a>\n                        <div
+        class=\"block block-system block-main block-system-main odd block-without-title\"
+        id=\"block-system-main\">\n  <div class=\"block-inner clearfix\">\n                \n
+        \   <div class=\"content clearfix\">\n      <div class=\"panel-display panels-960-layout
+        jcore-2col-layout\" >\n\t  <div class=\"panel-row-wrapper panel-row-first
+        clearfix\">\n\t\t\n\t\t<div class=\"top-wrapper\">\n\t\t\t<div class=\"panel-panel
+        panel-region-top\">\n\t\t\t  <div class=\"inside\"><div class=\"panel-pane
+        pane-highwire-search-token-summary pane-page-title\" >\n  \n      \n  \n  <div
+        class=\"pane-content\">\n    <div class=\"highwire-search-summary\" id=\"search-summary-wrapper\"><h1
+        id=\"page-title\">\n\tNo Results</h1>\n</div>  </div>\n\n  \n  </div>\n<div
+        class=\"panel-separator\"></div><div class=\"panel-pane pane-highwire-search-token-summary
+        pane-page-title-suffix\" >\n  \n      \n  \n  <div class=\"pane-content\">\n
+        \   <div class=\"highwire-search-summary\" id=\"search-summary-wrapper--2\"><p>for
+        term \"asdfasdfasdfasfasfd\"</p>\n</div>  </div>\n\n  \n  </div>\n</div>\n\t\t\t</div>\n\t\t</div>\n\t\n\t</div>
+        <!-- /.panel-row-wrapper -->\t\n\t  \n  <div class=\"panel-row-wrapper clearfix\">\n\t\t\n\t\t<div
+        class=\"main-content-wrapper grid-17 suffix-1 alpha\">\n\t\t\t<div class=\"panel-panel
+        panel-region-content\">\n\t\t\t  <div class=\"inside\"><div class=\"panel-pane
+        pane-highwire-search-results-tool\" >\n  \n      \n  \n  <div class=\"pane-content\">\n
+        \   <div class=\"highwire-search-results-tools-wrapper inline clearfix display-extra-form-options
+        display-search-menu\"><div class=\"hw-search-extra-wrapper\"><form class=\"hw-search-extra\"
+        action=\"/search/asdfasdfasdfasfasfd%20numresults:30\" method=\"post\" id=\"highwire-search-extra-dropdown\"
+        accept-charset=\"UTF-8\"><div><input type=\"hidden\" name=\"custom_redirect\"
+        value=\"search\" />\n<input type=\"hidden\" name=\"facet_queries\" value=\"\"
+        />\n<div class=\"form-item form-item-label-before form-type-select form-item-numresults\">\n
+        \ <label for=\"edit-numresults\">Items/Page </label>\n <select class=\"hw-search-tool-numresults
+        form-select\" id=\"edit-numresults\" name=\"numresults\"><option value=\"10\">10</option><option
+        value=\"25\">25</option><option value=\"50\">50</option><option value=\"75\">75</option></select>\n</div>\n<div
+        class=\"form-item form-item-label-before form-type-select form-item-sort\">\n
+        \ <label for=\"edit-sort\">Order by </label>\n <select class=\"hw-search-tool-sort
+        form-select\" id=\"edit-sort\" name=\"sort\"><option value=\"relevance-rank\"
+        selected=\"selected\">Best Match</option><option value=\"publication-date-ascending\">Oldest
+        First</option><option value=\"publication-date-descending\">Newest First</option></select>\n</div>\n<input
+        id=\"highwire_search_result_tools_submit\" type=\"submit\" name=\"op\" value=\"Submit\"
+        class=\"form-submit\" /><input type=\"hidden\" name=\"form_build_id\" value=\"form-y2nl-51FUwT6mc5ajpCYohE_k1ra76GcSimtsFQ988k\"
+        />\n<input type=\"hidden\" name=\"form_id\" value=\"highwire_search_extra_dropdown\"
+        />\n</div></form></div><ul class=\"links search-result-tool inline\"><li class=\"edit_link
+        first\"><a href=\"# \" title=\"Edit Search\" class=\"hw-edit-search link-icon-only
+        link-icon\"><i class=\"icon-pencil icon-large\"></i></a></li><li class=\"alert_link
+        last\"><a href=\"/alerts?destination=alerts/search/add&amp;search_query=asdfasdfasdfasfasfd%20numresults%3A30\"
+        title=\"Alert\" class=\"hw-alert-search link-icon-only link-icon\"><i class=\"icon-rss
+        icon-large\"></i></a></li></ul></div>  </div>\n\n  \n  </div>\n<div class=\"panel-separator\"></div><div
+        class=\"panel-pane pane-highwire-search-form search-hidden\"  id=\"hw-advance-search-form\">\n
+        \ \n      \n  \n  <div class=\"pane-content\">\n    <form class=\"highwire-search-form
+        highwire-advanced-search-form\" action=\"/search/asdfasdfasdfasfasfd%20numresults:30\"
+        method=\"post\" id=\"highwire-search-form\" accept-charset=\"UTF-8\"><div><div
+        class=\"form-item form-item-label-before form-type-textfield form-item-txtsimple\">\n
+        \ <label for=\"edit-txtsimple\">Search Terms &amp; Keywords </label>\n <input
+        type=\"text\" id=\"edit-txtsimple\" name=\"txtsimple\" value=\"asdfasdfasdfasfasfd\"
+        size=\"60\" maxlength=\"128\" class=\"form-text\" /><i class=\"icon-search\"></i>\n<div
+        class=\"description\">Type a term to search within all articles in this journal:
+        e.g., stem cell</div>\n</div>\n<fieldset class=\"collapsible form-wrapper\"
+        id=\"edit-limits\"><legend><span class=\"fieldset-legend\">Limit Results</span></legend><div
+        class=\"fieldset-wrapper\"><span class=\"label filter-by-date-label\">Date
+        of Publication</span><div class=\"filter-by-date clearfix form-wrapper\" id=\"edit-limit-by-date\"><div
+        \ class=\"container-inline-date\"><div class=\"form-item form-item-label-before
+        form-type-date-popup form-item-limit-from\">\n  <label for=\"edit-limit-from\"><span
+        class=\"element-invisible\">From</span> </label>\n <div id=\"edit-limit-from\"
+        \ class=\"date-padding\"><div class=\"form-item form-item-label-invisible
+        form-type-textfield form-item-limit-from-date\">\n  <label class=\"element-invisible\"
+        for=\"edit-limit-from-datepicker-popup-0\">Date </label>\n <input type=\"text\"
+        id=\"edit-limit-from-datepicker-popup-0\" name=\"limit_from[date]\" value=\"\"
+        size=\"20\" maxlength=\"30\" class=\"form-text\" />\n<div class=\"description\">
+        e.g., 2020-07-01</div>\n</div>\n</div>\n</div>\n</div><span class=\"date-spacer\">
+        &mdash; </span><div  class=\"container-inline-date\"><div class=\"form-item
+        form-item-label-before form-type-date-popup form-item-limit-to\">\n  <label
+        for=\"edit-limit-to\"><span class=\"element-invisible\">Through</span> </label>\n
+        <div id=\"edit-limit-to\"  class=\"date-padding\"><div class=\"form-item form-item-label-invisible
+        form-type-textfield form-item-limit-to-date\">\n  <label class=\"element-invisible\"
+        for=\"edit-limit-to-datepicker-popup-0\">Date </label>\n <input type=\"text\"
+        id=\"edit-limit-to-datepicker-popup-0\" name=\"limit_to[date]\" value=\"\"
+        size=\"20\" maxlength=\"30\" class=\"form-text\" />\n<div class=\"description\">
+        e.g., 2020-07-01</div>\n</div>\n</div>\n</div>\n</div></div><div class=\"form-item
+        form-item-label-before form-type-select form-item-jcode\">\n  <label for=\"edit-jcode\">Include
+        articles in bioRxiv and/or medRxiv: </label>\n <select data-placeholder=\"Select\"
+        multiple=\"multiple\" name=\"jcode[]\" class=\"chosen-enable form-select\"
+        id=\"edit-jcode\"><option value=\"biorxiv\" selected=\"selected\">bioRxiv</option><option
+        value=\"\">bioRxiv and medRxiv</option><option value=\"medrxiv\">medRxiv</option></select>\n</div>\n<div
+        class=\"form-item form-item-label-before form-type-select form-item-subject-collection-code\">\n
+        \ <label for=\"edit-subject-collection-code\">Include articles in subject
+        area(s) </label>\n <select data-placeholder=\"Select\" multiple=\"multiple\"
+        name=\"subject_collection_code[]\" class=\"chosen-enable form-select\" id=\"edit-subject-collection-code\"><option
+        value=\"0\">-- All Collections --</option><option value=\"Animal Behavior
+        and Cognition\">Animal Behavior and Cognition</option><option value=\"Biochemistry\">Biochemistry</option><option
+        value=\"Bioengineering\">Bioengineering</option><option value=\"Bioinformatics\">Bioinformatics</option><option
+        value=\"Biophysics\">Biophysics</option><option value=\"Cancer Biology\">Cancer
+        Biology</option><option value=\"Cell Biology\">Cell Biology</option><option
+        value=\"Clinical Trials\">Clinical Trials</option><option value=\"Developmental
+        Biology\">Developmental Biology</option><option value=\"Ecology\">Ecology</option><option
+        value=\"Epidemiology\">Epidemiology</option><option value=\"Evolutionary Biology\">Evolutionary
+        Biology</option><option value=\"Genetics\">Genetics</option><option value=\"Genomics\">Genomics</option><option
+        value=\"Immunology\">Immunology</option><option value=\"Microbiology\">Microbiology</option><option
+        value=\"Molecular Biology\">Molecular Biology</option><option value=\"Neuroscience\">Neuroscience</option><option
+        value=\"Paleontology\">Paleontology</option><option value=\"Pathology\">Pathology</option><option
+        value=\"Pharmacology\">Pharmacology and Toxicology</option><option value=\"Physiology\">Physiology</option><option
+        value=\"Plant Biology\">Plant Biology</option><option value=\"Scientific Communication\">Scientific
+        Communication and Education</option><option value=\"Synthetic Biology\">Synthetic
+        Biology</option><option value=\"Systems Biology\">Systems Biology</option><option
+        value=\"Zoology\">Zoology</option></select>\n</div>\n<div class=\"form-item
+        form-item-label-before form-type-select form-item-toc-section\">\n  <label
+        for=\"edit-toc-section\">Include articles in Table of Contents section: </label>\n
+        <select data-placeholder=\"Choose &quot;Table of Contents section(s)&quot;\"
+        multiple=\"multiple\" name=\"toc_section[]\" class=\"chosen-enable form-select\"
+        id=\"edit-toc-section\"><option value=\"0\">-- All Sections --</option><option
+        value=\"New Results\">New Results</option><option value=\"Contradictory Results\">Contradictory
+        Results</option><option value=\"Confirmatory Results\">Confirmatory Results</option></select>\n</div>\n<div
+        class=\"element-hidden\"><div class=\"form-item form-item-label-before form-type-select
+        form-item-series\">\n  <label for=\"edit-series\">Include articles in Series
+        </label>\n <select data-placeholder=\"Choose Article Series\" class=\"element-hidden
+        chosen-enable form-select\" multiple=\"multiple\" name=\"series[]\" id=\"edit-series\"><option
+        value=\"0\">-- All Series --</option></select>\n</div>\n</div><div class=\"element-hidden\"><div
+        class=\"form-item form-item-label-before form-type-checkboxes form-item-flag\">\n
+        \ <label for=\"edit-flag\">Include Only: </label>\n <div id=\"edit-flag\"
+        class=\"form-checkboxes element-hidden\"><div class=\"form-item form-item-label-after
+        form-type-checkbox form-item-flag-OPENACCESS\">\n <input class=\"element-hidden
+        form-checkbox\" type=\"checkbox\" id=\"edit-flag-openaccess\" name=\"flag[OPENACCESS]\"
+        value=\"OPENACCESS\" />  <label class=\"option\" for=\"edit-flag-openaccess\">
+        Open Access Articles </label>\n\n</div>\n<div class=\"form-item form-item-label-after
+        form-type-checkbox form-item-flag-HWREVIEW\">\n <input class=\"element-hidden
+        form-checkbox\" type=\"checkbox\" id=\"edit-flag-hwreview\" name=\"flag[HWREVIEW]\"
+        value=\"HWREVIEW\" />  <label class=\"option\" for=\"edit-flag-hwreview\">
+        Review Articles </label>\n\n</div>\n</div>\n</div>\n</div></div></fieldset>\n<fieldset
+        class=\"collapsible form-wrapper\" id=\"edit-keywords\"><legend><span class=\"fieldset-legend\">Authors,
+        Keywords</span></legend><div class=\"fieldset-wrapper\"><div class=\"fieldset-description\">Search
+        for specific authors and/or words and phrases.</div><div class=\"form-item
+        form-item-label-before form-type-textfield form-item-author1\">\n  <label
+        for=\"edit-author1\">Author </label>\n <input type=\"text\" id=\"edit-author1\"
+        name=\"author1\" value=\"\" size=\"60\" maxlength=\"128\" class=\"form-text\"
+        />\n<div class=\"description\">e.g., Smith, JS</div>\n</div>\n<div class=\"form-item
+        form-item-label-before form-type-textfield form-item-author2\">\n  <label
+        for=\"edit-author2\">Author </label>\n <input type=\"text\" id=\"edit-author2\"
+        name=\"author2\" value=\"\" size=\"60\" maxlength=\"128\" class=\"form-text\"
+        />\n<div class=\"description\">e.g., Smith, JS</div>\n</div>\n<div class=\"form-item
+        form-item-label-before form-type-textfield form-item-title\">\n  <label for=\"edit-title\">Title
+        </label>\n <input type=\"text\" id=\"edit-title\" name=\"title\" value=\"\"
+        size=\"60\" maxlength=\"128\" class=\"form-text\" />\n<div class=\"description\">Type
+        any phrase that appears in the article title</div>\n</div>\n<div class=\"form-item
+        form-item-label-before form-type-radios form-item-title-flags\">\n  <label
+        for=\"edit-title-flags\">words </label>\n <div id=\"edit-title-flags\" class=\"form-radios\"><div
+        class=\"form-item form-item-label-after form-type-radio form-item-title-flags\">\n
+        <input type=\"radio\" id=\"edit-title-flags-match-any\" name=\"title_flags\"
+        value=\"match-any\" class=\"form-radio\" />  <label class=\"option\" for=\"edit-title-flags-match-any\">any
+        </label>\n\n</div>\n<div class=\"form-item form-item-label-after form-type-radio
+        form-item-title-flags\">\n <input type=\"radio\" id=\"edit-title-flags-match-all\"
+        name=\"title_flags\" value=\"match-all\" checked=\"checked\" class=\"form-radio\"
+        />  <label class=\"option\" for=\"edit-title-flags-match-all\">all </label>\n\n</div>\n<div
+        class=\"form-item form-item-label-after form-type-radio form-item-title-flags\">\n
+        <input type=\"radio\" id=\"edit-title-flags-match-phrase\" name=\"title_flags\"
+        value=\"match-phrase\" class=\"form-radio\" />  <label class=\"option\" for=\"edit-title-flags-match-phrase\">phrase
+        </label>\n\n</div>\n</div>\n</div>\n<div class=\"form-item form-item-label-before
+        form-type-textfield form-item-abstract-title\">\n  <label for=\"edit-abstract-title\">Abstract
+        or Title </label>\n <input type=\"text\" id=\"edit-abstract-title\" name=\"abstract_title\"
+        value=\"\" size=\"60\" maxlength=\"128\" class=\"form-text\" />\n<div class=\"description\">Type
+        any phrase that appears within article title or abstract</div>\n</div>\n<div
+        class=\"form-item form-item-label-before form-type-radios form-item-abstract-title-flags\">\n
+        \ <label for=\"edit-abstract-title-flags\">words </label>\n <div id=\"edit-abstract-title-flags\"
+        class=\"form-radios\"><div class=\"form-item form-item-label-after form-type-radio
+        form-item-abstract-title-flags\">\n <input type=\"radio\" id=\"edit-abstract-title-flags-match-any\"
+        name=\"abstract_title_flags\" value=\"match-any\" class=\"form-radio\" />
+        \ <label class=\"option\" for=\"edit-abstract-title-flags-match-any\">any
+        </label>\n\n</div>\n<div class=\"form-item form-item-label-after form-type-radio
+        form-item-abstract-title-flags\">\n <input type=\"radio\" id=\"edit-abstract-title-flags-match-all\"
+        name=\"abstract_title_flags\" value=\"match-all\" checked=\"checked\" class=\"form-radio\"
+        />  <label class=\"option\" for=\"edit-abstract-title-flags-match-all\">all
+        </label>\n\n</div>\n<div class=\"form-item form-item-label-after form-type-radio
+        form-item-abstract-title-flags\">\n <input type=\"radio\" id=\"edit-abstract-title-flags-match-phrase\"
+        name=\"abstract_title_flags\" value=\"match-phrase\" class=\"form-radio\"
+        />  <label class=\"option\" for=\"edit-abstract-title-flags-match-phrase\">phrase
+        </label>\n\n</div>\n</div>\n</div>\n<div class=\"form-item form-item-label-before
+        form-type-textfield form-item-text-abstract-title\">\n  <label for=\"edit-text-abstract-title\">Full
+        Text or Abstract or Title </label>\n <input type=\"text\" id=\"edit-text-abstract-title\"
+        name=\"text_abstract_title\" value=\"\" size=\"60\" maxlength=\"128\" class=\"form-text\"
+        />\n<div class=\"description\">Type any phrase that appears within article
+        body, title or abstract</div>\n</div>\n<div class=\"form-item form-item-label-before
+        form-type-radios form-item-text-abstract-title-flags\">\n  <label for=\"edit-text-abstract-title-flags\">words
+        </label>\n <div id=\"edit-text-abstract-title-flags\" class=\"form-radios\"><div
+        class=\"form-item form-item-label-after form-type-radio form-item-text-abstract-title-flags\">\n
+        <input type=\"radio\" id=\"edit-text-abstract-title-flags-match-any\" name=\"text_abstract_title_flags\"
+        value=\"match-any\" class=\"form-radio\" />  <label class=\"option\" for=\"edit-text-abstract-title-flags-match-any\">any
+        </label>\n\n</div>\n<div class=\"form-item form-item-label-after form-type-radio
+        form-item-text-abstract-title-flags\">\n <input type=\"radio\" id=\"edit-text-abstract-title-flags-match-all\"
+        name=\"text_abstract_title_flags\" value=\"match-all\" checked=\"checked\"
+        class=\"form-radio\" />  <label class=\"option\" for=\"edit-text-abstract-title-flags-match-all\">all
+        </label>\n\n</div>\n<div class=\"form-item form-item-label-after form-type-radio
+        form-item-text-abstract-title-flags\">\n <input type=\"radio\" id=\"edit-text-abstract-title-flags-match-phrase\"
+        name=\"text_abstract_title_flags\" value=\"match-phrase\" class=\"form-radio\"
+        />  <label class=\"option\" for=\"edit-text-abstract-title-flags-match-phrase\">phrase
+        </label>\n\n</div>\n</div>\n</div>\n<div class=\"element-hidden\"><div class=\"form-item
+        form-item-label-before form-type-textfield form-item-references\">\n  <label
+        for=\"edit-references\">Bibliography </label>\n <input class=\"element-hidden
+        form-text\" type=\"text\" id=\"edit-references\" name=\"references\" value=\"\"
+        size=\"60\" maxlength=\"128\" />\n<div class=\"description\">e.g., Smith,
+        JS</div>\n</div>\n</div><div class=\"element-hidden\"><div class=\"form-item
+        form-item-label-before form-type-radios form-item-references-flags\">\n  <label
+        for=\"edit-references-flags\">words </label>\n <div id=\"edit-references-flags\"
+        class=\"form-radios element-hidden\"><div class=\"form-item form-item-label-after
+        form-type-radio form-item-references-flags\">\n <input class=\"element-hidden
+        form-radio\" type=\"radio\" id=\"edit-references-flags-match-any\" name=\"references_flags\"
+        value=\"match-any\" />  <label class=\"option\" for=\"edit-references-flags-match-any\">any
+        </label>\n\n</div>\n<div class=\"form-item form-item-label-after form-type-radio
+        form-item-references-flags\">\n <input class=\"element-hidden form-radio\"
+        type=\"radio\" id=\"edit-references-flags-match-all\" name=\"references_flags\"
+        value=\"match-all\" checked=\"checked\" />  <label class=\"option\" for=\"edit-references-flags-match-all\">all
+        </label>\n\n</div>\n<div class=\"form-item form-item-label-after form-type-radio
+        form-item-references-flags\">\n <input class=\"element-hidden form-radio\"
+        type=\"radio\" id=\"edit-references-flags-match-phrase\" name=\"references_flags\"
+        value=\"match-phrase\" />  <label class=\"option\" for=\"edit-references-flags-match-phrase\">phrase
+        </label>\n\n</div>\n</div>\n</div>\n</div><div class=\"element-hidden\"><div
+        class=\"form-item form-item-label-before form-type-select form-item-publisher\">\n
+        \ <label for=\"edit-publisher\">Publisher </label>\n <select class=\"element-hidden
+        form-select\" id=\"edit-publisher\" name=\"publisher\"><option value=\"\"
+        selected=\"selected\"> - All Publishers - </option></select>\n<div class=\"description\">Book
+        publisher name</div>\n</div>\n</div></div></fieldset>\n<fieldset class=\"collapsible
+        form-wrapper\" id=\"edit-citation\"><legend><span class=\"fieldset-legend\">Citation</span></legend><div
+        class=\"fieldset-wrapper\"><div class=\"fieldset-description\">Citation-specific
+        search information</div><div class=\"element-hidden\"><div class=\"form-item
+        form-item-label-before form-type-textfield form-item-pubyear\">\n  <label
+        for=\"edit-pubyear\">Year </label>\n <input class=\"element-hidden form-text\"
+        type=\"text\" id=\"edit-pubyear\" name=\"pubyear\" value=\"\" size=\"60\"
+        maxlength=\"128\" />\n<div class=\"description\">e.g., 2009</div>\n</div>\n</div><div
+        class=\"element-hidden\"><div class=\"form-item form-item-label-before form-type-textfield
+        form-item-volume\">\n  <label for=\"edit-volume\">Volume </label>\n <input
+        class=\"element-hidden form-text\" type=\"text\" id=\"edit-volume\" name=\"volume\"
+        value=\"\" size=\"60\" maxlength=\"128\" />\n<div class=\"description\">e.g.,
+        20</div>\n</div>\n</div><div class=\"element-hidden\"><div class=\"form-item
+        form-item-label-before form-type-textfield form-item-issue\">\n  <label for=\"edit-issue\">Issue
+        </label>\n <input class=\"element-hidden form-text\" type=\"text\" id=\"edit-issue\"
+        name=\"issue\" value=\"\" size=\"60\" maxlength=\"128\" />\n<div class=\"description\">e.g.,
+        3</div>\n</div>\n</div><div class=\"element-hidden\"><div class=\"form-item
+        form-item-label-before form-type-textfield form-item-firstpage\">\n  <label
+        for=\"edit-firstpage\">First page </label>\n <input class=\"element-hidden
+        form-text\" type=\"text\" id=\"edit-firstpage\" name=\"firstpage\" value=\"\"
+        size=\"60\" maxlength=\"128\" />\n<div class=\"description\">e.g., 29</div>\n</div>\n</div><div
+        class=\"form-item form-item-label-before form-type-textfield form-item-doi\">\n
+        \ <label for=\"edit-doi\">DOI </label>\n <input type=\"text\" id=\"edit-doi\"
+        name=\"doi\" value=\"\" size=\"60\" maxlength=\"128\" class=\"form-text\"
+        />\n<div class=\"description\">e.g., 10.9999/123XYZ456</div>\n</div>\n<div
+        class=\"element-hidden\"><div class=\"form-item form-item-label-before form-type-textfield
+        form-item-isbn\">\n  <label for=\"edit-isbn\">ISBN </label>\n <input class=\"element-hidden
+        form-text\" type=\"text\" id=\"edit-isbn\" name=\"isbn\" value=\"\" size=\"60\"
+        maxlength=\"128\" />\n</div>\n</div></div></fieldset>\n<fieldset class=\"collapsible
+        form-wrapper\" id=\"edit-format\"><legend><span class=\"fieldset-legend\">Format
+        Results</span></legend><div class=\"fieldset-wrapper\"><div class=\"form-item
+        form-item-label-before form-type-select form-item-numresults\">\n  <label
+        for=\"edit-numresults--2\">Number of results per page </label>\n <select id=\"edit-numresults--2\"
+        name=\"numresults\" class=\"form-select\"><option value=\"10\">10</option><option
+        value=\"25\">25</option><option value=\"50\">50</option><option value=\"75\">75</option></select>\n</div>\n<div
+        class=\"form-item form-item-label-before form-type-radios form-item-sort\">\n
+        \ <label for=\"edit-sort--2\">Sort </label>\n <div id=\"edit-sort--2\" class=\"form-radios\"><div
+        class=\"form-item form-item-label-after form-type-radio form-item-sort\">\n
+        <input type=\"radio\" id=\"edit-sort-relevance-rank\" name=\"sort\" value=\"relevance-rank\"
+        checked=\"checked\" class=\"form-radio\" />  <label class=\"option\" for=\"edit-sort-relevance-rank\">Best
+        Match </label>\n\n</div>\n<div class=\"form-item form-item-label-after form-type-radio
+        form-item-sort\">\n <input type=\"radio\" id=\"edit-sort-publication-date-ascending\"
+        name=\"sort\" value=\"publication-date-ascending\" class=\"form-radio\" />
+        \ <label class=\"option\" for=\"edit-sort-publication-date-ascending\">Oldest
+        First </label>\n\n</div>\n<div class=\"form-item form-item-label-after form-type-radio
+        form-item-sort\">\n <input type=\"radio\" id=\"edit-sort-publication-date-descending\"
+        name=\"sort\" value=\"publication-date-descending\" class=\"form-radio\" />
+        \ <label class=\"option\" for=\"edit-sort-publication-date-descending\">Newest
+        First </label>\n\n</div>\n</div>\n</div>\n<div class=\"form-item form-item-label-before
+        form-type-radios form-item-format-result\">\n  <label for=\"edit-format-result\">Format
+        Results </label>\n <div id=\"edit-format-result\" class=\"form-radios\"><div
+        class=\"form-item form-item-label-after form-type-radio form-item-format-result\">\n
+        <input type=\"radio\" id=\"edit-format-result-standard\" name=\"format_result\"
+        value=\"standard\" checked=\"checked\" class=\"form-radio\" />  <label class=\"option\"
+        for=\"edit-format-result-standard\">Standard Format </label>\n\n</div>\n<div
+        class=\"form-item form-item-label-after form-type-radio form-item-format-result\">\n
+        <input type=\"radio\" id=\"edit-format-result-condensed\" name=\"format_result\"
+        value=\"condensed\" class=\"form-radio\" />  <label class=\"option\" for=\"edit-format-result-condensed\">Condensed
+        Format </label>\n\n</div>\n</div>\n</div>\n</div></fieldset>\n<div class=\"element-hidden\"><div
+        class=\"form-item form-item-label-after form-type-checkbox form-item-exclude-meeting-abstracts\">\n
+        <input class=\"element-hidden form-checkbox\" type=\"checkbox\" id=\"edit-exclude-meeting-abstracts\"
+        name=\"exclude_meeting_abstracts\" value=\"1\" />  <label class=\"option\"
+        for=\"edit-exclude-meeting-abstracts\">Exclude meeting abstracts </label>\n\n</div>\n</div><input
+        type=\"hidden\" name=\"jcode_option\" value=\"medrxiv biorxiv\" />\n<input
+        type=\"hidden\" name=\"form_build_id\" value=\"form-9CjrtpLpx-4Y0I8k1b9FW7eaoXlUopvNwF4-wuykLpM\"
+        />\n<input type=\"hidden\" name=\"form_id\" value=\"highwire_search_form\"
+        />\n<div class=\"form-actions form-wrapper\" id=\"edit-actions\"><input type=\"submit\"
+        id=\"edit-submit--2\" name=\"op\" value=\"Search\" class=\"form-submit\" /></div></div></form>
+        \ </div>\n\n  \n  </div>\n<div class=\"panel-separator\"></div><div class=\"panel-pane
+        pane-highwire-search-results active\"  id=\"hw-advance-search-result\">\n
+        \ \n      \n  \n  <div class=\"pane-content\">\n    <div class=\"highwire-search-results
+        highwire-article-citation-list no-show-abstract\">No results found</div>  </div>\n\n
+        \ \n  </div>\n</div>\n\t\t\t</div>\n\t\t</div>\n\t\t\n\t\t<div class=\"sidebar-right-wrapper
+        grid-10 omega\">\n\t\t\t<div class=\"panel-panel panel-region-sidebar-right\">\n\t\t\t
+        \ <div class=\"inside\"><div class=\"panel-pane pane-panels-mini pane-biorxiv-save-citation-links\"
+        >\n  \n      \n  \n  <div class=\"pane-content\">\n    <div class=\"panel-display
+        panel-1col clearfix\" id=\"mini-panel-biorxiv_save_citation_links\">\n  <div
+        class=\"panel-panel panel-col\">\n    <div><div class=\"panel-pane pane-report-view-link\"
+        >\n  \n      \n  \n  <div class=\"pane-content\">\n    <a href=\"/highwire-save-citation/manage\"
+        id=\"link-save-citation-report\" class=\"link-save-citation-report link-icon\"><i
+        class=\"icon-bookmark\"></i> <span class=\"title\">View Selected Citations
+        (0)</span></a>  </div>\n\n  \n  </div>\n<div class=\"panel-separator\"></div><div
+        class=\"panel-pane pane-save-all-action-link\" >\n  \n      \n  \n  <div class=\"pane-content\">\n
+        \   <ul class=\"inline hw-link-save-unsave-all-citation\"><li class=\"save-all-link
+        first\"><a href=\"/highwire-save-citation/save-all//nojs\" class=\"link-save-all-citation-save
+        link-icon\" title=\"Add All Citations\"><i class=\"icon-plus\"></i> <span
+        class=\"title\">Add All Citations</span></a></li><li class=\"unsave-all-link
+        last\"><a href=\"/highwire-save-citation/unsave-all//nojs\" class=\"link-save-all-citation-unsave
+        link-icon\" title=\"Remove All Citations\"><i class=\"icon-ok\"></i> <span
+        class=\"title\">Remove All Citations</span></a></li></ul>  </div>\n\n  \n
+        \ </div>\n</div>\n  </div>\n</div>\n  </div>\n\n  \n  </div>\n<div class=\"panel-separator\"></div><div
+        class=\"panel-pane pane-panels-mini pane-biorxiv-subject-collections\" >\n
+        \ \n      \n  \n  <div class=\"pane-content\">\n    <div class=\"panel-flexible
+        panels-flexible-8 clearfix\" id=\"mini-panel-biorxiv_subject_collections\">\n<div
+        class=\"panel-flexible-inside panels-flexible-8-inside\">\n<div class=\"panels-flexible-region
+        panels-flexible-region-8-center panels-flexible-region-first panels-flexible-region-last\">\n
+        \ <div class=\"inside panels-flexible-region-inside panels-flexible-region-8-center-inside
+        panels-flexible-region-inside-first panels-flexible-region-inside-last\">\n<div
+        class=\"panel-pane pane-snippet\" >\n  \n      \n  \n  <div class=\"pane-content\">\n
+        \   <div class=\"snippet biorxiv-subject-areas-table-title\" id=\"biorxiv-subject-areas-table-title\">\n
+        \ \n      \n  <div class=\"snippet-content\">\n    <b>Subject Areas</b>  </div>\n\n</div>\n
+        \ </div>\n\n  \n  </div>\n<div class=\"panel-separator\"></div><div class=\"panel-pane
+        pane-snippet\" >\n  \n      \n  \n  <div class=\"pane-content\">\n    <div
+        class=\"snippet biorxiv-subject-areas-view-papers\" id=\"biorxiv-subject-areas-view-papers\">\n
+        \ \n      \n  <div class=\"snippet-content\">\n    <a href=\"/content/early/recent\"><strong>All
+        Articles</strong></a>  </div>\n\n</div>\n  </div>\n\n  \n  </div>\n<div class=\"panel-separator\"></div><div
+        class=\"panel-pane pane-highwire-subject-collections\" >\n  \n      \n  \n
+        \ <div class=\"pane-content\">\n    <ul id=\"collection\" class=\"collection
+        highwire-list-expand\"><li class=\"outer collection depth-2  child first\"><div
+        class = \"data-wrapper\"><a href=\"/collection/animal-behavior-and-cognition\"
+        class=\"\" data-icon-position=\"\" data-hide-link-title=\"0\">Animal Behavior
+        and Cognition</a> <span class = \"article-count\">(1986)</span></div></li>\n<li
+        class=\"outer collection depth-2  child\"><div class = \"data-wrapper\"><a
+        href=\"/collection/biochemistry\" class=\"\" data-icon-position=\"\" data-hide-link-title=\"0\">Biochemistry</a>
+        <span class = \"article-count\">(3717)</span></div></li>\n<li class=\"outer
+        collection depth-2  child\"><div class = \"data-wrapper\"><a href=\"/collection/bioengineering\"
+        class=\"\" data-icon-position=\"\" data-hide-link-title=\"0\">Bioengineering</a>
+        <span class = \"article-count\">(2506)</span></div></li>\n<li class=\"outer
+        collection depth-2  child\"><div class = \"data-wrapper\"><a href=\"/collection/bioinformatics\"
+        class=\"\" data-icon-position=\"\" data-hide-link-title=\"0\">Bioinformatics</a>
+        <span class = \"article-count\">(12227)</span></div></li>\n<li class=\"outer
+        collection depth-2  child\"><div class = \"data-wrapper\"><a href=\"/collection/biophysics\"
+        class=\"\" data-icon-position=\"\" data-hide-link-title=\"0\">Biophysics</a>
+        <span class = \"article-count\">(5224)</span></div></li>\n<li class=\"outer
+        collection depth-2  child\"><div class = \"data-wrapper\"><a href=\"/collection/cancer-biology\"
+        class=\"\" data-icon-position=\"\" data-hide-link-title=\"0\">Cancer Biology</a>
+        <span class = \"article-count\">(4067)</span></div></li>\n<li class=\"outer
+        collection depth-2  child\"><div class = \"data-wrapper\"><a href=\"/collection/cell-biology\"
+        class=\"\" data-icon-position=\"\" data-hide-link-title=\"0\">Cell Biology</a>
+        <span class = \"article-count\">(5818)</span></div></li>\n<li class=\"outer
+        collection depth-2  child\"><div class = \"data-wrapper\"><a href=\"/collection/clinical-trials\"
+        class=\"\" data-icon-position=\"\" data-hide-link-title=\"0\">Clinical Trials</a>
+        <span class = \"article-count\">(138)</span></div></li>\n<li class=\"outer
+        collection depth-2  child\"><div class = \"data-wrapper\"><a href=\"/collection/developmental-biology\"
+        class=\"\" data-icon-position=\"\" data-hide-link-title=\"0\">Developmental
+        Biology</a> <span class = \"article-count\">(3486)</span></div></li>\n<li
+        class=\"outer collection depth-2  child\"><div class = \"data-wrapper\"><a
+        href=\"/collection/ecology\" class=\"\" data-icon-position=\"\" data-hide-link-title=\"0\">Ecology</a>
+        <span class = \"article-count\">(5519)</span></div></li>\n<li class=\"outer
+        collection depth-2  child\"><div class = \"data-wrapper\"><a href=\"/collection/epidemiology\"
+        class=\"\" data-icon-position=\"\" data-hide-link-title=\"0\">Epidemiology</a>
+        <span class = \"article-count\">(2052)</span></div></li>\n<li class=\"outer
+        collection depth-2  child\"><div class = \"data-wrapper\"><a href=\"/collection/evolutionary-biology\"
+        class=\"\" data-icon-position=\"\" data-hide-link-title=\"0\">Evolutionary
+        Biology</a> <span class = \"article-count\">(8344)</span></div></li>\n<li
+        class=\"outer collection depth-2  child\"><div class = \"data-wrapper\"><a
+        href=\"/collection/genetics\" class=\"\" data-icon-position=\"\" data-hide-link-title=\"0\">Genetics</a>
+        <span class = \"article-count\">(6319)</span></div></li>\n<li class=\"outer
+        collection depth-2  child\"><div class = \"data-wrapper\"><a href=\"/collection/genomics\"
+        class=\"\" data-icon-position=\"\" data-hide-link-title=\"0\">Genomics</a>
+        <span class = \"article-count\">(8033)</span></div></li>\n<li class=\"outer
+        collection depth-2  child\"><div class = \"data-wrapper\"><a href=\"/collection/immunology\"
+        class=\"\" data-icon-position=\"\" data-hide-link-title=\"0\">Immunology</a>
+        <span class = \"article-count\">(3242)</span></div></li>\n<li class=\"outer
+        collection depth-2  child\"><div class = \"data-wrapper\"><a href=\"/collection/microbiology\"
+        class=\"\" data-icon-position=\"\" data-hide-link-title=\"0\">Microbiology</a>
+        <span class = \"article-count\">(9746)</span></div></li>\n<li class=\"outer
+        collection depth-2  child\"><div class = \"data-wrapper\"><a href=\"/collection/molecular-biology\"
+        class=\"\" data-icon-position=\"\" data-hide-link-title=\"0\">Molecular Biology</a>
+        <span class = \"article-count\">(3852)</span></div></li>\n<li class=\"outer
+        collection depth-2  child\"><div class = \"data-wrapper\"><a href=\"/collection/neuroscience\"
+        class=\"\" data-icon-position=\"\" data-hide-link-title=\"0\">Neuroscience</a>
+        <span class = \"article-count\">(22714)</span></div></li>\n<li class=\"outer
+        collection depth-2  child\"><div class = \"data-wrapper\"><a href=\"/collection/paleontology\"
+        class=\"\" data-icon-position=\"\" data-hide-link-title=\"0\">Paleontology</a>
+        <span class = \"article-count\">(166)</span></div></li>\n<li class=\"outer
+        collection depth-2  child\"><div class = \"data-wrapper\"><a href=\"/collection/pathology\"
+        class=\"\" data-icon-position=\"\" data-hide-link-title=\"0\">Pathology</a>
+        <span class = \"article-count\">(626)</span></div></li>\n<li class=\"outer
+        collection depth-2  child\"><div class = \"data-wrapper\"><a href=\"/collection/pharmacology-and-toxicology\"
+        class=\"\" data-icon-position=\"\" data-hide-link-title=\"0\">Pharmacology
+        and Toxicology</a> <span class = \"article-count\">(1009)</span></div></li>\n<li
+        class=\"outer collection depth-2  child\"><div class = \"data-wrapper\"><a
+        href=\"/collection/physiology\" class=\"\" data-icon-position=\"\" data-hide-link-title=\"0\">Physiology</a>
+        <span class = \"article-count\">(1531)</span></div></li>\n<li class=\"outer
+        collection depth-2  child\"><div class = \"data-wrapper\"><a href=\"/collection/plant-biology\"
+        class=\"\" data-icon-position=\"\" data-hide-link-title=\"0\">Plant Biology</a>
+        <span class = \"article-count\">(3454)</span></div></li>\n<li class=\"outer
+        collection depth-2  child\"><div class = \"data-wrapper\"><a href=\"/collection/scientific-communication-and-education\"
+        class=\"\" data-icon-position=\"\" data-hide-link-title=\"0\">Scientific Communication
+        and Education</a> <span class = \"article-count\">(805)</span></div></li>\n<li
+        class=\"outer collection depth-2  child\"><div class = \"data-wrapper\"><a
+        href=\"/collection/synthetic-biology\" class=\"\" data-icon-position=\"\"
+        data-hide-link-title=\"0\">Synthetic Biology</a> <span class = \"article-count\">(1074)</span></div></li>\n<li
+        class=\"outer collection depth-2  child\"><div class = \"data-wrapper\"><a
+        href=\"/collection/systems-biology\" class=\"\" data-icon-position=\"\" data-hide-link-title=\"0\">Systems
+        Biology</a> <span class = \"article-count\">(3296)</span></div></li>\n<li
+        class=\"outer collection depth-2  child last\"><div class = \"data-wrapper\"><a
+        href=\"/collection/zoology\" class=\"\" data-icon-position=\"\" data-hide-link-title=\"0\">Zoology</a>
+        <span class = \"article-count\">(567)</span></div></li>\n</ul>  </div>\n\n
+        \ \n  </div>\n  </div>\n</div>\n</div>\n</div>\n  </div>\n\n  \n  </div>\n</div>\n\t\t\t</div>\n\t\t</div>\n\t\n\t</div>
+        <!-- /.panel-row-wrapper -->\t\n\t\n\t</div>\n\n    </div>\n  </div>\n</div>
+        \     </div>\n</div>  </div>\n</section>    \n  \n  </div>    <div class=\"region
+        region-page-bottom\" id=\"region-page-bottom\">\n  <div class=\"region-inner
+        region-page-bottom-inner\">\n      </div>\n</div><script type=\"text/javascript\"
+        src=\"https://www.biorxiv.org/sites/default/files/advagg_js/js__bnwyEQSuZLC-kZnFqCi5iE02nOCzM7DjY7zYxcN9nsQ__VBiBT_qq_eHMMO2Q1rXK1u-hHff31XLUkmi9dgjuPeY__2Vk8Jq1CvyoD5Whg-2H8wW3EiWCafsCg4v9uYgZf94Q.js\"></script>\n<script
+        type=\"text/javascript\">\n<!--//--><![CDATA[//><!--\nfunction euCookieComplianceLoadScripts()
+        {}\n//--><!]]>\n</script>\n<script type=\"text/javascript\">\n<!--//--><![CDATA[//><!--\nvar
+        eu_cookie_compliance_cookie_name = \"\";\n//--><!]]>\n</script>\n<script type=\"text/javascript\"
+        src=\"//d33xdlntwy0kbs.cloudfront.net/cshl_custom.js\"></script>\n<script
+        type=\"text/javascript\" src=\"https://www.biorxiv.org/sites/default/files/advagg_js/js__BmqjBnkz3MgYCAoc25s1lDRMEjLhC3mEPVonUFIHi08__Unwv5-ZIuHBfFwytsjEx1niBVJ7n1T4lPws7VrkHXM4__2Vk8Jq1CvyoD5Whg-2H8wW3EiWCafsCg4v9uYgZf94Q.js\"></script>\n
+        \ </body>\n</html>\n"
+  recorded_at: 2020-07-01 18:23:38 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.6.2

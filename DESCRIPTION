@@ -7,7 +7,7 @@ Description: Provides a single interface to many sources of full text
     included for searching for articles, downloading full or partial
     text, downloading supplementary materials, converting to various
     data formats.
-Version: 1.4.1.92
+Version: 1.4.2.91
 License: MIT + file LICENSE
 Authors@R: person("Scott", "Chamberlain",
     role = c("aut", "cre"),
@@ -43,7 +43,8 @@ Suggests:
     roxygen2 (>= 7.1.0),
     testthat,
     knitr,
-    pubchunks
+    pubchunks,
+    vcr
 RoxygenNote: 7.1.0
 X-schema.org-applicationCategory: Literature
 X-schema.org-keywords: text-mining, literature, pdf, xml, publications, citations, full-text, TDM

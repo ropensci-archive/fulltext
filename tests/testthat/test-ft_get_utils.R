@@ -5,8 +5,10 @@ dois2 <- c('10.7717/peerj.228','10.7717/peerj.234') # found
 test_that("fat_cat_search_one", {
   skip_on_cran()
 
-  one <- fat_cat_search_one(dois1, fields = flds, size = length(dois1))
-  two <- fat_cat_search_one(dois2, fields = flds, size = length(dois2))
+  vcr::use_cassette("fat_cat_search_one", {
+    one <- fat_cat_search_one(dois1, fields = flds, size = length(dois1))
+    two <- fat_cat_search_one(dois2, fields = flds, size = length(dois2))
+  })
 
   expect_is(one, "data.frame")
   expect_equal(NROW(one), 2)
@@ -22,8 +24,10 @@ test_that("fat_cat_search_one", {
 test_that("fat_cat_search", {
   skip_on_cran()
 
-  one <- fat_cat_search(dois1)
-  two <- fat_cat_search(dois2)
+  vcr::use_cassette("fat_cat_search", {
+    one <- fat_cat_search(dois1)
+    two <- fat_cat_search(dois2)
+  })
 
   expect_is(one, "list")
   expect_equal(length(one), 2)
@@ -41,8 +45,10 @@ test_that("fat_cat_search", {
 test_that("get_publisher2", {
   skip_on_cran()
 
-  one <- get_publisher2(dois1)
-  two <- get_publisher2(dois2)
+  vcr::use_cassette("get_publisher2", {
+    one <- get_publisher2(dois1)
+    two <- get_publisher2(dois2)
+  })
 
   expect_is(one, "list")
   expect_equal(length(one), 2)

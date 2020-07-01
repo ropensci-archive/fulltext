@@ -3,12 +3,14 @@ context("ft_search")
 test_that("ft_search returns...", {
   skip_on_cran()
   
-  aa <- ft_search(query = 'ecology', from = 'plos')
-  flds <- c('id','author','eissn','journal','counter_total_all','alm_twitterCount')
-  bb <- ft_search(query = 'climate change', from = 'plos', plosopts = list(fl = flds))
-  Sys.sleep(1)
-  cc <- ft_search(query = 'ecology', from = 'crossref')
-  dd <- ft_search(query = 'owls', from = 'biorxiv')
+  vcr::use_cassette("ft_search", {
+    aa <- ft_search(query = 'ecology', from = 'plos')
+    flds <- c('id','author','eissn','journal','counter_total_all','alm_twitterCount')
+    bb <- ft_search(query = 'climate change', from = 'plos', plosopts = list(fl = flds))
+    Sys.sleep(1)
+    cc <- ft_search(query = 'ecology', from = 'crossref')
+    dd <- ft_search(query = 'owls', from = 'biorxiv')
+  })
   
   # correct classes
   expect_is(aa, "ft")
@@ -42,7 +44,9 @@ test_that("ft_search returns...", {
 test_that("ft_search works with scopus", {
   skip_on_cran()
   
-  aa <- ft_search(query = 'ecology', from = 'scopus')
+  vcr::use_cassette("ft_search_scopus", {
+    aa <- ft_search(query = 'ecology', from = 'scopus')
+  })
   
   expect_is(aa, "ft")
   expect_is(aa$scopus, "ft_ind")
@@ -61,17 +65,23 @@ test_that("ft_search works for larger requests", {
   skip_on_cran()
   skip_on_travis()
   
-  res_entrez <- ft_search(query = 'ecology', from = 'entrez', limit = 200)
+  vcr::use_cassette("ft_search_entrez", {
+    res_entrez <- ft_search(query = 'ecology', from = 'entrez', limit = 200)
+  })
   expect_is(res_entrez, "ft")
   expect_is(res_entrez$entrez, "ft_ind")
   expect_equal(NROW(res_entrez$entrez$data), 200)
   
-  res_plos <- ft_search(query = 'ecology', from = 'plos', limit = 200)
+  vcr::use_cassette("ft_search_plos", {
+    res_plos <- ft_search(query = 'ecology', from = 'plos', limit = 200)
+  })
   expect_is(res_plos, "ft")
   expect_is(res_plos$plos, "ft_ind")
   expect_equal(NROW(res_plos$plos$data), 200)
   
-  res_cr <- ft_search(query = 'ecology', from = 'crossref', limit = 200)
+  vcr::use_cassette("ft_search_crossref", {
+    res_cr <- ft_search(query = 'ecology', from = 'crossref', limit = 200)
+  })
   expect_is(res_cr, "ft")
   expect_is(res_cr$crossref, "ft_ind")
   expect_equal(NROW(res_cr$crossref$data), 200)
@@ -81,9 +91,12 @@ test_that("ft_search works for larger requests", {
 test_that("ft_search fails well", {
   skip_on_cran()
   
-  expect_error(ft_search(query = 'ecology', from = 'entrez', limit = 2000))
+  vcr::use_cassette("ft_search_fails_well_entrez_limit2large", { 
+    expect_error(ft_search(query = 'ecology', from = 'entrez', limit = 2000))
+  })
+  
   ## FIXME - add catches for plos, other sources
-  expect_error(ft_search(query = 'ecology', from = 'crossref', limit = 2000), 
+  expect_error(ft_search(query = 'ecology', from = 'crossref', limit = 2000),
                "limit parameter must be 1000 or less")
 
   # no query given
@@ -91,11 +104,16 @@ test_that("ft_search fails well", {
   # bad source
   expect_error(ft_search("foobar", from = 'stuff'), "'arg' should be one of")
   # no data found, not error, but no data
-  expect_equal(NROW(ft_search(5, from = 'plos')$plos$data), 0)
-  expect_equal(suppressMessages(ft_search(5, from = 'plos')$plos$found), 0)
+  vcr::use_cassette("ft_search_fails_well_plos_no_results", {
+    plos_no_data <- ft_search(5, from = 'plos')
+  })
+  expect_equal(NROW(plos_no_data$plos$data), 0)
+  expect_equal(plos_no_data$plos$found, 0)
   
-  expect_error(biorxiv_search("asdfasdfasdfasfasfd"), 
-               "no results found in Biorxiv")
+  vcr::use_cassette("ft_search_fails_well_biorxiv_no_results", {
+    expect_error(biorxiv_search("asdfasdfasdfasfasfd"),
+      "no results found in Biorxiv")
+  })
 })
 
 test_that("ft_search curl options work", {

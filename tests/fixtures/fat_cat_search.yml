@@ -1,0 +1,69 @@
+http_interactions:
+- request:
+    method: get
+    uri: https://search.fatcat.wiki/fatcat_release/_search?q=doi%3A%28%2210.7554%2FeLife.030326%22%20OR%20%2210.7554%2FeLife.327636%22%29&_source=doi%2Ccontainer_issnl%2Ccontainer_name%2Cpublisher&size=2
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      User-Agent: libcurl/7.64.1 r-curl/4.3 crul/0.9.2.92
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: 'HTTP/2 200 '
+      server: nginx/1.10.3 (Ubuntu)
+      date: Wed, 01 Jul 2020 18:37:35 GMT
+      content-type: application/json; charset=UTF-8
+      content-length: '134'
+      x-frame-options: SAMEORIGIN
+      x-content-type-options: nosniff
+      x-xss-protection: '1'
+      access-control-allow-origin: '*'
+      access-control-allow-methods: GET, OPTIONS
+      access-control-allow-headers: DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range
+      access-control-expose-headers: Content-Length,Content-Range
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"took":2,"timed_out":false,"_shards":{"total":5,"successful":5,"skipped":0,"failed":0},"hits":{"total":0,"max_score":null,"hits":[]}}'
+  recorded_at: 2020-07-01 18:37:35 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.6.2
+- request:
+    method: get
+    uri: https://search.fatcat.wiki/fatcat_release/_search?q=doi%3A%28%2210.7717%2Fpeerj.228%22%20OR%20%2210.7717%2Fpeerj.234%22%29&_source=doi%2Ccontainer_issnl%2Ccontainer_name%2Cpublisher&size=2
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      User-Agent: libcurl/7.64.1 r-curl/4.3 crul/0.9.2.92
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: 'HTTP/2 200 '
+      server: nginx/1.10.3 (Ubuntu)
+      date: Wed, 01 Jul 2020 18:37:35 GMT
+      content-type: application/json; charset=UTF-8
+      content-length: '574'
+      x-frame-options: SAMEORIGIN
+      x-content-type-options: nosniff
+      x-xss-protection: '1'
+      access-control-allow-origin: '*'
+      access-control-allow-methods: GET, OPTIONS
+      access-control-allow-headers: DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range
+      access-control-expose-headers: Content-Length,Content-Range
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"took":3,"timed_out":false,"_shards":{"total":5,"successful":5,"skipped":0,"failed":0},"hits":{"total":2,"max_score":16.892826,"hits":[{"_index":"fatcat_release_v03b","_type":"release","_id":"motud42tzfa6fkkgsdmxtu5rs4","_score":16.892826,"_source":{"container_name":"PeerJ","publisher":"PeerJ","doi":"10.7717/peerj.234","container_issnl":"2167-8359"}},{"_index":"fatcat_release_v03b","_type":"release","_id":"rulhhff3kngyfc3rys53vlfuuu","_score":16.869793,"_source":{"container_name":"PeerJ","publisher":"PeerJ","doi":"10.7717/peerj.228","container_issnl":"2167-8359"}}]}}'
+  recorded_at: 2020-07-01 18:37:35 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.6.2

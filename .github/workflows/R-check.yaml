@@ -20,8 +20,14 @@ jobs:
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       CRAN: ${{ matrix.config.cran }}
+      VCR_VERBOSE_ERRORS: true
       ELSEVIER_SCOPUS_KEY: ${{ secrets.ELSEVIER_SCOPUS_KEY }}
       SPRINGER_KEY: ${{ secrets.SPRINGER_KEY }}
+      crossref_email: ${{ secrets.crossref_email }}
+      CROSSREF_TDM: ${{ secrets.CROSSREF_TDM }}
+      ELSEVIER_TDM_KEY: ${{ secrets.ELSEVIER_TDM_KEY }}
+      MICROSOFT_ACADEMIC_KEY: ${{ secrets.MICROSOFT_ACADEMIC_KEY }}
+      ENTREZ_KEY: ${{ secrets.ENTREZ_KEY }}
 
     steps:
       - uses: actions/checkout@v2

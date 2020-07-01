@@ -3,9 +3,11 @@ context("ft_providers")
 test_that("ft_providers returns...", {
   skip_on_cran()
   
-  aa <- ft_providers(journal="Stem Cells International")
-  bb <- ft_providers(publisher="hindawi")
-  cc <- ft_providers(publisher="journal")
+  vcr::use_cassette("ft_providers", {
+    aa <- ft_providers(journal="Stem Cells International")
+    bb <- ft_providers(publisher="hindawi")
+    cc <- ft_providers(publisher="journal")
+  })
   
   # correct classes
   expect_is(aa, "ft_p")

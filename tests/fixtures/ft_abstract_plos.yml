@@ -1,0 +1,447 @@
+http_interactions:
+- request:
+    method: get
+    uri: http://api.plos.org/search?q=biology&fl=id&rows=0&wt=json
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      User-Agent: libcurl/7.64.1 r-curl/4.3 crul/0.9.2.92
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      server: nginx/1.14.1
+      date: Wed, 01 Jul 2020 17:34:24 GMT
+      content-type: application/json;charset=utf-8
+      content-length: '59'
+      connection: keep-alive
+      last-modified: Wed, 01 Jul 2020 13:15:09 GMT
+      etag: '"YTYzYzQwMDAwMDAwMDAwMFNvbHI="'
+    body:
+      encoding: UTF-8
+      file: no
+      string: |
+        {
+          "response":{"numFound":218260,"start":0,"docs":[]
+          }}
+  recorded_at: 2020-07-01 17:34:25 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.6.2
+- request:
+    method: get
+    uri: http://api.plos.org/search?fq=-article_type%3Acorrection&fq=-article_type%3Aviewpoints&q=biology&fl=id&start=0&rows=20&wt=json&fq=doc_type%3Afull
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      User-Agent: libcurl/7.64.1 r-curl/4.3 crul/0.9.2.92
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      server: nginx/1.14.1
+      date: Wed, 01 Jul 2020 17:34:24 GMT
+      content-type: application/json;charset=utf-8
+      content-length: '1136'
+      connection: keep-alive
+      last-modified: Wed, 01 Jul 2020 13:15:09 GMT
+      etag: '"OWJkYzQwMDAwMDAwMDAwMFNvbHI="'
+    body:
+      encoding: UTF-8
+      file: no
+      string: |
+        {
+          "response":{"numFound":217581,"start":0,"docs":[
+              {
+                "id":"10.1371/journal.pone.0034368"},
+              {
+                "id":"10.1371/journal.pone.0200929"},
+              {
+                "id":"10.1371/journal.pbio.2003691"},
+              {
+                "id":"10.1371/journal.pcbi.1005134"},
+              {
+                "id":"10.1371/journal.pone.0174402"},
+              {
+                "id":"10.1371/journal.pbio.2002050"},
+              {
+                "id":"10.1371/journal.pbio.1001530"},
+              {
+                "id":"10.1371/journal.pntd.0000343"},
+              {
+                "id":"10.1371/journal.pbio.1001659"},
+              {
+                "id":"10.1371/journal.pcbi.1002244"},
+              {
+                "id":"10.1371/journal.pcbi.1006164"},
+              {
+                "id":"10.1371/journal.pcbi.1004323"},
+              {
+                "id":"10.1371/image.ppat.v13.i05"},
+              {
+                "id":"10.1371/journal.pone.0054284"},
+              {
+                "id":"10.1371/journal.pcbi.0030227"},
+              {
+                "id":"10.1371/journal.pcbi.1002487"},
+              {
+                "id":"10.1371/journal.pcbi.1003682"},
+              {
+                "id":"10.1371/journal.pcbi.1005050"},
+              {
+                "id":"10.1371/journal.pgen.1006173"},
+              {
+                "id":"10.1371/journal.pone.0043231"}]
+          }}
+  recorded_at: 2020-07-01 17:34:25 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.6.2
+- request:
+    method: get
+    uri: http://api.plos.org/search?q=id%3A10.1371%2Fjournal.pone.0034368&fl=abstract&rows=0&wt=json
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      User-Agent: libcurl/7.64.1 r-curl/4.3 crul/0.9.2.92
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      server: nginx/1.14.1
+      date: Wed, 01 Jul 2020 17:34:24 GMT
+      content-type: application/json;charset=utf-8
+      content-length: '54'
+      connection: keep-alive
+      last-modified: Wed, 01 Jul 2020 13:15:09 GMT
+      etag: '"YTYzYzQwMDAwMDAwMDAwMFNvbHI="'
+    body:
+      encoding: UTF-8
+      file: no
+      string: |
+        {
+          "response":{"numFound":1,"start":0,"docs":[]
+          }}
+  recorded_at: 2020-07-01 17:34:25 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.6.2
+- request:
+    method: get
+    uri: http://api.plos.org/search?q=id%3A10.1371%2Fjournal.pone.0034368&fl=abstract&start=0&rows=10&wt=json
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      User-Agent: libcurl/7.64.1 r-curl/4.3 crul/0.9.2.92
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      server: nginx/1.14.1
+      date: Wed, 01 Jul 2020 17:34:24 GMT
+      content-type: application/json;charset=utf-8
+      content-length: '1715'
+      connection: keep-alive
+      last-modified: Wed, 01 Jul 2020 13:15:09 GMT
+      etag: '"OWJkYzQwMDAwMDAwMDAwMFNvbHI="'
+    body:
+      encoding: UTF-8
+      file: no
+      string: |
+        {
+          "response":{"numFound":1,"start":0,"docs":[
+              {
+                "abstract":["\n        This article uses data from Thomson Reuters Web of Science to map and analyse the scientific landscape for synthetic biology. The article draws on recent advances in data visualisation and analytics with the aim of informing upcoming international policy debates on the governance of synthetic biology by the Subsidiary Body on Scientific, Technical and Technological Advice (SBSTTA) of the United Nations Convention on Biological Diversity. We use mapping techniques to identify how synthetic biology can best be understood and the range of institutions, researchers and funding agencies involved. Debates under the Convention are likely to focus on a possible moratorium on the field release of synthetic organisms, cells or genomes. Based on the empirical evidence we propose that guidance could be provided to funding agencies to respect the letter and spirit of the Convention on Biological Diversity in making research investments. Building on the recommendations of the United States Presidential Commission for the Study of Bioethical Issues we demonstrate that it is possible to promote independent and transparent monitoring of developments in synthetic biology using modern information tools. In particular, public and policy understanding and engagement with synthetic biology can be enhanced through the use of online interactive tools. As a step forward in this process we make existing data on the scientific literature on synthetic biology available in an online interactive workbook so that researchers, policy makers and civil society can explore the data and draw conclusions for themselves.\n      "]}]
+          }}
+  recorded_at: 2020-07-01 17:34:25 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.6.2
+- request:
+    method: get
+    uri: http://api.plos.org/search?q=id%3A10.1371%2Fjournal.pone.0200929&fl=abstract&rows=0&wt=json
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      User-Agent: libcurl/7.64.1 r-curl/4.3 crul/0.9.2.92
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      server: nginx/1.14.1
+      date: Wed, 01 Jul 2020 17:34:24 GMT
+      content-type: application/json;charset=utf-8
+      content-length: '54'
+      connection: keep-alive
+      last-modified: Wed, 01 Jul 2020 13:15:09 GMT
+      etag: '"ODEzYzQwMDAwMDAwMDAwMFNvbHI="'
+    body:
+      encoding: UTF-8
+      file: no
+      string: |
+        {
+          "response":{"numFound":1,"start":0,"docs":[]
+          }}
+  recorded_at: 2020-07-01 17:34:25 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.6.2
+- request:
+    method: get
+    uri: http://api.plos.org/search?q=id%3A10.1371%2Fjournal.pone.0200929&fl=abstract&start=0&rows=10&wt=json
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      User-Agent: libcurl/7.64.1 r-curl/4.3 crul/0.9.2.92
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      server: nginx/1.14.1
+      date: Wed, 01 Jul 2020 17:34:24 GMT
+      content-type: application/json;charset=utf-8
+      content-length: '1863'
+      connection: keep-alive
+      last-modified: Wed, 01 Jul 2020 13:15:09 GMT
+      etag: '"YTYzYzQwMDAwMDAwMDAwMFNvbHI="'
+    body:
+      encoding: UTF-8
+      file: no
+      string: |
+        {
+          "response":{"numFound":1,"start":0,"docs":[
+              {
+                "abstract":["\nSystems biology is a discipline that studies biological systems from a holistic and interdisciplinary perspective. It brings together biologists, mathematicians, computer scientists, physicists, and engineers, so it has both biology-oriented components and systems-oriented components. We applied several computational tools to analyze the bibliographic information of published articles in systems biology to answer the question: Did the research topics of systems biology become more biology-oriented or more systems-oriented from 1992 to 2013? We analyzed the metadata of 9923 articles on systems biology from the Web of Science database. We identified the most highly cited 330 references using computational tools and through close reading we divided them into nine categories of research types in systems biology. Interestingly, we found that articles in one category, namely, systems biology’s applications in medical research, increased tremendously. This finding was corroborated by computational analysis of the abstracts, which also suggested that the percentages of topics on vaccines, diseases, drugs and cancers increased over time. In addition, we analyzed the institutional backgrounds of the corresponding authors of those 9923 articles and identified the most highly cited 330 authors over time. We found that before the mid-1990s, systems-oriented scientists had made the most referenced contributions. However, in recent years, researchers from biology-oriented institutions not only represented a huge percentage of the total number of researchers, but also had made the most referenced contributions. Notably, interdisciplinary institutions only produced a small percentage of researchers, but had made disproportionate contributions to this field.\n"]}]
+          }}
+  recorded_at: 2020-07-01 17:34:25 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.6.2
+- request:
+    method: get
+    uri: http://api.plos.org/search?q=id%3A10.1371%2Fjournal.pbio.2003691&fl=abstract&rows=0&wt=json
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      User-Agent: libcurl/7.64.1 r-curl/4.3 crul/0.9.2.92
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      server: nginx/1.14.1
+      date: Wed, 01 Jul 2020 17:34:24 GMT
+      content-type: application/json;charset=utf-8
+      content-length: '54'
+      connection: keep-alive
+      last-modified: Wed, 01 Jul 2020 13:15:08 GMT
+      etag: '"ZjkzYzQwMDAwMDAwMDAwMFNvbHI="'
+    body:
+      encoding: UTF-8
+      file: no
+      string: |
+        {
+          "response":{"numFound":1,"start":0,"docs":[]
+          }}
+  recorded_at: 2020-07-01 17:34:25 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.6.2
+- request:
+    method: get
+    uri: http://api.plos.org/search?q=id%3A10.1371%2Fjournal.pbio.2003691&fl=abstract&start=0&rows=10&wt=json
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      User-Agent: libcurl/7.64.1 r-curl/4.3 crul/0.9.2.92
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      server: nginx/1.14.1
+      date: Wed, 01 Jul 2020 17:34:24 GMT
+      content-type: application/json;charset=utf-8
+      content-length: '830'
+      connection: keep-alive
+      last-modified: Wed, 01 Jul 2020 13:15:08 GMT
+      etag: '"ZjkzYzQwMDAwMDAwMDAwMFNvbHI="'
+    body:
+      encoding: UTF-8
+      file: no
+      string: |
+        {
+          "response":{"numFound":1,"start":0,"docs":[
+              {
+                "abstract":["\nDevelopmental biology (including embryology) is proposed as \"the stem cell of biological disciplines.” Genetics, cell biology, oncology, immunology, evolutionary mechanisms, neurobiology, and systems biology each has its ancestry in developmental biology. Moreover, developmental biology continues to roll on, budding off more disciplines, while retaining its own identity. While its descendant disciplines differentiate into sciences with a restricted set of paradigms, examples, and techniques, developmental biology remains vigorous, pluripotent, and relatively undifferentiated. In many disciplines, especially in evolutionary biology and oncology, the developmental perspective is being reasserted as an important research program.\n"]}]
+          }}
+  recorded_at: 2020-07-01 17:34:25 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.6.2
+- request:
+    method: get
+    uri: http://api.plos.org/search?q=id%3A10.1371%2Fjournal.pcbi.1005134&fl=abstract&rows=0&wt=json
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      User-Agent: libcurl/7.64.1 r-curl/4.3 crul/0.9.2.92
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      server: nginx/1.14.1
+      date: Wed, 01 Jul 2020 17:34:24 GMT
+      content-type: application/json;charset=utf-8
+      content-length: '54'
+      connection: keep-alive
+      last-modified: Wed, 01 Jul 2020 13:15:09 GMT
+      etag: '"ODEzYzQwMDAwMDAwMDAwMFNvbHI="'
+    body:
+      encoding: UTF-8
+      file: no
+      string: |
+        {
+          "response":{"numFound":1,"start":0,"docs":[]
+          }}
+  recorded_at: 2020-07-01 17:34:25 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.6.2
+- request:
+    method: get
+    uri: http://api.plos.org/search?q=id%3A10.1371%2Fjournal.pcbi.1005134&fl=abstract&start=0&rows=10&wt=json
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      User-Agent: libcurl/7.64.1 r-curl/4.3 crul/0.9.2.92
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      server: nginx/1.14.1
+      date: Wed, 01 Jul 2020 17:34:24 GMT
+      content-type: application/json;charset=utf-8
+      content-length: '2481'
+      connection: keep-alive
+      last-modified: Wed, 01 Jul 2020 13:15:09 GMT
+      etag: '"YTYzYzQwMDAwMDAwMDAwMFNvbHI="'
+    body:
+      encoding: UTF-8
+      file: no
+      string: |
+        {
+          "response":{"numFound":1,"start":0,"docs":[
+              {
+                "abstract":["\nWhile women are generally underrepresented in STEM fields, there are noticeable differences between fields. For instance, the gender ratio in biology is more balanced than in computer science. We were interested in how this difference is reflected in the interdisciplinary field of computational/quantitative biology. To this end, we examined the proportion of female authors in publications from the PubMed and arXiv databases. There are fewer female authors on research papers in computational biology, as compared to biology in general. This is true across authorship position, year, and journal impact factor. A comparison with arXiv shows that quantitative biology papers have a higher ratio of female authors than computer science papers, placing computational biology in between its two parent fields in terms of gender representation. Both in biology and in computational biology, a female last author increases the probability of other authors on the paper being female, pointing to a potential role of female PIs in influencing the gender balance.\nAuthor summary: There are fewer women than men working in Science, Technology, Engineering and Mathematics (STEM). However, some fields within STEM are more gender-balanced than others. For instance, biology has a relatively high proportion of women, whereas there are few women in computer science. But what about computational biology? As an interdisciplinary STEM field, would its gender balance be close to one of its “parent” fields, or in between the two? To investigate this question, we examined authorship data from databases of scholarly publications in biology, computational biology, and computer science. We found that computational biology lies in between computer science and biology, as far as female representation goes. This is independent of other factors, e.g. year of publication. This suggests that computational biology might provide an environment that is more conducive to female participation that other areas of computer science. Across all three fields, we also found that if the last author on a publication—usually the person leading the study—is a women, then there will also be more women in other authorship positions. This suggests that having women in leadership positions might be beneficial for overall gender balance, though our data do not allow us to uncover the underlying mechanism. "]}]
+          }}
+  recorded_at: 2020-07-01 17:34:25 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.6.2
+- request:
+    method: get
+    uri: http://api.plos.org/search?q=id%3A10.1371%2Fjournal.pone.0174402&fl=abstract&rows=0&wt=json
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      User-Agent: libcurl/7.64.1 r-curl/4.3 crul/0.9.2.92
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      server: nginx/1.14.1
+      date: Wed, 01 Jul 2020 17:34:25 GMT
+      content-type: application/json;charset=utf-8
+      content-length: '54'
+      connection: keep-alive
+      last-modified: Wed, 01 Jul 2020 13:15:09 GMT
+      etag: '"YTYzYzQwMDAwMDAwMDAwMFNvbHI="'
+    body:
+      encoding: UTF-8
+      file: no
+      string: |
+        {
+          "response":{"numFound":1,"start":0,"docs":[]
+          }}
+  recorded_at: 2020-07-01 17:34:25 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.6.2
+- request:
+    method: get
+    uri: http://api.plos.org/search?q=id%3A10.1371%2Fjournal.pone.0174402&fl=abstract&start=0&rows=10&wt=json
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      User-Agent: libcurl/7.64.1 r-curl/4.3 crul/0.9.2.92
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      server: nginx/1.14.1
+      date: Wed, 01 Jul 2020 17:34:25 GMT
+      content-type: application/json;charset=utf-8
+      content-length: '2506'
+      connection: keep-alive
+      last-modified: Wed, 01 Jul 2020 13:15:09 GMT
+      etag: '"OWJkYzQwMDAwMDAwMDAwMFNvbHI="'
+    body:
+      encoding: UTF-8
+      file: no
+      string: |
+        {
+          "response":{"numFound":1,"start":0,"docs":[
+              {
+                "abstract":["\nEducation about virus biology at school is of pivotal interest to raise public awareness concerning means of disease transmission and, thus, methods to prevent infection, and to reduce unnecessary antibiotic treatment due to patient pressure on physicians in case of viral diseases such as influenza. This study aimed at making visible the knowledge of Austrian high school and university students with respect to virus biology, virus structure and health-education issues. The data presented here stem from comprehensive questionnaire analyses, including the task to draw a virus, from a cross-sectional study with 133 grade 7 and 199 grade 10 high school students, and 133 first-year biology and 181 first-year non-biology university students. Analyses were performed both quantitatively and qualitatively. ANOVA revealed a highly significant group effect for total knowledge relating to virus biology and health issues (F(3, 642) = 44.17, p < 0.01, η2p = 0.17). Specific post-hoc tests by means of the Tukey test showed significant differences between all groups (p < .01) with the exception of 1st year non-biology students and grade 10 high school students. Students enrolled in university-level biology outperformed all other groups, even though they had not yet encountered this topic at their courses; part of this phenomenon might be due to their affinity for learning about biological topics. However, even many first-year biology students had a high number of severe misconceptions, e.g., defining a virus as a pro- or eukaryotic cell, or falsely naming malaria as a viral disease. Since there was no significant difference in virus-related knowledge between high schools, virus biology seems to have been taught similarly among the tested schools. However, the majority of participants stated that the virus-related knowledge they had acquired at school was not sufficient. Based on the results presented here we urgently suggest improving and intensifying teaching this topic at school, since virus-related knowledge was by far too fragmentary among many participants. Such lack of health-relevant knowledge may contribute to pressure on physicians by patients to unnecessarily prescribe antibiotics, and possibly lead to potentially dangerous neglect concerning vaccination. The effectiveness of newly developed virus-related teaching units and material could be tested with the instrument used here.\n"]}]
+          }}
+  recorded_at: 2020-07-01 17:34:25 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.6.2
