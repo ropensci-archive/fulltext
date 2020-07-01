@@ -7,12 +7,17 @@ Description: Provides a single interface to many sources of full text
     included for searching for articles, downloading full or partial
     text, downloading supplementary materials, converting to various
     data formats.
-Version: 1.4.9.91
+Version: 1.5.0
 License: MIT + file LICENSE
-Authors@R: person("Scott", "Chamberlain",
-    role = c("aut", "cre"),
-    email = "myrmecocystus@gmail.com",
-    comment = c(ORCID = "0000-0003-1444-9135"))
+Authors@R: c(
+    person("Scott", "Chamberlain",
+        role = c("aut", "cre"),
+        email = "myrmecocystus@gmail.com",
+        comment = c(ORCID = "0000-0003-1444-9135")),
+    person(given = "rOpenSci",
+        role = "fnd",
+        comment = "https://ropensci.org/")
+    )
 URL: https://docs.ropensci.org/fulltext (website)
     https://github.com/ropensci/fulltext/ (devel)
     https://books.ropensci.org/fulltext/ (user manual)
