@@ -441,7 +441,8 @@ biorxiv_ft <- function(dois, type = "pdf", progress = FALSE, ...) {
     }
     lk <- tcat(ftdoi_get(sprintf("api/doi/%s/", x)))
     if (inherits(lk, c("error", "warning"))) return(ft_error(lk$message, x))
-    url <- jsonlite::fromJSON(lk$parse("UTF-8"))$links$pdf
+    lks <- jsonlite::fromJSON(lk$parse("UTF-8"))$links
+    url <- grep('pdf', lks$url, value = TRUE)
     get_ft(x, 'pdf', url, path, ...)
   }
   plapply(dois, biorxiv_fun, type, progress, ...)
