@@ -125,8 +125,8 @@ test_that("ft_get fails well", {
   expect_error(ft_get('10.7554/eLife.03032', type = "plain"),
     "'type' for elife must be")
   expect_error(
-    ft_get("10.1016/j.trac.2016.01.027", from = "elsevier", type = "pdf"),
-    "'type' for elsevier must be")
+    ft_get("10.1016/j.trac.2016.01.027", from = "elsevier", type = "add"),
+    "must be")
 })
 
 test_that("ft_get errors slot", {
