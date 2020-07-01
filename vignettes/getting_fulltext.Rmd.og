@@ -1,8 +1,13 @@
-<!--
-%\VignetteEngine{knitr::knitr}
-%\VignetteIndexEntry{Getting full text}
-%\VignetteEncoding{UTF-8}
--->
+---
+title: Getting full text
+author: Scott Chamberlain
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+    %\VignetteIndexEntry{Getting full text}
+    %\VignetteEngine{knitr::rmarkdown}
+    %\VignetteEncoding{UTF-8}
+---
 
 ```{r echo=FALSE}
 knitr::opts_chunk$set(
@@ -14,8 +19,6 @@ knitr::opts_chunk$set(
 ```
 
 The main interface to fetching full text is through `ft_get()`.
-
-## Load fulltext
 
 ```{r}
 library("fulltext")

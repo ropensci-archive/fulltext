@@ -1,13 +1,15 @@
-<!--
-%\VignetteEngine{knitr::knitr}
-%\VignetteIndexEntry{fulltext introduction}
-%\VignetteEncoding{UTF-8}
--->
+---
+title: fulltext introduction
+author: Scott Chamberlain
+date: "2020-07-01"
+output: rmarkdown::html_vignette
+vignette: >
+    %\VignetteIndexEntry{fulltext introduction}
+    %\VignetteEngine{knitr::rmarkdown}
+    %\VignetteEncoding{UTF-8}
+---
 
 
-
-fulltext introduction
-======
 
 `fulltext` is a package to facilitate text mining. It focuses on open access journals. This package makes it easier to search for articles, download those articles in full text if available, convert pdf format to plain text, and extract text chunks for vizualization/analysis. We are planning to add bits for analysis in future versions. The steps in bullet form:
 
@@ -34,7 +36,7 @@ Search for the term _ecology_ in PLOS journals.
 #> Query:
 #>   [ecology] 
 #> Found:
-#>   [PLoS: 50330; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
+#>   [PLoS: 52789; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
 #> Returned:
 #>   [PLoS: 10; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0]
 ```
@@ -45,7 +47,7 @@ Each publisher/search-engine has a slot with metadata and data
 ```r
 res1$plos
 #> Query: [ecology] 
-#> Records found, returned: [50330, 10] 
+#> Records found, returned: [52789, 10] 
 #> License: [CC-BY] 
 #>                              id
 #> 1  10.1371/journal.pone.0001248
@@ -70,8 +72,11 @@ Using the results from `ft_search()` we can grab full text of some articles
 #> <fulltext text>
 #> [Docs] 10 
 #> [Source] ext - /Users/sckott/Library/Caches/R/fulltext 
-#> [IDs] 10.1371/journal.pone.0001248 10.1371/journal.pone.0059813 10.1371/journal.pone.0080763 10.1371/journal.pone.0220747 10.1371/journal.pone.0155019 10.1371/journal.pone.0175014
-#>      10.1371/journal.pone.0150648 10.1371/journal.pone.0208370 10.1371/journal.pcbi.1003594 10.1371/journal.pone.0102437 ...
+#> [IDs] 10.1371/journal.pone.0001248 10.1371/journal.pone.0059813
+#>      10.1371/journal.pone.0080763 10.1371/journal.pone.0220747
+#>      10.1371/journal.pone.0155019 10.1371/journal.pone.0175014
+#>      10.1371/journal.pone.0150648 10.1371/journal.pone.0208370
+#>      10.1371/journal.pcbi.1003594 10.1371/journal.pone.0102437 ...
 ```
 
 Dig in to the PLOS data
@@ -104,7 +109,7 @@ You can extract from any pdf from a file path, like:
 ```r
 path <- system.file("examples", "example1.pdf", package = "fulltext")
 ft_extract(path)
-#> <document>/Library/Frameworks/R.framework/Versions/3.6/Resources/library/fulltext/examples/example1.pdf
+#> <document>/Library/Frameworks/R.framework/Versions/4.0/Resources/library/fulltext/examples/example1.pdf
 #>   Title: Suffering and mental health among older people living in nursing homes---a mixed-methods study
 #>   Producer: pdfTeX-1.40.10
 #>   Creation date: 2015-07-17

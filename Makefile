@@ -1,16 +1,15 @@
 PACKAGE := $(shell grep '^Package:' DESCRIPTION | sed -E 's/^Package:[[:space:]]+//')
 RSCRIPT = Rscript --no-init-file
 
-all: move rmd2md
-
-move:
-	cp inst/vign/fulltext.md vignettes;\
-	cp inst/vign/getting_fulltext.md vignettes
-
-rmd2md:
+vign:
 	cd vignettes;\
-	mv fulltext.md fulltext.Rmd;\
-	mv getting_fulltext.md getting_fulltext.Rmd
+	${RSCRIPT} -e "Sys.setenv(NOT_CRAN='true'); knitr::knit('fulltext.Rmd.og', output = 'fulltext.Rmd')";\
+	cd ..
+
+vign_getting:
+	cd vignettes;\
+	${RSCRIPT} -e "Sys.setenv(NOT_CRAN='true'); knitr::knit('getting_fulltext.Rmd.og', output = 'getting_fulltext.Rmd')";\
+	cd ..
 
 install: doc build
 	R CMD INSTALL . && rm *.tar.gz
