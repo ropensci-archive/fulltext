@@ -9,7 +9,7 @@ plugin_links_entrez <- function(sources, ids, opts, ...){
     res <- rentrez::entrez_link(dbfrom = "pubmed", db = "", cmd = "llinks",
       id = tmp$ids, config = c(...))
     out <- lapply(res$linkouts, function(z) {
-      rbind_fill(lapply(z, function(w) {
+      rbl(lapply(z, function(w) {
         w <- unclass(w)
         tmp <- Map(function(a) {
           a[vapply(a, class, "") == "NULL"] <- NA_character_
@@ -44,7 +44,7 @@ plugin_links_crossref <- function(sources, ids, opts, ...){
     }
     tmp <- ft_compact(lapply(ids, function(z) safe_crm_links(z, type = "all", ...)))
     out <- lapply(tmp, function(z) {
-      rbind_fill(lapply(z, function(w) {
+      rbl(lapply(z, function(w) {
         data.frame(url = w[[1]], doi = attr(w, "doi"), type = attr(w, "type"),
                    member = attr(w, "member") %||% "",
                    intended_application = attr(w, "intended_application") %||% "",
