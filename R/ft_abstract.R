@@ -1,9 +1,9 @@
 #' Get abstracts
 #'
 #' @export
-#' @param x (character) DOIs as a character vector
+#' @param x (character) DOIs as a character vector. See Details.
 #' @param from Source to query. One or more of plos (default),
-#' scopus, microsoft, or crossref
+#' scopus, microsoft, crossref, or semanticscholar
 #' @param plosopts PLOS options, a named list.
 #' @param scopusopts Scopus options, a named list.
 #' @param maopts Microsoft Academic options, a named list.
@@ -14,6 +14,16 @@
 #' @details See **Rate Limits** and **Authentication** in
 #' [fulltext-package] for rate limiting and authentication information,
 #' respectively
+#' 
+#' There's no options to pass on when `from="semanticscholar"`, other than
+#' curl options via `...`
+#' 
+#' When `from="semanticscholar"`, ids passed to `x` can be various types: DOI,
+#' S2 paper id (Semantic Scholar id), arXiv id, MAG id, ACL id, PubMed id,
+#' or Corpus id. If you use DOIs or S2 paper ids you can pass them to `x`
+#' as is. However, if you use other id types you need to prefix each id
+#' with the name of the type of id, options are: "arXiv", "MAG", "ACL",
+#' "PMID", "CorpusID"
 #'
 #' @examples
 #' # List publishers included
@@ -29,6 +39,14 @@
 #' dois <- res$plos$data$id
 #' (out <- ft_abstract(x = dois, from = "plos"))
 #' out$plos
+#' 
+#' # Semantic Scholar
+#' (out <- ft_abstract(x = dois, from = "semanticscholar"))
+#' out$semanticscholar
+#' ## using arxiv ids
+#' arxiv_ids <- c("0710.3491", "0804.0713", "0810.4821", "1003.0315")
+#' (out <- ft_abstract(x = paste0("arXiv:", arxiv_ids), from = "semanticscholar"))
+#' out$semanticscholar
 #'
 #' # Scopus
 #' opts <- list(key = Sys.getenv('ELSEVIER_SCOPUS_KEY'))
@@ -104,13 +122,16 @@ ft_abstract.character <- function(x, from = "plos", plosopts = list(),
                                   scopusopts = list(), maopts = list(),
                                   crossrefopts = list(), ...) {
 
-  from <- match.arg(from, c("plos", "scopus", "microsoft", "crossref"))
+  from <- match.arg(from, c("plos", "scopus", "microsoft", "crossref",
+    "semanticscholar"), several.ok = TRUE)
   plos_out <- plugin_abstract_plos(from, x, plosopts, ...)
   scopus_out <- plugin_abstract_scopus(from, x, scopusopts, ...)
   ma_out <- plugin_abstract_microsoft(from, x, maopts, ...)
   cr_out <- plugin_abstract_crossref(from, x, crossrefopts, ...)
+  ss_out <- plugin_abstract_semanticscholar(from, x, crossrefopts, ...)
   structure(list(plos = plos_out, scopus = scopus_out,
-    ma = ma_out, crossref = cr_out), class = "ft_abstract")
+    ma = ma_out, crossref = cr_out, semanticscholar = ss_out),
+  class = "ft_abstract")
 }
 
 #' @export
@@ -129,7 +150,8 @@ print.ft_abstract <- function(x, ...) {
     sprintf("  [PLOS: %s", len_abs(x$plos)),
     sprintf("Scopus: %s", len_abs(x$scopus)),
     sprintf("Microsoft: %s", len_abs(x$ma)),
-    sprintf("Crossref: %s]", len_abs(x$crossref)),
+    sprintf("Crossref: %s", len_abs(x$crossref)),
+    sprintf("Semantic Scholar: %s]", len_abs(x$semanticscholar)),
     sep = "; "), "\n")
 }
 

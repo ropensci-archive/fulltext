@@ -18,10 +18,10 @@ ft_abstract(
 ft_abstract_ls()
 }
 \arguments{
-\item{x}{(character) DOIs as a character vector}
+\item{x}{(character) DOIs as a character vector. See Details.}
 
 \item{from}{Source to query. One or more of plos (default),
-scopus, microsoft, or crossref}
+scopus, microsoft, crossref, or semanticscholar}
 
 \item{plosopts}{PLOS options, a named list.}
 
@@ -44,6 +44,16 @@ Get abstracts
 See \strong{Rate Limits} and \strong{Authentication} in
 \link{fulltext-package} for rate limiting and authentication information,
 respectively
+
+There's no options to pass on when \code{from="semanticscholar"}, other than
+curl options via \code{...}
+
+When \code{from="semanticscholar"}, ids passed to \code{x} can be various types: DOI,
+S2 paper id (Semantic Scholar id), arXiv id, MAG id, ACL id, PubMed id,
+or Corpus id. If you use DOIs or S2 paper ids you can pass them to \code{x}
+as is. However, if you use other id types you need to prefix each id
+with the name of the type of id, options are: "arXiv", "MAG", "ACL",
+"PMID", "CorpusID"
 }
 \examples{
 # List publishers included
@@ -59,6 +69,14 @@ ft_abstract_ls()
 dois <- res$plos$data$id
 (out <- ft_abstract(x = dois, from = "plos"))
 out$plos
+
+# Semantic Scholar
+(out <- ft_abstract(x = dois, from = "semanticscholar"))
+out$semanticscholar
+## using arxiv ids
+arxiv_ids <- c("0710.3491", "0804.0713", "0810.4821", "1003.0315")
+(out <- ft_abstract(x = paste0("arXiv:", arxiv_ids), from = "semanticscholar"))
+out$semanticscholar
 
 # Scopus
 opts <- list(key = Sys.getenv('ELSEVIER_SCOPUS_KEY'))

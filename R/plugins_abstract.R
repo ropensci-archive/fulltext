@@ -56,3 +56,15 @@ plugin_abstract_crossref <- function(sources, ids, opts, ...) {
     )
   })
 }
+
+# opts ignored
+plugin_abstract_semanticscholar <- function(sources, ids, opts, ...) {
+  if (!any(grepl("semanticscholar", sources))) return(empty_ids(ids))
+  assert(ids, "character")
+  ss_base <- 'https://api.semanticscholar.org/v1/paper'
+  con <- crul::Async$new(urls = file.path(ss_base, ids), opts = list(...))
+  out <- con$get()
+  jsons <- lapply(out, function(z) jsonlite::fromJSON(z$parse("UTF-8")))
+  Map(function(a, b) list(id = a, abstract = b$abstract), ids, jsons)
+}
+

@@ -10,7 +10,7 @@ test_that("ft_abstract basic functionality works - PLOS", {
   aa <- ft_abstract(x = dois[1:5], from = "plos")
   
   expect_is(aa, "ft_abstract")
-  expect_named(aa, c('plos', 'scopus', 'ma', 'crossref'))
+  expect_named(aa, c('plos', 'scopus', 'ma', 'crossref', 'semanticscholar'))
   expect_is(aa$plos, "list")
   expect_is(aa$plos[[1]], "list")
   expect_named(aa$plos[[1]], c('doi', 'abstract'))
@@ -70,7 +70,7 @@ test_that("ft_abstract basic functionality works - Crossref", {
   aa <- ft_abstract(x = ids, from = "crossref")
   
   expect_is(aa, "ft_abstract")
-  expect_named(aa, c('plos', 'scopus', 'ma', 'crossref'))
+  expect_named(aa, c('plos', 'scopus', 'ma', 'crossref', 'semanticscholar'))
   expect_is(aa$crossref, "list")
   expect_is(aa$crossref[[1]], "list")
   expect_named(aa$crossref[[1]], c('id', 'abstract'))
