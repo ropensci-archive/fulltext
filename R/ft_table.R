@@ -30,8 +30,10 @@
 #' }
 ft_table <- function(path = NULL, type = NULL, encoding = NULL, xml_extract_text = TRUE) {
   if (is.null(path)) path <- cache_options_get()$path
-  if (!is.character(path)) stop("'path' must be character class")
   if (!file.exists(path)) stop(path, " does not exist")
+  assert(path, "character")
+  assert(type, "character")
+  assert(xml_extract_text, "logical")
   if (is.null(encoding)) encoding <- getOption("encoding")
   pattern <- type
   if (!is.null(type)) {
