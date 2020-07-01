@@ -43,7 +43,9 @@ Get abstracts
 \details{
 See \strong{Rate Limits} and \strong{Authentication} in
 \link{fulltext-package} for rate limiting and authentication information,
-respectively
+respectively. In particular take int account Semantic Scholar rate limits
+because we do asynchronous requests to Semantic Scholar, which means
+you can get data fast, but you'll hit your rate limit fast too.
 
 There's no options to pass on when \code{from="semanticscholar"}, other than
 curl options via \code{...}

@@ -61,6 +61,11 @@
 #' pass in `verbose = TRUE` to your function call, and you'll get headers 
 #' that will display these rate limits. See also **Authentication**.
 #' 
+#' **Semantic Scholar**: Not documented in their docs, and no response
+#' headers given. At time of this writing (2020-07-01) the rate limit is:
+#' 100 requests per 5-minutes per IP address. or 20 requests per min. Note
+#' that this rate limit may change.
+#' 
 #' @section Authentication:
 #' 
 #' **BMC**: BMC is integrated into Springer Publishers now, 

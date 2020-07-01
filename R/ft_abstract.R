@@ -13,7 +13,9 @@
 #' @return An object of class `ft_abstract`
 #' @details See **Rate Limits** and **Authentication** in
 #' [fulltext-package] for rate limiting and authentication information,
-#' respectively
+#' respectively. In particular take int account Semantic Scholar rate limits
+#' because we do asynchronous requests to Semantic Scholar, which means
+#' you can get data fast, but you'll hit your rate limit fast too.
 #' 
 #' There's no options to pass on when `from="semanticscholar"`, other than
 #' curl options via `...`
