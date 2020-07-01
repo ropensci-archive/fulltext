@@ -33,6 +33,7 @@ test_that("cache_options_set - onload conditions", {
   bb <- cache_options_set(overwrite = TRUE)
   expect_true(bb$overwrite)
 
+  skip_on_os("windows")
   mypath <- tempdir()
   cache_options_set(full_path = mypath)
   cc <- cache_options_get()
