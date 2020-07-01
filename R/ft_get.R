@@ -448,7 +448,8 @@ ft_get.character <- function(x, from=NULL, type = "xml", try_unknown = TRUE,
   check_cache()
   if (!is.null(from)) {
     from <- match.arg(from, c("plos", "entrez", "elife", "pensoft",
-      "arxiv", "biorxiv", "elsevier", "sciencedirect", "wiley"))
+      "arxiv", "biorxiv", "elsevier", "sciencedirect", "wiley"),
+      several.ok = TRUE)
     plos_out <- plugin_get_plos(from, x, plosopts, type,
       progress = progress, ...)
     entrez_out <- plugin_get_entrez(from, x, entrezopts, type,
@@ -488,7 +489,8 @@ ft_get.list <- function(x, from=NULL, type = "xml", try_unknown = TRUE,
   check_cache()
   if (!is.null(from)) {
     from <- match.arg(from, c("plos", "entrez", "elife", "pensoft",
-      "arxiv", "biorxiv", "elsevier", "sciencedirect", "wiley"))
+      "arxiv", "biorxiv", "elsevier", "sciencedirect", "wiley"),
+      several.ok = TRUE)
     plos_out <- plugin_get_plos(from, x, plosopts, type,
       progress = progress, ...)
     entrez_out <- plugin_get_entrez(from, x, entrezopts, type,

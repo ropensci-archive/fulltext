@@ -65,6 +65,22 @@ test_that("ft_get works for all data providers", {
   # expect_is(oo, "ft_data")
 })
 
+test_that("ft_get: > 1 from works", {
+  skip_on_cran()
+
+  plos_dois <- c('10.1371/journal.pone.0086169', '10.1371/journal.pbio.0000062')
+  aa <- sm(ft_get(plos_dois, from = c("plos", "entrez")))
+
+  expect_is(aa, "ft_data")
+  expect_is(aa$plos, "list")
+  expect_match(aa$plos$data$path[[1]]$path, "xml")
+  expect_match(aa$plos$data$path[[1]]$type, "xml")
+
+  expect_is(aa$entrez, "list")
+  expect_match(aa$entrez$data$path[[1]]$path, "xml")
+  expect_match(aa$entrez$data$path[[1]]$type, "xml")
+})
+
 
 test_that("ft_get works for pdf for plos provider", {
   skip_on_cran()

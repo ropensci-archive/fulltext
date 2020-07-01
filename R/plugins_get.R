@@ -147,7 +147,7 @@ plugin_get_generator <- function(srce, fun) {
       if (any(grepl("plos", sources))) {
         opts$doi <- ids
       } else if (any(sources %in% c("entrez"))) {
-        opts$ids <- ids
+        opts$dois <- ids
       } else {
         opts$dois <- ids
       }
@@ -248,8 +248,8 @@ plos_wrapper <- function(dois, type, progress = FALSE, ...) {
 
 # Entrez - wrapper around rentrez::entrez_search/rentrez::entrez_fetch
 # type: only xml
-entrez_ft <- function(ids, type = "xml", progress = FALSE, ...) {
-  ids <- stats::na.omit(ids)
+entrez_ft <- function(dois, type = "xml", progress = FALSE, ...) {
+  ids <- stats::na.omit(dois)
   db <- "pmc"
   if (length(ids) > 50) {
     chunk_size <- 50
