@@ -10,9 +10,9 @@ fulltext
 [![rstudio mirror downloads](https://cranlogs.r-pkg.org/badges/fulltext)](https://github.com/metacran/cranlogs.app)
 [![cran version](https://www.r-pkg.org/badges/version/fulltext)](https://cran.r-project.org/package=fulltext)
 
-__Get full text articles from lots of places__
+__Get full text research articles__
 
-Checkout the [fulltext manual](https://books.ropensci.org/fulltext/) to get started.
+Checkout the [package docs][docs] and the [fulltext manual][ftbook] to get started.
 
 -----
 
@@ -45,6 +45,7 @@ Data sources in `fulltext` include:
 * [bioRxiv](https://biorxiv.org/) - via the `biorxivr` package
 * [PMC/Pubmed via Entrez](https://www.ncbi.nlm.nih.gov/) - via the `rentrez` package
 * Scopus (https://www.scopus.com/) - internal tooling
+* Semantic Scholar (https://www.semanticscholar.org/) - internal tooling
 * Many more are supported via the above sources (e.g., _Royal Society Open Science_ is
 available via Pubmed)
 * We __will__ add more, as publishers open up, and as we have time...See the [master list here](https://github.com/ropensci/fulltext/issues/4#issuecomment-52376743)
@@ -55,9 +56,9 @@ all the various authentication things for different publishers, but of course al
 is already easily available. See the **Authentication** section in `?fulltext-package` after 
 loading the package.
 
-We'd love your feedback. Let us know what you think in [the issue tracker](https://github.com/ropensci/fulltext/issues)
+We'd love your feedback. Let us know what you think in the issue tracker (https://github.com/ropensci/fulltext/issues)
 
-Article full text formats by publisher:  [https://github.com/ropensci/fulltext/blob/master/vignettes/formats.Rmd](https://github.com/ropensci/fulltext/blob/master/vignettes/formats.Rmd)
+Article full text formats by publisher: https://docs.ropensci.org/fulltext/articles/formats
 
 
 ## Installation
@@ -83,153 +84,13 @@ Load library
 library('fulltext')
 ```
 
-## Search
+## Interoperability with other packages downstream
 
-`ft_search()` - get metadata on a search query.
-
-
-```r
-ft_search(query = 'ecology', from = 'crossref')
-#> Query:
-#>   [ecology] 
-#> Found:
-#>   [PLoS: 0; BMC: 0; Crossref: 207039; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
-#> Returned:
-#>   [PLoS: 0; BMC: 0; Crossref: 10; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0]
-```
-
-## Get full text links
-
-`ft_links()` - get links for articles (xml and pdf).
-
-
-```r
-res1 <- ft_search(query = 'biology', from = 'entrez', limit = 5)
-ft_links(res1)
-#> <fulltext links>
-#> [Found] 5 
-#> [IDs] ID_32413789 ID_31553912 ID_30554963 ID_27578439 ID_23681635 ...
-```
-
-Or pass in DOIs directly
-
-
-```r
-ft_links(res1$entrez$data$doi, from = "entrez")
-#> <fulltext links>
-#> [Found] 5 
-#> [IDs] ID_32413789 ID_31553912 ID_30554963 ID_27578439 ID_23681635 ...
-```
-
-## Get full text
-
-`ft_get()` - get full or partial text of articles.
-
-
-```r
-ft_get('10.7717/peerj.228')
-#> <fulltext text>
-#> [Docs] 1 
-#> [Source] ext - /Users/sckott/Library/Caches/R/fulltext 
-#> [IDs] 10.7717/peerj.228 ...
-```
-
-## Extract chunks
-
-
-```r
-library(pubchunks)
-x <- ft_get(c('10.7554/eLife.03032', '10.7554/eLife.32763'), from = "elife")
-x %>% ft_collect() %>% pub_chunks("publisher") %>% pub_tabularize()
-#> $elife
-#> $elife$`10.7554/eLife.03032`
-#>                          publisher .publisher
-#> 1 eLife Sciences Publications, Ltd      elife
-#> 
-#> $elife$`10.7554/eLife.32763`
-#>                          publisher .publisher
-#> 1 eLife Sciences Publications, Ltd      elife
-```
-
-Get multiple fields at once
-
-
-```r
-x %>% ft_collect() %>% pub_chunks(c("doi","publisher")) %>% pub_tabularize()
-#> $elife
-#> $elife$`10.7554/eLife.03032`
-#>                   doi                        publisher .publisher
-#> 1 10.7554/eLife.03032 eLife Sciences Publications, Ltd      elife
-#> 
-#> $elife$`10.7554/eLife.32763`
-#>                   doi                        publisher .publisher
-#> 1 10.7554/eLife.32763 eLife Sciences Publications, Ltd      elife
-```
-
-Pull out the data.frame's
-
-
-```r
-x %>%
-  ft_collect() %>% 
-  pub_chunks(c("doi", "publisher", "author")) %>%
-  pub_tabularize() %>%
-  .$elife
-#> $`10.7554/eLife.03032`
-#>                   doi                        publisher authors.given_names
-#> 1 10.7554/eLife.03032 eLife Sciences Publications, Ltd                  Ya
-#>   authors.surname authors.given_names.1 authors.surname.1 authors.given_names.2
-#> 1            Zhao                 Jimin               Lin               Beiying
-#>   authors.surname.2 authors.given_names.3 authors.surname.3
-#> 1                Xu                  Sida                Hu
-#>   authors.given_names.4 authors.surname.4 authors.given_names.5
-#> 1                   Xue             Zhang                Ligang
-#>   authors.surname.5 .publisher
-#> 1                Wu      elife
-#> 
-#> $`10.7554/eLife.32763`
-#>                   doi                        publisher authors.given_names
-#> 1 10.7554/eLife.32763 eLife Sciences Publications, Ltd             Natasha
-#>   authors.surname authors.given_names.1 authors.surname.1 authors.given_names.2
-#> 1          Mhatre                Robert            Malkin                Rittik
-#>   authors.surname.2 authors.given_names.3 authors.surname.3
-#> 1               Deb                Rohini      Balakrishnan
-#>   authors.given_names.4 authors.surname.4 .publisher
-#> 1                Daniel            Robert      elife
-```
-
-## Extract text from PDFs
-
-There are going to be cases in which some results you find in `ft_search()` have full text available in text, xml, or other machine readable formats, but some may be open access, but only in pdf format. We have a series of convenience functions in this package to help extract text from pdfs, both locally and remotely.
-
-Locally, using code adapted from the package `tm`, and two pdf to text parsing backends
-
-
-```r
-pdf <- system.file("examples", "example2.pdf", package = "fulltext")
-ft_extract(pdf)
-#> <document>/Library/Frameworks/R.framework/Versions/4.0/Resources/library/fulltext/examples/example2.pdf
-#>   Title: pone.0107412 1..10
-#>   Producer: Acrobat Distiller 9.0.0 (Windows); modified using iText 5.0.3 (c) 1T3XT BVBA
-#>   Creation date: 2014-09-18
-```
-
-### Interoperability with other packages downstream
+Note: this example not included in vignettes as that would require the two below packages in Suggests here. To see many examples and documentation see the [package docs][docs] and the [fulltext manual][ftbook].
 
 
 ```r
 cache_options_set(path = (td <- 'foobar'))
-#> $cache
-#> [1] TRUE
-#> 
-#> $backend
-#> [1] "ext"
-#> 
-#> $path
-#> [1] "/Users/sckott/Library/Caches/R/foobar"
-#> 
-#> $overwrite
-#> [1] FALSE
 res <- ft_get(c('10.7554/eLife.03032', '10.7554/eLife.32763'), type = "pdf")
 library(readtext)
 x <- readtext::readtext(file.path(cache_options_get()$path, "*.pdf"))
@@ -239,12 +100,6 @@ x <- readtext::readtext(file.path(cache_options_get()$path, "*.pdf"))
 ```r
 library(quanteda)
 quanteda::corpus(x)
-#> Corpus consisting of 2 documents.
-#> 10_7554_eLife_03032.pdf :
-#> "                                                            ..."
-#> 
-#> 10_7554_eLife_32763.pdf :
-#> "                                                            ..."
 ```
 
 ## Contributors
@@ -266,3 +121,5 @@ By participating in this project you agree to abide by its terms.
 [suppdata]: https://github.com/ropensci/suppdata
 [pubchunks]: https://github.com/ropensci/pubchunks
 [coc]: https://github.com/ropensci/fulltext/blob/master/CODE_OF_CONDUCT.md
+[docs]: https://docs.ropensci.org/fulltext/
+[ftbook]: https://books.ropensci.org/fulltext/
