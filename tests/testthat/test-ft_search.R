@@ -10,7 +10,7 @@ test_that("ft_search returns...", {
     Sys.sleep(1)
     cc <- ft_search(query = 'ecology', from = 'crossref')
     dd <- ft_search(query = 'owls', from = 'biorxiv')
-  })
+  }, preserve_exact_body_bytes = TRUE)
   
   # correct classes
   expect_is(aa, "ft")

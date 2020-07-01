@@ -9,7 +9,7 @@ test_that("ft_abstract basic functionality works - PLOS", {
                       '-article_type:viewpoints')))
     dois <- res$plos$data$id
     aa <- ft_abstract(x = dois[1:5], from = "plos")
-  })
+  }, preserve_exact_body_bytes = TRUE)
   
   expect_is(aa, "ft_abstract")
   expect_named(aa, c('plos', 'scopus', 'ma', 'crossref', 'semanticscholar'))
