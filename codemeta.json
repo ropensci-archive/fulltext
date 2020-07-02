@@ -10,14 +10,14 @@
   "codeRepository": "https://github.com/ropensci/fulltext/",
   "issueTracker": "https://github.com/ropensci/fulltext/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
-    "version": "3.6.2",
+    "version": "4.0.2",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 3.6.2 Patched (2019-12-12 r77564)",
+  "runtimePlatform": "R version 4.0.2 (2020-06-22)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
@@ -47,7 +47,7 @@
       "@type": "SoftwareApplication",
       "identifier": "roxygen2",
       "name": "roxygen2",
-      "version": ">= 7.0.2",
+      "version": ">= 7.1.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -82,6 +82,18 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "rmarkdown",
+      "name": "rmarkdown",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=rmarkdown"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "pubchunks",
       "name": "pubchunks",
       "provider": {
@@ -91,6 +103,18 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=pubchunks"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "vcr",
+      "name": "vcr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=vcr"
     }
   ],
   "softwareRequirements": [
@@ -298,10 +322,13 @@
   "applicationCategory": "Literature",
   "isPartOf": "https://ropensci.org",
   "keywords": ["text-mining", "literature", "pdf", "xml", "publications", "citations", "full-text", "TDM", "text-ming", "metadata", "open-access", "extract-text", "crossref", "rstats", "r", "r-package"],
-  "contIntegration": ["https://travis-ci.org/ropensci/fulltext", "https://codecov.io/github/ropensci/fulltext?branch=master"],
+  "contIntegration": [
+    "https://travis-ci.org/ropensci/fulltext",
+    "https://codecov.io/github/ropensci/fulltext?branch=master"
+  ],
   "releaseNotes": "https://github.com/ropensci/fulltext/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/fulltext/blob/master/README.md",
-  "fileSize": "966.852KB",
+  "fileSize": "1360.843KB",
   "developmentStatus": "https://www.repostatus.org/#active",
   "relatedLink": [
     "https://ropensci.github.io/fulltext-book/",
@@ -311,5 +338,10 @@
   ],
   "contributor": {},
   "copyrightHolder": {},
-  "funder": {}
+  "funder": [
+    {
+      "@type": "Organization",
+      "name": "rOpenSci"
+    }
+  ]
 }
