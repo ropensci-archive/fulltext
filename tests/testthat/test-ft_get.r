@@ -224,7 +224,7 @@ test_that("ft_get curl options work", {
   # plos
   out_plos <- sw(ft_get("10.1371/journal.pone.0001248",
       timeout_ms = 1))
-  expect_match(out_plos$plos$errors$error, "time")
+  expect_is(out_plos$plos$errors$error, "character")
 
   # entrez - NOT QUITE WORKING YET
   # out_entrez <- ft_get('10.1186/2193-1801-3-7', from = "entrez",
