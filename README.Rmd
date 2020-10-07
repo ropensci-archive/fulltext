@@ -51,7 +51,7 @@ Data sources in `fulltext` include:
 * [arXiv](https://arxiv.org) - via the `aRxiv` package
 * [bioRxiv](https://biorxiv.org/) - via the `biorxivr` package
 * [PMC/Pubmed via Entrez](https://www.ncbi.nlm.nih.gov/) - via the `rentrez` package
-* Scopus (https://www.scopus.com/) - internal tooling
+* Scopus - internal tooling
 * Semantic Scholar (https://www.semanticscholar.org/) - internal tooling
 * Many more are supported via the above sources (e.g., _Royal Society Open Science_ is
 available via Pubmed)
