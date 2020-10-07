@@ -46,7 +46,7 @@ test_that("ft_get works for all data providers", {
   ## bioRxiv
   mm <- sm(ft_get('10.1101/012476', from = "biorxiv"))
   ## Karger Publisher - via Entrez
-  nn <- sm(ft_get('10.1159/000369331'))
+  # nn <- sm(ft_get('10.1159/000369331'))
   ## CogentOA Publisher - via Entrez
   # oo <- sm(ft_get('10.1080/23311916.2014.938430'))
 
@@ -61,7 +61,7 @@ test_that("ft_get works for all data providers", {
   #expect_is(jj, "ft_data")
   expect_is(kk, "ft_data")
   expect_is(mm, "ft_data")
-  expect_is(nn, "ft_data")
+  # expect_is(nn, "ft_data")
   # expect_is(oo, "ft_data")
 })
 
