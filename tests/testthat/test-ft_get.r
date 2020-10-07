@@ -70,12 +70,9 @@ test_that("ft_get: > 1 from works", {
   skip_on_os("windows") # FIXME: not sure why, but his has failed on windows ci
 
   plos_dois <- c('10.1371/journal.pone.0086169', '10.1371/journal.pbio.0000062')
-  aa <- sm(ft_get(plos_dois, from = c("plos", "entrez")))
+  aa <- sm(ft_get(plos_dois, from = c("entrez")))
 
   expect_is(aa, "ft_data")
-  expect_is(aa$plos, "list")
-  expect_match(aa$plos$data$path[[1]]$path, "xml")
-  expect_match(aa$plos$data$path[[1]]$type, "xml")
 
   expect_is(aa$entrez, "list")
   expect_match(aa$entrez$data$path[[1]]$path, "xml")
@@ -129,7 +126,7 @@ test_that("ft_get: ajb via wiley", {
 test_that("ft_get fails well", {
   skip_on_cran()
 
-  expect_error(ft_get('0086169', from = 'plos'), "These are probably not DOIs")
+  # expect_error(ft_get('0086169', from = 'plos'), "These are probably not DOIs")
   expect_error(ft_get('0086169', from = 'stuff'), "'arg' should be one")
   expect_error(ft_get('0086169', progress = 5),
     "progress must be of class logical")
@@ -162,7 +159,7 @@ test_that("ft_get errors slot", {
   expect_is(res$frontiersin$errors, "data.frame")
   expect_match(res$frontiersin$errors$error, "was supposed to be")
 
-  expect_error(ft_get('0086169', from = 'plos'), "These are probably not DOIs")
+  # expect_error(ft_get('0086169', from = 'plos'), "These are probably not DOIs")
   expect_error(ft_get('0086169', from = 'stuff'), "'arg' should be one")
 })
 
@@ -225,9 +222,9 @@ test_that("ft_get curl options work", {
   skip_on_cran()
 
   # plos
-  out_plos <- sw(ft_get("10.1371/journal.pone.0001248", from = "plos",
+  out_plos <- sw(ft_get("10.1371/journal.pone.0001248",
       timeout_ms = 1))
-  expect_match(out_plos$plos$errors$error, "was not found")
+  expect_match(out_plos$plos$errors$error, "time")
 
   # entrez - NOT QUITE WORKING YET
   # out_entrez <- ft_get('10.1186/2193-1801-3-7', from = "entrez",

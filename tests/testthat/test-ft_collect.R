@@ -5,7 +5,7 @@ context("ft_collect/ft_text")
 test_that("ft_collect", {
   skip_on_cran()
 
-  x <- sm(ft_get('10.1371/journal.pone.0086169', from='plos'))
+  x <- sm(ft_get('10.1371/journal.pone.0086169'))
   
   # note that the data is not in the object, gives NULL
   expect_null(x$plos$data$data)
