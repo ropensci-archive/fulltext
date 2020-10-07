@@ -7,7 +7,7 @@ fulltext
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![R-check](https://github.com/ropensci/fulltext/workflows/R-check/badge.svg)](https://github.com/ropensci/fulltext/actions/)
 [![codecov](https://codecov.io/gh/ropensci/fulltext/branch/master/graph/badge.svg)](https://codecov.io/gh/ropensci/fulltext)
-[![rstudio mirror downloads](https://cranlogs.r-pkg.org/badges/fulltext)](https://github.com/metacran/cranlogs.app)
+[![rstudio mirror downloads](https://cranlogs.r-pkg.org/badges/fulltext)](https://github.com/r-hub/cranlogs.app)
 [![cran version](https://www.r-pkg.org/badges/version/fulltext)](https://cran.r-project.org/package=fulltext)
 
 __Get full text research articles__
