@@ -16,12 +16,13 @@
 #' how to do so. You can also open up your cache folder and 
 #' delete them that way as well.
 #' 
-#' @examples
+#' @examples \dontrun{
 #' # identify likely bad files
 #' res <- cache_file_info()
 #' 
 #' # you can remove them yourself, e.g.,
 #' # invisible(lapply(res$xml_abstract_only, unlink))
+#' }
 cache_file_info <- function() {
   path <- cache_options_get()$path
 
