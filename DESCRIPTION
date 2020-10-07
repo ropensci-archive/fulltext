@@ -18,7 +18,7 @@ Authors@R: c(
         role = "fnd",
         comment = "https://ropensci.org/")
     )
-URL: https://docs.ropensci.org/fulltext (website)
+URL: https://docs.ropensci.org/fulltext/ (website)
     https://github.com/ropensci/fulltext/ (devel)
     https://books.ropensci.org/fulltext/ (user manual)
 BugReports: https://github.com/ropensci/fulltext/issues
