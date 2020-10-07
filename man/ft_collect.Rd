@@ -36,7 +36,7 @@ The result of this call is actual text you can read
 \examples{
 \dontrun{
 # Get some data
-x <- ft_get('10.1371/journal.pone.0086169', from='plos')
+x <- ft_get('10.1371/journal.pone.0086169')
 
 # note that the data is not in the object, gives NULL
 x$plos$data$data

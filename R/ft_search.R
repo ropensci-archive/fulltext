@@ -153,16 +153,10 @@
 #' # Microsoft academic search
 #' key <- Sys.getenv("MICROSOFT_ACADEMIC_KEY")
 #' (res <- ft_search("Y='19'...", from = "microsoft", maopts = list(key = key)))
-#' res$ma
 #' res$ma$data$DOI
 #' 
 #' # curl options
 #' ft_search(query='ecology', from='plos', verbose = TRUE)
-#' ft_search(query='ecology', from='bmc', verbose = TRUE)
-#' ft_search(query='ecology', from='crossref', verbose = TRUE)
-#' ft_search(query='ecology', from='biorxiv', verbose = TRUE)
-#' ft_search(query='ecology', from='europmc', verbose = TRUE)
-#' ft_search(query='ecology', from='scopus', verbose = TRUE)
 #' ma_key <- Sys.getenv("MICROSOFT_ACADEMIC_KEY")
 #' ft_search("Y='19'...", from='microsoft', maopts = list(key = ma_key),
 #'   verbose = TRUE)

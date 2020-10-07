@@ -106,7 +106,7 @@ out$plos$data[[1]]
 out$plos
 ## from character vector of DOIs
 x <- c("10.1371/journal.pone.0017342", "10.1371/journal.pone.0091497")
-out3 <- ft_links(x, from = "plos")
+out3 <- ft_links(x)
 out3$plos
 
 # BMC

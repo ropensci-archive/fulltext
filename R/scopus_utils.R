@@ -82,27 +82,27 @@
 #'
 #' # using facets
 #' ## scopus_search
-#' res <- scopus_search(query = "ecology", facets = "subjarea(count=5)")
-#' res
-#' res$`search-results`$link
-#' res$`search-results`$entry
-#' res$`search-results`$facet
+#' # res <- scopus_search(query = "ecology", facets = "subjarea(count=5)")
+#' # res
+#' # res$`search-results`$link
+#' # res$`search-results`$entry
+#' # res$`search-results`$facet
 #'
 #' ## more examples
-#' x <- scopus_search(query = "ecology", facets = "language(count=4)",
-#'   count = 1)
-#' x$`search-results`$facet
-#' x <- scopus_search(query = "ecology",
-#'   facets = "pubyear(count=3);doctype();language(count=4)")
-#' x$`search-results`$facet
+#' # x <- scopus_search(query = "ecology", facets = "language(count=4)",
+#' #   count = 1)
+#' # x$`search-results`$facet
+#' # x <- scopus_search(query = "ecology",
+#' #   facets = "pubyear(count=3);doctype();language(count=4)")
+#' # x$`search-results`$facet
 #'
 #' ## scopus_search_loop
-#' res <- scopus_search_loop(query = "ecology", facets = "subjarea(count=5)",
-#'   count = 200)
-#' res$found
-#' head(res$results)
-#' NROW(res$results)
-#' res$facets
+#' # res <- scopus_search_loop(query = "ecology", facets = "subjarea(count=5)",
+#' #   count = 200)
+#' # res$found
+#' # head(res$results)
+#' # NROW(res$results)
+#' # res$facets
 #'
 #' # sort
 #' x <- scopus_search(query = "ecology", sort = "-title")
