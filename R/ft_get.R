@@ -18,11 +18,10 @@
 #' structure that a machine can reason about, but you are of course free to try
 #' to get xml, pdf, or plain (in the case of Elsevier and ScienceDirect).
 #' @param try_unknown (logical) if publisher plugin not already known, we try
-#' to fetch full text link either from ftdoi.org or from Crossref. If not
-#' found at ftdoi.org or at Crossref we skip with a warning. If found with
-#' ftdoi.org or Crossref we attempt to download. Only applicable in
-#' `character` and `list` S3 methods. Default: `TRUE`
-#' @param plosopts PLOS options, a named list. See [rplos::plos_fulltext()]
+#' to fetch full text link either using \pkg{ftdoi} package or from Crossref.
+#' If not found at \pkg{ftdoi} or at Crossref we skip with a warning.
+#' If found with \pkg{ftdoi} or Crossref we attempt to download. Only
+#' applicable in `character` and `list` S3 methods. Default: `TRUE`
 #' @param bmcopts BMC options. parameter DEPRECATED
 #' @param entrezopts Entrez options, a named list. See
 #' [rentrez::entrez_search()] and [entrez_fetch()]
@@ -199,7 +198,7 @@
 #' ### xml
 #' ft_get('10.7554/eLife.03032')
 #' res <- ft_get(c('10.7554/eLife.03032', '10.7554/eLife.32763'),
-#' from = "elife")
+#'   from = "elife")
 #' res$elife
 #' respdf <- ft_get(c('10.7554/eLife.03032', '10.7554/eLife.32763'),
 #'   from = "elife", type = "pdf")
@@ -238,6 +237,10 @@
 #' res <- ft_get(c('10.1155/2014/292109', '10.12688/f1000research.6522.1'))
 #' res$hindawi
 #' res$f1000research
+#' 
+#' ## Thieme -
+#' ### coverage is hit and miss, it's not great
+#' ft_get('10.1055/s-0032-1316462')
 #'
 #' ## Pensoft
 #' ft_get('10.3897/mycokeys.22.12528')
@@ -254,6 +257,15 @@
 #' ## bioRxiv - only pdf
 #' res <- ft_get(x='10.1101/012476')
 #' res$biorxiv
+#' 
+#' ## AAAS - only pdf
+#' res <- ft_get(x='10.1126/science.276.5312.548')
+#' res$aaas
+#' 
+#' # The Royal Society
+#' res <- ft_get("10.1098/rspa.2007.1849")
+#' ft_get(c("10.1098/rspa.2007.1849", "10.1098/rstb.1970.0037",
+#'   "10.1098/rsif.2006.0142"))
 #'
 #' ## Karger Publisher
 #' (x <- ft_get('10.1159/000369331'))
@@ -364,6 +376,9 @@
 #'
 #' # American Chemical Society
 #' ft_get(c('10.1021/la903074z', '10.1021/jp048806z'))
+#' 
+#' # Royal Society of Chemistry
+#' ft_get('10.1039/c8cc06410e')
 #'
 #'
 #' # From ft_links output
@@ -421,7 +436,7 @@
 #' }
 
 ft_get <- function(x, from = NULL, type = "xml", try_unknown = TRUE,
-  plosopts = list(), bmcopts = list(), entrezopts = list(), elifeopts = list(),
+  bmcopts = list(), entrezopts = list(), elifeopts = list(),
   elsevieropts = list(), sciencedirectopts = list(), wileyopts = list(),
   crossrefopts = list(), progress = FALSE, ...) {
 
@@ -430,7 +445,7 @@ ft_get <- function(x, from = NULL, type = "xml", try_unknown = TRUE,
 
 #' @export
 ft_get.default <- function(x, from=NULL, type = "xml", try_unknown = TRUE,
-  plosopts=list(), bmcopts=list(), entrezopts=list(), elifeopts=list(),
+  bmcopts=list(), entrezopts=list(), elifeopts=list(),
   elsevieropts = list(), sciencedirectopts = list(), wileyopts = list(),
   crossrefopts = list(), progress = FALSE, ...) {
 
@@ -439,7 +454,7 @@ ft_get.default <- function(x, from=NULL, type = "xml", try_unknown = TRUE,
 
 #' @export
 ft_get.character <- function(x, from=NULL, type = "xml", try_unknown = TRUE,
-  plosopts=list(), bmcopts = list(), entrezopts=list(), elifeopts=list(),
+  bmcopts = list(), entrezopts=list(), elifeopts=list(),
   elsevieropts = list(), sciencedirectopts = list(), wileyopts = list(),
   crossrefopts = list(), progress = FALSE, ...) {
 
@@ -447,11 +462,9 @@ ft_get.character <- function(x, from=NULL, type = "xml", try_unknown = TRUE,
   assert(progress, "logical")
   check_cache()
   if (!is.null(from)) {
-    from <- match.arg(from, c("plos", "entrez", "elife", "pensoft",
+    from <- match.arg(from, c("entrez", "elife", "pensoft",
       "arxiv", "biorxiv", "elsevier", "sciencedirect", "wiley"),
       several.ok = TRUE)
-    plos_out <- plugin_get_plos(from, x, plosopts, type,
-      progress = progress, ...)
     entrez_out <- plugin_get_entrez(from, x, entrezopts, type,
       progress = progress, ...)
     elife_out <- plugin_get_elife(from, x, elifeopts, type,
@@ -468,7 +481,7 @@ ft_get.character <- function(x, from=NULL, type = "xml", try_unknown = TRUE,
         type, progress = progress, ...)
     wiley_out <- plugin_get_wiley(from, x, wileyopts, type,
       progress = progress, ...)
-    structure(list(plos = plos_out, entrez = entrez_out, elife = elife_out,
+    structure(list(entrez = entrez_out, elife = elife_out,
                    pensoft = pensoft_out, arxiv = arxiv_out,
                    biorxiv = biorxiv_out, elsevier = els_out,
                    sciencedirect = sciencedirect_out,
@@ -480,7 +493,7 @@ ft_get.character <- function(x, from=NULL, type = "xml", try_unknown = TRUE,
 
 #' @export
 ft_get.list <- function(x, from=NULL, type = "xml", try_unknown = TRUE,
-  plosopts=list(), bmcopts = list(), entrezopts=list(), elifeopts=list(),
+  bmcopts = list(), entrezopts=list(), elifeopts=list(),
   elsevieropts = list(), sciencedirectopts = list(), wileyopts = list(),
   crossrefopts = list(), progress = FALSE, ...) {
 
@@ -488,11 +501,9 @@ ft_get.list <- function(x, from=NULL, type = "xml", try_unknown = TRUE,
   assert(progress, "logical")
   check_cache()
   if (!is.null(from)) {
-    from <- match.arg(from, c("plos", "entrez", "elife", "pensoft",
+    from <- match.arg(from, c("entrez", "elife", "pensoft",
       "arxiv", "biorxiv", "elsevier", "sciencedirect", "wiley"),
       several.ok = TRUE)
-    plos_out <- plugin_get_plos(from, x, plosopts, type,
-      progress = progress, ...)
     entrez_out <- plugin_get_entrez(from, x, entrezopts, type,
       progress = progress, ...)
     elife_out <- plugin_get_elife(from, x, elifeopts, type,
@@ -509,7 +520,7 @@ ft_get.list <- function(x, from=NULL, type = "xml", try_unknown = TRUE,
       type, progress = progress, ...)
     wiley_out <- plugin_get_wiley(from, x, wileyopts, type,
       progress = progress, ...)
-    structure(list(plos = plos_out, entrez = entrez_out, elife = elife_out,
+    structure(list(entrez = entrez_out, elife = elife_out,
                    pensoft = pensoft_out, arxiv = arxiv_out,
                    biorxiv = biorxiv_out, elsevier = els_out,
                    sciencedirect = sciencedirect_out,
@@ -521,7 +532,7 @@ ft_get.list <- function(x, from=NULL, type = "xml", try_unknown = TRUE,
 
 #' @export
 ft_get.ft <- function(x, from=NULL, type = "xml", try_unknown = TRUE,
-  plosopts=list(), bmcopts=list(), entrezopts=list(), elifeopts=list(),
+  bmcopts=list(), entrezopts=list(), elifeopts=list(),
   elsevieropts = list(), sciencedirectopts = list(), wileyopts = list(),
   crossrefopts = list(), progress = FALSE, ...) {
 
@@ -540,8 +551,6 @@ ft_get.ft <- function(x, from=NULL, type = "xml", try_unknown = TRUE,
     ))
   }
 
-  plos_out <- plugin_get_plos(from, x$plos$data$id, plosopts, type,
-    progress = progress, ...)
   entrez_out <- plugin_get_entrez(from, x$entrez$data$doi,
     entrezopts, type, progress = progress, ...)
   cr_out <- NULL
@@ -550,13 +559,13 @@ ft_get.ft <- function(x, from=NULL, type = "xml", try_unknown = TRUE,
     cr_out <- plugin_get_links_crossref(from, urls = crl$crossref$data,
                                         crossrefopts, type, ...)
   }
-  structure(list(plos = plos_out, entrez = entrez_out,
+  structure(list(entrez = entrez_out,
                  crossref = cr_out), class = "ft_data")
 }
 
 #' @export
 ft_get.ft_links <- function(x, from=NULL, type = "xml", try_unknown = TRUE,
-  plosopts=list(), bmcopts=list(), entrezopts=list(), elifeopts=list(),
+  bmcopts=list(), entrezopts=list(), elifeopts=list(),
   elsevieropts = list(), sciencedirectopts = list(), wileyopts = list(),
   crossrefopts = list(), progress = FALSE, ...) {
 
@@ -564,11 +573,9 @@ ft_get.ft_links <- function(x, from=NULL, type = "xml", try_unknown = TRUE,
   check_cache()
   if (is.null(cache_options_get()$cache)) cache_options_set(FALSE)
   from <- names(x[sapply(x, function(v) !is.null(v$data))])
-  plos_out <- plugin_get_links_plos(from, urls = x$plos$data,
-                                    plosopts, type, ...)
   crossref_out <- plugin_get_links_crossref(from, urls = x$crossref$data,
                                             crossrefopts, type, ...)
-  structure(list(plos = plos_out, crossref = crossref_out), class = "ft_data")
+  structure(list(crossref = crossref_out), class = "ft_data")
 }
 
 
@@ -632,11 +639,10 @@ get_unknown <- function(x, type, try_unknown, progress = FALSE, ...) {
     fun <- publisher_plugin(names(dfsplit)[i])
     if (is.null(fun)) {
       if (try_unknown) {
-        tmp <- ftdoi_get(sprintf("api/members/%s/", names(dfsplit)[i]))
+        cont <- ftdoi_get(member = names(dfsplit)[i])
 
-        if (tmp$status_code == 200) {
+        if (!is.null(cont)) {
           fun <- plugin_get_links
-          cont <- jsonlite::fromJSON(tmp$parse("UTF-8"), FALSE)
           if (cont$use_crossref_links) {
             # just use crossref links if true
             fun <- plugin_get_crossref
@@ -683,14 +689,9 @@ get_unknown <- function(x, type, try_unknown, progress = FALSE, ...) {
   structure(out, class = "ft_data")
 }
 
-ftdoi_get <- function(path, opts = list()) {
-  cli <- crul::HttpClient$new(
-    url = "https://ftdoi.org",
-    headers = list(
-      `User-Agent` = paste0('fulltext/', utils::packageVersion('fulltext'))),
-    opts = opts
-  )
-  cli$get(path)
+ftdoi_get <- function(member) {
+  res <- tryCatch(ftdoi::ftd_members(member), error = function(e) e)
+  if (inherits(res, "error")) NULL else res
 }
 
 publisher_plugin <- function(x) {
@@ -724,7 +725,8 @@ publisher_plugin <- function(x) {
     `8215` = plugin_get_instinvestfil,
     `317` = plugin_get_aip,
     `56` = plugin_get_cambridge,
-    `237` = plugin_get_cob
+    `237` = plugin_get_cob,
+    `175` = plugin_get_roysoc
   )
 }
 
@@ -759,10 +761,10 @@ get_pub_name <- function(x) {
          `317` = "aip",
          `179` = "sage",
          `2997` = "koreanacper",
-         `175` = "rsoc",
          `1822` = "cdc",
          `56` = "cambridge",
          `237` = "cob",
+         `175` = "roysoc",
          "crossref"
   )
 }
@@ -798,6 +800,7 @@ get_tm_name <- function(x) {
          `317` = "aip",
          `56` = "cambridge",
          `237` = "cob",
+         `175` = "roysoc",
          "crossref"
   )
 }
@@ -883,7 +886,8 @@ get_publisher2 <- function(x, ...) {
   names(x) <- pref
   pref_uniq <- unique(pref)
   mems <- lapply(pref_uniq, function(z) {
-    tmp <- rcrossref::cr_prefixes(z)$data
+    # tmp <- rcrossref::cr_prefixes(z)$data
+    tmp <- ftdoi::prefix_local(z)
     list(
       prefix = z,
       member = basename(tmp$member),

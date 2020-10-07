@@ -224,10 +224,10 @@ plugin_links_cdc <- function(sources, ids, opts, ...) {
 
 cdc_link <- function(dois) {
   stats::setNames(lapply(dois, function(x) {
-    tt <- tcat(ftdoi_get(sprintf("api/doi/%s/", x)))
+    tt <- tcat(ftd_doi(x))
     if (inherits(tt, c("error", "warning"))) return(list(pdf = NA_character_))
-    if (!tt$success()) return(list(pdf = NA_character_))  
-    list(pdf = jsonlite::fromJSON(tt$parse("UTF-8"))$links$pdf)
+    if (is.na(tt$url)) return(list(pdf = NA_character_))  
+    list(pdf = tt$url)
   }), dois)
 }
 

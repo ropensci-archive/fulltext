@@ -206,6 +206,7 @@ plugin_get_instinvestfil <- plugin_get_generator("instinvestfil", instinvestfil_
 plugin_get_aip <- plugin_get_generator("aip", aip_ft)
 plugin_get_cambridge <- plugin_get_generator("cambridge", cambridge_ft)
 plugin_get_cob <- plugin_get_generator("cob", cob_ft)
+plugin_get_roysoc <- plugin_get_generator("roysoc", roysoc_ft)
 
 # lapply replacement with progress bar: actual a for loop internally
 plapply <- function(x, FUN, type = NULL, progress = FALSE, ...) {
@@ -224,7 +225,7 @@ plapply <- function(x, FUN, type = NULL, progress = FALSE, ...) {
 }
 
 ## getters - could stand to make closure for the below as well, FIXME
-# plos - wrapper around rplos::plos_fulltext, via .plos_fulltext
+# plos
 plos_wrapper <- function(dois, type, progress = FALSE, ...) {
   plos_fun <- function(x, type, progress, ...) {
     path <- make_key(x, type)
@@ -232,16 +233,10 @@ plos_wrapper <- function(dois, type, progress = FALSE, ...) {
       if (!progress) message(paste0("path exists: ", path))
       return(ft_object(path, x, type))
     }
-    tmp <- tryCatch(.plos_fulltext(x, disk = path, type = type, ...), 
-      error = function(e) e, 
-      warning = function(w) w)
-    if (inherits(tmp, c("error", "warning"))) {
-      unlink(path)
-      mssg <- 'was not found or may be a DOI for a part of an article'
-      warning(x, " ", mssg, call. = FALSE)
-      return(ft_error(mssg, x))
-    }
-    return(ft_object(path, x, type))
+    res <- tcat(ftd_doi(x))
+    if (inherits(res, c("error", "warning"))) return(ft_error(res$message, x))
+    url <- res[grepl(type, res$content_type), ]$url
+    get_ft(x, type, url, path, ...)
   }
   plapply(dois, plos_fun, type, progress, ...)
 }
@@ -353,8 +348,9 @@ peerj_ft <- function(dois, type, progress = FALSE, ...) {
       if (!progress) message(paste0("path exists: ", path))
       return(ft_object(path, x, type))
     }
-    url <- sprintf("https://peerj.com/articles/%s.%s", 
-      strextract(x, "[0-9]+$"), type)
+    res <- tcat(ftd_doi(x))
+    if (inherits(res, c("error", "warning"))) return(ft_error(res$message, x))
+    url <- res[grepl(type, res$content_type), ]$url
     get_ft(x, type, url, path, ...)
   }
   plapply(dois, peerj_fun, type, progress, ...)
@@ -369,8 +365,9 @@ frontiersin_ft <- function(dois, type, progress = FALSE, ...) {
       if (!progress) message(paste0("path exists: ", path))
       return(ft_object(path, x, type))
     }
-    url <- sprintf("https://www.frontiersin.org/articles/%s/%s", x, 
-      if (type == "xml") "xml/nlm" else "pdf")
+    res <- tcat(ftd_doi(x))
+    if (inherits(res, c("error", "warning"))) return(ft_error(res$message, x))
+    url <- res[grepl(type, res$content_type), ]$url
     get_ft(x, type, url, path, ...)
   }
   plapply(dois, fronteiersin_fun, type, progress, ...)
@@ -385,13 +382,9 @@ pensoft_ft <- function(dois, type, progress = FALSE, ...) {
       if (!progress) message(paste0("path exists: ", path))
       return(ft_object(path, x, type))
     }
-    res <- tcat(crul::HttpClient$new(url = "https://ftdoi.org")$get(sprintf("api/doi/%s/", x)))
-    if (inherits(res, c("error", "warning")) || !res$success()) {
-      mssg <- if (inherits(res, c("error", "warning"))) res$message else http_mssg(res)
-      return(ft_error(mssg, x))
-    }
-    lks <- jsonlite::fromJSON(res$parse("UTF-8"))$links
-    url <- grep(type, lks$url, value = TRUE)
+    res <- tcat(ftd_doi(x))
+    if (inherits(res, c("error", "warning"))) return(ft_error(res$message, x))
+    url <- res[grepl(type, res$content_type), ]$url
     get_ft(x, type, url, path, ...)
   }
   plapply(dois, pensoft_fun, type, progress, ...)
@@ -439,10 +432,9 @@ biorxiv_ft <- function(dois, type = "pdf", progress = FALSE, ...) {
       if (!progress) message(paste0("path exists: ", path))
       return(ft_object(path, x, 'pdf'))
     }
-    lk <- tcat(ftdoi_get(sprintf("api/doi/%s/", x)))
+    lk <- tcat(ftd_doi(x))
     if (inherits(lk, c("error", "warning"))) return(ft_error(lk$message, x))
-    lks <- jsonlite::fromJSON(lk$parse("UTF-8"))$links
-    url <- grep('pdf', lks$url, value = TRUE)
+    url <- lk[grepl('pdf', lk$content_type), ]$url
     get_ft(x, 'pdf', url, path, ...)
   }
   plapply(dois, biorxiv_fun, type, progress, ...)
@@ -599,15 +591,10 @@ roysocchem_ft <- function(dois, type = "pdf", progress = FALSE, ...) {
       if (!progress) message(paste0("path exists: ", path))
       return(ft_object(path, x, 'pdf'))
     }
-
-    lk <- tryCatch(crminer::crm_links(x), error = function(e) e, warning = function(w) w)
+    lk <- tcat(ftd_doi(x))
     if (inherits(lk, c("error", "warning"))) return(ft_error(lk$message, x))
-    if (is.null(lk) || length(lk) == 0) {
-      mssg <- "has no link available"
-      warning(x, " ", mssg, call. = FALSE)
-      return(ft_error(mssg, x))
-    }
-    get_ft(x, 'pdf', lk[[1]][[1]], path, ...)
+    url <- lk[grepl('pdf', lk$content_type), ]$url
+    get_ft(x = x, type = 'pdf', url = url, path = path, ...)
   }
   plapply(dois, roysocchem_fun, type, progress, ...)
 }
@@ -642,9 +629,9 @@ aaas_ft <- function(dois, type = "pdf", progress = FALSE, ...) {
       return(ft_object(path, x, 'pdf'))
     }
 
-    lk <- tcat(ftdoi_get(sprintf("api/doi/%s/", x)))
+    lk <- tcat(ftd_doi(x))
     if (inherits(lk, c("error", "warning"))) return(ft_error(lk$message, x))
-    url <- jsonlite::fromJSON(lk$parse("UTF-8"))$links$pdf
+    url <- lk[grepl('pdf', lk$content_type), ]$url
     get_ft(x = x, type = 'pdf', url = url, path = path, ...)
   }
   plapply(dois, aaas_fun, type, progress, ...)
@@ -659,12 +646,29 @@ pnas_ft <- function(dois, type = "pdf", progress = FALSE, ...) {
       return(ft_object(path, x, 'pdf'))
     }
 
-    lk <- tcat(ftdoi_get(sprintf("api/doi/%s/", x)))
+    lk <- tcat(ftd_doi(x))
     if (inherits(lk, c("error", "warning"))) return(ft_error(lk$message, x))
-    url <- jsonlite::fromJSON(lk$parse("UTF-8"))$links$pdf
+    url <- lk[grepl('pdf', lk$content_type), ]$url
     get_ft(x = x, type = 'pdf', url = url, path = path, ...)
   }
   plapply(dois, pnas_fun, type, progress, ...)
+}
+
+# type: only pdf (type parameter is ignored)
+roysoc_ft <- function(dois, type = "pdf", progress = FALSE, ...) {
+  roysoc_fun <- function(x, type, progress, ...) {
+    path <- make_key(x, 'pdf')
+    if (file.exists(path) && !cache_options_get()$overwrite) {
+      if (!progress) message(paste0("path exists: ", path))
+      return(ft_object(path, x, 'pdf'))
+    }
+
+    lk <- tcat(ftd_doi(x))
+    if (inherits(lk, c("error", "warning"))) return(ft_error(lk$message, x))
+    url <- lk[grepl('pdf', lk$content_type), ]$url
+    get_ft(x = x, type = 'pdf', url = url, path = path, ...)
+  }
+  plapply(dois, roysoc_fun, type, progress, ...)
 }
 
 # type: only pdf (type parameter is ignored)
@@ -676,10 +680,9 @@ microbiology_ft <- function(dois, type = "pdf", progress = FALSE, ...) {
       return(ft_object(path, x, 'pdf'))
     }
 
-    lk <- tcat(ftdoi_get(sprintf("api/doi/%s/", x)))
+    lk <- tcat(ftd_doi(x))
     if (inherits(lk, c("error", "warning"))) return(ft_error(lk$message, x))
-    urls <- jsonlite::fromJSON(lk$parse("UTF-8"))$links
-    url <- urls[grep("pdf", urls$`content-type`), "url"]
+    url <- lk[grepl('pdf', lk$content_type), ]$url
     get_ft(x = x, type = 'pdf', url = url, path = path, ...)
   }
   plapply(dois, microbiology_fun, type, progress, ...)
@@ -694,10 +697,9 @@ jama_ft <- function(dois, type = "pdf", progress = FALSE, ...) {
       return(ft_object(path, x, 'pdf'))
     }
 
-    lk <- tcat(ftdoi_get(sprintf("api/doi/%s/", x)))
+    lk <- tcat(ftd_doi(x))
     if (inherits(lk, c("error", "warning"))) return(ft_error(lk$message, x))
-    urls <- jsonlite::fromJSON(lk$parse("UTF-8"))$links
-    url <- urls[grep("pdf", urls$`content-type`), "url"]
+    url <- lk[grepl('pdf', lk$content_type), ]$url
     get_ft(x = x, type = 'pdf', url = url, path = path, ...)
   }
   plapply(dois, jama_fun, type, progress, ...)
@@ -712,10 +714,9 @@ amersocmicrobiol_ft <- function(dois, type = "pdf", progress = FALSE, ...) {
       return(ft_object(path, x, 'pdf'))
     }
 
-    lk <- tcat(ftdoi_get(sprintf("api/doi/%s/", x)))
+    lk <- tcat(ftd_doi(x))
     if (inherits(lk, c("error", "warning"))) return(ft_error(lk$message, x))
-    urls <- jsonlite::fromJSON(lk$parse("UTF-8"))$links
-    url <- urls[grep("pdf", urls$`content-type`), "url"]
+    url <- lk[grepl("pdf", lk$content_type), ]$url
     get_ft(x = x, type = 'pdf', url = url, path = path, ...)
   }
   plapply(dois, amersocmicrobiol_fun, type, progress, ...)
@@ -730,10 +731,9 @@ amersocclinoncol_ft <- function(dois, type = "pdf", progress = FALSE, ...) {
       return(ft_object(path, x, 'pdf'))
     }
 
-    lk <- tcat(ftdoi_get(sprintf("api/doi/%s/", x)))
+    lk <- tcat(ftd_doi(x))
     if (inherits(lk, c("error", "warning"))) return(ft_error(lk$message, x))
-    urls <- jsonlite::fromJSON(lk$parse("UTF-8"))$links
-    url <- urls[grep("pdf", urls$`content-type`), "url"]
+    url <- lk[grepl("pdf", lk$content_type), ]$url
     get_ft(x = x, type = 'pdf', url = url, path = path, ...)
   }
   plapply(dois, amersocclinoncol_fun, type, progress, ...)
@@ -770,10 +770,9 @@ aip_ft <- function(dois, type = "pdf", progress = FALSE, ...) {
       return(ft_object(path, x, 'pdf'))
     }
 
-    lk <- tcat(ftdoi_get(sprintf("api/doi/%s/", x)))
+    lk <- tcat(ftd_doi(x))
     if (inherits(lk, c("error", "warning"))) return(ft_error(lk$message, x))
-    urls <- jsonlite::fromJSON(lk$parse("UTF-8"))$links
-    url <- urls[grep("pdf", urls$`content-type`), "url"]
+    url <- lk[grepl("pdf", lk$content_type), ]$url
     get_ft(x = x, type = 'pdf', url = url, path = path, ...)
   }
   plapply(dois, aip_fun, type, progress, ...)
@@ -814,10 +813,9 @@ cob_ft <- function(dois, type = "pdf", progress = FALSE, ...) {
       if (!progress) message(paste0("path exists: ", path))
       return(ft_object(path, x, 'pdf'))
     }
-    lk <- tcat(ftdoi_get(sprintf("api/doi/%s/", x)))
+    lk <- tcat(ftd_doi(x))
     if (inherits(lk, c("error", "warning"))) return(ft_error(lk$message, x))
-    urls <- jsonlite::fromJSON(lk$parse("UTF-8"))$links
-    url <- urls[grep("pdf", urls$`content-type`), "url"]
+    url <- lk[grepl("pdf", lk$content_type), ]$url
     get_ft(x = x, type = 'pdf', url = url, path = path, ...)
   }
   plapply(dois, cob_fun, type, progress, ...)

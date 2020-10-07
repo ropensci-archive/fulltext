@@ -10,7 +10,6 @@ ft_get(
   from = NULL,
   type = "xml",
   try_unknown = TRUE,
-  plosopts = list(),
   bmcopts = list(),
   entrezopts = list(),
   elifeopts = list(),
@@ -37,12 +36,10 @@ structure that a machine can reason about, but you are of course free to try
 to get xml, pdf, or plain (in the case of Elsevier and ScienceDirect).}
 
 \item{try_unknown}{(logical) if publisher plugin not already known, we try
-to fetch full text link either from ftdoi.org or from Crossref. If not
-found at ftdoi.org or at Crossref we skip with a warning. If found with
-ftdoi.org or Crossref we attempt to download. Only applicable in
-\code{character} and \code{list} S3 methods. Default: \code{TRUE}}
-
-\item{plosopts}{PLOS options, a named list. See \code{\link[rplos:plos_fulltext]{rplos::plos_fulltext()}}}
+to fetch full text link either using \pkg{ftdoi} package or from Crossref.
+If not found at \pkg{ftdoi} or at Crossref we skip with a warning.
+If found with \pkg{ftdoi} or Crossref we attempt to download. Only
+applicable in \code{character} and \code{list} S3 methods. Default: \code{TRUE}}
 
 \item{bmcopts}{BMC options. parameter DEPRECATED}
 
@@ -255,7 +252,7 @@ ft_get('10.7717/peerj.228', type = "pdf")
 ### xml
 ft_get('10.7554/eLife.03032')
 res <- ft_get(c('10.7554/eLife.03032', '10.7554/eLife.32763'),
-from = "elife")
+  from = "elife")
 res$elife
 respdf <- ft_get(c('10.7554/eLife.03032', '10.7554/eLife.32763'),
   from = "elife", type = "pdf")
@@ -295,6 +292,10 @@ res <- ft_get(c('10.1155/2014/292109', '10.12688/f1000research.6522.1'))
 res$hindawi
 res$f1000research
 
+## Thieme -
+### coverage is hit and miss, it's not great
+ft_get('10.1055/s-0032-1316462')
+
 ## Pensoft
 ft_get('10.3897/mycokeys.22.12528')
 
@@ -310,6 +311,15 @@ res \%>\% ft_extract  \%>\% .$arxiv
 ## bioRxiv - only pdf
 res <- ft_get(x='10.1101/012476')
 res$biorxiv
+
+## AAAS - only pdf
+res <- ft_get(x='10.1126/science.276.5312.548')
+res$aaas
+
+# The Royal Society
+res <- ft_get("10.1098/rspa.2007.1849")
+ft_get(c("10.1098/rspa.2007.1849", "10.1098/rstb.1970.0037",
+  "10.1098/rsif.2006.0142"))
 
 ## Karger Publisher
 (x <- ft_get('10.1159/000369331'))
@@ -420,6 +430,9 @@ ft_get('10.1063/1.4895527')
 
 # American Chemical Society
 ft_get(c('10.1021/la903074z', '10.1021/jp048806z'))
+
+# Royal Society of Chemistry
+ft_get('10.1039/c8cc06410e')
 
 
 # From ft_links output

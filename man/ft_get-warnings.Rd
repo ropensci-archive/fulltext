@@ -19,7 +19,7 @@ This happens when we don't have a hard coded
 plugin for that specific publisher within this packge
 (use \code{ft_get_ls()} to see what hard coded publisher plugins
 we have), but we do have generic functions for Crossref and
-ftdoi.org that are also tried and may get a result. You
+\pkg{ftdoi} that are also tried and may get a result. You
 are welcome to open up an issue at
 \url{https://github.com/ropensci/fulltext/issues} to discuss
 publisher specific plugins.
