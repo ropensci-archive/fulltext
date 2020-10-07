@@ -5,15 +5,7 @@
 \alias{ft_links_ls}
 \title{Get full text links}
 \usage{
-ft_links(
-  x,
-  from = NULL,
-  plosopts = list(),
-  crossrefopts = list(),
-  entrezopts = list(),
-  bmcopts = list(),
-  ...
-)
+ft_links(x, from = NULL, ...)
 
 ft_links_ls()
 }
@@ -21,14 +13,6 @@ ft_links_ls()
 \item{x}{One of \code{ft}, \code{ft_ind}, or a character string of DOIs.}
 
 \item{from}{Source to query. Ignored when \code{ft_ind} class passed.}
-
-\item{plosopts}{PLOS options, a named list. See \code{?searchplos}}
-
-\item{crossrefopts}{Crossref options, a named list. See \code{?cr_works}}
-
-\item{entrezopts}{Entrez options, a named list. See \code{?entrez_search}}
-
-\item{bmcopts}{BMC options, a named list. See \code{?bmc_search}}
 
 \item{...}{curl options passed on to \link[crul:HttpClient]{crul::HttpClient} (plos, bmc,
 crossref) or \code{httr::GET()} (entrez), see examples below}
@@ -151,11 +135,11 @@ res$copernicus
 
 ## cogent
 (res <- ft_links('10.1080/23311916.2014.938430'))
-res$cogent
+res$informa
 
 ## bmc
 (res <- ft_links('10.1186/2049-2618-2-7'))
-res$bmc
+res$springer
 (res <- ft_links('10.1186/2049-2618-2-7', from = "bmc"))
 
 ## Many publishers, elife and peerj
