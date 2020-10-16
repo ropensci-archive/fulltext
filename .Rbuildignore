@@ -10,6 +10,7 @@ vignettes/margins.sty
 .Rhistory
 CONTRIBUTING.md
 README.Rmd
+README.md
 ^CODE_OF_CONDUCT\.md$
 ^cran-comments\.md$
 ^revdep$
