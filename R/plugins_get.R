@@ -332,8 +332,8 @@ elife_ft <- function(dois, type, progress = FALSE, ...) {
       return(ft_object(path, x, type))
     }
     lk <- tcat(crminer::crm_links(x))
-    lk <- tcat(Filter(function(x) grepl(paste0("\\.", type), x), lk)[[1]][[1]])
     if (inherits(lk, "error")) return(ft_error(lk$message, x))
+    lk <- tcat(Filter(function(x) grepl(paste0("\\.", type), x), lk)[[1]][[1]])
     get_ft(x, type, lk, path, list(), ...)
   }
   plapply(dois, elife_fun, type, progress, ...)

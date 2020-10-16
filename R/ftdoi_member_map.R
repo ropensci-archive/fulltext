@@ -43,10 +43,10 @@ member_map <- list(
     "name" = "sage",
     "path" = "sage.json"
   ),
-  "194" = list(
-    "name" = "thieme",
-    "path" = "thieme.json"
-  ),
+  # "194" = list(
+  #   "name" = "thieme",
+  #   "path" = "thieme.json"
+  # ),
   "98" = list(
     "name" = "hindawi",
     "path" = "hindawi.json"
