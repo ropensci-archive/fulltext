@@ -170,5 +170,6 @@ ftd_doi <- function(doi, ...) {
 empty_df <- function(d) {
   na_cr <- NA_character_
   data.frame(doi = d, url = na_cr, content_type = na_cr, issn = na_cr,
-    member_name = na_cr, member_url = na_cr)
+    member_name = na_cr, member_url = na_cr,
+    stringsAsFactors = FALSE)
 }

@@ -137,5 +137,6 @@ links2df <- function(x) {
 first_page <- function(x) strsplit(x, "-")[[1]][1]
 to_df <- function(doi, pat, member, issn, lks) {
   data.frame(doi = doi, lks, issn = issn %||% NA_character_,
-    member_name = pat$publisher, member_url = murl(member))
+    member_name = pat$publisher, member_url = murl(member),
+    stringsAsFactors = FALSE)
 }
