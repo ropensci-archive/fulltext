@@ -10,14 +10,13 @@
   "codeRepository": "https://github.com/ropensci/fulltext/",
   "issueTracker": "https://github.com/ropensci/fulltext/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
-    "version": "4.0.2",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.0.2 (2020-06-22)",
+  "runtimePlatform": "R version 4.0.3 (2020-10-10)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
@@ -70,30 +69,6 @@
     },
     {
       "@type": "SoftwareApplication",
-      "identifier": "knitr",
-      "name": "knitr",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=knitr"
-    },
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "rmarkdown",
-      "name": "rmarkdown",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=rmarkdown"
-    },
-    {
-      "@type": "SoftwareApplication",
       "identifier": "pubchunks",
       "name": "pubchunks",
       "provider": {
@@ -118,6 +93,12 @@
     }
   ],
   "softwareRequirements": [
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "R",
+      "name": "R",
+      "version": ">= 2.10"
+    },
     {
       "@type": "SoftwareApplication",
       "identifier": "crul",
@@ -317,24 +298,34 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=digest"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "fauxpas",
+      "name": "fauxpas",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=fauxpas"
     }
   ],
   "applicationCategory": "Literature",
   "isPartOf": "https://ropensci.org",
   "keywords": ["text-mining", "literature", "pdf", "xml", "publications", "citations", "full-text", "TDM", "text-ming", "metadata", "open-access", "extract-text", "crossref", "rstats", "r", "r-package"],
-  "contIntegration": [
-    "https://travis-ci.org/ropensci/fulltext",
-    "https://codecov.io/github/ropensci/fulltext?branch=master"
-  ],
+  "contIntegration": "https://codecov.io/gh/ropensci/fulltext",
   "releaseNotes": "https://github.com/ropensci/fulltext/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/fulltext/blob/master/README.md",
-  "fileSize": "1360.843KB",
+  "fileSize": "0KB",
   "developmentStatus": "https://www.repostatus.org/#active",
   "relatedLink": [
     "https://ropensci.github.io/fulltext-book/",
     "https://ropenscilabs.github.io/fulltext-book/",
     "https://docs.ropensci.org/fulltext",
-    "https://books.ropensci.org/fulltext/"
+    "https://books.ropensci.org/fulltext/",
+    "https://docs.ropensci.org/fulltext/"
   ],
   "contributor": {},
   "copyrightHolder": {},

@@ -1,3 +1,19 @@
+fulltext 1.6.0
+==============
+
+### NEW FEATURES
+
+* HTTP requests previously made to the ftdoi.org API are now done locally with data/files cached locally; speeds up `ft_get` usage, especially if you're on a slow internet connection (#225) (#226)
+
+### MINOR IMPROVEMENTS
+
+* all vignettes only available on docs site now: https://docs.ropensci.org/fulltext/ (#227)
+
+### BUG FIXES
+
+* `ft_links()` opts parameters dropped (e.g., `plosopts`); no options can be passed down to each data source (#223)
+
+
 fulltext 1.5.0
 ==============
 
