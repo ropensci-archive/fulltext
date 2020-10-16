@@ -2,6 +2,9 @@ ex <- function(str, pattern) regmatches(str, regexpr(pattern, str))
 sm <- function(x) suppressMessages(x)
 sw <- function(x) suppressWarnings(x)
 
+# fetch ftdoi patterns before running tests
+ftd_fetch_patterns()
+
 library("vcr")
 vcr::vcr_configure(
   dir = "../fixtures",

@@ -12,8 +12,8 @@
 #' return a string as XML (`FALSE`). Default: `TRUE`
 #' @details You can alternatively use `readtext::readtext()` or similar functions
 #' to achieve a similar outcome.
-#' @examples  
-#' \dontrun{
+#' @examples \dontrun{
+#' if (interactive()) {
 #' ## from a directory path
 #' x <- ft_table()
 #' x
@@ -27,7 +27,7 @@
 #' ## don't pull text out of xml, just give back the xml please
 #' x <- ft_table(xml_extract_text = FALSE)
 #' x
-#' }
+#' }}
 ft_table <- function(path = NULL, type = NULL, encoding = NULL, xml_extract_text = TRUE) {
   if (is.null(path)) path <- cache_options_get()$path
   if (!file.exists(path)) stop(path, " does not exist")

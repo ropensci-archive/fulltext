@@ -26,8 +26,8 @@ You can alternatively use \code{readtext::readtext()} or similar functions
 to achieve a similar outcome.
 }
 \examples{
- 
 \dontrun{
+if (interactive()) {
 ## from a directory path
 x <- ft_table()
 x
@@ -41,5 +41,5 @@ ft_table(type = "pdf")
 ## don't pull text out of xml, just give back the xml please
 x <- ft_table(xml_extract_text = FALSE)
 x
-}
+}}
 }

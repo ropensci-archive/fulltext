@@ -673,7 +673,7 @@ get_unknown <- function(x, type, try_unknown, progress = FALSE, ...) {
 }
 
 ftdoi_get <- function(member) {
-  res <- tryCatch(ftdoi::ftd_members(member), error = function(e) e)
+  res <- tryCatch(ftd_members(member), error = function(e) e)
   if (inherits(res, "error")) NULL else res
 }
 
@@ -870,7 +870,7 @@ get_publisher2 <- function(x, ...) {
   pref_uniq <- unique(pref)
   mems <- lapply(pref_uniq, function(z) {
     # tmp <- rcrossref::cr_prefixes(z)$data
-    tmp <- ftdoi::prefix_local(z)
+    tmp <- prefix_local(z)
     list(
       prefix = z,
       member = basename(tmp$member),

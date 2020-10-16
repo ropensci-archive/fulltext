@@ -1,0 +1,88 @@
+---
+title: "ftdoi"
+author: Scott Chamberlain
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{ftdoi}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r include=FALSE}
+knitr::opts_chunk$set(
+  comment = "#>",
+  collapse = TRUE,
+  warning = FALSE,
+  message = FALSE
+)
+```
+
+Retrieve full-text urls on a per publisher basis
+
+Docs: https://docs.ropensci.org/ftdoi/
+
+The role `ftdoi` plays is filling in gaps where other tools fall short. That is, Crossref collates full text links for articles on a voluntary basis, which can be accessed with R using [crminer::crm_links()](https://docs.ropensci.org/crminer/reference/crm_links.html) - but, only some publishers share the links with Crossref, and even those that do may not supply the correct links to articles, and/or the links may get out of date and no longer work at some point. 
+
+There used to be an web API where you could request links for a DOI - nearly all requests to this API were from R - so now the API is gone and `ftdoi` is now the main interface to access these publisher specific article URL patterns. 
+
+The patterns are maintained in a separate GitHub repository at <https://github.com/ropenscilabs/pubpatterns>. If you have a question about a puslishers article URL patterns or want to request one, open an issue in that repository.
+
+## Installation
+
+```{r eval=FALSE}
+remotes::install_github("ropensci/ftdoi")
+```
+
+```{r setup}
+library(ftdoi)
+```
+
+## Download publisher "patterns"
+
+`ftdoi` works by using metadata for each publisher. To use this package you'll first need to download the publisher patterns, a set of JSON files. These are cached locally; and should be updated whenever there's a new version available. The JSON files are maintained at <https://github.com/ropenscilabs/pubpatterns> - new versions are simply git tags in the `pubpatterns` repository.
+
+```{r eval=FALSE}
+ftd_fetch_patterns()
+```
+
+## Members
+
+You can look at the publisher specific metadata. Each publisher has a Crossref member id, an integer.  You can lookup all publishers. 
+
+```{r eval=FALSE}
+ftd_members()
+```
+
+Or if you know a Crossref member ID already, you can lookup by that number.
+
+```{r}
+ftd_members(1965)
+```
+
+## Prefixes
+
+Most publishers have more than one DOI prefix (e.g., `10.1021`). There's a few DOI prefixes that have their own patterns because they may use different URL patterns for articles than the rest of the papers for the publisher.
+
+```{r}
+x <- ftd_prefixes()
+vapply(x, "[[", "", "publisher")
+```
+
+## Get urls
+
+The main function you'll want to use in this package is `ftd_doi()`
+
+eLife
+
+```{r}
+elife <- ftd_doi(doi = c('10.7554/eLife.07404', '10.7554/eLife.07405'))
+lapply(elife, "[[", "links")
+```
+
+pensoft
+
+```{r}
+pensoft <- ftd_doi(doi = c('10.3897/zookeys.594.8768', '10.3897/mycokeys.54.34571'))
+lapply(pensoft, "[[", "links")
+```

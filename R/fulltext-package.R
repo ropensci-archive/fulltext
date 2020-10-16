@@ -188,7 +188,6 @@
 #' @importFrom tibble as_tibble
 #' @importFrom stats na.omit
 #' @importFrom digest digest
-#' @importFrom ftdoi ftd_members ftd_doi
 #' @name fulltext-package
 #' @aliases fulltext
 #' @docType package

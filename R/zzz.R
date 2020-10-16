@@ -55,7 +55,7 @@ assert_from <- function(x, options) {
   }
 }
 
-strextract <- function(str, pattern) regmatches(str, regexpr(pattern, str))
+strextract <- function(str, pattern, ...) regmatches(str, regexpr(pattern, str, ...))
 strtrim <- function(str) gsub("^\\s+|\\s+$", "", str)
 
 xml_node_parse <- function(x) {
@@ -89,7 +89,8 @@ rbl <- function(x) {
   ))
 }
 
-`%||%` <- function(x, y) if (is.null(x)) y else x
+# `%||%` <- function(x, y) if (is.null(x)) y else x
+`%||%` <- function (x, y) if (is.null(x) || is.na(x)) y else x
 `%<|>%` <- function(x, y) if (length(x) == 0) y else x
 
 httr_write_disk <- function(path, overwrite) {
@@ -109,4 +110,32 @@ httr_write_disk <- function(path, overwrite) {
       file = NULL
     ), class = c("write_disk", "write_function"))
   ), classs = "request")
+}
+
+if (base::getRversion() >= "2.15.1") {
+  utils::globalVariables(c("crossref_member_prefix"))
+}
+
+char2num <- function(x) as.numeric(strextract(x, "[0-9]+"))
+pop <- function(x, nms) x[!names(x) %in% nms]
+no_http_needed <- function(x) !x$member %in% members_need_crossref
+make_doi_str <- function(x) {
+  sprintf("doi:(\"%s\")", paste0(x, collapse = "\" OR \""))
+}
+fat_cat_link <- function(doi) {
+  cn <- crul::HttpClient$new("https://search.fatcat.wiki")
+  query <- list(q = make_doi_str(doi), size = 1)
+  res <- cn$get("fatcat_release/_search", query = query)
+  res$raise_for_status()
+  out <- jsonlite::fromJSON(res$parse("UTF-8"), flatten = TRUE)$hits$hits
+  out$`_source.best_pdf_url`
+}
+last <- function(x) x[length(x)]
+links2df <- function(x) {
+  stats::setNames(x, c("url","content_type"))
+}
+first_page <- function(x) strsplit(x, "-")[[1]][1]
+to_df <- function(doi, pat, member, issn, lks) {
+  data.frame(doi = doi, lks, issn = issn %||% NA_character_,
+    member_name = pat$publisher, member_url = murl(member))
 }

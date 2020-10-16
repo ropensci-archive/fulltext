@@ -11,6 +11,11 @@ vign_getting:
 	${RSCRIPT} -e "Sys.setenv(NOT_CRAN='true'); knitr::knit('getting_fulltext.Rmd.og', output = 'getting_fulltext.Rmd')";\
 	cd ..
 
+vign_ftdoi:
+	cd vignettes;\
+	${RSCRIPT} -e "Sys.setenv(NOT_CRAN='true'); knitr::knit('ftdoi.Rmd.og', output = 'ftdoi.Rmd')";\
+	cd ..
+
 install: doc build
 	R CMD INSTALL . && rm *.tar.gz
 
