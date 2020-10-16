@@ -16,7 +16,9 @@ a named list with: prefix, member, name
 prefix local
 }
 \examples{
+\dontrun{
 prefix_local('10.3390/ani4010082')
+}
 }
 \seealso{
 Other ftdoi: 
