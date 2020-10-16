@@ -29,3 +29,4 @@ Other ftdoi:
 \code{\link{ftdoi_cache}}
 }
 \concept{ftdoi}
+\keyword{internal}

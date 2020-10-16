@@ -1,6 +1,6 @@
 #' Members
 #' 
-#' @export
+#' @keywords internal
 #' @param id (character) a Crossref member ID. Default is `NULL` which
 #' gets all members
 #' @family ftdoi
@@ -32,7 +32,7 @@ a_member <- function(id) {
 
 #' Prefixes
 #' 
-#' @export
+#' @keywords internal
 #' @param id (character) a DOI prefix. Default is `NULL`, which 
 #' gets all
 #' @return named list of details of the publisher for the DOI prefix
@@ -74,7 +74,7 @@ a_prefix <- function(id) {
 }
 
 #' prefix local
-#' @export
+#' @keywords internal
 #' @param doi (characte) a doi
 #' @return a named list with: prefix, member, name
 #' @family ftdoi
