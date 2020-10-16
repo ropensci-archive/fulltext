@@ -20,3 +20,4 @@ vignettes/*.og
 vignettes/formats.Rmd
 vignettes/fulltext.Rmd
 vignettes/getting_fulltext.Rmd
+^LICENSE\.md$
