@@ -60,7 +60,7 @@ get_ctype <- function(x) {
 }
 murl <- function(x) file.path("https://api.crossref.org/members", x)
 iurl <- function(x) {
-  if (is.null(x) || !nzchar(x)) return(NA_character_)
+  if (is.null(x) || !nzchar(as.character(x))) return(NA_character_)
   x <- strsplit(x, ",")[[1]][1]
   file.path("https://api.crossref.org/journals", x)
 }

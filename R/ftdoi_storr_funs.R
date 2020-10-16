@@ -21,7 +21,7 @@ prefix_list_keys <- function() {
 # doi-url
 url_update <- function(doi, url, content_type) {
   storr_init("_urls")
-  if (!nzchar(url) || is.null(url)) return()
+  if (!nzchar(as.character(url)) || is.null(url)) return()
   if (!key_exists(url_get(doi, content_type))) {
     ftdoi_urls$set(
       key = paste(doi, content_type, sep = ":"),

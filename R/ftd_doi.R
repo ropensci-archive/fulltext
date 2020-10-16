@@ -156,10 +156,15 @@ ftd_doi <- function(doi, ...) {
       zz <- url_get(d)
       if (w$member %in% members_sim_check)
         df <- list(link = list(data.frame(intended.application="similarity-checking",
-          URL=zz[[1]]$url, `content-type`=zz[[1]]$content_type)))
+          URL=zz[[1]]$url, `content-type`=zz[[1]]$content_type,
+          stringsAsFactors = FALSE)))
       else
-        df <- list(link = list(data.frame(
-          URL=pluck(zz, "url"), `content-type`=pluck(zz, "content_type"))))
+        df <- list(link = list(
+          data.frame(
+            URL=pluck(zz, "url"), `content-type`=pluck(zz, "content_type"),
+            stringsAsFactors = FALSE
+          )
+        ))
     }
     # z <- tryCatch(pattern_member(d, w$member, df$issn, df), error = function(e) e)
     z <- pattern_member(d, w$member, df$issn, df)

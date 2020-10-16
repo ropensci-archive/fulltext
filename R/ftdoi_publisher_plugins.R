@@ -24,7 +24,8 @@ fun_pnas <- function(doi, pat, member, issn, res) {
     lks[[i]] <- data.frame(
       url = sprintf(pat$urls[[i]], res$volume, res$issue,
         sub("E", "", strsplit(res$page, "-")[[1]][1])),
-      content_type = get_ctype(names(pat$urls)[i])
+      content_type = get_ctype(names(pat$urls)[i]),
+      stringsAsFactors = FALSE
     )
   }
   return(rbl(lks))
