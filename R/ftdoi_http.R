@@ -1,5 +1,5 @@
 make_ua <- function() {
-  paste0("ftdoi/", utils::packageVersion("ftdoi"))
+  paste0("fulltext/", utils::packageVersion("fulltext"))
 }
 
 ftd_GET <- function(url, args = list(), ...) {
