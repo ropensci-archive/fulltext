@@ -69,7 +69,8 @@ make_links <- function(doi, z, regex) {
   for (i in seq_along(z)) {
     out[[i]] <- data.frame(
       url = sprintf(z[[i]], strextract(doi, regex, perl=TRUE)),
-      content_type = get_ctype(names(z)[i])
+      content_type = get_ctype(names(z)[i]),
+      stringsAsFactors = FALSE
     )
   }
   return(do.call(rbind, out))
