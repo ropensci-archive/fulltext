@@ -14,7 +14,7 @@ burdensome to include, then we can include that source.
 }
 \section{Manual}{
 
-See \url{https://books.ropensci.org/fulltext/} for a longer form
+See https://books.ropensci.org/fulltext/ for a longer form
 manual for using \pkg{fulltext}.
 }
 
@@ -54,7 +54,7 @@ directly.
 \section{Rate limits}{
 
 \strong{Scopus}: 20,000 per 7 days. See
-\url{https://dev.elsevier.com/api_key_settings.html} for rate
+https://dev.elsevier.com/api_key_settings.html for rate
 limit information. To see what your personal rate limit details are,
 request verbose HTTP request output - this will vary on the function
 you are using - see the docs for the function. See the response
@@ -134,9 +134,8 @@ this package. If you aren't physically at your institution you will likely
 need to be on a VPN or similar so that your IP address is in the range
 that the publisher is accepting for that institution.
 
-\strong{Microsoft}: Get a key by creating an Azure account at
-\url{https://www.microsoft.com/cognitive-services/en-us/subscriptions},
-then requesting a key for \strong{Academic Knowledge API} within
+\strong{Microsoft}: Get a key by creating an Azure account
+then request a key for \strong{Academic Knowledge API} within
 \strong{Cognitive Services}. Store it as an environment variable in your
 \code{.Renviron} file - see \link{Startup} for help. Pass your
 API key into \code{maopts} as a named element in a list like
@@ -194,11 +193,11 @@ Let us know if you run into trouble with authentication.
 
 \section{Feedback}{
 
-Let us know what you think at \url{https://github.com/ropensci/fulltext/issues}
+Let us know what you think at https://github.com/ropensci/fulltext/issues
 }
 
 \author{
-Scott Chamberlain \href{mailto:myrmecocystus@gmail.com}{myrmecocystus@gmail.com}
+Scott Chamberlain
 
 Will Pearse
 

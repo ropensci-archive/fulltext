@@ -15,7 +15,7 @@
 #' we have), but we do have generic functions for Crossref and 
 #' ftdoi that are also tried and may get a result. You
 #' are welcome to open up an issue at 
-#' <https://github.com/ropensci/fulltext/issues> to discuss 
+#' https://github.com/ropensci/fulltext/issues to discuss 
 #' publisher specific plugins.
 #' 
 #' 

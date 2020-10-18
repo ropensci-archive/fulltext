@@ -50,7 +50,7 @@
 #' [fulltext-package] for rate limiting and authentication information,
 #' respectively
 #' 
-#' See <https://dev.elsevier.com/tips/ScopusSearchTips.htm> for help/tips
+#' See https://dev.elsevier.com/sc_search_tips.html for help/tips
 #' on searching with Scopus
 #' 
 #' @section Looping:

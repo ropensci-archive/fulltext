@@ -7,7 +7,7 @@
 #' burdensome to include, then we can include that source.
 #' 
 #' @section Manual:
-#' See <https://books.ropensci.org/fulltext/> for a longer form
+#' See https://books.ropensci.org/fulltext/ for a longer form
 #' manual for using \pkg{fulltext}.
 #'
 #' @section What's included:
@@ -38,7 +38,7 @@
 #' 
 #' @section Rate limits:
 #' **Scopus**: 20,000 per 7 days. See 
-#' <https://dev.elsevier.com/api_key_settings.html> for rate 
+#' https://dev.elsevier.com/api_key_settings.html for rate 
 #' limit information. To see what your personal rate limit details are, 
 #' request verbose HTTP request output - this will vary on the function
 #' you are using - see the docs for the function. See the response 
@@ -116,9 +116,8 @@
 #' need to be on a VPN or similar so that your IP address is in the range 
 #' that the publisher is accepting for that institution.
 #'  
-#' **Microsoft**: Get a key by creating an Azure account at 
-#' <https://www.microsoft.com/cognitive-services/en-us/subscriptions>, 
-#' then requesting a key for **Academic Knowledge API** within 
+#' **Microsoft**: Get a key by creating an Azure account 
+#' then request a key for **Academic Knowledge API** within 
 #' **Cognitive Services**. Store it as an environment variable in your 
 #' `.Renviron` file - see [Startup] for help. Pass your 
 #' API key into `maopts` as a named element in a list like 
@@ -174,7 +173,7 @@
 #' Let us know if you run into trouble with authentication.
 #'
 #' @section Feedback:
-#' Let us know what you think at <https://github.com/ropensci/fulltext/issues>
+#' Let us know what you think at https://github.com/ropensci/fulltext/issues
 #'
 #' @importFrom xml2 read_html read_xml xml_find_first xml_find_all xml_text
 #' xml_contents xml_attr xml_ns xml_children xml_name xml_ns_strip
@@ -191,7 +190,7 @@
 #' @name fulltext-package
 #' @aliases fulltext
 #' @docType package
-#' @author Scott Chamberlain <myrmecocystus@@gmail.com>
+#' @author Scott Chamberlain
 #' @author Will Pearse
 #' @author Helge Knüttel
 #' @keywords package

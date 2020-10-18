@@ -74,7 +74,7 @@ desired. Note that these subject code mapping vary based upon the
 environment in which the request is executed. See Details for choices.}
 
 \item{key}{(character) api key. get a key at
-\url{https://dev.elsevier.com/index.html}}
+https://dev.elsevier.com/index.html}
 
 \item{...}{curl options passed on to \link[crul:HttpClient]{crul::HttpClient}}
 }
@@ -87,10 +87,10 @@ won't make that many requests in 7 days, but if you do e.g., make 20K in
 5 days, then you have to wait 2 days for the clock to reset, than you'll
 be able to make 20K again.
 
-See \url{https://dev.elsevier.com/api_key_settings.html} for rate
+See https://dev.elsevier.com/api_key_settings.html for rate
 limit information.
 
-See \url{https://dev.elsevier.com/tips/ScopusSearchTips.htm} for help/tips
+See https://dev.elsevier.com/sc_search_tips.html for help/tips
 on searching
 }
 \section{subj choices include}{
