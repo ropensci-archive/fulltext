@@ -61,7 +61,7 @@ fulltext 1.3.0
 ### NEW FEATURES
 
 * `ft_get()` gains new data source: ScienceDirect (#196) thanks @knh11545
-* performance improvement to `ft_get()`: when using internal fxn `get_unknown`(when publisher is not initially knowsn) we run another internal fxn `get_publisher` which is slow cause can only throw one DOI per request to Crossref API; We now use the FatCat (https://fatcat.wiki/) API (https://guide.fatcat.wiki/http_api.html) to do more efficient publisher lookup (#192) (#201)
+* performance improvement to `ft_get()`: when using internal fxn `get_unknown`(when publisher is not initially knowsn) we run another internal fxn `get_publisher` which is slow cause can only throw one DOI per request to Crossref API; We now use the FatCat (https://fatcat.wiki/) API to do more efficient publisher lookup (#192) (#201)
 
 ### MINOR IMPROVEMENTS
 
@@ -85,8 +85,8 @@ fulltext 1.2.0
 
 ### DEFUNCT
 
-* `ft_chunks()` and `ft_tabularize()` were deprecated in the previous version, and are now defunct. See the new package <https://github.com/ropensci/pubchunks> for the same (and improved) functionality (#146) (#181)
-* `ft_get_si()` is defunct. It's been pulled out into a new package <https://github.com/ropensci/suppdata>  (#186) (#188)
+* `ft_chunks()` and `ft_tabularize()` were deprecated in the previous version, and are now defunct. See the new package https://github.com/ropensci/pubchunks for the same (and improved) functionality (#146) (#181)
+* `ft_get_si()` is defunct. It's been pulled out into a new package suppdata  (#186) (#188)
 
 ### BUG FIXES
 
@@ -135,7 +135,7 @@ fulltext 1.1.0
 
 ### DEPRECATED
 
-Continuing to focus the scope of this package the functions `ft_chunks()` and `ft_tabularize()` are now deprecated, and will be removed (defunct) in a future version of this package. See the new package <https://github.com/ropensci/pubchunks> for the same and better functionality. (#181)
+Continuing to focus the scope of this package the functions `ft_chunks()` and `ft_tabularize()` are now deprecated, and will be removed (defunct) in a future version of this package. See the new package pubchunks for the same and better functionality. (#181)
 
 
 fulltext 1.0.1
@@ -153,7 +153,7 @@ fulltext 1.0.1
 fulltext 1.0
 ============
 
-Check out the [fulltext manual](https://books.ropensci.org/fulltext/) for detailed documentation.
+Check out the fulltext manual (https://books.ropensci.org/fulltext/) for detailed documentation.
 
 `fulltext` has undergone a re-organization, which includes a bump in the major version to `v1` to reinforce the large changes the package has undergone. Changes include:
 
@@ -168,7 +168,7 @@ Check out the [fulltext manual](https://books.ropensci.org/fulltext/) for detail
 * `collect` changed to `ft_collect` (#139)
 * `tabularize` changed to `ft_tabularize` (#139)
 * `get_text` changed to `ft_text` (#139)
-* `ft_get()` gains new parameter `try_unknown` that attempts to try to find full text for a given DOI/ID even if we don't have code plugins specifically for that publisher. This includes trying to get a full text link from Crossref and the <https://ftdoi.org> API (#137)
+* `ft_get()` gains new parameter `try_unknown` that attempts to try to find full text for a given DOI/ID even if we don't have code plugins specifically for that publisher. This includes trying to get a full text link from Crossref and the ftdoi.org API (#137)
 * Gains function `ft_table` that outputs a data.frame of all downloaded articles with DOIs, filenames, and the text of each article, similar to the `readtext` package (#134)
 * Gains function `ft_abstract` for fetching abstracts, including support for getting abstracts from Scopus, Microsoft Academic, Crossref, and PLOS (#98) (#115)
 * Microsoft Academic added as another data source both in `ft_abstract` and in `ft_search` via the `microdemic` package (#99) (#115)
