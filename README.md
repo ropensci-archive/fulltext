@@ -28,27 +28,26 @@ rOpenSci has a number of R packages to get either full text, metadata, or both f
 
 Previously supported use cases, extracted out to other packages:
 
-* Collect bits of articles that you actually need - moved to package [pubchunks][]
-* Supplementary data from papers has been moved to the [suppdata][] package
+* Collect bits of articles that you actually need - moved to package `pubchunks`
+* Supplementary data from papers has been moved to the `suppdata`
 
 
 It's easy to go from the outputs of `ft_get` to text-mining packages such as 
-[tm](https://cran.r-project.org/package=tm) and 
-[quanteda](https://cran.r-project.org/package=quanteda).
+`tm` and `quanteda`
 
 Data sources in `fulltext` include:
 
-* [Crossref](https://www.crossref.org/) - via the `rcrossref` package
-* [Public Library of Science (PLOS)](https://www.plos.org/) - via the `rplos` package
+* Crossref - via the `rcrossref` package
+* Public Library of Science (PLOS) - via the `rplos` package
 * Biomed Central
-* [arXiv](https://arxiv.org) - via the `aRxiv` package
-* [bioRxiv](https://biorxiv.org/) - via the `biorxivr` package
-* [PMC/Pubmed via Entrez](https://www.ncbi.nlm.nih.gov/) - via the `rentrez` package
+* arXiv - via the `aRxiv` package
+* bioRxiv - via the `biorxivr` package
+* PMC/Pubmed via Entrez - via the `rentrez` package
 * Scopus - internal tooling
-* Semantic Scholar (https://www.semanticscholar.org/) - internal tooling
+* Semantic Scholar - internal tooling
 * Many more are supported via the above sources (e.g., _Royal Society Open Science_ is
 available via Pubmed)
-* We __will__ add more, as publishers open up, and as we have time...See the [master list here](https://github.com/ropensci/fulltext/issues/4#issuecomment-52376743)
+* We __will__ add more, as publishers open up, and as we have time...See the issues
 
 Authentication: A number of publishers require authentication via API key, and some even more
 draconian authentication processes involving checking IP addresses. We are working on supporting
@@ -56,9 +55,7 @@ all the various authentication things for different publishers, but of course al
 is already easily available. See the **Authentication** section in `?fulltext-package` after 
 loading the package.
 
-We'd love your feedback. Let us know what you think in the issue tracker (https://github.com/ropensci/fulltext/issues)
-
-Article full text formats by publisher: https://docs.ropensci.org/fulltext/articles/formats
+We'd love your feedback. Let us know what you think in the issue tracker
 
 
 ## Installation
@@ -104,9 +101,9 @@ quanteda::corpus(x)
 
 ## Contributors
 
-* Scott Chamberlain <https://github.com/sckott>
-* Will Pearse <https://github.com/willpearse>
-* Katrin Leinweber <https://github.com/katrinleinweber>
+* Scott Chamberlain
+* Will Pearse
+* Katrin Leinweber
 
 ## Meta
 
@@ -117,7 +114,5 @@ quanteda::corpus(x)
 
 [![rofooter](https://ropensci.org/public_images/github_footer.png)](https://ropensci.org)
 
-[suppdata]: https://github.com/ropensci/suppdata
-[pubchunks]: https://github.com/ropensci/pubchunks
 [docs]: https://docs.ropensci.org/fulltext/
 [ftbook]: https://books.ropensci.org/fulltext/
