@@ -14,7 +14,7 @@
 
 --------
 
-This version fixes a bug and makes some internal changes to speed up usage of a function.
+This version fixes a bug and makes some internal changes to speed up usage of a function. This is a re-submission after fixing some broken urls.
 
 Thanks! 
 Scott Chamberlain
