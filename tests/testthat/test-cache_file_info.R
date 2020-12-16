@@ -19,7 +19,7 @@ test_that("cache_file_info - when cache dir not empty", {
   skip_on_cran()
   
   # download a file
-  pap <- ft_get('10.1371/journal.pone.0086169')
+  pap <- ft_get('10.7717/peerj.7755')
 
   # cache info
   aa <- cache_file_info()
