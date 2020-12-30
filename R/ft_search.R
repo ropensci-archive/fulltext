@@ -14,13 +14,15 @@
 #'
 #' @export
 #' @param query (character) Query terms
-#' @param from (character) Source to query, one or more of `"plos"`, `"bmc"`, `"crossref"`,
-#' `"entrez"`, `"arxiv"`, `"biorxiv"`, `"europmc"`, `"scopus"`, or `"ma"`
-#' @param limit (integer) Number of records to return. default: 10
+#' @param from (character) Source to query, one or more of `"plos"`, `"bmc"`,
+#' `"crossref"`, `"entrez"`, `"arxiv"`, `"biorxiv"`, `"europmc"`, `"scopus"`,
+#' or `"ma"`
+#' @param limit (integer) Number of records to return. default: 10. See also
+#' Pagination section below.
 #' @param start (integer) Record number to start at. Only used for 
 #' 'scopus' right now. default: 0. Note that with some data sources we loop 
-#' internally to get all the results you want with the `limit` parameter, so `start`
-#' in those cases will be ignored. See **Looping** section below.
+#' internally to get all the results you want with the `limit` parameter, so
+#' `start` in those cases will be ignored. See **Looping** section below.
 #' @param plosopts (list) PLOS options, a named list. See [rplos::searchplos()]
 #' @param bmcopts (list) BMC options, a named list. See [bmc_search()]
 #' @param crossrefopts (list) Crossref options, a named list. 
@@ -40,7 +42,7 @@
 #' examples below. curl options are ignored for: arxiv (however, you
 #' can wrap your call to arxiv in `httr::with_config`)
 #' 
-#' @note for all `*opts` parameters, ee the function linked to in 
+#' @note for all `*opts` parameters, see the function linked to in 
 #' the parameter definition for what you can pass to it. 
 #' 
 #' @details Each of `plosopts`, `scopusopts`, etc. expect 
@@ -79,6 +81,22 @@
 #' include internal looping of requests 
 #' - Microsoft AR: using internal function `microsoft_search` that does not
 #' loop, so you have to iterate through requests manually
+#' 
+#' @section Pagination:
+#' For each data source you can pass named parameters to a list matching
+#' that data source name, e.g., `plosopts` for PLOS. If you pass pagination
+#' parameters per data source they will override the global pagination
+#' parameters set in `ft_search()`. They are for each data source
+#' (limit parameter name/offset parameter name):
+#' - PLOS: `limit`/`start`
+#' - Crossref: `limit`/`offset`
+#' - BMC: `limit`/`offset`
+#' - Entrez: `retmax`/`retstart`
+#' - Europe PMC: `per_page`/(see [eupmc_search()])
+#' - arXiv: `limit`/`start`
+#' - BioRxiv: `limit`/none
+#' - Scopus: `count`/`start`
+#' - Microsoft Academic: `count`/`offset`
 #'
 #' @return An object of class `ft`, and objects of class `ft_ind`
 #' within each source. You can access each data source with `$`

@@ -27,15 +27,17 @@ ft_search_ls()
 \arguments{
 \item{query}{(character) Query terms}
 
-\item{from}{(character) Source to query, one or more of \code{"plos"}, \code{"bmc"}, \code{"crossref"},
-\code{"entrez"}, \code{"arxiv"}, \code{"biorxiv"}, \code{"europmc"}, \code{"scopus"}, or \code{"ma"}}
+\item{from}{(character) Source to query, one or more of \code{"plos"}, \code{"bmc"},
+\code{"crossref"}, \code{"entrez"}, \code{"arxiv"}, \code{"biorxiv"}, \code{"europmc"}, \code{"scopus"},
+or \code{"ma"}}
 
-\item{limit}{(integer) Number of records to return. default: 10}
+\item{limit}{(integer) Number of records to return. default: 10. See also
+Pagination section below.}
 
 \item{start}{(integer) Record number to start at. Only used for
 'scopus' right now. default: 0. Note that with some data sources we loop
-internally to get all the results you want with the \code{limit} parameter, so \code{start}
-in those cases will be ignored. See \strong{Looping} section below.}
+internally to get all the results you want with the \code{limit} parameter, so
+\code{start} in those cases will be ignored. See \strong{Looping} section below.}
 
 \item{plosopts}{(list) PLOS options, a named list. See \code{\link[rplos:searchplos]{rplos::searchplos()}}}
 
@@ -94,7 +96,7 @@ See https://dev.elsevier.com/sc_search_tips.html for help/tips
 on searching with Scopus
 }
 \note{
-for all \verb{*opts} parameters, ee the function linked to in
+for all \verb{*opts} parameters, see the function linked to in
 the parameter definition for what you can pass to it.
 }
 \section{Looping}{
@@ -124,6 +126,26 @@ loop, so you have to iterate through requests manually
 include internal looping of requests
 \item Microsoft AR: using internal function \code{microsoft_search} that does not
 loop, so you have to iterate through requests manually
+}
+}
+
+\section{Pagination}{
+
+For each data source you can pass named parameters to a list matching
+that data source name, e.g., \code{plosopts} for PLOS. If you pass pagination
+parameters per data source they will override the global pagination
+parameters set in \code{ft_search()}. They are for each data source
+(limit parameter name/offset parameter name):
+\itemize{
+\item PLOS: \code{limit}/\code{start}
+\item Crossref: \code{limit}/\code{offset}
+\item BMC: \code{limit}/\code{offset}
+\item Entrez: \code{retmax}/\code{retstart}
+\item Europe PMC: \code{per_page}/(see \code{\link[=eupmc_search]{eupmc_search()}})
+\item arXiv: \code{limit}/\code{start}
+\item BioRxiv: \code{limit}/none
+\item Scopus: \code{count}/\code{start}
+\item Microsoft Academic: \code{count}/\code{offset}
 }
 }
 

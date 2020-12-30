@@ -811,7 +811,7 @@ get_publisher <- function(x, ...) {
 fat_cat_search_one <- function(dois, fields, size) {
   search_string <- make_doi_str(dois)
   cn <- crul::HttpClient$new("https://search.fatcat.wiki")
-  query <- list(q = search_string, `_source` = paste0(fields, collapse = ","),
+  query <- list(q = search_string, `_source_includes` = paste0(fields, collapse = ","),
     size = size)
   res <- cn$get("fatcat_release/_search", query = query)
   res$raise_for_status()
