@@ -67,7 +67,7 @@ get_ft <- function(x, type, url, path, headers = list(), ...) {
   )
   #cat(paste0("within get_ft: ", cli$url), sep="\n")
   res <- tryCatch(cli$get(disk = path), 
-    error = function(e) e, 
+    error = function(e) e,
     warning = function(w) w)
   #cat(class(res)[1L], sep = "\n")
 
@@ -454,13 +454,16 @@ elsevier_ft <- function(dois, type, progress = FALSE, retain_non_ft = FALSE, ...
     if (inherits(res, c("error", "warning"))) return(ft_error(res$message, x))
     res <- res$data$link[[1]]
     url <- res[res$content.type == paste0("text/", type), "URL"][[1]]
-    if (is.null(url)) {
+    if (is.null(url) || length(url) == 0) {
       mssg <- "has no link available"
-      warning(x, " ", mssg, call. = FALSE)
+      warning(x, " with type '", type, "' ", mssg, call. = FALSE)
       return(ft_error(mssg, x))
     }
     header <- list(
-      `CR-Clickthrough-Client-Token` = Sys.getenv("CROSSREF_TDM"),
+      # clickthrough system is now defunct, use Elsevier TDM instead
+      # `CR-Clickthrough-Client-Token` = Sys.getenv("CROSSREF_TDM"),
+      # See https://dev.elsevier.com/tecdoc_text_mining.html
+      `X-ELS-APIKey` = Sys.getenv("ELSEVIER_TDM_KEY"),
       Accept = paste0(switch(type, xml = "text/", plain = "text/"), type)
     )
     get_ft(x, type, url, path, header, ...)
@@ -532,6 +535,7 @@ wiley_ft <- function(dois, type, progress = FALSE, ...) {
         sub("/", "%2F", x))
     }
     header <- list(
+      # FIXME: clickthrough system is now defunct, no known Wiley TDM
       `CR-Clickthrough-Client-Token` = Sys.getenv("CROSSREF_TDM"),
       Accept = paste0(switch(type, xml = "application/", pdf = "application/"), type)
     )

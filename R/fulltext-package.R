@@ -5,7 +5,7 @@
 #' support sources that require authentication on a case by case basis - that
 #' is, if more than just a few people will use it, and it's not too
 #' burdensome to include, then we can include that source.
-#' 
+#'
 #' @section Manual:
 #' See https://books.ropensci.org/fulltext/ for a longer form
 #' manual for using \pkg{fulltext}.
@@ -17,7 +17,7 @@
 #'
 #' @section Use cases:
 #' The following are tasks/use cases supported:
-#' 
+#'
 #' - search - [ft_search()]
 #' - get texts - [ft_get()]
 #' - get full text links - [ft_links()]
@@ -35,64 +35,64 @@
 #' For example, for Crossref we search Crossref for a match for a DOI, and if
 #' none is found we attempt to retrieve the full text from the publisher
 #' directly.
-#' 
+#'
 #' @section Rate limits:
-#' **Scopus**: 20,000 per 7 days. See 
-#' https://dev.elsevier.com/api_key_settings.html for rate 
-#' limit information. To see what your personal rate limit details are, 
+#' **Scopus**: 20,000 per 7 days. See
+#' https://dev.elsevier.com/api_key_settings.html for rate
+#' limit information. To see what your personal rate limit details are,
 #' request verbose HTTP request output - this will vary on the function
-#' you are using - see the docs for the function. See the response 
-#' headers `X-RateLimit-Limit`, `X-RateLimit-Remaining`, and 
-#' `X-RateLimit-Reset` (your limit, those requests remaining, and UTC 
+#' you are using - see the docs for the function. See the response
+#' headers `X-RateLimit-Limit`, `X-RateLimit-Remaining`, and
+#' `X-RateLimit-Reset` (your limit, those requests remaining, and UTC
 #' date/time it will reset)
-#' 
-#' **Microsoft**: 10,000 per month, and 1 per second. There are no rate 
+#'
+#' **Microsoft**: 10,000 per month, and 1 per second. There are no rate
 #' limit headers, sorry :(
-#' 
-#' **PLOS**: There are no known rate limits for PLOS, though if you do 
+#'
+#' **PLOS**: There are no known rate limits for PLOS, though if you do
 #' hit something let us know.
-#' 
-#' **Crossref**: From time to time Crossref needs to impose rate limits 
-#' to ensure that the free API is usable by all. Any rate limits that are in 
+#'
+#' **Crossref**: From time to time Crossref needs to impose rate limits
+#' to ensure that the free API is usable by all. Any rate limits that are in
 #' effect will be advertised in the `X-Rate-Limit-Limit` and
-#' `X-Rate-Limit-Interval` HTTP headers. This boils down to: they allow X 
-#' number of requests per some time period. The numbers can change so we 
-#' can't give a rate limit that will always be in effect. If you're curious 
-#' pass in `verbose = TRUE` to your function call, and you'll get headers 
+#' `X-Rate-Limit-Interval` HTTP headers. This boils down to: they allow X
+#' number of requests per some time period. The numbers can change so we
+#' can't give a rate limit that will always be in effect. If you're curious
+#' pass in `verbose = TRUE` to your function call, and you'll get headers
 #' that will display these rate limits. See also **Authentication**.
-#' 
+#'
 #' **Semantic Scholar**: Not documented in their docs, and no response
 #' headers given. At time of this writing (2020-07-01) the rate limit is:
 #' 100 requests per 5-minutes per IP address. or 20 requests per min. Note
 #' that this rate limit may change.
-#' 
+#'
 #' @section Authentication:
-#' 
-#' **BMC**: BMC is integrated into Springer Publishers now, 
-#' and that API requires an API key.  Get your key by signing up at 
-#' https://dev.springer.com/, then you'll get a key. Pass the key to a 
-#' named parameter `key` to `bmcopts`. Or, save your key in your `.Renviron` 
-#' file as `SPRINGER_KEY`, and we'll read it in for you, and you don't 
+#'
+#' **BMC**: BMC is integrated into Springer Publishers now,
+#' and that API requires an API key.  Get your key by signing up at
+#' https://dev.springer.com/, then you'll get a key. Pass the key to a
+#' named parameter `key` to `bmcopts`. Or, save your key in your `.Renviron`
+#' file as `SPRINGER_KEY`, and we'll read it in for you, and you don't
 #' have to pass in anything.
-#' 
+#'
 #' **Scopus**: Scopus requires two things: an API key and your institution must
-#' have access. For the API key, go to https://dev.elsevier.com/index.html, 
-#' register for an account, then when you're in your account, create an API key. 
-#' Pass in as variable `key` to `scopusopts`, or store your key under the name 
-#' `ELSEVIER_SCOPUS_KEY` as an environment variable in `.Renviron`, and 
+#' have access. For the API key, go to https://dev.elsevier.com/index.html,
+#' register for an account, then when you're in your account, create an API key.
+#' Pass in as variable `key` to `scopusopts`, or store your key under the name
+#' `ELSEVIER_SCOPUS_KEY` as an environment variable in `.Renviron`, and
 #' we'll read it in for you. See [Startup] for help. For the institution access
-#' go to a browser and see if you have access to the journal(s) you want. 
-#' If you don't have access in a browser you probably won't have access via 
-#' this package. If you aren't physically at your institution you will likely 
+#' go to a browser and see if you have access to the journal(s) you want.
+#' If you don't have access in a browser you probably won't have access via
+#' this package. If you aren't physically at your institution you will likely
 #' need to be on a VPN or similar and eventually require correct proxy settings,
-#' so that your IP address is in the range 
+#' so that your IP address is in the range
 #' that the two publishers are accepting for that institution.
-#' It might be, that the API access seems to work even while 
-#' in the wrong IP range or have wrong proxy settings, 
+#' It might be, that the API access seems to work even while
+#' in the wrong IP range or have wrong proxy settings,
 #' but you are not able to see the abstracts, they will be empty.
-#' By using the currect curl options into the calls to ft_search or ft_abstracts even 
+#' By using the currect curl options into the calls to ft_search or ft_abstracts even
 #' the most complex proxy including authentication should work. As an example:
-#' 
+#'
 #' \preformatted{
 #' opts <- list(key="your-scopus-key")
 #' ft_abstract(x = dois, from = "scopus", scopusopts = opts,
@@ -101,76 +101,65 @@
 #'   proxyuserpwd="username:password", # often the same as your windows login
 #'   proxyauth=8) # ntlm - authentication
 #' }
-#' 
-#' **ScienceDirect**: Elsevier ScienceDirect requires two things: an API key 
-#' and your institution must have access. For the API key, 
-#' go to https://dev.elsevier.com/index.html, 
-#' register for an account, then when you're in your account, create an API key 
-#' that is allowed to access the TDM API (must accept their TDM policy). 
-#' Pass in as variable `key` to `sciencedirectopts`, or store your key under the name 
-#' `ELSEVIER_TDM_KEY` as an environment variable in `.Renviron`, and 
-#' we'll read it in for you. See [Startup] for help. For the institution access
-#' go to a browser and see if you have access to the journal(s) you want. 
-#' If you don't have access in a browser you probably won't have access via 
-#' this package. If you aren't physically at your institution you will likely 
-#' need to be on a VPN or similar so that your IP address is in the range 
+#'
+#' **Elsevier/ScienceDirect**: Elsevier ScienceDirect requires two things: an
+#' API key and your institution must have access. For the API key,
+#' go to https://dev.elsevier.com/index.html,
+#' register for an account, then when you're in your account, create an API key
+#' that is allowed to access the TDM API (must accept their TDM policy).
+#' Pass in as variable `key` to `elsevieropts`/`sciencedirectopts`, or store
+#' your key under the name `ELSEVIER_TDM_KEY` as an environment variable in
+#' `.Renviron`, and we'll read it in for you. See [Startup] for help. For
+#' the institution access
+#' go to a browser and see if you have access to the journal(s) you want.
+#' If you don't have access in a browser you probably won't have access via
+#' this package. If you aren't physically at your institution you will likely
+#' need to be on a VPN or similar so that your IP address is in the range
 #' that the publisher is accepting for that institution.
-#'  
-#' **Microsoft**: Get a key by creating an Azure account 
-#' then request a key for **Academic Knowledge API** within 
-#' **Cognitive Services**. Store it as an environment variable in your 
-#' `.Renviron` file - see [Startup] for help. Pass your 
-#' API key into `maopts` as a named element in a list like 
+#'
+#' **Wiley**: No known replacement exists for the no defunct Crossref TDM
+#' service. Open an issue in the package repository if you know of a Wiley
+#' text and data mining program/solution. However, as of this writing
+#' (2021-01-15) the Crossref TDM clickthrough token still works, so it
+#' may also work for you. Presumably it will stop working imminently, but
+#' until then do use your Crossref TDM token until it doesn't work.
+#'
+#' **Microsoft**: Get a key by creating an Azure account
+#' then request a key for **Academic Knowledge API** within
+#' **Cognitive Services**. Store it as an environment variable in your
+#' `.Renviron` file - see [Startup] for help. Pass your
+#' API key into `maopts` as a named element in a list like
 #' `list(key = Sys.getenv('MICROSOFT_ACADEMIC_KEY'))`
-#' 
-#' **Crossref**: Crossref encourages requests with contact information 
-#' (an email address) and will forward you to a dedicated API cluster 
+#'
+#' **Crossref**: Crossref encourages requests with contact information
+#' (an email address) and will forward you to a dedicated API cluster
 #' for improved performance when you share your email address with them.
 #' https://github.com/CrossRef/rest-api-doc#good-manners--more-reliable-service
-#' To pass your email address to Crossref via this client, store it 
-#' as an environment variable in `.Renviron` like 
+#' To pass your email address to Crossref via this client, store it
+#' as an environment variable in `.Renviron` like
 #' `crossref_email = name@example.com`
-#' 
-#' **Crossref TDM**: TDM = "Text and Data Mining". This applies to the few 
-#' publishers - Wiley and Elsevier - that are part of this program (TDM). 
-#' When using [ft_get()], and you want to get papers from these two publishers,
-#' you'll need two things: 
-#' (1) an API key for the Crossref TDM. Go to 
-#' https://apps.crossref.org/clickthrough/researchers and you'll be asked to 
-#' login with your ORCID. If you don't have an ORCID go to https://orcid.org/
-#' and get one. After logging in with your ORCID, click on the "API token" 
-#' tag and grab your API key. Put your API key in `.Renviron` file or similar
-#' (e.g. `.zshrc` or `.bash_profile`, etc.) with the entry 
-#' `CROSSREF_TDM=yourkey`. We'll look for the environment variable CROSSREF_TDM
-#' within this package. See http://tdmsupport.crossref.org/ for more 
-#' information on the Crossref TDM program.
-#' (2) Your institution needs to have access to the journal you're requesting
-#' papers from. If you're not sure about this just go to a browser and see if you
-#' have access to the journal(s) you want. If you don't have access in a browser 
-#' you probably won't have access via this package. If you aren't physically at 
-#' your institution you will likely need to be on a VPN or similar so that 
-#' your IP address is in the range that the two publishers are accepting for 
-#' that institution. Also talk to your librarian if you aren't sure about 
-#' access or have questions about it. In some cases, you may also need to request
-#' that Elsevier removes a "fence" for your institution - that is, your institution
-#' has access to XYZ journal(s), but they don't yet allow programmatic access. 
-#' This has happened at least a few times that I know of.
-#' 
-#' **Entrez**: NCBI limits users to making only 3 requests per second. But, users 
-#' who register for an API key are able to make up to ten requests per second. 
-#' Getting a key is simple; register for a "my ncbi" account then click on a 
-#' button in the account settings page. Once you have an API key, you can pass it 
-#' as the argument `api_key` to `entrezopts` in both [ft_get()] and [ft_search()]. 
+#'
+#' **Crossref TDM**: TDM = "Text and Data Mining". This used to apply to just
+#' two publishers - Wiley and Elsevier - This service officially shut down at
+#' the end of 2020 (but see caveat for Wiley). For Elsevier, see the
+#' "Elsevier/ScienceDirect" section above. For Wiley, see the "Wiley" section
+#' above.
+#'
+#' **Entrez**: NCBI limits users to making only 3 requests per second. But, users
+#' who register for an API key are able to make up to ten requests per second.
+#' Getting a key is simple; register for a "my ncbi" account then click on a
+#' button in the account settings page. Once you have an API key, you can pass it
+#' as the argument `api_key` to `entrezopts` in both [ft_get()] and [ft_search()].
 #' However, we advise you use environment variables instead as they are more secure.
-#' To do that you can set an environment variable for the current R session like 
-#' `Sys.setenv(ENTREZ_KEY="yourkey")` OR better yet set it in your `.Renviron` 
-#' or equivalent file with an entry like `ENTREZ_KEY=yourkey` so that it is 
+#' To do that you can set an environment variable for the current R session like
+#' `Sys.setenv(ENTREZ_KEY="yourkey")` OR better yet set it in your `.Renviron`
+#' or equivalent file with an entry like `ENTREZ_KEY=yourkey` so that it is
 #' used across R sessions.
-#' 
-#' No authentication needed for **PLOS**, **eLife**, **arxiv**, **biorxiv**, 
+#'
+#' No authentication needed for **PLOS**, **eLife**, **arxiv**, **biorxiv**,
 #' **Euro PMC**
-#' 
-#' Let us know if you run into trouble with authentication.
+#'
+#' Open an issue if you run into trouble with authentication.
 #'
 #' @section Feedback:
 #' Let us know what you think at https://github.com/ropensci/fulltext/issues
