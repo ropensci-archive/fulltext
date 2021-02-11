@@ -158,11 +158,17 @@ API key into \code{maopts} as a named element in a list like
 
 \strong{Crossref}: Crossref encourages requests with contact information
 (an email address) and will forward you to a dedicated API cluster
-for improved performance when you share your email address with them.
+for improved performance when you share your email address with them. This
+is called the "Polite Pool".
 https://github.com/CrossRef/rest-api-doc#good-manners--more-reliable-service
 To pass your email address to Crossref via this client, store it
 as an environment variable in \code{.Renviron} like
-\code{crossref_email = name@example.com}
+\code{crossref_email=name@example.com}, or \code{CROSSREF_EMAIL=name@example.com}.
+Save the file and restart your R session. To stop sharing your email when
+using rcrossref simply delete it from your \code{.Renviron} file OR to temporarily
+not use your email unset it for the session
+like \code{Sys.unsetenv('crossref_email')}. To be sure your in the polite pool
+use curl verbose by e.g., \code{ft_cr_links(doi = "10.5555/515151", verbose = TRUE)}
 
 \strong{Crossref TDM}: TDM = "Text and Data Mining". This used to apply to just
 two publishers - Wiley and Elsevier - This service officially shut down at

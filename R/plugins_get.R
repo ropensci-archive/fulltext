@@ -187,8 +187,6 @@ plugin_get_peerj <- plugin_get_generator("peerj", peerj_ft)
 plugin_get_frontiersin <- plugin_get_generator("frontiersin", frontiersin_ft)
 plugin_get_pensoft <- plugin_get_generator("pensoft", pensoft_ft)
 plugin_get_copernicus <- plugin_get_generator("copernicus", copernicus_ft)
-# plugin_get_cogent <- plugin_get_generator("cogent", cogent_ft)
-#plugin_get_crossref <- plugin_get_generator("crossref", crminer::crm_xml)
 plugin_get_entrez <- plugin_get_generator("entrez", entrez_ft)
 plugin_get_biorxiv <- plugin_get_generator("biorxiv", biorxiv_ft)
 plugin_get_arxiv <- plugin_get_generator("arxiv", arxiv_ft)
@@ -336,7 +334,7 @@ elife_ft <- function(dois, type, progress = FALSE, ...) {
       if (!progress) message(paste0("path exists: ", path))
       return(ft_object(path, x, type))
     }
-    lk <- tcat(crminer::crm_links(x))
+    lk <- tcat(ft_cr_links(x))
     if (inherits(lk, "error")) return(ft_error(lk$message, x))
     lk <- tcat(Filter(function(x) grepl(paste0("\\.", type), x), lk)[[1]][[1]])
     get_ft(x, type, lk, path, list(), ...)
@@ -558,7 +556,7 @@ scientificsocieties_ft <- function(dois, type = "pdf", progress = FALSE, ...) {
       return(ft_object(path, x, 'pdf'))
     }
 
-    lk <- tryCatch(crminer::crm_links(x), error = function(e) e, 
+    lk <- tryCatch(ft_cr_links(x), error = function(e) e, 
       warning = function(w) w)
     if (inherits(lk, c("error", "warning"))) return(ft_error(lk$message, x))
     if (is.null(lk) || length(lk) == 0) {
@@ -580,7 +578,7 @@ informa_ft <- function(dois, type = "pdf", progress = FALSE, ...) {
       return(ft_object(path, x, 'pdf'))
     }
 
-    lk <- tryCatch(crminer::crm_links(x), error = function(e) e, warning = function(w) w)
+    lk <- tryCatch(ft_cr_links(x), error = function(e) e, warning = function(w) w)
     if (inherits(lk, c("error", "warning"))) return(ft_error(lk$message, x))
     if (is.null(lk) || length(lk) == 0) {
       mssg <- "has no link available"
@@ -617,7 +615,7 @@ ieee_ft <- function(dois, type = "pdf",progress = FALSE, ...) {
       return(ft_object(path, x, 'pdf'))
     }
 
-    lk <- tryCatch(crminer::crm_links(x), error = function(e) e, warning = function(w) w)
+    lk <- tryCatch(ft_cr_links(x), error = function(e) e, warning = function(w) w)
     if (inherits(lk, c("error", "warning"))) return(ft_error(lk$message, x))
     if (is.null(lk) || length(lk) == 0) {
       mssg <- "has no link available"
@@ -757,7 +755,7 @@ instinvestfil_ft <- function(dois, type = "pdf", progress = FALSE, ...) {
       return(ft_object(path, x, 'pdf'))
     }
 
-    lk <- tryCatch(crminer::crm_links(x), error = function(e) e, warning = function(w) w)
+    lk <- tryCatch(ft_cr_links(x), error = function(e) e, warning = function(w) w)
     if (inherits(lk, c("error", "warning"))) return(ft_error(lk$message, x))
     if (is.null(lk) || length(lk) == 0) {
       mssg <- "has no link available"
@@ -833,7 +831,7 @@ cob_ft <- function(dois, type = "pdf", progress = FALSE, ...) {
 # special Crossref plugin to try any DOI
 crossref_ft <- function(dois, type, progress = FALSE, ...) {
   crossref_fun <- function(x, type, progress, ...) {
-    lks <- tcat(crminer::crm_links(x))
+    lks <- tcat(ft_cr_links(x))
     if (inherits(lks, c("error", "warning")) || inherits(lks, "warning")) {
       mssg <- lks$message
       if (inherits(lks, "error")) warning(x, " has no full text links available", call. = FALSE)

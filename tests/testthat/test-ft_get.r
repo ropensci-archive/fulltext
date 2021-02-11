@@ -1,4 +1,5 @@
 skip_on_cran()
+skip_if_crossref_api_down()
 
 context("ft_get")
 

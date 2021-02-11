@@ -33,7 +33,7 @@ ft_extract <- function(x) {
 #' @export
 ft_extract.character <- function(x) {
   if (!file.exists(x)) stop("File does not exist", call. = FALSE)
-  res <- crminer::crm_extract(x)
+  res <- .crm_extract(x)
   structure(list(meta = res$info, data = res$text), class = "pdft_char", 
             path = x)
 }
@@ -67,4 +67,40 @@ print.pdft_char <- function(x, ...) {
   cat("  Producer: ", x$meta$keys$Producer, "\n", sep = "")
   cat("  Creation date: ", as.character(as.Date(x$meta$created)), "\n", 
       sep = "")
+}
+
+.crm_extract <- function(path = NULL, raw = NULL, try_ocr = FALSE, ...) {
+  assert(try_ocr, "logical")
+  stopifnot(xor(is.null(path), is.null(raw)))
+  if (!is.null(path)) {
+    path <- path.expand(path)
+    if (!file.exists(path)) stop("path does not exist", call. = FALSE)  
+  } else {
+    assert(raw, "raw")
+    path <- raw
+  }
+  fun <- if (try_ocr) pdftools::pdf_ocr_text else pdftools::pdf_text
+  
+  structure(
+    list(
+      info = pdftools::pdf_info(path, ...),
+      text = fun(path, ...)
+    ),
+    class = "crm_pdf",
+    path = if (is.character(path)) path else 'raw'
+  )
+}
+
+#' @export
+print.crm_pdf <- function(x, ...) {
+  cat("<document>", attr(x, "path"), "\n", sep = "")
+  cat("  Pages: ", x$info$pages, "\n", sep = "")
+  cat("  No. characters: ", sum(nchar(x$text)), "\n", sep = "")
+  cat("  Created: ", as.character(as.Date(x$info$created)), "\n",
+      sep = "")
+}
+#' @export
+print.crm_pdf_text <- function(x, ...) {
+  cat("<document>", attr(x, "path"), "\n", sep = "")
+  cat("  No. characters: ", sum(nchar(x$text)), "\n", sep = "")
 }

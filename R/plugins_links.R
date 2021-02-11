@@ -40,7 +40,7 @@ plugin_links_plos <- function(sources, ids, ...){
 plugin_links_crossref <- function(sources, ids, ...){
   if (any(grepl("crossref", sources))) {
     safe_crm_links <- function(x, type = "xml", ...) {
-      tryCatch(crminer::crm_links(x, type, ...), error = function(e) NULL)
+      tryCatch(ft_cr_links(x, type, ...), error = function(e) NULL)
     }
     tmp <- ft_compact(lapply(ids, function(z) safe_crm_links(z, type = "all", ...)))
     out <- lapply(tmp, function(z) {

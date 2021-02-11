@@ -43,7 +43,7 @@ plugin_get_links_crossref <- function(from, urls, opts = list(), type, ...) {
   # fetch text
   res <- list()
   for (i in seq_along(out)) {
-    tdm <- crminer::as_tdmurl(out[[i]]$url, type)
+    tdm <- as_ftdmurl(out[[i]]$url, type)
     lk <- tdm[[type]]
     if (is.null(lk)) {
       # res[[i]] <- ft_object(NULL, names(out)[i], type)

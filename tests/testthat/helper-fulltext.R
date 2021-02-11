@@ -29,5 +29,5 @@ has_crossref_api <- function() {
 
 skip_if_crossref_api_down <- function() {
   if (has_crossref_api()) return()
-  testthat::skip("crossref API is down")
+  testthat::skip("crossref API down or too slow")
 }
