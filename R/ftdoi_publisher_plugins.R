@@ -163,10 +163,11 @@ pub_factory4 <- function(fun_not_cached) {
 pub_frontiers <- pub_informa <- pub_emerald <-
   pub_pleiades <- pub_sage <- pub_spie <- pub_springer <- 
   pub_american_society_of_clinical_oncology <- pub_aip <- 
-  pub_acs <- pub_the_royal_society <- pub_iop <- pub_factory1()
+  pub_acs <- pub_the_royal_society <- pub_iop <-
+  pub_transtech <- pub_factory1()
 # pub_plos <- pub_thieme <- pub_peerj <- pub_factory2()
 pub_plos <- pub_peerj <- pub_factory2()
-pub_aps <- pub_rsc <- pub_karger <- pub_transtech <-
+pub_aps <- pub_rsc <- pub_karger <-
   pub_oxford <- pub_factory3()
 pub_mdpi <- pub_factory4(fun_mdpi)
 pub_pnas <- pub_factory4(fun_pnas)

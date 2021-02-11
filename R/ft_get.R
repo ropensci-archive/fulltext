@@ -704,7 +704,8 @@ publisher_plugin <- function(x) {
     `317` = plugin_get_aip,
     `56` = plugin_get_cambridge,
     `237` = plugin_get_cob,
-    `175` = plugin_get_roysoc
+    `175` = plugin_get_roysoc,
+    `2457` = plugin_get_transtech
   )
 }
 
@@ -743,6 +744,7 @@ get_pub_name <- function(x) {
          `56` = "cambridge",
          `237` = "cob",
          `175` = "roysoc",
+         `2457` = "transtech",
          "crossref"
   )
 }
@@ -779,6 +781,7 @@ get_tm_name <- function(x) {
          `56` = "cambridge",
          `237` = "cob",
          `175` = "roysoc",
+         `2457` = "transtech",
          "crossref"
   )
 }

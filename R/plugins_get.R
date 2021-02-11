@@ -210,6 +210,7 @@ plugin_get_aip <- plugin_get_generator("aip", aip_ft)
 plugin_get_cambridge <- plugin_get_generator("cambridge", cambridge_ft)
 plugin_get_cob <- plugin_get_generator("cob", cob_ft)
 plugin_get_roysoc <- plugin_get_generator("roysoc", roysoc_ft)
+plugin_get_transtech <- plugin_get_generator("transtech", transtech_ft)
 
 # lapply replacement with progress bar: actual a for loop internally
 plapply <- function(x, FUN, type = NULL, progress = FALSE, ...) {
@@ -826,6 +827,24 @@ cob_ft <- function(dois, type = "pdf", progress = FALSE, ...) {
     get_ft(x = x, type = 'pdf', url = url, path = path, ...)
   }
   plapply(dois, cob_fun, type, progress, ...)
+}
+
+# Trans Tech Publications
+# type: only pdf (type parameter is ignored)
+transtech_ft <- function(dois, type = "pdf", progress = FALSE, ...) {
+  tt_fun <- function(x, type, progress, ...) {
+    path <- make_key(x, 'pdf')
+    if (file.exists(path) && !cache_options_get()$overwrite) {
+      if (!progress) message(paste0("path exists: ", path))
+      return(ft_object(path, x, 'pdf'))
+    }
+    # ftdoi_get(member = names(dfsplit)[i])
+    lk <- tcat(ftd_doi(x))
+    if (inherits(lk, c("error", "warning"))) return(ft_error(lk$message, x))
+    url <- lk[grepl("pdf", lk$content_type), ]$url
+    get_ft(x = x, type = 'pdf', url = url, path = path, ...)
+  }
+  plapply(dois, tt_fun, type, progress, ...)
 }
 
 # special Crossref plugin to try any DOI
