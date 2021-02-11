@@ -112,7 +112,6 @@ quanteda::corpus(x)
 * Get citation information for `fulltext`: `citation(package = 'fulltext')`
 * Please note that this package is released with a [Contributor Code of Conduct](https://ropensci.org/code-of-conduct/). By contributing to this project, you agree to abide by its terms.
 
-[![rofooter](https://ropensci.org/public_images/github_footer.png)](https://ropensci.org)
 
 [docs]: https://docs.ropensci.org/fulltext/
 [ftbook]: https://books.ropensci.org/fulltext/
