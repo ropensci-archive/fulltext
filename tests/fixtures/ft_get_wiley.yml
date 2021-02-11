@@ -1,0 +1,87 @@
+http_interactions:
+- request:
+    method: get
+    uri: https://onlinelibrary.wiley.com/doi/full-xml/10.1016%2Fs0014-5793(01)02862-9
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      User-Agent: libcurl/7.75.0 r-curl/4.3 crul/1.1.0
+      Accept-Encoding: gzip, deflate
+      Wiley-TDM-Client-Token: <<wiley-tdm-key>>
+      Accept: application/xml
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: 'HTTP/2 200 '
+      date: Thu, 11 Feb 2021 02:39:00 GMT
+      content-type: application/xml; charset=UTF-8
+      content-length: '18126'
+      cf-ray: 61fab26a1e97fdb1-PDX
+      accept-ranges: bytes
+      cache-control: no-cache
+      content-encoding: gzip
+      strict-transport-security: max-age=16070400
+      vary: Accept-Encoding
+      cf-cache-status: DYNAMIC
+      cf-request-id: 08308dd6500000fdb154297000000001
+      expect-ct: max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      pragma: no-cache
+      x-content-type-options: nosniff
+      x-frame-options: SAMEORIGIN
+      x-webstats-respid: 25b28fe120da855b682b9faccd293ff4
+      x-xss-protection: 1; mode=block
+      server: cloudflare
+      alt-svc: h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400
+    body:
+      encoding: UTF-8
+      file: yes
+      string: ../files/10_1016_s0014_5793_01_02862_9.xml
+  recorded_at: 2021-02-11 02:39:00 GMT
+  recorded_with: vcr/0.6.0, webmockr/0.7.4
+- request:
+    method: get
+    uri: https://onlinelibrary.wiley.com/doi/full-xml/10.1016%2Fs0014-5793(01)02864-2
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      User-Agent: libcurl/7.75.0 r-curl/4.3 crul/1.1.0
+      Accept-Encoding: gzip, deflate
+      Wiley-TDM-Client-Token: <<wiley-tdm-key>>
+      Accept: application/xml
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: 'HTTP/2 200 '
+      date: Thu, 11 Feb 2021 02:39:01 GMT
+      content-type: application/xml; charset=UTF-8
+      content-length: '16331'
+      cf-ray: 61fab2705beffdb1-PDX
+      accept-ranges: bytes
+      cache-control: no-cache
+      content-encoding: gzip
+      strict-transport-security: max-age=16070400
+      vary: Accept-Encoding
+      cf-cache-status: DYNAMIC
+      cf-request-id: 08308dda350000fdb10683b000000001
+      expect-ct: max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      pragma: no-cache
+      x-content-type-options: nosniff
+      x-frame-options: SAMEORIGIN
+      x-webstats-respid: 83f86b3c888bbef5102a456ff8646ba0
+      x-xss-protection: 1; mode=block
+      server: cloudflare
+      alt-svc: h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400
+    body:
+      encoding: UTF-8
+      file: yes
+      string: ../files/10_1016_s0014_5793_01_02864_2.xml
+  recorded_at: 2021-02-11 02:39:00 GMT
+  recorded_with: vcr/0.6.0, webmockr/0.7.4

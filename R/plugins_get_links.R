@@ -1,6 +1,7 @@
 # get plugins for ft_links input --------------------------------------
 
 plugin_get_links_crossref <- function(from, urls, opts = list(), type, ...) {
+  warn_crossref_tdm()
   # pick URLs
   out <- list()
   for (i in seq_along(urls)) {
@@ -56,7 +57,6 @@ plugin_get_links_crossref <- function(from, urls, opts = list(), type, ...) {
         cli <- crul::HttpClient$new(
           url = lk, 
           headers = list(
-            `CR-Clickthrough-Client-Token` = Sys.getenv("CROSSREF_TDM"),
             Accept = paste0(switch(type, xml = "text/", pdf = "application/"), type)
           ),
           opts = list(followlocation = 1)

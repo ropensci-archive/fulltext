@@ -340,9 +340,11 @@
 #' ft_get(x = "10.1016/S0140-6736(13)62329-6", from = "sciencedirect")
 #'
 #' # wiley, ugh
+#' ## set the environment variable Sys.setenv(WILEY_TDM_KEY = "your key")
 #' ft_get(x = "10.1006/asle.2001.0035", from = "wiley", type = "pdf")
 #' ## xml
 #' ft_get(x = "10.1111/evo.13812", from = "wiley")
+#' 
 #' ## highwire fiasco paper
 #' ft_get(x = "10.3732/ajb.1300053", from = "wiley")
 #' ft_get(x = "10.3732/ajb.1300053", from = "wiley", type = "pdf")
@@ -567,10 +569,6 @@ ft_get_ls <- function() {
   nms <- grep("_links|generator", nms, invert = TRUE, value = TRUE)
   gsub("plugin_get_", "", nms)
 }
-
-
-
-
 
 #' @export
 print.ft_data <- function(x, ...) {

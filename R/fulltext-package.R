@@ -117,12 +117,18 @@
 #' need to be on a VPN or similar so that your IP address is in the range
 #' that the publisher is accepting for that institution.
 #'
-#' **Wiley**: No known replacement exists for the no defunct Crossref TDM
-#' service. Open an issue in the package repository if you know of a Wiley
-#' text and data mining program/solution. However, as of this writing
-#' (2021-01-15) the Crossref TDM clickthrough token still works, so it
-#' may also work for you. Presumably it will stop working imminently, but
-#' until then do use your Crossref TDM token until it doesn't work.
+#' **Wiley**: Replacing Crossref TDM service as of February 2021, Wiley
+#' now requires you get a Wiley TDM key. Get one at
+#' https://onlinelibrary.wiley.com/library-info/resources/text-and-datamining
+#' Pass in as variable `key` to `wileyopts`, or preferably store
+#' your key under the name `WILEY_TDM_KEY` as an environment variable in
+#' `.Renviron`, and we'll read it in for you. See [Startup] for help. Some
+#' notes about Wiley's TDM service:
+#'
+#' - They always respond initially with a redirect to a server dedicated to
+#' the serving of binary resources - fulltext takes care of this
+#' - Wiley uses rate-limiting: no more than 3 requests per second. you
+#' may get 429 errors if making too requests too rapidly
 #'
 #' **Microsoft**: Get a key by creating an Azure account
 #' then request a key for **Academic Knowledge API** within
@@ -141,7 +147,7 @@
 #'
 #' **Crossref TDM**: TDM = "Text and Data Mining". This used to apply to just
 #' two publishers - Wiley and Elsevier - This service officially shut down at
-#' the end of 2020 (but see caveat for Wiley). For Elsevier, see the
+#' the end of 2020. For Elsevier, see the
 #' "Elsevier/ScienceDirect" section above. For Wiley, see the "Wiley" section
 #' above.
 #'

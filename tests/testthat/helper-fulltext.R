@@ -8,9 +8,11 @@ ftd_fetch_patterns()
 library("vcr")
 vcr::vcr_configure(
   dir = "../fixtures",
+  write_disk_path = "../files",
   filter_sensitive_data = list(
     "<<crossref-email>>" = Sys.getenv("crossref_email"),
     "<<crossref-tdm-key>>" = Sys.getenv("CROSSREF_TDM"),
+    "<<wiley-tdm-key>>" = Sys.getenv("WILEY_TDM_KEY"),
     "<<scopus-key>>" = Sys.getenv("ELSEVIER_SCOPUS_KEY"),
     "<<elsevier-tdm-key>>" = Sys.getenv("ELSEVIER_TDM_KEY"),
     "<<ma-key>>" = Sys.getenv("MICROSOFT_ACADEMIC_KEY"),

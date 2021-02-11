@@ -1,11 +1,11 @@
+skip_on_cran()
+
 context("ft_get")
 
 # delete all files before testing
 ftxt_cache$delete_all()
 
 test_that("ft_get basic functionality works ...", {
-  skip_on_cran()
-
   aa <- sm(ft_get('10.7717/peerj.228'))
 
   # correct classes
@@ -20,8 +20,6 @@ test_that("ft_get basic functionality works ...", {
 })
 
 test_that("ft_get works for all data providers", {
-  skip_on_cran()
-
   ## PLOS
   # aa <- sm(ft_get(c('10.1371/journal.pone.0086169', '10.1371/journal.pbio.0000062')))
   ## PeerJ
@@ -66,7 +64,6 @@ test_that("ft_get works for all data providers", {
 })
 
 test_that("ft_get: > 1 from works", {
-  skip_on_cran()
   skip_on_os("windows") # FIXME: not sure why, but his has failed on windows ci
 
   plos_dois <- c('10.1371/journal.pone.0086169', '10.1371/journal.pbio.0000062')
@@ -82,8 +79,6 @@ test_that("ft_get: > 1 from works", {
 
 # FIXME: PLOS having SSL cert errors as of 2020-12-16
 # test_that("ft_get works for pdf for plos provider", {
-#   skip_on_cran()
-
 #   ## PLOS
 #   aa <- sm(ft_get('10.1371/journal.pone.0086169', type = "pdf"))
 
@@ -104,7 +99,6 @@ test_that("ft_get: > 1 from works", {
 # on the first try, then runs again with
 # https://bsapubs.onlinelibrary.wiley.com/doi/pdf/10.3732/ajb.1700190
 # test_that("ft_get: wiley problems", {
-#   skip_on_cran()
 
 #   aa <- sw(sm(ft_get(x = '10.3732/AJB.1700190', from = "wiley")))
 
@@ -114,8 +108,6 @@ test_that("ft_get: > 1 from works", {
 # })
 
 test_that("ft_get: ajb via wiley", {
-  skip_on_cran()
-
   # american j botany eg
   aa <- sw(sm(ft_get(x = '10.3732/AJB.1700190', from = "wiley")))
 
@@ -125,8 +117,6 @@ test_that("ft_get: ajb via wiley", {
 })
 
 test_that("ft_get fails well", {
-  skip_on_cran()
-
   # expect_error(ft_get('0086169', from = 'plos'), "These are probably not DOIs")
   expect_error(ft_get('0086169', from = 'stuff'), "'arg' should be one")
   expect_error(ft_get('0086169', progress = 5),
@@ -145,7 +135,6 @@ test_that("ft_get fails well", {
 })
 
 test_that("ft_get errors slot", {
-  skip_on_cran()
 
   res <- suppressWarnings(
     ft_get(c('10.7554/eLife.03032', '10.7554/eLife.aaaa', '10.3389/fphar.2024.00109'))
@@ -166,8 +155,6 @@ test_that("ft_get errors slot", {
 
 context("ft_get: progress bars")
 test_that("ft_get: entrez", {
-  skip_on_cran()
-
   ftxt_cache$delete_all()
 
   entrez_dois <- c('10.1186/2049-2618-2-7', '10.1186/2193-1801-3-7')
@@ -189,8 +176,6 @@ test_that("ft_get: entrez", {
 })
 
 test_that("ft_get: elife", {
-  skip_on_cran()
-
   ftxt_cache$delete_all()
 
   elife_dois <- c('10.7554/eLife.04300', '10.7554/eLife.03032')
@@ -216,12 +201,43 @@ test_that("ft_get: elife", {
   )
 })
 
+context("ft_get: Elsevier and Wiley")
+test_that("ft_get: wiley", {
+  ftxt_cache$delete_all()
+
+  # unset crossref tdm env in case its present
+  crossref_tdm <- Sys.getenv("CROSSREF_TDM")
+  Sys.unsetenv("CROSSREF_TDM")
+
+  wiley_dois <- c("10.1016/s0014-5793(01)02862-9", "10.1016/s0014-5793(01)02864-2")
+  vcr::use_cassette("ft_get_wiley", {
+    res <- ft_get(wiley_dois, from = "wiley")
+  })
+  expect_is(res, "ft_data")
+
+  # reset crossref env
+  Sys.setenv(CROSSREF_TDM = crossref_tdm)
+})
+
+context("ft_get: warn on crossref tdm token")
+test_that("ft_get: warn on crossref tdm token", {
+  expect_warning(warn_crossref_tdm())
+  
+  # unset crossref tdm env in case its present
+  crossref_tdm <- Sys.getenv("CROSSREF_TDM")
+  Sys.unsetenv("CROSSREF_TDM")
+
+  expect_warning(warn_crossref_tdm(), NA)
+
+  # reset crossref env
+  Sys.setenv(CROSSREF_TDM = crossref_tdm)
+})
+
+
 # cleanup before running curl options checks
 ftxt_cache$delete_all()
 
 test_that("ft_get curl options work", {
-  skip_on_cran()
-
   # plos
   out_plos <- sw(ft_get("10.1371/journal.pone.0001248",
       timeout_ms = 1))

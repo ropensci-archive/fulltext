@@ -57,3 +57,14 @@ the Crossref API, and there wasn't one, so we stop searching and
 give that warning.
 }
 
+\section{CROSSREF_TDM env var detected}{
+
+
+The Crossref Text and Data Mining service ended at the end of 2020.
+We only check for the \code{CROSSREF_TDM} environment variable when you request
+articles from Elsevier and Wiley as those two publishers were the only
+major publishers that used the Crossref TDM service. If we detect the key
+we'll throw a warning - you should probably remove your \code{CROSSREF_TDM}
+key as the service is no longer operational.
+}
+

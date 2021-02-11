@@ -107,6 +107,11 @@ get_ft <- function(x, type, url, path, headers = list(), ...) {
       # if all else fails just give a HTTP status code message back
       http_mssg(res)
     }
+    if ("url" %in% names(res)) {
+      if (grepl("wiley", res$url, ignore.case = TRUE)) {
+        mssg <- paste(mssg, res$response_headers$status, sep = " & ")
+      }
+    }
     warning("you may not have access to ", x, 
       "\n or an error occurred", 
       "\n or the downloaded file was invalid", 
@@ -442,6 +447,7 @@ biorxiv_ft <- function(dois, type = "pdf", progress = FALSE, ...) {
 
 # type: plain and xml
 elsevier_ft <- function(dois, type, progress = FALSE, retain_non_ft = FALSE, ...) {
+  warn_crossref_tdm()
   assert(retain_non_ft, "logical")
   type_in(type, c('plain', 'xml', 'pdf'), "elsevier")
   elsevier_fun <- function(x, type, progress, ...) {
@@ -460,8 +466,6 @@ elsevier_ft <- function(dois, type, progress = FALSE, retain_non_ft = FALSE, ...
       return(ft_error(mssg, x))
     }
     header <- list(
-      # clickthrough system is now defunct, use Elsevier TDM instead
-      # `CR-Clickthrough-Client-Token` = Sys.getenv("CROSSREF_TDM"),
       # See https://dev.elsevier.com/tecdoc_text_mining.html
       `X-ELS-APIKey` = Sys.getenv("ELSEVIER_TDM_KEY"),
       Accept = paste0(switch(type, xml = "text/", plain = "text/"), type)
@@ -520,6 +524,7 @@ sciencedirect_ft <- function(dois, type, progress = FALSE, ...) {
 
 # type: pdf and xml
 wiley_ft <- function(dois, type, progress = FALSE, ...) {
+  warn_crossref_tdm()
   type_in(type, c('pdf', 'xml'), "wiley")
   wiley_fun <- function(x, type, progress, ...) {
     path <- make_key(x, type)
@@ -535,8 +540,8 @@ wiley_ft <- function(dois, type, progress = FALSE, ...) {
         sub("/", "%2F", x))
     }
     header <- list(
-      # FIXME: clickthrough system is now defunct, no known Wiley TDM
-      `CR-Clickthrough-Client-Token` = Sys.getenv("CROSSREF_TDM"),
+      # See https://onlinelibrary.wiley.com/library-info/resources/text-and-datamining
+      `Wiley-TDM-Client-Token` = Sys.getenv("WILEY_TDM_KEY"),
       Accept = paste0(switch(type, xml = "application/", pdf = "application/"), type)
     )
     suppressWarnings(get_ft(x, type, url, path, header, ...))
@@ -887,4 +892,12 @@ got_link_ft <- function(dois, type, url_pattern, progress = FALSE, ...) {
     get_ft(x, type, url, path, ...)
   }
   plapply(dois, link_fun, type, progress, ...)
+}
+
+warn_crossref_tdm <- function(x) {
+  crtdm <- 'CROSSREF_TDM'
+  if (nzchar(Sys.getenv(crtdm)))
+    warning(sprintf(
+      "`%s` env var found: see 'Authentication' section of ?fulltext",
+      crtdm), call. = FALSE)
 }
