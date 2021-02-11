@@ -1,4 +1,8 @@
 skip_on_cran()
+skip_if_crossref_api_down()
+
+# delate any cached files, start over for tests
+ftdoi_cache$delete_all()
 
 context("ftd_doi")
 

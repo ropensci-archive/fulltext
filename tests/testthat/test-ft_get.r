@@ -135,6 +135,7 @@ test_that("ft_get fails well", {
 })
 
 test_that("ft_get errors slot", {
+  skip_if_crossref_api_down()
 
   res <- suppressWarnings(
     ft_get(c('10.7554/eLife.03032', '10.7554/eLife.aaaa', '10.3389/fphar.2024.00109'))
@@ -238,6 +239,8 @@ test_that("ft_get: warn on crossref tdm token", {
 ftxt_cache$delete_all()
 
 test_that("ft_get curl options work", {
+  skip_if_crossref_api_down()
+  
   # plos
   out_plos <- sw(ft_get("10.1371/journal.pone.0001248",
       timeout_ms = 1))

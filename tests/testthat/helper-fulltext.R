@@ -21,3 +21,13 @@ vcr::vcr_configure(
   )
 )
 vcr::check_cassette_names()
+
+# check if rcrossref API is down
+has_crossref_api <- function() {
+  crul::ok("https://api.crossref.org/works?rows=1", timeout_ms=10000L)
+}
+
+skip_if_crossref_api_down <- function() {
+  if (has_crossref_api()) return()
+  testthat::skip("crossref API is down")
+}
