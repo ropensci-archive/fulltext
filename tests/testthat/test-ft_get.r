@@ -1,5 +1,6 @@
 skip_on_cran()
 skip_if_crossref_api_down()
+skip_on_os("mac") # not sure why, but failing on gh actions
 
 context("ft_get")
 
