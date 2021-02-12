@@ -17,8 +17,5 @@ README.md
 .github
 ^notes\.md$
 ^codemeta\.json$
-vignettes/*.og
-vignettes/formats.Rmd
-vignettes/fulltext.Rmd
-vignettes/getting_fulltext.Rmd
+vignettes/
 ^LICENSE\.md$

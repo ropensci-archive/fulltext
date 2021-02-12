@@ -1,3 +1,22 @@
+fulltext 1.7.0
+==============
+
+### NEW FEATURES
+
+* The Cross Text and Data Mining program has ended. It ended officially at the end of 2020, but it took Wiley until early February to implement a TDM service. This impacts `ft_get` only, and impacts retrieval of only Wiley and Elsevier works (which is a lot since they're very large publishers). You now have to get a TDM key from both Wiley and Elsevier. See the "Authentication" section in `?fulltext` for details. See also `?"ft_get-warnings"`: there's a new warning if we detect that you have a `CROSSREF_TDM` env var   (#224)
+* Added new `ft_get` plugin for Trans Tech Publications (#232)
+* Import dependency `crminer` dropped. A few `crminer` functions brought over into this package and renamed. This is due to Crossref TDM program ending (#233)
+
+### MINOR IMPROVEMENTS
+
+* new `ft_search()` docs section "Pagination" describing what parameter names to use for each data source to do pagination
+
+### BUG FIXES
+
+* `ft_search()` fix: some data source specific options (e.g., `plosopts`) were being overridden by the global equivalent options (e.g., in `ft_search(limit = 5, from = c("plos", "entrez"), plosopts = list(limit=10))` the limit sent to PLOS was 5 instead of 10). Fixed now so that data source specfiic options override the matching global option (#229)
+* Internal API Fatcat changed its parameter name to limit what fields are returned. Fixed now (#231)
+
+
 fulltext 1.6.0
 ==============
 

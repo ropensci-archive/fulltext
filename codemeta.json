@@ -10,13 +10,13 @@
   "codeRepository": "https://github.com/ropensci/fulltext/",
   "issueTracker": "https://github.com/ropensci/fulltext/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.0.3 (2020-10-10)",
+  "runtimePlatform": "R version 4.0.3 Patched (2021-02-02 r79929)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
@@ -177,19 +177,6 @@
     },
     {
       "@type": "SoftwareApplication",
-      "identifier": "crminer",
-      "name": "crminer",
-      "version": ">= 0.2.0",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=crminer"
-    },
-    {
-      "@type": "SoftwareApplication",
       "identifier": "microdemic",
       "name": "microdemic",
       "version": ">= 0.2.0",
@@ -318,7 +305,7 @@
   "contIntegration": "https://codecov.io/gh/ropensci/fulltext",
   "releaseNotes": "https://github.com/ropensci/fulltext/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/fulltext/blob/master/README.md",
-  "fileSize": "0KB",
+  "fileSize": "4087.407KB",
   "developmentStatus": "https://www.repostatus.org/#active",
   "relatedLink": [
     "https://ropensci.github.io/fulltext-book/",
