@@ -24,7 +24,12 @@ vcr::check_cassette_names()
 
 # check if rcrossref API is down
 has_crossref_api <- function() {
-  crul::ok("https://api.crossref.org/works?rows=1", timeout_ms=10000L)
+  url <- "https://api.crossref.org/works?rows=1"
+  email <- Sys.getenv("crossref_email")
+  if (nzchar(email)) {
+    url <- paste0(url, "&mailto=", email)
+  }
+  crul::ok(url, timeout_ms=10000L)
 }
 
 skip_if_crossref_api_down <- function() {
