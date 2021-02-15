@@ -10,7 +10,7 @@ knitr::opts_chunk$set(
 fulltext
 ========
 
-[![cran checks](https://cranchecks.info/badges/worst/fulltext)](https://cranchecks.info/pkgs/fulltext)
+[![cran checks](https://cranchecks.info/badges/flavor/release/fulltext)](https://cranchecks.info/pkgs/fulltext)
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![R-check](https://github.com/ropensci/fulltext/workflows/R-check/badge.svg)](https://github.com/ropensci/fulltext/actions/)
 [![codecov](https://codecov.io/gh/ropensci/fulltext/branch/master/graph/badge.svg)](https://codecov.io/gh/ropensci/fulltext)
