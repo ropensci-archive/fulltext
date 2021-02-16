@@ -114,3 +114,10 @@ test_that("ft_abstract curl options work", {
     ft_abstract("10.5194/we-13-95-2013", from = "crossref", timeout_ms = 1),
     "[Tt]ime")
 })
+
+test_that("ft_abstract use a non-PLOS DOI with from=plos", {
+  skip_on_cran()
+  
+  a_ieee_doi <- "10.1109/TEM.2019.2914408"
+  expect_is(ft_abstract(a_ieee_doi, from = "plos"), "ft_abstract")
+})
