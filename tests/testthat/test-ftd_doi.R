@@ -1,4 +1,5 @@
 skip_on_cran()
+skip_on_ci()
 
 # delate any cached files, start over for tests
 ftdoi_cache$delete_all()
