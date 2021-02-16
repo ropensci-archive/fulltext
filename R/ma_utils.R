@@ -1,5 +1,5 @@
 #' Microsoft Academic search
-#' 
+#'
 #' Wraps `microdemic::ma_evaluate`
 #'
 #' @name microsoft-internals
@@ -9,28 +9,25 @@
 #' @param offset (integer) record to start at. default: 0
 #' @param orderby (character) field to sort results by
 #' @param atts (character) character vector of fields to return
-#' @param key (character) microsoft academic API key, see `Authentication` section 
-#' in [fulltext-package]
+#' @param key (character) microsoft academic API key, see
+#' `Authentication` section in [fulltext-package]
 #' @references
 #' https://academic.microsoft.com/
 #' @examples \dontrun{
-#' microsoft_search(query = "Y='19'...", key = Sys.getenv("MICROSOFT_ACADEMIC_KEY"))
+#' microsoft_search2(query = "Y='19'...",
+#'   key = Sys.getenv("MICROSOFT_ACADEMIC_KEY"))
 #' }
 
 #' @export
 #' @rdname microsoft-internals
 microsoft_search <- function(query, count = 10, offset = 0, orderby = NULL,
-  atts = c("Id", "AA.AuN", "J.JN", "Ti", "Y", "E", "CC"), key = NULL, ...) {
+  atts = c('Id', 'DN', 'VFN', 'DOI', 'D'), key = NULL, ...) {
 
-  out <- microdemic::ma_evaluate(query = query, count = count, offset = offset, 
+  out <- microdemic::ma_evaluate(query = query, count = count, offset = offset,
     orderby = orderby, atts = atts, key = key, ...)
-  ee <- rbl(lapply(out$E, function(z) {
-    dat <- jsonlite::fromJSON(z)
-    dat <- dat[names(dat) %in% c('DN', 'VFN', 'DOI', 'D')]
-    data.frame(dat, stringsAsFactors = FALSE)
-  }))
-  out$E <- NULL
-  cbind(out, ee)
+  out$logprob <- NULL
+  out$prob <- NULL
+  return(out)
 }
 
 #' @export
@@ -38,7 +35,7 @@ microsoft_search <- function(query, count = 10, offset = 0, orderby = NULL,
 microsoft_links <- function(query, count = 10, offset = 0, orderby = NULL,
   atts = c("Id", "AA.AuN", "J.JN", "Ti", "Y", "E", "CC"), key = NULL, ...) {
 
-  out <- microdemic::ma_evaluate(query = query, count = count, offset = offset, 
+  out <- microdemic::ma_evaluate(query = query, count = count, offset = offset,
     orderby = orderby, atts = atts, key = key, ...)
   ee <- stats::setNames(lapply(out$E, function(z) {
     dat <- jsonlite::fromJSON(z)

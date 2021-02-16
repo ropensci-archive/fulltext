@@ -11,7 +11,7 @@ microsoft_search(
   count = 10,
   offset = 0,
   orderby = NULL,
-  atts = c("Id", "AA.AuN", "J.JN", "Ti", "Y", "E", "CC"),
+  atts = c("Id", "DN", "VFN", "DOI", "D"),
   key = NULL,
   ...
 )
@@ -37,15 +37,16 @@ microsoft_links(
 
 \item{atts}{(character) character vector of fields to return}
 
-\item{key}{(character) microsoft academic API key, see \code{Authentication} section
-in \link{fulltext-package}}
+\item{key}{(character) microsoft academic API key, see
+\code{Authentication} section in \link{fulltext-package}}
 }
 \description{
 Wraps \code{microdemic::ma_evaluate}
 }
 \examples{
 \dontrun{
-microsoft_search(query = "Y='19'...", key = Sys.getenv("MICROSOFT_ACADEMIC_KEY"))
+microsoft_search2(query = "Y='19'...",
+  key = Sys.getenv("MICROSOFT_ACADEMIC_KEY"))
 }
 }
 \references{
