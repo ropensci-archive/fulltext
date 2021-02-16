@@ -12,7 +12,7 @@ test_that("ft_abstract basic functionality works - PLOS", {
   }, preserve_exact_body_bytes = TRUE)
   
   expect_is(aa, "ft_abstract")
-  expect_named(aa, c('plos', 'scopus', 'ma', 'crossref', 'semanticscholar'))
+  expect_named(aa, c('crossref', 'plos', 'scopus', 'ma', 'semanticscholar'))
   expect_is(aa$plos, "list")
   expect_is(aa$plos[[1]], "list")
   expect_named(aa$plos[[1]], c('doi', 'abstract'))
@@ -74,7 +74,7 @@ test_that("ft_abstract basic functionality works - Crossref", {
   })
   
   expect_is(aa, "ft_abstract")
-  expect_named(aa, c('plos', 'scopus', 'ma', 'crossref', 'semanticscholar'))
+  expect_named(aa, c('crossref', 'plos', 'scopus', 'ma', 'semanticscholar'))
   expect_is(aa$crossref, "list")
   expect_is(aa$crossref[[1]], "list")
   expect_named(aa$crossref[[1]], c('id', 'abstract'))

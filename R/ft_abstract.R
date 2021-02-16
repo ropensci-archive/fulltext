@@ -2,8 +2,8 @@
 #'
 #' @export
 #' @param x (character) DOIs as a character vector. See Details.
-#' @param from Source to query. One or more of plos (default),
-#' scopus, microsoft, crossref, or semanticscholar
+#' @param from Source to query. One or more of crossref (default), plos,
+#' scopus, microsoft, or semanticscholar
 #' @param plosopts PLOS options, a named list.
 #' @param scopusopts Scopus options, a named list.
 #' @param maopts Microsoft Academic options, a named list.
@@ -62,8 +62,6 @@
 #' out
 #' out$scopus
 #'
-#' (out <- ft_abstract(x = dois[1:5], from = "scopus", scopusopts = opts))
-#'
 #' # use scopus Ids
 #' (res <- ft_search(query = 'biology', from = 'scopus', scopusopts = opts,
 #'   limit = 50))
@@ -99,40 +97,40 @@
 #' ft_abstract("10.2458/v17i1.21696", from = "crossref", verbose = TRUE)
 #' ft_abstract("10.1371/journal.pcbi.1002487", from = "plos", verbose = TRUE)
 #' }
-ft_abstract <- function(x, from = "plos", plosopts = list(),
+ft_abstract <- function(x, from = "crossref", plosopts = list(),
                         scopusopts = list(), maopts = list(),
                         crossrefopts = list(), ...) {
   UseMethod("ft_abstract")
 }
 
 #' @export
-ft_abstract.default <- function(x, from = "plos", plosopts = list(),
+ft_abstract.default <- function(x, from = "crossref", plosopts = list(),
                                 scopusopts = list(), maopts = list(),
                                 crossrefopts = list(), ...) {
   stop("'ft_abstract' does not suport class ", class(x), call. = FALSE)
 }
 
 #' @export
-ft_abstract.numeric <- function(x, from = "plos", plosopts = list(),
+ft_abstract.numeric <- function(x, from = "crossref", plosopts = list(),
                                 scopusopts = list(), maopts = list(),
                                 crossrefopts = list(), ...) {
   ft_abstract(as.character(x), from, plosopts, scopusopts, maopts, ...)
 }
 
 #' @export
-ft_abstract.character <- function(x, from = "plos", plosopts = list(),
+ft_abstract.character <- function(x, from = "crossref", plosopts = list(),
                                   scopusopts = list(), maopts = list(),
                                   crossrefopts = list(), ...) {
 
-  from <- match.arg(from, c("plos", "scopus", "microsoft", "crossref",
+  from <- match.arg(from, c("crossref", "scopus", "microsoft", "plos",
     "semanticscholar"), several.ok = TRUE)
   plos_out <- plugin_abstract_plos(from, x, plosopts, ...)
   scopus_out <- plugin_abstract_scopus(from, x, scopusopts, ...)
   ma_out <- plugin_abstract_microsoft(from, x, maopts, ...)
   cr_out <- plugin_abstract_crossref(from, x, crossrefopts, ...)
   ss_out <- plugin_abstract_semanticscholar(from, x, crossrefopts, ...)
-  structure(list(plos = plos_out, scopus = scopus_out,
-    ma = ma_out, crossref = cr_out, semanticscholar = ss_out),
+  structure(list(crossref = cr_out, plos = plos_out, scopus = scopus_out,
+    ma = ma_out, semanticscholar = ss_out),
   class = "ft_abstract")
 }
 
@@ -149,10 +147,10 @@ print.ft_abstract <- function(x, ...) {
   cat("<fulltext abstracts>", sep = "\n")
   cat("Found:\n")
   cat(paste(
-    sprintf("  [PLOS: %s", len_abs(x$plos)),
+    sprintf("  [Crossref: %s", len_abs(x$crossref)),
     sprintf("Scopus: %s", len_abs(x$scopus)),
     sprintf("Microsoft: %s", len_abs(x$ma)),
-    sprintf("Crossref: %s", len_abs(x$crossref)),
+    sprintf("PLOS: %s", len_abs(x$plos)),
     sprintf("Semantic Scholar: %s]", len_abs(x$semanticscholar)),
     sep = "; "), "\n")
 }

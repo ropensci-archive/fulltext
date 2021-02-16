@@ -7,7 +7,7 @@
 \usage{
 ft_abstract(
   x,
-  from = "plos",
+  from = "crossref",
   plosopts = list(),
   scopusopts = list(),
   maopts = list(),
@@ -20,8 +20,8 @@ ft_abstract_ls()
 \arguments{
 \item{x}{(character) DOIs as a character vector. See Details.}
 
-\item{from}{Source to query. One or more of plos (default),
-scopus, microsoft, crossref, or semanticscholar}
+\item{from}{Source to query. One or more of crossref (default), plos,
+scopus, microsoft, or semanticscholar}
 
 \item{plosopts}{PLOS options, a named list.}
 
@@ -91,8 +91,6 @@ dois <- na.omit(res$scopus$data$`prism:doi`)
 out <- ft_abstract(x = dois[1:3], from = "scopus", scopusopts = opts)
 out
 out$scopus
-
-(out <- ft_abstract(x = dois[1:5], from = "scopus", scopusopts = opts))
 
 # use scopus Ids
 (res <- ft_search(query = 'biology', from = 'scopus', scopusopts = opts,
