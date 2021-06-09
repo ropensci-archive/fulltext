@@ -3,9 +3,7 @@ context("ft_links")
 test_that("ft_links", {
   skip_on_cran()
 
-  vcr::use_cassette("ft_links_plos", {
-    x <- ft_links("10.1371/journal.pone.0001248", from = "plos")
-  })
+  x <- ft_links("10.1371/journal.pone.0001248", from = "plos")
   expect_is(x, "ft_links")
   expect_is(unclass(x), "list")
   expect_is(x$plos, "list")
@@ -29,19 +27,15 @@ test_that("ft_links curl options work", {
   skip_on_cran()
 
   # bmc
-  vcr::use_cassette("ft_links_error_bmc", {
-    expect_error(
-      ft_links("10.1007/978-3-642-40455-9_52-1", from = "bmc", timeout_ms = 1),
-      "[Tt]ime")
-  })
+  expect_error(
+    ft_links("10.1007/978-3-642-40455-9_52-1", from = "bmc", timeout_ms = 1),
+    "[Tt]ime")
 
   # crossref - curl timeout caught by tryCatch, returns nothing
-  vcr::use_cassette("ft_links_error_crossref", {
-    expect_equal(
-      length(ft_links("10.1002/ecy.2629", from = "crossref", 
-        timeout_ms = 1)$crossref$data),
-      0)
-  })
+  expect_equal(
+    length(ft_links("10.1002/ecy.2629", from = "crossref", 
+      timeout_ms = 1)$crossref$data),
+    0)
 
   # entrez - dont include, httr not in suggests
   # expect_error(
