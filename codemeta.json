@@ -10,13 +10,13 @@
   "codeRepository": "https://github.com/ropensci/fulltext/",
   "issueTracker": "https://github.com/ropensci/fulltext/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "1.7.0",
+  "version": "2.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.0.3 Patched (2021-02-02 r79929)",
+  "runtimePlatform": "R version 4.1.0 (2021-05-18)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
@@ -305,7 +305,7 @@
   "contIntegration": "https://codecov.io/gh/ropensci/fulltext",
   "releaseNotes": "https://github.com/ropensci/fulltext/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/fulltext/blob/master/README.md",
-  "fileSize": "4087.407KB",
+  "fileSize": "4087.669KB",
   "developmentStatus": "https://www.repostatus.org/#active",
   "relatedLink": [
     "https://ropensci.github.io/fulltext-book/",

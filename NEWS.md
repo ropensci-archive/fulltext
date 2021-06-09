@@ -1,3 +1,19 @@
+fulltext 2.0
+==============
+
+### MINOR IMPROVEMENTS
+
+* xxx (#xxx)
+* xxx (#xxx)
+* xxx (#xxx)
+
+### BUG FIXES
+
+* xxx (#xxx)
+* xxx (#xxx)
+* xxx (#xxx)
+
+
 fulltext 1.7.0
 ==============
 
