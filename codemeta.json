@@ -305,7 +305,7 @@
   "contIntegration": "https://codecov.io/gh/ropensci/fulltext",
   "releaseNotes": "https://github.com/ropensci/fulltext/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/fulltext/blob/master/README.md",
-  "fileSize": "4087.669KB",
+  "fileSize": "4087.825KB",
   "developmentStatus": "https://www.repostatus.org/#active",
   "relatedLink": [
     "https://ropensci.github.io/fulltext-book/",

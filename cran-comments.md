@@ -14,7 +14,7 @@
 
 --------
 
-This version fixes some bugs, drops an Import and makes some fixes.
+This version fixes some bugs.
 
 Thanks! 
 Scott Chamberlain
